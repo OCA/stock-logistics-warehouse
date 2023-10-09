@@ -30,6 +30,13 @@ msgstr ""
 "di misura di approvvigionamento diversa."
 
 #. module: stock_orderpoint_uom
+#: model:ir.model.fields,field_description:stock_orderpoint_uom.field_procurement_group__display_name
+#: model:ir.model.fields,field_description:stock_orderpoint_uom.field_product_template__display_name
+#: model:ir.model.fields,field_description:stock_orderpoint_uom.field_stock_warehouse_orderpoint__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: stock_orderpoint_uom
 #: code:addons/stock_orderpoint_uom/models/stock_warehouse_orderpoint.py:0
 #, python-format
 msgid ""
@@ -38,6 +45,20 @@ msgid ""
 msgstr ""
 "Errore: l'unità di misura del prodotto e l'unità di misura di "
 "approvvigionamento devono essere della stessa categoria."
+
+#. module: stock_orderpoint_uom
+#: model:ir.model.fields,field_description:stock_orderpoint_uom.field_procurement_group__id
+#: model:ir.model.fields,field_description:stock_orderpoint_uom.field_product_template__id
+#: model:ir.model.fields,field_description:stock_orderpoint_uom.field_stock_warehouse_orderpoint__id
+msgid "ID"
+msgstr ""
+
+#. module: stock_orderpoint_uom
+#: model:ir.model.fields,field_description:stock_orderpoint_uom.field_procurement_group____last_update
+#: model:ir.model.fields,field_description:stock_orderpoint_uom.field_product_template____last_update
+#: model:ir.model.fields,field_description:stock_orderpoint_uom.field_stock_warehouse_orderpoint____last_update
+msgid "Last Modified on"
+msgstr ""
 
 #. module: stock_orderpoint_uom
 #: model:ir.model,name:stock_orderpoint_uom.model_stock_warehouse_orderpoint
@@ -51,7 +72,6 @@ msgstr "Gruppo di approvvigionamento"
 
 #. module: stock_orderpoint_uom
 #: model:ir.model.fields,field_description:stock_orderpoint_uom.field_stock_warehouse_orderpoint__procure_uom_id
-#: model:ir.model.fields,field_description:stock_orderpoint_uom.field_stock_warehouse_orderpoint_template__procure_uom_id
 msgid "Procurement UoM"
 msgstr "UdM di approvvigionamento"
 
