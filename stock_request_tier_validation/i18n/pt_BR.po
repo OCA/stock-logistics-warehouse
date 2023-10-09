@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* stock_request_tier_validation
+# 	* stock_request_tier_validation
 #
 msgid ""
 msgstr ""
@@ -19,7 +19,8 @@ msgstr ""
 #. module: stock_request_tier_validation
 #: model_terms:ir.ui.view,arch_db:stock_request_tier_validation.stock_request_order_form_inherit_tier
 #: model_terms:ir.ui.view,arch_db:stock_request_tier_validation.view_stock_request_form_inherit_tier
-msgid "<i class=\"fa fa-info-circle\"/>This Stock Request needs to be\n"
+msgid ""
+"<i class=\"fa fa-info-circle\"/>This Stock Request needs to be\n"
 "                        validated."
 msgstr ""
 "<i class=\"fa fa-info-circle\"/>Esta Requisição de Estoque precisa ser\n"
