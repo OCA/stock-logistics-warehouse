@@ -92,6 +92,5 @@ msgstr "Regla de Inventario"
 #. module: stock_request_mrp
 #: code:addons/stock_request_mrp/models/stock_request.py:0
 #, python-format
-msgid ""
-"You have linked to a Manufacture Order that belongs to another company."
+msgid "You have linked to a Manufacture Order that belongs to another company."
 msgstr ""
