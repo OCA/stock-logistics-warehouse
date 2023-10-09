@@ -24,7 +24,9 @@ msgstr ""
 
 #. module: stock_vertical_lift
 #: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_shuttle_view_kanban
-msgid "<i class=\"fa fa-ellipsis-v\" role=\"img\" aria-label=\"Manage\" title=\"Manage\"/>"
+msgid ""
+"<i class=\"fa fa-ellipsis-v\" role=\"img\" aria-label=\"Manage\" title="
+"\"Manage\"/>"
 msgstr ""
 
 #. module: stock_vertical_lift
@@ -132,8 +134,8 @@ msgstr ""
 #: code:addons/stock_vertical_lift/models/vertical_lift_operation_base.py:0
 #, python-format
 msgid ""
-"Created from backorder <a href=# data-oe-model=stock.picking data-oe-"
-"id=%d>%s</a>."
+"Created from backorder <a href=# data-oe-model=stock.picking data-oe-id=%d>"
+"%s</a>."
 msgstr ""
 
 #. module: stock_vertical_lift
@@ -662,8 +664,8 @@ msgstr ""
 #: model:ir.model.fields,help:stock_vertical_lift.field_vertical_lift_operation_transfer__location_id
 #: model:ir.model.fields,help:stock_vertical_lift.field_vertical_lift_shuttle__location_id
 msgid ""
-"The Shuttle source location for Pick operations and destination location for"
-" Put operations."
+"The Shuttle source location for Pick operations and destination location for "
+"Put operations."
 msgstr ""
 
 #. module: stock_vertical_lift
