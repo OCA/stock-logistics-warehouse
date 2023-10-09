@@ -20,11 +20,26 @@ msgstr ""
 "X-Generator: Weblate 4.3.2\n"
 
 #. module: stock_inventory_exclude_sublocation
+#: model:ir.model.fields,field_description:stock_inventory_exclude_sublocation.field_stock_inventory__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: stock_inventory_exclude_sublocation
 #: model:ir.model.fields,field_description:stock_inventory_exclude_sublocation.field_stock_inventory__exclude_sublocation
 msgid "Exclude Sublocations"
 msgstr "Esclude sottoubicazioni"
 
 #. module: stock_inventory_exclude_sublocation
+#: model:ir.model.fields,field_description:stock_inventory_exclude_sublocation.field_stock_inventory__id
+msgid "ID"
+msgstr ""
+
+#. module: stock_inventory_exclude_sublocation
 #: model:ir.model,name:stock_inventory_exclude_sublocation.model_stock_inventory
 msgid "Inventory"
 msgstr "Inventario"
+
+#. module: stock_inventory_exclude_sublocation
+#: model:ir.model.fields,field_description:stock_inventory_exclude_sublocation.field_stock_inventory____last_update
+msgid "Last Modified on"
+msgstr ""
