@@ -23,10 +23,28 @@ msgid "Direction"
 msgstr "Sentido"
 
 #. module: stock_request_direction
+#: model:ir.model.fields,field_description:stock_request_direction.field_stock_request__display_name
+#: model:ir.model.fields,field_description:stock_request_direction.field_stock_request_order__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: stock_request_direction
+#: model:ir.model.fields,field_description:stock_request_direction.field_stock_request__id
+#: model:ir.model.fields,field_description:stock_request_direction.field_stock_request_order__id
+msgid "ID"
+msgstr ""
+
+#. module: stock_request_direction
 #: model:ir.model.fields.selection,name:stock_request_direction.selection__stock_request__direction__inbound
 #: model:ir.model.fields.selection,name:stock_request_direction.selection__stock_request_order__direction__inbound
 msgid "Inbound"
 msgstr "Entrante"
+
+#. module: stock_request_direction
+#: model:ir.model.fields,field_description:stock_request_direction.field_stock_request____last_update
+#: model:ir.model.fields,field_description:stock_request_direction.field_stock_request_order____last_update
+msgid "Last Modified on"
+msgstr ""
 
 #. module: stock_request_direction
 #: model:ir.model.fields.selection,name:stock_request_direction.selection__stock_request__direction__outbound
