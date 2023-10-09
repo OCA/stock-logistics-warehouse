@@ -31,13 +31,13 @@ msgid "Internal Unreserved"
 msgstr "内部未预留"
 
 #. module: stock_available_unreserved
-#: code:addons/stock_available_unreserved/models/product.py:0
+#: code:addons/stock_available_unreserved/models/product_product.py:0
 #, python-format
 msgid "Invalid domain operator %s"
 msgstr "无效的域运算符%s"
 
 #. module: stock_available_unreserved
-#: code:addons/stock_available_unreserved/models/product.py:0
+#: code:addons/stock_available_unreserved/models/product_product.py:0
 #, python-format
 msgid "Invalid domain right operand %s"
 msgstr "无效的域权限操作数%s"
@@ -61,6 +61,13 @@ msgstr "可用量未预留"
 #: model:ir.model.fields,field_description:stock_available_unreserved.field_product_template__qty_available_not_res
 msgid "Quantity On Hand Unreserved"
 msgstr "未预留的在手数量"
+
+#. module: stock_available_unreserved
+#: model:ir.model.fields,help:stock_available_unreserved.field_product_product__qty_available_not_res
+#: model:ir.model.fields,help:stock_available_unreserved.field_product_template__qty_available_not_res
+msgid ""
+"Quantity of this product that is not currently reserved for a stock move"
+msgstr ""
 
 #. module: stock_available_unreserved
 #: model:ir.model,name:stock_available_unreserved.model_stock_quant
