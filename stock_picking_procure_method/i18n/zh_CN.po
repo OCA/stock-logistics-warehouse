@@ -30,6 +30,21 @@ msgstr ""
 "动并让其等待上一个，则应选择第二个选项。"
 
 #. module: stock_picking_procure_method
+#: model:ir.model.fields,field_description:stock_picking_procure_method.field_stock_picking__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: stock_picking_procure_method
+#: model:ir.model.fields,field_description:stock_picking_procure_method.field_stock_picking__id
+msgid "ID"
+msgstr ""
+
+#. module: stock_picking_procure_method
+#: model:ir.model.fields,field_description:stock_picking_procure_method.field_stock_picking____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: stock_picking_procure_method
 #: model:ir.model.fields,field_description:stock_picking_procure_method.field_stock_picking__procure_method
 msgid "Supply Method"
 msgstr "供应方法"
