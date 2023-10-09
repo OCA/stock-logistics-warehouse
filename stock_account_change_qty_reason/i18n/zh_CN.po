@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* stock_account_change_qty_reason
+# 	* stock_account_change_qty_reason
 #
 msgid ""
 msgstr ""
@@ -38,10 +38,14 @@ msgstr "库存移动"
 
 #. module: stock_account_change_qty_reason
 #: model:ir.model.fields,help:stock_account_change_qty_reason.field_stock_inventory_line_reason__account_reason_output_id
-msgid "When set, it will be used as offsetting account when products are issued from the company."
+msgid ""
+"When set, it will be used as offsetting account when products are issued "
+"from the company."
 msgstr "设置后，当产品从公司发出时，它将被用作冲销科目。"
 
 #. module: stock_account_change_qty_reason
 #: model:ir.model.fields,help:stock_account_change_qty_reason.field_stock_inventory_line_reason__account_reason_input_id
-msgid "When set, it will be used as offsetting account when products are received into the company."
+msgid ""
+"When set, it will be used as offsetting account when products are received "
+"into the company."
 msgstr "设置后，当产品被接收到公司时，它将被用作冲销科目。"
