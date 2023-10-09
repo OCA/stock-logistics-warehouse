@@ -20,6 +20,30 @@ msgstr ""
 "X-Generator: Poedit 2.0.6\n"
 
 #. module: stock_reserve_sale
+#: code:addons/stock_reserve_sale/model/sale.py:0
+#, python-format
+msgid "<div>     <b>Product qty.</b>: "
+msgstr ""
+
+#. module: stock_reserve_sale
+#: code:addons/stock_reserve_sale/model/sale.py:0
+#, python-format
+msgid "<div>     <b>Product</b>: "
+msgstr ""
+
+#. module: stock_reserve_sale
+#: code:addons/stock_reserve_sale/model/sale.py:0
+#, python-format
+msgid "<div>     <b>Product</b>: %s"
+msgstr ""
+
+#. module: stock_reserve_sale
+#: code:addons/stock_reserve_sale/model/sale.py:0
+#, python-format
+msgid "<p>Modified Order line data</p>"
+msgstr ""
+
+#. module: stock_reserve_sale
 #: model_terms:ir.ui.view,arch_db:stock_reserve_sale.view_sale_stock_reserve_form
 msgid ""
 "A stock reservation will be created for the products\n"
@@ -94,6 +118,11 @@ msgstr ""
 "de esta."
 
 #. module: stock_reserve_sale
+#: model:ir.model.fields,field_description:stock_reserve_sale.field_sale_order_line__is_readonly
+msgid "Is Readonly"
+msgstr ""
+
+#. module: stock_reserve_sale
 #: model:ir.model.fields,field_description:stock_reserve_sale.field_sale_stock_reserve____last_update
 msgid "Last Modified on"
 msgstr "Última modificación el"
@@ -156,9 +185,30 @@ msgid "Sale Order"
 msgstr "Pedido de venta"
 
 #. module: stock_reserve_sale
+#: code:addons/stock_reserve_sale/model/sale.py:0
+#, python-format
+msgid ""
+"Sale Order %s has some reserved lines.\n"
+"Please unreserve this lines before delete the order."
+msgstr ""
+
+#. module: stock_reserve_sale
 #: model:ir.model.fields,field_description:stock_reserve_sale.field_stock_reservation__sale_line_id
 msgid "Sale Order Line"
 msgstr "Linea de venta"
+
+#. module: stock_reserve_sale
+#: model:ir.model,name:stock_reserve_sale.model_sale_stock_reserve
+msgid "Sale Stock Reserve"
+msgstr ""
+
+#. module: stock_reserve_sale
+#: code:addons/stock_reserve_sale/model/sale.py:0
+#, python-format
+msgid ""
+"Sale order line \"[%s] %s\" has a related reservation.\n"
+"Please unreserve this line before delete the line"
+msgstr ""
 
 #. module: stock_reserve_sale
 #: model_terms:ir.ui.view,arch_db:stock_reserve_sale.view_stock_reservation_form
@@ -230,8 +280,3 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:stock_reserve_sale.view_sale_stock_reserve_form
 msgid "or"
 msgstr "o"
-
-#. module: stock_reserve_sale
-#: model:ir.model,name:stock_reserve_sale.model_sale_stock_reserve
-msgid "sale.stock.reserve"
-msgstr ""
