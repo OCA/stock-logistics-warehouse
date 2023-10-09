@@ -39,8 +39,8 @@ msgid ""
 "It is not possible to archive location '%s' which has associated stock "
 "quantities."
 msgstr ""
-"No es posible archivar la ubicación '%s' que tiene asociadas cantidades "
-"de stock."
+"No es posible archivar la ubicación '%s' que tiene asociadas cantidades de "
+"stock."
 
 #. module: stock_archive_constraint
 #: code:addons/stock_archive_constraint/models/stock_location.py:58
@@ -69,8 +69,8 @@ msgid ""
 "It is not possible to archive product '%s' which has associated stock "
 "quantities."
 msgstr ""
-"No es posible archivar el producto '%s' que tiene asociadas cantidades "
-"de stock."
+"No es posible archivar el producto '%s' que tiene asociadas cantidades de "
+"stock."
 
 #. module: stock_archive_constraint
 #: code:addons/stock_archive_constraint/models/product_product.py:50
