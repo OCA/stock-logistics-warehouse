@@ -80,8 +80,8 @@ msgstr "Movimiento de existencias"
 #: code:addons/stock_location_product_restriction/models/stock_move.py:0
 #, python-format
 msgid ""
-"The location {location} can only contain items of the same product. You plan"
-" to move different products to this location. ({products})"
+"The location {location} can only contain items of the same product. You plan "
+"to move different products to this location. ({products})"
 msgstr ""
 "La ubicación {location} sólo puede contener artículos del mismo producto. "
 "Usted planea mover diferentes productos a esta ubicación. ({products})"
