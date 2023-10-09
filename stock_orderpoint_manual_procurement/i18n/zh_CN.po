@@ -47,6 +47,7 @@ msgstr "创建时间"
 #. module: stock_orderpoint_manual_procurement
 #: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_make_procurement_orderpoint__display_name
 #: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_make_procurement_orderpoint_item__display_name
+#: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_stock_warehouse_orderpoint__display_name
 msgid "Display Name"
 msgstr "显示名称"
 
@@ -59,6 +60,7 @@ msgstr "执行"
 #. module: stock_orderpoint_manual_procurement
 #: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_make_procurement_orderpoint__id
 #: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_make_procurement_orderpoint_item__id
+#: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_stock_warehouse_orderpoint__id
 msgid "ID"
 msgstr "ID"
 
@@ -72,6 +74,7 @@ msgstr "项"
 #. module: stock_orderpoint_manual_procurement
 #: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_make_procurement_orderpoint____last_update
 #: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_make_procurement_orderpoint_item____last_update
+#: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_stock_warehouse_orderpoint____last_update
 msgid "Last Modified on"
 msgstr "最后修改时间"
 
@@ -120,7 +123,6 @@ msgstr "计划日期"
 
 #. module: stock_orderpoint_manual_procurement
 #: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_stock_warehouse_orderpoint__procure_recommended_qty
-#: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_stock_warehouse_orderpoint_template__procure_recommended_qty
 msgid "Procure Recommendation"
 msgstr "获取推荐"
 
@@ -153,7 +155,6 @@ msgstr "数量必须为正数。"
 
 #. module: stock_orderpoint_manual_procurement
 #: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_stock_warehouse_orderpoint__procure_recommended_date
-#: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_stock_warehouse_orderpoint_template__procure_recommended_date
 msgid "Recommended Request Date"
 msgstr "引用请求日期"
 
