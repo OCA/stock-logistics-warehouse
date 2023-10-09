@@ -26,6 +26,12 @@ msgid "Purchase"
 msgstr "Compra"
 
 #. module: stock_request_purchase
+#: model:ir.model.fields,field_description:stock_request_purchase.field_stock_request__purchase_count
+#: model:ir.model.fields,field_description:stock_request_purchase.field_stock_request_order__purchase_count
+msgid "Purchase Count"
+msgstr ""
+
+#. module: stock_request_purchase
 #: model:ir.model,name:stock_request_purchase.model_purchase_order
 msgid "Purchase Order"
 msgstr "Pedido de compra"
@@ -46,12 +52,6 @@ msgstr "Líneas de pedido de compra"
 #: model:ir.model.fields,field_description:stock_request_purchase.field_stock_request_order__purchase_ids
 msgid "Purchase Orders"
 msgstr "Pedidos de compras"
-
-#. module: stock_request_purchase
-#: model:ir.model.fields,field_description:stock_request_purchase.field_stock_request__purchase_count
-#: model:ir.model.fields,field_description:stock_request_purchase.field_stock_request_order__purchase_count
-msgid "Purchase count"
-msgstr "# de Compras"
 
 #. module: stock_request_purchase
 #: model:ir.model,name:stock_request_purchase.model_stock_request
@@ -98,6 +98,9 @@ msgid ""
 "You have linked to a purchase order line that belongs to another company."
 msgstr ""
 "Ha seleccionada una línea de pedido de compras que pertenece a otra compañía."
+
+#~ msgid "Purchase count"
+#~ msgstr "# de Compras"
 
 #~ msgid "Procurement Rule"
 #~ msgstr "Regla de abastecimiento"

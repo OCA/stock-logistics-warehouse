@@ -23,6 +23,12 @@ msgid "Purchase"
 msgstr "采购"
 
 #. module: stock_request_purchase
+#: model:ir.model.fields,field_description:stock_request_purchase.field_stock_request__purchase_count
+#: model:ir.model.fields,field_description:stock_request_purchase.field_stock_request_order__purchase_count
+msgid "Purchase Count"
+msgstr ""
+
+#. module: stock_request_purchase
 #: model:ir.model,name:stock_request_purchase.model_purchase_order
 msgid "Purchase Order"
 msgstr "采购订单"
@@ -43,12 +49,6 @@ msgstr "采购订单行"
 #: model:ir.model.fields,field_description:stock_request_purchase.field_stock_request_order__purchase_ids
 msgid "Purchase Orders"
 msgstr "采购订单"
-
-#. module: stock_request_purchase
-#: model:ir.model.fields,field_description:stock_request_purchase.field_stock_request__purchase_count
-#: model:ir.model.fields,field_description:stock_request_purchase.field_stock_request_order__purchase_count
-msgid "Purchase count"
-msgstr "采购数量"
 
 #. module: stock_request_purchase
 #: model:ir.model,name:stock_request_purchase.model_stock_request
@@ -92,3 +92,6 @@ msgstr "您无法将采购订单行链接到属于另一家公司的库存请求
 msgid ""
 "You have linked to a purchase order line that belongs to another company."
 msgstr "您已链接到属于另一家公司的采购订单行。"
+
+#~ msgid "Purchase count"
+#~ msgstr "采购数量"
