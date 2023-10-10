@@ -20,7 +20,7 @@ msgstr ""
 "X-Generator: Weblate 4.17\n"
 
 #. module: stock_change_qty_reason
-#: model:ir.model.fields,field_description:stock_change_qty_reason.field_stock_inventory_line_reason__active
+#: model:ir.model.fields,field_description:stock_change_qty_reason.field_stock_quant_reason__active
 msgid "Active"
 msgstr "Activo"
 
@@ -36,17 +36,17 @@ msgid "Config Settings"
 msgstr "Ajustes de Configuración"
 
 #. module: stock_change_qty_reason
-#: model:ir.model.fields,field_description:stock_change_qty_reason.field_stock_inventory_line_reason__create_uid
+#: model:ir.model.fields,field_description:stock_change_qty_reason.field_stock_quant_reason__create_uid
 msgid "Created by"
 msgstr "Creado por"
 
 #. module: stock_change_qty_reason
-#: model:ir.model.fields,field_description:stock_change_qty_reason.field_stock_inventory_line_reason__create_date
+#: model:ir.model.fields,field_description:stock_change_qty_reason.field_stock_quant_reason__create_date
 msgid "Created on"
 msgstr "Creado el"
 
 #. module: stock_change_qty_reason
-#: model:ir.model.fields,field_description:stock_change_qty_reason.field_stock_inventory_line_reason__display_name
+#: model:ir.model.fields,field_description:stock_change_qty_reason.field_stock_quant_reason__display_name
 msgid "Display Name"
 msgstr "Nombre a Mostrar"
 
@@ -60,14 +60,9 @@ msgstr ""
 "de ajustes de inventario y actualización de cantidades de productos."
 
 #. module: stock_change_qty_reason
-#: model:ir.model.fields,field_description:stock_change_qty_reason.field_stock_inventory_line_reason__id
+#: model:ir.model.fields,field_description:stock_change_qty_reason.field_stock_quant_reason__id
 msgid "ID"
 msgstr "ID (identificación)"
-
-#. module: stock_change_qty_reason
-#: model:ir.model,name:stock_change_qty_reason.model_stock_inventory
-msgid "Inventory"
-msgstr "Inventario"
 
 #. module: stock_change_qty_reason
 #: model:ir.ui.menu,name:stock_change_qty_reason.menu_inventory_adjustments_config
@@ -76,22 +71,17 @@ msgid "Inventory Adjustment"
 msgstr "Ajuste de Inventario"
 
 #. module: stock_change_qty_reason
-#: model:ir.model,name:stock_change_qty_reason.model_stock_inventory_line
-msgid "Inventory Line"
-msgstr "Línea inventario"
-
-#. module: stock_change_qty_reason
-#: model:ir.model.fields,field_description:stock_change_qty_reason.field_stock_inventory_line_reason____last_update
+#: model:ir.model.fields,field_description:stock_change_qty_reason.field_stock_quant_reason____last_update
 msgid "Last Modified on"
 msgstr "Última modificación el"
 
 #. module: stock_change_qty_reason
-#: model:ir.model.fields,field_description:stock_change_qty_reason.field_stock_inventory_line_reason__write_uid
+#: model:ir.model.fields,field_description:stock_change_qty_reason.field_stock_quant_reason__write_uid
 msgid "Last Updated by"
 msgstr "Actualizado por última vez por"
 
 #. module: stock_change_qty_reason
-#: model:ir.model.fields,field_description:stock_change_qty_reason.field_stock_inventory_line_reason__write_date
+#: model:ir.model.fields,field_description:stock_change_qty_reason.field_stock_quant_reason__write_date
 msgid "Last Updated on"
 msgstr "Actualizado por última vez el"
 
@@ -112,49 +102,67 @@ msgid "Preset Change Qty Reason"
 msgstr "Motivo preestablecido para el cambio de cantidad"
 
 #. module: stock_change_qty_reason
-#: model:ir.model.fields,field_description:stock_change_qty_reason.field_stock_inventory__preset_reason_id
-#: model:ir.model.fields,field_description:stock_change_qty_reason.field_stock_inventory_line__preset_reason_id
-#: model:ir.model.fields,field_description:stock_change_qty_reason.field_stock_move__preset_reason_id
+#: model:ir.model.fields,field_description:stock_change_qty_reason.field_stock_move_line__preset_reason_id
+#: model:ir.model.fields,field_description:stock_change_qty_reason.field_stock_quant__preset_reason_id
 #: model_terms:ir.ui.view,arch_db:stock_change_qty_reason.view_preset_reason
 msgid "Preset Reason"
 msgstr "Razón preestablecida"
 
 #. module: stock_change_qty_reason
-#: model:ir.model.fields,field_description:stock_change_qty_reason.field_stock_inventory__reason
-#: model:ir.model.fields,field_description:stock_change_qty_reason.field_stock_inventory_line__reason
+#: model:ir.model,name:stock_change_qty_reason.model_stock_move_line
+msgid "Product Moves (Stock Move Line)"
+msgstr ""
+
+#. module: stock_change_qty_reason
+#: model:ir.model,name:stock_change_qty_reason.model_stock_quant
+msgid "Quants"
+msgstr ""
+
+#. module: stock_change_qty_reason
+#: model:ir.model.fields,field_description:stock_change_qty_reason.field_stock_move_line__reason
+#: model:ir.model.fields,field_description:stock_change_qty_reason.field_stock_quant__reason
+#: model_terms:ir.ui.view,arch_db:stock_change_qty_reason.preset_reason_view_move_line_tree
+#: model_terms:ir.ui.view,arch_db:stock_change_qty_reason.reason_stock_inventory_line_tree_reason_id
 msgid "Reason"
 msgstr "Razón"
 
 #. module: stock_change_qty_reason
-#: model:ir.model.fields,field_description:stock_change_qty_reason.field_stock_inventory_line_reason__description
+#: model:ir.model.fields,field_description:stock_change_qty_reason.field_stock_quant_reason__description
 msgid "Reason Description"
 msgstr "Descripción del Motivo"
 
 #. module: stock_change_qty_reason
-#: model:ir.model.fields,field_description:stock_change_qty_reason.field_stock_inventory_line_reason__name
+#: model:ir.model.fields,field_description:stock_change_qty_reason.field_stock_quant_reason__name
 msgid "Reason Name"
 msgstr "Nombre del motivo"
 
 #. module: stock_change_qty_reason
-#: model:ir.model,name:stock_change_qty_reason.model_stock_inventory_line_reason
-msgid "Stock Inventory Line Reason"
-msgstr "Motivo de línea inventario de existencias"
+#: model:ir.model,name:stock_change_qty_reason.model_stock_quant_reason
+msgid "Stock Quant Reason"
+msgstr ""
 
 #. module: stock_change_qty_reason
-#: model:ir.model,name:stock_change_qty_reason.model_stock_move
-msgid "Stock Move"
-msgstr "Movimiento de existencias"
-
-#. module: stock_change_qty_reason
-#: model:ir.model.fields,help:stock_change_qty_reason.field_stock_inventory__reason
-#: model:ir.model.fields,help:stock_change_qty_reason.field_stock_inventory_line__reason
+#: model:ir.model.fields,help:stock_change_qty_reason.field_stock_move_line__reason
+#: model:ir.model.fields,help:stock_change_qty_reason.field_stock_quant__reason
 msgid "Type in a reason for the product quantity change"
 msgstr "Escriba una razón para el cambio de cantidad del producto"
 
 #. module: stock_change_qty_reason
-#: model:ir.model.constraint,message:stock_change_qty_reason.constraint_stock_inventory_line_reason_name_unique
+#: model:ir.model.constraint,message:stock_change_qty_reason.constraint_stock_quant_reason_name_unique
 msgid "You cannot have two reason with the same name."
 msgstr "No puede tener dos motivos con el mismo nombre."
+
+#~ msgid "Inventory"
+#~ msgstr "Inventario"
+
+#~ msgid "Inventory Line"
+#~ msgstr "Línea inventario"
+
+#~ msgid "Stock Inventory Line Reason"
+#~ msgstr "Motivo de línea inventario de existencias"
+
+#~ msgid "Stock Move"
+#~ msgstr "Movimiento de existencias"
 
 #~ msgid "Change Product Quantity"
 #~ msgstr "Cambiar cantidad de producto"
