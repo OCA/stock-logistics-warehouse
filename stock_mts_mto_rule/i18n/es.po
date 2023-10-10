@@ -84,8 +84,8 @@ msgstr "Bajo pedido + bajo existencias"
 #, python-format
 msgid "No MTS or MTO rule configured on procurement rule: %s!"
 msgstr ""
-"¡No hay ninguna regla MTS o MTO configurada en la regla de aprovisionamiento:"
-" %s!"
+"¡No hay ninguna regla MTS o MTO configurada en la regla de "
+"aprovisionamiento: %s!"
 
 #. module: stock_mts_mto_rule
 #: model:ir.model,name:stock_mts_mto_rule.model_stock_rule
