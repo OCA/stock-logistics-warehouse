@@ -9,7 +9,6 @@ from odoo.tests.common import SavepointCase
 
 from odoo.addons.stock_location_package_restriction.models.stock_location import (
     MULTIPACKAGE,
-    NORESTRICTION,
     SINGLEPACKAGE,
 )
 
@@ -265,7 +264,7 @@ class TestStockMove(SavepointCase):
             self.pack_1,
             self._get_package_in_location(self.location_1),
         )
-        self.location_1.package_restriction = NORESTRICTION
+        self.location_1.package_restriction = False
         picking = self._create_and_assign_picking(
             [
                 ShortMoveInfo(
