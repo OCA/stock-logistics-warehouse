@@ -149,7 +149,7 @@
                         <div class="oe_kanban_global_click o_res_partner_kanban">
                             <div class="o_kanban_image">
                                 <img
-                                    t-att-src="kanban_image('product.product', 'image_small', record.product_id.raw_value)"
+                                    t-att-src="kanban_image('product.product', 'image_128', record.product_id.raw_value)"
                                     alt="Kanban Image"
                                 />
                             </div>
