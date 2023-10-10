@@ -576,6 +576,11 @@ msgid "Propagate cancel and split"
 msgstr ""
 
 #. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__product_qty_by_packaging_display
+msgid "Qty by packaging"
+msgstr ""
+
+#. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation__previous_promised_qty
 msgid ""
 "Quantities promised to moves with higher priority than this move (in default "
