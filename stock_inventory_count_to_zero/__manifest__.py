@@ -3,7 +3,7 @@
 {
     "name": "Stock Inventory Count To Zero",
     "summary": "Request an inventory count filling the quantities to zero as default",
-    "version": "15.0.1.0.0",
+    "version": "16.0.1.0.0",
     "development_status": "Beta",
     "category": "Inventory/Inventory",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
