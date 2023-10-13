@@ -246,6 +246,49 @@ class TestStockMove(SavepointCase):
         with self.assertRaises(ValidationError):
             self._process_picking(picking)
 
+    def test_03_with_backorder(self):
+        """
+        Data:
+            location_2 without package but with package restriction = 'single package'
+            a picking with two move with destination location_2 but only one move is
+            being processsed, backorder creation.
+        Test case:
+            Process the picking
+        Expected result:
+            One package in location no error
+        """
+        self.location_2.package_restriction = SINGLEPACKAGE
+        picking = self._create_and_assign_picking(
+            [
+                ShortMoveInfo(
+                    product=self.product_1,
+                    location_dest=self.location_2,
+                    qty=2,
+                    package_id=self.pack_1,
+                ),
+                ShortMoveInfo(
+                    product=self.product_2,
+                    location_dest=self.location_2,
+                    qty=2,
+                    package_id=self.pack_2,
+                ),
+            ],
+            location_dest=self.location_2,
+        )
+        picking.action_assign()
+        # Processing only one move out of two
+        line_to_process = picking.move_line_ids[0]
+        line_to_process.qty_done = line_to_process.product_qty
+        wizard_action = picking.button_validate()
+        wizard_context = wizard_action.get("context", {})
+        wizard = (
+            self.env[wizard_action["res_model"]]
+            .with_context(**wizard_context)
+            .create({})
+        )
+        wizard.process()
+        self.assertEqual(self.pack_1, self._get_package_in_location(self.location_2))
+
     def test_04(self):
         """
         Data:
