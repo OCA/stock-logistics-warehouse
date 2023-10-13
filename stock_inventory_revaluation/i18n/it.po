@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-03-17 09:47+0000\n"
-"PO-Revision-Date: 2023-07-17 17:12+0000\n"
+"PO-Revision-Date: 2023-10-13 12:40+0000\n"
 "Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -300,7 +300,7 @@ msgstr ""
 #. module: stock_inventory_revaluation
 #: model:ir.model.fields,field_description:stock_inventory_revaluation.field_stock_inventory_revaluation_journal_id
 msgid "Journal"
-msgstr "Sezionale"
+msgstr "Registro"
 
 #. module: stock_inventory_revaluation
 #: model:ir.ui.view,arch_db:stock_inventory_revaluation.view_stock_inventory_revaluation_form
