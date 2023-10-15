@@ -9,15 +9,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-03-04 03:58+0000\n"
-"PO-Revision-Date: 2019-11-26 20:14+0000\n"
-"Last-Translator: Galoperd <jvcsan@gmail.com>\n"
+"PO-Revision-Date: 2023-10-15 20:36+0000\n"
+"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
 "Language-Team: Spanish (https://www.transifex.com/oca/teams/23907/es/)\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.9.1\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: stock_available_unreserved
 #: model:ir.model.fields,field_description:stock_available_unreserved.field_stock_quant__contains_unreserved
@@ -67,6 +67,7 @@ msgstr "Cantidad A Mano No Reservada"
 msgid ""
 "Quantity of this product that is not currently reserved for a stock move"
 msgstr ""
+"Cantidad del producto que actualmente no este disponible para este movimiento"
 
 #. module: stock_available_unreserved
 #: model:ir.model,name:stock_available_unreserved.model_stock_quant
