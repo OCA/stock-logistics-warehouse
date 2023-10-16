@@ -52,7 +52,7 @@ Usage
 
 To make a stock reservation:
 
-#. Go to *Inventory > Products*.
+#. Go to *Inventory > Operations*.
 #. Select or create one product with stock.
 #. Click on *Stock Reservations* smart button.
 #. Create one reservation.
