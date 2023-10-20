@@ -36,7 +36,7 @@ class OrderpointTemplate(models.Model):
 
     auto_min_qty = fields.Boolean(
         string="Auto Minimum",
-        help="Auto compute minimum quantity " "per product for a given a date range",
+        help="Auto compute minimum quantity per product for a given a date range",
     )
     auto_min_date_start = fields.Datetime()
     auto_min_date_end = fields.Datetime()
@@ -53,7 +53,7 @@ class OrderpointTemplate(models.Model):
     )
     auto_max_qty = fields.Boolean(
         string="Auto Maximum",
-        help="Auto compute maximum quantity " "per product for a given a date range",
+        help="Auto compute maximum quantity per product for a given a date range",
     )
     auto_max_qty_criteria = fields.Selection(
         selection=[

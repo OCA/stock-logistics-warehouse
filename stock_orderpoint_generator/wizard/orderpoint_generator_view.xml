@@ -6,7 +6,7 @@
         <field name="arch" type="xml">
             <form string="Reordering Rules Generator">
                 <label
-                    for="orderpoint_template"
+                    for="orderpoint_template_id"
                     string="This wizard will apply the following orderpoint to selected product(s)"
                 />
                 <group string="Templates" colspan="4">
