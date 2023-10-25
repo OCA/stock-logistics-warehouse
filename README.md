@@ -26,7 +26,7 @@ addon | version | maintainers | summary
 [procurement_auto_create_group](procurement_auto_create_group/) | 15.0.1.0.0 |  | Allows to configure the system to propose automatically new procurement groups during the procurement run.
 [sale_stock_available_info_popup](sale_stock_available_info_popup/) | 15.0.1.0.0 |  | Adds an 'Available to promise' quantity to the popover shown in sale order line that display stock info of the product
 [scrap_reason_code](scrap_reason_code/) | 15.0.1.1.0 | [![bodedra](https://github.com/bodedra.png?size=30px)](https://github.com/bodedra) | Reason code for scrapping
-[stock_archive_constraint](stock_archive_constraint/) | 15.0.1.0.1 | [![victoralmau](https://github.com/victoralmau.png?size=30px)](https://github.com/victoralmau) | Stock archive constraint
+[stock_archive_constraint](stock_archive_constraint/) | 15.0.1.0.2 | [![victoralmau](https://github.com/victoralmau.png?size=30px)](https://github.com/victoralmau) | Stock archive constraint
 [stock_available](stock_available/) | 15.0.1.0.0 |  | Stock available to promise
 [stock_available_immediately](stock_available_immediately/) | 15.0.1.0.0 |  | Ignore planned receptions in quantity available to promise
 [stock_available_mrp](stock_available_mrp/) | 15.0.1.0.1 |  | Consider the production potential is available to promise
@@ -41,8 +41,8 @@ addon | version | maintainers | summary
 [stock_inventory_discrepancy](stock_inventory_discrepancy/) | 15.0.1.0.1 |  | Adds the capability to show the discrepancy of every line in an inventory and to block the inventory validation when the discrepancy is over a user defined threshold.
 [stock_location_lockdown](stock_location_lockdown/) | 15.0.1.0.1 |  | Prevent to add stock on locked locations
 [stock_location_route_description](stock_location_route_description/) | 15.0.1.0.0 |  | Add description field on stock routes.
-[stock_lot_filter_available](stock_lot_filter_available/) | 15.0.1.0.0 | [![CarlosRoca13](https://github.com/CarlosRoca13.png?size=30px)](https://github.com/CarlosRoca13) | Allow to filter lots by available on stock
-[stock_move_location](stock_move_location/) | 15.0.1.3.0 |  | This module allows to move all stock in a stock location to an other one.
+[stock_lot_filter_available](stock_lot_filter_available/) | 15.0.1.0.1 | [![CarlosRoca13](https://github.com/CarlosRoca13.png?size=30px)](https://github.com/CarlosRoca13) | Allow to filter lots by available on stock
+[stock_move_location](stock_move_location/) | 15.0.1.3.1 |  | This module allows to move all stock in a stock location to an other one.
 [stock_mts_mto_rule](stock_mts_mto_rule/) | 15.0.1.0.1 |  | Add a MTS+MTO route
 [stock_orderpoint_generator](stock_orderpoint_generator/) | 15.0.1.0.2 |  | Mass configuration of stock order points
 [stock_orderpoint_move_link](stock_orderpoint_move_link/) | 15.0.1.0.0 |  | Link Reordering rules to stock moves
@@ -52,8 +52,8 @@ addon | version | maintainers | summary
 [stock_picking_orig_dest_link](stock_picking_orig_dest_link/) | 15.0.1.0.0 |  | This addon link the pickings with their respective Origin and Destination Pickings.
 [stock_picking_show_linked](stock_picking_show_linked/) | 15.0.1.0.0 |  | This addon allows to easily access related pickings (in the case of chained routes) through a button in the parent picking view.
 [stock_procurement_group_hook](stock_procurement_group_hook/) | 15.0.1.0.0 |  | Adds Hook to Procurement Group run method.
-[stock_putaway_product_template](stock_putaway_product_template/) | 15.0.1.0.1 | [![kevinkhao](https://github.com/kevinkhao.png?size=30px)](https://github.com/kevinkhao) [![sebastienbeau](https://github.com/sebastienbeau.png?size=30px)](https://github.com/sebastienbeau) | Add product template in putaway strategies from the product view
-[stock_quant_cost_info](stock_quant_cost_info/) | 15.0.1.1.0 |  | Shows the cost of the quants
+[stock_putaway_product_template](stock_putaway_product_template/) | 15.0.1.0.2 | [![kevinkhao](https://github.com/kevinkhao.png?size=30px)](https://github.com/kevinkhao) [![sebastienbeau](https://github.com/sebastienbeau.png?size=30px)](https://github.com/sebastienbeau) | Add product template in putaway strategies from the product view
+[stock_quant_cost_info](stock_quant_cost_info/) | 15.0.1.1.1 |  | Shows the cost of the quants
 [stock_quant_manual_assign](stock_quant_manual_assign/) | 15.0.1.2.1 |  | Stock - Manual Quant Assignment
 [stock_request](stock_request/) | 15.0.1.6.3 |  | Internal request for stock
 [stock_request_analytic](stock_request_analytic/) | 15.0.1.0.1 |  | Internal request for stock
@@ -65,7 +65,7 @@ addon | version | maintainers | summary
 [stock_request_tier_validation](stock_request_tier_validation/) | 15.0.1.0.0 |  | Extends the functionality of Stock Requests to support a tier validation process.
 [stock_reserve](stock_reserve/) | 15.0.1.1.0 |  | Stock reservations on products
 [stock_reserve_rule](stock_reserve_rule/) | 15.0.1.0.0 |  | Configure reservation rules by location
-[stock_secondary_unit](stock_secondary_unit/) | 15.0.1.0.0 |  | Get product quantities in a secondary unit
+[stock_secondary_unit](stock_secondary_unit/) | 15.0.1.0.1 |  | Get product quantities in a secondary unit
 [stock_warehouse_calendar](stock_warehouse_calendar/) | 15.0.1.0.0 | [![JordiBForgeFlow](https://github.com/JordiBForgeFlow.png?size=30px)](https://github.com/JordiBForgeFlow) | Adds a calendar to the Warehouse
 
 [//]: # (end addons)
