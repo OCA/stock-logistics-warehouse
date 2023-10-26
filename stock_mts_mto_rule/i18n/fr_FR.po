@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-07-28 02:58+0000\n"
-"PO-Revision-Date: 2019-07-02 10:43+0000\n"
-"Last-Translator: Julien Thomazeau <julien.thomazeau@protonmail.com>\n"
+"PO-Revision-Date: 2023-10-29 08:28+0000\n"
+"Last-Translator: Julie LeBrun <julie.lebrun@numigi.com>\n"
 "Language-Team: French (France) (https://www.transifex.com/oca/teams/23907/"
 "fr_FR/)\n"
 "Language: fr_FR\n"
@@ -18,29 +18,29 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 3.7.1\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: stock_mts_mto_rule
 #: model:ir.model.fields,field_description:stock_mts_mto_rule.field_stock_rule__action
 msgid "Action"
-msgstr ""
+msgstr "Action"
 
 #. module: stock_mts_mto_rule
 #: model:ir.model.fields.selection,name:stock_mts_mto_rule.selection__stock_rule__action__split_procurement
 msgid "Choose between MTS and MTO"
-msgstr ""
+msgstr "Choisir entre MTS et MTO"
 
 #. module: stock_mts_mto_rule
 #: model:ir.model.fields,field_description:stock_mts_mto_rule.field_stock_rule__display_name
 #: model:ir.model.fields,field_description:stock_mts_mto_rule.field_stock_warehouse__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nom affiché"
 
 #. module: stock_mts_mto_rule
 #: model:ir.model.fields,field_description:stock_mts_mto_rule.field_stock_rule__id
 #: model:ir.model.fields,field_description:stock_mts_mto_rule.field_stock_warehouse__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: stock_mts_mto_rule
 #: model:ir.model.fields,help:stock_mts_mto_rule.field_stock_warehouse__mto_mts_management
@@ -49,33 +49,36 @@ msgid ""
 "created only if the virtual stock is less than 0 else, the product will be "
 "taken from stocks"
 msgstr ""
+"Si cette nouvelle route est sélectionnée sur la vue formulaire de l'article, "
+"un bon de commande sera créé uniquement si le stock virtuel est inférieur à "
+"0 sinon, le produit sera sorti des stocks"
 
 #. module: stock_mts_mto_rule
 #: model:ir.model.fields,field_description:stock_mts_mto_rule.field_stock_rule____last_update
 #: model:ir.model.fields,field_description:stock_mts_mto_rule.field_stock_warehouse____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Dernière modification le"
 
 #. module: stock_mts_mto_rule
 #: model:ir.model.fields,field_description:stock_mts_mto_rule.field_stock_rule__mto_rule_id
 msgid "MTO Rule"
-msgstr ""
+msgstr "Règle Approvisionné à la commande"
 
 #. module: stock_mts_mto_rule
 #: model:ir.model.fields,field_description:stock_mts_mto_rule.field_stock_warehouse__mts_mto_rule_id
 msgid "MTO+MTS rule"
-msgstr ""
+msgstr "Règle Prendre dans le stock + Approvisionner à la commande"
 
 #. module: stock_mts_mto_rule
 #: model:ir.model.fields,field_description:stock_mts_mto_rule.field_stock_rule__mts_rule_id
 msgid "MTS Rule"
-msgstr ""
+msgstr "Règle Prendre dans le stock"
 
 #. module: stock_mts_mto_rule
 #: code:addons/stock_mts_mto_rule/models/stock_warehouse.py:0
 #, python-format
 msgid "MTS+MTO"
-msgstr ""
+msgstr "Prendre dans le stock + Approvisionner à la commande"
 
 #. module: stock_mts_mto_rule
 #: code:addons/stock_mts_mto_rule/models/stock_warehouse.py:0
@@ -89,16 +92,19 @@ msgstr "Production à la demande + Production sur stock"
 #, python-format
 msgid "No MTS or MTO rule configured on procurement rule: %s!"
 msgstr ""
+"Aucune règle Prendre dans le stock ou Approvisionner à la commande "
+"configurée sur la règle d'approvisionnement:%s!"
 
 #. module: stock_mts_mto_rule
 #: model:ir.model,name:stock_mts_mto_rule.model_stock_rule
 msgid "Stock Rule"
-msgstr ""
+msgstr "Règle de stock"
 
 #. module: stock_mts_mto_rule
 #: model:ir.model.fields,field_description:stock_mts_mto_rule.field_stock_warehouse__mto_mts_management
 msgid "Use MTO+MTS rules"
 msgstr ""
+"Utiliser les règles Prendre dans le stock + Approvisionner à la commande"
 
 #. module: stock_mts_mto_rule
 #: model:ir.model,name:stock_mts_mto_rule.model_stock_warehouse
