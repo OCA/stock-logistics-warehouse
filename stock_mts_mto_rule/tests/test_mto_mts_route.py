@@ -213,6 +213,50 @@ class TestMtoMtsRoute(TransactionCase):
         self.warehouse.name = new_warehouse_name
         self.assertEqual(new_rule_name, self.warehouse.mts_mto_rule_id.name)
 
+    def test_multiple_procurements(self):
+        mto_mts_route = self.env.ref("stock_mts_mto_rule.route_mto_mts")
+        self.product.route_ids = [(6, 0, [mto_mts_route.id])]
+        self._create_quant(1.0)
+        group2 = self.env["procurement.group"].create({"name": "test_2"})
+        proc_vals2 = {"warehouse_id": self.warehouse, "group_id": group2}
+        self.env["procurement.group"].run(
+            [
+                self.group.Procurement(
+                    self.product,
+                    2.0,
+                    self.uom,
+                    self.customer_loc,
+                    self.product.name,
+                    "test",
+                    self.warehouse.company_id,
+                    self.procurement_vals,
+                ),
+                group2.Procurement(
+                    self.product,
+                    2.0,
+                    self.uom,
+                    self.customer_loc,
+                    self.product.name,
+                    "test",
+                    self.warehouse.company_id,
+                    proc_vals2,
+                ),
+            ]
+        )
+        moves = self.env["stock.move"].search([("group_id", "=", self.group.id)])
+        self.assertEqual(3, len(moves))
+        moves2 = self.env["stock.move"].search([("group_id", "=", group2.id)])
+        self.assertEqual(2, len(moves2))
+        move_mto = self.env["stock.move"].search(
+            [
+                ("group_id", "=", group2.id),
+                ("location_dest_id", "=", self.customer_loc.id),
+                ("procure_method", "=", "make_to_order"),
+            ]
+        )
+        self.assertEqual(1, len(move_mto))
+        self.assertEqual(2.0, move_mto.product_uom_qty)
+
     def setUp(self):
         super(TestMtoMtsRoute, self).setUp()
         self.move_obj = self.env["stock.move"]

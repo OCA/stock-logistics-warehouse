@@ -1,4 +1,7 @@
+# Copyright 2025 Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+
+from collections import defaultdict
 
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
@@ -36,14 +39,16 @@ class StockRule(models.Model):
                     ) % (rule.name,)
                     raise ValidationError(msg)
 
-    def get_mto_qty_to_order(self, product, product_qty, product_uom, values):
+    def get_mto_qty_to_order(
+        self, product, product_qty, product_uom, values, qty_unavailable=0.0
+    ):
         self.ensure_one()
         precision = self.env["decimal.precision"].precision_get(
             "Product Unit of Measure"
         )
         src_location_id = self.mts_rule_id.location_src_id.id
         product_location = product.with_context(location=src_location_id)
-        virtual_available = product_location.virtual_available
+        virtual_available = product_location.virtual_available - qty_unavailable
         qty_available = product.uom_id._compute_quantity(virtual_available, product_uom)
         if float_compare(qty_available, 0.0, precision_digits=precision) > 0:
             if (
@@ -59,6 +64,7 @@ class StockRule(models.Model):
         precision = self.env["decimal.precision"].precision_get(
             "Product Unit of Measure"
         )
+        qty_unavailable_by_product = defaultdict(float)
         for procurement, rule in procurements:
             domain = self.env["procurement.group"]._get_moves_to_assign_domain(
                 procurement.company_id.id
@@ -68,11 +74,15 @@ class StockRule(models.Model):
                 procurement.product_qty,
                 procurement.product_uom,
                 procurement.values,
+                qty_unavailable=qty_unavailable_by_product[procurement.product_id.id],
             )
             if float_is_zero(needed_qty, precision_digits=precision):
                 getattr(self.env["stock.rule"], "_run_%s" % rule.mts_rule_id.action)(
                     [(procurement, rule.mts_rule_id)]
                 )
+                qty_unavailable_by_product[
+                    procurement.product_id.id
+                ] += procurement.product_qty
             elif (
                 float_compare(
                     needed_qty, procurement.product_qty, precision_digits=precision
@@ -104,4 +114,5 @@ class StockRule(models.Model):
                 getattr(self.env["stock.rule"], "_run_%s" % rule.mto_rule_id.action)(
                     [(mto_procurement, rule.mto_rule_id)]
                 )
+                qty_unavailable_by_product[procurement.product_id.id] += mts_qty
         return True
