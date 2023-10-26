@@ -36,14 +36,20 @@ class StockRule(models.Model):
                     ) % (rule.name,)
                     raise ValidationError(msg)
 
-    def get_mto_qty_to_order(self, product, product_qty, product_uom, values):
+    def get_mto_qty_to_order(
+        self, product, product_qty, product_uom, values, done_procs=None
+    ):
         self.ensure_one()
+        if done_procs is None:
+            done_procs = {}
         precision = self.env["decimal.precision"].precision_get(
             "Product Unit of Measure"
         )
         src_location_id = self.mts_rule_id.location_src_id.id
         product_location = product.with_context(location=src_location_id)
-        virtual_available = product_location.virtual_available
+        virtual_available = product_location.virtual_available - done_procs.get(
+            product.id, 0.0
+        )
         qty_available = product.uom_id._compute_quantity(virtual_available, product_uom)
         if float_compare(qty_available, 0.0, precision_digits=precision) > 0:
             if (
@@ -59,6 +65,7 @@ class StockRule(models.Model):
         precision = self.env["decimal.precision"].precision_get(
             "Product Unit of Measure"
         )
+        done_procurements_by_product = {}
         for procurement, rule in procurements:
             domain = self.env["procurement.group"]._get_moves_to_assign_domain(
                 procurement.company_id.id
@@ -68,6 +75,7 @@ class StockRule(models.Model):
                 procurement.product_qty,
                 procurement.product_uom,
                 procurement.values,
+                done_procs=done_procurements_by_product,
             )
             if float_is_zero(needed_qty, precision_digits=precision):
                 getattr(self.env["stock.rule"], "_run_%s" % rule.mts_rule_id.action)(
@@ -104,4 +112,8 @@ class StockRule(models.Model):
                 getattr(self.env["stock.rule"], "_run_%s" % rule.mto_rule_id.action)(
                     [(mto_procurement, rule.mto_rule_id)]
                 )
+            done_procurements_by_product.setdefault(procurement.product_id.id, 0)
+            done_procurements_by_product[
+                procurement.product_id.id
+            ] += procurement.product_qty
         return True
