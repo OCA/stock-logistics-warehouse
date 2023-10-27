@@ -418,7 +418,6 @@ msgstr ""
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,help:stock_cycle_count.field_stock_cycle_count__message_has_error
-#: model:ir.model.fields,help:stock_cycle_count.field_stock_cycle_count__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr ""
 
@@ -643,11 +642,6 @@ msgstr ""
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule__rule_description
 msgid "Rule Description"
-msgstr ""
-
-#. module: stock_cycle_count
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__message_has_sms_error
-msgid "SMS Delivery error"
 msgstr ""
 
 #. module: stock_cycle_count
