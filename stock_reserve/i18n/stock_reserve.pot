@@ -804,7 +804,6 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:stock_reserve.product_template_form_view_reservation_button
 #: model_terms:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_form
 #: model_terms:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_search
-#: model_terms:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_tree
 msgid "Stock Reservations"
 msgstr ""
 
