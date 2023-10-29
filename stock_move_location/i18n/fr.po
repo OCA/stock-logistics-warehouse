@@ -104,11 +104,6 @@ msgid "Immediate Transfer"
 msgstr "Transfert Immédiat"
 
 #. module: stock_move_location
-#: model_terms:ir.ui.view,arch_db:stock_move_location.view_wiz_stock_move_location_form_stock_move_location
-msgid "Inventory Details"
-msgstr "Détails de l'Inventaire"
-
-#. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_stock_move____last_update
 #: model:ir.model.fields,field_description:stock_move_location.field_stock_picking____last_update
 #: model:ir.model.fields,field_description:stock_move_location.field_stock_picking_type____last_update
@@ -294,3 +289,6 @@ msgstr ""
 msgid "technical field to disable the edition of origin location."
 msgstr ""
 "champ technique pour désactiver la modification de l'emplacement d'origine."
+
+#~ msgid "Inventory Details"
+#~ msgstr "Détails de l'Inventaire"
