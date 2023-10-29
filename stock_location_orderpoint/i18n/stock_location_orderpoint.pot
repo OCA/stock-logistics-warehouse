@@ -209,11 +209,6 @@ msgid "Sequence"
 msgstr ""
 
 #. module: stock_location_orderpoint
-#: model_terms:ir.ui.view,arch_db:stock_location_orderpoint.view_stock_location_orderpoint_tree_editable
-msgid "Stock Location Oderpoints"
-msgstr ""
-
-#. module: stock_location_orderpoint
 #: model:ir.actions.act_window,name:stock_location_orderpoint.action_stock_location_orderpoint
 #: model:ir.ui.menu,name:stock_location_orderpoint.menu_stock_location_orderpoint
 msgid "Stock Location Orderpoint"

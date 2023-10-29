@@ -43,7 +43,7 @@
                     </group>
                     <group string="Removal Rules" name="rule" col="1">
                         <field name="rule_removal_ids" nolabel="1">
-                            <tree string="Removal Rules">
+                            <tree>
                                 <field name="sequence" widget="handle" />
                                 <field name="name" />
                                 <field name="location_id" />
@@ -96,7 +96,7 @@
         <field name="name">stock.reserve.rule</field>
         <field name="model">stock.reserve.rule</field>
         <field name="arch" type="xml">
-            <tree string="Reservation Rule">
+            <tree>
                 <field name="sequence" widget="handle" />
                 <field name="name" />
                 <field name="location_id" />

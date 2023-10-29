@@ -290,9 +290,7 @@ msgstr ""
 
 #. module: stock_request_kanban
 #: model:ir.model.fields,help:stock_request_kanban.field_stock_inventory_kanban__message_has_error
-#: model:ir.model.fields,help:stock_request_kanban.field_stock_inventory_kanban__message_has_sms_error
 #: model:ir.model.fields,help:stock_request_kanban.field_stock_request_kanban__message_has_error
-#: model:ir.model.fields,help:stock_request_kanban.field_stock_request_kanban__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr ""
 
@@ -591,12 +589,6 @@ msgid "Routes"
 msgstr ""
 
 #. module: stock_request_kanban
-#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban__message_has_sms_error
-#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__message_has_sms_error
-msgid "SMS Delivery error"
-msgstr ""
-
-#. module: stock_request_kanban
 #: model_terms:ir.ui.view,arch_db:stock_request_kanban.stock_request_order_form
 #: model_terms:ir.ui.view,arch_db:stock_request_kanban.view_stock_inventory_kanban_form
 msgid "Scan"
@@ -662,7 +654,6 @@ msgstr ""
 
 #. module: stock_request_kanban
 #: model_terms:ir.ui.view,arch_db:stock_request_kanban.view_stock_inventory_kanban_form
-#: model_terms:ir.ui.view,arch_db:stock_request_kanban.view_stock_inventory_kanban_tree
 msgid "Stock Inventories"
 msgstr ""
 
@@ -711,7 +702,6 @@ msgstr ""
 
 #. module: stock_request_kanban
 #: model_terms:ir.ui.view,arch_db:stock_request_kanban.view_stock_request_kanban_form
-#: model_terms:ir.ui.view,arch_db:stock_request_kanban.view_stock_request_kanban_tree
 msgid "Stock Requests"
 msgstr ""
 

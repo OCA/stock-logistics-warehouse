@@ -4,7 +4,7 @@
         <field name="name">stock.inventory.kanban.tree</field>
         <field name="model">stock.inventory.kanban</field>
         <field name="arch" type="xml">
-            <tree string="Stock Inventories">
+            <tree>
                 <field name="name" />
                 <field name="count_missing_kanbans" />
                 <field name="state" />

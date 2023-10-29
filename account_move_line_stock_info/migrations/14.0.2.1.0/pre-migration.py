@@ -4,6 +4,7 @@ import logging
 
 from odoo import SUPERUSER_ID, api
 
+# pylint: disable=W7950
 from odoo.addons.account_move_line_stock_info.hooks import post_init_hook
 
 _logger = logging.getLogger(__name__)

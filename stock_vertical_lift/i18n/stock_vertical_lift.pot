@@ -603,7 +603,6 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_shuttle_form_menu
 #: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_shuttle_manual_barcode_form
 #: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_shuttle_view_form
-#: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_shuttle_view_tree
 msgid "Shuttle"
 msgstr ""
 

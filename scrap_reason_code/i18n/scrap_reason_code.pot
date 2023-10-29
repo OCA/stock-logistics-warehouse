@@ -90,11 +90,6 @@ msgid "Reason Code"
 msgstr ""
 
 #. module: scrap_reason_code
-#: model_terms:ir.ui.view,arch_db:scrap_reason_code.view_scrap_reason_code_list
-msgid "Reason Codes"
-msgstr ""
-
-#. module: scrap_reason_code
 #: model:ir.model.fields,field_description:scrap_reason_code.field_stock_move__reason_code_id
 msgid "Reason code"
 msgstr ""
