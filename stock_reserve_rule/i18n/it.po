@@ -224,7 +224,6 @@ msgstr ""
 #. module: stock_reserve_rule
 #: model_terms:ir.ui.view,arch_db:stock_reserve_rule.view_stock_reserve_rule_form
 #: model_terms:ir.ui.view,arch_db:stock_reserve_rule.view_stock_reserve_rule_search
-#: model_terms:ir.ui.view,arch_db:stock_reserve_rule.view_stock_reserve_rule_tree
 msgid "Reservation Rule"
 msgstr "Regola prenotazione"
 
