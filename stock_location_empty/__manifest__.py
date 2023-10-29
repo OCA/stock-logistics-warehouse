@@ -4,7 +4,7 @@
 {
     "name": "Stock Location Empty",
     "summary": "Adds a filter for empty stock location",
-    "version": "14.0.1.0.0",
+    "version": "14.0.1.0.1",
     "author": "Camptocamp, Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "category": "Warehouse",
