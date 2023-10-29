@@ -3,7 +3,7 @@
 
 {
     "name": "Stock Request kanban",
-    "version": "14.0.1.1.2",
+    "version": "14.0.1.1.3",
     "category": "Warehouse Management",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "author": "Creu Blanca, ForgeFlow, Odoo Community Association (OCA)",
