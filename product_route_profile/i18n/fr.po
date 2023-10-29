@@ -113,7 +113,6 @@ msgstr "Routes"
 #: model:ir.actions.act_window,name:product_route_profile.action_route_profile_form
 #: model:ir.ui.menu,name:product_route_profile.menu_route_profile_config
 #: model_terms:ir.ui.view,arch_db:product_route_profile.route_profile_form
-#: model_terms:ir.ui.view,arch_db:product_route_profile.route_profile_tree
 msgid "Routes Profiles"
 msgstr "Profils de Routes"
 
