@@ -187,7 +187,7 @@
         <field name="name">vertical.lift.shuttle.tree</field>
         <field name="model">vertical.lift.shuttle</field>
         <field name="arch" type="xml">
-            <tree string="Shuttle">
+            <tree>
                 <field name="name" />
             </tree>
         </field>

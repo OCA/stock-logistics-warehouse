@@ -4,7 +4,7 @@
         <field name="name">stock.location.orderpoint.tree.editable</field>
         <field name="model">stock.location.orderpoint</field>
         <field name="arch" type="xml">
-            <tree string="Stock Location Oderpoints">
+            <tree>
                 <field name="sequence" widget="handle" />
                 <field name="name" />
                 <field name="location_id" options="{'no_create': True}" />
