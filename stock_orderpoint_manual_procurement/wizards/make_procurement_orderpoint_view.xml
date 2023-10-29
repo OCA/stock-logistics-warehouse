@@ -14,7 +14,7 @@
                 </p>
                 <group name="items" string="Items">
                     <field name="item_ids" nolabel="1">
-                        <tree string="Items" nocreate="1" editable="top">
+                        <tree nocreate="1" editable="top">
                             <field name="orderpoint_id" invisible="True" />
                             <field
                                 name="warehouse_id"
@@ -58,7 +58,7 @@
                 </p>
                 <group name="items" string="Items">
                     <field name="item_ids" nolabel="1">
-                        <tree string="Items" nocreate="1" editable="top">
+                        <tree nocreate="1" editable="top">
                             <field name="orderpoint_id" invisible="True" />
                             <field
                                 name="warehouse_id"
