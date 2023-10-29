@@ -7,7 +7,7 @@
         <field name="name">route.profile.tree</field>
         <field name="model">route.profile</field>
         <field name="arch" type="xml">
-            <tree string="Routes Profiles">
+            <tree>
                 <field name="name" />
                 <field name="route_ids" widget="many2many_tags" />
             </tree>
