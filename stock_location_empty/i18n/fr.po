@@ -85,11 +85,6 @@ msgid "Stock Amount"
 msgstr "Quantité en stock"
 
 #. module: stock_location_empty
-#: model_terms:ir.ui.view,arch_db:stock_location_empty.view_location_tree3
-msgid "Stock Location"
-msgstr "Emplacement de stock"
-
-#. module: stock_location_empty
 #: model_terms:ir.ui.view,arch_db:stock_location_empty.view_location_search_empty_2
 msgid "Stock Locations"
 msgstr "Emplacements de stock"
@@ -103,3 +98,6 @@ msgstr "Fournisseur"
 #: model_terms:ir.ui.view,arch_db:stock_location_empty.view_location_search_empty_2
 msgid "Vendor Locations"
 msgstr "Adresses du vendeur"
+
+#~ msgid "Stock Location"
+#~ msgstr "Emplacement de stock"

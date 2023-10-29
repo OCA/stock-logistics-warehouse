@@ -85,11 +85,6 @@ msgid "Stock Amount"
 msgstr "Bestandsmenge"
 
 #. module: stock_location_empty
-#: model_terms:ir.ui.view,arch_db:stock_location_empty.view_location_tree3
-msgid "Stock Location"
-msgstr "Lagerort"
-
-#. module: stock_location_empty
 #: model_terms:ir.ui.view,arch_db:stock_location_empty.view_location_search_empty_2
 msgid "Stock Locations"
 msgstr "Lagerorte"
@@ -103,3 +98,6 @@ msgstr "Lieferant"
 #: model_terms:ir.ui.view,arch_db:stock_location_empty.view_location_search_empty_2
 msgid "Vendor Locations"
 msgstr "Lieferantenlagerorte"
+
+#~ msgid "Stock Location"
+#~ msgstr "Lagerort"
