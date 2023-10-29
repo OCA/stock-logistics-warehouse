@@ -874,7 +874,6 @@ msgstr ""
 #. module: stock_request
 #: model_terms:ir.ui.view,arch_db:stock_request.view_move_form
 #: model_terms:ir.ui.view,arch_db:stock_request.view_stock_request_allocation_form
-#: model_terms:ir.ui.view,arch_db:stock_request.view_stock_request_allocation_tree
 msgid "Stock Request Allocations"
 msgstr ""
 
@@ -933,7 +932,6 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
 #: model_terms:ir.ui.view,arch_db:stock_request.view_picking_form
 #: model_terms:ir.ui.view,arch_db:stock_request.view_stock_request_form
-#: model_terms:ir.ui.view,arch_db:stock_request.view_stock_request_tree
 msgid "Stock Requests"
 msgstr ""
 
