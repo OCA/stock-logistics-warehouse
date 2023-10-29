@@ -193,6 +193,12 @@ msgid "Validated Message"
 msgstr ""
 
 #. module: stock_request_tier_validation
+#: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request__validation_status
+#: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request_order__validation_status
+msgid "Validation Status"
+msgstr ""
+
+#. module: stock_request_tier_validation
 #: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request__review_ids
 #: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request_order__review_ids
 msgid "Validations"
