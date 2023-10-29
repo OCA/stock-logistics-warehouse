@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-07-17 17:13+0000\n"
-"Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
+"PO-Revision-Date: 2023-10-29 17:37+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
@@ -49,7 +49,7 @@ msgstr "Disponibile"
 #. module: sale_stock_info_popup
 #: model:ir.model.fields,field_description:sale_stock_info_popup.field_sale_order_line__display_qty_widget
 msgid "Display Qty Widget"
-msgstr "Mostra Widget Qtà"
+msgstr "Mostra procedura guidata q.tà"
 
 #. module: sale_stock_info_popup
 #. openerp-web
@@ -80,7 +80,7 @@ msgstr "Giacenza prevista"
 #. module: sale_stock_info_popup
 #: model:ir.model.fields,field_description:sale_stock_info_popup.field_sale_order_line__free_qty_today
 msgid "Free Qty Today"
-msgstr "Qtà Libera Oggi"
+msgstr "Q.tà Libera Oggi"
 
 #. module: sale_stock_info_popup
 #: model:ir.model.fields,field_description:sale_stock_info_popup.field_product_product__free_qty
@@ -130,12 +130,12 @@ msgstr "Tipologia prodotto"
 #. module: sale_stock_info_popup
 #: model:ir.model.fields,field_description:sale_stock_info_popup.field_sale_order_line__qty_available_today
 msgid "Qty Available Today"
-msgstr "Qtà Disponibile Oggi"
+msgstr "Q.tà disponibile oggi"
 
 #. module: sale_stock_info_popup
 #: model:ir.model.fields,field_description:sale_stock_info_popup.field_sale_order_line__qty_to_deliver
 msgid "Qty To Deliver"
-msgstr "Qtà da Consegnare"
+msgstr "Q.tà da consegnare"
 
 #. module: sale_stock_info_popup
 #: model:ir.model,name:sale_stock_info_popup.model_sale_order_line
