@@ -172,7 +172,6 @@ msgstr ""
 #. module: stock_location_tray
 #: model_terms:ir.ui.view,arch_db:stock_location_tray.view_stock_location_tray_type_form
 #: model_terms:ir.ui.view,arch_db:stock_location_tray.view_stock_location_tray_type_search
-#: model_terms:ir.ui.view,arch_db:stock_location_tray.view_stock_location_tray_type_tree
 msgid "Location Tray Type"
 msgstr ""
 
