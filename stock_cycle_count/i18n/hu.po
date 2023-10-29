@@ -426,7 +426,6 @@ msgstr "Ha be van jelölve, akkor figyelje az új üzeneteket."
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,help:stock_cycle_count.field_stock_cycle_count__message_has_error
-#: model:ir.model.fields,help:stock_cycle_count.field_stock_cycle_count__message_has_sms_error
 #, fuzzy
 msgid "If checked, some messages have a delivery error."
 msgstr "Ha be van jelölve, akkor figyelje az új üzeneteket."
@@ -657,11 +656,6 @@ msgid "Rule Description"
 msgstr ""
 
 #. module: stock_cycle_count
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__message_has_sms_error
-msgid "SMS Delivery error"
-msgstr ""
-
-#. module: stock_cycle_count
 #: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:0
 #, python-format
 msgid ""
@@ -717,8 +711,6 @@ msgstr "Állapot"
 #. module: stock_cycle_count
 #: model:ir.actions.act_window,name:stock_cycle_count.action_stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_inventory__cycle_count_id
-#: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_rule_tree_view
-#: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_tree_view
 msgid "Stock Cycle Count"
 msgstr ""
 

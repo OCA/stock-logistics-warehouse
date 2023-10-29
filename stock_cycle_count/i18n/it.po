@@ -442,7 +442,6 @@ msgstr "Se selezionata, nuovi messaggi richiedono attenzione."
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,help:stock_cycle_count.field_stock_cycle_count__message_has_error
-#: model:ir.model.fields,help:stock_cycle_count.field_stock_cycle_count__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr "Se selezionata, alcuni messaggi hanno un errore di consegna."
 
@@ -681,11 +680,6 @@ msgid "Rule Description"
 msgstr "Descrizione regola"
 
 #. module: stock_cycle_count
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__message_has_sms_error
-msgid "SMS Delivery error"
-msgstr "Errore consegna SMS"
-
-#. module: stock_cycle_count
 #: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:0
 #, python-format
 msgid ""
@@ -745,8 +739,6 @@ msgstr "Stato"
 #. module: stock_cycle_count
 #: model:ir.actions.act_window,name:stock_cycle_count.action_stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_inventory__cycle_count_id
-#: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_rule_tree_view
-#: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_tree_view
 msgid "Stock Cycle Count"
 msgstr "Inventario a rotazione di magazzino"
 
@@ -910,6 +902,9 @@ msgstr "Aree dove applicato"
 #: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_rule_form_view
 msgid "cycle counts test:"
 msgstr "test inventari a rotazione:"
+
+#~ msgid "SMS Delivery error"
+#~ msgstr "Errore consegna SMS"
 
 #, python-format
 #~ msgid ""
