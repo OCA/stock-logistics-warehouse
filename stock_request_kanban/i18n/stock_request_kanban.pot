@@ -654,7 +654,6 @@ msgstr ""
 
 #. module: stock_request_kanban
 #: model_terms:ir.ui.view,arch_db:stock_request_kanban.view_stock_inventory_kanban_form
-#: model_terms:ir.ui.view,arch_db:stock_request_kanban.view_stock_inventory_kanban_tree
 msgid "Stock Inventories"
 msgstr ""
 
@@ -703,7 +702,6 @@ msgstr ""
 
 #. module: stock_request_kanban
 #: model_terms:ir.ui.view,arch_db:stock_request_kanban.view_stock_request_kanban_form
-#: model_terms:ir.ui.view,arch_db:stock_request_kanban.view_stock_request_kanban_tree
 msgid "Stock Requests"
 msgstr ""
 
