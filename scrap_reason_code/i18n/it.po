@@ -93,11 +93,6 @@ msgid "Reason Code"
 msgstr "Codice causale"
 
 #. module: scrap_reason_code
-#: model_terms:ir.ui.view,arch_db:scrap_reason_code.view_scrap_reason_code_list
-msgid "Reason Codes"
-msgstr "Codici causale"
-
-#. module: scrap_reason_code
 #: model:ir.model.fields,field_description:scrap_reason_code.field_stock_move__reason_code_id
 msgid "Reason code"
 msgstr "Codice causale"
@@ -129,3 +124,6 @@ msgstr "Movimento di magazzino"
 #, python-format
 msgid "The selected reason code is not allowed for this product category."
 msgstr ""
+
+#~ msgid "Reason Codes"
+#~ msgstr "Codici causale"
