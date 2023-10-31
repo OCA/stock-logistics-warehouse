@@ -28,7 +28,7 @@ class ProductTemplate(models.Model):
     @api.depends("route_profile_id", "force_route_profile_id")
     @api.depends_context("company")
     def _compute_route_ids(self):
-        for rec in self:
+        for rec in self.sudo():
             if rec.force_route_profile_id:
                 rec.route_ids = [(6, 0, rec.force_route_profile_id.route_ids.ids)]
             elif rec.route_profile_id:
