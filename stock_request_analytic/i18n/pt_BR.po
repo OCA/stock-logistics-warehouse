@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2022-02-01 20:33+0000\n"
-"Last-Translator: Rodrigo Macedo <rmsolucoeseminformatica@protonmail.com>\n"
+"PO-Revision-Date: 2023-10-31 17:05+0000\n"
+"Last-Translator: Douglas Custódio <douglascstd@yahoo.com>\n"
 "Language-Team: none\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.3.2\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: stock_request_analytic
 #: model:ir.model,name:stock_request_analytic.model_account_analytic_account
@@ -36,7 +36,7 @@ msgstr "Contagem Analítica"
 #. module: stock_request_analytic
 #: model:ir.model.fields,field_description:stock_request_analytic.field_stock_request_order__analytic_tag_count
 msgid "Analytic Tag Count"
-msgstr ""
+msgstr "Contagem de Etiqueta Analítica"
 
 #. module: stock_request_analytic
 #: model:ir.model.fields,field_description:stock_request_analytic.field_stock_request__analytic_tag_ids
@@ -49,12 +49,12 @@ msgstr "Etiquetas Analíticas"
 #: code:addons/stock_request_analytic/models/stock_request_order.py:0
 #, python-format
 msgid "Analytic type (analytic_type) not present in the context"
-msgstr ""
+msgstr "Tipo Analítico (analytic_type) não está presente no contexto"
 
 #. module: stock_request_analytic
 #: model:ir.model.fields,field_description:stock_request_analytic.field_stock_request_order__default_analytic_account_id
 msgid "Default Analytic Account"
-msgstr ""
+msgstr "Conta Analítica Padrão"
 
 #. module: stock_request_analytic
 #: model:ir.model.fields,field_description:stock_request_analytic.field_account_analytic_account__display_name
@@ -62,7 +62,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_request_analytic.field_stock_request_order__display_name
 #: model:ir.model.fields,field_description:stock_request_analytic.field_stock_rule__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nome para Mostrar"
 
 #. module: stock_request_analytic
 #: model:ir.model.fields,field_description:stock_request_analytic.field_account_analytic_account__id
@@ -70,7 +70,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_request_analytic.field_stock_request_order__id
 #: model:ir.model.fields,field_description:stock_request_analytic.field_stock_rule__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: stock_request_analytic
 #: model:ir.model.fields,field_description:stock_request_analytic.field_account_analytic_account____last_update
@@ -78,12 +78,13 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_request_analytic.field_stock_request_order____last_update
 #: model:ir.model.fields,field_description:stock_request_analytic.field_stock_rule____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Última Modificação Em"
 
 #. module: stock_request_analytic
 #: model:ir.model.fields,help:stock_request_analytic.field_stock_request_order__default_analytic_account_id
 msgid "Set this if you want to define a default analytic account on requests"
 msgstr ""
+"Defina isso se você deseja definir uma conta analítica padrão nas requisições"
 
 #. module: stock_request_analytic
 #: model:ir.model,name:stock_request_analytic.model_stock_request
