@@ -9,7 +9,7 @@ class RouteProfile(models.Model):
     _name = "route.profile"
     _description = "Route Profile"
 
-    name = fields.Char("Name")
+    name = fields.Char()
     company_id = fields.Many2one(
         comodel_name="res.company",
         default=lambda self: self.env.company.id,
