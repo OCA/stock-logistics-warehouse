@@ -61,8 +61,10 @@ class StockMove(models.Model):
         job_options = job_options.copy()
         job_options.setdefault(
             "description",
-            _('Try releasing "{}" for quantities added in: {}').format(
-                product.display_name, ", ".join(locations.mapped("name"))
+            _(
+                'Try releasing "%(product)s" for quantities added in: %(locations)s',
+                product=product.display_name,
+                locations=", ".join(locations.mapped("name")),
             ),
         )
         job_options.setdefault("identity_key", identity_exact)
