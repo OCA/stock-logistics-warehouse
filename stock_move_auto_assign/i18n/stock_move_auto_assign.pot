@@ -27,5 +27,5 @@ msgstr ""
 #. odoo-python
 #: code:addons/stock_move_auto_assign/models/stock_move.py:0
 #, python-format
-msgid "Try reserving \"{}\" for quantities added in: {}"
+msgid "Try reserving \"%(product)s\" for quantities added in: %(locations)s"
 msgstr ""
