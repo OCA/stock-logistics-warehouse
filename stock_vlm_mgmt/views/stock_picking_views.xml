@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="svm_operation_picking_form_view" model="ir.ui.view">
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <field name="has_vlm_pending_operations" invisible="1" />
+                <field name="has_vlm_operations" invisible="1" />
+                <field name="vlm_task_ids" invisible="1" />
+                <field name="has_pending_vlm_tasks" invisible="1" />
+                <button
+                    string="VLM Tasks"
+                    type="object"
+                    name="action_open_vlm_task"
+                    class="oe_stat_button"
+                    icon="fa-rocket"
+                    attrs="{'invisible': [('vlm_task_ids', '=', [])]}"
+                />
+            </xpath>
+            <xpath expr="//div[hasclass('oe_title')]" position="before">
+                <div
+                    class="alert alert-warning h4"
+                    role="alert"
+                    attrs="{'invisible': [('has_pending_vlm_tasks', '=', False)]}"
+                >
+
+                    <i class="fa fa-rocket" />&amp;nbsp;
+                    Pending VLM tasks. Proceed to complete them.&amp;nbsp;
+                    <button
+                        name="action_do_vlm_tasks"
+                        string="Start tasks"
+                        type="object"
+                        class="btn btn-primary btn-lg"
+                    />
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>
