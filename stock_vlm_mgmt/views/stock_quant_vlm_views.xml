@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_stock_quant_vlm_form" model="ir.ui.view">
+        <field name="model">stock.quant.vlm</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group string="Content">
+                            <field name="product_id" readonly="1" force_save="1" />
+                            <field name="quantity" />
+                        </group>
+                        <group string="Reference">
+                            <field name="location_id" readonly="1" force_save="1" />
+                            <field name="quant_id" readonly="1" force_save="1" />
+                            <field
+                                name="tray_id"
+                                domain="[('location_id', '=', location_id)]"
+                            />
+                            <field name="tray_type_id" invisible="1" />
+                            <field name="pos_x" readonly="1" force_save="1" />
+                            <field name="pos_y" readonly="1" force_save="1" />
+                        </group>
+                        <group>
+                            <field
+                                name="tray_matrix"
+                                widget="location_tray_matrix"
+                                options="{'live_cell_edit': True}"
+                                nolabel="1"
+                            />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="view_stock_quant_vlm_tree" model="ir.ui.view">
+        <field name="model">stock.quant.vlm</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="tray_id" domain="[('location_id', '=', location_id)]" />
+                <field name="quant_id" optional="hide" readonly="1" />
+                <field name="location_id" optional="show" readonly="1" />
+                <field name="product_id" />
+                <field name="quantity" />
+                <field name="pos_x" optional="show" />
+                <field name="pos_y" optional="show" />
+            </tree>
+        </field>
+    </record>
+    <record id="location_quant_form_action" model="ir.actions.act_window">
+        <field name="name">Vertical Lift Module Quants</field>
+        <field name="res_model">stock.quant.vlm</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+    <record id="view_stock_quant_inventory_tree" model="ir.ui.view">
+        <field name="model">stock.quant.vlm</field>
+        <field name="inherit_id" ref="view_stock_quant_vlm_tree" />
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <tree position="attributes">
+                <attribute name="editable">top</attribute>
+            </tree>
+            <field name="location_id" position="attributes">
+                <attribute name="optional">hide</attribute>
+            </field>
+            <field name="pos_y" position="after">
+                <button
+                    name="action_task_detail"
+                    string="Details"
+                    type="object"
+                    class="oe_highlight"
+                />
+            </field>
+        </field>
+    </record>
+    <record id="vlm_quant_search_view" model="ir.ui.view">
+        <field name="model">stock.quant.vlm</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="product_id" string="Product" />
+                <field name="location_id" string="VLM" />
+                <searchpanel>
+                    <field
+                        name="location_id"
+                        string="VLM"
+                        select="multi"
+                        icon="fa-table"
+                        enable_counters="1"
+                    />
+                    <field
+                        name="tray_id"
+                        string="Trays"
+                        select="multi"
+                        icon="fa-tasks"
+                        enable_counters="1"
+                    />
+                </searchpanel>
+           </search>
+        </field>
+    </record>
+    <record id="location_quant_vlm_action" model="ir.actions.act_window">
+        <field name="name">Vertical Lift Module Quants</field>
+        <field name="res_model">stock.quant.vlm</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="vlm_quant_search_view" />
+        <field name="view_id" ref="view_stock_quant_vlm_tree" />
+    </record>
+    <menuitem
+        id="menu_vlm_quant"
+        parent="menu_vlm_config"
+        action="location_quant_vlm_action"
+    />
+</odoo>

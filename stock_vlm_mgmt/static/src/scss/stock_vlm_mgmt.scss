@@ -1,0 +1,19 @@
+// VLM tray matrix default colors
+.o_field_location_tray_matrix {
+    background-color: $o-brand-lightsecondary;
+    border: 2px $o-main-color-muted solid;
+}
+// Product image hint in the wizard
+.o_form_view {
+    .vlm_task_image {
+        float: right;
+        margin-bottom: 10px;
+
+        > img {
+            max-width: 200px;
+            max-height: 200px;
+            margin: auto;
+            display: block;
+        }
+    }
+}
