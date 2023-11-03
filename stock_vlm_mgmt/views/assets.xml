@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="assets_backend" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <link
+                rel="stylesheet"
+                type="text/scss"
+                href="/stock_vlm_mgmt/static/src/scss/stock_vlm_mgmt.scss"
+            />
+            <script
+                type="text/javascript"
+                src="/stock_vlm_mgmt/static/src/js/stock_location_tray.js"
+            />
+            <script
+                type="text/javascript"
+                src="/stock_vlm_mgmt/static/src/js/vlm_task_tree_action_buttons.js"
+            />
+        </xpath>
+    </template>
+</odoo>

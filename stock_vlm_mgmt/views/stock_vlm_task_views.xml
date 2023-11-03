@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_vlm_task_form" model="ir.ui.view">
+        <field name="model">stock.vlm.task</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field
+                        name="state"
+                        widget="statusbar"
+                        clickable="1"
+                        statusbar_visible="pending,waiting,done"
+                    />
+                </header>
+                <sheet>
+                    <div class="oe_button_box">
+                        <button
+                            string="Command"
+                            help="Send task to the VLM"
+                            class="oe_stat_button"
+                            icon="fa-rocket"
+                            name="action_do_tasks"
+                            type="object"
+                            states="pending,waiting"
+                        />
+                    </div>
+                    <group>
+                        <group>
+                            <field name="reference" />
+                            <field name="task_type" string="Operation" readonly="1" />
+                            <field name="location_id" />
+                            <field name="tray_id" />
+                            <field name="product_id" />
+                            <field name="quantity_pending" string="Pending" />
+                            <field name="quantity_done" string="Done" />
+                        </group>
+                        <group>
+                            <field
+                                name="tray_matrix"
+                                widget="location_tray_matrix"
+                                options="{'live_cell_edit': True}"
+                                nolabel="1"
+                            />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="view_vlm_task_tree" model="ir.ui.view">
+        <field name="model">stock.vlm.task</field>
+        <field name="arch" type="xml">
+            <tree
+                decoration-danger="state == 'pending'"
+                decoration-success="state == 'done'"
+                js_class="stock_vlm_task_action_tree"
+            >
+                <field name="tray_id" />
+                <field name="location_id" />
+                <field name="reference" />
+                <field name="product_id" />
+                <field name="quantity_pending" string="Pending" />
+                <field name="quantity_done" string="Done" />
+                <field name="task_type" string="Operation" />
+                <field name="state" />
+                <button
+                    name="action_do_tasks"
+                    type="object"
+                    icon="fa-rocket"
+                    attrs="{'invisible': [('state', '=', 'done')]}"
+                />
+            </tree>
+        </field>
+    </record>
+    <record id="vlm_task_search_view" model="ir.ui.view">
+        <field name="model">stock.vlm.task</field>
+        <field name="arch" type="xml">
+            <search>
+                <filter
+                    name="pending"
+                    string="Pending tasks"
+                    domain="[('state', 'in', ['pending', 'waiting'])]"
+                />
+                <filter
+                    name="done"
+                    string="Done tasks"
+                    domain="[('state', '=', 'done')]"
+                />
+                <searchpanel>
+                    <field
+                        name="location_id"
+                        string="VLM"
+                        select="multi"
+                        icon="fa-table"
+                        enable_counters="1"
+                    />
+                    <field
+                        name="task_type"
+                        string="Operation"
+                        select="multi"
+                        icon="fa-rocket"
+                        enable_counters="1"
+                    />
+                    <field
+                        name="tray_id"
+                        string="Trays"
+                        select="multi"
+                        icon="fa-tasks"
+                        enable_counters="1"
+                    />
+                    <field
+                        name="product_id"
+                        select="multi"
+                        icon="fa-cubes"
+                        enable_counters="1"
+                    />
+                </searchpanel>
+           </search>
+        </field>
+    </record>
+    <record id="vlm_operation_bulk_task_action" model="ir.actions.server">
+        <field name="name">Perform VLM Tasks</field>
+        <field name="model_id" ref="stock_vlm_mgmt.model_stock_vlm_task" />
+        <field name="binding_model_id" ref="stock_vlm_mgmt.model_stock_vlm_task" />
+        <field name="state">code</field>
+        <field name="binding_view_types">list</field>
+        <field name="code">action = records.action_do_tasks()</field>
+    </record>
+    <record id="vlm_task_action" model="ir.actions.act_window">
+        <field name="name">Vertical Lift Module Tasks</field>
+        <field name="res_model">stock.vlm.task</field>
+        <field name="context">{"search_default_pending": 1}</field>
+        <field name="view_mode">tree,kanban,form</field>
+    </record>
+    <menuitem
+        id="vlm_task_menu"
+        parent="stock.menu_stock_warehouse_mgmt"
+        action="vlm_task_action"
+        groups="stock.group_stock_manager"
+    />
+</odoo>

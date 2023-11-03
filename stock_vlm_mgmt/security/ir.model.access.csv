@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_stock_quant_vlm,access_stock_quant_vlm,model_stock_quant_vlm,stock.group_stock_user,1,1,1,1
+access_stock_location_vlm_tray_user,access_stock_location_vlm_tray,model_stock_location_vlm_tray,stock.group_stock_user,1,0,0,0
+access_stock_location_vlm_tray_manager,access_stock_location_vlm_tray,model_stock_location_vlm_tray,stock.group_stock_manager,1,1,1,1
+access_vlm_task,access_vlm_task,model_stock_vlm_task,stock.group_stock_user,1,1,1,1
+access_vlm_task_action,access_vlm_task_action,model_stock_vlm_task_action,stock.group_stock_user,1,1,1,1
+access_stock_location_vlm_tray_type,access_stock_location_vlm_tray_type,model_stock_location_vlm_tray_type,stock.group_stock_user,1,1,1,1
