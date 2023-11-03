@@ -172,3 +172,15 @@ class TestCommonMoveDest(SavepointCase):
             ),
             pick_move_1a | pick_move_1b,
         )
+
+    def test_compute_common_dest_move_ids_on_new_record(self):
+        """Discovered while testing MRP with code such as::
+
+            with Form(cls.env["mrp.production"]) as mo_form:
+                mo_form.product_id = cls.product
+
+        This call _compute_common_dest_move_ids on a new instance
+        (without stock_move db record)
+        """
+        move = self.env["stock.move"].new({})
+        self.assertFalse(move.common_dest_move_ids)
