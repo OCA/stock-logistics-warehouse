@@ -21,10 +21,11 @@ class ProductTemplate(models.Model):
     def _compute_product_available_not_res(self):
         for tmpl in self:
             if isinstance(tmpl.id, models.NewId):
-                continue
-            tmpl.qty_available_not_res = sum(
-                tmpl.mapped("product_variant_ids.qty_available_not_res")
-            )
+                tmpl.qty_available_not_res = 0
+            else:
+                tmpl.qty_available_not_res = sum(
+                    tmpl.mapped("product_variant_ids.qty_available_not_res")
+                )
 
     def action_open_quants_unreserved(self):
         products_ids = self.mapped("product_variant_ids").ids
