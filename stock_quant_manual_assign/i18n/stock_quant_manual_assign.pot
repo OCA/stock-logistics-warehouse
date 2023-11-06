@@ -94,6 +94,7 @@ msgid "Lot"
 msgstr ""
 
 #. module: stock_quant_manual_assign
+#: model_terms:ir.ui.view,arch_db:stock_quant_manual_assign.stock_move_manual_quants_form_view
 #: model_terms:ir.ui.view,arch_db:stock_quant_manual_assign.stock_picking_manual_quants_form_view
 msgid "Manual Quants"
 msgstr ""
