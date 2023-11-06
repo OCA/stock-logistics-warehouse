@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo noupdate="1">
+
+    <record id="res_partner_bob" model="res.partner">
+        <field name="name">Bob</field>
+        <field name="email">bob@example.com</field>
+    </record>
+
+    <record id="product_template_plate" model="product.template">
+        <field name="name">Plate</field>
+        <field name="detailed_type">product</field>
+    </record>
+
+    <record id="product_template_napkin" model="product.template">
+        <field name="name">Napkin</field>
+        <field name="detailed_type">product</field>
+    </record>
+
+    <record
+        id="product_template_napkin_attribute_line"
+        model="product.template.attribute.line"
+    >
+        <field name="product_tmpl_id" ref="product_template_napkin" />
+        <field name="attribute_id" ref="product.product_attribute_2" />
+        <field
+            name="value_ids"
+            eval="[(4, ref('product.product_attribute_value_3')), (4, ref('product.product_attribute_value_4'))]"
+        />
+    </record>
+
+    <record id="product_product_chopsticks" model="product.product">
+        <field name="name">Chopsticks</field>
+        <field name="detailed_type">product</field>
+    </record>
+
+    <record id="product_product_fork" model="product.product">
+        <field name="name">Fork</field>
+        <field name="detailed_type">product</field>
+    </record>
+
+    <record id="product_product_spoon" model="product.product">
+        <field name="name">Spoon</field>
+        <field name="detailed_type">product</field>
+    </record>
+
+    <record id="product_product_knife" model="product.product">
+        <field name="name">Knife</field>
+        <field name="detailed_type">product</field>
+        <field
+            name="product_interchangeable_ids"
+            eval="[(4,ref('product_product_fork')), (4, ref('product_product_spoon'))]"
+        />
+    </record>
+
+</odoo>

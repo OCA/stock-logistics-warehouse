@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="view_picking_form" model="ir.ui.view">
+        <field name="name">stock.picking.interchangeable.form</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form" />
+        <field name="arch" type="xml">
+            <field name="picking_type_id" position="after">
+                <field name="available_pass_interchangeable" invisible="1" />
+                <field
+                    name="pass_interchangeable"
+                    attrs="{'invisible': [('available_pass_interchangeable', '=', False)]}"
+                />
+            </field>
+        </field>
+    </record>
+
+</odoo>
