@@ -1,0 +1,124 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_picking_product_interchangeable
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_picking_product_interchangeable
+#: model:ir.model.fields,field_description:stock_picking_product_interchangeable.field_stock_picking__available_pass_interchangeable
+msgid "Available Pass Interchangeable"
+msgstr ""
+
+#. module: stock_picking_product_interchangeable
+#: model:product.template,name:stock_picking_product_interchangeable.product_product_chopsticks_product_template
+msgid "Chopsticks"
+msgstr ""
+
+#. module: stock_picking_product_interchangeable
+#: model:product.template,name:stock_picking_product_interchangeable.product_product_fork_product_template
+msgid "Fork"
+msgstr ""
+
+#. module: stock_picking_product_interchangeable
+#: model:ir.model.fields.selection,name:stock_picking_product_interchangeable.selection__stock_picking_type__substitute_products_mode__all
+msgid "If all available"
+msgstr ""
+
+#. module: stock_picking_product_interchangeable
+#: model:ir.model.fields.selection,name:stock_picking_product_interchangeable.selection__stock_picking_type__substitute_products_mode__any
+msgid "If any available"
+msgstr ""
+
+#. module: stock_picking_product_interchangeable
+#: model_terms:ir.ui.view,arch_db:stock_picking_product_interchangeable.product_normal_form_view
+#: model_terms:ir.ui.view,arch_db:stock_picking_product_interchangeable.product_template_interchangeable_form_view
+msgid "Interchangeable"
+msgstr ""
+
+#. module: stock_picking_product_interchangeable
+#: model:product.template,name:stock_picking_product_interchangeable.product_product_knife_product_template
+msgid "Knife"
+msgstr ""
+
+#. module: stock_picking_product_interchangeable
+#: model:product.template,name:stock_picking_product_interchangeable.product_template_napkin
+msgid "Napkin"
+msgstr ""
+
+#. module: stock_picking_product_interchangeable
+#: model:ir.model.fields,field_description:stock_picking_product_interchangeable.field_stock_picking__pass_interchangeable
+msgid "Pass Interchangeable"
+msgstr ""
+
+#. module: stock_picking_product_interchangeable
+#: model:ir.model,name:stock_picking_product_interchangeable.model_stock_picking_type
+msgid "Picking Type"
+msgstr ""
+
+#. module: stock_picking_product_interchangeable
+#: model:product.template,name:stock_picking_product_interchangeable.product_template_plate
+msgid "Plate"
+msgstr ""
+
+#. module: stock_picking_product_interchangeable
+#: model:ir.model,name:stock_picking_product_interchangeable.model_product_template
+msgid "Product"
+msgstr ""
+
+#. module: stock_picking_product_interchangeable
+#: model:ir.model.fields,field_description:stock_picking_product_interchangeable.field_product_product__product_tmpl_interchangeable_ids
+#: model:ir.model.fields,field_description:stock_picking_product_interchangeable.field_product_template__product_tmpl_interchangeable_ids
+msgid "Product Tmpl Interchangeable"
+msgstr ""
+
+#. module: stock_picking_product_interchangeable
+#: model:ir.model,name:stock_picking_product_interchangeable.model_product_product
+msgid "Product Variant"
+msgstr ""
+
+#. module: stock_picking_product_interchangeable
+#: model:ir.model.fields,help:stock_picking_product_interchangeable.field_product_product__product_interchangeable_ids
+#: model:ir.model.fields,help:stock_picking_product_interchangeable.field_product_product__product_replaces_ids
+msgid "Products that can be substituted by current product"
+msgstr ""
+
+#. module: stock_picking_product_interchangeable
+#: model:ir.model.fields,help:stock_picking_product_interchangeable.field_product_product__product_replaced_by_ids
+msgid "Products that can substitute current current product"
+msgstr ""
+
+#. module: stock_picking_product_interchangeable
+#: model:ir.model.fields,field_description:stock_picking_product_interchangeable.field_product_product__product_interchangeable_ids
+#: model:ir.model.fields,field_description:stock_picking_product_interchangeable.field_product_product__product_replaced_by_ids
+#: model:ir.model.fields,field_description:stock_picking_product_interchangeable.field_product_product__product_replaces_ids
+msgid "Replaces"
+msgstr ""
+
+#. module: stock_picking_product_interchangeable
+#: model:product.template,name:stock_picking_product_interchangeable.product_product_spoon_product_template
+msgid "Spoon"
+msgstr ""
+
+#. module: stock_picking_product_interchangeable
+#: model:ir.model,name:stock_picking_product_interchangeable.model_stock_move
+msgid "Stock Move"
+msgstr ""
+
+#. module: stock_picking_product_interchangeable
+#: model:ir.model.fields,field_description:stock_picking_product_interchangeable.field_stock_picking_type__substitute_products_mode
+msgid "Substitute Products"
+msgstr ""
+
+#. module: stock_picking_product_interchangeable
+#: model:ir.model,name:stock_picking_product_interchangeable.model_stock_picking
+msgid "Transfer"
+msgstr ""
