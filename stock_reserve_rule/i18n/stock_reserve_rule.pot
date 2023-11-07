@@ -180,7 +180,8 @@ msgstr ""
 #: code:addons/stock_reserve_rule/models/stock_reserve_rule.py:0
 #, python-format
 msgid ""
-"Removal rule '{}' location has to be a child of the rule location '{}'."
+"Removal rule '%(rule_name)s' location has to be a child of the rule location"
+" '%(rule_location_name)s'."
 msgstr ""
 
 #. module: stock_reserve_rule
