@@ -198,10 +198,10 @@ msgstr "Normas de eliminación"
 #. module: stock_reserve_rule
 #: code:addons/stock_reserve_rule/models/stock_reserve_rule.py:0
 #, python-format
-msgid "Removal rule '{}' location has to be a child of the rule location '{}'."
+msgid ""
+"Removal rule '%(rule_name)s' location has to be a child of the rule location "
+"'%(rule_location_name)s'."
 msgstr ""
-"La ubicación de la regla de eliminación '{}' tiene que ser hija de la "
-"ubicación de la regla '{}'."
 
 #. module: stock_reserve_rule
 #: model_terms:ir.ui.view,arch_db:stock_reserve_rule.view_stock_reserve_rule_form
@@ -265,3 +265,10 @@ msgstr "Norma de reserva de existencias"
 #: model:ir.model,name:stock_reserve_rule.model_stock_reserve_rule_removal
 msgid "Stock Reservation Rule Removal"
 msgstr "Supresión de la norma de reserva de existencias"
+
+#, python-format
+#~ msgid ""
+#~ "Removal rule '{}' location has to be a child of the rule location '{}'."
+#~ msgstr ""
+#~ "La ubicación de la regla de eliminación '{}' tiene que ser hija de la "
+#~ "ubicación de la regla '{}'."
