@@ -290,9 +290,7 @@ msgstr "Si está marcada, nuevos mensajes requieren su atención."
 
 #. module: stock_request_kanban
 #: model:ir.model.fields,help:stock_request_kanban.field_stock_inventory_kanban__message_has_error
-#: model:ir.model.fields,help:stock_request_kanban.field_stock_inventory_kanban__message_has_sms_error
 #: model:ir.model.fields,help:stock_request_kanban.field_stock_request_kanban__message_has_error
-#: model:ir.model.fields,help:stock_request_kanban.field_stock_request_kanban__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr "si está marcada, algunos mensajes tienen un error de entrega."
 
@@ -590,12 +588,6 @@ msgid "Routes"
 msgstr "Rutas"
 
 #. module: stock_request_kanban
-#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban__message_has_sms_error
-#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__message_has_sms_error
-msgid "SMS Delivery error"
-msgstr "Error en la entrega de SMS"
-
-#. module: stock_request_kanban
 #: model_terms:ir.ui.view,arch_db:stock_request_kanban.stock_request_order_form
 #: model_terms:ir.ui.view,arch_db:stock_request_kanban.view_stock_inventory_kanban_form
 msgid "Scan"
@@ -771,6 +763,9 @@ msgstr "Mensajes de la página web"
 #: model:ir.model.fields,help:stock_request_kanban.field_stock_request_kanban__website_message_ids
 msgid "Website communication history"
 msgstr "Historial de la comunicación en la página web"
+
+#~ msgid "SMS Delivery error"
+#~ msgstr "Error en la entrega de SMS"
 
 #, python-format
 #~ msgid "Added kanban %s for product %s"

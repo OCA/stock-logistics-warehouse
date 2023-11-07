@@ -286,9 +286,7 @@ msgstr "如果勾选此项，将会收到新消息提醒。"
 
 #. module: stock_request_kanban
 #: model:ir.model.fields,help:stock_request_kanban.field_stock_inventory_kanban__message_has_error
-#: model:ir.model.fields,help:stock_request_kanban.field_stock_inventory_kanban__message_has_sms_error
 #: model:ir.model.fields,help:stock_request_kanban.field_stock_request_kanban__message_has_error
-#: model:ir.model.fields,help:stock_request_kanban.field_stock_request_kanban__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr "如果勾选此项， 某些信息将会产生传递错误。"
 
@@ -588,13 +586,6 @@ msgid "Routes"
 msgstr "路线"
 
 #. module: stock_request_kanban
-#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban__message_has_sms_error
-#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__message_has_sms_error
-#, fuzzy
-msgid "SMS Delivery error"
-msgstr "消息递送错误"
-
-#. module: stock_request_kanban
 #: model_terms:ir.ui.view,arch_db:stock_request_kanban.stock_request_order_form
 #: model_terms:ir.ui.view,arch_db:stock_request_kanban.view_stock_inventory_kanban_form
 msgid "Scan"
@@ -774,6 +765,10 @@ msgstr "网站消息"
 #: model:ir.model.fields,help:stock_request_kanban.field_stock_request_kanban__website_message_ids
 msgid "Website communication history"
 msgstr "网站沟通记录"
+
+#, fuzzy
+#~ msgid "SMS Delivery error"
+#~ msgstr "消息递送错误"
 
 #, python-format
 #~ msgid "Added kanban %s for product %s"
