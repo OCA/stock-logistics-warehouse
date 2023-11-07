@@ -159,12 +159,12 @@ class StockReserveRuleRemoval(models.Model):
                 removal_rule.rule_id.location_id
             ):
                 msg = _(
-                    "Removal rule '{}' location has to be a child "
-                    "of the rule location '{}'."
-                ).format(
-                    removal_rule.name,
-                    removal_rule.rule_id.location_id.display_name,
-                )
+                    "Removal rule '%(rule_name)s' location has to be a child "
+                    "of the rule location '%(rule_location_name)s'."
+                ) % {
+                    "rule_name": removal_rule.name,
+                    "rule_location_name": removal_rule.rule_id.location_id.display_name,
+                }
                 raise ValidationError(msg)
 
     def _eval_quant_domain(self, quants, domain):
