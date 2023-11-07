@@ -282,9 +282,7 @@ msgstr ""
 
 #. module: stock_request_kanban
 #: model:ir.model.fields,help:stock_request_kanban.field_stock_inventory_kanban__message_has_error
-#: model:ir.model.fields,help:stock_request_kanban.field_stock_inventory_kanban__message_has_sms_error
 #: model:ir.model.fields,help:stock_request_kanban.field_stock_request_kanban__message_has_error
-#: model:ir.model.fields,help:stock_request_kanban.field_stock_request_kanban__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr ""
 
@@ -576,12 +574,6 @@ msgstr ""
 #. module: stock_request_kanban
 #: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__route_ids
 msgid "Routes"
-msgstr ""
-
-#. module: stock_request_kanban
-#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_inventory_kanban__message_has_sms_error
-#: model:ir.model.fields,field_description:stock_request_kanban.field_stock_request_kanban__message_has_sms_error
-msgid "SMS Delivery error"
 msgstr ""
 
 #. module: stock_request_kanban
