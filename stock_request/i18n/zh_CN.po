@@ -350,11 +350,8 @@ msgstr "如果勾选此项，将会收到新消息提醒。"
 
 #. module: stock_request
 #: model:ir.model.fields,help:stock_request.field_stock_request__message_has_error
-#: model:ir.model.fields,help:stock_request.field_stock_request__message_has_sms_error
 #: model:ir.model.fields,help:stock_request.field_stock_request_abstract__message_has_error
-#: model:ir.model.fields,help:stock_request.field_stock_request_abstract__message_has_sms_error
 #: model:ir.model.fields,help:stock_request.field_stock_request_order__message_has_error
-#: model:ir.model.fields,help:stock_request.field_stock_request_order__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr "如果勾选此项， 某些信息将会产生传递错误。"
 
@@ -765,14 +762,6 @@ msgid "Routes"
 msgstr "路线"
 
 #. module: stock_request
-#: model:ir.model.fields,field_description:stock_request.field_stock_request__message_has_sms_error
-#: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__message_has_sms_error
-#: model:ir.model.fields,field_description:stock_request.field_stock_request_order__message_has_sms_error
-#, fuzzy
-msgid "SMS Delivery error"
-msgstr "消息递送错误"
-
-#. module: stock_request
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_form
 #: model_terms:ir.ui.view,arch_db:stock_request.view_stock_request_form
 msgid "Set to Draft"
@@ -1147,6 +1136,10 @@ msgid ""
 "You have to select a product unit of measure in the same category than the "
 "default unit of measure of the product"
 msgstr "您必须选择与产品默认计量单位相同类别的产品计量单位"
+
+#, fuzzy
+#~ msgid "SMS Delivery error"
+#~ msgstr "消息递送错误"
 
 #~ msgid "Stock request"
 #~ msgstr "库存请求"
