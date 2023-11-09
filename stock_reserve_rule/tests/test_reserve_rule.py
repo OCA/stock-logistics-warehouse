@@ -435,6 +435,45 @@ class TestReserveRule(common.SavepointCase):
         )
         self.assertEqual(move.state, "assigned")
 
+    def test_rule_full_bin(self):
+        self._create_rule(
+            {},
+            [
+                {
+                    "location_id": self.loc_zone1.id,
+                    "sequence": 1,
+                    "removal_strategy": "full_bin",
+                },
+                {"location_id": self.loc_zone2.id, "sequence": 2},
+            ],
+        )
+        # 100 on location and reserving it with picking 1
+        self._update_qty_in_location(self.loc_zone1_bin1, self.product1, 100)
+        picking1 = self._create_picking(self.wh, [(self.product1, 100)])
+        picking1.action_assign()
+        self.assertEqual(picking1.state, "assigned")
+        # Add 300 on location
+        # There is 400 but 100 is reserved
+        self._update_qty_in_location(self.loc_zone1_bin1, self.product1, 300)
+        # A move for 300 will no be allowed (not fully empty)
+        picking2 = self._create_picking(self.wh, [(self.product1, 300)])
+        picking2.action_assign()
+        self.assertEqual(picking2.state, "confirmed")
+        # But when picking 1 is done, no more reserved quantity
+        picking1.move_line_ids.qty_done = picking1.move_line_ids.product_uom_qty
+        picking1._action_done()
+        # Bin is fully emptied
+        picking2.action_assign()
+        move = picking2.move_lines
+        ml = move.move_line_ids
+        self.assertRecordValues(
+            ml,
+            [
+                {"location_id": self.loc_zone1_bin1.id, "product_qty": 300.0},
+            ],
+        )
+        self.assertEqual(move.state, "assigned")
+
     def test_rule_empty_bin(self):
         self._update_qty_in_location(self.loc_zone1_bin1, self.product1, 300)
         self._update_qty_in_location(self.loc_zone1_bin2, self.product1, 150)
