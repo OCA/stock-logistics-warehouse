@@ -73,15 +73,9 @@ msgid ""
 "ones with the configured Removal Strategy(FIFO, FEFO, ...).\n"
 "Empty Bins: take goods from a location only if the bin is empty afterwards.\n"
 "Full Packaging: take goods from a location only if the location quantity "
-"matches a packaging quantity (do not open boxes)."
+"matches a packaging quantity (do not open boxes).\n"
+"Full Bin: take goods from a location if it reserves all its content"
 msgstr ""
-"Definisce se e come la merce è prelevata dalle ubicazioni. Predefinito: "
-"preleva seguendo la strategia di rimozione configurata (FIFO, FEFO, ...).\n"
-"Svuota le casse: preleva la merce da un'ubicazione solo se la cassa è vuota "
-"a fine operazione.\n"
-"Intero imballaggio: preleva la merce da un'ubicazione solo se la quantità "
-"dell'ubicazione corrisponde alla quantità di un imballaggio (non aprire le "
-"scatole)."
 
 #. module: stock_reserve_rule
 #: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule__name
@@ -118,6 +112,11 @@ msgid ""
 msgstr ""
 "Filtra quanti che possono essere prenotati per questa ubicazione e "
 "ubicazioni figlie."
+
+#. module: stock_reserve_rule
+#: model:ir.model.fields.selection,name:stock_reserve_rule.selection__stock_reserve_rule_removal__removal_strategy__full_bin
+msgid "Full Bin"
+msgstr ""
 
 #. module: stock_reserve_rule
 #: model:ir.model.fields.selection,name:stock_reserve_rule.selection__stock_reserve_rule_removal__removal_strategy__packaging
@@ -301,3 +300,20 @@ msgstr "kg"
 #: model:product.template,volume_uom_name:stock_reserve_rule.product_funky_socks_product_template
 msgid "m³"
 msgstr "m³"
+
+#~ msgid ""
+#~ "Defines if and how goods are taken from locations.Default: take the first "
+#~ "ones with the configured Removal Strategy(FIFO, FEFO, ...).\n"
+#~ "Empty Bins: take goods from a location only if the bin is empty "
+#~ "afterwards.\n"
+#~ "Full Packaging: take goods from a location only if the location quantity "
+#~ "matches a packaging quantity (do not open boxes)."
+#~ msgstr ""
+#~ "Definisce se e come la merce è prelevata dalle ubicazioni. Predefinito: "
+#~ "preleva seguendo la strategia di rimozione configurata (FIFO, "
+#~ "FEFO, ...).\n"
+#~ "Svuota le casse: preleva la merce da un'ubicazione solo se la cassa è "
+#~ "vuota a fine operazione.\n"
+#~ "Intero imballaggio: preleva la merce da un'ubicazione solo se la quantità "
+#~ "dell'ubicazione corrisponde alla quantità di un imballaggio (non aprire "
+#~ "le scatole)."
