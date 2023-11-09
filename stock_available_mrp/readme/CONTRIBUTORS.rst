@@ -9,3 +9,4 @@
 * `Tecnativa <https://www.tecnativa.com>`_:
 
   * Víctor Martínez
+* Michael Tietz (MT Software) <mtietz@mt-software.de>
