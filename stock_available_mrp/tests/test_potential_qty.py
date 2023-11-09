@@ -496,3 +496,103 @@ class TestPotentialQty(SavepointCase):
         product.invalidate_cache()
 
         self.assertEqual(product.immediately_usable_qty, 0.0)
+
+    def test_product_siblings(self):
+        # This test ensures that always the right bom is used
+        # also for products with siblings that also have a bom
+        attribute = self.env["product.attribute"].create(
+            {
+                "name": "Attribute",
+                "value_ids": [(0, 0, {"name": "Value1"}), (0, 0, {"name": "Value2"})],
+            }
+        )
+        product_tmpl = self.env["product.template"].create(
+            {
+                "name": "Template",
+                "attribute_line_ids": [
+                    (
+                        0,
+                        0,
+                        {
+                            "attribute_id": attribute.id,
+                            "value_ids": [(6, 0, attribute.value_ids.ids)],
+                        },
+                    )
+                ],
+            }
+        )
+        product1, product2 = (
+            product_tmpl.product_variant_ids[0],
+            product_tmpl.product_variant_ids[1],
+        )
+        child1 = product1.create(
+            {
+                "name": "Child1",
+                "type": "product",
+            }
+        )
+        child2 = product1.create(
+            {
+                "name": "Child2",
+                "type": "product",
+            }
+        )
+        child3 = product1.create(
+            {
+                "name": "Child3",
+                "type": "product",
+            }
+        )
+        self.create_inventory(child2.id, 1)
+        self.create_inventory(child3.id, 1)
+        bom1 = self.bom_model.create(
+            {
+                "product_tmpl_id": product_tmpl.id,
+                "product_id": product1.id,
+                "type": "phantom",
+            }
+        )
+        self.bom_line_model.create(
+            {
+                "bom_id": bom1.id,
+                "product_id": child1.id,
+                "product_qty": 1,
+                "product_uom_id": self.env.ref("uom.product_uom_unit").id,
+            }
+        )
+        self.bom_line_model.create(
+            {
+                "bom_id": bom1.id,
+                "product_id": child2.id,
+                "product_qty": 1,
+                "product_uom_id": self.env.ref("uom.product_uom_unit").id,
+            }
+        )
+
+        bom2 = self.bom_model.create(
+            {
+                "product_tmpl_id": product_tmpl.id,
+                "product_id": product2.id,
+                "type": "phantom",
+            }
+        )
+        self.bom_line_model.create(
+            {
+                "bom_id": bom2.id,
+                "product_id": child2.id,
+                "product_qty": 1,
+                "product_uom_id": self.env.ref("uom.product_uom_unit").id,
+            }
+        )
+        self.bom_line_model.create(
+            {
+                "bom_id": bom2.id,
+                "product_id": child3.id,
+                "product_qty": 1,
+                "product_uom_id": self.env.ref("uom.product_uom_unit").id,
+            }
+        )
+        product1.invalidate_cache()
+        product2.invalidate_cache()
+        self.assertEqual(product1.immediately_usable_qty, 0)
+        self.assertEqual(product2.immediately_usable_qty, 1)

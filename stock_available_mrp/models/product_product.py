@@ -1,4 +1,5 @@
 # Copyright 2014 Numérigraphe SARL
+# Copyright 2023 Michael Tietz (MT Software) <mtietz@mt-software.de>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from collections import Counter
@@ -50,9 +51,10 @@ class ProductProduct(models.Model):
                 for p in component_products
             }
 
+        boms_by_product = self.env["mrp.bom"]._get_product2bom(self)
         for product in product_with_bom:
             # Need by product (same product can be in many BOM lines/levels)
-            bom_id = first(product.bom_ids)
+            bom_id = boms_by_product[product]
             exploded_components = exploded_boms[product.id]
             component_needs = product._get_components_needs(exploded_components)
             if not component_needs:
@@ -134,13 +136,12 @@ class ProductProduct(models.Model):
         generate thousands of SELECT for searches.
         """
         result = {}
-
+        BOM = self.env["mrp.bom"]
+        boms_by_product = BOM._get_product2bom(self)
         for product in self:
+            bom = boms_by_product[product]
             lines_done = []
-            bom_lines = [
-                (first(product.bom_ids), bom_line, product, 1.0)
-                for bom_line in first(product.bom_ids).bom_line_ids
-            ]
+            bom_lines = [(bom, bom_line, product, 1.0) for bom_line in bom.bom_line_ids]
 
             while bom_lines:
                 (current_bom, current_line, current_product, current_qty) = bom_lines[0]
@@ -150,8 +151,7 @@ class ProductProduct(models.Model):
                     continue
 
                 line_quantity = current_qty * current_line.product_qty
-
-                sub_bom = first(current_line.product_id.bom_ids)
+                sub_bom = BOM._bom_find(product=current_line.product_id)
                 if sub_bom.type == "phantom":
                     product_uom = current_line.product_uom_id
                     converted_line_quantity = product_uom._compute_quantity(
