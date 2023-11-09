@@ -66,7 +66,8 @@ msgstr ""
 msgid ""
 "Defines if and how goods are taken from locations.Default: take the first ones with the configured Removal Strategy(FIFO, FEFO, ...).\n"
 "Empty Bins: take goods from a location only if the bin is empty afterwards.\n"
-"Full Packaging: take goods from a location only if the location quantity matches a packaging quantity (do not open boxes)."
+"Full Packaging: take goods from a location only if the location quantity matches a packaging quantity (do not open boxes).\n"
+"Full Bin: take goods from a location if it reserves all its content"
 msgstr ""
 
 #. module: stock_reserve_rule
@@ -99,6 +100,11 @@ msgstr ""
 #: model:ir.model.fields,help:stock_reserve_rule.field_stock_reserve_rule_removal__quant_domain
 msgid ""
 "Filter Quants allowed to be reserved for this location and sub-locations."
+msgstr ""
+
+#. module: stock_reserve_rule
+#: model:ir.model.fields.selection,name:stock_reserve_rule.selection__stock_reserve_rule_removal__removal_strategy__full_bin
+msgid "Full Bin"
 msgstr ""
 
 #. module: stock_reserve_rule
