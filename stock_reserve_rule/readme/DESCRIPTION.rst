@@ -31,8 +31,7 @@ The included advanced removal strategies are:
   If lot selected must have same qty as requested, set "Tolerance on = No tolerance";
   otherwise it's possible to select a lot with higher qty (Tolerance on = Upper Limit")
   or lower qty ("Lower Limit"), either in percentage of qty or absolute value.
-  Please note that both "Upper limit" or "Lower limit" rules
-  will not select a lot with qty = requested qty.
+  Please note that three "No tolerance" or "Upper limit" or "Lower limit" rules.
 
 
 Examples of scenario:
