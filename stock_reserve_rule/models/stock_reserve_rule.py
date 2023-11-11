@@ -145,7 +145,7 @@ class StockReserveRuleRemoval(models.Model):
         " empty afterwards.\n"
         "Full Packaging: take goods from a location only if the location "
         "quantity matches a packaging quantity (do not open boxes).\n"
-        "Full Bin: take goods from a location if it reserves all its content",
+        "Full Bin: take goods from a location if it reserves all its content"
         "quantity matches a packaging quantity (do not open boxes)."
         "By lot: ",
     )
@@ -168,8 +168,10 @@ class StockReserveRuleRemoval(models.Model):
         string="Tolerance on",
         help="Selecting a tolerance limit type"
         "No tolerance: lot qty should be equal required"
-        "Upper Limit: lot with higher qty than required"
+        "Upper Limit: quantity higher than demand but within tolerance"
         "Lower Limit: lot with lower qty than required",
+        default="no_tolerance",
+        required=True,
     )
 
     tolerance_requested_computation = fields.Selection(
@@ -429,29 +431,34 @@ class StockReserveRuleRemoval(models.Model):
 
     @api.model
     def _get_requested_comparisons(self, rounding):
-        value = self.tolerance_requested_value
-        if value == 0.0:
+        tolerance = self.tolerance_requested_value
+        limit = self.tolerance_requested_limit
+        if limit == "no_tolerance" or float_compare(tolerance, 0, rounding) == 0:
             return lambda product_qty, need: product_qty == need
         computation = self.tolerance_requested_computation
-        if self.tolerance_requested_limit == "upper_limit":
+        if limit == "upper_limit":
 
             def wrap(product_qty, need):
                 if computation == "percentage":
-                    return need + rounding < product_qty <= need * (100 + value) / 100
+                    return (
+                        need + rounding < product_qty <= need * (100 + tolerance) / 100
+                    )
                 # computation == "absolute"
                 else:
-                    return need + rounding < product_qty <= need + value
+                    return need + rounding < product_qty <= need + tolerance
 
             return wrap
 
-        if self.tolerance_requested_limit == "lower_limit":
+        if limit == "lower_limit":
 
             def wrap(product_qty, need):
                 if computation == "percentage":
-                    return need * (100 - value) / 100 <= product_qty < need - rounding
+                    return (
+                        need * (100 - tolerance) / 100 <= product_qty < need - rounding
+                    )
                 # computation == "absolute"
                 else:
-                    return need - value <= product_qty < need - rounding
+                    return need - tolerance <= product_qty < need - rounding
 
             return wrap
 

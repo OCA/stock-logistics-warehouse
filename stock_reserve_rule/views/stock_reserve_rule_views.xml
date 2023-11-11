@@ -65,15 +65,15 @@
                                     />
                                     <field
                                         name="tolerance_requested_limit"
-                                        attrs="{'invisible': [('removal_strategy', '!=', 'single_lot')], 'required': [('removal_strategy', '=', 'single_lot')]}"
+                                        attrs="{'invisible': [('removal_strategy', '!=', 'single_lot')]"
                                     />
                                     <field
                                         name="tolerance_requested_computation"
-                                        attrs="{'invisible': [('removal_strategy', '!=', 'single_lot')], 'required': [('removal_strategy', '=', 'single_lot')], 'readonly': [('tolerance_requested_limit', '=', 'no_tolerance')]}"
+                                        attrs="{'invisible': [('tolerance_requested_limit', '=', 'no_tolerance')], 'required': [('removal_strategy', '=', 'single_lot')], 'readonly': [('tolerance_requested_limit', '=', 'no_tolerance')]}"
                                     />
                                     <field
                                         name="tolerance_requested_value"
-                                        attrs="{'invisible': [('removal_strategy', '!=', 'single_lot')], 'required': [('removal_strategy', '=', 'single_lot')], 'readonly': [('tolerance_requested_limit', '=', 'no_tolerance')]}"
+                                        attrs="{'invisible': [('tolerance_requested_limit', '=', 'no_tolerance')], 'readonly': [('tolerance_requested_limit', '=', 'no_tolerance')]}"
                                     />
 
                                     <field
