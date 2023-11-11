@@ -65,7 +65,7 @@
                                     />
                                     <field
                                         name="tolerance_requested_limit"
-                                        attrs="{'invisible': [('removal_strategy', '!=', 'single_lot')]"
+                                        attrs="{'invisible': [('removal_strategy', '!=', 'single_lot')]}"
                                     />
                                     <field
                                         name="tolerance_requested_computation"

@@ -180,6 +180,8 @@ class StockReserveRuleRemoval(models.Model):
             ("absolute", "Absolute Value"),
         ],
         string="Tolerance computation",
+        required=True,
+        default="percentage",
     )
 
     tolerance_requested_value = fields.Float(string="Tolerance value", default=0.0)
