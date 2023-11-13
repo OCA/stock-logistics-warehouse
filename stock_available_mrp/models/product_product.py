@@ -52,7 +52,7 @@ class ProductProduct(models.Model):
                 for p in component_products
             }
 
-        boms_by_product = self.env["mrp.bom"]._get_product2bom(self)
+        boms_by_product = self.env["mrp.bom"]._bom_find(self)
         for product in product_with_bom:
             # Need by product (same product can be in many BOM lines/levels)
             bom_id = boms_by_product[product]
@@ -124,7 +124,7 @@ class ProductProduct(models.Model):
         """
         result = {}
         BOM = self.env["mrp.bom"]
-        boms_by_product = BOM._get_product2bom(self)
+        boms_by_product = BOM.env["mrp.bom"]._bom_find(self)
         for product in self:
             bom = boms_by_product[product]
             lines_done = []
@@ -138,8 +138,10 @@ class ProductProduct(models.Model):
                     continue
 
                 line_quantity = current_qty * current_line.product_qty
-                sub_bom = BOM._bom_find(product=current_line.product_id)
-                if sub_bom.type == "phantom":
+                sub_bom = BOM._bom_find(current_line.product_id).get(
+                    current_line.product_id
+                )
+                if sub_bom and sub_bom.type == "phantom":
                     product_uom = current_line.product_uom_id
                     converted_line_quantity = product_uom._compute_quantity(
                         line_quantity / sub_bom.product_qty,

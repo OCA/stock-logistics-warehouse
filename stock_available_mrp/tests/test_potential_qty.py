@@ -498,8 +498,8 @@ class TestPotentialQty(TransactionCase):
                 "type": "product",
             }
         )
-        self.create_inventory(child2.id, 1)
-        self.create_inventory(child3.id, 1)
+        self.create_inventory(child2, 1)
+        self.create_inventory(child3, 1)
         bom1 = self.bom_model.create(
             {
                 "product_tmpl_id": product_tmpl.id,
