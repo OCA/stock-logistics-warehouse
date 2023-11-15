@@ -30,7 +30,7 @@ addon | version | maintainers | summary
 [stock_available](stock_available/) | 15.0.1.0.0 |  | Stock available to promise
 [stock_available_immediately](stock_available_immediately/) | 15.0.1.0.0 |  | Ignore planned receptions in quantity available to promise
 [stock_available_mrp](stock_available_mrp/) | 15.0.1.0.1 |  | Consider the production potential is available to promise
-[stock_available_unreserved](stock_available_unreserved/) | 15.0.1.0.0 | [![LoisRForgeFlow](https://github.com/LoisRForgeFlow.png?size=30px)](https://github.com/LoisRForgeFlow) | Quantity of stock available for immediate use
+[stock_available_unreserved](stock_available_unreserved/) | 15.0.1.0.1 | [![LoisRForgeFlow](https://github.com/LoisRForgeFlow.png?size=30px)](https://github.com/LoisRForgeFlow) | Quantity of stock available for immediate use
 [stock_change_qty_reason](stock_change_qty_reason/) | 15.0.1.0.0 |  | Stock Quantity Change Reason
 [stock_demand_estimate](stock_demand_estimate/) | 15.0.1.1.0 |  | Allows to create demand estimates.
 [stock_demand_estimate_matrix](stock_demand_estimate_matrix/) | 15.0.1.2.0 |  | Allows to create demand estimates.
