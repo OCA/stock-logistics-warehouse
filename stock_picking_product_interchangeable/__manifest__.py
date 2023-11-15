@@ -5,8 +5,9 @@
     "version": "16.0.1.0.0",
     "category": "Inventory/Inventory",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
-    "maintainers": ["geomer198", "CetmixGitDrone"],
+    "maintainers": ["CetmixGitDrone"],
     "depends": ["stock_available"],
+    "images": ["static/description/banner.png"],
     "data": [
         "views/product_views.xml",
         "views/stock_picking_type_views.xml",
