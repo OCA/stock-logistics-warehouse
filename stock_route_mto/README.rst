@@ -28,8 +28,8 @@ Stock Route Mto
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-This module adds a field 'MTO' on routes in order to be able to filter across
-them.
+This module adds a field 'MTO' on routes in order to be able to filter
+across them.
 
 **Table of contents**
 
@@ -39,8 +39,8 @@ them.
 Usage
 =====
 
-* Go to Inventory > Settings > Warehouse Management > Routes
-* Check the MTO field on desired route(s)
+-  Go to Inventory > Settings > Warehouse Management > Routes
+-  Check the MTO field on desired route(s)
 
 Bug Tracker
 ===========
@@ -56,17 +56,17 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * ACSONE SA/NV
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* Denis Roussel <denis.roussel@acsone.eu>
+-  Denis Roussel <denis.roussel@acsone.eu>
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is maintained by the OCA.
 

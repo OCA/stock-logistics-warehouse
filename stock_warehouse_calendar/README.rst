@@ -28,13 +28,13 @@ Stock Warehouse Calendar
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-This module adds a Calendar to the Warehouse. This calendar can then used as
-the basis of the proper computation of start/end dates based on lead times in
-this and other modules.
+This module adds a Calendar to the Warehouse. This calendar can then
+used as the basis of the proper computation of start/end dates based on
+lead times in this and other modules.
 
-In this module, the calendar considered in the computation of start date of
-stock moves and pickings created from procurements, where the lead time
-is used.
+In this module, the calendar considered in the computation of start date
+of stock moves and pickings created from procurements, where the lead
+time is used.
 
 **Table of contents**
 
@@ -44,30 +44,27 @@ is used.
 Configuration
 =============
 
-* Go to *Settings* and activate the developer mode.
-
-* Go to *Settings > Technical > Resource > Working Time* and define your
-  resource calendar.
-
-* Go to *Inventory > Configuration > Warehouse Management > Warehouses*
-  and assign the Resource Calendar.
-
-* Go to *Inventory > Configuration > Settings* and in *Warehouse* mark
-  'Multi-Step Routes option'.
-
-* Go to *Inventory > Configuration > Warehouse Management > Routes* and
-  set up the proper delays in the stock rules where 'action'
-  is 'Move From Another Location'.
+-  Go to *Settings* and activate the developer mode.
+-  Go to *Settings > Technical > Resource > Working Time* and define
+   your resource calendar.
+-  Go to *Inventory > Configuration > Warehouse Management > Warehouses*
+   and assign the Resource Calendar.
+-  Go to *Inventory > Configuration > Settings* and in *Warehouse* mark
+   'Multi-Step Routes option'.
+-  Go to *Inventory > Configuration > Warehouse Management > Routes* and
+   set up the proper delays in the stock rules where 'action' is 'Move
+   From Another Location'.
 
 Usage
 =====
 
 When a picking is created out of a procurement evaluation (from an
-orderpoint, MTO,...) the calendar is considered in the computation of the
-expected date of the picking and moves. For example, if it takes 1 day to
-execute a stock transfer from another warehouse and it is Monday, the picking
-to resupply will be created with expected start date on the previous Friday,
-if the warehouse operates under a Mo-Fri working calendar.
+orderpoint, MTO,...) the calendar is considered in the computation of
+the expected date of the picking and moves. For example, if it takes 1
+day to execute a stock transfer from another warehouse and it is Monday,
+the picking to resupply will be created with expected start date on the
+previous Friday, if the warehouse operates under a Mo-Fri working
+calendar.
 
 Bug Tracker
 ===========
@@ -83,19 +80,19 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * ForgeFlow
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* Jordi Ballester <jordi.ballester@forgeflow.com>
-* Lois Rilo <lois.rilo@forgeflow.com>
-* Joan Mateu <joan.mateu@forgeflow.com>
+-  Jordi Ballester <jordi.ballester@forgeflow.com>
+-  Lois Rilo <lois.rilo@forgeflow.com>
+-  Joan Mateu <joan.mateu@forgeflow.com>
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is maintained by the OCA.
 

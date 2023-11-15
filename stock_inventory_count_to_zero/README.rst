@@ -28,8 +28,8 @@ Stock Inventory Count To Zero
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-This module extends the functionality of stock module to allow request a inventory and
-set inventory quantities to zero.
+This module extends the functionality of stock module to allow request a
+inventory and set inventory quantities to zero.
 
 **Table of contents**
 
@@ -41,10 +41,10 @@ Usage
 
 To use this module you need to:
 
-#. Go to a *Inventory > Operations > Inventory adjustment*.
-#. Select some records and click on button "Request a count".
-#. Set the "Set to zero" in count field.
-#. Apply inventory when you want.
+1. Go to a *Inventory > Operations > Inventory adjustment*.
+2. Select some records and click on button "Request a count".
+3. Set the "Set to zero" in count field.
+4. Apply inventory when you want.
 
 Bug Tracker
 ===========
@@ -60,19 +60,19 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * Tecnativa
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* `Tecnativa <https://www.tecnativa.com>`_
+-  `Tecnativa <https://www.tecnativa.com>`__
 
-  * Sergio Teruel
+   -  Sergio Teruel
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is maintained by the OCA.
 

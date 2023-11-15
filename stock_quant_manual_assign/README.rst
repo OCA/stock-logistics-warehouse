@@ -40,9 +40,9 @@ Usage
 
 To use this module, you need to:
 
-#. Click on the tags icon at the end of move line.
-#. Open the wizard with the button "Manual Quants".
-#. Select the quants to assign (reserve), then Confirm.
+1. Click on the tags icon at the end of move line.
+2. Open the wizard with the button "Manual Quants".
+3. Select the quants to assign (reserve), then Confirm.
 
 Bug Tracker
 ===========
@@ -58,7 +58,7 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * AvanzOSC
 * Tecnativa
@@ -66,28 +66,28 @@ Authors
 * Fanha Giang
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* Mikel Arregi <mikelarregi@avanzosc.es>
-* Ana Juaristi <anajuaristi@avanzosc.es>
-* Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>
-* Fanha Giang <fanha99@hotmail.com>
-* `Tecnativa <https://www.tecnativa.com>`_:
+-  Mikel Arregi <mikelarregi@avanzosc.es>
+-  Ana Juaristi <anajuaristi@avanzosc.es>
+-  Oihane Crucelaegui <oihanecrucelaegi@avanzosc.es>
+-  Fanha Giang <fanha99@hotmail.com>
+-  `Tecnativa <https://www.tecnativa.com>`__:
 
-  * Pedro M. Baeza <pedro.baeza@tecnativa.com>
-  * Vicent Cubells <vicent.cubells@tecnativa.com>
+   -  Pedro M. Baeza <pedro.baeza@tecnativa.com>
+   -  Vicent Cubells <vicent.cubells@tecnativa.com>
 
-* `ForgeFlow <https://www.forgeflow.com>`_:
+-  `ForgeFlow <https://www.forgeflow.com>`__:
 
-  * Jordi Ballester <jordi.ballester@forgeflow.com>
-  * Lois Rilo <lois.rilo@forgeflow.com>
+   -  Jordi Ballester <jordi.ballester@forgeflow.com>
+   -  Lois Rilo <lois.rilo@forgeflow.com>
 
-* `Shine IT <https://www.openerp.cn>`_:
+-  `Shine IT <https://www.openerp.cn>`__:
 
-  * Tony Gu <tony@openerp.cn>
+   -  Tony Gu <tony@openerp.cn>
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is maintained by the OCA.
 

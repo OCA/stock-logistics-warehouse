@@ -30,10 +30,10 @@ Stock Location Position
 
 This module adds position attributes on stock location such as:
 
-* Corridor
-* Row
-* Rack
-* Level
+-  Corridor
+-  Row
+-  Rack
+-  Level
 
 and renames position (XYZ) to box (XYZ).
 
@@ -56,30 +56,30 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * BCIM
 * Okia
 * Camptocamp
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* Syvain Van Hoof (Okia sprl) <sylvainvh@okia.be>
-* Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
-* Guewen Baconnier (Camptocamp) <guewen.baconnier@camptocamp.com>
-* Akim Juillerat <akim.juillerat@camptocamp.com>
-* Phuc Tran Thanh <phuc@trobz.com>
+-  Syvain Van Hoof (Okia sprl) <sylvainvh@okia.be>
+-  Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
+-  Guewen Baconnier (Camptocamp) <guewen.baconnier@camptocamp.com>
+-  Akim Juillerat <akim.juillerat@camptocamp.com>
+-  Phuc Tran Thanh <phuc@trobz.com>
 
 Other credits
-~~~~~~~~~~~~~
+-------------
 
 The development of this module has been financially supported by:
 
-* Camptocamp
+-  Camptocamp
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is maintained by the OCA.
 

@@ -31,7 +31,8 @@ Stock Demand Estimate
 This module allows to create demand estimates for a given product and
 location, on configurable time periods.
 
-The module does not provide in itself any specific usage of the estimates.
+The module does not provide in itself any specific usage of the
+estimates.
 
 **Table of contents**
 
@@ -52,18 +53,18 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * ForgeFlow
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* Jordi Ballester Alomar <jordi.ballester@forgeflow.com>
-* Lois Rilo <lois.rilo@forgeflow.com>
+-  Jordi Ballester Alomar <jordi.ballester@forgeflow.com>
+-  Lois Rilo <lois.rilo@forgeflow.com>
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is maintained by the OCA.
 

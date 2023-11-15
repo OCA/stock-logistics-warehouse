@@ -28,8 +28,8 @@ Stock Location Product Restriction
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-This module extends the functionality of stock to allow you to prevent to put
-items of different products into the same stock location.
+This module extends the functionality of stock to allow you to prevent
+to put items of different products into the same stock location.
 
 **Table of contents**
 
@@ -39,19 +39,24 @@ items of different products into the same stock location.
 Usage
 =====
 
-By default, Odoo allows you to put items of any product into the same location.
-This behaviour remains the one by default once the addon is installed.
-Once installed, you can specify at any level of the stock location hierarchy
-if you want to restrict the usage of the location to only items of the same
-product. This property is inherited by all the children locations while you
-don't specify an other specific value on a child location. The constrains only
-applies location by location.
+By default, Odoo allows you to put items of any product into the same
+location. This behaviour remains the one by default once the addon is
+installed. Once installed, you can specify at any level of the stock
+location hierarchy if you want to restrict the usage of the location to
+only items of the same product. This property is inherited by all the
+children locations while you don't specify an other specific value on a
+child location. The constrains only applies location by location.
 
-Once a location is configured to only contains items of the same product, the
-system will prevent you to move items of any others products into a location
-that already contains product items. A new filter into the tree view of the
-stock locations will also allow you to find all the location where this new
-restriction is violated.
+Once a location is configured to only contains items of the same
+product, the system will prevent you to move items of any others
+products into a location that already contains product items. A new
+filter into the tree view of the stock locations will also allow you to
+find all the location where this new restriction is violated.
+
+Changelog
+=========
+
+
 
 Bug Tracker
 ===========
@@ -67,26 +72,26 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * ACSONE SA/NV
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* Laurent Mignon <laurent.mignon@acsone.eu> (https://www.acsone.eu/)
-* Denis Roussel <denis.roussel@acsone.eu> (https://www.acsone.eu/)
+-  Laurent Mignon <laurent.mignon@acsone.eu> (https://www.acsone.eu/)
+-  Denis Roussel <denis.roussel@acsone.eu> (https://www.acsone.eu/)
 
 Other credits
-~~~~~~~~~~~~~
+-------------
 
 The development of this module has been financially supported by:
 
-* ACSONE SA/NV
-* Alcyon Benelux
+-  ACSONE SA/NV
+-  Alcyon Benelux
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is maintained by the OCA.
 

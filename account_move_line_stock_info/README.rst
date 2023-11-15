@@ -28,7 +28,8 @@ Account Move Line Stock Info
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-This module adds the stock move to the account move lines that it generates.
+This module adds the stock move to the account move lines that it
+generates.
 
 **Table of contents**
 
@@ -38,12 +39,12 @@ This module adds the stock move to the account move lines that it generates.
 Usage
 =====
 
-* The stock manager can check the journal items by accessing to 'Inventory >
-  Reports > Stock moves'.
-
-* A user belonging to the group 'Show Full Accounting Features' can review the
-  details of a move that is associated to a journal item through
-  'Invoicing > Accounting > Journal Entries (or Journal items)'.
+-  The stock manager can check the journal items by accessing to
+   'Inventory > Reports > Stock moves'.
+-  A user belonging to the group 'Show Full Accounting Features' can
+   review the details of a move that is associated to a journal item
+   through 'Invoicing > Accounting > Journal Entries (or Journal
+   items)'.
 
 Bug Tracker
 ===========
@@ -59,22 +60,24 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * ForgeFlow
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* Jordi Ballester Alomar <jordi.ballester@forgeflow.com>
-* Lois Rilo <lois.rilo@forgeflow.com>
-* Pimolnat Suntian <pimolnats@ecosoft.co.th>
-* Joan Mateu <joan.mateu@forgeflow.com>
-* Ángel Tornero Hernández <angel.tornero@braintec.com> (https://braintec.com)
-* Nadal Francisco Garcia <nadal.francisco@braintec.com> (https://braintec.com)
+-  Jordi Ballester Alomar <jordi.ballester@forgeflow.com>
+-  Lois Rilo <lois.rilo@forgeflow.com>
+-  Pimolnat Suntian <pimolnats@ecosoft.co.th>
+-  Joan Mateu <joan.mateu@forgeflow.com>
+-  Ángel Tornero Hernández <angel.tornero@braintec.com>
+   (https://braintec.com)
+-  Nadal Francisco Garcia <nadal.francisco@braintec.com>
+   (https://braintec.com)
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is maintained by the OCA.
 

@@ -28,15 +28,15 @@ Procurement Auto Create Group
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-This module allows the system to propose automatically new procurement groups
-during the procurement run.
+This module allows the system to propose automatically new procurement
+groups during the procurement run.
 
-This capability is important when you want to make sure that all the stock
-moves resulting from a procurement run will never be mixed with moves from
-other groups in stock transfers.
+This capability is important when you want to make sure that all the
+stock moves resulting from a procurement run will never be mixed with
+moves from other groups in stock transfers.
 
-The stock transfers resulting from the procurement run will
-only contain stock moves created in that run.
+The stock transfers resulting from the procurement run will only contain
+stock moves created in that run.
 
 **Table of contents**
 
@@ -46,22 +46,22 @@ only contain stock moves created in that run.
 Configuration
 =============
 
-#. Go to *Inventory / Configuration / Settings* and check the option
+1. Go to *Inventory / Configuration / Settings* and check the option
    'Multi-Step Routes' and press the 'Save' button.
-#. Activate the developer mode.
-#. Go to *Inventory / Configuration / Warehouse Management / Routes*
-   and select the route you want to change. Select the rule you wish
-   to change, and in case of a Pull rule or Push & Pull rule Select
+2. Activate the developer mode.
+3. Go to *Inventory / Configuration / Warehouse Management / Routes* and
+   select the route you want to change. Select the rule you wish to
+   change, and in case of a Pull rule or Push & Pull rule Select
    'Propagation of Procurement Group': 'Propagate'. The checkbox
-   'Auto-create Procurement Group' will then appear and you can set
-   it if you want to procurement group to be automatically created.
+   'Auto-create Procurement Group' will then appear and you can set it
+   if you want to procurement group to be automatically created.
 
 Usage
 =====
 
-#. Run a new procurement and make sure that it determines a rule
-   with the option 'Auto-create Procurement Group' set.
-#. When the procurement rule is executed, a procurement group with
+1. Run a new procurement and make sure that it determines a rule with
+   the option 'Auto-create Procurement Group' set.
+2. When the procurement rule is executed, a procurement group with
    format 'PG/000001' will be created. You can find this procurement
    group in 'Additional info' tab of a transfer.
 
@@ -79,23 +79,23 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * ForgeFlow
 * BCIM
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* Jordi Ballester <jordi.ballester@forgeflow.com>
-* Lois Rilo <lois.rilo@forgeflow.com>
-* Héctor Villarreal Ortega <hector.villarreal@forgeflow.com>
-* Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
-* Bernat Puig <bernat.puig@forgeflow.com>
-* Laurent Mignon <laurent.mignon@acsone.eu>
+-  Jordi Ballester <jordi.ballester@forgeflow.com>
+-  Lois Rilo <lois.rilo@forgeflow.com>
+-  Héctor Villarreal Ortega <hector.villarreal@forgeflow.com>
+-  Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
+-  Bernat Puig <bernat.puig@forgeflow.com>
+-  Laurent Mignon <laurent.mignon@acsone.eu>
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is maintained by the OCA.
 

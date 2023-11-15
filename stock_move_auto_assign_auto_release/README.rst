@@ -28,20 +28,20 @@ Stock Move Auto Assign Auto Release
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-Automatically release stock moves when a move is set to "done" and the product
-becomes available.
+Automatically release stock moves when a move is set to "done" and the
+product becomes available.
 
-It uses queue jobs to release the moves in order to have a minimal impact
-on the user operations.
+It uses queue jobs to release the moves in order to have a minimal
+impact on the user operations.
 
 The conditions to trigger the check are:
 
-* A job to check the availability of stock moves has been created
+-  A job to check the availability of stock moves has been created
 
 At this point, jobs are generated:
 
-* One job per product
-* Any available moves releasable are processed
+-  One job per product
+-  Any available moves releasable are processed
 
 **Table of contents**
 
@@ -62,24 +62,24 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * ACSONE SA/NV
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* Laurent Mignon <laurent.mignon@acsone.eu>
+-  Laurent Mignon <laurent.mignon@acsone.eu>
 
 Other credits
-~~~~~~~~~~~~~
+-------------
 
 The development of this module has been financially supported by:
 
-* Alcyon Belux Distrib Vétérinaire
+-  Alcyon Belux Distrib Vétérinaire
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is maintained by the OCA.
 

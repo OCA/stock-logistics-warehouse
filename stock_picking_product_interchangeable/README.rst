@@ -28,11 +28,18 @@ Stock Picking Product Interchangeable
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-This module implements "interchangeable" products. If an interchangeable product is not available in stock in requested quantity its substitute products will be added to picking to complete the order.
+This module implements "interchangeable" products. If an interchangeable
+product is not available in stock in requested quantity its substitute
+products will be added to picking to complete the order.
 
-Eg there is an "English Breakfast" tea and "Breakfast in England" tea which are absolutely the same inside and have the same price. Only package labels are different. And our customers don't care which of them will be actually delivered.
+Eg there is an "English Breakfast" tea and "Breakfast in England" tea
+which are absolutely the same inside and have the same price. Only
+package labels are different. And our customers don't care which of them
+will be actually delivered.
 
-NB: Interchangeable products substitute each other. Eg if "English Breakfast" can substitutes "Breakfast in England" then "Breakfast in England" can substitute "English Breakfast".
+NB: Interchangeable products substitute each other. Eg if "English
+Breakfast" can substitutes "Breakfast in England" then "Breakfast in
+England" can substitute "English Breakfast".
 
 **Table of contents**
 
@@ -42,9 +49,12 @@ NB: Interchangeable products substitute each other. Eg if "English Breakfast" ca
 Usage
 =====
 
-Click **Mark todo** or "Check availability" button in Stock Picking form.
+Click **Mark todo** or "Check availability" button in Stock Picking
+form.
 
-If **Substitute Products** option is activated for picking operation type and there is not enough stock of an interchangeable product substitute products will be added to picking.
+If **Substitute Products** option is activated for picking operation
+type and there is not enough stock of an interchangeable product
+substitute products will be added to picking.
 
 Bug Tracker
 ===========
@@ -60,12 +70,12 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * Cetmix
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is maintained by the OCA.
 

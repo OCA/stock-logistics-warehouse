@@ -28,8 +28,8 @@ Scrap Reason Code
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-Adds a reason code for scrapping operations and an interface for the user
-to create scrap codes
+Adds a reason code for scrapping operations and an interface for the
+user to create scrap codes
 
 **Table of contents**
 
@@ -46,10 +46,15 @@ Create a required scrap reason code and provide scrap location.
 Usage
 =====
 
-- Go to Inventory > Operations > Scrap
-- Create a scarp order and select reason code.
-- A scrap location will be readonly and auto fill based on selected reason
-  code.
+-  Go to Inventory > Operations > Scrap
+-  Create a scarp order and select reason code.
+-  A scrap location will be readonly and auto fill based on selected
+   reason code.
+
+Known issues / Roadmap
+======================
+
+
 
 Bug Tracker
 ===========
@@ -65,30 +70,30 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * Open Source Integrators
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* Michael Allen <mallen@opensourceintegrators.com>
-* Bhavesh Odedra <bodedra@opensourceintegrators.com>
-* Balaji Kannan <bkannan@opensourceintegrators.com>
-* Serpent Consulting Services Pvt. Ltd. <support@serpentcs.com>
-* Chandresh Thakkar <cthakkar@opensourceintegrators.com>
-* Hughes Damry <hughes.damry@acsone.eu>
-* Lois Rilo <lois.rilo@forgeflow.com>
+-  Michael Allen <mallen@opensourceintegrators.com>
+-  Bhavesh Odedra <bodedra@opensourceintegrators.com>
+-  Balaji Kannan <bkannan@opensourceintegrators.com>
+-  Serpent Consulting Services Pvt. Ltd. <support@serpentcs.com>
+-  Chandresh Thakkar <cthakkar@opensourceintegrators.com>
+-  Hughes Damry <hughes.damry@acsone.eu>
+-  Lois Rilo <lois.rilo@forgeflow.com>
 
 Other credits
-~~~~~~~~~~~~~
+-------------
 
 The development of this module has been financially supported by:
 
-* Open Source Integrators
+-  Open Source Integrators
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is maintained by the OCA.
 

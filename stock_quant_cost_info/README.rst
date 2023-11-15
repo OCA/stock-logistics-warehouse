@@ -28,10 +28,11 @@ Stock Quant Cost Info
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-This module extends the functionality of *Quantity Adjustments* in *Stock Quants* to
-show a new column *Adjustment cost* in *Quant Details* list and PDF report table.
-The value of *Adjustment cost* will be self-calculated according to:
-(`Real Quantity` - `Theoretical Quantity`) * `Product Cost`
+This module extends the functionality of *Quantity Adjustments* in
+*Stock Quants* to show a new column *Adjustment cost* in *Quant Details*
+list and PDF report table. The value of *Adjustment cost* will be
+self-calculated according to: (Real Quantity - Theoretical Quantity) \*
+Product Cost
 
 **Table of contents**
 
@@ -41,18 +42,18 @@ The value of *Adjustment cost* will be self-calculated according to:
 Installation
 ============
 
-A pre_init_hook process is initiated in order to set the *Adjustment cost* to
-zero in all existing *stock quant* before installation.
+A pre_init_hook process is initiated in order to set the *Adjustment
+cost* to zero in all existing *stock quant* before installation.
 
 Usage
 =====
 
 To use this module, you need to:
 
-#. Go to *Inventory > Products > Products* and create or select one.
-#. Click on *Update Quantity* button.
-#. In *Quant* list you will see a new column named *Adjustment cost*.
-#. The cost will be recomputed when we change the *Counted Quantity*.
+1. Go to *Inventory > Products > Products* and create or select one.
+2. Click on *Update Quantity* button.
+3. In *Quant* list you will see a new column named *Adjustment cost*.
+4. The cost will be recomputed when we change the *Counted Quantity*.
 
 Bug Tracker
 ===========
@@ -68,22 +69,22 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * Tecnativa
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* `Tecnativa <https://www.tecnativa.com>`_:
+-  `Tecnativa <https://www.tecnativa.com>`__:
 
-  * Ernesto Tejeda
-  * Pedro M. Baeza
-  * Sergio Teruel
-  * Carlos Roca
+   -  Ernesto Tejeda
+   -  Pedro M. Baeza
+   -  Sergio Teruel
+   -  Carlos Roca
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is maintained by the OCA.
 

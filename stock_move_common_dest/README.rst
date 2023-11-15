@@ -28,9 +28,9 @@ Stock Move Common Destination
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-This module adds a M2m field `common_dest_move_ids` on `stock.move` in order
-to compute all the moves having a chained destination move sharing the same
-picking as the actual move's destination move.
+This module adds a M2m field common_dest_move_ids on stock.move in order
+to compute all the moves having a chained destination move sharing the
+same picking as the actual move's destination move.
 
 **Table of contents**
 
@@ -51,18 +51,18 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * Camptocamp
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* Akim Juillerat <akim.juillerat@camptocamp.com>
-* Hughes Damry <hughes.damry@acsone.eu>
+-  Akim Juillerat <akim.juillerat@camptocamp.com>
+-  Hughes Damry <hughes.damry@acsone.eu>
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is maintained by the OCA.
 

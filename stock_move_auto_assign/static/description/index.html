@@ -370,9 +370,10 @@ ul.auto-toc {
 !! source digest: sha256:e5ef14f525b451ebc94486db5028762a1d91fb685d275edb6278f53bd29c36c1
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 <p><a class="reference external image-reference" href="https://odoo-community.org/page/development-status"><img alt="Beta" src="https://img.shields.io/badge/maturity-Beta-yellow.png" /></a> <a class="reference external image-reference" href="http://www.gnu.org/licenses/agpl-3.0-standalone.html"><img alt="License: AGPL-3" src="https://img.shields.io/badge/licence-AGPL--3-blue.png" /></a> <a class="reference external image-reference" href="https://github.com/OCA/stock-logistics-warehouse/tree/16.0/stock_move_auto_assign"><img alt="OCA/stock-logistics-warehouse" src="https://img.shields.io/badge/github-OCA%2Fstock--logistics--warehouse-lightgray.png?logo=github" /></a> <a class="reference external image-reference" href="https://translation.odoo-community.org/projects/stock-logistics-warehouse-16-0/stock-logistics-warehouse-16-0-stock_move_auto_assign"><img alt="Translate me on Weblate" src="https://img.shields.io/badge/weblate-Translate%20me-F47D42.png" /></a> <a class="reference external image-reference" href="https://runboat.odoo-community.org/builds?repo=OCA/stock-logistics-warehouse&amp;target_branch=16.0"><img alt="Try me on Runboat" src="https://img.shields.io/badge/runboat-Try%20me-875A7B.png" /></a></p>
-<p>Automatically check availability of stock moves when a move is set to “done”.</p>
-<p>It uses queue jobs to verify the availability in order to have a minimal impact
-on the user operations.</p>
+<p>Automatically check availability of stock moves when a move is set to
+“done”.</p>
+<p>It uses queue jobs to verify the availability in order to have a minimal
+impact on the user operations.</p>
 <p>The conditions to trigger the check are:</p>
 <ul class="simple">
 <li>A move is marked as done</li>
@@ -382,8 +383,9 @@ on the user operations.</p>
 <p>At this point, jobs are generated:</p>
 <ul class="simple">
 <li>One job per product</li>
-<li>Any move waiting for stock in a parent (or same) location of the internal
-destination locations from the done move has its availability checked</li>
+<li>Any move waiting for stock in a parent (or same) location of the
+internal destination locations from the done move has its
+availability checked</li>
 </ul>
 <p>Only one job is generated for an identical set of (product, locations).</p>
 <p><strong>Table of contents</strong></p>

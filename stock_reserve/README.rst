@@ -39,8 +39,8 @@ stock below the minimum, the orderpoint will be triggered and new
 purchase orders will be generated. It also implies that the max may be
 exceeded if the reservations are canceled.
 
-If ownership of stock is active in the stock settings, you can specify the
-owner on the reservation.
+If ownership of stock is active in the stock settings, you can specify
+the owner on the reservation.
 
 **Table of contents**
 
@@ -52,18 +52,19 @@ Usage
 
 To make a stock reservation:
 
-#. Go to *Inventory > Products*.
-#. Select or create one product with stock.
-#. Click on *Stock Reservations* smart button.
-#. Create one reservation.
-#. Press the button *Reserve*.
+1. Go to *Inventory > Products*.
+2. Select or create one product with stock.
+3. Click on *Stock Reservations* smart button.
+4. Create one reservation.
+5. Press the button *Reserve*.
 
 You can release a reservation by clicking on the button *Release*
 
 Known issues / Roadmap
 ======================
 
-* Review multicompany. Take a look of [this](https://github.com/OCA/stock-logistics-warehouse/pull/1346) PR
+-  Review multicompany. Take a look of
+   [this](https://github.com/OCA/stock-logistics-warehouse/pull/1346) PR
 
 Bug Tracker
 ===========
@@ -79,12 +80,12 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * Camptocamp
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is maintained by the OCA.
 

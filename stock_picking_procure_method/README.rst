@@ -28,8 +28,9 @@ Stock Picking Procure Method
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-This module adds the possibility to set the supply method to *Apply Procurement
-Rules* in the pickings, which is normally set to *Take From Stock* by default.
+This module adds the possibility to set the supply method to *Apply
+Procurement Rules* in the pickings, which is normally set to *Take From
+Stock* by default.
 
 This way, you can configure MTO flows triggered from the picking itself.
 
@@ -41,63 +42,64 @@ This way, you can configure MTO flows triggered from the picking itself.
 Installation
 ============
 
-This module is useless without either Odoo's `mrp` or `purchase` modules (or
+This module is useless without either Odoo's mrp or purchase modules (or
 both). Depending on your needs you should install them in advance.
 
 Configuration
 =============
 
-This is an example scenario with two warehouses. WH2 will be allways supplied
-through WH1.
+This is an example scenario with two warehouses. WH2 will be allways
+supplied through WH1.
 
-Common steps to `mrp` and `purchase` procurements:
+Common steps to mrp and purchase procurements:
 
-#. Go to *Inventory > Configuration > Settings > Warehouse* and set *Multi-Step
-   Routes* on.
-#. Go to *Inventory > Configuration > Warehouse Management > Warehouses*
-#. Create **WH1** with either *Manufacture to Resupply* or *Buy to
+1. Go to *Inventory > Configuration > Settings > Warehouse* and set
+   *Multi-Step Routes* on.
+2. Go to *Inventory > Configuration > Warehouse Management > Warehouses*
+3. Create **WH1** with either *Manufacture to Resupply* or *Buy to
    Resupply* this warehouse or both set.
-#. Create **WH2** setting off *Manufacture to Resupply* and *Buy to
+4. Create **WH2** setting off *Manufacture to Resupply* and *Buy to
    Resupply*. Set **WH1** as the *Resupply Warehouse*.
-#. Go to *Inventory > Configuration > Warehouse Management > Routes* and click
-   on the *Make To Order* one.
-#. Add a new *Procurement Rule* with these settings and save:
+5. Go to *Inventory > Configuration > Warehouse Management > Routes* and
+   click on the *Make To Order* one.
+6. Add a new *Procurement Rule* with these settings and save:
 
-   - Name: *WH1 -> WH2-MTO*
-   - Action: *Pull From*
-   - Operation Type: *WH1: Internal Transfers*
-   - Source Location: *WH1/Stock*
-   - Destination Location: *WH2/Stock*
-   - Move Supply Method: *Take From Stock*
-   - Propagation of Procurement Group: *Propagate*
-   - Propagate cancel and split: `True`
-   - Warehouse to Propagate: *WH1*
+   -  Name: *WH1 -> WH2-MTO*
+   -  Action: *Pull From*
+   -  Operation Type: *WH1: Internal Transfers*
+   -  Source Location: *WH1/Stock*
+   -  Destination Location: *WH2/Stock*
+   -  Move Supply Method: *Take From Stock*
+   -  Propagation of Procurement Group: *Propagate*
+   -  Propagate cancel and split: True
+   -  Warehouse to Propagate: *WH1*
 
 Now, if you want to trigger a manufacture:
 
-   - Create a stockable product with a BoM list.
-   - In the product's *Inventory > Routes section* set *Make To Order* and
-     *Manufacture* on.
+   -  Create a stockable product with a BoM list.
+   -  In the product's *Inventory > Routes section* set *Make To Order*
+      and *Manufacture* on.
 
 Or if you want to trigger a purchase:
 
-   - Create a stockable product with a vendor.
-   - In the product's *Inventory > Routes section* set *Make To Order* and
-     *Purchase* on.
+   -  Create a stockable product with a vendor.
+   -  In the product's *Inventory > Routes section* set *Make To Order*
+      and *Purchase* on.
 
 Usage
 =====
 
 After configuring you procurement rules and your product routes:
 
-#. Go to *Inventory > Dashboard* and click on the *more options* icon (☰).
-#. Choose *New > Planned Transfer*.
-#. Set an origin and destination that is considered in the routes procurement
-   rules.
-#. Set *Supply Method* to *Apply Procurement Rules*.
-#. Set the products and quantities you want to supply.
-#. Save and click on *Mark as To Do*.
-#. Depending on the product's supply type a new MO or a new PO should be
+1. Go to *Inventory > Dashboard* and click on the *more options* icon
+   (☰).
+2. Choose *New > Planned Transfer*.
+3. Set an origin and destination that is considered in the routes
+   procurement rules.
+4. Set *Supply Method* to *Apply Procurement Rules*.
+5. Set the products and quantities you want to supply.
+6. Save and click on *Mark as To Do*.
+7. Depending on the product's supply type a new MO or a new PO should be
    created.
 
 Bug Tracker
@@ -114,23 +116,23 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * Tecnativa
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* `Tecnativa <https://www.tecnativa.com>`_:
+-  `Tecnativa <https://www.tecnativa.com>`__:
 
-    * David Vidal
-    * Pedro M. Baeza
-    * César A. Sánchez
+      -  David Vidal
+      -  Pedro M. Baeza
+      -  César A. Sánchez
 
-* Kitti Upariphutthiphong <kittiu@ecosoft.co.th>
+-  Kitti Upariphutthiphong <kittiu@ecosoft.co.th>
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is maintained by the OCA.
 

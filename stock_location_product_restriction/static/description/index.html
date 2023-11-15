@@ -370,39 +370,43 @@ ul.auto-toc {
 !! source digest: sha256:c5f7c2b6887e37fb12c38fe1cb2c2ec77b8e4b97f4f741d3aa9075ecf93bc2d0
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 <p><a class="reference external image-reference" href="https://odoo-community.org/page/development-status"><img alt="Beta" src="https://img.shields.io/badge/maturity-Beta-yellow.png" /></a> <a class="reference external image-reference" href="http://www.gnu.org/licenses/agpl-3.0-standalone.html"><img alt="License: AGPL-3" src="https://img.shields.io/badge/licence-AGPL--3-blue.png" /></a> <a class="reference external image-reference" href="https://github.com/OCA/stock-logistics-warehouse/tree/16.0/stock_location_product_restriction"><img alt="OCA/stock-logistics-warehouse" src="https://img.shields.io/badge/github-OCA%2Fstock--logistics--warehouse-lightgray.png?logo=github" /></a> <a class="reference external image-reference" href="https://translation.odoo-community.org/projects/stock-logistics-warehouse-16-0/stock-logistics-warehouse-16-0-stock_location_product_restriction"><img alt="Translate me on Weblate" src="https://img.shields.io/badge/weblate-Translate%20me-F47D42.png" /></a> <a class="reference external image-reference" href="https://runboat.odoo-community.org/builds?repo=OCA/stock-logistics-warehouse&amp;target_branch=16.0"><img alt="Try me on Runboat" src="https://img.shields.io/badge/runboat-Try%20me-875A7B.png" /></a></p>
-<p>This module extends the functionality of stock to allow you to prevent to put
-items of different products into the same stock location.</p>
+<p>This module extends the functionality of stock to allow you to prevent
+to put items of different products into the same stock location.</p>
 <p><strong>Table of contents</strong></p>
 <div class="contents local topic" id="contents">
 <ul class="simple">
 <li><a class="reference internal" href="#usage" id="toc-entry-1">Usage</a></li>
-<li><a class="reference internal" href="#bug-tracker" id="toc-entry-2">Bug Tracker</a></li>
-<li><a class="reference internal" href="#credits" id="toc-entry-3">Credits</a><ul>
-<li><a class="reference internal" href="#authors" id="toc-entry-4">Authors</a></li>
-<li><a class="reference internal" href="#contributors" id="toc-entry-5">Contributors</a></li>
-<li><a class="reference internal" href="#other-credits" id="toc-entry-6">Other credits</a></li>
-<li><a class="reference internal" href="#maintainers" id="toc-entry-7">Maintainers</a></li>
+<li><a class="reference internal" href="#changelog" id="toc-entry-2">Changelog</a></li>
+<li><a class="reference internal" href="#bug-tracker" id="toc-entry-3">Bug Tracker</a></li>
+<li><a class="reference internal" href="#credits" id="toc-entry-4">Credits</a><ul>
+<li><a class="reference internal" href="#authors" id="toc-entry-5">Authors</a></li>
+<li><a class="reference internal" href="#contributors" id="toc-entry-6">Contributors</a></li>
+<li><a class="reference internal" href="#other-credits" id="toc-entry-7">Other credits</a></li>
+<li><a class="reference internal" href="#maintainers" id="toc-entry-8">Maintainers</a></li>
 </ul>
 </li>
 </ul>
 </div>
 <div class="section" id="usage">
 <h1><a class="toc-backref" href="#toc-entry-1">Usage</a></h1>
-<p>By default, Odoo allows you to put items of any product into the same location.
-This behaviour remains the one by default once the addon is installed.
-Once installed, you can specify at any level of the stock location hierarchy
-if you want to restrict the usage of the location to only items of the same
-product. This property is inherited by all the children locations while you
-don’t specify an other specific value on a child location. The constrains only
-applies location by location.</p>
-<p>Once a location is configured to only contains items of the same product, the
-system will prevent you to move items of any others products into a location
-that already contains product items. A new filter into the tree view of the
-stock locations will also allow you to find all the location where this new
-restriction is violated.</p>
+<p>By default, Odoo allows you to put items of any product into the same
+location. This behaviour remains the one by default once the addon is
+installed. Once installed, you can specify at any level of the stock
+location hierarchy if you want to restrict the usage of the location to
+only items of the same product. This property is inherited by all the
+children locations while you don’t specify an other specific value on a
+child location. The constrains only applies location by location.</p>
+<p>Once a location is configured to only contains items of the same
+product, the system will prevent you to move items of any others
+products into a location that already contains product items. A new
+filter into the tree view of the stock locations will also allow you to
+find all the location where this new restriction is violated.</p>
+</div>
+<div class="section" id="changelog">
+<h1><a class="toc-backref" href="#toc-entry-2">Changelog</a></h1>
 </div>
 <div class="section" id="bug-tracker">
-<h1><a class="toc-backref" href="#toc-entry-2">Bug Tracker</a></h1>
+<h1><a class="toc-backref" href="#toc-entry-3">Bug Tracker</a></h1>
 <p>Bugs are tracked on <a class="reference external" href="https://github.com/OCA/stock-logistics-warehouse/issues">GitHub Issues</a>.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
@@ -410,22 +414,22 @@ If you spotted it first, help us to smash it by providing a detailed and welcome
 <p>Do not contact contributors directly about support or help with technical issues.</p>
 </div>
 <div class="section" id="credits">
-<h1><a class="toc-backref" href="#toc-entry-3">Credits</a></h1>
+<h1><a class="toc-backref" href="#toc-entry-4">Credits</a></h1>
 <div class="section" id="authors">
-<h2><a class="toc-backref" href="#toc-entry-4">Authors</a></h2>
+<h2><a class="toc-backref" href="#toc-entry-5">Authors</a></h2>
 <ul class="simple">
 <li>ACSONE SA/NV</li>
 </ul>
 </div>
 <div class="section" id="contributors">
-<h2><a class="toc-backref" href="#toc-entry-5">Contributors</a></h2>
+<h2><a class="toc-backref" href="#toc-entry-6">Contributors</a></h2>
 <ul class="simple">
 <li>Laurent Mignon &lt;<a class="reference external" href="mailto:laurent.mignon&#64;acsone.eu">laurent.mignon&#64;acsone.eu</a>&gt; (<a class="reference external" href="https://www.acsone.eu/">https://www.acsone.eu/</a>)</li>
 <li>Denis Roussel &lt;<a class="reference external" href="mailto:denis.roussel&#64;acsone.eu">denis.roussel&#64;acsone.eu</a>&gt; (<a class="reference external" href="https://www.acsone.eu/">https://www.acsone.eu/</a>)</li>
 </ul>
 </div>
 <div class="section" id="other-credits">
-<h2><a class="toc-backref" href="#toc-entry-6">Other credits</a></h2>
+<h2><a class="toc-backref" href="#toc-entry-7">Other credits</a></h2>
 <p>The development of this module has been financially supported by:</p>
 <ul class="simple">
 <li>ACSONE SA/NV</li>
@@ -433,7 +437,7 @@ If you spotted it first, help us to smash it by providing a detailed and welcome
 </ul>
 </div>
 <div class="section" id="maintainers">
-<h2><a class="toc-backref" href="#toc-entry-7">Maintainers</a></h2>
+<h2><a class="toc-backref" href="#toc-entry-8">Maintainers</a></h2>
 <p>This module is maintained by the OCA.</p>
 <a class="reference external image-reference" href="https://odoo-community.org"><img alt="Odoo Community Association" src="https://odoo-community.org/logo.png" /></a>
 <p>OCA, or the Odoo Community Association, is a nonprofit organization whose

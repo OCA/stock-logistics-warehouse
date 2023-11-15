@@ -28,7 +28,8 @@ Stock packaging calculator
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-Basic module providing an helper method to calculate the quantity of product by packaging.
+Basic module providing an helper method to calculate the quantity of
+product by packaging.
 
 **Table of contents**
 
@@ -40,40 +41,41 @@ Usage
 
 Imagine you have the following packagings:
 
-* Pallet: 1000 Units
-* Big box: 500 Units
-* Box: 50 Units
+-  Pallet: 1000 Units
+-  Big box: 500 Units
+-  Box: 50 Units
 
 and you have to pick from your warehouse 2860 Units.
 
 Then you can do:
 
-    .. code-block::
+   ::
 
-        >>> product.product_qty_by_packaging(2860)
+      >>> product.product_qty_by_packaging(2860)
 
-        [
-            {"id": 1, "qty": 2, "name": "Pallet"},
-            {"id": 2, "qty": 1, "name": "Big box"},
-            {"id": 3, "qty": 7, "name": "Box"},
-            {"id": 100, "qty": 10, "name": "Units"},
-        ]
+      [
+          {"id": 1, "qty": 2, "name": "Pallet"},
+          {"id": 2, "qty": 1, "name": "Big box"},
+          {"id": 3, "qty": 7, "name": "Box"},
+          {"id": 100, "qty": 10, "name": "Units"},
+      ]
 
-With this you can show a proper message to warehouse operators to quickly pick the quantity they need.
+With this you can show a proper message to warehouse operators to
+quickly pick the quantity they need.
 
-Optionally you can get contained packaging by passing `with_contained` flag:
+Optionally you can get contained packaging by passing with_contained
+flag:
 
+   ::
 
-    .. code-block::
+      >>> product.product_qty_by_packaging(2860, with_contained=True)
 
-        >>> product.product_qty_by_packaging(2860, with_contained=True)
-
-        [
-            {"id": 1, "qty": 2, "name": "Pallet", "contained": [{"id": 2, "qty": 2, "name": "Big box"}]},
-            {"id": 2, "qty": 1, "name": "Big box", "contained": [{"id": 3, "qty": 10, "name": "Box"}]},
-            {"id": 3, "qty": 7, "name": "Box", "contained": [{"id": 100, "qty": 50, "name": "Units"}]},
-            {"id": 100, "qty": 10, "name": "Units", "contained": []},},
-        ]
+      [
+          {"id": 1, "qty": 2, "name": "Pallet", "contained": [{"id": 2, "qty": 2, "name": "Big box"}]},
+          {"id": 2, "qty": 1, "name": "Big box", "contained": [{"id": 3, "qty": 10, "name": "Box"}]},
+          {"id": 3, "qty": 7, "name": "Box", "contained": [{"id": 100, "qty": 50, "name": "Units"}]},
+          {"id": 100, "qty": 10, "name": "Units", "contained": []},},
+      ]
 
 Known issues / Roadmap
 ======================
@@ -81,7 +83,7 @@ Known issues / Roadmap
 TODO
 
 1. Fractional quantities (eg: 0.5 Kg) are lost when counting units
-2. Maybe rely on `packaging_uom`
+2. Maybe rely on packaging_uom
 
 Bug Tracker
 ===========
@@ -97,18 +99,18 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * Camptocamp
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* Simone Orsi <simahawk@gmail.com>
-* Christopher Ormaza <chris.ormaza@forgeflow.com>
+-  Simone Orsi <simahawk@gmail.com>
+-  Christopher Ormaza <chris.ormaza@forgeflow.com>
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is maintained by the OCA.
 

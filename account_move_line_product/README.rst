@@ -28,12 +28,11 @@ Account Move Line Product
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
+This module enhances the views associated to account moves and account
+move lines to display the product that is associated to the move line.
 
-This module enhances the views associated to account moves and account move
-lines to display the product that is associated to the move line.
-
-This will be relevant in perpetual inventory, for inventory-related account
-moves.
+This will be relevant in perpetual inventory, for inventory-related
+account moves.
 
 **Table of contents**
 
@@ -54,22 +53,21 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * ForgeFlow
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-
-* Jordi Ballester Alomar <jordi.ballester@forgeflow.com>
-* Pimolnat Suntian <pimolnat@ecosoft.co.th>
-* Mantas Šniukas <mantas@vialaurea.lt>
-* Juany Davila <juany.davila@forgeflow.com>
-* Dhara Solanki <dhara.solanki@initos.com>
+-  Jordi Ballester Alomar <jordi.ballester@forgeflow.com>
+-  Pimolnat Suntian <pimolnat@ecosoft.co.th>
+-  Mantas Šniukas <mantas@vialaurea.lt>
+-  Juany Davila <juany.davila@forgeflow.com>
+-  Dhara Solanki <dhara.solanki@initos.com>
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is maintained by the OCA.
 

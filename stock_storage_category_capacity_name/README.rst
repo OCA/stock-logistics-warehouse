@@ -28,8 +28,9 @@ Stock Storage Category Capacity Name
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-This module allows to enhance the display of Stock Storage Category Capacity
-records as in Odoo core, there is no implementation of name display.
+This module allows to enhance the display of Stock Storage Category
+Capacity records as in Odoo core, there is no implementation of name
+display.
 
 **Table of contents**
 
@@ -50,17 +51,17 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * ACSONE SA/NV
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* Denis Roussel <denis.roussel@acsone.eu>
+-  Denis Roussel <denis.roussel@acsone.eu>
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is maintained by the OCA.
 

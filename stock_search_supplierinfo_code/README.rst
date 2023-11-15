@@ -28,7 +28,8 @@ Stock Search Supplierinfo Code
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-Allow to search picking from product supplier code. Maybe usefull mainly for receptions.
+Allow to search picking from product supplier code. Maybe usefull mainly
+for receptions.
 
 **Table of contents**
 
@@ -49,17 +50,17 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * Akretion
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* Florian da Costa <florian.dacosta@akretion.com>
+-  Florian da Costa <florian.dacosta@akretion.com>
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is maintained by the OCA.
 

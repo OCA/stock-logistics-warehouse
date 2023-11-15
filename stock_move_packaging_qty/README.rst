@@ -49,19 +49,19 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * ForgeFlow
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* Mateu Griful <mateu.griful@forgeflow.com>
-* Lois Rilo <lois.rilo@forgeflow.com>
-* Jairo Llopis (`Moduon <https://www.moduon.team/>`__)
+-  Mateu Griful <mateu.griful@forgeflow.com>
+-  Lois Rilo <lois.rilo@forgeflow.com>
+-  Jairo Llopis (`Moduon <https://www.moduon.team/>`__)
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is maintained by the OCA.
 

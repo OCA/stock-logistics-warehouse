@@ -28,16 +28,16 @@ Stock packaging calculator
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-Glue module for `stock_packaging_calculator` and `stock`.
-It adds product qty computed by packaging to:
+Glue module for stock_packaging_calculator and stock. It adds product
+qty computed by packaging to:
 
-* stock move
-* stock move line
-* stock quant
+-  stock move
+-  stock move line
+-  stock quant
 
 Displays it:
 
-* stock picking view for move line
+-  stock picking view for move line
 
 .. IMPORTANT::
    This is an alpha version, the data model and design can change at any time without warning.
@@ -63,26 +63,26 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * Camptocamp
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-Simone Orsi <simone.orsi@camptocamp.com>
-Sébastien Alix <sebastien.alix@camptocamp.com>
-* `Trobz <https://trobz.com>`_:
-* Nguyen Hoang Hiep <hiepnh@trobz.com>
+Simone Orsi <simone.orsi@camptocamp.com> Sébastien Alix
+<sebastien.alix@camptocamp.com> \* `Trobz <https://trobz.com>`__: \*
+Nguyen Hoang Hiep <hiepnh@trobz.com>
 
 Other credits
-~~~~~~~~~~~~~
+-------------
 
-The migration of this module from 13.0 to 14.0 was financially supported by Camptocamp.
-The migration of this module from 14.0 to 16.0 was financially supported by Camptocamp.
+The migration of this module from 13.0 to 14.0 was financially supported
+by Camptocamp. The migration of this module from 14.0 to 16.0 was
+financially supported by Camptocamp.
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is maintained by the OCA.
 

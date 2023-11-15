@@ -31,7 +31,8 @@ Stock Demand Estimate Matrix
 This module allows to create demand estimates for a given product and
 location, on configurable time periods.
 
-The module does not provide in itself any specific usage of the estimates.
+The module does not provide in itself any specific usage of the
+estimates.
 
 **Table of contents**
 
@@ -43,18 +44,20 @@ Installation
 
 This module relies on:
 
-* The OCA module '2D matrix for x2many fields', and can be downloaded from
-  Github: https://github.com/OCA/web/tree/13.0/web_widget_x2many_2d_matrix
-* The OCA module 'Date Range', and can be downloaded from
-  Github: https://github.com/OCA/server-ux/tree/13.0/date_range
+-  The OCA module '2D matrix for x2many fields', and can be downloaded
+   from Github:
+   https://github.com/OCA/web/tree/13.0/web_widget_x2many_2d_matrix
+-  The OCA module 'Date Range', and can be downloaded from Github:
+   https://github.com/OCA/server-ux/tree/13.0/date_range
 
 Usage
 =====
 
-Go to *Inventory > Configuration > Date Ranges* and define your estimating periods.
+Go to *Inventory > Configuration > Date Ranges* and define your
+estimating periods.
 
-Go to *Inventory > Demand Planning > Create Demand Estimates* to create or
-update your demand estimates.
+Go to *Inventory > Demand Planning > Create Demand Estimates* to create
+or update your demand estimates.
 
 Go to *Inventory > Demand Planning > Demand Estimates* to review the
 estimates created.
@@ -73,19 +76,19 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * ForgeFlow
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* Jordi Ballester Alomar <jordi.ballester@forgeflow.com>
-* Lois Rilo <lois.rilo@forgeflow.com>
-* Pimolnat Suntian <pimolnats@ecosoft.co.th>
+-  Jordi Ballester Alomar <jordi.ballester@forgeflow.com>
+-  Lois Rilo <lois.rilo@forgeflow.com>
+-  Pimolnat Suntian <pimolnats@ecosoft.co.th>
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is maintained by the OCA.
 

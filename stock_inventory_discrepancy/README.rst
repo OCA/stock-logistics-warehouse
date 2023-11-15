@@ -28,14 +28,15 @@ Stock Inventory Discrepancy
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-Adds the capability to show the discrepancy of every line in an inventory and
-to block the inventory validation (setting it as 'Pending to Approve') when the
-discrepancy is greater than an user defined threshold.
+Adds the capability to show the discrepancy of every line in an
+inventory and to block the inventory validation (setting it as 'Pending
+to Approve') when the discrepancy is greater than an user defined
+threshold.
 
-Only new group "Validate All inventory Adjustments" will be able to force the
-validation of those blocked inventories. By default, Stock manager will belong
-to this group. In addition, Stock Users can validate inventories under the
-threshold now.
+Only new group "Validate All inventory Adjustments" will be able to
+force the validation of those blocked inventories. By default, Stock
+manager will belong to this group. In addition, Stock Users can validate
+inventories under the threshold now.
 
 **Table of contents**
 
@@ -45,23 +46,24 @@ threshold now.
 Configuration
 =============
 
-#. Go to "Inventory > Warehouse Management" > Warehouses" or to "Inventory >
-   Warehouse Management" > Locations".
-#. Modify the "Maximum Discrepancy Rate Threshold" either in a Warehouse or
-   in a location. If set to 0.0 in both the threshold is disabled.
+1. Go to "Inventory > Warehouse Management" > Warehouses" or to
+   "Inventory > Warehouse Management" > Locations".
+2. Modify the "Maximum Discrepancy Rate Threshold" either in a Warehouse
+   or in a location. If set to 0.0 in both the threshold is disabled.
 
 Usage
 =====
 
 If you configured a "Maximum Discrepancy Rate Threshold".
 
-#. When validating an Inventory Adjustment if some line exceed the Discrepancy
-   Threshold the system will set the inventory's state to 'Pending to Approve'
-   and show the quantity of lines that exceed the threshold.
-#. If both WH and location thresholds are configured, the location one has
-   preference.
-#. The user with "Validate All inventory Adjustments" rights can force the
-   validation of an inventory pending to approve.
+1. When validating an Inventory Adjustment if some line exceed the
+   Discrepancy Threshold the system will set the inventory's state to
+   'Pending to Approve' and show the quantity of lines that exceed the
+   threshold.
+2. If both WH and location thresholds are configured, the location one
+   has preference.
+3. The user with "Validate All inventory Adjustments" rights can force
+   the validation of an inventory pending to approve.
 
 Bug Tracker
 ===========
@@ -77,24 +79,24 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * ForgeFlow
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* Lois Rilo <lois.rilo@forgeflow.com>
-* Andreas Dian Sukarno Putro <andreasdian777@gmail.com>
-* Bhavesh Odedra <bodedra@opensourceintegrators.com>
-* Héctor Villarreal <hector.villarreal@forgeflow.com>
-* `Tecnativa <https://www.tecnativa.com>`_:
+-  Lois Rilo <lois.rilo@forgeflow.com>
+-  Andreas Dian Sukarno Putro <andreasdian777@gmail.com>
+-  Bhavesh Odedra <bodedra@opensourceintegrators.com>
+-  Héctor Villarreal <hector.villarreal@forgeflow.com>
+-  `Tecnativa <https://www.tecnativa.com>`__:
 
-  * Ernesto Tejeda
-  * Carolina Fernandez
+   -  Ernesto Tejeda
+   -  Carolina Fernandez
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is maintained by the OCA.
 

@@ -28,7 +28,8 @@ Product template in putaway strategies
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-This module add product template in putaway strategies from the product view to not need defined putaway strategies for all variants.
+This module add product template in putaway strategies from the product
+view to not need defined putaway strategies for all variants.
 
 **Table of contents**
 
@@ -38,10 +39,10 @@ This module add product template in putaway strategies from the product view to 
 Usage
 =====
 
-* In Inventory Settings, set "Storage Locations" to True
-* User should be in "Manage push and pull inventory flows"
-* Inside a product go to "Putaway rules"
-* It's possible to define record to template
+-  In Inventory Settings, set "Storage Locations" to True
+-  User should be in "Manage push and pull inventory flows"
+-  Inside a product go to "Putaway rules"
+-  It's possible to define record to template
 
 Bug Tracker
 ===========
@@ -57,26 +58,26 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * Akretion
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* `Akretion <https://www.akretion.com>`_:
+-  `Akretion <https://www.akretion.com>`__:
 
-  * Kevin Khao <kevin.khao@akretion.com>
+   -  Kevin Khao <kevin.khao@akretion.com>
 
-* `Tecnativa <https://www.tecnativa.com>`_:
+-  `Tecnativa <https://www.tecnativa.com>`__:
 
-  * Sergio Teruel
-  * Víctor Martínez
-  * César A. Sánchez
-  * Carolina Fernandez
+   -  Sergio Teruel
+   -  Víctor Martínez
+   -  César A. Sánchez
+   -  Carolina Fernandez
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is maintained by the OCA.
 

@@ -28,7 +28,8 @@ Stock Helpers
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-Add methods to be used by other modules. This is not a functional module.
+Add methods to be used by other modules. This is not a functional
+module.
 
 **Table of contents**
 
@@ -49,18 +50,18 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * Camptocamp
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* Guewen Baconnier <guewen.baconnier@camptocamp.com>
-* Christopher Ormaza <chris.ormaza@forgeflow.com>
+-  Guewen Baconnier <guewen.baconnier@camptocamp.com>
+-  Christopher Ormaza <chris.ormaza@forgeflow.com>
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is maintained by the OCA.
 

@@ -370,7 +370,8 @@ ul.auto-toc {
 !! source digest: sha256:7f199b0f860e5108a32b20d253fdf4e90e51bd2ba3088e0b48c5465c1274b5a8
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 <p><a class="reference external image-reference" href="https://odoo-community.org/page/development-status"><img alt="Beta" src="https://img.shields.io/badge/maturity-Beta-yellow.png" /></a> <a class="reference external image-reference" href="http://www.gnu.org/licenses/lgpl-3.0-standalone.html"><img alt="License: LGPL-3" src="https://img.shields.io/badge/licence-LGPL--3-blue.png" /></a> <a class="reference external image-reference" href="https://github.com/OCA/stock-logistics-warehouse/tree/16.0/stock_packaging_calculator"><img alt="OCA/stock-logistics-warehouse" src="https://img.shields.io/badge/github-OCA%2Fstock--logistics--warehouse-lightgray.png?logo=github" /></a> <a class="reference external image-reference" href="https://translation.odoo-community.org/projects/stock-logistics-warehouse-16-0/stock-logistics-warehouse-16-0-stock_packaging_calculator"><img alt="Translate me on Weblate" src="https://img.shields.io/badge/weblate-Translate%20me-F47D42.png" /></a> <a class="reference external image-reference" href="https://runboat.odoo-community.org/builds?repo=OCA/stock-logistics-warehouse&amp;target_branch=16.0"><img alt="Try me on Runboat" src="https://img.shields.io/badge/runboat-Try%20me-875A7B.png" /></a></p>
-<p>Basic module providing an helper method to calculate the quantity of product by packaging.</p>
+<p>Basic module providing an helper method to calculate the quantity of
+product by packaging.</p>
 <p><strong>Table of contents</strong></p>
 <div class="contents local topic" id="contents">
 <ul class="simple">
@@ -396,7 +397,7 @@ ul.auto-toc {
 <p>and you have to pick from your warehouse 2860 Units.</p>
 <p>Then you can do:</p>
 <blockquote>
-<pre class="code literal-block">
+<pre class="literal-block">
 &gt;&gt;&gt; product.product_qty_by_packaging(2860)
 
 [
@@ -407,10 +408,12 @@ ul.auto-toc {
 ]
 </pre>
 </blockquote>
-<p>With this you can show a proper message to warehouse operators to quickly pick the quantity they need.</p>
-<p>Optionally you can get contained packaging by passing <cite>with_contained</cite> flag:</p>
+<p>With this you can show a proper message to warehouse operators to
+quickly pick the quantity they need.</p>
+<p>Optionally you can get contained packaging by passing with_contained
+flag:</p>
 <blockquote>
-<pre class="code literal-block">
+<pre class="literal-block">
 &gt;&gt;&gt; product.product_qty_by_packaging(2860, with_contained=True)
 
 [
@@ -427,7 +430,7 @@ ul.auto-toc {
 <p>TODO</p>
 <ol class="arabic simple">
 <li>Fractional quantities (eg: 0.5 Kg) are lost when counting units</li>
-<li>Maybe rely on <cite>packaging_uom</cite></li>
+<li>Maybe rely on packaging_uom</li>
 </ol>
 </div>
 <div class="section" id="bug-tracker">
