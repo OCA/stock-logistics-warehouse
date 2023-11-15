@@ -21,6 +21,7 @@ class ProductTemplate(models.Model):
     def _compute_product_available_not_res(self):
         for tmpl in self:
             if isinstance(tmpl.id, models.NewId):
+                tmpl.qty_available_not_res = False
                 continue
             tmpl.qty_available_not_res = sum(
                 tmpl.mapped("product_variant_ids.qty_available_not_res")
