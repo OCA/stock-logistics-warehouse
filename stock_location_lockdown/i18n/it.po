@@ -1,0 +1,63 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_location_lockdown
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2023-11-21 13:33+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
+
+#. module: stock_location_lockdown
+#: model:ir.model.fields,field_description:stock_location_lockdown.field_stock_location__block_stock_entrance
+msgid "Block Stock Entrance"
+msgstr "Blocco entrata magazzino"
+
+#. module: stock_location_lockdown
+#: model:ir.model,name:stock_location_lockdown.model_stock_location
+msgid "Inventory Locations"
+msgstr "Ubicazioni di inventario"
+
+#. module: stock_location_lockdown
+#. odoo-python
+#: code:addons/stock_location_lockdown/models/stock_location.py:0
+#, python-format
+msgid ""
+"It is impossible to prohibit this location from                    receiving"
+" products as it already contains some."
+msgstr ""
+"Non è possibile bloccare la ricezione di prodotti                    in "
+"questa ubicazione perché ha già giacenze."
+
+#. module: stock_location_lockdown
+#: model:ir.model,name:stock_location_lockdown.model_stock_quant
+msgid "Quants"
+msgstr "Quanti"
+
+#. module: stock_location_lockdown
+#. odoo-python
+#: code:addons/stock_location_lockdown/models/stock_quant.py:0
+#, python-format
+msgid ""
+"The location %(location)s is blocked and can not be used for moving the "
+"product %(product)s"
+msgstr ""
+"L'ubicazione %(location)s è bloccata e non può essere utilizzata per "
+"movimentare il prodotto %(product)s"
+
+#. module: stock_location_lockdown
+#: model:ir.model.fields,help:stock_location_lockdown.field_stock_location__block_stock_entrance
+msgid ""
+"if this box is checked, putting stock on this location won't be allowed. "
+"Usually used for a virtual location that has childrens."
+msgstr ""
+"Se selezionato, non è possibile caricare merce in questa ubicazione. "
+"Normalmente utilizzato per una ubicazione virtuale con elementi derivati."
