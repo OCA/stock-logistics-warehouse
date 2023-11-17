@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-07-05 00:45+0000\n"
-"PO-Revision-Date: 2023-10-29 17:41+0000\n"
+"PO-Revision-Date: 2023-11-17 14:37+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -157,7 +157,7 @@ msgstr ""
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants__quants_lines
 msgid "Quants"
-msgstr "Quantità"
+msgstr "Quanti"
 
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants__move_qty
