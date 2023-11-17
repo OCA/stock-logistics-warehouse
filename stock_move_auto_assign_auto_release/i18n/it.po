@@ -1,0 +1,46 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_move_auto_assign_auto_release
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2023-11-21 13:33+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
+
+#. module: stock_move_auto_assign_auto_release
+#: model:ir.model.fields,field_description:stock_move_auto_assign_auto_release.field_stock_move__is_auto_release_allowed
+#: model:ir.model.fields,field_description:stock_move_auto_assign_auto_release.field_stock_picking__is_auto_release_allowed
+#: model:ir.model.fields,field_description:stock_move_auto_assign_auto_release.field_stock_reservation__is_auto_release_allowed
+msgid "Is Auto Release Allowed"
+msgstr "È consentito il rilascio automatico"
+
+#. module: stock_move_auto_assign_auto_release
+#: model:ir.model,name:stock_move_auto_assign_auto_release.model_product_product
+msgid "Product Variant"
+msgstr "Variante prodotto"
+
+#. module: stock_move_auto_assign_auto_release
+#: model:ir.model,name:stock_move_auto_assign_auto_release.model_stock_move
+msgid "Stock Move"
+msgstr "Movimento di magazzino"
+
+#. module: stock_move_auto_assign_auto_release
+#: model:ir.model,name:stock_move_auto_assign_auto_release.model_stock_picking
+msgid "Transfer"
+msgstr "Trasferimento"
+
+#. module: stock_move_auto_assign_auto_release
+#. odoo-python
+#: code:addons/stock_move_auto_assign_auto_release/models/stock_move.py:0
+#, python-format
+msgid "Try releasing \"%(product)s\" for quantities added in: %(locations)s"
+msgstr "Tenta rilascio \"%(product)s\" per quantità aggiunte in: %(locations)s"
