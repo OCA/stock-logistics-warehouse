@@ -29,6 +29,6 @@
         <field name="rule_id" ref="stock_reserve_rule_1_demo" />
         <field name="sequence">4</field>
         <field name="location_id" ref="stock_location_zone_d_demo" />
-        <field name="removal_strategy">single_lot</field>
+        <field name="removal_strategy">full_lot</field>
     </record>
 </odoo>

@@ -844,35 +844,7 @@ class TestReserveRule(common.SavepointCase):
         )
         self.assertEqual(move.state, "assigned")
 
-    def test_rule_no_tolerance_error(self):
-        with self.assertRaises(exceptions.UserError):
-            self._create_rule(
-                {"picking_type_ids": [(6, 0, self.wh.out_type_id.ids)], "sequence": 1},
-                [
-                    {
-                        "location_id": self.loc_zone4.id,
-                        "removal_strategy": "single_lot",
-                        "tolerance_requested_limit": "no_tolerance",
-                        "tolerance_requested_computation": "absolute",
-                        "tolerance_requested_value": 0.0,
-                    }
-                ],
-            )
-        with self.assertRaises(exceptions.UserError):
-            self._create_rule(
-                {"picking_type_ids": [(6, 0, self.wh.out_type_id.ids)], "sequence": 1},
-                [
-                    {
-                        "location_id": self.loc_zone4.id,
-                        "removal_strategy": "single_lot",
-                        "tolerance_requested_limit": "no_tolerance",
-                        "tolerance_requested_computation": "percentage",
-                        "tolerance_requested_value": 1.0,
-                    }
-                ],
-            )
-
-    def test_rule_single_lot_equals(self):
+    def test_rule_full_lot_equals(self):
         self._update_qty_in_location(
             self.loc_zone4_bin1, self.product3, 100, lot_id=self.lot0_id
         )
@@ -883,7 +855,7 @@ class TestReserveRule(common.SavepointCase):
             [
                 {
                     "location_id": self.loc_zone4.id,
-                    "removal_strategy": "single_lot",
+                    "removal_strategy": "full_lot",
                     "tolerance_requested_limit": "no_tolerance",
                     "tolerance_requested_computation": "percentage",
                     "tolerance_requested_value": 0.0,
@@ -930,7 +902,7 @@ class TestReserveRule(common.SavepointCase):
             [
                 {
                     "location_id": self.loc_zone4.id,
-                    "removal_strategy": "single_lot",
+                    "removal_strategy": "full_lot",
                     "tolerance_requested_limit": "lower_limit",
                     "tolerance_requested_computation": "absolute",
                 }
@@ -952,7 +924,7 @@ class TestReserveRule(common.SavepointCase):
             [
                 {
                     "location_id": self.loc_zone4.id,
-                    "removal_strategy": "single_lot",
+                    "removal_strategy": "full_lot",
                     "tolerance_requested_limit": "upper_limit",
                     "tolerance_requested_computation": "absolute",
                     "tolerance_requested_value": 1.0,
@@ -992,7 +964,7 @@ class TestReserveRule(common.SavepointCase):
             [
                 {
                     "location_id": self.loc_zone4.id,
-                    "removal_strategy": "single_lot",
+                    "removal_strategy": "full_lot",
                     "tolerance_requested_limit": "upper_limit",
                     "tolerance_requested_computation": "percentage",
                     "tolerance_requested_value": 50.0,
@@ -1028,14 +1000,14 @@ class TestReserveRule(common.SavepointCase):
             [
                 {
                     "location_id": self.loc_zone1.id,
-                    "removal_strategy": "single_lot",
+                    "removal_strategy": "full_lot",
                     "tolerance_requested_limit": "lower_limit",
                     "tolerance_requested_computation": "percentage",
                     "tolerance_requested_value": 50.0,
                 },
                 {
                     "location_id": self.loc_zone4.id,
-                    "removal_strategy": "single_lot",
+                    "removal_strategy": "full_lot",
                     "tolerance_requested_limit": "no_tolerance",
                     "tolerance_requested_computation": "percentage",
                     "tolerance_requested_value": 0.0,
