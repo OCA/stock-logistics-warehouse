@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-18 04:05+0000\n"
-"PO-Revision-Date: 2023-11-21 13:33+0000\n"
+"PO-Revision-Date: 2023-11-21 16:36+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -93,19 +93,19 @@ msgstr "Ultima modifica il"
 #. module: stock_inventory_discrepancy
 #: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_confirm_discrepancy_wiz__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Ultimo aggiornamento di"
 
 #. module: stock_inventory_discrepancy
 #: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_confirm_discrepancy_wiz__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Ultimo aggiornamento il"
 
 #. module: stock_inventory_discrepancy
 #: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_stock_location__discrepancy_threshold
 #: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_stock_warehouse__discrepancy_threshold
 #: model:ir.model.fields,help:stock_inventory_discrepancy.field_stock_quant__discrepancy_threshold
 msgid "Maximum Discrepancy Rate Threshold"
-msgstr ""
+msgstr "Soglia indice differenza massimo"
 
 #. module: stock_inventory_discrepancy
 #: model:ir.model.fields,help:stock_inventory_discrepancy.field_stock_warehouse__discrepancy_threshold
@@ -113,6 +113,9 @@ msgid ""
 "Maximum Discrepancy Rate allowed for any product when doing an Inventory "
 "Adjustment. Threshold defined in involved Location has preference."
 msgstr ""
+"Indice differenza massima consentita per ogni prodotto nelle rettifiche di "
+"inventario. Le soglie definite nelle ubicazioni coinvolte hanno la "
+"precedenza."
 
 #. module: stock_inventory_discrepancy
 #: model:ir.model.fields,help:stock_inventory_discrepancy.field_stock_location__discrepancy_threshold
@@ -121,6 +124,9 @@ msgid ""
 "Adjustment. Thresholds defined in Locations have preference over Warehouse's "
 "ones."
 msgstr ""
+"Indice differenza massima consentita per ogni prodotto nelle rettifiche di "
+"inventario. Le soglie definite nelle ubicazioni hanno la precedenza su "
+"quella del magazzino."
 
 #. module: stock_inventory_discrepancy
 #. odoo-python
@@ -128,26 +134,28 @@ msgstr ""
 #, python-format
 msgid "Only a stock manager can validate an inventory adjustment."
 msgstr ""
+"Solo un responsabile di magazzino può convalidare una rettifica di "
+"inventario."
 
 #. module: stock_inventory_discrepancy
 #: model:ir.model.fields,help:stock_inventory_discrepancy.field_stock_location__propagate_discrepancy_threshold
 msgid "Propagate Maximum Discrepancy Rate Threshold to child locations"
-msgstr ""
+msgstr "Propaga la soglia indice differenza massima alle ubicazioni figlie"
 
 #. module: stock_inventory_discrepancy
 #: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_stock_location__propagate_discrepancy_threshold
 msgid "Propagate discrepancy threshold"
-msgstr ""
+msgstr "Propaga soglia differenza"
 
 #. module: stock_inventory_discrepancy
 #: model:ir.model,name:stock_inventory_discrepancy.model_stock_quant
 msgid "Quants"
-msgstr ""
+msgstr "Quanti"
 
 #. module: stock_inventory_discrepancy
 #: model:ir.model.fields,help:stock_inventory_discrepancy.field_stock_quant__discrepancy_percent
 msgid "The discrepancy expressed in percent with theoretical quantity as basis"
-msgstr ""
+msgstr "La differenza espressa in percentuale con la quantità teorica come base"
 
 #. module: stock_inventory_discrepancy
 #: model_terms:ir.ui.view,arch_db:stock_inventory_discrepancy.confirm_discrepancy_wizard
@@ -155,21 +163,23 @@ msgid ""
 "The following products have exceeded the discrepancy threshold.\n"
 "                    Are you sure you want to proceed?"
 msgstr ""
+"I seguenti prodotti hanno ecceduto la soglia di differenza.\n"
+"                    Si è sicuri di procedere?"
 
 #. module: stock_inventory_discrepancy
 #: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_stock_quant__discrepancy_threshold
 msgid "Threshold (%)"
-msgstr ""
+msgstr "Soglia (%)"
 
 #. module: stock_inventory_discrepancy
 #: model:res.groups,name:stock_inventory_discrepancy.group_stock_inventory_validation
 msgid "Validate Inventory Adjustments"
-msgstr ""
+msgstr "Valida rettifiche di inventario"
 
 #. module: stock_inventory_discrepancy
 #: model:res.groups,name:stock_inventory_discrepancy.group_stock_inventory_validation_always
 msgid "Validate Inventory Adjustments excceded threshold"
-msgstr ""
+msgstr "Valida le rettifiche di inventario per soglia superata"
 
 #. module: stock_inventory_discrepancy
 #: model:ir.model,name:stock_inventory_discrepancy.model_stock_warehouse
@@ -184,6 +194,9 @@ msgid ""
 "You cannot apply inventory adjustments if there are products that exceed the "
 "discrepancy threshold. Only users with rights to apply them can proceed."
 msgstr ""
+"Non si possono applicare le rettifiche di inventario se ci sono prodotti che "
+"superano la sogli a di differenza. Solo gli utenti abilitati possono "
+"procedere."
 
 #. module: stock_inventory_discrepancy
 #: model_terms:ir.ui.view,arch_db:stock_inventory_discrepancy.confirm_discrepancy_wizard
@@ -193,6 +206,10 @@ msgid ""
 "threshold.\n"
 "                    Only users with permissions to apply them can proceed."
 msgstr ""
+"Non si possono confermare le rettifiche di inventario,\n"
+"                    i seguenti prodotti hanno ecceduto la sogli a di "
+"differenza.\n"
+"                    Solo gli utenti autorizzati possono procedere."
 
 #~ msgid "Inventory"
 #~ msgstr "Inventario"
