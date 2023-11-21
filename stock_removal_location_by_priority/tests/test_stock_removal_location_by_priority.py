@@ -4,6 +4,7 @@
 
 from datetime import date
 
+from odoo import Command
 from odoo.tests.common import TransactionCase
 
 
@@ -93,10 +94,8 @@ class TestStockRemovalLocationByPriority(TransactionCase):
                 "picking_type_id": picking_type.id,
                 "location_id": location.id,
                 "location_dest_id": location_dest.id,
-                "move_lines": [
-                    (
-                        0,
-                        0,
+                "move_ids": [
+                    Command.create(
                         {
                             "name": "Test move",
                             "product_id": self.product_1.id,
@@ -126,7 +125,7 @@ class TestStockRemovalLocationByPriority(TransactionCase):
         picking_1 = self._create_picking(
             self.picking_internal, self.stock, self.stock_2, 5
         )
-        picking_1.flush()
+        picking_1.flush_model()
         picking_1.action_confirm()
         picking_1.action_assign()
 
@@ -151,7 +150,7 @@ class TestStockRemovalLocationByPriority(TransactionCase):
         picking_1 = self._create_picking(
             self.picking_internal, self.stock, self.stock_2, 5
         )
-        picking_1.flush()
+        picking_1.flush_model()
         picking_1.action_confirm()
         picking_1.action_assign()
 
