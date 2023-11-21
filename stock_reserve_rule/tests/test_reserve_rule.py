@@ -1034,3 +1034,49 @@ class TestReserveRule(common.SavepointCase):
                 },
             ],
         )
+
+    def test_rule_reserve_single_lot_from_multiple_location(self):
+        self._update_qty_in_location(
+            self.loc_zone1_bin1, self.product3, 10, lot_id=self.lot0_id
+        )
+        self._update_qty_in_location(
+            self.loc_zone1_bin2, self.product3, 5, lot_id=self.lot0_id
+        )
+        self._create_rule(
+            # different picking, should be excluded
+            {"picking_type_ids": [(6, 0, self.wh.out_type_id.ids)], "sequence": 1},
+            [
+                {
+                    "location_id": self.loc_zone1.id,
+                    "removal_strategy": "full_lot",
+                    "tolerance_requested_limit": "lower_limit",
+                    "tolerance_requested_computation": "percentage",
+                    "tolerance_requested_value": 50.0,
+                },
+                {
+                    "location_id": self.loc_zone1.id,
+                    "removal_strategy": "full_lot",
+                    "tolerance_requested_limit": "no_tolerance",
+                },
+            ],
+        )
+        picking = self._create_picking(
+            self.wh, [(self.product3, 15)], picking_type_id=self.wh.out_type_id.id
+        )
+        picking.action_assign()
+        move = picking.move_lines
+        self.assertRecordValues(
+            move.move_line_ids,
+            [
+                {
+                    "location_id": self.loc_zone1_bin1.id,
+                    "product_qty": 10,
+                    "lot_id": self.lot0_id.id,
+                },
+                {
+                    "location_id": self.loc_zone1_bin2.id,
+                    "product_qty": 5,
+                    "lot_id": self.lot0_id.id,
+                },
+            ],
+        )

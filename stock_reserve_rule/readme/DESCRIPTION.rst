@@ -21,7 +21,7 @@ The included advanced removal strategies are:
 * Full Packaging: tries to remove full packaging (configured on the products)
   first, by largest to smallest package or based on a pre-selected package
   (default removal strategy is then applied for equal quantities).
-* Single lot: tries to remove a single lot.
+* Full lot: tries to remove a complete lot.
   This strategy requires to select if a tolerance should be applied on lot selection,
   allowing to select lots with qty higher or lower than qty requested in picking.
   Rules can be applied in sequence, for example, to first check for exact lot qty,
