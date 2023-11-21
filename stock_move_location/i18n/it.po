@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-11-21 16:36+0000\n"
+"PO-Revision-Date: 2023-11-21 19:36+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -133,18 +133,18 @@ msgstr "Righe movimento ubicazione"
 #. module: stock_move_location
 #: model_terms:ir.ui.view,arch_db:stock_move_location.stock_picking_type_kanban
 msgid "Move On Hand"
-msgstr ""
+msgstr "Sposta disponibile"
 
 #. module: stock_move_location
 #: model:ir.actions.act_window,name:stock_move_location.wiz_stock_move_location_action
 #: model:ir.ui.menu,name:stock_move_location.menuitem_move_location
 msgid "Move from location..."
-msgstr ""
+msgstr "Sposta da ubicazione..."
 
 #. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__move_location_wizard_id
 msgid "Move location Wizard"
-msgstr ""
+msgstr "Procedura guidata movimento ubicazione"
 
 #. module: stock_move_location
 #. odoo-python
@@ -152,82 +152,83 @@ msgstr ""
 #, python-format
 msgid "Move quantity can not exceed max quantity or be negative"
 msgstr ""
+"La quantità spostata non può superare la quantità massima o essere negativa"
 
 #. module: stock_move_location
 #: model:ir.actions.act_window,name:stock_move_location.wiz_stock_quant_location_action
 msgid "Move to location..."
-msgstr ""
+msgstr "Sposta all'ubicazione..."
 
 #. module: stock_move_location
 #. odoo-python
 #: code:addons/stock_move_location/models/stock_picking.py:0
 #, python-format
 msgid "Moves lines already exists"
-msgstr ""
+msgstr "Le righe di spostamento esistono già"
 
 #. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location__origin_location_id
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__origin_location_id
 msgid "Origin Location"
-msgstr ""
+msgstr "Ubicazione di origine"
 
 #. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location__origin_location_disable
 msgid "Origin Location Disable"
-msgstr ""
+msgstr "Disabilita ubicazione di origine"
 
 #. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__package_id
 msgid "Package Number"
-msgstr ""
+msgstr "Numero collo"
 
 #. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_stock_move__location_move
 msgid "Part of move location"
-msgstr ""
+msgstr "Parte di un movimento ubicazione"
 
 #. module: stock_move_location
 #: model:ir.model,name:stock_move_location.model_stock_picking_type
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location__picking_type_id
 msgid "Picking Type"
-msgstr ""
+msgstr "Tipologia prelievo"
 
 #. module: stock_move_location
 #: model_terms:ir.ui.view,arch_db:stock_move_location.view_wiz_stock_move_location_form_stock_move_location
 msgid "Planned Transfer"
-msgstr ""
+msgstr "Trasferimento pianificato"
 
 #. module: stock_move_location
 #. odoo-python
 #: code:addons/stock_move_location/models/stock_picking.py:0
 #, python-format
 msgid "Please choose a source end location"
-msgstr ""
+msgstr "Selezionare ubicazione destinazione"
 
 #. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__product_id
 msgid "Product"
-msgstr ""
+msgstr "Prodotto"
 
 #. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__product_uom_id
 msgid "Product Unit of Measure"
-msgstr ""
+msgstr "Unità di misura del prodotto"
 
 #. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__move_quantity
 msgid "Quantity to move"
-msgstr ""
+msgstr "Quantità da spostare"
 
 #. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__reserved_quantity
 msgid "Reserved Quantity"
-msgstr ""
+msgstr "Quantità riservata"
 
 #. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_stock_picking_type__show_move_onhand
 msgid "Show Move On hand stock"
-msgstr ""
+msgstr "Mostra quantità in giacenza"
 
 #. module: stock_move_location
 #: model:ir.model.fields,help:stock_move_location.field_stock_picking_type__show_move_onhand
@@ -235,43 +236,47 @@ msgid ""
 "Show a button 'Move On Hand' in the Inventory Dashboard to initiate the "
 "process to move the products in stock at the origin location."
 msgstr ""
+"Mostra un pulsante 'Sposta disponibile' nella panoramica del magazzino per "
+"iniziare il processo per spostare i prodotti in magazzino dalla destinazione "
+"di origine."
 
 #. module: stock_move_location
 #: model:ir.model,name:stock_move_location.model_stock_move
 msgid "Stock Move"
-msgstr ""
+msgstr "Movimento di magazzino"
 
 #. module: stock_move_location
 #: model:ir.model,name:stock_move_location.model_stock_picking
 msgid "Transfer"
-msgstr ""
+msgstr "Trasferimento"
 
 #. module: stock_move_location
 #: model_terms:ir.ui.view,arch_db:stock_move_location.view_wiz_stock_move_location_form_stock_move_location
 msgid "UoM"
-msgstr ""
+msgstr "UdM"
 
 #. module: stock_move_location
 #: model:ir.model.fields,help:stock_move_location.field_stock_move__location_move
 msgid "Whether this move is a part of stock_location moves"
-msgstr ""
+msgstr "Se questo movimento fa parte dei movimenti tra ubicazioni"
 
 #. module: stock_move_location
 #: model:ir.model,name:stock_move_location.model_wiz_stock_move_location
 msgid "Wizard move location"
-msgstr ""
+msgstr "Procedura guidata spostamento ubicazione"
 
 #. module: stock_move_location
 #: model:ir.model,name:stock_move_location.model_wiz_stock_move_location_line
 msgid "Wizard move location line"
-msgstr ""
+msgstr "Riga procedura guidata spostamento ubicazione"
 
 #. module: stock_move_location
 #: model:ir.model.fields,help:stock_move_location.field_wiz_stock_move_location__destination_location_disable
 msgid "technical field to disable the edition of destination location."
 msgstr ""
+"campo tecnico per disabilitare la modifica delle ubicazioni di destinazione."
 
 #. module: stock_move_location
 #: model:ir.model.fields,help:stock_move_location.field_wiz_stock_move_location__origin_location_disable
 msgid "technical field to disable the edition of origin location."
-msgstr ""
+msgstr "campo tecnico per disabilitare la modifica dell'ubicazione di origine."
