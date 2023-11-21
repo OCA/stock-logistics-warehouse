@@ -6,25 +6,27 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2023-11-21 13:33+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: stock_move_packaging_qty
 #: model:ir.model.fields,help:stock_move_packaging_qty.field_stock_move__product_packaging_qty
 msgid "Amount of packages demanded."
-msgstr ""
+msgstr "Quantità dei colli richiesti."
 
 #. module: stock_move_packaging_qty
 #: model:ir.model.fields,field_description:stock_move_packaging_qty.field_stock_move__product_packaging_qty
 msgid "Package quantity"
-msgstr ""
+msgstr "Quantità collo"
 
 #. module: stock_move_packaging_qty
 #: model:ir.model,name:stock_move_packaging_qty.model_stock_move
 msgid "Stock Move"
-msgstr ""
+msgstr "Movimento di magazzino"
