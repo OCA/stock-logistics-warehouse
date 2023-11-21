@@ -19,9 +19,9 @@ class StockQuant(models.Model):
             "stock_removal_location_by_priority.group_removal_priority"
         ):
             if removal_strategy == "fifo":
-                return "in_date ASC NULLS FIRST, removal_priority ASC, id"
+                return "in_date ASC, removal_priority ASC, id"
             elif removal_strategy == "lifo":
-                return "in_date DESC NULLS LAST, removal_priority ASC, id desc"
+                return "in_date DESC, removal_priority ASC, id desc"
             raise UserError(
                 _("Removal strategy %s not implemented.") % (removal_strategy,)
             )
