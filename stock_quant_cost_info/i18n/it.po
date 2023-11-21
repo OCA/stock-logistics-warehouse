@@ -6,35 +6,37 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2023-11-21 13:33+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: stock_quant_cost_info
 #: model_terms:ir.ui.view,arch_db:stock_quant_cost_info.report_inventory_cost_info
 msgid "<strong>Adjustment cost</strong>"
-msgstr ""
+msgstr "<strong>Correttivo costo</strong>"
 
 #. module: stock_quant_cost_info
 #: model:ir.model.fields,field_description:stock_quant_cost_info.field_stock_quant__adjustment_cost
 msgid "Adjustment cost"
-msgstr ""
+msgstr "Correttivo costo"
 
 #. module: stock_quant_cost_info
 #: model:ir.model.fields,field_description:stock_quant_cost_info.field_stock_quant__currency_id
 msgid "Currency"
-msgstr ""
+msgstr "Valuta"
 
 #. module: stock_quant_cost_info
 #: model:ir.model,name:stock_quant_cost_info.model_stock_quant
 msgid "Quants"
-msgstr ""
+msgstr "Quanti"
 
 #. module: stock_quant_cost_info
 #: model_terms:ir.ui.view,arch_db:stock_quant_cost_info.view_stock_quant_tree_inventory_editable
 msgid "Total"
-msgstr ""
+msgstr "Totale"
