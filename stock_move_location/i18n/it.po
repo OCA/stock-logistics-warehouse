@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-11-03 20:38+0000\n"
-"Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
+"PO-Revision-Date: 2023-11-21 19:35+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
@@ -19,12 +19,12 @@ msgstr ""
 #. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location__apply_putaway_strategy
 msgid "Apply putaway strategy"
-msgstr "Applica regole di spostamento"
+msgstr "Applica regole inoltro"
 
 #. module: stock_move_location
 #: model_terms:ir.ui.view,arch_db:stock_move_location.view_wiz_stock_move_location_form_stock_move_location
 msgid "Apply putaway strategy for moving products"
-msgstr "Applica regole di spostamento per prodotti movimentati"
+msgstr "Applica regole inoltro per prodotti movimentati"
 
 #. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__available_quantity
@@ -39,19 +39,19 @@ msgstr "Annulla"
 #. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location__picking_id
 msgid "Connected Picking"
-msgstr "Trasferimento Collegato"
+msgstr "Prelievo collegato"
 
 #. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location__create_uid
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Creato da"
 
 #. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location__create_date
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Creato il"
 
 #. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__custom
@@ -67,30 +67,30 @@ msgstr "Ubicazione di destinazione"
 #. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location__destination_location_disable
 msgid "Destination Location Disable"
-msgstr "Disabilita Ubicazione di Destinazione"
+msgstr "Disabilita ubicazione di destinazione"
 
 #. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location__display_name
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nome visualizzato"
 
 #. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location__edit_locations
 #: model_terms:ir.ui.view,arch_db:stock_move_location.view_wiz_stock_move_location_form_stock_move_location
 msgid "Edit Locations"
-msgstr "Modifica Ubicazioni"
+msgstr "Modifica ubicazioni"
 
 #. module: stock_move_location
 #: model_terms:ir.ui.view,arch_db:stock_move_location.view_picking_form
 msgid "Fill with stock"
-msgstr "Riempi con stock"
+msgstr "Riempi con giacenza"
 
 #. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location__id
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: stock_move_location
 #: model:ir.model.fields,help:stock_move_location.field_stock_picking_type__suggest_available_qty
@@ -116,24 +116,24 @@ msgstr "Dettagli Inventario"
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location____last_update
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Ultima modifica il"
 
 #. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location__write_uid
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Ultimo aggiornamento di"
 
 #. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location__write_date
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Ultimo aggiornamento il"
 
 #. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__lot_id
 msgid "Lot/Serial Number"
-msgstr "Lotto/numero di serie"
+msgstr "Numero di lotto/serie"
 
 #. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__max_quantity
@@ -143,12 +143,12 @@ msgstr "Massima quantità disponibile"
 #. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location__stock_move_location_line_ids
 msgid "Move Location lines"
-msgstr "Righe spostamento tra ubicazioni"
+msgstr "Righe movimento ubicazione"
 
 #. module: stock_move_location
 #: model_terms:ir.ui.view,arch_db:stock_move_location.stock_picking_type_kanban
 msgid "Move On Hand"
-msgstr "Sposta Giacenza"
+msgstr "Sposta disponibile"
 
 #. module: stock_move_location
 #: model:ir.actions.act_window,name:stock_move_location.wiz_stock_move_location_action
@@ -159,7 +159,7 @@ msgstr "Sposta da ubicazione..."
 #. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__move_location_wizard_id
 msgid "Move location Wizard"
-msgstr "Procedura spostamento tra ubicazioni"
+msgstr "Procedura guidata movimento ubicazione"
 
 #. module: stock_move_location
 #: code:addons/stock_move_location/wizard/stock_move_location_line.py:76
@@ -183,7 +183,7 @@ msgstr "Le righe di spostamento esistono già"
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location__origin_location_id
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__origin_location_id
 msgid "Origin Location"
-msgstr "Ubicazione di Origine"
+msgstr "Ubicazione di origine"
 
 #. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location__origin_location_disable
@@ -193,7 +193,7 @@ msgstr "Disabilita Ubicazione di Origine"
 #. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_stock_move__location_move
 msgid "Part of move location"
-msgstr "Parte di un movimento tra ubicazioni"
+msgstr "Parte di un movimento ubicazione"
 
 #. module: stock_move_location
 #: model:ir.model,name:stock_move_location.model_stock_picking_type
@@ -210,7 +210,7 @@ msgstr "Trasferimento pianificato"
 #: code:addons/stock_move_location/models/stock_picking.py:35
 #, python-format
 msgid "Please choose a source end location"
-msgstr "Si prega di selezionare un'ubicazione di destinazione"
+msgstr "Selezionare ubicazione destinazione"
 
 #. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__product_id
@@ -230,7 +230,7 @@ msgstr "Quantità da spostare"
 #. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_stock_picking_type__show_move_onhand
 msgid "Show Move On hand stock"
-msgstr "Mostra quantità in Giacenza"
+msgstr "Mostra quantità in giacenza"
 
 #. module: stock_move_location
 #: model:ir.model.fields,help:stock_move_location.field_stock_picking_type__show_move_onhand
@@ -238,7 +238,7 @@ msgid ""
 "Show a button 'Move On Hand' in the Inventory Dashboard to initiate the "
 "process to move the products in stock at the origin location."
 msgstr ""
-"Mostra un bottone 'Sposta Giacenza' nella Panoramica del Magazzino per "
+"Mostra un pulsante 'Sposta disponibile' nella panoramica del magazzino per "
 "iniziare il processo per spostare i prodotti in magazzino dalla destinazione "
 "di origine."
 
@@ -275,7 +275,7 @@ msgstr "Procedura spostamento tra ubicazioni"
 #. module: stock_move_location
 #: model:ir.model,name:stock_move_location.model_wiz_stock_move_location_line
 msgid "Wizard move location line"
-msgstr "Procedura riga spostamento tra ubicazioni"
+msgstr "Riga procedura guidata spostamento ubicazione"
 
 #. module: stock_move_location
 #: model:ir.model.fields,help:stock_move_location.field_wiz_stock_move_location__destination_location_disable
