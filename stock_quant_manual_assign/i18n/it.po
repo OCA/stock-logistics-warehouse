@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-01-18 18:31+0000\n"
-"PO-Revision-Date: 2023-11-17 14:36+0000\n"
+"PO-Revision-Date: 2023-11-22 18:33+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/"
 "OCA-stock-logistics-warehouse-8-0/language/it/)\n"
@@ -168,7 +168,7 @@ msgstr ""
 #. module: stock_quant_manual_assign
 #: field:stock.move,picking_type_code:0
 msgid "Type of Operation"
-msgstr "Tipo di Operazione"
+msgstr "Tipo di operazione"
 
 #. module: stock_quant_manual_assign
 #: view:assign.manual.quants:stock_quant_manual_assign.assign_manual_quants_form_view
