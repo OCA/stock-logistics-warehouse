@@ -13,7 +13,10 @@ class StockPicking(models.Model):
                 raise UserError(_("Choose transfers with same source location"))
             if not record.picking_type_id.allow_pull_list_server_action:
                 raise UserError(
-                    f"Operation type of {record.name} transfer did not handle server action"
+                    _(
+                        "Operation type of %(name)s transfer did not handle server action",
+                        name=record.name,
+                    )
                 )
         pull_wizard = self.env["stock.pull.list.wizard"].create(
             {"location_id": source_location.id}
