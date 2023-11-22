@@ -24,11 +24,19 @@ If you go to the Inventory Dashboard you can see the button "Move from
 location" in each of the picking types (only applicable to internal
 transfers). Press it and you will be directed to the wizard.
 
+![](https://user-images.githubusercontent.com/147538094/281480833-208ea309-0bad-43e7-bd6f-8384520afe00.png)
+
+To enable this option, check "Show Move On Hand Stock" in the Picking Type configuration.
+
+![](https://user-images.githubusercontent.com/147538094/281479487-45fa4bde-36be-4ba1-8d54-8e707b89459e.png)
+
 If you want transfer everything from stock.location
 
 On a draft picking, add a button to fill with moves lines for all
 products in the source destination. This allows to create a picking to
-move all the content of a location. If some quants are not available
+move all the content of a location. The Origin Location must have stock.
+The Destination Location has to be a final location.
+If some quants are not available
 (i.e. reserved) the picking will be in partially available state and
 reserved moves won't be listed in the operations. Use barcode interface
 to scan a location and create an empty picking. Then use the fill with
