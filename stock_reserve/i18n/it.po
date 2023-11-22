@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-18 03:44+0000\n"
-"PO-Revision-Date: 2023-07-17 17:12+0000\n"
-"Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
+"PO-Revision-Date: 2023-11-22 18:33+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/"
 "OCA-stock-logistics-warehouse-8-0/language/it/)\n"
 "Language: it\n"
@@ -610,7 +610,7 @@ msgstr "Totale"
 #. module: stock_reserve
 #: field:stock.reservation,picking_type_code:0
 msgid "Type of Operation"
-msgstr "Tipo di Operazione"
+msgstr "Tipo di operazione"
 
 #. module: stock_reserve
 #: field:stock.reservation,price_unit:0
