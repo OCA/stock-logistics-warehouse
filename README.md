@@ -89,7 +89,7 @@ addon | version | maintainers | summary
 [stock_picking_volume_packaging](stock_picking_volume_packaging/) | 14.0.1.1.0 |  | Use volume information on potential product packaging to compute the volume of a stock.move
 [stock_procurement_group_hook](stock_procurement_group_hook/) | 14.0.1.0.0 |  | Adds Hook to Procurement Group run method.
 [stock_product_qty_by_packaging](stock_product_qty_by_packaging/) | 14.0.1.0.0 |  | Compute product quantity to pick by packaging
-[stock_pull_list](stock_pull_list/) | 14.0.1.2.0 | [![LoisRForgeFlow](https://github.com/LoisRForgeFlow.png?size=30px)](https://github.com/LoisRForgeFlow) | The pull list checks the stock situation and calculates needed quantities.
+[stock_pull_list](stock_pull_list/) | 14.0.1.2.1 | [![LoisRForgeFlow](https://github.com/LoisRForgeFlow.png?size=30px)](https://github.com/LoisRForgeFlow) | The pull list checks the stock situation and calculates needed quantities.
 [stock_putaway_method](stock_putaway_method/) | 14.0.1.0.0 | [![asaunier](https://github.com/asaunier.png?size=30px)](https://github.com/asaunier) | Add the putaway strategy method back, removed from the stock module in Odoo 12
 [stock_putaway_product_template](stock_putaway_product_template/) | 14.0.1.1.0 | [![kevinkhao](https://github.com/kevinkhao.png?size=30px)](https://github.com/kevinkhao) [![sebastienbeau](https://github.com/sebastienbeau.png?size=30px)](https://github.com/sebastienbeau) | Add product template in putaway strategies from the product view
 [stock_quant_manual_assign](stock_quant_manual_assign/) | 14.0.1.4.0 |  | Stock - Manual Quant Assignment
