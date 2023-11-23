@@ -200,6 +200,12 @@ msgid "Needs"
 msgstr "Necessario"
 
 #. module: stock_pull_list
+#: code:addons/stock_pull_list/models/stock_picking.py:0
+#, python-format
+msgid "Operation type of %(name)s transfer did not handle server action"
+msgstr ""
+
+#. module: stock_pull_list
 #: model:ir.model,name:stock_pull_list.model_stock_picking_type
 msgid "Picking Type"
 msgstr "Tipologia prelievo"
