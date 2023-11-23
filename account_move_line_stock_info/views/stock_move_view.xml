@@ -21,8 +21,13 @@
                 expr="//notebook//form//field[@name='description_picking']/.."
                 position="after"
             >
-                <group name="account_move_lines_grp" string="Journal Items" colspan="4">
-                    <field name="account_move_line_ids" readonly="1" nolabel="1" />
+                <group name="account_move_lines_grp" string="Journal Items">
+                    <field
+                        name="account_move_line_ids"
+                        readonly="1"
+                        nolabel="1"
+                        colspan="2"
+                    />
                 </group>
             </xpath>
         </field>
