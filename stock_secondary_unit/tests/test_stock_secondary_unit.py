@@ -156,7 +156,7 @@ class TestProductSecondaryUnit(TransactionCase):
             delivery_order.move_line_ids.mapped("secondary_uom_qty")
         )
         self.assertEqual(uom_qty, 20.0)
-        self.assertEqual(secondary_uom_qty, 40.0)
+        self.assertEqual(secondary_uom_qty, 0.0)
 
     def test_picking_secondary_unit(self):
         product = self.product_template.product_variant_ids[0]
