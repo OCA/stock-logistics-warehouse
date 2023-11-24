@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-06-03 01:23+0000\n"
-"PO-Revision-Date: 2022-07-16 18:06+0000\n"
+"PO-Revision-Date: 2023-11-24 17:33+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.3.2\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: stock_available
 #: model_terms:ir.ui.view,arch_db:stock_available.product_normal_form_view
@@ -34,13 +34,13 @@ msgstr "<span class=\"o_stat_text\">Potenziale</span>"
 #. module: stock_available
 #: model_terms:ir.ui.view,arch_db:stock_available.view_stock_available_kanban
 msgid "Available to Promise:"
-msgstr "Disponibile alla promessa:"
+msgstr "Disponibile da promettere:"
 
 #. module: stock_available
 #: model:ir.model.fields,field_description:stock_available.field_product_product__immediately_usable_qty
 #: model:ir.model.fields,field_description:stock_available.field_product_template__immediately_usable_qty
 msgid "Available to promise"
-msgstr "Disponibile alla promessa"
+msgstr "Disponibile da promettere"
 
 #. module: stock_available
 #: model:ir.model.fields,help:stock_available.field_res_config_settings__stock_available_mrp_based_on
@@ -178,7 +178,7 @@ msgid ""
 "promise.\n"
 "This installs the module stock_available_immediately."
 msgstr ""
-"Questo toglierà le quantità in arrivo alle quantità disponibile per le "
+"Questo toglierà le quantità in arrivo alle quantità disponibili per le "
 "promesse.\n"
 "Questo installa il modulo stock_available_immediately."
 
