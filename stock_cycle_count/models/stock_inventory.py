@@ -16,7 +16,7 @@ class StockInventory(models.Model):
         for inv in self:
             theoretical = sum(inv.stock_quant_ids.mapped(lambda x: abs(x.quantity)))
             abs_discrepancy = sum(
-                inv.stock_quant_ids.mapped(lambda x: abs(x.discrepancy_qty))
+                inv.stock_quant_ids.mapped(lambda x: abs(x.inventory_diff_quantity))
             )
             if theoretical:
                 inv.inventory_accuracy = max(
