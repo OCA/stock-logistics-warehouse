@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-10-29 17:36+0000\n"
-"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"PO-Revision-Date: 2023-11-24 11:33+0000\n"
+"Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
@@ -204,6 +204,8 @@ msgstr "Necessario"
 #, python-format
 msgid "Operation type of %(name)s transfer did not handle server action"
 msgstr ""
+"Il tipo di operazione del trasferimento %(name)s non ha gestito l'azione del "
+"server"
 
 #. module: stock_pull_list
 #: model:ir.model,name:stock_pull_list.model_stock_picking_type
