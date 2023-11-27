@@ -442,25 +442,22 @@ class StockReserveRuleRemoval(models.Model):
         # We take goods only if we empty the bin.
         # The original ordering (fefo, fifo, ...) must be kept.
         product = fields.first(quants).product_id
-        rounding = product.uom_id.rounding
         if product.tracking == "lot":
+            rounding = product.uom_id.rounding
             for lot, lot_quants in quants.filtered(
-                lambda quant, product_id=product.id: quant.product_id.id == product_id
+                lambda quant: quant.product_id.id == product.id
+                and quant.lot_id
+                and not quant.reserved_quantity
             ).group_by_lot():
+                product_qty = sum(lot_quants.mapped("quantity"))
+                if not self._compare_with_tolerance(need, product_qty, rounding):
+                    continue
                 for lot_quant in lot_quants:
-                    product_qty = sum(lot_quant.mapped("quantity"))
-                    lot_quantity = sum(lot_quant.mapped("quantity")) - sum(
-                        lot_quant.mapped("reserved_quantity")
+                    lot_quantity = lot_quant.quantity - lot_quant.reserved_quantity
+                    need = yield (
+                        lot_quant.location_id,
+                        lot_quantity,
+                        need,
+                        lot,
+                        None,
                     )
-                    if (
-                        lot
-                        and self._compare_with_tolerance(need, product_qty, rounding)
-                        and lot_quantity > 0
-                    ):
-                        need = (
-                            yield lot_quant.location_id,
-                            lot_quantity,
-                            need,
-                            lot,
-                            None,
-                        )  # noqa
