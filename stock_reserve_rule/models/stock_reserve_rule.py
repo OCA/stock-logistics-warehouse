@@ -445,19 +445,18 @@ class StockReserveRuleRemoval(models.Model):
         if product.tracking == "lot":
             rounding = product.uom_id.rounding
             for lot, lot_quants in quants.filtered(
-                lambda quant: quant.product_id.id == product.id
-                and quant.lot_id
-                and not quant.reserved_quantity
+                lambda quant: quant.product_id.id == product.id and quant.lot_id
             ).group_by_lot():
                 product_qty = sum(lot_quants.mapped("quantity"))
                 if not self._compare_with_tolerance(need, product_qty, rounding):
                     continue
                 for lot_quant in lot_quants:
                     lot_quantity = lot_quant.quantity - lot_quant.reserved_quantity
-                    need = yield (
-                        lot_quant.location_id,
-                        lot_quantity,
-                        need,
-                        lot,
-                        None,
-                    )
+                    if lot_quantity > 0:
+                        need = yield (
+                            lot_quant.location_id,
+                            lot_quantity,
+                            need,
+                            lot,
+                            None,
+                        )
