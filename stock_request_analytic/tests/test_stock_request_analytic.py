@@ -4,13 +4,14 @@
 from odoo import fields
 from odoo.exceptions import UserError
 from odoo.tests import Form
+from odoo.tests.common import users
 
 from odoo.addons.stock_request.tests import test_stock_request
 
 
 class TestStockRequestAnalytic(test_stock_request.TestStockRequest):
     def setUp(self):
-        super(TestStockRequestAnalytic, self).setUp()
+        super().setUp()
         self.analytic_model = self.env["account.analytic.account"]
         self.analytic = self.analytic_model.create({"name": "Pizza"})
         self.analytic2 = self.analytic_model.create(
@@ -48,6 +49,14 @@ class TestStockRequestAnalytic(test_stock_request.TestStockRequest):
             }
         )
         self.pizza.route_ids = [(6, 0, self.demand_route.ids)]
+        self.stock_request_user.write(
+            {
+                "groups_id": [
+                    (4, self.env.ref("analytic.group_analytic_accounting").id),
+                    (4, self.env.ref("stock.group_stock_user").id),
+                ]
+            }
+        )
 
     def prepare_order_request_analytic(self, analytic, company, analytic_tags=None):
         expected_date = fields.Datetime.now()
@@ -150,6 +159,7 @@ class TestStockRequestAnalytic(test_stock_request.TestStockRequest):
             )
             self.env["stock.request.order"].create(vals)
 
+    @users("stock_request_user")
     def test_default_analytic(self):
         """
         Create request order with a default analytic
