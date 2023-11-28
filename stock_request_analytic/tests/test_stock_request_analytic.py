@@ -3,11 +3,11 @@
 
 from odoo import fields
 from odoo.exceptions import UserError
-from odoo.tests import Form
-from odoo.tests.common import TransactionCase
+from odoo.tests import Form, common, new_test_user
+from odoo.tests.common import users
 
 
-class TestStockRequestAnalytic(TransactionCase):
+class TestStockRequestAnalytic(common.TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -74,6 +74,17 @@ class TestStockRequestAnalytic(TransactionCase):
                 "type": "product",
                 "route_ids": [(6, 0, cls.demand_route.ids)],
             }
+        )
+        new_test_user(
+            cls.env,
+            login="stock_request_user",
+            groups="%s,%s,%s"
+            % (
+                "stock_request.group_stock_request_user",
+                "analytic.group_analytic_accounting",
+                "stock.group_stock_user",
+            ),
+            company_ids=[(6, 0, [cls.main_company.id, cls.company_2.id])],
         )
 
     def prepare_order_request_analytic(self, analytic, company, analytic_tags=None):
@@ -175,6 +186,7 @@ class TestStockRequestAnalytic(TransactionCase):
             )
             self.StockRequestOrder.create(vals)
 
+    @users("stock_request_user")
     def test_default_analytic(self):
         """
         Create request order with a default analytic

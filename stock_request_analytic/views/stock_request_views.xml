@@ -6,6 +6,10 @@
         <field name="name">stock.request.form</field>
         <field name="model">stock.request</field>
         <field name="inherit_id" ref="stock_request.view_stock_request_form" />
+        <field
+            name="groups_id"
+            eval="[(4, ref('analytic.group_analytic_accounting')),(4, ref('analytic.group_analytic_tags'))]"
+        />
         <field name="arch" type="xml">
             <field name="procurement_group_id" position="after">
                 <field
