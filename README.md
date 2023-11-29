@@ -98,7 +98,7 @@ addon | version | maintainers | summary
 [stock_quant_view_reservation](stock_quant_view_reservation/) | 14.0.1.0.1 |  | Allows to see details of reservations on a quant
 [stock_removal_location_by_priority](stock_removal_location_by_priority/) | 14.0.1.0.0 |  | Establish a removal priority on stock locations.
 [stock_request](stock_request/) | 14.0.1.7.2 |  | Internal request for stock
-[stock_request_analytic](stock_request_analytic/) | 14.0.1.0.3 |  | Internal request for stock
+[stock_request_analytic](stock_request_analytic/) | 14.0.1.1.0 |  | Internal request for stock
 [stock_request_cancel_confirm](stock_request_cancel_confirm/) | 14.0.1.0.1 | [![kittiu](https://github.com/kittiu.png?size=30px)](https://github.com/kittiu) | Stock Request Cancel Confirm
 [stock_request_direction](stock_request_direction/) | 14.0.1.0.1 | [![max3903](https://github.com/max3903.png?size=30px)](https://github.com/max3903) | From or to your warehouse?
 [stock_request_kanban](stock_request_kanban/) | 14.0.1.1.3 |  | Adds a stock request order, and takes stock requests as lines
