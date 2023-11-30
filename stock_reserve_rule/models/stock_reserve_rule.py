@@ -447,16 +447,18 @@ class StockReserveRuleRemoval(models.Model):
             for lot, lot_quants in quants.filtered(
                 lambda quant: quant.product_id.id == product.id and quant.lot_id
             ).group_by_lot():
+                if any(quant.reserved_quantity for quant in lot_quants):
+                    # skip lots that are partially reserved
+                    continue
                 product_qty = sum(lot_quants.mapped("quantity"))
                 if not self._compare_with_tolerance(need, product_qty, rounding):
                     continue
                 for lot_quant in lot_quants:
                     lot_quantity = lot_quant.quantity - lot_quant.reserved_quantity
-                    if lot_quantity > 0:
-                        need = yield (
-                            lot_quant.location_id,
-                            lot_quantity,
-                            need,
-                            lot,
-                            None,
-                        )
+                    need = yield (
+                        lot_quant.location_id,
+                        lot_quantity,
+                        need,
+                        lot,
+                        None,
+                    )
