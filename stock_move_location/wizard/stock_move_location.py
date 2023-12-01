@@ -207,9 +207,26 @@ class StockMoveLocationWizard(models.TransientModel):
     def _create_move(self, picking, lines):
         self.ensure_one()
         move = self.env["stock.move"].create(self._get_move_values(picking, lines))
-        if not self.env.context.get("planned"):
+        lines.create_move_lines(picking, move)
+        if self.env.context.get("planned"):
             for line in lines:
-                line.create_move_lines(picking, move)
+                available_quantity = self.env["stock.quant"]._get_available_quantity(
+                    line.product_id,
+                    line.origin_location_id,
+                    lot_id=line.lot_id,
+                    strict=False,
+                )
+                move._update_reserved_quantity(
+                    line.move_quantity,
+                    available_quantity,
+                    line.origin_location_id,
+                    lot_id=line.lot_id,
+                    strict=False,
+                )
+            # Force the state to be assigned, instead of _action_assign,
+            # to avoid discarding the selected move_location_line.
+            move.state = "assigned"
+            move.move_line_ids.write({"state": "assigned"})
         return move
 
     def _unreserve_moves(self):
@@ -255,9 +272,6 @@ class StockMoveLocationWizard(models.TransientModel):
             moves_to_reassign = self._unreserve_moves()
             picking.button_validate()
             moves_to_reassign._action_assign()
-        else:
-            picking.action_confirm()
-            picking.action_assign()
         self.picking_id = picking
         return self._get_picking_action(picking.id)
 
