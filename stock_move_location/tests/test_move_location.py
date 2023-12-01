@@ -124,7 +124,28 @@ class TestMoveLocation(TestsCommon):
         wizard.action_move_location()
         picking = wizard.picking_id
         self.assertEqual(picking.state, "assigned")
-        self.assertEqual(len(picking.move_line_ids), 7)
+        self.assertEqual(
+            len(wizard.stock_move_location_line_ids), len(picking.move_line_ids)
+        )
+        wizard_lines = sorted(
+            [
+                (line.product_id.id, line.lot_id.id, line.move_quantity)
+                for line in wizard.stock_move_location_line_ids
+            ],
+            key=lambda x: (x[0], x[1]),
+        )
+        picking_lines = sorted(
+            [
+                (line.product_id.id, line.lot_id.id, line.reserved_uom_qty)
+                for line in picking.move_line_ids
+            ],
+            key=lambda x: (x[0], x[1]),
+        )
+        self.assertEqual(
+            wizard_lines,
+            picking_lines,
+            "Mismatch between move location lines and move lines",
+        )
         self.assertEqual(
             sorted(picking.move_line_ids.mapped("reserved_uom_qty")),
             [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 123.0],
