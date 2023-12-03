@@ -61,27 +61,62 @@ class TestReserveRuleFullLot(ReserveRuleCommon):
         result = removal._compare_with_tolerance(2, 2, self.rounded)
         self.assertTrue(result, "Compare result must be True")
 
+        result = removal._compare_with_tolerance(2.52, 1.52, self.rounded)
+        self.assertFalse(result, "Compare result must be True")
+
+        result = removal._compare_with_tolerance(1.52, 2.52, self.rounded)
+        self.assertFalse(result, "Compare result must be True")
+
+        result = removal._compare_with_tolerance(1.524, 1.52, self.rounded)
+        self.assertTrue(result, "Compare result must be True")
+
     def test_compare_with_tolerance_upper_limit_percentage(self):
         """Test flow that checks 'Upper Limit' comparison in percentage"""
         removal = self._create_rule(
-            self.rule_vals,
-            [self.upper_limit_percentage_vals],
+            self.rule_vals, [self.upper_limit_percentage_vals]
         ).rule_removal_ids
 
-        result = removal._compare_with_tolerance(10, 5, self.rounded)
+        product_qty = 10
+        result = removal._compare_with_tolerance(product_qty, 5, self.rounded)
         self.assertFalse(result, "Compare result must be False")
 
-        result = removal._compare_with_tolerance(10, 16, self.rounded)
+        result = removal._compare_with_tolerance(product_qty, 16, self.rounded)
         self.assertFalse(result, "Compare result must be False")
 
-        result = removal._compare_with_tolerance(10, 10, self.rounded)
+        result = removal._compare_with_tolerance(product_qty, product_qty, self.rounded)
         self.assertFalse(result, "Compare result must be False")
 
-        result = removal._compare_with_tolerance(10, 15, self.rounded)
+        result = removal._compare_with_tolerance(product_qty, 15, self.rounded)
         self.assertTrue(result, "Compare result must be True")
 
-        result = removal._compare_with_tolerance(10, 11, self.rounded)
+        result = removal._compare_with_tolerance(product_qty, 11, self.rounded)
         self.assertTrue(result, "Compare result must be True")
+
+        #  Decimal value
+        product_qty = 35.24
+        result = removal._compare_with_tolerance(product_qty, 30.0, self.rounded)
+        self.assertFalse(result, "Compare result must be False")
+
+        result = removal._compare_with_tolerance(product_qty, 52.92, self.rounded)
+        self.assertFalse(result, "Compare result must be False")
+
+        result = removal._compare_with_tolerance(product_qty, product_qty, self.rounded)
+        self.assertFalse(result, "Compare result must be False")
+
+        result = removal._compare_with_tolerance(product_qty, 35.25, self.rounded)
+        self.assertTrue(result, "Compare result must be True")
+
+        result = removal._compare_with_tolerance(product_qty, 40.0, self.rounded)
+        self.assertTrue(result, "Compare result must be True")
+
+        result = removal._compare_with_tolerance(product_qty, 52.86, self.rounded)
+        self.assertTrue(result, "Compare result must be True")
+
+        result = removal._compare_with_tolerance(product_qty, 52.85, self.rounded)
+        self.assertTrue(result, "Compare result must be True")
+
+        result = removal._compare_with_tolerance(product_qty, 52.87, self.rounded)
+        self.assertFalse(result, "Compare result must be False")
 
     def test_compare_with_tolerance_upper_limit_absolute(self):
         """Test flow that checks 'Upper Limit' comparison in absolute value"""
@@ -90,20 +125,47 @@ class TestReserveRuleFullLot(ReserveRuleCommon):
             [self.upper_limit_absolute_vals],
         ).rule_removal_ids
 
-        result = removal._compare_with_tolerance(10, 5, self.rounded)
+        product_qty = 10.0
+        result = removal._compare_with_tolerance(product_qty, 5, self.rounded)
         self.assertFalse(result, "Compare result must be False")
 
-        result = removal._compare_with_tolerance(10, 20, self.rounded)
+        result = removal._compare_with_tolerance(product_qty, 20, self.rounded)
         self.assertFalse(result, "Compare result must be False")
 
-        result = removal._compare_with_tolerance(10, 10, self.rounded)
+        result = removal._compare_with_tolerance(product_qty, 10, self.rounded)
         self.assertFalse(result, "Compare result must be False")
 
-        result = removal._compare_with_tolerance(10, 17, self.rounded)
+        result = removal._compare_with_tolerance(product_qty, 17, self.rounded)
         self.assertTrue(result, "Compare result must be True")
 
-        result = removal._compare_with_tolerance(10, 13, self.rounded)
+        result = removal._compare_with_tolerance(product_qty, 13, self.rounded)
         self.assertTrue(result, "Compare result must be True")
+
+        #  Decimal value
+        product_qty = 35.24
+        result = removal._compare_with_tolerance(product_qty, 30.0, self.rounded)
+        self.assertFalse(result, "Compare result must be False")
+
+        result = removal._compare_with_tolerance(product_qty, 43.92, self.rounded)
+        self.assertFalse(result, "Compare result must be False")
+
+        result = removal._compare_with_tolerance(product_qty, product_qty, self.rounded)
+        self.assertFalse(result, "Compare result must be False")
+
+        result = removal._compare_with_tolerance(product_qty, 35.25, self.rounded)
+        self.assertTrue(result, "Compare result must be True")
+
+        result = removal._compare_with_tolerance(product_qty, 40.0, self.rounded)
+        self.assertTrue(result, "Compare result must be True")
+
+        result = removal._compare_with_tolerance(product_qty, 42.24, self.rounded)
+        self.assertTrue(result, "Compare result must be True")
+
+        result = removal._compare_with_tolerance(product_qty, 42.23, self.rounded)
+        self.assertTrue(result, "Compare result must be True")
+
+        result = removal._compare_with_tolerance(product_qty, 42.25, self.rounded)
+        self.assertFalse(result, "Compare result must be False")
 
     def test_compare_with_tolerance_lower_limit_percentage(self):
         """Test flow that checks 'Lower Limit' comparison in percentage"""
@@ -112,20 +174,44 @@ class TestReserveRuleFullLot(ReserveRuleCommon):
             [self.lower_limit_percentage_vals],
         ).rule_removal_ids
 
-        result = removal._compare_with_tolerance(10, 1, self.rounded)
+        product_qty = 10
+        result = removal._compare_with_tolerance(product_qty, 1, self.rounded)
         self.assertFalse(result, "Compare result must be False")
 
-        result = removal._compare_with_tolerance(10, 11, self.rounded)
+        result = removal._compare_with_tolerance(product_qty, 11, self.rounded)
         self.assertFalse(result, "Compare result must be False")
 
-        result = removal._compare_with_tolerance(10, 10, self.rounded)
+        result = removal._compare_with_tolerance(product_qty, product_qty, self.rounded)
         self.assertFalse(result, "Compare result must be False")
 
-        result = removal._compare_with_tolerance(10, 5, self.rounded)
+        result = removal._compare_with_tolerance(product_qty, 5, self.rounded)
         self.assertTrue(result, "Compare result must be True")
 
-        result = removal._compare_with_tolerance(10, 7, self.rounded)
+        result = removal._compare_with_tolerance(product_qty, 7, self.rounded)
         self.assertTrue(result, "Compare result must be True")
+
+        product_qty = 35.24
+
+        result = removal._compare_with_tolerance(product_qty, 17.0, self.rounded)
+        self.assertFalse(result, "Compare result must be False")
+
+        result = removal._compare_with_tolerance(product_qty, product_qty, self.rounded)
+        self.assertFalse(result, "Compare result must be False")
+
+        result = removal._compare_with_tolerance(product_qty, 35.23, self.rounded)
+        self.assertTrue(result, "Compare result must be True")
+
+        result = removal._compare_with_tolerance(product_qty, 30.0, self.rounded)
+        self.assertTrue(result, "Compare result must be True")
+
+        result = removal._compare_with_tolerance(product_qty, 17.62, self.rounded)
+        self.assertTrue(result, "Compare result must be True")
+
+        result = removal._compare_with_tolerance(product_qty, 17.63, self.rounded)
+        self.assertTrue(result, "Compare result must be True")
+
+        result = removal._compare_with_tolerance(product_qty, 17.61, self.rounded)
+        self.assertFalse(result, "Compare result must be False")
 
     def test_compare_with_tolerance_lower_limit_absolute(self):
         """Test flow that checks 'Lower Limit' comparison in absolute value"""
@@ -134,20 +220,45 @@ class TestReserveRuleFullLot(ReserveRuleCommon):
             [self.lower_limit_absolute_vals],
         ).rule_removal_ids
 
-        result = removal._compare_with_tolerance(10, 2, self.rounded)
+        product_qty = 10
+
+        result = removal._compare_with_tolerance(product_qty, 2, self.rounded)
         self.assertFalse(result, "Compare result must be False")
 
-        result = removal._compare_with_tolerance(10, 11, self.rounded)
+        result = removal._compare_with_tolerance(product_qty, 11, self.rounded)
         self.assertFalse(result, "Compare result must be False")
 
-        result = removal._compare_with_tolerance(10, 10, self.rounded)
+        result = removal._compare_with_tolerance(product_qty, product_qty, self.rounded)
         self.assertFalse(result, "Compare result must be False")
 
-        result = removal._compare_with_tolerance(10, 3, self.rounded)
+        result = removal._compare_with_tolerance(product_qty, 3, self.rounded)
         self.assertTrue(result, "Compare result must be True")
 
-        result = removal._compare_with_tolerance(10, 7, self.rounded)
+        result = removal._compare_with_tolerance(product_qty, 7, self.rounded)
         self.assertTrue(result, "Compare result must be True")
+
+        product_qty = 35.24
+
+        result = removal._compare_with_tolerance(product_qty, 28.20, self.rounded)
+        self.assertFalse(result, "Compare result must be False")
+
+        result = removal._compare_with_tolerance(product_qty, product_qty, self.rounded)
+        self.assertFalse(result, "Compare result must be False")
+
+        result = removal._compare_with_tolerance(product_qty, 35.23, self.rounded)
+        self.assertTrue(result, "Compare result must be True")
+
+        result = removal._compare_with_tolerance(product_qty, 30.0, self.rounded)
+        self.assertTrue(result, "Compare result must be True")
+
+        result = removal._compare_with_tolerance(product_qty, 28.24, self.rounded)
+        self.assertTrue(result, "Compare result must be True")
+
+        result = removal._compare_with_tolerance(product_qty, 28.25, self.rounded)
+        self.assertTrue(result, "Compare result must be True")
+
+        result = removal._compare_with_tolerance(product_qty, 28.23, self.rounded)
+        self.assertFalse(result, "Compare result must be False")
 
     def test_compute_tolerance_display(self):
         rule = self._create_rule(

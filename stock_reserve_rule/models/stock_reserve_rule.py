@@ -403,38 +403,55 @@ class StockReserveRuleRemoval(models.Model):
         tolerance = self.tolerance_requested_value
         limit = self.tolerance_requested_limit
         computation = self.tolerance_requested_computation
-        if limit == "no_tolerance" or float_compare(tolerance, 0, rounding) == 0:
+        if (
+            limit == "no_tolerance"
+            or float_compare(tolerance, 0, precision_rounding=rounding) == 0
+        ):
             return float_compare(need, product_qty, rounding) == 0
         elif limit == "upper_limit":
             if computation == "percentage":
                 # need + rounding < product_qty <= need * (100 + tolerance) / 100
                 return (
-                    float_compare(need, product_qty, rounding) == -1
+                    float_compare(need, product_qty, precision_rounding=rounding) == -1
                     and float_compare(
-                        product_qty, need * (100 + tolerance) / 100, rounding
+                        product_qty,
+                        need * (100 + tolerance) / 100,
+                        precision_rounding=rounding,
                     )
                     <= 0
                 )
             else:
                 # need + rounding < product_qty <= need + tolerance
                 return (
-                    float_compare(need, product_qty, rounding) == -1
-                    and float_compare(product_qty, need + tolerance, rounding) <= 0
+                    float_compare(need, product_qty, precision_rounding=rounding) == -1
+                    and float_compare(
+                        product_qty, need + tolerance, precision_rounding=rounding
+                    )
+                    <= 0
                 )
         elif limit == "lower_limit":
             if computation == "percentage":
                 # need * (100 - tolerance) / 100 <= product_qty < need - rounding
                 return (
-                    float_compare(need * (100 - tolerance) / 100, product_qty, rounding)
+                    float_compare(
+                        need * (100 - tolerance) / 100,
+                        product_qty,
+                        precision_rounding=rounding,
+                    )
                     <= 0
-                    and float_compare(product_qty, need, rounding) == -1
+                    and float_compare(product_qty, need, precision_rounding=rounding)
+                    == -1
                 )
             # computation == "absolute"
             else:
                 # need - tolerance <= product_qty < need - rounding
                 return (
-                    float_compare(need - tolerance, product_qty, rounding) <= 0
-                    and float_compare(product_qty, need, rounding) == -1
+                    float_compare(
+                        need - tolerance, product_qty, precision_rounding=rounding
+                    )
+                    <= 0
+                    and float_compare(product_qty, need, precision_rounding=rounding)
+                    == -1
                 )
 
     def _apply_strategy_full_lot(self, quants):
