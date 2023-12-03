@@ -200,7 +200,7 @@ class StockReserveRuleRemoval(models.Model):
             tolerance_on = rec.tolerance_requested_limit
             tolerance_computation = rec.tolerance_requested_computation
             value = rec.tolerance_requested_value
-            if value == 0.0:
+            if value == 0.0 and tolerance_on == "no_tolerance":
                 rec.tolerance_display = "Requested Qty = Lot Qty"
                 continue
             limit = "-" if tolerance_on == "lower_limit" else ""
