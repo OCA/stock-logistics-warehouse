@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-01-18 18:31+0000\n"
-"PO-Revision-Date: 2023-07-12 16:11+0000\n"
-"Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
+"PO-Revision-Date: 2023-12-04 09:36+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/"
 "OCA-stock-logistics-warehouse-8-0/language/it/)\n"
 "Language: it\n"
@@ -171,7 +171,7 @@ msgstr ""
 #. module: stock_inventory_hierarchical
 #: field:stock.inventory,progress_rate:0
 msgid "Progress"
-msgstr "Progresso"
+msgstr "Avanzamento"
 
 #. module: stock_inventory_hierarchical
 #: view:stock.inventory:stock_inventory_hierarchical.stock_inventory_hierarchical_tree_view
