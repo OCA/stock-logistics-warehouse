@@ -257,7 +257,7 @@ class StockMoveLocationWizard(models.TransientModel):
         self._create_moves(picking)
         if not self.env.context.get("planned"):
             moves_to_reassign = self._unreserve_moves()
-            picking.button_validate()
+            picking.with_context(skip_expired=True).button_validate()
             moves_to_reassign._action_assign()
         else:
             picking.action_confirm()
