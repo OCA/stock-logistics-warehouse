@@ -1,6 +1,9 @@
 # Copyright 2023 Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
+from odoo import api, registry
+from odoo.exceptions import UserError
+
 from odoo.addons.procurement_auto_create_group.tests.test_auto_create import (
     TestProcurementAutoCreateGroup,
 )
@@ -108,3 +111,33 @@ class TestProcurementAutoCreateGroupByProduct(TestProcurementAutoCreateGroup):
             self.prod_auto_push,
             "Procurement Group product missing.",
         )
+
+    def test_concurrent_procurement_group_creation(self):
+        """Check for the same product, no multiple procurement groups are created."""
+        rule = self.pull_push_rule_auto
+        rule.auto_create_group_by_product = True
+        product = self.prod_auto_pull_push
+        # Check that no procurement group exist for the product
+        self.assertFalse(product.auto_create_procurement_group_ids)
+        # So create one and an adisory lock will be created
+        rule._get_auto_procurement_group(product)
+        self.assertTrue(product.auto_create_procurement_group_ids)
+        # Use another transaction to test the advisory lock
+        with registry(self.env.cr.dbname).cursor() as new_cr:
+            new_env = api.Environment(new_cr, self.env.uid, self.env.context)
+            new_env["product.product"].invalidate_cache(
+                ["auto_create_procurement_group_ids"],
+                [
+                    product.id,
+                ],
+            )
+            rule2 = new_env["stock.rule"].browse(rule.id)
+            rule2.auto_create_group_by_product = True
+            product2 = new_env["product.product"].browse(product.id)
+            self.assertFalse(product2.auto_create_procurement_group_ids)
+            exception_msg = (
+                f"The auto procurement group for product {product2.name} "
+                "is already being created by someone else."
+            )
+            with self.assertRaisesRegex(UserError, exception_msg):
+                rule2._get_auto_procurement_group(product2)
