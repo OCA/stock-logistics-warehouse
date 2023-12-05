@@ -2,7 +2,6 @@
 # @author: Simone Orsi <simone.orsi@camptocamp.com>
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl)
 
-import unicodedata
 from collections import namedtuple
 
 from odoo import api, models
@@ -12,8 +11,6 @@ from odoo.addons.base_sparse_field.models.fields import Serialized
 
 # Unify records as we mix up w/ UoM
 Packaging = namedtuple("Packaging", "id name qty barcode is_unit")
-
-NO_BREAK_SPACE_CHAR = unicodedata.lookup("NO-BREAK SPACE")
 
 
 class Product(models.Model):
@@ -209,7 +206,7 @@ class Product(models.Model):
             as_string.append(f"{unit_qty} {self.uom_id.name}")
         # We want to avoid line break here as this string
         # can be used by reports
-        res = f",{NO_BREAK_SPACE_CHAR}".join(as_string)
+        res = ",\N{NO-BREAK SPACE}".join(as_string)
         if include_total_units and not has_only_units:
             res += " " + self._qty_by_packaging_total_units(prod_qty)
         return res
