@@ -4,9 +4,9 @@ from odoo import api, fields, models
 from odoo.tools.float_utils import float_round
 
 
-class StockProductSecondaryUnit(models.AbstractModel):
-    _name = "stock.product.secondary.unit"
-    _description = "Stock Product Secondary Unit"
+class StockProductSecondaryUnitMixin(models.AbstractModel):
+    _name = "stock.product.secondary.unit.mixin"
+    _description = "Stock Product Secondary Unit Mixin"
 
     secondary_unit_qty_available = fields.Float(
         string="Quantity On Hand (2Unit)",
@@ -26,23 +26,3 @@ class StockProductSecondaryUnit(models.AbstractModel):
                 product.secondary_unit_qty_available = float_round(
                     qty, precision_rounding=product.uom_id.rounding
                 )
-
-
-class ProductTemplate(models.Model):
-    _inherit = ["product.template", "stock.product.secondary.unit"]
-    _name = "product.template"
-
-    stock_secondary_uom_id = fields.Many2one(
-        comodel_name="product.secondary.unit", string="Second unit for inventory"
-    )
-
-
-class ProductProduct(models.Model):
-    _inherit = ["product.product", "stock.product.secondary.unit"]
-    _name = "product.product"
-
-    stock_secondary_uom_id = fields.Many2one(
-        comodel_name="product.secondary.unit",
-        string="Second unit for inventory",
-        related="product_tmpl_id.stock_secondary_uom_id",
-    )

@@ -1,7 +1,6 @@
 # Copyright 2018 Tecnativa - Sergio Teruel
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 from odoo import api, fields, models
-from odoo.tools.float_utils import float_round
 
 
 class StockMove(models.Model):
@@ -24,17 +23,18 @@ class StockMove(models.Model):
     def onchange_product_uom_for_secondary(self):
         self._onchange_helper_product_uom_for_secondary()
 
-    def _merge_moves_fields(self):
-        res = super()._merge_moves_fields()
-        res["secondary_uom_qty"] = sum(self.mapped("secondary_uom_qty"))
-        return res
-
     @api.model
     def _prepare_merge_moves_distinct_fields(self):
         """Don't merge moves with distinct secondary units"""
         distinct_fields = super()._prepare_merge_moves_distinct_fields()
         distinct_fields += ["secondary_uom_id"]
         return distinct_fields
+
+    def _prepare_extra_move_vals(self, qty):
+        vals = super()._prepare_extra_move_vals(qty)
+        if self.secondary_uom_id:
+            vals["secondary_uom_id"] = self.secondary_uom_id.id
+        return vals
 
 
 class StockMoveLine(models.Model):
@@ -48,16 +48,7 @@ class StockMoveLine(models.Model):
     def create(self, vals):
         move = self.env["stock.move"].browse(vals.get("move_id", False))
         if move.secondary_uom_id:
-            uom = self.env["uom.uom"].browse(vals["product_uom_id"])
-            factor = move.secondary_uom_id.factor * uom.factor
-            move_line_qty = vals.get("product_uom_qty", vals.get("qty_done", 0.0))
-            qty = float_round(
-                move_line_qty / (factor or 1.0),
-                precision_rounding=move.secondary_uom_id.uom_id.rounding,
-            )
-            vals.update(
-                {"secondary_uom_qty": qty, "secondary_uom_id": move.secondary_uom_id.id}
-            )
+            vals["secondary_uom_id"] = move.secondary_uom_id.id
         return super().create(vals)
 
     @api.depends("secondary_uom_id", "secondary_uom_qty")
