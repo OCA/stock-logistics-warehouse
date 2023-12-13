@@ -51,7 +51,7 @@ msgstr "Plantilla de producto"
 #. module: stock_secondary_unit
 #: model:ir.model.fields,field_description:stock_secondary_unit.field_product_product__secondary_unit_qty_available
 #: model:ir.model.fields,field_description:stock_secondary_unit.field_product_template__secondary_unit_qty_available
-#: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_product_secondary_unit__secondary_unit_qty_available
+#: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_product_secondary_unit_mixin__secondary_unit_qty_available
 msgid "Quantity On Hand (2Unit)"
 msgstr "Cantidad a mano (2Ud.)"
 
@@ -84,9 +84,9 @@ msgid "Stock Move"
 msgstr "Movimiento de existencias"
 
 #. module: stock_secondary_unit
-#: model:ir.model,name:stock_secondary_unit.model_stock_product_secondary_unit
-msgid "Stock Product Secondary Unit"
-msgstr "Existencias de unidad secundaria del producto"
+#: model:ir.model,name:stock_secondary_unit.model_stock_product_secondary_unit_mixin
+msgid "Stock Product Secondary Unit Mixin"
+msgstr ""
 
 #. module: stock_secondary_unit
 #: model:ir.model.fields,help:stock_secondary_unit.field_stock_move__product_uom_qty
@@ -105,6 +105,9 @@ msgstr ""
 "está previsto mover. La reducción de esta cantidad no genera un pedido "
 "pendiente. La modificación de esta cantidad en los movimientos asignados "
 "afecta a la reserva de productos, y debe hacerse con cuidado."
+
+#~ msgid "Stock Product Secondary Unit"
+#~ msgstr "Existencias de unidad secundaria del producto"
 
 #~ msgid "Display Name"
 #~ msgstr "Mostrar Nombre"
