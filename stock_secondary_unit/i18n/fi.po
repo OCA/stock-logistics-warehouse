@@ -50,7 +50,7 @@ msgstr "Tuotemalli"
 #. module: stock_secondary_unit
 #: model:ir.model.fields,field_description:stock_secondary_unit.field_product_product__secondary_unit_qty_available
 #: model:ir.model.fields,field_description:stock_secondary_unit.field_product_template__secondary_unit_qty_available
-#: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_product_secondary_unit__secondary_unit_qty_available
+#: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_product_secondary_unit_mixin__secondary_unit_qty_available
 msgid "Quantity On Hand (2Unit)"
 msgstr "Varastossa (2.yks.)"
 
@@ -83,9 +83,9 @@ msgid "Stock Move"
 msgstr "Varastosiirto"
 
 #. module: stock_secondary_unit
-#: model:ir.model,name:stock_secondary_unit.model_stock_product_secondary_unit
-msgid "Stock Product Secondary Unit"
-msgstr "Tuotteen toinen varastointiyksikkö"
+#: model:ir.model,name:stock_secondary_unit.model_stock_product_secondary_unit_mixin
+msgid "Stock Product Secondary Unit Mixin"
+msgstr ""
 
 #. module: stock_secondary_unit
 #: model:ir.model.fields,help:stock_secondary_unit.field_stock_move__product_uom_qty
@@ -104,3 +104,6 @@ msgstr ""
 "tarkoitus siirtää. Tämän määrän alentaminen ei synny takaisinkytkentää. "
 "Tämän määrän muuttaminen määrättyihin liikkeisiin vaikuttaa tuotteen "
 "varaamiseen, ja se on tehtävä huolellisesti."
+
+#~ msgid "Stock Product Secondary Unit"
+#~ msgstr "Tuotteen toinen varastointiyksikkö"
