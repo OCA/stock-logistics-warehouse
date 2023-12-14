@@ -11,3 +11,5 @@
 - Iryna Vyshnevska \<<i.vyshnevska@mobilunity.com>\>
 - Alexei Rivera \<<arivera@archeti.com>\>
 - Abraham Anes \<<abraham@studio73.es>\>
+- Quartile \<<https://www.quartile.co>\>
+  - Aung Ko Ko Lin
