@@ -1,0 +1,137 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_request_tier_validation
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#. module: stock_request_tier_validation
+#: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request__can_review
+#: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request_order__can_review
+msgid "Can Review"
+msgstr ""
+
+#. module: stock_request_tier_validation
+#: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request__has_comment
+#: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request_order__has_comment
+msgid "Has Comment"
+msgstr ""
+
+#. module: stock_request_tier_validation
+#: model:tier.definition,name:stock_request_tier_validation.stock_request_default_tier_definition
+#: model:tier.definition,name:stock_request_tier_validation.stock_request_order_default_tier_definition
+msgid "Manager review"
+msgstr ""
+
+#. module: stock_request_tier_validation
+#: model_terms:ir.ui.view,arch_db:stock_request_tier_validation.view_stock_request_order_filter
+msgid "My Stock Request Orders to review"
+msgstr ""
+
+#. module: stock_request_tier_validation
+#: model_terms:ir.ui.view,arch_db:stock_request_tier_validation.view_stock_request_filter
+msgid "My Stock Requests to review"
+msgstr ""
+
+#. module: stock_request_tier_validation
+#: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request__need_validation
+#: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request_order__need_validation
+msgid "Need Validation"
+msgstr ""
+
+#. module: stock_request_tier_validation
+#: model_terms:ir.ui.view,arch_db:stock_request_tier_validation.view_stock_request_filter
+msgid "Need actions"
+msgstr ""
+
+#. module: stock_request_tier_validation
+#: model_terms:ir.ui.view,arch_db:stock_request_tier_validation.view_stock_request_filter
+#: model_terms:ir.ui.view,arch_db:stock_request_tier_validation.view_stock_request_order_filter
+msgid "Needs my Review"
+msgstr ""
+
+#. module: stock_request_tier_validation
+#: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request__next_review
+#: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request_order__next_review
+msgid "Next Review"
+msgstr ""
+
+#. module: stock_request_tier_validation
+#: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request__rejected
+#: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request_order__rejected
+msgid "Rejected"
+msgstr ""
+
+#. module: stock_request_tier_validation
+#: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request__rejected_message
+#: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request_order__rejected_message
+msgid "Rejected Message"
+msgstr ""
+
+#. module: stock_request_tier_validation
+#: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request__reviewer_ids
+#: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request_order__reviewer_ids
+msgid "Reviewers"
+msgstr ""
+
+#. module: stock_request_tier_validation
+#: model:ir.model,name:stock_request_tier_validation.model_stock_request
+msgid "Stock Request"
+msgstr ""
+
+#. module: stock_request_tier_validation
+#: model:ir.model,name:stock_request_tier_validation.model_stock_request_order
+msgid "Stock Request Order"
+msgstr ""
+
+#. module: stock_request_tier_validation
+#: model_terms:ir.ui.view,arch_db:stock_request_tier_validation.view_stock_request_filter
+#: model_terms:ir.ui.view,arch_db:stock_request_tier_validation.view_stock_request_order_filter
+msgid "Stock Requests validated and ready to be confirmed"
+msgstr ""
+
+#. module: stock_request_tier_validation
+#: model:ir.model,name:stock_request_tier_validation.model_tier_definition
+msgid "Tier Definition"
+msgstr ""
+
+#. module: stock_request_tier_validation
+#: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request__to_validate_message
+#: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request_order__to_validate_message
+msgid "To Validate Message"
+msgstr ""
+
+#. module: stock_request_tier_validation
+#: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request__validated
+#: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request_order__validated
+#: model_terms:ir.ui.view,arch_db:stock_request_tier_validation.view_stock_request_filter
+#: model_terms:ir.ui.view,arch_db:stock_request_tier_validation.view_stock_request_order_filter
+msgid "Validated"
+msgstr ""
+
+#. module: stock_request_tier_validation
+#: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request__validated_message
+#: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request_order__validated_message
+msgid "Validated Message"
+msgstr ""
+
+#. module: stock_request_tier_validation
+#: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request__validation_status
+#: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request_order__validation_status
+msgid "Validation Status"
+msgstr ""
+
+#. module: stock_request_tier_validation
+#: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request__review_ids
+#: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request_order__review_ids
+msgid "Validations"
+msgstr ""
