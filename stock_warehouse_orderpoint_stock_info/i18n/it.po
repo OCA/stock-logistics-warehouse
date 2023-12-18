@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-01-16 14:36+0000\n"
-"PO-Revision-Date: 2023-11-01 14:36+0000\n"
+"PO-Revision-Date: 2023-12-18 10:36+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -34,7 +34,7 @@ msgstr "In arrivo nell'ubicazione"
 #. module: stock_warehouse_orderpoint_stock_info
 #: model:ir.model,name:stock_warehouse_orderpoint_stock_info.model_stock_warehouse_orderpoint
 msgid "Minimum Inventory Rule"
-msgstr "Regola Inventario Minimo"
+msgstr "Regola giacenza minima"
 
 #. module: stock_warehouse_orderpoint_stock_info
 #: model:ir.model.fields,field_description:stock_warehouse_orderpoint_stock_info.field_stock_warehouse_orderpoint__outgoing_location_qty
