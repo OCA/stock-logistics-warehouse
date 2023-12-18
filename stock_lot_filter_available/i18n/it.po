@@ -6,31 +6,33 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2023-12-18 09:34+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: stock_lot_filter_available
 #: model:ir.model,name:stock_lot_filter_available.model_stock_production_lot
 msgid "Lot/Serial"
-msgstr ""
+msgstr "Lotto/seriale"
 
 #. module: stock_lot_filter_available
 #: model_terms:ir.ui.view,arch_db:stock_lot_filter_available.search_product_lot_filter
 msgid "On hand"
-msgstr ""
+msgstr "A disposizione"
 
 #. module: stock_lot_filter_available
 #: model:ir.model.fields,field_description:stock_lot_filter_available.field_stock_production_lot__product_qty
 msgid "Quantity"
-msgstr ""
+msgstr "Quantità"
 
 #. module: stock_lot_filter_available
 #: code:addons/stock_lot_filter_available/models/stock_production_lot.py:0
 #, python-format
 msgid "Unsupported search"
-msgstr ""
+msgstr "Ricerca nn supportata"
