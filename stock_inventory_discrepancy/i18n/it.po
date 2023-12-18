@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-18 04:05+0000\n"
-"PO-Revision-Date: 2023-12-13 15:34+0000\n"
+"PO-Revision-Date: 2023-12-18 09:34+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -68,44 +68,44 @@ msgstr "Percentuale differenza (%)"
 #. module: stock_inventory_discrepancy
 #: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_confirm_discrepancy_wiz__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nome visualizzato"
 
 #. module: stock_inventory_discrepancy
 #: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_stock_quant__has_over_discrepancy
 msgid "Has Over Discrepancy"
-msgstr ""
+msgstr "Ha una discrepanza eccessiva"
 
 #. module: stock_inventory_discrepancy
 #: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_confirm_discrepancy_wiz__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: stock_inventory_discrepancy
 #: model:ir.model,name:stock_inventory_discrepancy.model_stock_location
 msgid "Inventory Locations"
-msgstr ""
+msgstr "Ubicazioni di inventario"
 
 #. module: stock_inventory_discrepancy
 #: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_confirm_discrepancy_wiz____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Ultima modifica il"
 
 #. module: stock_inventory_discrepancy
 #: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_confirm_discrepancy_wiz__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Ultimo aggiornamento di"
 
 #. module: stock_inventory_discrepancy
 #: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_confirm_discrepancy_wiz__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Ultimo aggiornamento il"
 
 #. module: stock_inventory_discrepancy
 #: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_stock_location__discrepancy_threshold
 #: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_stock_warehouse__discrepancy_threshold
 #: model:ir.model.fields,help:stock_inventory_discrepancy.field_stock_quant__discrepancy_threshold
 msgid "Maximum Discrepancy Rate Threshold"
-msgstr ""
+msgstr "Soglia indice differenza massimo"
 
 #. module: stock_inventory_discrepancy
 #: model:ir.model.fields,help:stock_inventory_discrepancy.field_stock_warehouse__discrepancy_threshold
@@ -113,6 +113,9 @@ msgid ""
 "Maximum Discrepancy Rate allowed for any product when doing an Inventory "
 "Adjustment. Threshold defined in involved Location has preference."
 msgstr ""
+"Indice differenza massima consentita per ogni prodotto nelle rettifiche di "
+"inventario. Le soglie definite nelle ubicazioni coinvolte hanno la "
+"precedenza."
 
 #. module: stock_inventory_discrepancy
 #: model:ir.model.fields,help:stock_inventory_discrepancy.field_stock_location__discrepancy_threshold
