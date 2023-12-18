@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-10-29 08:28+0000\n"
+"PO-Revision-Date: 2023-12-18 09:36+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -85,7 +85,7 @@ msgstr "Richiesta di magazzino"
 #. module: stock_request_purchase
 #: model:ir.model.fields,field_description:stock_request_purchase.field_purchase_order__stock_request_count
 msgid "Stock Request #"
-msgstr "Richiesta di magazzino #"
+msgstr "N° richieste di magazzino"
 
 #. module: stock_request_purchase
 #: model:ir.model,name:stock_request_purchase.model_stock_request_order
@@ -121,4 +121,5 @@ msgstr ""
 msgid ""
 "You have linked to a purchase order line that belongs to another company."
 msgstr ""
-"Hai collegato una riga ordine di acquisto che appartiene ad un'altra azienda."
+"È stata collegata una riga ordine di acquisto che appartiene ad un'altra "
+"azienda."
