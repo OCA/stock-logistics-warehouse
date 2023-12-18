@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-05-15 19:34+0000\n"
-"Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
+"PO-Revision-Date: 2023-12-18 09:36+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.14.1\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: stock_request_mrp
 #: model:ir.model.fields,field_description:stock_request_mrp.field_mrp_production__display_name
@@ -71,7 +71,7 @@ msgstr "Richiesta di magazzino"
 #. module: stock_request_mrp
 #: model:ir.model.fields,field_description:stock_request_mrp.field_mrp_production__stock_request_count
 msgid "Stock Request #"
-msgstr "Richiesta di magazzino #"
+msgstr "N° richieste di magazzino"
 
 #. module: stock_request_mrp
 #: model:ir.model,name:stock_request_mrp.model_stock_request_order
@@ -94,4 +94,4 @@ msgstr "Regola di giacenza"
 #, python-format
 msgid "You have linked to a Manufacture Order that belongs to another company."
 msgstr ""
-"Hai collegato un ordine di produzione che appartiene ad un'altra azienda."
+"È stato collegato un ordine di produzione che appartiene ad un'altra azienda."
