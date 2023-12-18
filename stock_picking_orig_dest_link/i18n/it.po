@@ -6,25 +6,27 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2023-12-18 09:34+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: stock_picking_orig_dest_link
 #: model:ir.model.fields,field_description:stock_picking_orig_dest_link.field_stock_picking__dest_picking_ids
 msgid "Destination Transfer/s"
-msgstr ""
+msgstr "Destinazione trasferimento"
 
 #. module: stock_picking_orig_dest_link
 #: model:ir.model.fields,field_description:stock_picking_orig_dest_link.field_stock_picking__orig_picking_ids
 msgid "Origin Transfer/s"
-msgstr ""
+msgstr "Origine trasferimento"
 
 #. module: stock_picking_orig_dest_link
 #: model:ir.model,name:stock_picking_orig_dest_link.model_stock_picking
 msgid "Transfer"
-msgstr ""
+msgstr "Trasferimento"
