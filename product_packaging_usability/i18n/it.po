@@ -6,35 +6,37 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2023-12-20 13:37+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: product_packaging_usability
 #: model_terms:ir.ui.view,arch_db:product_packaging_usability.product_packaging_usability_search
 msgid "Group By"
-msgstr ""
+msgstr "Raggruppa per"
 
 #. module: product_packaging_usability
 #: model_terms:ir.ui.view,arch_db:product_packaging_usability.product_packaging_usability_search
 msgid "Name"
-msgstr ""
+msgstr "Nome"
 
 #. module: product_packaging_usability
 #: model:ir.model,name:product_packaging_usability.model_product_packaging
 msgid "Product Packaging"
-msgstr ""
+msgstr "Imballaggio prodotto"
 
 #. module: product_packaging_usability
 #: model_terms:ir.ui.view,arch_db:product_packaging_usability.product_packaging_usability_search
 msgid "Qty"
-msgstr ""
+msgstr "Q.tà"
 
 #. module: product_packaging_usability
 #: model_terms:ir.ui.view,arch_db:product_packaging_usability.product_packaging_tree_view2
 msgid "See product's packages"
-msgstr ""
+msgstr "Visualizza imballaggio prodotto"
