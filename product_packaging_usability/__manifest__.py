@@ -4,7 +4,7 @@
 {
     "name": "Product Packaging Usability",
     "summary": "Add sugar to Product Packaging",
-    "version": "16.0.1.0.0",
+    "version": "16.0.1.0.1",
     "author": "Akretion, Odoo Community Association (OCA)",
     "maintainer": ["bealdav"],
     "website": "https://github.com/OCA/stock-logistics-warehouse",
