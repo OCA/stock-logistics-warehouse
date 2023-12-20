@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+<record id="product_packaging_usability_search" model="ir.ui.view">
+    <field name="model">product.packaging</field>
+    <field name="arch" type="xml">
+        <search>
+            <field name="product_id" filter_domain="[('product_id', 'ilike', self)]" />
+            <field
+                    name="name"
+                    string="Name"
+                    filter_domain="[('name', 'ilike', self)]"
+                />
+            <separator />
+            <group expand="0" string="Group By">
+                <filter
+                        string="Qty"
+                        name="qty"
+                        domain="[]"
+                        context="{'group_by': 'qty'}"
+                    />
+            </group>
+        </search>
+    </field>
+</record>
+
+<record id="product_packaging_tree_view2" model="ir.ui.view">
+    <field name="model">product.packaging</field>
+    <field name="inherit_id" ref="product.product_packaging_tree_view2" />
+    <field name="arch" type="xml">
+        <xpath expr="//tree/field[@name='qty']" position="before">
+            <button
+                    name="ui_goto_packaging_view"
+                    string="📦"
+                    type="object"
+                    help="See product's packages"
+                />
+        </xpath>
+    </field>
+</record>
+
+</odoo>
