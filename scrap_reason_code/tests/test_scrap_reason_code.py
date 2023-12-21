@@ -106,17 +106,17 @@ class StockScrap(TransactionCase):
         scrapped_move = picking.move_ids.filtered(lambda m: m.state == "done")
         self.assertTrue(scrapped_move, "No scrapped move created.")
         self.assertEqual(
-            scrapped_move.scrap_ids.ids, [scrap.id], "Wrong scrap linked to the move."
+            scrapped_move.scrap_id.id, scrap.id, "Wrong scrap linked to the move."
         )
         self.assertEqual(
             scrap.scrap_qty,
             5,
             "Scrap quantity has been modified and is not " "correct anymore.",
         )
-        move = scrap.move_id
-        self.assertEqual(move.reason_code_id.id, self.reason_code.id)
+        moves = scrap.move_ids
+        self.assertEqual(moves.mapped("reason_code_id.id"), [self.reason_code.id])
 
-        scrapped_move.quantity_done = 8
+        scrapped_move.quantity = 8
         self.assertEqual(scrap.scrap_qty, 8, "Scrap quantity is not updated.")
 
     def test_scrap_reason_code_write(self):
@@ -170,17 +170,17 @@ class StockScrap(TransactionCase):
         scrapped_move = picking2.move_ids.filtered(lambda m: m.state == "done")
         self.assertTrue(scrapped_move, "No scrapped move created.")
         self.assertEqual(
-            scrapped_move.scrap_ids.ids, [scrap2.id], "Wrong scrap linked to the move."
+            scrapped_move.scrap_id.id, scrap2.id, "Wrong scrap linked to the move."
         )
         self.assertEqual(
             scrap2.scrap_qty,
             5,
             "Scrap quantity has been modified and is not " "correct anymore.",
         )
-        move = scrap2.move_id
-        self.assertEqual(move.reason_code_id.id, self.reason_code.id)
+        moves = scrap2.move_ids
+        self.assertEqual(moves.mapped("reason_code_id.id"), [self.reason_code.id])
 
-        scrapped_move.quantity_done = 8
+        scrapped_move.quantity = 8
         self.assertEqual(scrap2.scrap_qty, 8, "Scrap quantity is not updated.")
 
     def test_allowed_reason_codes(self):

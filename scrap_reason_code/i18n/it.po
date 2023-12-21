@@ -67,11 +67,6 @@ msgstr ""
 "tutti i prodotti."
 
 #. module: scrap_reason_code
-#: model:ir.model.fields,field_description:scrap_reason_code.field_scrap_reason_code____last_update
-msgid "Last Modified on"
-msgstr "Ultima modifica il"
-
-#. module: scrap_reason_code
 #: model:ir.model.fields,field_description:scrap_reason_code.field_scrap_reason_code__write_uid
 msgid "Last Updated by"
 msgstr "Ultimo aggiornamento di"
@@ -119,3 +114,6 @@ msgstr "Movimento di magazzino"
 msgid "The selected reason code is not allowed for this product category."
 msgstr ""
 "Il codice causale selezionato non è consentito per questa categoria prodotto."
+
+#~ msgid "Last Modified on"
+#~ msgstr "Ultima modifica il"
