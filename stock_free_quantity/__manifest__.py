@@ -2,7 +2,7 @@
 
 {
     "name": "Stock Free Quantity",
-    "version": "14.0.1.1.0",
+    "version": "14.0.1.2.0",
     "author": "akretion,Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "development_status": "Production/Stable",
