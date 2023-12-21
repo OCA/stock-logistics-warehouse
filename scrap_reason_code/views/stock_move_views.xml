@@ -8,10 +8,7 @@
         <field name="arch" type="xml">
             <xpath expr="//group[@name='origin_grp']" position='after'>
                 <field name="scrapped" invisible="1" />
-                <group
-                    string="Reason Code"
-                    attrs="{'invisible': [('scrapped', '!=', True)]}"
-                >
+                <group string="Reason Code" invisible="not scrapped">
                     <field name="reason_code_id" />
                 </group>
             </xpath>

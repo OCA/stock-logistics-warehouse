@@ -8,8 +8,8 @@
         <field name="inherit_id" ref="stock.stock_scrap_form_view" />
         <field name="arch" type="xml">
             <xpath expr="//group/group" position='inside'>
-                <field name="reason_code_id" />
-                <field name="allowed_reason_code_ids" invisible="1" />
+                <field name="reason_code_id" readonly="state == 'done'" />
+                <field name="allowed_reason_code_ids" invisible="True" />
             </xpath>
         </field>
     </record>
@@ -19,8 +19,8 @@
         <field name="inherit_id" ref="stock.stock_scrap_tree_view" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='product_uom_id']" position='after'>
-                <field name="reason_code_id" />
-                <field name="allowed_reason_code_ids" invisible="1" />
+                <field name="reason_code_id" readonly="state == 'done'" />
+                <field name="allowed_reason_code_ids" invisible="True" />
             </xpath>
         </field>
     </record>
@@ -30,8 +30,8 @@
         <field name="inherit_id" ref="stock.stock_scrap_form_view2" />
         <field name="arch" type="xml">
             <xpath expr="//group/group" position='inside'>
-                <field name="reason_code_id" />
-                <field name="allowed_reason_code_ids" invisible="1" />
+                <field name="reason_code_id" readonly="state == 'done'" />
+                <field name="allowed_reason_code_ids" invisible="True" />
             </xpath>
         </field>
     </record>

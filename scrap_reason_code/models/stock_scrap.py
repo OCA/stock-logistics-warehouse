@@ -12,7 +12,6 @@ class StockScrap(models.Model):
 
     reason_code_id = fields.Many2one(
         comodel_name="scrap.reason.code",
-        states={"done": [("readonly", True)]},
         domain="[('id', 'in', allowed_reason_code_ids)]",
     )
     allowed_reason_code_ids = fields.Many2many(
