@@ -113,6 +113,7 @@ addon | version | maintainers | summary
 [stock_reserve](stock_reserve/) | 13.0.1.0.0 |  | Stock reservations on products
 [stock_reserve_rule](stock_reserve_rule/) | 13.0.1.5.0 |  | Configure reservation rules by location
 [stock_reserve_sale](stock_reserve_sale/) | 13.0.1.1.0 |  | Stock Reserve Sales
+[stock_reserve_sale_mrp](stock_reserve_sale_mrp/) | 13.0.1.1.0 |  | Stock Reserve Sales MRP
 [stock_secondary_unit](stock_secondary_unit/) | 13.0.2.1.1 |  | Get product quantities in a secondary unit
 [stock_vertical_lift](stock_vertical_lift/) | 13.0.1.3.1 |  | Provides the core for integration with Vertical Lifts
 [stock_vertical_lift_empty_tray_check](stock_vertical_lift_empty_tray_check/) | 13.0.1.1.0 |  | Checks if the tray is actually empty.
