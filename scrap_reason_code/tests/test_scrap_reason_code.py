@@ -9,7 +9,7 @@ from odoo.tests.common import TransactionCase
 
 class StockScrap(TransactionCase):
     def setUp(self):
-        super(StockScrap, self).setUp()
+        super().setUp()
 
         self.stock_location = self.env.ref("stock.stock_location_stock")
         self.customer_location = self.env.ref("stock.stock_location_customers")
