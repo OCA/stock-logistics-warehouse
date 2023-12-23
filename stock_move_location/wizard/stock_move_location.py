@@ -157,7 +157,7 @@ class StockMoveLocationWizard(models.TransientModel):
     def _get_locations_domain(self):
         return [
             "|",
-            ("company_id", "=", self.env.user.company_id.id),
+            ("company_id", "=", self.env.company.id),
             ("company_id", "=", False),
         ]
 
