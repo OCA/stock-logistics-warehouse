@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-10 03:40+0000\n"
-"PO-Revision-Date: 2022-07-16 18:06+0000\n"
+"PO-Revision-Date: 2023-12-24 17:33+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -17,12 +17,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.3.2\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: stock_inventory_exclude_sublocation
 #: model:ir.model.fields,field_description:stock_inventory_exclude_sublocation.field_stock_inventory__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nome visualizzato"
 
 #. module: stock_inventory_exclude_sublocation
 #: model:ir.model.fields,field_description:stock_inventory_exclude_sublocation.field_stock_inventory__exclude_sublocation
@@ -32,7 +32,7 @@ msgstr "Esclude sottoubicazioni"
 #. module: stock_inventory_exclude_sublocation
 #: model:ir.model.fields,field_description:stock_inventory_exclude_sublocation.field_stock_inventory__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: stock_inventory_exclude_sublocation
 #: model:ir.model,name:stock_inventory_exclude_sublocation.model_stock_inventory
@@ -42,4 +42,4 @@ msgstr "Inventario"
 #. module: stock_inventory_exclude_sublocation
 #: model:ir.model.fields,field_description:stock_inventory_exclude_sublocation.field_stock_inventory____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Ultima modifica il"
