@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-03-02 03:44+0000\n"
-"PO-Revision-Date: 2023-12-19 17:33+0000\n"
+"PO-Revision-Date: 2023-12-24 18:39+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -336,7 +336,7 @@ msgstr "Elementi"
 #. module: stock_request
 #: model_terms:ir.ui.view,arch_db:stock_request.res_config_settings_view_form
 msgid "Kanban"
-msgstr ""
+msgstr "Kanban"
 
 #. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request____last_update
