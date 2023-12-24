@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-01-04 01:47+0000\n"
-"PO-Revision-Date: 2023-11-30 22:36+0000\n"
+"PO-Revision-Date: 2023-12-24 19:45+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -136,9 +136,8 @@ msgstr "Valuta"
 
 #. module: stock_cycle_count
 #: view:website:stock_cycle_count.stock_location_accuracy
-#, fuzzy
 msgid "Current Accuracy:"
-msgstr "Valuta"
+msgstr "Valuta:"
 
 #. module: stock_cycle_count
 #: model:ir.actions.report.xml,name:stock_cycle_count.action_report_stock_cycle_count
@@ -427,9 +426,8 @@ msgstr "Ubicazione"
 
 #. module: stock_cycle_count
 #: view:website:stock_cycle_count.stock_location_accuracy
-#, fuzzy
 msgid "Location:"
-msgstr "Posizione"
+msgstr "Posizione:"
 
 #. module: stock_cycle_count
 #: field:stock.cycle.count,message_ids:0
