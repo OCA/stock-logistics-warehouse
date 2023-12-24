@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-09-03 06:29+0000\n"
-"Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
+"PO-Revision-Date: 2023-12-24 17:33+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
@@ -76,6 +76,16 @@ msgid ""
 "matches a packaging quantity (do not open boxes).\n"
 "Full Bin: take goods from a location if it reserves all its content"
 msgstr ""
+"Definisce se e come la merce viene prelevata dalle ubicazioni. Predefinito: "
+"preleva la prima con la strategia di prelievo configurata (FIFO, FEFO, ...)."
+"\n"
+"Contenitori vuoti: preleva la merce da una ubicazione solo se il contenitore "
+"rimane vuoto.\n"
+"Imballo completo: preleva la merce da una ubicazione solo se la quantità "
+"ubicazione corrisponde una quantità imballaggio (non si aprono contenitori)."
+"\n"
+"Contenotore completo: preleva la merce da una ubicazione se prenota tutto il "
+"contenuto"
 
 #. module: stock_reserve_rule
 #: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule__name
@@ -116,7 +126,7 @@ msgstr ""
 #. module: stock_reserve_rule
 #: model:ir.model.fields.selection,name:stock_reserve_rule.selection__stock_reserve_rule_removal__removal_strategy__full_bin
 msgid "Full Bin"
-msgstr ""
+msgstr "Contenitore completo"
 
 #. module: stock_reserve_rule
 #: model:ir.model.fields.selection,name:stock_reserve_rule.selection__stock_reserve_rule_removal__removal_strategy__packaging
