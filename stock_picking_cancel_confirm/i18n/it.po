@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-11-23 19:35+0000\n"
+"PO-Revision-Date: 2023-12-31 20:35+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -19,13 +19,12 @@ msgstr ""
 #. module: stock_picking_cancel_confirm
 #: model:ir.model.fields,help:stock_picking_cancel_confirm.field_stock_picking__cancel_confirm
 msgid "A flag signify that this document is confirmed for cancellation"
-msgstr ""
-"Una spunta indica che questo documento è confermato per la cancellazione"
+msgstr "Una spunta indica che questo documento è confermato per l'annullamento"
 
 #. module: stock_picking_cancel_confirm
 #: model:ir.model.fields,help:stock_picking_cancel_confirm.field_stock_picking__cancel_reason
 msgid "An optional cancel reason"
-msgstr "Un motivo di cancellazione opzionale"
+msgstr "Un motivo di annullamento opzionale"
 
 #. module: stock_picking_cancel_confirm
 #: model:ir.model.fields,field_description:stock_picking_cancel_confirm.field_stock_picking__cancel_confirm
