@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-11-30 03:53+0000\n"
-"PO-Revision-Date: 2023-12-20 15:34+0000\n"
+"PO-Revision-Date: 2024-01-05 09:38+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -267,7 +267,7 @@ msgstr "Descrizione"
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__description_picking
 msgid "Description of Picking"
-msgstr "Descrizine del prelievo"
+msgstr "Descrizione del prelievo"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__partner_id
@@ -402,7 +402,7 @@ msgid ""
 "If this shipment was split, then this field links to the shipment which "
 "contains the already processed part."
 msgstr ""
-"Se questa spedizine è stata suddivisa, allora il campo collega alla "
+"Se questa spedizione è stata suddivisa, allora il campo collega alla "
 "spedizione che contiene la parte già elaborata."
 
 #. module: stock_reserve
@@ -653,7 +653,7 @@ msgstr "Prodotto con tracciamento"
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__raw_material_production_id
 msgid "Production Order for components"
-msgstr "Ordine di produzine per componenti"
+msgstr "Ordine di produzione per componenti"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__production_id
