@@ -1,1 +1,1 @@
-This module allows to set justification on inventories
+This module allows to set justifications on inventories.
