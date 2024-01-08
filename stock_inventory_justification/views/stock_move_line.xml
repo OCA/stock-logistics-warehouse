@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record model="ir.ui.view" id="stock_move_line_form_view">
+        <field name="model">stock.move.line</field>
+        <field name="inherit_id" ref="stock.view_move_line_form" />
+        <field name="arch" type="xml">
+            <field name="product_uom_category_id" position="after">
+                <field name="is_inventory" invisible="1" />
+            </field>
+            <field name="product_id" position="after">
+                <field
+                    name="inventory_justification_ids"
+                    widget="many2many_tags"
+                    attrs="{'invisible': [('is_inventory', '=', False)]}"
+                />
+            </field>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="stock_move_line_tree_view">
+        <field name="model">stock.move.line</field>
+        <field name="inherit_id" ref="stock.view_move_line_tree" />
+        <field name="arch" type="xml">
+            <field name="location_dest_usage" position="after">
+                <field name="is_inventory" invisible="1" />
+            </field>
+            <field name="product_uom_id" position="after">
+                <field
+                    name="inventory_justification_ids"
+                    widget="many2many_tags"
+                    attrs="{'invisible': [('is_inventory', '=', False)]}"
+                />
+            </field>
+        </field>
+    </record>
+</odoo>
