@@ -8,5 +8,6 @@ class StockInventory(models.Model):
     _inherit = "stock.inventory"
 
     justification_ids = fields.Many2many(
-        string="Justifications", comodel_name="stock.inventory.justification",
+        string="Justifications",
+        comodel_name="stock.inventory.justification",
     )
