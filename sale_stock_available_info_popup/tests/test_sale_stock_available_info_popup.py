@@ -4,11 +4,11 @@
 from datetime import timedelta
 
 from odoo.fields import Datetime
-from odoo.tests import Form, common, new_test_user
-from odoo.tests.common import users
+from odoo.tests import Form, new_test_user
+from odoo.tests.common import SavepointCase, users
 
 
-class SaleStockAvailableInfoPopup(common.TransactionCase):
+class SaleStockAvailableInfoPopup(SavepointCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
