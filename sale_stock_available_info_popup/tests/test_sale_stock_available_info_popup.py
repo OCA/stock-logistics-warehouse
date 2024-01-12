@@ -18,7 +18,7 @@ class SaleStockAvailableInfoPopup(SavepointCase):
             groups="sales_team.group_sale_salesman",
         )
         cls.product = cls.env["product.product"].create(
-            {"name": "Storable product", "detailed_type": "product"}
+            {"name": "Storable product", "type": "product"}
         )
         cls.partner = cls.env["res.partner"].create({"name": "Mr. Odoo"})
         cls.env["stock.quant"].create(
