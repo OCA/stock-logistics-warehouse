@@ -201,7 +201,7 @@ class Product(models.Model):
             as_string.append(f"{unit_qty} {self.uom_id.name}")
         # We want to avoid line break here as this string
         # can be used by reports
-        res = f",{NO_BREAK_SPACE_CHAR}".join(as_string)
+        res = f", {NO_BREAK_SPACE_CHAR}".join(as_string)
         if include_total_units and not has_only_units:
             res += " " + self._qty_by_packaging_total_units(prod_qty)
         return res
