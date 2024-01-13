@@ -57,7 +57,7 @@ repos:
       - id: oca-checks-odoo-module
       - id: oca-checks-po
   - repo: https://github.com/myint/autoflake
-    rev: v1.4
+    rev: v1.5.3
     hooks:
       - id: autoflake
         args:
@@ -136,7 +136,7 @@ repos:
           - --header
           - "# generated from manifests external_dependencies"
   - repo: https://github.com/PyCQA/flake8
-    rev: 3.9.2
+    rev: 5.0.0
     hooks:
       - id: flake8
         name: flake8
