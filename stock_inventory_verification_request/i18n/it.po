@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-01-16 14:36+0000\n"
-"PO-Revision-Date: 2023-07-12 14:10+0000\n"
-"Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
+"PO-Revision-Date: 2024-01-15 11:35+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
@@ -89,7 +89,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request_inventory_line_id
 #: model:ir.ui.view,arch_db:stock_inventory_verification_request.view_inventory_line_form
 msgid "Inventory Line"
-msgstr "Riga d'Inventario"
+msgstr "Riga d'inventario"
 
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request_involved_inv_line_count
