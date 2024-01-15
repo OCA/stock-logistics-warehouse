@@ -6,13 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2024-01-15 11:33+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: stock_product_qty_by_packaging
 #: model:ir.model.fields,field_description:stock_product_qty_by_packaging.field_stock_inventory_line__display_name
@@ -20,7 +22,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_product_qty_by_packaging.field_stock_move_line__display_name
 #: model:ir.model.fields,field_description:stock_product_qty_by_packaging.field_stock_quant__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nome visualizzato"
 
 #. module: stock_product_qty_by_packaging
 #: model:ir.model.fields,field_description:stock_product_qty_by_packaging.field_stock_inventory_line__id
@@ -28,12 +30,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_product_qty_by_packaging.field_stock_move_line__id
 #: model:ir.model.fields,field_description:stock_product_qty_by_packaging.field_stock_quant__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: stock_product_qty_by_packaging
 #: model:ir.model,name:stock_product_qty_by_packaging.model_stock_inventory_line
 msgid "Inventory Line"
-msgstr ""
+msgstr "Riga d'inventario"
 
 #. module: stock_product_qty_by_packaging
 #: model:ir.model.fields,field_description:stock_product_qty_by_packaging.field_stock_inventory_line____last_update
@@ -41,12 +43,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_product_qty_by_packaging.field_stock_move_line____last_update
 #: model:ir.model.fields,field_description:stock_product_qty_by_packaging.field_stock_quant____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Ultima modifica il"
 
 #. module: stock_product_qty_by_packaging
 #: model:ir.model,name:stock_product_qty_by_packaging.model_stock_move_line
 msgid "Product Moves (Stock Move Line)"
-msgstr ""
+msgstr "Movimenti prodotto (riga movimento di magazzino)"
 
 #. module: stock_product_qty_by_packaging
 #: model:ir.model.fields,field_description:stock_product_qty_by_packaging.field_stock_inventory_line__product_qty_by_packaging_display
@@ -54,14 +56,14 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_product_qty_by_packaging.field_stock_move_line__product_qty_by_packaging_display
 #: model:ir.model.fields,field_description:stock_product_qty_by_packaging.field_stock_quant__product_qty_by_packaging_display
 msgid "Qty by packaging"
-msgstr ""
+msgstr "Q.tà per imballaggio"
 
 #. module: stock_product_qty_by_packaging
 #: model:ir.model,name:stock_product_qty_by_packaging.model_stock_quant
 msgid "Quants"
-msgstr ""
+msgstr "Quanti"
 
 #. module: stock_product_qty_by_packaging
 #: model:ir.model,name:stock_product_qty_by_packaging.model_stock_move
 msgid "Stock Move"
-msgstr ""
+msgstr "Movimento di magazzino"
