@@ -9,14 +9,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-06-03 01:23+0000\n"
-"PO-Revision-Date: 2017-06-03 01:23+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"PO-Revision-Date: 2024-01-15 11:35+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: stock_change_qty_reason
 #: model:ir.model.fields,field_description:stock_change_qty_reason.field_stock_inventory_line_reason_active
@@ -71,7 +72,7 @@ msgstr "Riga d'Inventario"
 #. module: stock_change_qty_reason
 #: model:ir.model,name:stock_change_qty_reason.model_stock_inventory_line
 msgid "Inventory Line"
-msgstr "Riga d'Inventario"
+msgstr "Riga d'inventario"
 
 #. module: stock_change_qty_reason
 #: model:ir.model.fields,field_description:stock_change_qty_reason.field_stock_inventory_line_reason___last_update
