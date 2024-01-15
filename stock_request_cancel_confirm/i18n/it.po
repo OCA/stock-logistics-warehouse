@@ -6,62 +6,64 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2024-01-15 11:34+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: stock_request_cancel_confirm
 #: model:ir.model.fields,help:stock_request_cancel_confirm.field_stock_request__cancel_confirm
 #: model:ir.model.fields,help:stock_request_cancel_confirm.field_stock_request_order__cancel_confirm
 msgid "A flag signify that this document is confirmed for cancellation"
-msgstr ""
+msgstr "Una spunta indica che questo documento è confermato per l'annullamento"
 
 #. module: stock_request_cancel_confirm
 #: model:ir.model.fields,help:stock_request_cancel_confirm.field_stock_request__cancel_reason
 #: model:ir.model.fields,help:stock_request_cancel_confirm.field_stock_request_order__cancel_reason
 msgid "An optional cancel reason"
-msgstr ""
+msgstr "Un motivo di annullamento opzionale"
 
 #. module: stock_request_cancel_confirm
 #: model:ir.model.fields,field_description:stock_request_cancel_confirm.field_stock_request__cancel_confirm
 #: model:ir.model.fields,field_description:stock_request_cancel_confirm.field_stock_request_order__cancel_confirm
 msgid "Cancel Confirmed"
-msgstr ""
+msgstr "Annullamento confermato"
 
 #. module: stock_request_cancel_confirm
 #: model:ir.model.fields,field_description:stock_request_cancel_confirm.field_stock_request__cancel_reason
 #: model:ir.model.fields,field_description:stock_request_cancel_confirm.field_stock_request_order__cancel_reason
 msgid "Cancel Reason"
-msgstr ""
+msgstr "Causale annullamento"
 
 #. module: stock_request_cancel_confirm
 #: model:ir.model.fields,field_description:stock_request_cancel_confirm.field_stock_request__display_name
 #: model:ir.model.fields,field_description:stock_request_cancel_confirm.field_stock_request_order__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nome visualizzato"
 
 #. module: stock_request_cancel_confirm
 #: model:ir.model.fields,field_description:stock_request_cancel_confirm.field_stock_request__id
 #: model:ir.model.fields,field_description:stock_request_cancel_confirm.field_stock_request_order__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: stock_request_cancel_confirm
 #: model:ir.model.fields,field_description:stock_request_cancel_confirm.field_stock_request____last_update
 #: model:ir.model.fields,field_description:stock_request_cancel_confirm.field_stock_request_order____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Ultima modifica il"
 
 #. module: stock_request_cancel_confirm
 #: model:ir.model,name:stock_request_cancel_confirm.model_stock_request
 msgid "Stock Request"
-msgstr ""
+msgstr "Richiesta di magazzino"
 
 #. module: stock_request_cancel_confirm
 #: model:ir.model,name:stock_request_cancel_confirm.model_stock_request_order
 msgid "Stock Request Order"
-msgstr ""
+msgstr "Ordine richiesta di magazzino"
