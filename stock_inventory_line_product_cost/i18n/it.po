@@ -6,23 +6,25 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2024-01-15 11:34+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: stock_inventory_line_product_cost
 #: model:ir.model.fields,field_description:stock_inventory_line_product_cost.field_stock_inventory_line__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nome visualizzato"
 
 #. module: stock_inventory_line_product_cost
 #: model:ir.model.fields,field_description:stock_inventory_line_product_cost.field_stock_inventory_line__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: stock_inventory_line_product_cost
 #: model:ir.model.fields,help:stock_inventory_line_product_cost.field_stock_inventory_line__product_cost
@@ -32,18 +34,25 @@ msgid ""
 "        Used to value the product when the purchase cost is not known (e.g. inventory adjustment).\n"
 "        Used to compute margins on sale orders."
 msgstr ""
+"Nei prezzi standard & costi medi: valore del prodotto (calcolato "
+"automaticamente nei costi medi).\n"
+"        In FIFO: valore dell'unità successiva che lascerà il magazzino ("
+"calcolato automaticamente).\n"
+"        Utilizzato per valutare il prodotto quando il costo di acquisto non "
+"è noto (es. rettifiche di inventario).\n"
+"        Utilizzato per calcolare i margini negli ordini di vendita."
 
 #. module: stock_inventory_line_product_cost
 #: model:ir.model,name:stock_inventory_line_product_cost.model_stock_inventory_line
 msgid "Inventory Line"
-msgstr ""
+msgstr "Riga d'inventario"
 
 #. module: stock_inventory_line_product_cost
 #: model:ir.model.fields,field_description:stock_inventory_line_product_cost.field_stock_inventory_line____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Ultima modifica il"
 
 #. module: stock_inventory_line_product_cost
 #: model:ir.model.fields,field_description:stock_inventory_line_product_cost.field_stock_inventory_line__product_cost
 msgid "Product Cost"
-msgstr ""
+msgstr "Costo prodotto"
