@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2022-10-24 12:43+0000\n"
+"PO-Revision-Date: 2024-01-15 11:33+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.14.1\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: stock_generate_putaway_from_inventory
 #: model:ir.model.fields,field_description:stock_generate_putaway_from_inventory.field_stock_inventory__display_name
@@ -41,7 +41,7 @@ msgstr "Inventario"
 #. module: stock_generate_putaway_from_inventory
 #: model:ir.model,name:stock_generate_putaway_from_inventory.model_stock_inventory_line
 msgid "Inventory Line"
-msgstr "Riga inventario"
+msgstr "Riga d'inventario"
 
 #. module: stock_generate_putaway_from_inventory
 #: model:ir.model.fields,field_description:stock_generate_putaway_from_inventory.field_stock_inventory____last_update
