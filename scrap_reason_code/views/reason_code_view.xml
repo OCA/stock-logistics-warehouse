@@ -1,0 +1,54 @@
+<!-- Copyright 2019 Open Source Integrators
+     Copyright 2023 ForgeFlow S.L. (https://www.forgeflow.com)
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <!-- Scrap Reason Code Type -->
+    <record id="view_scrap_reason_code_form" model="ir.ui.view">
+        <field name="name">scrap.reason.code.form</field>
+        <field name="model">scrap.reason.code</field>
+        <field name="arch" type="xml">
+            <form string="Reason Code">
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name" nolabel="1" /></h1>
+                    </div>
+                    <group>
+                        <field name="description" />
+                    </group>
+                    <group>
+                        <field name="location_id" />
+                        <field
+                            name="product_category_ids"
+                            widget="many2many_tags"
+                            options="{'no_create': True}"
+                        />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="view_scrap_reason_code_list" model="ir.ui.view">
+        <field name="name">scrap.reason.code.list</field>
+        <field name="model">scrap.reason.code</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="description" />
+                <field name="location_id" />
+                <field name="product_category_ids" widget="many2many_tags" />
+            </tree>
+        </field>
+    </record>
+    <record id="open_view_scrap_reason_code_form" model="ir.actions.act_window">
+        <field name="name">Scrap Reason Codes</field>
+        <field name="res_model">scrap.reason.code</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem
+        action="open_view_scrap_reason_code_form"
+        id="menu_view_scrap_reason_code_form"
+        parent="stock.menu_stock_config_settings"
+        sequence="55"
+        groups="stock.group_stock_manager"
+    />
+</odoo>
