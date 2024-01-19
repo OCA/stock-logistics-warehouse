@@ -15,7 +15,7 @@ class SaleStockAvailableInfoPopup(SavepointCase):
         cls.sale_user = new_test_user(
             cls.env,
             login="sale_user",
-            groups="sales_team.group_sale_salesman",
+            groups="sales_team.group_sale_salesman,stock.group_stock_user",
         )
         cls.product = cls.env["product.product"].create(
             {"name": "Storable product", "type": "product"}
