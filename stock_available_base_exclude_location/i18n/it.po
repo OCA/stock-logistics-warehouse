@@ -6,50 +6,56 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2024-01-22 12:37+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: stock_available_base_exclude_location
 #: model:ir.model.fields,field_description:stock_available_base_exclude_location.field_product_product__display_name
 #: model:ir.model.fields,field_description:stock_available_base_exclude_location.field_stock_exclude_location_mixin__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nome visualizzato"
 
 #. module: stock_available_base_exclude_location
 #: model:ir.model.fields,help:stock_available_base_exclude_location.field_stock_exclude_location_mixin__stock_excluded_location_ids
 msgid ""
 "Fill in this field to exclude locations for product availablequantities."
 msgstr ""
+"Compilare questo campo per escludere ubicazioni per quantità prodotti "
+"disponibili."
 
 #. module: stock_available_base_exclude_location
 #: model:ir.model.fields,field_description:stock_available_base_exclude_location.field_product_product__id
 #: model:ir.model.fields,field_description:stock_available_base_exclude_location.field_stock_exclude_location_mixin__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: stock_available_base_exclude_location
 #: model:ir.model.fields,field_description:stock_available_base_exclude_location.field_product_product____last_update
 #: model:ir.model.fields,field_description:stock_available_base_exclude_location.field_stock_exclude_location_mixin____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Ultima modifica il"
 
 #. module: stock_available_base_exclude_location
 #: model:ir.model,name:stock_available_base_exclude_location.model_product_product
 msgid "Product"
-msgstr ""
+msgstr "Prodotto"
 
 #. module: stock_available_base_exclude_location
 #: model:ir.model.fields,field_description:stock_available_base_exclude_location.field_stock_exclude_location_mixin__stock_excluded_location_ids
 msgid "Stock Excluded Location"
-msgstr ""
+msgstr "Ubicazione esclusa dalla giacenza"
 
 #. module: stock_available_base_exclude_location
 #: model:ir.model,name:stock_available_base_exclude_location.model_stock_exclude_location_mixin
 msgid ""
 "technical base module to allow defining excluded locations on an Odoo model"
 msgstr ""
+"modulo tecnico base per consentire la definizione di ubicazioni escluse su "
+"un modello Odoo"
