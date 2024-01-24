@@ -7,7 +7,7 @@
     "category": "Stock",
     "summary": "Returns and recreate the picking",
     "author": "ForgeFlow, Odoo Community Association (OCA)",
-    "website": "https://www.forgeflow.com",
+    "website": "https://github.com/OCA/stock-logistics-warehouse",
     "license": "AGPL-3",
     "depends": ["sale_stock"],
     "data": ["view/stock_view.xml"],
