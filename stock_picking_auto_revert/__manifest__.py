@@ -3,7 +3,7 @@
 
 {
     "name": "Stock Picking Auto Revert",
-    "version": "10.0.1.0.0",
+    "version": "15.0.1.0.0",
     "category": "Stock",
     "summary": "Returns and recreate the picking",
     "author": "ForgeFlow, Odoo Community Association (OCA)",

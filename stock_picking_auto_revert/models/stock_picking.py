@@ -1,7 +1,7 @@
 # Copyright 2019 ForgeFlow
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import _, api, exceptions, models
+from odoo import _, exceptions, models
 
 
 class StockPicking(models.Model):
@@ -13,7 +13,6 @@ class StockPicking(models.Model):
         for move in self.move_lines:
             move._check_restrictions()
 
-    @api.multi
     def action_revert_recreate(self):
         self.ensure_one()
         pick = self
@@ -25,7 +24,7 @@ class StockPicking(models.Model):
         # Create return picking
         StockReturnPicking = self.env["stock.return.picking"]
         default_data = StockReturnPicking.with_context(
-            active_ids=pick.ids, active_id=pick.ids[0]
+            active_model="stock.picking", active_id=pick.id
         ).default_get(
             [
                 "move_dest_exists",
@@ -35,27 +34,23 @@ class StockPicking(models.Model):
                 "location_id",
             ]
         )
-        for rm in default_data["product_return_moves"]:
-            if len(rm) > 2 and isinstance(rm[2], dict):
-                sm = pick.move_lines.filtered(
-                    lambda x: x.product_id.id == rm[2]["product_id"]
-                )
-                if rm[2]["quantity"] < sm.product_uom_qty:
-                    raise exceptions.UserError(msg)
-            else:
+        default_data.update({"location_id": pick.location_id.id})
+        return_wiz = StockReturnPicking.create(default_data)
+        return_wiz._onchange_picking_id()
+        for rm in return_wiz.product_return_moves:
+            sm = pick.move_lines.filtered(lambda x: x.product_id.id == rm.product_id.id)
+            if rm.quantity < sm.product_uom_qty:
                 raise exceptions.UserError(msg)
-        return_wiz = StockReturnPicking.with_context(
-            active_ids=pick.ids, active_id=pick.ids[0]
-        ).create(default_data)
         try:
             res = return_wiz.create_returns()
-        except exceptions.UserError:
-            raise exceptions.UserError()
+        except exceptions.UserError as e:
+            raise exceptions.UserError(e) from e
 
         return_pick = self.env["stock.picking"].browse(res["res_id"])
 
         # Validate picking
-        return_pick.do_transfer()
+        return_pick.action_set_quantities_to_reservation()
+        return_pick._action_done()
         new_pick = pick.copy()
         new_pick.action_assign()
         action = self.env.ref("stock.action_picking_tree_all")

@@ -40,7 +40,8 @@ class TestStockPicking(TransactionCase):
         picking = so.picking_ids
 
         picking.action_confirm()
-        picking.do_transfer()
+        picking.move_lines.write({"quantity_done": 5.0})
+        picking.button_validate()
         picking.action_revert_recreate()
 
         # we have the original shipment and the return and the duplicated
@@ -63,4 +64,4 @@ class TestStockPicking(TransactionCase):
             so.picking_ids[0].mapped("move_lines.location_dest_id.name"),
             ["Customers"],
         )
-        self.assertEqual(so.picking_ids[0].state, "assigned")
+        self.assertEqual(so.picking_ids[2].state, "confirmed")
