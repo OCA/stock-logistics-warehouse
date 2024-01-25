@@ -77,6 +77,9 @@ class TestStockRequest(common.TransactionCase):
         self.route_2 = self._create_location_route(
             name="Transfer", company_id=self.company_2.id
         )
+        self.route_3 = self._create_location_route(
+            name="Transfer", company_id=self.main_company.id
+        )
         self.uom_dozen = self.env["uom.uom"].create(
             {
                 "name": "Test-DozenA",
@@ -1377,3 +1380,185 @@ class TestStockRequestOrderState(TestStockRequest):
             1,
             "Quantity in progress should be the rounded down quantity after confirmation",
         )
+
+    def test_route_id_propagation_on_creation(self):
+        order_vals = {
+            "company_id": self.main_company.id,
+            "warehouse_id": self.warehouse.id,
+            "location_id": self.warehouse.lot_stock_id.id,
+            "expected_date": fields.Datetime.now(),
+            "route_id": self.route.id,
+            "stock_request_ids": [
+                (
+                    0,
+                    0,
+                    {
+                        "product_id": self.product.id,
+                        "product_uom_id": self.product.uom_id.id,
+                        "product_uom_qty": 5.0,
+                    },
+                ),
+                (
+                    0,
+                    0,
+                    {
+                        "product_id": self.product.id,
+                        "product_uom_id": self.product.uom_id.id,
+                        "product_uom_qty": 10.0,
+                    },
+                ),
+            ],
+        }
+        order = self.request_order.create(order_vals)
+        self.assertEqual(len(order.stock_request_ids), 2)
+        order.write({"route_id": self.route_3})
+        for request in order.stock_request_ids:
+            self.assertEqual(
+                request.route_id.id,
+                order.route_id.id,
+                "The route_id from stock.request.order has not "
+                "been set in the associated stock.requests.",
+            )
+
+    def test_compute_route_id_consistency_1(self):
+        order_vals = {
+            "company_id": self.main_company.id,
+            "warehouse_id": self.warehouse.id,
+            "location_id": self.warehouse.lot_stock_id.id,
+            "expected_date": fields.Datetime.now(),
+            "stock_request_ids": [
+                (
+                    0,
+                    0,
+                    {
+                        "product_id": self.product.id,
+                        "product_uom_id": self.product.uom_id.id,
+                        "product_uom_qty": 5.0,
+                        "route_id": self.route.id,
+                    },
+                ),
+                (
+                    0,
+                    0,
+                    {
+                        "product_id": self.product.id,
+                        "product_uom_id": self.product.uom_id.id,
+                        "product_uom_qty": 10.0,
+                        "route_id": self.route_3.id,
+                    },
+                ),
+            ],
+        }
+        order = self.request_order.create(order_vals)
+        order._compute_route_id()
+        self.assertFalse(
+            order.route_id,
+            "Route ID should be False due to inconsistent routes in stock requests.",
+        )
+
+    def test_compute_route_id_consistency_2(self):
+        order_vals = {
+            "company_id": self.main_company.id,
+            "warehouse_id": self.warehouse.id,
+            "location_id": self.warehouse.lot_stock_id.id,
+            "expected_date": fields.Datetime.now(),
+            "stock_request_ids": [
+                (
+                    0,
+                    0,
+                    {
+                        "product_id": self.product.id,
+                        "product_uom_id": self.product.uom_id.id,
+                        "product_uom_qty": 5.0,
+                        "route_id": self.route.id,
+                    },
+                ),
+                (
+                    0,
+                    0,
+                    {
+                        "product_id": self.product.id,
+                        "product_uom_id": self.product.uom_id.id,
+                        "product_uom_qty": 10.0,
+                        "route_id": self.route.id,
+                    },
+                ),
+            ],
+        }
+        order = self.request_order.create(order_vals)
+        order._compute_route_id()
+        self.assertEqual(order.route_id, self.route)
+
+    def test_inverse_route_id_propagation(self):
+        order_vals = {
+            "company_id": self.main_company.id,
+            "warehouse_id": self.warehouse.id,
+            "location_id": self.warehouse.lot_stock_id.id,
+            "expected_date": fields.Datetime.now(),
+            "stock_request_ids": [
+                (
+                    0,
+                    0,
+                    {
+                        "product_id": self.product.id,
+                        "product_uom_id": self.product.uom_id.id,
+                        "product_uom_qty": 5.0,
+                    },
+                ),
+                (
+                    0,
+                    0,
+                    {
+                        "product_id": self.product.id,
+                        "product_uom_id": self.product.uom_id.id,
+                        "product_uom_qty": 10.0,
+                    },
+                ),
+            ],
+        }
+        order = self.request_order.create(order_vals)
+        order.route_id = self.route.id
+        order._inverse_route_id()
+        for request in order.stock_request_ids:
+            self.assertEqual(
+                request.route_id.id,
+                self.route.id,
+                "Route ID should propagate to all stock requests.",
+            )
+
+    def test_onchange_route_id_propagation(self):
+        order_vals = {
+            "company_id": self.main_company.id,
+            "warehouse_id": self.warehouse.id,
+            "location_id": self.warehouse.lot_stock_id.id,
+            "expected_date": fields.Datetime.now(),
+            "stock_request_ids": [
+                (
+                    0,
+                    0,
+                    {
+                        "product_id": self.product.id,
+                        "product_uom_id": self.product.uom_id.id,
+                        "product_uom_qty": 5.0,
+                    },
+                ),
+                (
+                    0,
+                    0,
+                    {
+                        "product_id": self.product.id,
+                        "product_uom_id": self.product.uom_id.id,
+                        "product_uom_qty": 10.0,
+                    },
+                ),
+            ],
+        }
+        order = self.request_order.create(order_vals)
+        order.route_id = self.route.id
+        order._onchange_route_id()
+        for request in order.stock_request_ids:
+            self.assertEqual(
+                request.route_id.id,
+                self.route.id,
+                "Route ID should update on all stock requests on onchange.",
+            )
