@@ -139,9 +139,41 @@ class StockRequestOrder(models.Model):
         string="Stock requests", compute="_compute_stock_request_count", readonly=True
     )
 
+    route_id = fields.Many2one(
+        "stock.location.route",
+        compute="_compute_route_id",
+        inverse="_inverse_route_id",
+        readonly=True,
+        states={"draft": [("readonly", False)]},
+        store=True,
+        help="The route related to a stock request order.",
+    )
+
     _sql_constraints = [
         ("name_uniq", "unique(name, company_id)", "Stock Request name must be unique")
     ]
+
+    @api.depends("stock_request_ids")
+    def _compute_route_id(self):
+        for order in self:
+            if order.stock_request_ids:
+                first_route = order.stock_request_ids[0].route_id or False
+                for request in order.stock_request_ids:
+                    if request.route_id != first_route:
+                        first_route = False
+                        break
+                order.route_id = first_route
+
+    def _inverse_route_id(self):
+        for order in self:
+            if order.route_id:
+                order.stock_request_ids.write({"route_id": order.route_id.id})
+
+    @api.onchange("route_id")
+    def _onchange_route_id(self):
+        if self.route_id:
+            for request in self.stock_request_ids:
+                request.route_id = self.route_id
 
     @api.depends("stock_request_ids.state")
     def _compute_state(self):
