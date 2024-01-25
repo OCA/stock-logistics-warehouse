@@ -216,6 +216,8 @@ class StockMoveLocationWizard(models.TransientModel):
                     line.product_id,
                     line.origin_location_id,
                     lot_id=line.lot_id,
+                    package_id=line.package_id,
+                    owner_id=line.owner_id,
                     strict=False,
                 )
                 move._update_reserved_quantity(
@@ -223,6 +225,8 @@ class StockMoveLocationWizard(models.TransientModel):
                     available_quantity,
                     line.origin_location_id,
                     lot_id=line.lot_id,
+                    package_id=line.package_id,
+                    owner_id=line.owner_id,
                     strict=False,
                 )
             # Force the state to be assigned, instead of _action_assign,
