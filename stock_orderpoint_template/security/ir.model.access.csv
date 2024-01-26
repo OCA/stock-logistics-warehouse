@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_stock_warehouse_orderpoint_template,stock.warehouse.orderpoint template,model_stock_warehouse_orderpoint_template,stock.group_stock_user,1,0,0,0
+access_stock_warehouse_orderpoint_template_system,stock.warehouse.orderpoint template system,model_stock_warehouse_orderpoint_template,stock.group_stock_manager,1,1,1,1
