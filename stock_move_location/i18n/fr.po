@@ -6,20 +6,20 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2021-09-07 16:33+0000\n"
-"Last-Translator: Rémi <remi@le-filament.com>\n"
+"PO-Revision-Date: 2024-01-29 13:37+0000\n"
+"Last-Translator: yassine-rhimi <yassinrhimi67@gmail.com>\n"
 "Language-Team: none\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.3.2\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location__apply_putaway_strategy
 msgid "Apply Putaway Strategy"
-msgstr ""
+msgstr "Appliquer la stratégie de rangement"
 
 #. module: stock_move_location
 #: model_terms:ir.ui.view,arch_db:stock_move_location.view_wiz_stock_move_location_form_stock_move_location
@@ -79,12 +79,12 @@ msgstr "Modifier les Emplacements"
 #. module: stock_move_location
 #: model_terms:ir.ui.view,arch_db:stock_move_location.view_picking_form
 msgid "Fill with stock"
-msgstr ""
+msgstr "Remplir de stock"
 
 #. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__owner_id
 msgid "From Owner"
-msgstr ""
+msgstr "Du propriétaire"
 
 #. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location__id
@@ -165,7 +165,7 @@ msgstr "Déplacer vers l'emplacement..."
 #: code:addons/stock_move_location/models/stock_picking.py:0
 #, python-format
 msgid "Moves lines already exists"
-msgstr ""
+msgstr "Déplace les lignes déjà existantes"
 
 #. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location__origin_location_id
@@ -181,7 +181,7 @@ msgstr "Désactiver l'Emplacement d'Origine"
 #. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__package_id
 msgid "Package Number"
-msgstr ""
+msgstr "Numéro du paquet"
 
 #. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_stock_move__location_move
@@ -204,7 +204,7 @@ msgstr "Transfert Planifié"
 #: code:addons/stock_move_location/models/stock_picking.py:0
 #, python-format
 msgid "Please choose a source end location"
-msgstr ""
+msgstr "Veuillez choisir un lieu de fin de source"
 
 #. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__product_id
@@ -224,7 +224,7 @@ msgstr "Quantité à déplacer"
 #. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_wiz_stock_move_location_line__reserved_quantity
 msgid "Reserved Quantity"
-msgstr ""
+msgstr "Quantité réservée"
 
 #. module: stock_move_location
 #: model:ir.model.fields,field_description:stock_move_location.field_stock_picking_type__show_move_onhand
