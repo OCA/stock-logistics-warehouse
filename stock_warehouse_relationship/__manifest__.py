@@ -5,7 +5,7 @@
 {
     "name": "Stock Warehouse relationship",
     "summary": "Technical module to add warehouse_id field on various stock.* models",
-    "version": "14.0.1.0.0",
+    "version": "16.0.1.0.0",
     "category": "Warehouse Management",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "author": "Akretion, Pierre Verkest, Odoo Community Association (OCA)",

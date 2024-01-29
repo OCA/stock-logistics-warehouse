@@ -24,9 +24,10 @@ class StockMove(models.Model):
             wh = len(whs) <= 1 and whs or self.env["stock.warehouse"]
         return wh
 
-    @api.model
-    def create(self, vals):
-        if not vals.get("warehouse_id"):
-            wh = self._get_move_default_warehouse(vals)
-            vals["warehouse_id"] = wh.id or False
-        return super().create(vals)
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            if not vals.get("warehouse_id"):
+                wh = self._get_move_default_warehouse(vals)
+                vals["warehouse_id"] = wh.id or False
+        return super().create(vals_list)

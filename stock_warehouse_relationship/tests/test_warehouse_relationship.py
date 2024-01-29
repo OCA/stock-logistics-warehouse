@@ -1,10 +1,10 @@
 # Copyright 2022 Foodles (http://www.foodles.co).
 # @author Pierre Verkest <pierreverkest84@gmail.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-from odoo.tests.common import SavepointCase
+from odoo.tests.common import TransactionCase
 
 
-class TestWarehouseRelationship(SavepointCase):
+class TestWarehouseRelationship(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -104,10 +104,10 @@ class TestWarehouseRelationship(SavepointCase):
 
     def test_stock_move_warehouse_id(self):
         self.assertEqual(
-            self.stock_picking_wh_1.move_lines.mapped("warehouse_id"), self.warehouse_1
+            self.stock_picking_wh_1.move_ids.mapped("warehouse_id"), self.warehouse_1
         )
         self.assertEqual(
-            self.stock_picking_wh_2.move_lines.mapped("warehouse_id"), self.warehouse_2
+            self.stock_picking_wh_2.move_ids.mapped("warehouse_id"), self.warehouse_2
         )
 
     def test_stock_move_line_warehouse_id(self):
@@ -124,7 +124,7 @@ class TestWarehouseRelationship(SavepointCase):
     def test_stock_quant_warehouse_id(self):
         pickings = self.stock_picking_wh_1 | self.stock_picking_wh_2
         pickings.action_assign()
-        pickings.move_lines.write({"quantity_done": 5})
+        pickings.move_ids.write({"quantity_done": 5})
         pickings.button_validate()
 
         self.assertEqual(
@@ -180,5 +180,5 @@ class TestWarehouseRelationship(SavepointCase):
         )
         stock_picking.action_assign()
         self.assertEqual(
-            self.stock_picking_wh_2.move_lines.mapped("warehouse_id"), self.warehouse_2
+            self.stock_picking_wh_2.move_ids.mapped("warehouse_id"), self.warehouse_2
         )

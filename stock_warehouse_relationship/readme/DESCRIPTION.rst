@@ -12,9 +12,6 @@ Following models are linked by this module:
 * *stock.quant*
 * *stock.quant.package*
 
-You'll probably like to use `stock_location_warehouse` as well
-which add `warehouse_id` on `stock.location`.
-
 This module is inspired from the experiences of
 `stock_multi_warehouse_security <https://github.com/akretion/stock-logistics-warehouse/tree/12-muli-wh-security/stock_multi_warehouse_security/>`_
 on version 12.0 but has some key differences on user experience:
