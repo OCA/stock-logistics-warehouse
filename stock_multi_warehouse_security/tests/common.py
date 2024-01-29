@@ -1,6 +1,6 @@
 from decorator import decorator
 
-from odoo.tests.common import SavepointCase
+from odoo.tests.common import TransactionCase
 
 
 def allowed_companies():
@@ -27,8 +27,6 @@ def allowed_companies():
     @decorator
     def wrapper(func, *args, **kwargs):
         self = args[0]
-        # with self.env.with_context(allowed_company_ids=self.env.user.company_ids):
-        #     func(*args, **kwargs)
 
         previous_allowed_company_ids = self.env.context.get("allowed_company_ids")
         try:
@@ -51,7 +49,7 @@ def allowed_companies():
     return wrapper
 
 
-class TestStockCommon(SavepointCase):
+class TestStockCommon(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()

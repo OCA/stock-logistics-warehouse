@@ -88,7 +88,7 @@ class TestStockWarehouseAccess(TestStockCommon):
         )
         picking.action_assign()
         self.assertEqual(picking.state, "assigned")
-        picking.move_lines.write({"quantity_done": 5})
+        picking.move_ids.write({"quantity_done": 5})
         picking.button_validate()
         self.assertEqual(picking.state, "done")
 
@@ -204,7 +204,7 @@ class TestStockWarehouseAccessWithReceivedGoods(TestStockCommon):
             cls.stock_picking_wh_1 | cls.stock_picking_wh_2 | cls.stock_picking_wh_3
         )
         pickings.action_assign()
-        pickings.move_lines.write({"quantity_done": 5})
+        pickings.move_ids.write({"quantity_done": 5})
         pickings.button_validate()
 
     @users(
