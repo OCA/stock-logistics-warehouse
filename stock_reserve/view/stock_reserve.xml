@@ -34,7 +34,7 @@
                 <sheet>
                     <widget
                         name="web_ribbon"
-                        text="Released"
+                        title="Released"
                         bg_color="bg-danger"
                         attrs="{'invisible': [('state', '!=', 'cancel')]}"
                     />
