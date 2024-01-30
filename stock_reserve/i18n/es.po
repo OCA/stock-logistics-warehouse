@@ -714,6 +714,7 @@ msgid "Release the stock reservation having a passed validity date"
 msgstr "Lanzar las reservas de stock con una fecha de validación pasada"
 
 #. module: stock_reserve
+#: model_terms:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_form
 #: model_terms:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_search
 msgid "Released"
 msgstr "Lanzado"
