@@ -44,8 +44,8 @@ msgstr ""
 "* Attesa disponibilità: questo stato viene raggiunto quando il completamento "
 "dell'approvvigionamento non è semplice. Richiede l'esecuzione della "
 "schedulazione, la lavorazione di un componente...\n"
-"* Disponibile: qando i prodotti sono prenotati, è impostato a 'Disponibile'."
-"\n"
+"* Disponibile: qando i prodotti sono prenotati, è impostato a "
+"'Disponibile'.\n"
 "* Eseguito: quando la spedizione viene elaborata, lo stato è 'Eseguito'."
 
 #. module: stock_reserve
@@ -713,6 +713,7 @@ msgstr ""
 "Rilascia le prenotazioni di giacenza che hanno una data validità scaduta"
 
 #. module: stock_reserve
+#: model_terms:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_form
 #: model_terms:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_search
 msgid "Released"
 msgstr "Rilasciato"
