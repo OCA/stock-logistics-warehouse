@@ -94,6 +94,7 @@ setuptools.setup(
         'odoo14-addon-stock_request_partner',
         'odoo14-addon-stock_request_picking_type',
         'odoo14-addon-stock_request_purchase',
+        'odoo14-addon-stock_request_sequence_option',
         'odoo14-addon-stock_request_submit',
         'odoo14-addon-stock_request_tier_validation',
         'odoo14-addon-stock_reserve',
