@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="group_show_transit_location_stock_wizard" model="res.groups">
+        <field
+            name="name"
+        >Display transit location lines in sale line stock popup</field>
+        <field name="category_id" ref="base.module_category_hidden" />
+    </record>
+</odoo>

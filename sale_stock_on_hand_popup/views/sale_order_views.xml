@@ -1,15 +1,24 @@
 <?xml version="1.0" ?>
 <odoo>
-    <template
-        id="sale_order_line_view_list"
-        name="sale.order.line.view.list"
-        inherit_id="web.assets_backend"
-    >
-        <xpath expr="." position="inside">
-            <script
-                type="text/javascript"
-                src="/sale_stock_on_hand_popup/static/src/js/qty_at_date_widget.js"
-            />
-        </xpath>
-    </template>
+    <record id="view_order_form_inherit_sale_stock_qty" model="ir.ui.view">
+        <field name="model">sale.order</field>
+        <field
+            name="inherit_id"
+            ref="sale_stock.view_order_form_inherit_sale_stock_qty"
+        />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//field[@name='order_line']/form/group/group/div[@name='ordered_qty']/widget[@name='qty_at_date_widget']"
+                position="after"
+            >
+                <widget name="stock_on_hand_widget" width="0.1px" />
+            </xpath>
+            <xpath
+                expr="//field[@name='order_line']/tree/widget[@name='qty_at_date_widget']"
+                position="after"
+            >
+                <widget name="stock_on_hand_widget" width="20px" />
+            </xpath>
+        </field>
+    </record>
 </odoo>

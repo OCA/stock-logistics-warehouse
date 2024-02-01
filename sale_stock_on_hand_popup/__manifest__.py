@@ -7,8 +7,15 @@
     "version": "14.0.1.0.1",
     "license": "AGPL-3",
     "depends": ["sale_stock", "stock_available"],
-    "data": ["views/sale_order_views.xml"],
-    "qweb": ["static/src/xml/sale_stock.xml"],
+    "data": [
+        "security/ir.model.access.csv",
+        "security/security.xml",
+        "views/assets.xml",
+        "views/res_config_settings_views.xml",
+        "views/sale_order_views.xml",
+        "wizards/product_quant_wizard_views.xml",
+    ],
+    "qweb": ["static/src/xml/stock_on_hand_widget.xml"],
     "installable": True,
     "application": False,
 }

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="product_quant_wizard_view_form" model="ir.ui.view">
+        <field name="name">product.quant.wizard.form</field>
+        <field name="model">product.quant.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <field name="product_id" invisible="1" />
+                <field name="stock_quant_ids" readonly="1">
+                    <tree>
+                        <field name="product_id" optional="hide" />
+                        <field name="location_id" optional="show" />
+                        <field
+                            name="lot_id"
+                            groups="stock.group_production_lot"
+                            optional="show"
+                        />
+                        <field
+                            name="package_id"
+                            groups="stock.group_tracking_lot"
+                            optional="show"
+                        />
+                        <field
+                            name="owner_id"
+                            groups="stock.group_tracking_owner"
+                            optional="show"
+                        />
+                        <field name="available_quantity" optional="show" />
+                        <field name="quantity" optional="show" />
+                        <field
+                            name="product_uom_id"
+                            groups="uom.group_uom"
+                            optional="show"
+                        />
+                        <field
+                            name='company_id'
+                            groups="base.group_multi_company"
+                            optional="show"
+                        />
+                    </tree>
+                </field>
+                <footer>
+                    <button string="Close" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

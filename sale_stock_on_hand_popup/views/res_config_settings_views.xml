@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_stock_configuration" model="ir.ui.view">
+        <field name="name">Stock settings: Display transit location lines</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="stock.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@data-key='stock']" position="inside">
+                <h2 id="stock_on_hand_info">Sale Stock on Hand</h2>
+                <div class="row mt16 o_settings_container">
+                    <div class="col-xs-12 col-md-6 o_setting_box">
+                        <div class="o_setting_left_pane">
+                            <field name="group_show_transit_location_stock_wizard" />
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="group_show_transit_location_stock_wizard" />
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>
