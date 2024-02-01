@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="seq_stock_request_option_1" model="ir.sequence">
+        <field name="name">Stock Request: Option 1</field>
+        <field name="padding" eval="5" />
+        <field name="prefix">SR-1/</field>
+    </record>
+    <record id="seq_stock_request_order_option_1" model="ir.sequence">
+        <field name="name">Stock Request Order: Option 1</field>
+        <field name="padding" eval="5" />
+        <field name="prefix">SRO-1/</field>
+    </record>
+
+    <record id="stock_request_sequence_option_line_1" model="ir.sequence.option.line">
+        <field
+            name="base_id"
+            ref="stock_request_sequence_option.stock_request_sequence_option"
+        />
+        <field name="name">SR Option 1</field>
+        <field name="filter_domain">[]</field>
+        <field
+            name="sequence_id"
+            ref="stock_request_sequence_option.seq_stock_request_option_1"
+        />
+    </record>
+    <record
+        id="stock_request_order_sequence_option_line_1"
+        model="ir.sequence.option.line"
+    >
+        <field
+            name="base_id"
+            ref="stock_request_sequence_option.stock_request_order_sequence_option"
+        />
+        <field name="name">SRO Option 1</field>
+        <field name="filter_domain">[]</field>
+        <field
+            name="sequence_id"
+            ref="stock_request_sequence_option.seq_stock_request_order_option_1"
+        />
+    </record>
+
+</odoo>
