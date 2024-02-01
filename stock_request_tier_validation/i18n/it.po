@@ -165,6 +165,12 @@ msgid "Tier Definition"
 msgstr ""
 
 #. module: stock_request_tier_validation
+#: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request__tier_validation_before_write
+#: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request_order__tier_validation_before_write
+msgid "Tier Validation Before Write"
+msgstr ""
+
+#. module: stock_request_tier_validation
 #: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request__to_validate_message
 #: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request_order__to_validate_message
 msgid "To Validate Message"
