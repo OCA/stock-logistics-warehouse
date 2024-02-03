@@ -67,11 +67,6 @@ msgstr ""
 "utilizarse con cualquier producto."
 
 #. module: scrap_reason_code
-#: model:ir.model.fields,field_description:scrap_reason_code.field_scrap_reason_code____last_update
-msgid "Last Modified on"
-msgstr "Últ. modificación en"
-
-#. module: scrap_reason_code
 #: model:ir.model.fields,field_description:scrap_reason_code.field_scrap_reason_code__write_uid
 msgid "Last Updated by"
 msgstr "actualizado por última vez por"
@@ -120,6 +115,9 @@ msgid "The selected reason code is not allowed for this product category."
 msgstr ""
 "El código de motivo seleccionado no está permitido para esta categoría de "
 "producto."
+
+#~ msgid "Last Modified on"
+#~ msgstr "Últ. modificación en"
 
 #~ msgid "Reason Codes"
 #~ msgstr "Códigos de motivo"

@@ -67,11 +67,6 @@ msgstr ""
 "mis au rebut."
 
 #. module: scrap_reason_code
-#: model:ir.model.fields,field_description:scrap_reason_code.field_scrap_reason_code____last_update
-msgid "Last Modified on"
-msgstr "Date de dernière modification"
-
-#. module: scrap_reason_code
 #: model:ir.model.fields,field_description:scrap_reason_code.field_scrap_reason_code__write_uid
 msgid "Last Updated by"
 msgstr "Dernière modification par"
@@ -118,6 +113,9 @@ msgstr "Opération"
 #, python-format
 msgid "The selected reason code is not allowed for this product category."
 msgstr "Le motif choisi n'est pas utilisable avec cette catégorie de produits."
+
+#~ msgid "Last Modified on"
+#~ msgstr "Date de dernière modification"
 
 #~ msgid "Reason Codes"
 #~ msgstr "Motifs"
