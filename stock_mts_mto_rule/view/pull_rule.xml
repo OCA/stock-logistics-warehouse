@@ -9,12 +9,12 @@
                 <field
                     name="mts_rule_id"
                     groups="stock.group_adv_location"
-                    attrs="{'invisible': [('action', '!=', 'split_procurement')]}"
+                    invisible="action != 'split_procurement'"
                 />
                 <field
                     name="mto_rule_id"
                     groups="stock.group_adv_location"
-                    attrs="{'invisible': [('action', '!=', 'split_procurement')]}"
+                    invisible="action != 'split_procurement'"
                 />
             </field>
         </field>
@@ -28,12 +28,12 @@
                 <field
                     name="mts_rule_id"
                     groups="stock.group_adv_location"
-                    attrs="{'invisible': [('action', '!=', 'split_procurement')]}"
+                    invisible="action != 'split_procurement'"
                 />
                 <field
                     name="mto_rule_id"
                     groups="stock.group_adv_location"
-                    attrs="{'invisible': [('action', '!=', 'split_procurement')]}"
+                    invisible="action != 'split_procurement'"
                 />
             </field>
         </field>

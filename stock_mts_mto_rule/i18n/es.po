@@ -10,19 +10,20 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-11-30 03:53+0000\n"
-"PO-Revision-Date: 2017-11-30 03:53+0000\n"
-"Last-Translator: Pedro M. Baeza <pedro.baeza@gmail.com>, 2017\n"
+"PO-Revision-Date: 2024-04-23 10:34+0000\n"
+"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
 "Language-Team: Spanish (https://www.transifex.com/oca/teams/23907/es/)\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: stock_mts_mto_rule
 #: model:ir.model.fields,field_description:stock_mts_mto_rule.field_stock_rule__action
 msgid "Action"
-msgstr ""
+msgstr "Acción"
 
 #. module: stock_mts_mto_rule
 #: model:ir.model.fields.selection,name:stock_mts_mto_rule.selection__stock_rule__action__split_procurement
@@ -38,7 +39,7 @@ msgid ""
 msgstr ""
 "Si se selecciona esta nueva ruta en la vista formulario de producto, se "
 "creará un pedido de compra sólo si la cantidad virtual es menor de 0. Si no, "
-"se cogerá el producto desde existencias."
+"se cogerá el producto desde existencias"
 
 #. module: stock_mts_mto_rule
 #. odoo-python
@@ -48,6 +49,8 @@ msgid ""
 "Inconsistency between the source locations of the mts and mto rules linked "
 "to the procurement rule: %s! It should be the same."
 msgstr ""
+"¡Incoherencia entre las ubicaciones de origen de las reglas mts y mto "
+"vinculadas a la regla de aprovisionamiento: %s! Debería ser la misma."
 
 #. module: stock_mts_mto_rule
 #: model:ir.model.fields,field_description:stock_mts_mto_rule.field_stock_rule__mto_rule_id
@@ -85,10 +88,11 @@ msgstr "Bajo pedido + bajo existencias"
 #, python-format
 msgid "No MTS or MTO rule configured on procurement rule: %s!"
 msgstr ""
+"¡No hay ninguna regla MTS o MTO configurada en la regla de aprovisionamiento:"
+" %s!"
 
 #. module: stock_mts_mto_rule
 #: model:ir.model,name:stock_mts_mto_rule.model_stock_rule
-#, fuzzy
 msgid "Stock Rule"
 msgstr "Regla \"bajo existencias\""
 
