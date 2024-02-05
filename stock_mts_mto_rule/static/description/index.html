@@ -369,37 +369,33 @@ ul.auto-toc {
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !! source digest: sha256:78f31c340b9a6d9ee2bf09265bcdccf98cd337ba57409ad7989efae7f38e6a93
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
-<p><a class="reference external image-reference" href="https://odoo-community.org/page/development-status"><img alt="Mature" src="https://img.shields.io/badge/maturity-Mature-brightgreen.png" /></a> <a class="reference external image-reference" href="http://www.gnu.org/licenses/agpl-3.0-standalone.html"><img alt="License: AGPL-3" src="https://img.shields.io/badge/licence-AGPL--3-blue.png" /></a> <a class="reference external image-reference" href="https://github.com/OCA/stock-logistics-warehouse/tree/16.0/stock_mts_mto_rule"><img alt="OCA/stock-logistics-warehouse" src="https://img.shields.io/badge/github-OCA%2Fstock--logistics--warehouse-lightgray.png?logo=github" /></a> <a class="reference external image-reference" href="https://translation.odoo-community.org/projects/stock-logistics-warehouse-16-0/stock-logistics-warehouse-16-0-stock_mts_mto_rule"><img alt="Translate me on Weblate" src="https://img.shields.io/badge/weblate-Translate%20me-F47D42.png" /></a> <a class="reference external image-reference" href="https://runboat.odoo-community.org/builds?repo=OCA/stock-logistics-warehouse&amp;target_branch=16.0"><img alt="Try me on Runboat" src="https://img.shields.io/badge/runboat-Try%20me-875A7B.png" /></a></p>
+<p><a class="reference external image-reference" href="https://odoo-community.org/page/development-status"><img alt="Mature" src="https://img.shields.io/badge/maturity-Mature-brightgreen.png" /></a> <a class="reference external image-reference" href="http://www.gnu.org/licenses/agpl-3.0-standalone.html"><img alt="License: AGPL-3" src="https://img.shields.io/badge/licence-AGPL--3-blue.png" /></a> <a class="reference external image-reference" href="https://github.com/OCA/stock-logistics-warehouse/tree/17.0/stock_mts_mto_rule"><img alt="OCA/stock-logistics-warehouse" src="https://img.shields.io/badge/github-OCA%2Fstock--logistics--warehouse-lightgray.png?logo=github" /></a> <a class="reference external image-reference" href="https://translation.odoo-community.org/projects/stock-logistics-warehouse-17-0/stock-logistics-warehouse-17-0-stock_mts_mto_rule"><img alt="Translate me on Weblate" src="https://img.shields.io/badge/weblate-Translate%20me-F47D42.png" /></a> <a class="reference external image-reference" href="https://runboat.odoo-community.org/builds?repo=OCA/stock-logistics-warehouse&amp;target_branch=17.0"><img alt="Try me on Runboat" src="https://img.shields.io/badge/runboat-Try%20me-875A7B.png" /></a></p>
 <p>This module add a Make To Stock + Make to Order Route.</p>
-<p>If you choose the make to stock + make to order rule instead of the make to
-order route, the creation of a purchase order will depend on the virtual stock.
-There are 3 cases :</p>
-<ol class="arabic simple">
-<li><dl class="first docutils">
-<dt>The virtual stock of the product is 0</dt>
-<dd>=&gt; It will act exactly like the make to order route.</dd>
-</dl>
+<p>If you choose the make to stock + make to order rule instead of the make
+to order route, the creation of a purchase order will depend on the
+virtual stock. There are 3 cases :</p>
+<ol class="arabic">
+<li><div class="first line-block">
+<div class="line">The virtual stock of the product is 0</div>
+<div class="line">=&gt; It will act exactly like the make to order route.</div>
+</div>
 </li>
-<li><dl class="first docutils">
-<dt>The virtual stock is equal to the quantity ordered</dt>
-<dd>=&gt; It will act exactly like a make to stock route</dd>
-</dl>
+<li><div class="first line-block">
+<div class="line">The virtual stock is equal to the quantity ordered</div>
+<div class="line">=&gt; It will act exactly like a make to stock route</div>
+</div>
 </li>
-<li><dl class="first docutils">
-<dt>The virtual stock is more than 0 but less than ordered quantity</dt>
-<dd><dl class="first last docutils">
-<dt>=&gt; On part of the products will be taken from stock and a purchase order</dt>
-<dd>will be created for the rest. So it will act like both make to order and
-make to stock rule.</dd>
-</dl>
-</dd>
-</dl>
+<li><div class="first line-block">
+<div class="line">The virtual stock is more than 0 but less than ordered quantity</div>
+<div class="line">=&gt; On part of the products will be taken from stock and a purchase
+order</div>
+<div class="line">will be created for the rest. So it will act like both make to
+order and make to stock rule.</div>
+</div>
 </li>
 </ol>
-<p>Example :
-We have a virtual stock of : 1 product A
-A sale Order is made for 3 products A.
-2 Procurements will be created :</p>
+<p>Example : We have a virtual stock of : 1 product A A sale Order is made
+for 3 products A. 2 Procurements will be created :</p>
 <ol class="arabic simple">
 <li>1 with a make to stock rule and a quantity of 1</li>
 <li>1 with a make to order rule and a quantity of 2.</li>
@@ -408,8 +404,10 @@ A sale Order is made for 3 products A.
 <p><strong>Table of contents</strong></p>
 <div class="contents local topic" id="contents">
 <ul class="simple">
-<li><a class="reference internal" href="#configuration" id="toc-entry-1">Configuration</a></li>
+<li><a class="reference internal" href="#configuration" id="toc-entry-1">Configuration</a><ul>
 <li><a class="reference internal" href="#known-issues" id="toc-entry-2">Known issues</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#usage" id="toc-entry-3">Usage</a></li>
 <li><a class="reference internal" href="#bug-tracker" id="toc-entry-4">Bug Tracker</a></li>
 <li><a class="reference internal" href="#credits" id="toc-entry-5">Credits</a><ul>
@@ -423,26 +421,27 @@ A sale Order is made for 3 products A.
 <div class="section" id="configuration">
 <h1><a class="toc-backref" href="#toc-entry-1">Configuration</a></h1>
 <p>You have to select ‘Use MTO+MTS rules’ on the company’s warehouse form.</p>
-</div>
 <div class="section" id="known-issues">
-<h1><a class="toc-backref" href="#toc-entry-2">Known issues</a></h1>
+<h2><a class="toc-backref" href="#toc-entry-2">Known issues</a></h2>
 <p>If you cancel a delivery order and then recreate it from Recreate
-Delivery Order button in sale order form, then the stock level at the time of
-the Re-Creation won’t be taken into account. So if a purchase order was created
-when the sale order was first validated, a similar purchase order will be created
-during the Re-creation of the delivery order, even if not needed regarding the actual stock.</p>
+Delivery Order button in sale order form, then the stock level at the
+time of the Re-Creation won’t be taken into account. So if a purchase
+order was created when the sale order was first validated, a similar
+purchase order will be created during the Re-creation of the delivery
+order, even if not needed regarding the actual stock.</p>
+</div>
 </div>
 <div class="section" id="usage">
 <h1><a class="toc-backref" href="#toc-entry-3">Usage</a></h1>
-<p>You have to select the mts+mto route on the product form.
-You should not select both the mts+mto route and the mto route.</p>
+<p>You have to select the mts+mto route on the product form. You should not
+select both the mts+mto route and the mto route.</p>
 </div>
 <div class="section" id="bug-tracker">
 <h1><a class="toc-backref" href="#toc-entry-4">Bug Tracker</a></h1>
 <p>Bugs are tracked on <a class="reference external" href="https://github.com/OCA/stock-logistics-warehouse/issues">GitHub Issues</a>.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-<a class="reference external" href="https://github.com/OCA/stock-logistics-warehouse/issues/new?body=module:%20stock_mts_mto_rule%0Aversion:%2016.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**">feedback</a>.</p>
+<a class="reference external" href="https://github.com/OCA/stock-logistics-warehouse/issues/new?body=module:%20stock_mts_mto_rule%0Aversion:%2017.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**">feedback</a>.</p>
 <p>Do not contact contributors directly about support or help with technical issues.</p>
 </div>
 <div class="section" id="credits">
@@ -468,7 +467,7 @@ If you spotted it first, help us to smash it by providing a detailed and welcome
 <p>OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.</p>
-<p>This module is part of the <a class="reference external" href="https://github.com/OCA/stock-logistics-warehouse/tree/16.0/stock_mts_mto_rule">OCA/stock-logistics-warehouse</a> project on GitHub.</p>
+<p>This module is part of the <a class="reference external" href="https://github.com/OCA/stock-logistics-warehouse/tree/17.0/stock_mts_mto_rule">OCA/stock-logistics-warehouse</a> project on GitHub.</p>
 <p>You are welcome to contribute. To learn how please visit <a class="reference external" href="https://odoo-community.org/page/Contribute">https://odoo-community.org/page/Contribute</a>.</p>
 </div>
 </div>
