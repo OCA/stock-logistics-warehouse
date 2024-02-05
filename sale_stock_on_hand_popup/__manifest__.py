@@ -1,6 +1,7 @@
 {
     "name": "Sale Stock On Hand Popup",
     "author": "PyTech SRL, Ooops404, Odoo Community Association (OCA)",
+    "maintainers": ["aleuffre", "renda-dev", "PicchiSeba"],
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "category": "Warehouse Management",
     "version": "14.0.1.0.1",
