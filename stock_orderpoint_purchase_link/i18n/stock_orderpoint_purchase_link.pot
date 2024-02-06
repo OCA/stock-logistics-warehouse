@@ -54,6 +54,7 @@ msgstr ""
 
 #. module: stock_orderpoint_purchase_link
 #: model:ir.model.fields,field_description:stock_orderpoint_purchase_link.field_stock_warehouse_orderpoint__purchase_count
+#: model:ir.model.fields,field_description:stock_orderpoint_purchase_link.field_stock_warehouse_orderpoint_template__purchase_count
 msgid "Purchase Count"
 msgstr ""
 
@@ -64,6 +65,7 @@ msgstr ""
 
 #. module: stock_orderpoint_purchase_link
 #: model:ir.model.fields,field_description:stock_orderpoint_purchase_link.field_stock_warehouse_orderpoint__purchase_line_ids
+#: model:ir.model.fields,field_description:stock_orderpoint_purchase_link.field_stock_warehouse_orderpoint_template__purchase_line_ids
 msgid "Purchase Order Lines"
 msgstr ""
 
