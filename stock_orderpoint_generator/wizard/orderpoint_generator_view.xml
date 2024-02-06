@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="orderpoint_generator_view" model="ir.ui.view">
+        <field name="name">stock.warehouse.orderpoint.generator</field>
+        <field name="model">stock.warehouse.orderpoint.generator</field>
+        <field name="arch" type="xml">
+            <form string="Reordering Rules Generator">
+                <label
+                    for="orderpoint_template_id"
+                    string="This wizard will apply the following orderpoint to selected product(s)"
+                />
+                <group string="Templates" colspan="4">
+                    <field name="orderpoint_template_id" colspan="4" />
+                </group>
+                <footer>
+                    <button
+                        name="action_configure"
+                        string="Apply"
+                        type="object"
+                        class="btn-primary"
+                    />
+                    <button string="Cancel" class="btn-default" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+    <act_window
+        name="Reordering Rules Generator"
+        res_model="stock.warehouse.orderpoint.generator"
+        binding_model="product.product"
+        view_mode="form"
+        target="new"
+        id="act_create_product_conf"
+    />
+    <act_window
+        name="Reordering Rules Generator"
+        res_model="stock.warehouse.orderpoint.generator"
+        binding_model="product.template"
+        view_mode="form"
+        target="new"
+        id="act_create_product_template_conf"
+    />
+</odoo>
