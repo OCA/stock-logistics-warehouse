@@ -121,6 +121,7 @@ msgstr ""
 
 #. module: stock_orderpoint_manual_procurement
 #: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_stock_warehouse_orderpoint__procure_recommended_qty
+#: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_stock_warehouse_orderpoint_template__procure_recommended_qty
 msgid "Procure Recommendation"
 msgstr ""
 
@@ -153,6 +154,7 @@ msgstr ""
 
 #. module: stock_orderpoint_manual_procurement
 #: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_stock_warehouse_orderpoint__procure_recommended_date
+#: model:ir.model.fields,field_description:stock_orderpoint_manual_procurement.field_stock_warehouse_orderpoint_template__procure_recommended_date
 msgid "Recommended Request Date"
 msgstr ""
 
@@ -177,7 +179,8 @@ msgstr ""
 msgid ""
 "Use this assistant to generate a procurement request for this\n"
 "                    stock buffer. According to the product configuration,\n"
-"                    this may trigger a draft purchase order, a manufacturing\n"
+"                    this may trigger a draft purchase order, a "
+"manufacturing\n"
 "                    order or a transfer picking."
 msgstr ""
 
