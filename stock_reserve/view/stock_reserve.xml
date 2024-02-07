@@ -11,14 +11,14 @@
                         type="object"
                         string="Reserve"
                         class="oe_highlight"
-                        states="draft"
+                        invisible="state != 'draft'"
                     />
                     <button
                         name="release_reserve"
                         type="object"
                         string="Release"
                         class="oe_highlight"
-                        states="assigned,confirmed,partially_available,done"
+                        invisible="state not in ['assigned','confirmed','partially_available','done']"
                     />
                     <button
                         name="open_move"
@@ -36,7 +36,7 @@
                         name="web_ribbon"
                         title="Released"
                         bg_color="bg-danger"
-                        attrs="{'invisible': [('state', '!=', 'cancel')]}"
+                        invisible="state != 'cancel'"
                     />
                     <group>
                         <group name="main_grp" string="Details">
@@ -69,8 +69,8 @@
                             <field name="location_id" />
                             <field name="location_dest_id" />
                         </group>
-                        <group name="note" string="Notes">
-                            <field name="note" nolabel="1" />
+                        <group name="note" colspan="2">
+                            <field name="note" />
                         </group>
                     </group>
                 </sheet>
@@ -99,14 +99,14 @@
                     type="object"
                     string="Reserve"
                     class="oe_highlight"
-                    states="draft"
+                    invisible="state != 'draft'"
                 />
                 <button
                     name="release_reserve"
                     type="object"
                     string="Release"
                     class="oe_highlight"
-                    states="assigned,confirmed,partially_available,done"
+                    invisible="state not in ['assigned','confirmed','partially_available','done']"
                 />
             </tree>
         </field>

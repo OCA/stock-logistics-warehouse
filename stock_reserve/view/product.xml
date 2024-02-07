@@ -10,7 +10,7 @@
                     class="oe_inline oe_stat_button"
                     name="action_view_reservations"
                     type="object"
-                    attrs="{'invisible':[('type', '!=', 'product')]}"
+                    invisible="type != 'product'"
                     icon="fa-lock"
                 >
                     <field
@@ -32,7 +32,7 @@
                     class="oe_inline oe_stat_button"
                     name="action_view_reservations"
                     type="object"
-                    attrs="{'invisible':[('type', '!=', 'product')]}"
+                    invisible="type != 'product'"
                     icon="fa-lock"
                 >
                     <field
