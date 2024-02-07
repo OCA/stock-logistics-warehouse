@@ -7,6 +7,9 @@ class InventoryAdjustmentsGroup(models.Model):
     _name = "stock.inventory"
     _description = "Inventory Adjustment Group"
     _order = "date desc, id desc"
+    _inherit = [
+        "mail.thread",
+    ]
 
     name = fields.Char(required=True, default="Inventory", string="Inventory Reference")
 
@@ -15,6 +18,7 @@ class InventoryAdjustmentsGroup(models.Model):
     state = fields.Selection(
         [("draft", "Draft"), ("in_progress", "In Progress"), ("done", "Done")],
         default="draft",
+        tracking=True,
     )
 
     owner_id = fields.Many2one(
