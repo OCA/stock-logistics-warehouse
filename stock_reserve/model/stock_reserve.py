@@ -1,7 +1,7 @@
 # Copyright 2013 Camptocamp SA - Guewen Baconnier
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 from odoo import api, fields, models
-from odoo.exceptions import except_orm
+from odoo.exceptions import UserError
 from odoo.tools import float_compare
 from odoo.tools.translate import _
 
@@ -102,7 +102,7 @@ class StockReservation(models.Model):
             location = self.env.ref(ref, raise_if_not_found=True)
             location.check_access_rule("read")
             location_id = location.id
-        except (except_orm, ValueError):
+        except (UserError, ValueError):
             location_id = False
         return location_id
 
