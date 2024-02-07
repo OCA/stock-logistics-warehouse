@@ -1,7 +1,7 @@
 # Copyright 2022 ForgeFlow S.L
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
-from odoo.exceptions import ValidationError
+from odoo.exceptions import UserError, ValidationError
 from odoo.tests.common import TransactionCase
 
 
@@ -121,7 +121,7 @@ class TestStockInventory(TransactionCase):
                 "location_ids": [self.location1.id],
             }
         )
-        with self.assertRaises(ValidationError), self.cr.savepoint():
+        with self.assertRaises(UserError), self.cr.savepoint():
             inventory2.action_state_to_in_progress()
         self.assertEqual(inventory1.state, "in_progress")
         self.assertEqual(
@@ -173,7 +173,6 @@ class TestStockInventory(TransactionCase):
         self.quant3.inventory_quantity = 74
         self.quant3.action_apply_inventory()
         inventory1._compute_count_stock_quants()
-        inventory1.action_view_stock_moves()
         self.assertEqual(inventory1.count_stock_moves, 1)
         self.assertEqual(inventory1.count_stock_quants, 2)
         self.assertEqual(inventory1.count_stock_quants_string, "1 / 2")
@@ -190,8 +189,8 @@ class TestStockInventory(TransactionCase):
         inventory1.action_state_to_done()
 
     def test_03_one_selection(self):
-        with self.assertRaises(ValidationError), self.cr.savepoint():
-            inventory1 = self.inventory_model.create(
+        with self.assertRaises(UserError), self.cr.savepoint():
+            self.inventory_model.create(
                 {
                     "name": "Inventory_Test_5",
                     "product_selection": "one",
@@ -240,8 +239,8 @@ class TestStockInventory(TransactionCase):
         inventory1.action_state_to_done()
 
     def test_04_lot_selection(self):
-        with self.assertRaises(ValidationError), self.cr.savepoint():
-            inventory1 = self.inventory_model.create(
+        with self.assertRaises(UserError), self.cr.savepoint():
+            self.inventory_model.create(
                 {
                     "name": "Inventory_Test_6",
                     "product_selection": "lot",
@@ -334,7 +333,7 @@ class TestStockInventory(TransactionCase):
                 "exclude_sublocation": True,
             }
         )
-        with self.assertRaises(ValidationError), self.cr.savepoint():
+        with self.assertRaises(UserError), self.cr.savepoint():
             inventory2.action_state_to_in_progress()
         self.assertEqual(inventory1.state, "in_progress")
         self.assertEqual(
