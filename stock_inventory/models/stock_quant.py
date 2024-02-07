@@ -59,9 +59,9 @@ class StockQuant(models.Model):
     def _get_inventory_fields_write(self):
         return super()._get_inventory_fields_write() + ["to_do"]
 
-    @api.model
-    def create(self, vals):
-        res = super().create(vals)
+    @api.model_create_multi
+    def create(self, vals_list):
+        res = super().create(vals_list)
         if self.env.context.get(
             "active_model", False
         ) == "stock.inventory" and self.env.context.get("active_id", False):
