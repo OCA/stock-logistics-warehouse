@@ -55,6 +55,7 @@ class TestProductRouteProfile(TransactionCase):
         self.product.with_company(
             self.env.company
         ).force_route_profile_id = self.route_profile_2.id
+        self.assertEqual(self.product.route_profile_id, self.route_profile_1)
         self.assertEqual(
             self.product.with_company(self.env.company).route_ids,
             self.route_profile_2.route_ids,
