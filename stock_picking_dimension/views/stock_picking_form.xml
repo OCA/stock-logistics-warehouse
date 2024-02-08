@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_picking_form_dimensions" model="ir.ui.view">
+        <field
+            name="name"
+        >stock_picking_dimensions.stock.view_picking_form_dimensions</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='logistics_data']//label" position="before">
+                <label for="dimension_uom_id" string="Dimensions Unit of Measure" />
+                <div>
+                    <field name="dimension_uom_id" class="oe_inline" />
+                </div>
+                <label for="picking_length" string="Length" />
+                <div>
+                    <field name="picking_length" class="oe_inline" />
+                    <field
+                        name="dimension_uom_name"
+                        nolabel="1"
+                        class="oe_inline"
+                        style="margin-left:5px"
+                    />
+                </div>
+                <label for="picking_width" string="Width" />
+                <div>
+                    <field name="picking_width" class="oe_inline" />
+                    <field
+                        name="dimension_uom_name"
+                        nolabel="1"
+                        class="oe_inline"
+                        style="margin-left:5px"
+                    />
+                </div>
+                <label for="picking_height" string="Height" />
+                <div>
+                    <field name="picking_height" class="oe_inline" />
+                    <field
+                        name="dimension_uom_name"
+                        nolabel="1"
+                        class="oe_inline"
+                        style="margin-left:5px"
+                    />
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

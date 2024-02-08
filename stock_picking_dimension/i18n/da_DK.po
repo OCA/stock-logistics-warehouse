@@ -1,0 +1,106 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_picking_dimensions
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-02-08 10:20+0000\n"
+"PO-Revision-Date: 2024-02-08 10:20+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_picking_dimensions
+#: model_terms:ir.ui.view,arch_db:stock_picking_dimensions.report_delivery_document
+msgid "<span>Height: </span>"
+msgstr "<span>Højde: </span>"
+
+#. module: stock_picking_dimensions
+#: model_terms:ir.ui.view,arch_db:stock_picking_dimensions.report_delivery_document
+msgid "<span>Length: </span>"
+msgstr "<span>Længde: </span>"
+
+#. module: stock_picking_dimensions
+#: model_terms:ir.ui.view,arch_db:stock_picking_dimensions.report_delivery_document
+msgid "<span>Volume: </span>"
+msgstr "<span>Volumen: </span>"
+
+#. module: stock_picking_dimensions
+#: model_terms:ir.ui.view,arch_db:stock_picking_dimensions.report_delivery_document
+msgid "<span>Width: </span>"
+msgstr "<span>Bredde: </span>"
+
+#. module: stock_picking_dimensions
+#: model_terms:ir.ui.view,arch_db:stock_picking_dimensions.report_delivery_document
+msgid "<strong>Dimensions of the picking: </strong>"
+msgstr "<strong>Plukningens dimensioner: </strong>"
+
+#. module: stock_picking_dimensions
+#: model:ir.model.fields,help:stock_picking_dimensions.field_stock_picking__volume
+msgid "Computed volume for the picking"
+msgstr "Beregnet volumen til plukningen"
+
+#. module: stock_picking_dimensions
+#: model:ir.model.fields,field_description:stock_picking_dimensions.field_stock_picking__dimension_uom_id
+#: model_terms:ir.ui.view,arch_db:stock_picking_dimensions.view_picking_form_dimensions
+msgid "Dimensions Unit of Measure"
+msgstr "Dimensioner Måleenhed"
+
+#. module: stock_picking_dimensions
+#: model_terms:ir.ui.view,arch_db:stock_picking_dimensions.view_picking_form_dimensions
+msgid "Dimensions information"
+msgstr "Oplysninger om dimensioner"
+
+#. module: stock_picking_dimensions
+#: model:ir.model.fields,field_description:stock_picking_dimensions.field_stock_picking__picking_height
+#: model_terms:ir.ui.view,arch_db:stock_picking_dimensions.view_picking_form_dimensions
+msgid "Height"
+msgstr "Højde"
+
+#. module: stock_picking_dimensions
+#: model:ir.model.fields,help:stock_picking_dimensions.field_stock_picking__picking_height
+msgid "Height of the picking"
+msgstr "Plukningens højde"
+
+#. module: stock_picking_dimensions
+#: model:ir.model.fields,field_description:stock_picking_dimensions.field_stock_picking__picking_length
+#: model_terms:ir.ui.view,arch_db:stock_picking_dimensions.view_picking_form_dimensions
+msgid "Length"
+msgstr "Længde"
+
+#. module: stock_picking_dimensions
+#: model:ir.model.fields,help:stock_picking_dimensions.field_stock_picking__picking_length
+msgid "Length of the picking"
+msgstr "Plukningens længde"
+
+#. module: stock_picking_dimensions
+#: model:ir.model,name:stock_picking_dimensions.model_stock_picking
+msgid "Transfer"
+msgstr "Overfør"
+
+#. module: stock_picking_dimensions
+#: model:ir.model.fields,help:stock_picking_dimensions.field_stock_picking__dimension_uom_id
+msgid "UoM for length, height, width"
+msgstr "UoM for længde, højde, bredde"
+
+#. module: stock_picking_dimensions
+#: model:ir.model.fields,field_description:stock_picking_dimensions.field_stock_picking__volume
+#: model_terms:ir.ui.view,arch_db:stock_picking_dimensions.view_picking_form_dimensions
+msgid "Volume"
+msgstr "Volumen"
+
+#. module: stock_picking_dimensions
+#: model:ir.model.fields,field_description:stock_picking_dimensions.field_stock_picking__picking_width
+#: model_terms:ir.ui.view,arch_db:stock_picking_dimensions.view_picking_form_dimensions
+msgid "Width"
+msgstr "Bredde"
+
+#. module: stock_picking_dimensions
+#: model:ir.model.fields,help:stock_picking_dimensions.field_stock_picking__picking_width
+msgid "Width of the picking"
+msgstr "Plukningens bredde"
