@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-05-16 07:35+0000\n"
-"PO-Revision-Date: 2023-06-13 16:10+0000\n"
+"PO-Revision-Date: 2024-02-12 10:39+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -100,7 +100,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:business_product_location.field_business_product_location___last_update
 #: model:ir.model.fields,field_description:business_product_location.field_report_business_product_location_report_bpl___last_update
 msgid "Last Modified on"
-msgstr "Ultima Modifica il"
+msgstr "Ultima modifica il"
 
 #. module: business_product_location
 #: model:ir.model.fields,field_description:business_product_location.field_business_product_line_write_uid
