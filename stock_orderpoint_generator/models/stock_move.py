@@ -25,7 +25,7 @@ class StockMove(models.Model):
                 limit=1,
             )
             if not orderpoint:
-                template = self.env["stock.warehouse.orderpoint.template"].search(
+                template = self.env["stock.warehouse.orderpoint.template"].sudo().search(
                     [
                         ("location_id", "parent_of", move.location_id.id),
                         ("company_id", "=", move.company_id.id),
