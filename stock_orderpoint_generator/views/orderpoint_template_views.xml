@@ -20,6 +20,8 @@
                 <field name="auto_min_qty" />
                 <field name="auto_max_qty" />
                 <field name="auto_generate" />
+                <field name="trigger" />
+                <field name="route_id" />
             </tree>
         </field>
     </record>
@@ -33,6 +35,8 @@
                 <field name="warehouse_id" />
                 <field name="location_id" groups="stock.group_stock_multi_locations" />
                 <field name="company_id" groups="base.group_multi_company" />
+                <field name="trigger" />
+                <field name="route_id" />
                 <group expand="0" string="Group By">
                     <filter
                         string="Warehouse"
@@ -104,6 +108,8 @@
                         <group string="Misc">
                             <field name="active" />
                             <field name="auto_generate" />
+                            <field name="trigger" />
+                            <field name="route_id" />
                         </group>
                         <group
                             name="auto_minimum"
