@@ -80,6 +80,22 @@ class OrderpointTemplate(models.Model):
         "scheduled action for every product in this list.",
     )
     auto_last_generation = fields.Datetime(string="Last Automatic Generation")
+    trigger = fields.Selection(
+        selection=[
+            ("auto", "Auto"),
+            ("manual", "Manual"),
+        ],
+        string="Trigger",
+        default="auto",
+        required=True,
+        help="Select trigger",
+    )
+    route_id = fields.Many2one(
+        string="Router",
+        help="Choose router that you need",
+        comodel_name="stock.location.route",
+        domain=[],
+    )
 
     def _template_fields_to_discard(self):
         """In order to create every orderpoint we should pop this template
