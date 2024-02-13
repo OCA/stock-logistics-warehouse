@@ -57,4 +57,3 @@ class StockPicking(models.Model):
                 volume_m3 = m_length * m_width * m_heigth
                 volume = meter3_uom._compute_quantity(volume_m3, p.volume_uom_id)
             p.volume = volume
-
