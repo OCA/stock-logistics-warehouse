@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates>
+    <div t-name="sale_stock_on_hand_popup.qtyOnHand">
+        <div t-att-class="!widget.data.display_qty_widget ? 'invisible' : ''">
+            <a tabindex="0" t-attf-class="fa fa-arrow-right" />
+        </div>
+    </div>
+</templates>
