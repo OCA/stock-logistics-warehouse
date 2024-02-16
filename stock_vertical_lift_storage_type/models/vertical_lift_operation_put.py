@@ -118,6 +118,7 @@ class VerticalLiftOperationPut(models.Model):
         self.env.user.notify_warning(
             _("No free space found for storage type '{}' in shuttle '{}'").format(
                 storage_type.name, self.name
-            )
+            ),
+            params=self._get_user_notification_params(),
         )
         return True
