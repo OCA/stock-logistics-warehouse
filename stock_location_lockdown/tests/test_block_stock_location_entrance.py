@@ -6,23 +6,24 @@ from odoo.tests.common import TransactionCase
 
 
 class TestStockLocationLockdown(TransactionCase):
-    def setUp(self, *args, **kwargs):
-        super(TestStockLocationLockdown, self).setUp(*args, **kwargs)
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
 
         # Create a new stock location with no quants and blocked stock entrance
         new_loc = {"name": "location_test", "usage": "internal"}
-        self.new_stock_location = self.env["stock.location"].create(new_loc)
-        self.new_stock_location.block_stock_entrance = True
+        cls.new_stock_location = cls.env["stock.location"].create(new_loc)
+        cls.new_stock_location.block_stock_entrance = True
 
-        self.supplier_location = self.env.ref("stock.stock_location_suppliers")
-        self.customer_location = self.env.ref("stock.stock_location_customers")
+        cls.supplier_location = cls.env.ref("stock.stock_location_suppliers")
+        cls.customer_location = cls.env.ref("stock.stock_location_customers")
 
         # Call an existing product and force no Lot/Serial Number tracking
-        self.product = self.env.ref("product.product_product_27")
-        self.product.tracking = "none"
+        cls.product = cls.env.ref("product.product_product_27")
+        cls.product.tracking = "none"
 
         # Catch the first quant's stock location
-        self.stock_location = self.env["stock.quant"].search([])[0].location_id
+        cls.stock_location = cls.env["stock.quant"].search([])[0].location_id
 
     def test_transfer_stock_in_locked_location(self):
         """
@@ -34,7 +35,9 @@ class TestStockLocationLockdown(TransactionCase):
             "location_dest_id": self.new_stock_location.id,
             "product_id": self.product.id,
             "product_uom_qty": self.product.qty_available + 1,
-            "product_uom": 1,
+            "quantity": self.product.qty_available + 1,
+            "picked": True,
+            "product_uom": self.product.uom_id.id,
             "name": "test",
             "move_line_ids": [
                 (
@@ -42,8 +45,8 @@ class TestStockLocationLockdown(TransactionCase):
                     0,
                     {
                         "product_id": self.product.id,
-                        "product_uom_id": 1,
-                        "qty_done": self.product.qty_available + 1,
+                        "product_uom_id": self.product.uom_id.id,
+                        "quantity": self.product.qty_available + 1,
                         "location_id": self.supplier_location.id,
                         "location_dest_id": self.new_stock_location.id,
                     },
@@ -65,7 +68,9 @@ class TestStockLocationLockdown(TransactionCase):
             "location_dest_id": self.customer_location.id,
             "product_id": self.product.id,
             "product_uom_qty": self.product.qty_available + 1,
-            "product_uom": 1,
+            "quantity": self.product.qty_available + 1,
+            "picked": True,
+            "product_uom": self.product.uom_id.id,
             "name": "test",
             "move_line_ids": [
                 (
@@ -73,8 +78,8 @@ class TestStockLocationLockdown(TransactionCase):
                     0,
                     {
                         "product_id": self.product.id,
-                        "product_uom_id": 1,
-                        "qty_done": self.product.qty_available + 1,
+                        "product_uom_id": self.product.uom_id.id,
+                        "quantity": self.product.qty_available + 1,
                         "location_id": self.supplier_location.id,
                         "location_dest_id": self.new_stock_location.id,
                     },
