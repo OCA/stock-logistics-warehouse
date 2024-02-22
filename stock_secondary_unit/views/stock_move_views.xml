@@ -9,7 +9,11 @@
         <field name="groups_id" eval="[(4, ref('uom.group_uom'))]" />
         <field name="arch" type="xml">
             <field name="product_uom_qty" position="before">
-                <field name="secondary_uom_qty" />
+                <field
+                    name="secondary_uom_qty"
+                    attrs="{'readonly': [('state', 'in', ('done', 'cancel')), ('is_locked', '=', True)]}"
+                    force_save="1"
+                />
                 <field
                     name="secondary_uom_id"
                     domain="['|', ('product_id', '=', product_id),
@@ -31,7 +35,11 @@
         <field name="groups_id" eval="[(4, ref('uom.group_uom'))]" />
         <field name="arch" type="xml">
             <field name="product_uom_qty" position="before">
-                <field name="secondary_uom_qty" />
+                <field
+                    name="secondary_uom_qty"
+                    attrs="{'readonly': [('state', 'in', ('done', 'cancel')), ('is_locked', '=', True)]}"
+                    force_save="1"
+                />
                 <field
                     name="secondary_uom_id"
                     domain="['|', ('product_id', '=', product_id),
