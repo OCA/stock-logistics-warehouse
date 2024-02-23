@@ -19,7 +19,6 @@
         "views/stock_move.xml",
     ],
     "demo": [],
-    "post_init_hook": "post_init_hook",
     "pre_init_hook": "pre_init_hook",
     "development_status": "Beta",
 }
