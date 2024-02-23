@@ -6,7 +6,7 @@ from collections import Counter
 from datetime import datetime
 
 from odoo import exceptions, fields
-from odoo.tests import common, new_test_user
+from odoo.tests import Form, common, new_test_user
 
 
 class TestStockRequest(common.TransactionCase):
@@ -305,6 +305,11 @@ class TestStockRequestBase(TestStockRequest):
 
         self.assertEqual(stock_request.company_id, self.main_company)
         self.assertEqual(stock_request.location_id, self.warehouse.lot_stock_id)
+
+    def test_stock_request_order_empty(self):
+        request_order = Form(self.request_order)
+        with self.assertRaises(exceptions.ValidationError):
+            request_order.save()
 
     def test_stock_request_order_validations_01(self):
         """Testing the discrepancy in warehouse_id between
