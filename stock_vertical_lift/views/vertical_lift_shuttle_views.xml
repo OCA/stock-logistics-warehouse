@@ -97,7 +97,7 @@
                     </group>
                     <group groups="base.group_no_one">
                         <label for="command_ids" />
-                        <field name="command_ids">
+                        <field name="command_ids" nolabel="1" colspan="2">
                             <tree>
                                 <field name="name" />
                                 <field name="command" />
