@@ -426,6 +426,14 @@ msgid "Is Follower"
 msgstr "Est un abonné"
 
 #. module: stock_request
+#: code:addons/stock_request/models/stock_request_order.py:0
+#, python-format
+msgid ""
+"It is not possible to set empty stock request orders (maybe you should "
+"cancel it)."
+msgstr ""
+
+#. module: stock_request
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_form
 msgid "Items"
 msgstr "Articles"

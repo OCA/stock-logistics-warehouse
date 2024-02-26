@@ -424,9 +424,6 @@ msgstr "Es Seguidor"
 #. module: stock_request
 #: code:addons/stock_request/models/stock_request_order.py:0
 #, fuzzy, python-format
-#| msgid ""
-#| "It is not possible to set empty stock request orders (maybe\n"
-#| "                    you should cancel it)."
 msgid ""
 "It is not possible to set empty stock request orders (maybe you should "
 "cancel it)."
@@ -556,6 +553,7 @@ msgstr "Nombre"
 
 #. module: stock_request
 #: model:ir.model.constraint,message:stock_request.constraint_stock_request_abstract_name_uniq
+#: model:ir.model.constraint,message:stock_request.constraint_stock_request_kanban_name_uniq
 msgid "Name must be unique"
 msgstr "El nombre debe ser único"
 
