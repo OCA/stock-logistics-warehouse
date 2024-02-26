@@ -48,3 +48,25 @@ class VerticalLiftCommand(models.Model):
                 if name:
                     values["name"] = name
         return super().create(vals_list)
+
+    @api.autovacuum
+    def _autovacuum_commands(self):
+        _logger.info("Vacuuming ``vertical.lift.command`` records")
+        count = 0
+        param = self.env["ir.config_parameter"].sudo()
+        value = param.get_param("stock_vertical_lift.delete_command_after_days")
+        if value:
+            try:
+                days = int(value)  # ``value`` is a str, try casting to int
+            except ValueError:
+                _logger.warning(
+                    "Cannot convert ``stock_vertical_lift.delete_command_after_days``"
+                    f"'s value to integer: '{value}'"
+                )
+            else:
+                limit = fields.Datetime.add(fields.Datetime.now(), days=-days)
+                commands = self.search([("create_date", "<", limit)])
+                if commands:
+                    count = len(commands)
+                    commands.unlink()
+        _logger.info(f"Vacuumed {count} ``vertical.lift.command`` record(s)")
