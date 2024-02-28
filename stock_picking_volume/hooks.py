@@ -38,7 +38,7 @@ def pre_init_hook(cr):
                             product_uom_qty * pp.volume
                     END
             from reserved_qty_by_move
-            join product_product pp on pp.id = product_id
+            join product_product pp on pp.id = reserved_qty_by_move.product_id
             where
                 stock_move.id = reserved_qty_by_move.move_id
                 and state not in ('done', 'cancel')
