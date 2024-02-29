@@ -108,8 +108,13 @@ class StockReservation(models.Model):
 
     @api.model
     def _default_picking_type_id(self):
-        ref = "stock.picking_type_out"
-        return self.env.ref(ref, raise_if_not_found=False).id
+        domain = [
+            ("code", "=", "outgoing"),
+            "|",
+            ("company_id", "=", self.env.company.id),
+            ("company_id", "=", False),
+        ]
+        return self.env["stock.picking.type"].search(domain, limit=1).id
 
     @api.model
     def _default_location_dest_id(self):
