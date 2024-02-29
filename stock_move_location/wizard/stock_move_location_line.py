@@ -98,7 +98,7 @@ class StockMoveLocationWizardLine(models.TransientModel):
         self.ensure_one()
         location_dest_id = (
             self.move_location_wizard_id.apply_putaway_strategy
-            and self.destination_location_id.get_putaway_strategy(self.product_id).id
+            and self.destination_location_id._get_putaway_strategy(self.product_id).id
             or self.destination_location_id.id
         )
         qty_todo, qty_done = self._get_available_quantity()
