@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_stock_reservation_form" model="ir.ui.view">
+        <field name="name">stock.reservation.form</field>
+        <field name="model">stock.reservation</field>
+        <field name="inherit_id" ref="stock_reserve.view_stock_reservation_form" />
+        <field name="arch" type="xml">
+            <group name="location" position="after">
+                <group name="sale" string="Sales">
+                    <field name="sale_id" />
+                    <field name="sale_line_id" />
+                </group>
+            </group>
+            <xpath expr="//header//button[@name='open_move']" position="after">
+                    <button
+                    class="oe_stat_button"
+                    string="View Stock Picking"
+                    type="object"
+                    name="action_view_reserves_stock_picking_reservation"
+                />
+            </xpath>
+            <xpath
+                expr="//group[@name='note']/field[@name='note']"
+                position="attributes"
+            >
+                <attribute name="style">position:absolute; width:46%</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_stock_reservation_tree" model="ir.ui.view">
+        <field name="name">stock.reservation.tree</field>
+        <field name="model">stock.reservation</field>
+        <field name="inherit_id" ref="stock_reserve.view_stock_reservation_tree" />
+        <field name="arch" type="xml">
+            <field name="move_id" position="before">
+                <field name="sale_id" />
+            </field>
+        </field>
+    </record>
+</odoo>

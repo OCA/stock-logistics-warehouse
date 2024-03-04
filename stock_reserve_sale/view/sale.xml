@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_order_form_reserve" model="ir.ui.view">
+        <field name="name">sale.order.form.reserve</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale_stock.view_order_form_inherit_sale_stock" />
+        <field name="arch" type="xml">
+            <xpath expr="//form//div[@name='button_box']" position="inside">
+                <button
+                    class="oe_stat_button"
+                    string="Reserves"
+                    type="object"
+                    name="action_view_reserves_products"
+                    icon="fa-lock"
+                    attrs="{'invisible': [('reserves_count', '=', 0)]}"
+                >
+                    <field string="Reserved" name="reserves_count" widget="statinfo" />
+                    <field name="reserves_count" invisible="1" />
+                    <field name="all_lines_reserved" invisible="1" />
+                </button>
+                <button
+                    class="oe_stat_button"
+                    string="Stock Picking Reserve"
+                    type="object"
+                    name="action_view_reserves_stock_picking"
+                    icon="fa-truck"
+                    attrs="{'invisible': ['|', ('reserves_count', '=', 0),('state', '!=', 'draft')]}"
+                />
+            </xpath>
+            <button name="action_quotation_send" position="before">
+                <field name="is_stock_reservable" invisible="1" />
+                <button
+                    name="%(action_sale_stock_reserve)d"
+                    type="action"
+                    string="Reserve Stock"
+                    help="Pre-book products from stock"
+                    attrs="{'invisible': ['|', ('all_lines_reserved', '=', True), ('state', '!=', 'draft')]}"
+                />
+            </button>
+            <field name="order_line" position="attributes">
+                <attribute name="options">{"reload_on_button": 1}</attribute>
+            </field>
+            <xpath
+                expr="//field[@name='order_line']/form//field[@name='state']"
+                position="before"
+            >
+                <field name="reservation_ids" invisible="1" />
+                <button
+                    name="%(action_sale_stock_reserve)d"
+                    type="action"
+                    string="Reserve Stock"
+                    attrs="{'invisible': ['|', ('reservation_ids', '!=', []),
+                                                ('state', '!=', 'draft')]}"
+                />
+                <button
+                    name="release_stock_reservation"
+                    type="object"
+                    string="Release Reservation"
+                    attrs="{'invisible': ['|', ('reservation_ids', '=', []),
+                                                ('state', '!=', 'draft')]}"
+                />
+            </xpath>
+            <xpath
+                expr="//field[@name='order_line']/tree/field[@name='price_subtotal']"
+                position="after"
+            >
+                <field name="reservation_ids" invisible="1" />
+                <field name="is_stock_reservable" invisible="1" />
+                <button
+                    name="%(action_sale_stock_reserve)d"
+                    type="action"
+                    icon="fa-lock"
+                    attrs="{'invisible': [('is_stock_reservable', '=', False)]}"
+                />
+                <button
+                    name="release_stock_reservation"
+                    type="object"
+                    icon="fa-undo"
+                    attrs="{'invisible': [('reservation_ids', '=', [])]}"
+                />
+            </xpath>
+            <field name="user_id" position="before">
+                <field name="has_stock_reservation" invisible="1" />
+            </field>
+            <xpath expr="//button[@name='action_quotation_send']" position="before">
+                <button
+                    name="release_all_stock_reservation"
+                    string="Cancell all reserve"
+                    type="object"
+                    attrs="{'invisible': [('has_stock_reservation', '=', False)]}"
+                />
+            </xpath>
+            <!-- Make readonly the fields quantity and product_id when they are reserved -->
+            <xpath
+                expr="//field[@name='order_line']/form//field[@name='product_id']"
+                position="after"
+            >
+                <field name="is_readonly" invisible="True" />
+            </xpath>
+            <xpath
+                expr="//field[@name='order_line']/form//field[@name='product_uom_qty']"
+                position="attributes"
+            >
+                <attribute
+                    name="attrs"
+                >{'readonly': [('is_readonly', '=', True)]}</attribute>
+            </xpath>
+            <xpath
+                expr="//field[@name='order_line']/form//field[@name='product_id']"
+                position="attributes"
+            >
+                <attribute
+                    name="attrs"
+                >{'readonly': [('is_readonly', '=', True)]}</attribute>
+            </xpath>
+            <xpath
+                expr="//field[@name='order_line']/tree/field[@name='product_id']"
+                position="after"
+            >
+                <field name="is_readonly" invisible="True" />
+            </xpath>
+            <xpath
+                expr="//field[@name='order_line']/tree/field[@name='product_uom_qty']"
+                position="attributes"
+            >
+                <attribute
+                    name="attrs"
+                >{'readonly': [('is_readonly', '=', True)]}</attribute>
+            </xpath>
+            <xpath
+                expr="//field[@name='order_line']/tree/field[@name='product_id']"
+                position="attributes"
+            >
+                <attribute
+                    name="attrs"
+                >{'readonly': [('is_readonly', '=', True)]}</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>
