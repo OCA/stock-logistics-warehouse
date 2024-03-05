@@ -14,6 +14,6 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: stock_picking_volume_packaging
-#: model:ir.model,name:stock_picking_volume_packaging.model_stock_move
-msgid "Stock Move"
+#: model:ir.model,name:stock_picking_volume_packaging.model_product_product
+msgid "Product Variant"
 msgstr ""
