@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-11-21 13:33+0000\n"
+"PO-Revision-Date: 2024-03-06 10:33+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -24,7 +24,7 @@ msgstr "Logistica"
 #. module: stock_picking_volume
 #: model:ir.model,name:stock_picking_volume.model_product_product
 msgid "Product Variant"
-msgstr ""
+msgstr "Variante prodotto"
 
 #. module: stock_picking_volume
 #: model:ir.model,name:stock_picking_volume.model_stock_move
