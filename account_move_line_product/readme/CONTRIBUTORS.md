@@ -3,3 +3,4 @@
 - Mantas Šniukas \<<mantas@vialaurea.lt>\>
 - Juany Davila \<<juany.davila@forgeflow.com>\>
 - Dhara Solanki \<<dhara.solanki@initos.com>\>
+- Anais Lopez \<<anais.lopez@forgeflow.com>\>
