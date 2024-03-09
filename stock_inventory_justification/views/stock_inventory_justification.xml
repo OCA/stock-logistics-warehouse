@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2019 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <!--FORM view-->
+    <record model="ir.ui.view" id="stock_inventory_justification_form_view">
+        <field
+            name="name"
+        >stock.inventory.justification.form (in stock_inventory_justification)</field>
+        <field name="model">stock.inventory.justification</field>
+        <field name="arch" type="xml">
+            <form>
+                <header />
+                <sheet>
+                    <group name="group_main">
+                        <field name="name" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <!--TREE view-->
+    <record model="ir.ui.view" id="stock_inventory_justification_tree_view">
+        <field
+            name="name"
+        >stock.inventory.justification.tree (in stock_inventory_justification)</field>
+        <field name="model">stock.inventory.justification</field>
+        <field name="arch" type="xml">
+            <tree editable="top">
+                <field name="name" />
+            </tree>
+        </field>
+    </record>
+    <!--SEARCH view-->
+    <record model="ir.ui.view" id="stock_inventory_justification_search_view">
+        <field
+            name="name"
+        >stock.inventory.justification.search (in stock_inventory_justification)</field>
+        <field name="model">stock.inventory.justification</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+            </search>
+        </field>
+    </record>
+    <!--ACTION-->
+    <record model="ir.actions.act_window" id="stock_inventory_justification_act_window">
+        <field name="name">Inventory justifications</field>
+        <field name="res_model">stock.inventory.justification</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+    <!-- MENU -->
+    <record model="ir.ui.menu" id="silog_stock_inventory_justification_menu">
+        <field name="name">Inventory justifications</field>
+        <field name="parent_id" ref="stock.menu_warehouse_config" />
+        <field
+            name="action"
+            ref="stock_inventory_justification.stock_inventory_justification_act_window"
+        />
+        <field name="sequence" eval="40" />
+    </record>
+</odoo>
