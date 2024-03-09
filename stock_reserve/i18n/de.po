@@ -341,6 +341,11 @@ msgid "Inventory"
 msgstr "Bestand"
 
 #. module: stock_reserve
+#: model:ir.model.fields,help:stock_reserve.field_stock_reservation__inventory_justification_ids
+msgid "Inventory justifications"
+msgstr ""
+
+#. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__is_locked
 msgid "Is Locked"
 msgstr ""
@@ -353,6 +358,11 @@ msgstr ""
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__is_quantity_done_editable
 msgid "Is quantity done editable"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__inventory_justification_ids
+msgid "Justifications"
 msgstr ""
 
 #. module: stock_reserve
