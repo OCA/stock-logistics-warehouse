@@ -40,6 +40,7 @@ setuptools.setup(
         'odoo-addon-stock_putaway_product_template>=16.0dev,<16.1dev',
         'odoo-addon-stock_quant_cost_info>=16.0dev,<16.1dev',
         'odoo-addon-stock_quant_manual_assign>=16.0dev,<16.1dev',
+        'odoo-addon-stock_removal_location_by_priority>=16.0dev,<16.1dev',
         'odoo-addon-stock_reserve>=16.0dev,<16.1dev',
         'odoo-addon-stock_route_mto>=16.0dev,<16.1dev',
         'odoo-addon-stock_search_supplierinfo_code>=16.0dev,<16.1dev',
