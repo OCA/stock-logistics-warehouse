@@ -39,23 +39,23 @@ msgid "ID"
 msgstr ""
 
 #. module: stock_inventory_justification
-#: model:ir.model,name:stock_inventory_justification.model_stock_inventory
-msgid "Inventory"
-msgstr ""
-
-#. module: stock_inventory_justification
 #: model:ir.model,name:stock_inventory_justification.model_stock_inventory_justification
 msgid "Inventory justification"
 msgstr ""
 
 #. module: stock_inventory_justification
 #: model:ir.actions.act_window,name:stock_inventory_justification.stock_inventory_justification_act_window
+#: model:ir.model.fields,help:stock_inventory_justification.field_stock_move__inventory_justification_ids
+#: model:ir.model.fields,help:stock_inventory_justification.field_stock_move_line__inventory_justification_ids
+#: model:ir.model.fields,help:stock_inventory_justification.field_stock_quant__inventory_justification_ids
 #: model:ir.ui.menu,name:stock_inventory_justification.silog_stock_inventory_justification_menu
 msgid "Inventory justifications"
 msgstr ""
 
 #. module: stock_inventory_justification
-#: model:ir.model.fields,field_description:stock_inventory_justification.field_stock_inventory__justification_ids
+#: model:ir.model.fields,field_description:stock_inventory_justification.field_stock_move__inventory_justification_ids
+#: model:ir.model.fields,field_description:stock_inventory_justification.field_stock_move_line__inventory_justification_ids
+#: model:ir.model.fields,field_description:stock_inventory_justification.field_stock_quant__inventory_justification_ids
 msgid "Justifications"
 msgstr ""
 
@@ -77,6 +77,21 @@ msgstr ""
 #. module: stock_inventory_justification
 #: model:ir.model.fields,field_description:stock_inventory_justification.field_stock_inventory_justification__name
 msgid "Name"
+msgstr ""
+
+#. module: stock_inventory_justification
+#: model:ir.model,name:stock_inventory_justification.model_stock_move_line
+msgid "Product Moves (Stock Move Line)"
+msgstr ""
+
+#. module: stock_inventory_justification
+#: model:ir.model,name:stock_inventory_justification.model_stock_quant
+msgid "Quants"
+msgstr ""
+
+#. module: stock_inventory_justification
+#: model:ir.model,name:stock_inventory_justification.model_stock_move
+msgid "Stock Move"
 msgstr ""
 
 #. module: stock_inventory_justification
