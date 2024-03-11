@@ -22,6 +22,7 @@ Available addons
 addon | version | maintainers | summary
 --- | --- | --- | ---
 [scrap_reason_code](scrap_reason_code/) | 17.0.1.0.0 | [![bodedra](https://github.com/bodedra.png?size=30px)](https://github.com/bodedra) | Reason code for scrapping
+[stock_mts_mto_rule](stock_mts_mto_rule/) | 17.0.1.0.0 |  | Add a MTS+MTO route
 
 [//]: # (end addons)
 
