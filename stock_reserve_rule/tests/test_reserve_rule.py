@@ -717,3 +717,39 @@ class TestReserveRule(common.TransactionCase):
             ml, [{"location_id": self.loc_zone2_bin1.id, "reserved_uom_qty": 80.0}]
         )
         self.assertEqual(move.state, "assigned")
+
+    def test_several_rules_same_loc_negative(self):
+        """
+        We have several rules for the same location
+        We have two quants in the location with one negative
+
+        """
+
+        self.env["stock.quant"].create(
+            {
+                "location_id": self.loc_zone1_bin1.id,
+                "quantity": 10.0,
+                "product_id": self.product1.id,
+            }
+        )
+        self.env["stock.quant"].create(
+            {
+                "location_id": self.loc_zone1_bin1.id,
+                "quantity": -2.0,
+                "product_id": self.product1.id,
+            }
+        )
+
+        picking = self._create_picking(self.wh, [(self.product1, 1.0)])
+        self._create_rule(
+            {},
+            [
+                {
+                    "location_id": self.loc_zone1_bin1.id,
+                    "removal_strategy": "packaging",
+                    "sequence": 1,
+                },
+                {"location_id": self.loc_zone1_bin1.id, "sequence": 2},
+            ],
+        )
+        picking.action_assign()
