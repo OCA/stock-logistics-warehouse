@@ -5,6 +5,7 @@
   * David Vidal
   * Sergio Teruel
   * Carlos Roca
+  * Carolina Fernandez
 
 * Xavier Jimenez <xavier.jimenez@qubiq.es>
 * Iván Todorovich <ivan.todorovich@gmail.com>
