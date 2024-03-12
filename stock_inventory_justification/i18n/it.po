@@ -6,43 +6,45 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2024-03-12 13:36+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: stock_inventory_justification
 #: model:ir.model.fields,field_description:stock_inventory_justification.field_stock_inventory_justification__active
 msgid "Active"
-msgstr ""
+msgstr "Attiva"
 
 #. module: stock_inventory_justification
 #: model:ir.model.fields,field_description:stock_inventory_justification.field_stock_inventory_justification__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Creato da"
 
 #. module: stock_inventory_justification
 #: model:ir.model.fields,field_description:stock_inventory_justification.field_stock_inventory_justification__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Creato il"
 
 #. module: stock_inventory_justification
 #: model:ir.model.fields,field_description:stock_inventory_justification.field_stock_inventory_justification__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nome visualizzato"
 
 #. module: stock_inventory_justification
 #: model:ir.model.fields,field_description:stock_inventory_justification.field_stock_inventory_justification__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: stock_inventory_justification
 #: model:ir.model,name:stock_inventory_justification.model_stock_inventory_justification
 msgid "Inventory justification"
-msgstr ""
+msgstr "Giustificazione inventario"
 
 #. module: stock_inventory_justification
 #: model:ir.actions.act_window,name:stock_inventory_justification.stock_inventory_justification_act_window
@@ -51,51 +53,51 @@ msgstr ""
 #: model:ir.model.fields,help:stock_inventory_justification.field_stock_quant__inventory_justification_ids
 #: model:ir.ui.menu,name:stock_inventory_justification.silog_stock_inventory_justification_menu
 msgid "Inventory justifications"
-msgstr ""
+msgstr "Giustificazioni inventario"
 
 #. module: stock_inventory_justification
 #: model:ir.model.fields,field_description:stock_inventory_justification.field_stock_move__inventory_justification_ids
 #: model:ir.model.fields,field_description:stock_inventory_justification.field_stock_move_line__inventory_justification_ids
 #: model:ir.model.fields,field_description:stock_inventory_justification.field_stock_quant__inventory_justification_ids
 msgid "Justifications"
-msgstr ""
+msgstr "Giustificazioni"
 
 #. module: stock_inventory_justification
 #: model:ir.model.fields,field_description:stock_inventory_justification.field_stock_inventory_justification____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Ultima modifica il"
 
 #. module: stock_inventory_justification
 #: model:ir.model.fields,field_description:stock_inventory_justification.field_stock_inventory_justification__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Ultimo aggiornamento di"
 
 #. module: stock_inventory_justification
 #: model:ir.model.fields,field_description:stock_inventory_justification.field_stock_inventory_justification__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Ultimo aggiornamento il"
 
 #. module: stock_inventory_justification
 #: model:ir.model.fields,field_description:stock_inventory_justification.field_stock_inventory_justification__name
 msgid "Name"
-msgstr ""
+msgstr "Nome"
 
 #. module: stock_inventory_justification
 #: model:ir.model,name:stock_inventory_justification.model_stock_move_line
 msgid "Product Moves (Stock Move Line)"
-msgstr ""
+msgstr "Movimenti prodotto (riga movimento di magazzino)"
 
 #. module: stock_inventory_justification
 #: model:ir.model,name:stock_inventory_justification.model_stock_quant
 msgid "Quants"
-msgstr ""
+msgstr "Quanti"
 
 #. module: stock_inventory_justification
 #: model:ir.model,name:stock_inventory_justification.model_stock_move
 msgid "Stock Move"
-msgstr ""
+msgstr "Movimento di magazzino"
 
 #. module: stock_inventory_justification
 #: model:ir.model.constraint,message:stock_inventory_justification.constraint_stock_inventory_justification_unique_name
 msgid "This stock inventory justification already exists."
-msgstr ""
+msgstr "Questa giustificazione inventario di magazzino esiste già."
