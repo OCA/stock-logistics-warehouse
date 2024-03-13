@@ -6,63 +6,65 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2024-03-13 11:39+0000\n"
+"Last-Translator: MorganeGoujon <morgane@scalizer.fr>\n"
 "Language-Team: none\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: stock_location_position
 #: model:ir.model.fields,field_description:stock_location_position.field_stock_location__posx
 msgid "Box (X)"
-msgstr ""
+msgstr "Boîte (X)"
 
 #. module: stock_location_position
 #: model:ir.model.fields,field_description:stock_location_position.field_stock_location__posy
 msgid "Box (Y)"
-msgstr ""
+msgstr "Boîte (Y)"
 
 #. module: stock_location_position
 #: model:ir.model.fields,field_description:stock_location_position.field_stock_location__posz
 msgid "Box (Z)"
-msgstr ""
+msgstr "Boîte (Z)"
 
 #. module: stock_location_position
 #: model:ir.model.fields,field_description:stock_location_position.field_stock_location__corridor
 msgid "Corridor"
-msgstr ""
+msgstr "Couloir"
 
 #. module: stock_location_position
 #: model:ir.model.fields,help:stock_location_position.field_stock_location__level
 msgid "Define as the floor of the house"
-msgstr ""
+msgstr "Défini comme l'étage de la maison"
 
 #. module: stock_location_position
 #: model:ir.model.fields,help:stock_location_position.field_stock_location__rack
 msgid "Define as the house number within the street"
-msgstr ""
+msgstr "Défini comme le numéro de maison dans la rue"
 
 #. module: stock_location_position
 #: model:ir.model.fields,help:stock_location_position.field_stock_location__row
 msgid "Define as the side within the street"
-msgstr ""
+msgstr "Défini comme le côté au sein de la rue"
 
 #. module: stock_location_position
 #: model:ir.model.fields,help:stock_location_position.field_stock_location__corridor
 msgid "Define as the street"
-msgstr ""
+msgstr "Défini comme la rue"
 
 #. module: stock_location_position
 #: model:ir.model,name:stock_location_position.model_stock_location
 msgid "Inventory Locations"
-msgstr ""
+msgstr "Emplacements d'inventaire"
 
 #. module: stock_location_position
 #: model:ir.model.fields,field_description:stock_location_position.field_stock_location__level
 msgid "Level"
-msgstr ""
+msgstr "Niveau"
 
 #. module: stock_location_position
 #: model:ir.model.fields,help:stock_location_position.field_stock_location__posx
@@ -70,6 +72,8 @@ msgid ""
 "Optional (X) coordinate of the bin if the location is split in several "
 "parts. (e.g. drawer storage)"
 msgstr ""
+"Coordonnée optionnelle (X) de l'entreposage si l'emplacement est divisé en "
+"plusieurs parties (ex. rangements à tiroir)"
 
 #. module: stock_location_position
 #: model:ir.model.fields,help:stock_location_position.field_stock_location__posy
@@ -77,6 +81,8 @@ msgid ""
 "Optional (Y) coordinate of the bin if the location is split in several "
 "parts. (e.g. drawer storage)"
 msgstr ""
+"Coordonnée optionnelle (Y) de l'entreposage si l'emplacement est divisé en "
+"plusieurs parties (ex. rangements à tiroir)"
 
 #. module: stock_location_position
 #: model:ir.model.fields,help:stock_location_position.field_stock_location__posz
@@ -84,18 +90,20 @@ msgid ""
 "Optional (Z) coordinate of the bin if the location is split in several "
 "parts. (e.g. storage tray)"
 msgstr ""
+"Coordonnée optionnelle (Z) de l'entreposage si l'emplacement est divisé en "
+"plusieurs parties (ex. rangements à tiroir)"
 
 #. module: stock_location_position
 #: model_terms:ir.ui.view,arch_db:stock_location_position.stock_location_form_inherit
 msgid "Position"
-msgstr ""
+msgstr "Position"
 
 #. module: stock_location_position
 #: model:ir.model.fields,field_description:stock_location_position.field_stock_location__rack
 msgid "Rack"
-msgstr ""
+msgstr "Étagère"
 
 #. module: stock_location_position
 #: model:ir.model.fields,field_description:stock_location_position.field_stock_location__row
 msgid "Row"
-msgstr ""
+msgstr "Rangée"
