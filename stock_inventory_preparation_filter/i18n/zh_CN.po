@@ -21,65 +21,50 @@ msgstr ""
 "X-Generator: Weblate 3.8\n"
 
 #. module: stock_inventory_preparation_filter
-#: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:0
-#, fuzzy, python-format
-msgid "All products"
-msgstr "产品"
-
-#. module: stock_inventory_preparation_filter
-#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__categ_ids
-msgid "Categories"
-msgstr "分类"
-
-#. module: stock_inventory_preparation_filter
 #: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__product_domain
 msgid "Domain"
 msgstr ""
 
 #. module: stock_inventory_preparation_filter
-#: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:0
-#, fuzzy, python-format
+#: model:ir.model.fields.selection,name:stock_inventory_preparation_filter.selection__stock_inventory__product_selection__domain
+#, fuzzy
 msgid "Filtered Products"
 msgstr "已选定产品"
 
 #. module: stock_inventory_preparation_filter
-#: model:ir.model.fields,help:stock_inventory_preparation_filter.field_stock_inventory__filter
-msgid ""
-"If you do an entire inventory, you can choose 'All Products' and it will "
-"prefill the inventory with the current stock.  If you only do some products "
-"(e.g. Cycle Counting) you can choose 'Manual Selection of Products' and the "
-"system won't propose anything.  You can also let the system propose for a "
-"single product / lot /... "
+#: model:ir.model,name:stock_inventory_preparation_filter.model_stock_inventory
+msgid "Inventory Adjustment Group"
 msgstr ""
 
 #. module: stock_inventory_preparation_filter
-#: model:ir.model,name:stock_inventory_preparation_filter.model_stock_inventory
-msgid "Inventory"
-msgstr "库存"
+#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__product_selection
+msgid "Product Selection"
+msgstr ""
 
-#. module: stock_inventory_preparation_filter
-#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__filter
-#: model_terms:ir.ui.view,arch_db:stock_inventory_preparation_filter.view_inventory_form
+#, fuzzy, python-format
+#~ msgid "All products"
+#~ msgstr "产品"
+
+#~ msgid "Categories"
+#~ msgstr "分类"
+
+#~ msgid "Inventory"
+#~ msgstr "库存"
+
 #, fuzzy
-msgid "Inventory of"
-msgstr "库存"
+#~ msgid "Inventory of"
+#~ msgstr "库存"
 
-#. module: stock_inventory_preparation_filter
-#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__lot_ids
-msgid "Lots"
-msgstr "批次"
+#~ msgid "Lots"
+#~ msgstr "批次"
 
-#. module: stock_inventory_preparation_filter
-#: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:0
 #, python-format
-msgid "Selected Categories"
-msgstr "已选定分类"
+#~ msgid "Selected Categories"
+#~ msgstr "已选定分类"
 
-#. module: stock_inventory_preparation_filter
-#: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:0
 #, python-format
-msgid "Selected Lots"
-msgstr "已选定批次"
+#~ msgid "Selected Lots"
+#~ msgstr "已选定批次"
 
 #~ msgid "Capture Lines"
 #~ msgstr "获取行"

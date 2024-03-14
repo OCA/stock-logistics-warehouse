@@ -20,69 +20,61 @@ msgstr ""
 "X-Generator: Weblate 4.3.2\n"
 
 #. module: stock_inventory_preparation_filter
-#: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:0
-#, python-format
-msgid "All products"
-msgstr "Tutti i prodotti"
-
-#. module: stock_inventory_preparation_filter
-#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__categ_ids
-msgid "Categories"
-msgstr "Categorie"
-
-#. module: stock_inventory_preparation_filter
 #: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__product_domain
 msgid "Domain"
 msgstr "Dominio"
 
 #. module: stock_inventory_preparation_filter
-#: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:0
-#, python-format
+#: model:ir.model.fields.selection,name:stock_inventory_preparation_filter.selection__stock_inventory__product_selection__domain
 msgid "Filtered Products"
 msgstr "Prodotti filtrati"
 
 #. module: stock_inventory_preparation_filter
-#: model:ir.model.fields,help:stock_inventory_preparation_filter.field_stock_inventory__filter
-msgid ""
-"If you do an entire inventory, you can choose 'All Products' and it will "
-"prefill the inventory with the current stock.  If you only do some products "
-"(e.g. Cycle Counting) you can choose 'Manual Selection of Products' and the "
-"system won't propose anything.  You can also let the system propose for a "
-"single product / lot /... "
-msgstr ""
-"Se fai un inventario completo, puoi scegliere 'Tutti i prodotti' e "
-"l'inventario verrà precompilato con le quantità attuali.  Se lo fai solo per "
-"alcuni prodotti (es. Inventario a rotazione) Puoi scegliere  'Selezione "
-"manuale dei prodotti' e il sistema non proporrà niente.  Puoi anche far sì "
-"che il sistema proponga un singolo prodotto / lotto / ... "
-
-#. module: stock_inventory_preparation_filter
 #: model:ir.model,name:stock_inventory_preparation_filter.model_stock_inventory
-msgid "Inventory"
-msgstr "Inventario"
+msgid "Inventory Adjustment Group"
+msgstr ""
 
 #. module: stock_inventory_preparation_filter
-#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__filter
-#: model_terms:ir.ui.view,arch_db:stock_inventory_preparation_filter.view_inventory_form
-msgid "Inventory of"
-msgstr "Inventario di"
+#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__product_selection
+msgid "Product Selection"
+msgstr ""
 
-#. module: stock_inventory_preparation_filter
-#: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__lot_ids
-msgid "Lots"
-msgstr "Lotti"
-
-#. module: stock_inventory_preparation_filter
-#: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:0
 #, python-format
-msgid "Selected Categories"
-msgstr "Categorie selezionate"
+#~ msgid "All products"
+#~ msgstr "Tutti i prodotti"
 
-#. module: stock_inventory_preparation_filter
-#: code:addons/stock_inventory_preparation_filter/models/stock_inventory.py:0
+#~ msgid "Categories"
+#~ msgstr "Categorie"
+
+#~ msgid ""
+#~ "If you do an entire inventory, you can choose 'All Products' and it will "
+#~ "prefill the inventory with the current stock.  If you only do some "
+#~ "products (e.g. Cycle Counting) you can choose 'Manual Selection of "
+#~ "Products' and the system won't propose anything.  You can also let the "
+#~ "system propose for a single product / lot /... "
+#~ msgstr ""
+#~ "Se fai un inventario completo, puoi scegliere 'Tutti i prodotti' e "
+#~ "l'inventario verrà precompilato con le quantità attuali.  Se lo fai solo "
+#~ "per alcuni prodotti (es. Inventario a rotazione) Puoi scegliere  "
+#~ "'Selezione manuale dei prodotti' e il sistema non proporrà niente.  Puoi "
+#~ "anche far sì che il sistema proponga un singolo prodotto / lotto / ... "
+
+#~ msgid "Inventory"
+#~ msgstr "Inventario"
+
+#~ msgid "Inventory of"
+#~ msgstr "Inventario di"
+
+#~ msgid "Lots"
+#~ msgstr "Lotti"
+
 #, python-format
-msgid "Selected Lots"
-msgstr "Lotti selezionati"
+#~ msgid "Selected Categories"
+#~ msgstr "Categorie selezionate"
+
+#, python-format
+#~ msgid "Selected Lots"
+#~ msgstr "Lotti selezionati"
 
 #~ msgid "Created by"
 #~ msgstr "Creato da"
