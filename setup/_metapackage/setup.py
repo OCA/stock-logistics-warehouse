@@ -53,6 +53,7 @@ setuptools.setup(
         'odoo-addon-stock_reserve>=15.0dev,<15.1dev',
         'odoo-addon-stock_reserve_rule>=15.0dev,<15.1dev',
         'odoo-addon-stock_secondary_unit>=15.0dev,<15.1dev',
+        'odoo-addon-stock_valuation_layer_accounting_date>=15.0dev,<15.1dev',
         'odoo-addon-stock_warehouse_calendar>=15.0dev,<15.1dev',
     ],
     classifiers=[
