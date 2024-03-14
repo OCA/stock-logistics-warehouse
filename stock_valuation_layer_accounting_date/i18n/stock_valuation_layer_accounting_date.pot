@@ -4,13 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 15.0+e\n"
+"Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-26 01:48+0000\n"
-"PO-Revision-Date: 2022-12-26 01:48+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -19,28 +16,26 @@ msgstr ""
 #. module: stock_valuation_layer_accounting_date
 #: model:ir.model.fields,field_description:stock_valuation_layer_accounting_date.field_stock_valuation_layer__accounting_date
 msgid "Accounting Date"
-msgstr "会計日"
+msgstr ""
 
 #. module: stock_valuation_layer_accounting_date
 #: model:ir.model.fields,help:stock_valuation_layer_accounting_date.field_stock_valuation_layer__accounting_date
 msgid ""
-"Date of the linked journal entry if applicable, otherwise the create date of "
-"the record (timezone aware)"
+"Date of the linked journal entry if applicable, otherwise the create date of"
+" the record (timezone aware)"
 msgstr ""
-"紐づく仕訳がある場合はその日付、なければレコード作成日（タイムゾーンの考慮あ"
-"り）"
 
 #. module: stock_valuation_layer_accounting_date
 #: model:ir.model,name:stock_valuation_layer_accounting_date.model_stock_quantity_history
 msgid "Stock Quantity History"
-msgstr "在庫数量履歴"
+msgstr ""
 
 #. module: stock_valuation_layer_accounting_date
 #: model:ir.model,name:stock_valuation_layer_accounting_date.model_stock_valuation_layer
 msgid "Stock Valuation Layer"
-msgstr "在庫評価レイヤー"
+msgstr ""
 
 #. module: stock_valuation_layer_accounting_date
 #: model_terms:ir.ui.view,arch_db:stock_valuation_layer_accounting_date.view_stock_quantity_history
 msgid "Valuation as of Accounting Date"
-msgstr "会計日での評価"
+msgstr ""
