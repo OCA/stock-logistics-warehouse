@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="view_inventory_group_form">
+        <field name="model">stock.inventory</field>
+        <field name="inherit_id" ref="stock_inventory.view_inventory_group_form" />
+        <field name="arch" type="xml">
+            <field name="product_ids" position="attributes">
+                <attribute
+                    name="attrs"
+                >{'invisible': [('product_selection', '!=', 'all')]}</attribute>
+            </field>
+            <xpath expr="//field[@name='owner_id']/../.." position="after">
+                <group name="preparation_filter">
+                    <group name="preparation_filter_right">
+                        <field
+                            name="product_domain"
+                            widget="domain"
+                            attrs="{'invisible': [('product_selection', '!=', 'domain')]}"
+                            options="{'model': 'product.product'}"
+                        />
+                    </group>
+                </group>
+            </xpath>
+
+        </field>
+    </record>
+</odoo>
