@@ -20,11 +20,11 @@ class StockPicking(models.Model):
 
     def detect_exceptions(self):
         all_exceptions = super().detect_exceptions()
-        moves = self.mapped("move_lines")
+        moves = self.mapped("move_ids")
         all_exceptions += moves.detect_exceptions()
         return all_exceptions
 
-    @api.constrains("ignore_exception", "move_lines", "state")
+    @api.constrains("ignore_exception", "move_ids", "state")
     def stock_check_exception(self):
         pickings = self.filtered(
             lambda s: s.state in ["waiting", "confirmed", "assigned"]
@@ -32,7 +32,7 @@ class StockPicking(models.Model):
         if pickings:
             pickings._check_exception()
 
-    @api.onchange("move_lines")
+    @api.onchange("move_ids")
     def onchange_ignore_exception(self):
         if self.state in ["waiting", "confirmed", "assigned"]:
             self.ignore_exception = False
