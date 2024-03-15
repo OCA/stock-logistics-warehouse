@@ -15,6 +15,15 @@ class StockRule(models.Model):
     )
     mts_rule_id = fields.Many2one("stock.rule", string="MTS Rule", check_company=True)
     mto_rule_id = fields.Many2one("stock.rule", string="MTO Rule", check_company=True)
+    mts_mto_split_quantity_rule = fields.Selection(
+        string="MTS/MTO split rule",
+        selection=[("diff", "Difference"), ("full", "No Split")],
+        default="diff",
+        help=(
+            "With `Difference` the MTS rule will be used for any available quantity.\n"
+            "With`No Split` only if the full quantity is avaiable."
+        ),
+    )
 
     @api.constrains("action", "mts_rule_id", "mto_rule_id")
     def _check_mts_mto_rule(self):
@@ -26,6 +35,10 @@ class StockRule(models.Model):
                     ) % (rule.name,)
                     raise ValidationError(msg)
 
+    @api.model
+    def _get_available_quantity_mts_mto_rule(self, product):
+        return product.virtual_available
+
     def get_mto_qty_to_order(self, product, product_qty, product_uom, values):
         self.ensure_one()
         precision = self.env["decimal.precision"].precision_get(
@@ -33,7 +46,7 @@ class StockRule(models.Model):
         )
         src_location_id = self.mts_rule_id.location_src_id.id
         product_location = product.with_context(location=src_location_id)
-        virtual_available = product_location.virtual_available
+        virtual_available = self._get_available_quantity_mts_mto_rule(product_location)
         qty_available = product.uom_id._compute_quantity(virtual_available, product_uom)
         if float_compare(qty_available, 0.0, precision_digits=precision) > 0:
             if (
@@ -68,7 +81,7 @@ class StockRule(models.Model):
                     needed_qty, procurement.product_qty, precision_digits=precision
                 )
                 == 0.0
-            ):
+            ) or rule.mts_mto_split_quantity_rule == "full":
                 getattr(self.env["stock.rule"], "_run_%s" % rule.mto_rule_id.action)(
                     [(procurement, rule.mto_rule_id)]
                 )
