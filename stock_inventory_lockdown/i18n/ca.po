@@ -1,0 +1,48 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * stock_inventory_lockdown
+#
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-11-30 03:53+0000\n"
+"PO-Revision-Date: 2017-11-30 03:53+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"Language-Team: Catalan (https://www.transifex.com/oca/teams/23907/ca/)\n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: stock_inventory_lockdown
+#: code:addons/stock_inventory_lockdown/models/stock_move.py:0
+#, python-format
+msgid ""
+"An inventory is being conducted at the following location(s):\n"
+" - %s"
+msgstr ""
+
+#. module: stock_inventory_lockdown
+#: code:addons/stock_inventory_lockdown/models/stock_location.py:0
+#, python-format
+msgid "An inventory is being conducted at this location"
+msgstr ""
+
+#. module: stock_inventory_lockdown
+#: model:ir.model,name:stock_inventory_lockdown.model_stock_inventory
+msgid "Inventory"
+msgstr ""
+
+#. module: stock_inventory_lockdown
+#: model:ir.model,name:stock_inventory_lockdown.model_stock_location
+msgid "Inventory Locations"
+msgstr ""
+
+#. module: stock_inventory_lockdown
+#: model:ir.model,name:stock_inventory_lockdown.model_stock_move
+msgid "Stock Move"
+msgstr "Moviments d'estoc"
