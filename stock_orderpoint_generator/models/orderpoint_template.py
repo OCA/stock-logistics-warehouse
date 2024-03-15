@@ -7,6 +7,7 @@
 from statistics import mean, median_high
 
 from odoo import api, fields, models
+from odoo.tools.safe_eval import safe_eval
 
 
 class OrderpointTemplate(models.Model):
@@ -96,6 +97,16 @@ class OrderpointTemplate(models.Model):
         comodel_name="stock.location.route",
         domain=[],
     )
+    use_product_domain = fields.Boolean(
+        string="Use Product Domain",
+        help="If checked, the product domain will be used to filter the products "
+        "for which the reordering rules will be created.",
+    )
+    domain = fields.Char(
+        string="Domain",
+        help="Domain to filter products for which the reordering rules will be "
+        "created. If empty, all products will be used.",
+    )
 
     def _template_fields_to_discard(self):
         """In order to create every orderpoint we should pop this template
@@ -112,6 +123,8 @@ class OrderpointTemplate(models.Model):
             "auto_max_date_end",
             "auto_max_qty_criteria",
             "auto_max_qty",
+            "use_product_domain",
+            "domain",
         ]
 
     def _disable_old_instances(self, products):
@@ -212,7 +225,12 @@ class OrderpointTemplate(models.Model):
                 or template.write_date > template.auto_last_generation
             ):
                 template.auto_last_generation = fields.Datetime.now()
-                template.create_orderpoints(template.auto_product_ids)
+                auto_product_ids = (
+                    self.env["product.product"].search(safe_eval(template.domain))
+                    if template.use_product_domain
+                    else template.auto_product_ids
+                )
+                template.create_orderpoints(auto_product_ids)
 
     @api.model
     def _cron_create_auto_orderpoints(self):

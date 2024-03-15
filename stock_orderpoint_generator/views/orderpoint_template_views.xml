@@ -110,6 +110,13 @@
                             <field name="auto_generate" />
                             <field name="trigger" />
                             <field name="route_id" />
+                            <field name="use_product_domain" />
+                            <field
+                                name="domain"
+                                widget="domain"
+                                attrs="{'invisible': [('use_product_domain','=', False)]}"
+                                options="{'model':'product.product'}"
+                            />
                         </group>
                         <group
                             name="auto_minimum"
@@ -154,7 +161,9 @@
                             />
                         </group>
                     </group>
-                    <notebook attrs="{'invisible': [('auto_generate', '=', False)]}">
+                    <notebook
+                        attrs="{'invisible': ['|',('auto_generate', '=', False),('use_product_domain','=', True)]}"
+                    >
                         <page string="Products" name="auto_rules">
                             <field name="auto_product_ids" />
                         </page>
