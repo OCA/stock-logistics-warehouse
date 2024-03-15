@@ -37,4 +37,4 @@ class TestStockLocationSoruceFromRoute(StockHelperCommonCase):
         source_location = location._get_source_location_from_route(
             route, "make_to_stock"
         )
-        self.assertFalse(source_location)
+        self.assertEqual(source_location, self.supplier_loc)
