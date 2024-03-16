@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_stock_location_lock,Full access on stock.locaiton.lock,model_stock_location_lock,stock.group_stock_manager,1,1,1,1
