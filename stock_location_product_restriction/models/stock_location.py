@@ -86,8 +86,15 @@ class StockLocation(models.Model):
                stock_quant.location_id
             HAVING count(distinct(product_id)) > 1
        """
-        self.env.cr.execute(SQL, (tuple(records.ids),))
-        product_ids_by_location_id = dict(self.env.cr.fetchall())
+        # Browse only real record ids
+        ids = tuple(
+            [record.id for record in records if not isinstance(record.id, fields.NewId)]
+        )
+        if not ids:
+            product_ids_by_location_id = dict()
+        else:
+            self.env.cr.execute(SQL, (ids,))
+            product_ids_by_location_id = dict(self.env.cr.fetchall())
         for record in self:
             record_id = record.id
             has_restriction_violation = False
