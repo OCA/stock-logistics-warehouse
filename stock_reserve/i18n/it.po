@@ -568,11 +568,6 @@ msgid "Package Level"
 msgstr "Livello collo"
 
 #. module: stock_reserve
-#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__product_packaging_qty
-msgid "Package quantity"
-msgstr "Quantità collo"
-
-#. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__product_packaging_id
 msgid "Packaging"
 msgstr "Imballaggio"
@@ -581,6 +576,11 @@ msgstr "Imballaggio"
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__location_move
 msgid "Part of move location"
 msgstr "Parte di un movimento ubicazione"
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__product_packaging_qty
+msgid "Pkg. Qty."
+msgstr ""
 
 #. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation__route_ids
@@ -971,6 +971,9 @@ msgid ""
 msgstr ""
 "il magazzino da considerare per la selezione della rotta nel prossimo "
 "approvvigionamento (ce c'è)."
+
+#~ msgid "Package quantity"
+#~ msgstr "Quantità collo"
 
 #~ msgid "Date"
 #~ msgstr "Data"

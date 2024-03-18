@@ -568,11 +568,6 @@ msgid "Package Level"
 msgstr "Nivel de paquete"
 
 #. module: stock_reserve
-#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__product_packaging_qty
-msgid "Package quantity"
-msgstr "Cantidad de paquetes"
-
-#. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__product_packaging_id
 msgid "Packaging"
 msgstr "Embalaje"
@@ -581,6 +576,11 @@ msgstr "Embalaje"
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__location_move
 msgid "Part of move location"
 msgstr "Parte de un movimiento entre ubicaciones"
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__product_packaging_qty
+msgid "Pkg. Qty."
+msgstr ""
 
 #. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation__route_ids
@@ -969,6 +969,9 @@ msgid ""
 msgstr ""
 "el almacén a tener en cuenta para la selección de ruta en el siguiente "
 "aprovisionamiento (si lo hubiera)."
+
+#~ msgid "Package quantity"
+#~ msgstr "Cantidad de paquetes"
 
 #~ msgid ""
 #~ "Technical field depicting the warehouse to consider for the route "
