@@ -8,7 +8,7 @@ class StockPicking(models.Model):
     _inherit = "stock.move"
 
     product_packaging_qty = fields.Float(
-        string="Package quantity",
+        string="Pkg. Qty.",
         compute="_compute_product_packaging_qty",
         inverse="_inverse_product_packaging_qty",
         help="Amount of packages demanded.",
