@@ -102,11 +102,6 @@ msgid "ID"
 msgstr "ID"
 
 #. module: stock_demand_estimate
-#: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate____last_update
-msgid "Last Modified on"
-msgstr "최근 수정"
-
-#. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__write_uid
 msgid "Last Updated by"
 msgstr "최근 갱신한 사람"
@@ -197,6 +192,9 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__product_uom
 msgid "Unit of measure"
 msgstr ""
+
+#~ msgid "Last Modified on"
+#~ msgstr "최근 수정"
 
 #~ msgid "Cancel"
 #~ msgstr "취소"
