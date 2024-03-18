@@ -6,15 +6,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-03-15 12:37+0000\n"
-"Last-Translator: loida-vm <loida@moduon.team>\n"
+"POT-Creation-Date: 2024-03-18 07:54+0000\n"
+"PO-Revision-Date: 2024-03-18 07:54+0000\n"
+"Last-Translator: Jairo Llopis <jairo@moduon.team>\n"
 "Language-Team: none\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: \n"
+"Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.17\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. module: stock_move_packaging_qty
 #: model:ir.model.fields,help:stock_move_packaging_qty.field_stock_move__product_packaging_qty
@@ -23,8 +24,8 @@ msgstr "Cantidad de envases pedidos."
 
 #. module: stock_move_packaging_qty
 #: model:ir.model.fields,field_description:stock_move_packaging_qty.field_stock_move__product_packaging_qty
-msgid "Package quantity"
-msgstr "Cantidad de envases"
+msgid "Pkg. Qty."
+msgstr "Cant. Envs."
 
 #. module: stock_move_packaging_qty
 #: model:ir.model,name:stock_move_packaging_qty.model_stock_move
