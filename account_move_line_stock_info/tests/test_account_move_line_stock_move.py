@@ -108,7 +108,6 @@ class TestAccountMoveLineStockInfo(TransactionCase):
         return product
 
     def _create_picking(self, picking_type, location, location_dest):
-
         picking = self.stock_picking_model.with_user(self.stock_manager).create(
             {
                 "picking_type_id": picking_type.id,
