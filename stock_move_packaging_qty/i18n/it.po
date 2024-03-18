@@ -23,10 +23,13 @@ msgstr "Quantità dei colli richiesti."
 
 #. module: stock_move_packaging_qty
 #: model:ir.model.fields,field_description:stock_move_packaging_qty.field_stock_move__product_packaging_qty
-msgid "Package quantity"
-msgstr "Quantità collo"
+msgid "Pkg. Qty."
+msgstr ""
 
 #. module: stock_move_packaging_qty
 #: model:ir.model,name:stock_move_packaging_qty.model_stock_move
 msgid "Stock Move"
 msgstr "Movimento di magazzino"
+
+#~ msgid "Package quantity"
+#~ msgstr "Quantità collo"
