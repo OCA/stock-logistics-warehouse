@@ -102,11 +102,6 @@ msgid "ID"
 msgstr "รหัส"
 
 #. module: stock_demand_estimate
-#: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate____last_update
-msgid "Last Modified on"
-msgstr "แก้ไขครั้งสุดท้ายเมื่อ"
-
-#. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__write_uid
 msgid "Last Updated by"
 msgstr "อัพเดทครั้งสุดท้ายโดย"
@@ -197,6 +192,9 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__product_uom
 msgid "Unit of measure"
 msgstr ""
+
+#~ msgid "Last Modified on"
+#~ msgstr "แก้ไขครั้งสุดท้ายเมื่อ"
 
 #~ msgid "Cancel"
 #~ msgstr "ยกเลิก"
