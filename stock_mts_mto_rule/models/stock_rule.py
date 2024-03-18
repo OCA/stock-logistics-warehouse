@@ -15,13 +15,14 @@ class StockRule(models.Model):
     )
     mts_rule_id = fields.Many2one("stock.rule", string="MTS Rule", check_company=True)
     mto_rule_id = fields.Many2one("stock.rule", string="MTO Rule", check_company=True)
-    mts_mto_split_quantity_rule = fields.Selection(
-        string="MTS/MTO split rule",
-        selection=[("diff", "Difference"), ("full", "No Split")],
-        default="diff",
+    mts_quantity_rule = fields.Selection(
+        string="MTS quantity rule",
+        selection=[("available", "Available"), ("full", "No Split")],
+        default="available",
         help=(
-            "With `Difference` the MTS rule will be used for any available quantity.\n"
-            "With`No Split` only if the full quantity is avaiable."
+            "With `Available` the MTS rule will be used for any available quantity.\n"
+            "With`No Split` the MTS rule is only used, if the full requested quantity "
+            "is available."
         ),
     )
 
@@ -81,7 +82,7 @@ class StockRule(models.Model):
                     needed_qty, procurement.product_qty, precision_digits=precision
                 )
                 == 0.0
-            ) or rule.mts_mto_split_quantity_rule == "full":
+            ) or rule.mts_quantity_rule == "full":
                 getattr(self.env["stock.rule"], "_run_%s" % rule.mto_rule_id.action)(
                     [(procurement, rule.mto_rule_id)]
                 )

@@ -17,7 +17,7 @@
                     attrs="{'invisible': [('action', '!=', 'split_procurement')]}"
                 />
                 <field
-                    name="mts_mto_split_quantity_rule"
+                    name="mts_quantity_rule"
                     groups="stock.group_adv_location"
                     attrs="{'invisible': [('action', '!=', 'split_procurement')]}"
                 />
@@ -41,7 +41,7 @@
                     attrs="{'invisible': [('action', '!=', 'split_procurement')]}"
                 />
                 <field
-                    name="mts_mto_split_quantity_rule"
+                    name="mts_quantity_rule"
                     groups="stock.group_adv_location"
                     attrs="{'invisible': [('action', '!=', 'split_procurement')]}"
                 />

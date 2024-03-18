@@ -97,7 +97,7 @@ class TestMtoMtsRoute(TransactionCase):
     def test_mts_mto_route_no_split(self):
         """Check the no split rule."""
         mto_mts_route = self.env.ref("stock_mts_mto_rule.route_mto_mts")
-        mto_mts_route.rule_ids.mts_mto_split_quantity_rule = "full"
+        mto_mts_route.rule_ids.mts_quantity_rule = "full"
         self.product.route_ids = [(6, 0, [mto_mts_route.id])]
         self._create_quant(1.0)
         self.env["procurement.group"].run(
