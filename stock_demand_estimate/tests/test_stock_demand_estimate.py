@@ -1,7 +1,8 @@
 # Copyright 2017-19 ForgeFlow S.L. (https://www.forgeflow.com)
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
-from datetime import date, timedelta as td
+from datetime import date
+from datetime import timedelta as td
 
 from odoo.exceptions import UserError
 from odoo.tests.common import TransactionCase
