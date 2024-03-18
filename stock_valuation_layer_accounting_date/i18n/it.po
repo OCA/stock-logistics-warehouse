@@ -1,0 +1,42 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_valuation_layer_accounting_date
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#. module: stock_valuation_layer_accounting_date
+#: model:ir.model.fields,field_description:stock_valuation_layer_accounting_date.field_stock_valuation_layer__accounting_date
+msgid "Accounting Date"
+msgstr ""
+
+#. module: stock_valuation_layer_accounting_date
+#: model:ir.model.fields,help:stock_valuation_layer_accounting_date.field_stock_valuation_layer__accounting_date
+msgid ""
+"Date of the linked journal entry if applicable, otherwise the create date of"
+" the record (timezone aware)"
+msgstr ""
+
+#. module: stock_valuation_layer_accounting_date
+#: model:ir.model,name:stock_valuation_layer_accounting_date.model_stock_quantity_history
+msgid "Stock Quantity History"
+msgstr ""
+
+#. module: stock_valuation_layer_accounting_date
+#: model:ir.model,name:stock_valuation_layer_accounting_date.model_stock_valuation_layer
+msgid "Stock Valuation Layer"
+msgstr ""
+
+#. module: stock_valuation_layer_accounting_date
+#: model_terms:ir.ui.view,arch_db:stock_valuation_layer_accounting_date.view_stock_quantity_history
+msgid "Valuation as of Accounting Date"
+msgstr ""
