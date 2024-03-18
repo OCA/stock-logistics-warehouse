@@ -103,11 +103,6 @@ msgid "ID"
 msgstr "ID"
 
 #. module: stock_demand_estimate
-#: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate____last_update
-msgid "Last Modified on"
-msgstr "Last Modified on"
-
-#. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__write_uid
 msgid "Last Updated by"
 msgstr "Last Updated by"
@@ -198,6 +193,9 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__product_uom
 msgid "Unit of measure"
 msgstr ""
+
+#~ msgid "Last Modified on"
+#~ msgstr "Last Modified on"
 
 #~ msgid "Cancel"
 #~ msgstr "Cancel"
