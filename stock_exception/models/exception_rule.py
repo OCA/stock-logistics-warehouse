@@ -15,3 +15,5 @@ class ExceptionRule(models.Model):
         ],
         ondelete={"stock.picking": "cascade", "stock.move": "cascade"},
     )
+    check_on_validate = fields.Boolean(default=False)
+    check_on_confirm = fields.Boolean(default=False)

@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<odoo>
+    <record id="view_exception_rule_form" model="ir.ui.view">
+        <field name="name">exception.rule.form</field>
+        <field name="model">exception.rule</field>
+        <field name="inherit_id" ref="base_exception.view_exception_rule_form" />
+        <field name="arch" type="xml">
+            <field name="model" position="after">
+                <field
+                    name="check_on_confirm"
+                    attrs="{'invisible': [('model', '!=', 'stock.picking')]}"
+                />
+                <field
+                    name="check_on_validate"
+                    attrs="{'invisible': [('model', '!=', 'stock.picking')]}"
+                />
+            </field>
+        </field>
+    </record>
+</odoo>
