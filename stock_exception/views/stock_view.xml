@@ -26,7 +26,7 @@
                     class="alert alert-danger"
                     role="alert"
                     style="margin-bottom:0px;"
-                    attrs="{'invisible': [('exceptions_summary','=',False)]}"
+                    attrs="{'invisible': [('exceptions_summary', '=', False)]}"
                 >
                     <p>
                         <strong
