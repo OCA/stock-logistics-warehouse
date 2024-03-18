@@ -16,17 +16,8 @@ class Inventory(models.Model):
         states={"draft": [("readonly", False)]},
     )
 
-    def _get_inventory_lines_values(self):
-        """Discard inventory lines that are from sublocations if option
-        is enabled.
-
-        Done this way for maximizing inheritance compatibility.
-        """
-        vals = super()._get_inventory_lines_values()
+    def _get_base_domain(self, locations):
+        res = super()._get_base_domain(locations=locations)
         if not self.exclude_sublocation:
-            return vals
-        new_vals = []
-        for val in vals:
-            if val["location_id"] in self.location_ids.ids:
-                new_vals.append(val)
-        return new_vals
+            return res
+        return [("location_id", "in", locations.mapped("id"))]

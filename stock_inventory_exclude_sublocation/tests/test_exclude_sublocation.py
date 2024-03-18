@@ -56,14 +56,14 @@ class TestStockInventoryExcludeSublocation(TransactionCase):
         starting_inv = self.inventory_model.create(
             {
                 "name": "Starting inventory",
-                "line_ids": [
+                "stock_quant_ids": [
                     (
                         0,
                         0,
                         {
                             "product_id": self.product1.id,
                             "product_uom_id": self.env.ref("uom.product_uom_unit").id,
-                            "product_qty": 2.0,
+                            "inventory_quantity": 2.0,
                             "location_id": self.location.id,
                         },
                     ),
@@ -73,15 +73,15 @@ class TestStockInventoryExcludeSublocation(TransactionCase):
                         {
                             "product_id": self.product2.id,
                             "product_uom_id": self.env.ref("uom.product_uom_unit").id,
-                            "product_qty": 4.0,
+                            "inventory_quantity": 4.0,
                             "location_id": self.sublocation.id,
                         },
                     ),
                 ],
             }
         )
-        starting_inv.action_start()
-        starting_inv.action_validate()
+        starting_inv.action_state_to_in_progress()
+        starting_inv.action_state_to_done()
 
     def _create_inventory_all_products(self, name, location, exclude_sublocation):
         inventory = self.inventory_model.create(
@@ -99,9 +99,9 @@ class TestStockInventoryExcludeSublocation(TransactionCase):
         inventory_location = self._create_inventory_all_products(
             "location inventory", self.location, False
         )
-        inventory_location.action_start()
-        inventory_location.action_validate()
-        lines = inventory_location.line_ids
+        inventory_location.action_state_to_in_progress()
+        inventory_location.action_state_to_done()
+        lines = inventory_location.stock_quant_ids
         self.assertEqual(len(lines), 2, "Not all expected products are " "included")
 
     def test_excluding_sublocations(self):
@@ -113,12 +113,12 @@ class TestStockInventoryExcludeSublocation(TransactionCase):
         inventory_sublocation = self._create_inventory_all_products(
             "sublocation inventory", self.sublocation, True
         )
-        inventory_location.action_start()
-        inventory_location.action_validate()
-        inventory_sublocation.action_start()
-        inventory_sublocation.action_validate()
-        lines_location = inventory_location.line_ids
-        lines_sublocation = inventory_sublocation.line_ids
+        inventory_location.action_state_to_in_progress()
+        inventory_location.action_state_to_done()
+        inventory_sublocation.action_state_to_in_progress()
+        inventory_sublocation.action_state_to_done()
+        lines_location = inventory_location.stock_quant_ids
+        lines_sublocation = inventory_sublocation.stock_quant_ids
         self.assertEqual(
             len(lines_location), 1, "The products in the sublocations are not excluded"
         )
