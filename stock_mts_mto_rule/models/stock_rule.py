@@ -55,6 +55,8 @@ class StockRule(models.Model):
                 >= 0
             ):
                 return 0.0
+            elif self.mts_quantity_rule == "full":
+                return product_qty
             else:
                 return product_qty - qty_available
         return product_qty
@@ -82,7 +84,7 @@ class StockRule(models.Model):
                     needed_qty, procurement.product_qty, precision_digits=precision
                 )
                 == 0.0
-            ) or rule.mts_quantity_rule == "full":
+            ):
                 getattr(self.env["stock.rule"], "_run_%s" % rule.mto_rule_id.action)(
                     [(procurement, rule.mto_rule_id)]
                 )
