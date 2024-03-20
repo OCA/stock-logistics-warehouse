@@ -76,6 +76,8 @@ class StockQuant(models.Model):
     def action_apply_inventory(self):
         if self.env.context.get("skip_exceeded_discrepancy", False):
             return super().action_apply_inventory()
+        if not self.env.company.inventory_discrepancy_enable:
+            return super().action_apply_inventory()
         over_discrepancy = self.filtered(lambda r: r.has_over_discrepancy)
         if over_discrepancy:
             action = self.env["ir.actions.act_window"]._for_xml_id(
