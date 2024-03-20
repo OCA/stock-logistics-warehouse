@@ -17,6 +17,7 @@
         "views/stock_quant_view.xml",
         "views/stock_warehouse_view.xml",
         "views/stock_location_view.xml",
+        "views/res_config_settings_view.xml",
         "wizards/confirm_discrepancy_wiz.xml",
     ],
     "license": "AGPL-3",
