@@ -75,9 +75,7 @@ class TestStockValuation(TestStockValuation):
         inventory_quant.inventory_quantity = 200.00
         accounting_date = date.today() + timedelta(days=3)
         inventory_quant.accounting_date = accounting_date
-        inventory_quant.with_context(
-            skip_exceeded_discrepancy=True
-        ).action_apply_inventory()
+        inventory_quant.action_apply_inventory()
         move = self.env["stock.move"].search(
             [("product_id", "=", self.product.id), ("is_inventory", "=", True)],
             limit=1,
