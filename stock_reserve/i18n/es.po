@@ -28,24 +28,13 @@ msgstr "# Ventas"
 #. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation__state
 msgid ""
-"* New: When the stock move is created and not yet confirmed.\n"
-"* Waiting Another Move: This state can be seen when a move is waiting for "
-"another one, for example in a chained flow.\n"
-"* Waiting Availability: This state is reached when the procurement "
-"resolution is not straight forward. It may need the scheduler to run, a "
-"component to be manufactured...\n"
-"* Available: When products are reserved, it is set to 'Available'.\n"
-"* Done: When the shipment is processed, the state is 'Done'."
+"* New: The stock move is created but not confirmed.\n"
+"* Waiting Another Move: A linked stock move should be done before this one.\n"
+"* Waiting Availability: The stock move is confirmed but the product can't be "
+"reserved.\n"
+"* Available: The product of the stock move is reserved.\n"
+"* Done: The product has been transferred and the transfer has been confirmed."
 msgstr ""
-"* Nuevo: Cuando se crea el movimiento de stock y aún no ha sido confirmado.\n"
-"* Esperando otro movimiento: Este estado aparece cuando un movimiento está "
-"esperando otro, por ejemplo en un flujo encadenado.\n"
-"* En espera de disponibilidad: Este estado se alcanza cuando no hay stock "
-"disponible. Puede necesitar ejecutar el planificador, un componente a "
-"fabricar...\n"
-"* Disponible: Cuando los productos están reservados, se establece en "
-"'Disponible'.\n"
-"* Hecho: Cuando se procesa el envío, el estado es 'Hecho'."
 
 #. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation__location_dest_usage
@@ -98,52 +87,9 @@ msgstr ""
 "Un servicio es un producto no material."
 
 #. module: stock_reserve
-#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__account_move_ids
-msgid "Account Move"
-msgstr "Movimiento de cuenta"
-
-#. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__returned_move_ids
 msgid "All returned moves"
 msgstr "Todas las devoluciones"
-
-#. module: stock_reserve
-#: model:ir.model.fields,help:stock_reserve.field_stock_reservation__common_dest_move_ids
-msgid ""
-"All the stock moves having a chained destination move sharing the same "
-"picking as the actual move's destination move"
-msgstr ""
-"Todos los movimientos de existencias que tienen un movimiento de destino "
-"encadenado que comparte la misma recogida que el movimiento de destino del "
-"movimiento real"
-
-#. module: stock_reserve
-#: model:ir.model.fields,help:stock_reserve.field_stock_reservation__product_packaging_qty
-msgid "Amount of packages demanded."
-msgstr "Cantidad de paquetes demandados."
-
-#. module: stock_reserve
-#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__analytic_account_line_id
-msgid "Analytic Account Line"
-msgstr "Línea de cuenta analítica"
-
-#. module: stock_reserve
-#: model:ir.model.fields,help:stock_reserve.field_stock_reservation__ordered_available_to_promise_qty
-msgid ""
-"Available to Promise quantity minus quantities promised  to moves with "
-"higher priority (in default UoM of the product)."
-msgstr ""
-"Cantidad disponible para Prometer menos las cantidades prometidas   a "
-"movimientos con mayor prioridad (en la UdM por defecto del producto)."
-
-#. module: stock_reserve
-#: model:ir.model.fields,help:stock_reserve.field_stock_reservation__ordered_available_to_promise_uom_qty
-msgid ""
-"Available to Promise quantity minus quantities promised  to moves with "
-"higher priority (in initial demand's UoM)."
-msgstr ""
-"Cantidad disponible para prometer menos las cantidades prometidas   a "
-"movimientos con mayor prioridad (en la UdM de la demanda inicial)."
 
 #. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation__procure_method
@@ -178,11 +124,6 @@ msgstr ""
 #: model_terms:ir.actions.act_window,help:stock_reserve.action_stock_reservation_tree
 msgid "Click to create a stock reservation."
 msgstr "Pulsar para crear una reserva de stock."
-
-#. module: stock_reserve
-#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__common_dest_move_ids
-msgid "Common Dest Move"
-msgstr "Movimiento de destino común"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__company_id
@@ -233,15 +174,6 @@ msgstr "Fecha prevista"
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__reservation_date
 msgid "Date to Reserve"
 msgstr "Fecha a reservar"
-
-#. module: stock_reserve
-#: model:ir.model.fields,help:stock_reserve.field_stock_reservation__date_priority
-msgid ""
-"Date/time used to sort moves to deliver first. Used to calculate the ordered "
-"available to promise."
-msgstr ""
-"Fecha/hora utilizada para ordenar los movimientos para entregar primero. Se "
-"utiliza para calcular los pedidos disponibles para prometer."
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__date_deadline
@@ -309,14 +241,19 @@ msgid "Display Assign Serial"
 msgstr "Asignar números de serie"
 
 #. module: stock_reserve
-#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__display_clear_serial
-msgid "Display Clear Serial"
-msgstr "Visualizar Borrar Serie"
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__display_import_lot
+msgid "Display Import Lot"
+msgstr ""
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__display_name
 msgid "Display Name"
 msgstr "Nombre mostrado"
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__product_packaging_quantity
+msgid "Done Packaging Quantity"
+msgstr ""
 
 #. module: stock_reserve
 #: model_terms:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_search
@@ -347,11 +284,6 @@ msgstr "Fecha esperada pronosticada"
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__availability
 msgid "Forecasted Quantity"
 msgstr "Cantidad pronosticada"
-
-#. module: stock_reserve
-#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__show_reserved_availability
-msgid "From Supplier"
-msgstr "Desde proveedor"
 
 #. module: stock_reserve
 #: model_terms:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_search
@@ -387,11 +319,6 @@ msgid "If ticked, you will be able to select entire packages to move"
 msgstr "Si está marcado, podrá seleccionar paquetes completos para mover"
 
 #. module: stock_reserve
-#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__from_immediate_transfer
-msgid "Immediate Transfer"
-msgstr "Transferencia inmediata"
-
-#. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__is_inventory
 msgid "Inventory"
 msgstr "Inventario"
@@ -410,11 +337,6 @@ msgstr "Es la demanda inicial editable"
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__is_quantity_done_editable
 msgid "Is quantity done editable"
 msgstr "Es la cantidad realizada editable"
-
-#. module: stock_reserve
-#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation____last_update
-msgid "Last Modified on"
-msgstr "Última modificación el"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__write_uid
@@ -447,11 +369,6 @@ msgid "Move Line"
 msgstr "Apunte"
 
 #. module: stock_reserve
-#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__move_line_nosuggest_ids
-msgid "Move Line Nosuggest"
-msgstr "Linea de movimiento no sugerido"
-
-#. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__move_lines_count
 msgid "Move Lines Count"
 msgstr "Recuento de líneas de movimiento"
@@ -472,18 +389,12 @@ msgid "Moves are reserved."
 msgstr "Los movimientos están reservados."
 
 #. module: stock_reserve
-#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__need_release
-msgid "Need Release"
-msgstr "Liberación necesaria"
-
-#. module: stock_reserve
 #: model_terms:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_search
 msgid "Not already reserved"
 msgstr "Aún no reservados"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__note
-#: model_terms:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_form
 msgid "Notes"
 msgstr "Notas"
 
@@ -523,16 +434,6 @@ msgid "Optional: previous stock move when chaining them"
 msgstr "Opcional: movimiento de stock previo cuando se encadenan"
 
 #. module: stock_reserve
-#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__ordered_available_to_promise_uom_qty
-msgid "Ordered Available to Promise"
-msgstr "Pedido Disponible para prometer"
-
-#. module: stock_reserve
-#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__ordered_available_to_promise_qty
-msgid "Ordered Available to Promise (Real Qty)"
-msgstr "Pedido Disponible para prometer (cantd Real)"
-
-#. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__origin_returned_move_id
 msgid "Origin return move"
 msgstr "Origen del movimiento de devolución"
@@ -558,19 +459,14 @@ msgid "Package Level"
 msgstr "Nivel de paquete"
 
 #. module: stock_reserve
-#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__product_packaging_qty
-msgid "Package quantity"
-msgstr "Cantidad de paquetes"
-
-#. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__product_packaging_id
 msgid "Packaging"
 msgstr "Embalaje"
 
 #. module: stock_reserve
-#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__location_move
-msgid "Part of move location"
-msgstr "Parte de un movimiento entre ubicaciones"
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__picked
+msgid "Picked"
+msgstr ""
 
 #. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation__route_ids
@@ -581,11 +477,6 @@ msgstr "Ruta preferida"
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__priority
 msgid "Priority"
 msgstr "Prioridad"
-
-#. module: stock_reserve
-#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__date_priority
-msgid "Priority Date"
-msgstr "Fecha prioritaria"
 
 #. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation__delay_alert_date
@@ -635,33 +526,9 @@ msgid "Propagate cancel and split"
 msgstr "Propagar cancelación y división"
 
 #. module: stock_reserve
-#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__product_qty_by_packaging_display
-msgid "Qty by packaging"
-msgstr "Cantidad por embalaje"
-
-#. module: stock_reserve
-#: model:ir.model.fields,help:stock_reserve.field_stock_reservation__previous_promised_qty
-msgid ""
-"Quantities promised to moves with higher priority than this move (in default "
-"UoM of the product)."
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__quantity
+msgid "Quantity"
 msgstr ""
-"Cantidades prometidas a movimientos con mayor prioridad que este movimiento "
-"(en la UdM por defecto del producto)."
-
-#. module: stock_reserve
-#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__quantity_done
-msgid "Quantity Done"
-msgstr "Cantidad hecha"
-
-#. module: stock_reserve
-#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__previous_promised_qty
-msgid "Quantity Promised before this move"
-msgstr "Cantidad Prometida antes de este movimiento"
-
-#. module: stock_reserve
-#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__reserved_availability
-msgid "Quantity Reserved"
-msgstr "Cantidad reservada"
 
 #. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation__availability
@@ -672,11 +539,6 @@ msgstr "Cantidad en stock que puede ser reservada aún para este movimiento"
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation__product_qty
 msgid "Quantity in the default UoM of the product"
 msgstr "Cantidad en la UdM por defecto del producto"
-
-#. module: stock_reserve
-#: model:ir.model.fields,help:stock_reserve.field_stock_reservation__reserved_availability
-msgid "Quantity that has already been reserved for this move"
-msgstr "Cantidad que ha sido ya reservada para este movimiento"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__product_qty
@@ -700,13 +562,7 @@ msgid "Release"
 msgstr "Liberar"
 
 #. module: stock_reserve
-#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__release_ready
-msgid "Release Ready"
-msgstr "Liberación preparada"
-
-#. module: stock_reserve
 #: model:ir.actions.server,name:stock_reserve.ir_cron_release_stock_reservation_ir_actions_server
-#: model:ir.cron,cron_name:stock_reserve.ir_cron_release_stock_reservation
 msgid "Release the stock reservation having a passed validity date"
 msgstr "Liberar las reservas de stock con fecha de validez pasada"
 
@@ -741,6 +597,11 @@ msgid "Reserved"
 msgstr "Reservado"
 
 #. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__product_packaging_qty
+msgid "Reserved Packaging Quantity"
+msgstr ""
+
+#. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation__date
 msgid "Scheduled date until move is done, then date of actual move processing"
 msgstr ""
@@ -748,9 +609,9 @@ msgstr ""
 "de procesamiento real del movimiento"
 
 #. module: stock_reserve
-#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__scrap_ids
-msgid "Scrap"
-msgstr "Desechar"
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__scrap_id
+msgid "Scrap operation"
+msgstr ""
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__scrapped
@@ -780,6 +641,26 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__show_operations
 msgid "Show Detailed Operations"
 msgstr "Mostrar operaciones detalladas"
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__show_quant
+msgid "Show Quant"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__show_reserved
+msgid "Show Reserved"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__show_lots_m2o
+msgid "Show lot_id"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__show_lots_text
+msgid "Show lot_name"
+msgstr ""
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__origin
@@ -824,13 +705,7 @@ msgid "Stock Rule"
 msgstr "Regla de Inventario"
 
 #. module: stock_reserve
-#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__stock_valuation_layer_ids
-msgid "Stock Valuation Layer"
-msgstr "Nivel de valoración de existencias"
-
-#. module: stock_reserve
 #: model:ir.actions.server,name:stock_reserve.ir_cron_reserve_waiting_confirmed_ir_actions_server
-#: model:ir.cron,cron_name:stock_reserve.ir_cron_reserve_waiting_confirmed
 msgid "Stock reservation: Assign waiting/confirmed reserve moves"
 msgstr ""
 "Reserva de existencias: Asignar movimientos de reserva en espera/confirmados"
@@ -846,21 +721,19 @@ msgid "The stock rule that created this stock move"
 msgstr "La regla de stock que creó este movimiento de almacén"
 
 #. module: stock_reserve
+#: model:ir.model.fields,help:stock_reserve.field_stock_reservation__picked
+msgid ""
+"This checkbox is just indicative, it doesn't validate or generate any "
+"product moves."
+msgstr ""
+
+#. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation__product_uom_qty
 msgid ""
-"This is the quantity of products from an inventory point of view. For moves "
-"in the state 'done', this is the quantity of products that were actually "
-"moved. For other moves, this is the quantity of product that is planned to "
-"be moved. Lowering this quantity does not generate a backorder. Changing "
-"this quantity on assigned moves affects the product reservation, and should "
-"be done with care."
+"This is the quantity of product that is planned to be moved.Lowering this "
+"quantity does not generate a backorder.Changing this quantity on assigned "
+"moves affects the product reservation, and should be done with care."
 msgstr ""
-"Ésta es la cantidad de productos desde un punto de vista de inventario. Para "
-"movimientos en el estado 'Realizado', ésta es la cantidad de productos que "
-"se movieron realmente. Para otros movimientos, ésta es la cantidad de "
-"producto que está planeado mover. Disminuyendo esta cantidad no se genera un "
-"pedido en espera. Cambiando esta cantidad en movimientos asignados, afecta "
-"la reserva de producto, y debe ser realizado con cuidado."
 
 #. module: stock_reserve
 #: model_terms:ir.actions.act_window,help:stock_reserve.action_stock_reservation_tree
@@ -882,15 +755,6 @@ msgid "Transfer"
 msgstr "Transferencia"
 
 #. module: stock_reserve
-#: model:ir.model.fields,help:stock_reserve.field_stock_reservation__to_refund
-msgid ""
-"Trigger a decrease of the delivered/received quantity in the associated Sale "
-"Order/Purchase Order"
-msgstr ""
-"Activar una disminución de la cantidad entregada/recibida en el pedido de "
-"compra/venta asociado"
-
-#. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__picking_code
 msgid "Type of Operation"
 msgstr "Tipo de operación"
@@ -901,19 +765,9 @@ msgid "Unit Price"
 msgstr "Precio unidad"
 
 #. module: stock_reserve
-#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__unrelease_allowed
-msgid "Unrelease Allowed"
-msgstr "Desbloqueo permitido"
-
-#. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__product_uom
 msgid "UoM"
 msgstr "UDM (Unidad De Medida)"
-
-#. module: stock_reserve
-#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__to_refund
-msgid "Update quantities on SO/PO"
-msgstr "Actualizar las cantidades en SO/PO"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__date_validity
@@ -926,16 +780,6 @@ msgid "View Reservation Move"
 msgstr "Ver movimiento de reserva"
 
 #. module: stock_reserve
-#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__volume
-msgid "Volume"
-msgstr "Volumen"
-
-#. module: stock_reserve
-#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__volume_uom_name
-msgid "Volume unit of measure label"
-msgstr "Etiqueta de unidad de medida de volumen"
-
-#. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__warehouse_id
 msgid "Warehouse"
 msgstr "Almacén"
@@ -946,12 +790,6 @@ msgid "Whether the move was added after the picking's confirmation"
 msgstr "Si el movimiento se agregó después de la confirmación de la operación"
 
 #. module: stock_reserve
-#: model:ir.model.fields,help:stock_reserve.field_stock_reservation__location_move
-msgid "Whether this move is a part of stock_location moves"
-msgstr ""
-"Si este movimiento es parte de movimiento de ubicaciones de existencias"
-
-#. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation__warehouse_id
 msgid ""
 "the warehouse to consider for the route selection on the next procurement "
@@ -959,6 +797,171 @@ msgid ""
 msgstr ""
 "el almacén a tener en cuenta para la selección de ruta en el siguiente "
 "aprovisionamiento (si lo hubiera)."
+
+#~ msgid ""
+#~ "* New: When the stock move is created and not yet confirmed.\n"
+#~ "* Waiting Another Move: This state can be seen when a move is waiting for "
+#~ "another one, for example in a chained flow.\n"
+#~ "* Waiting Availability: This state is reached when the procurement "
+#~ "resolution is not straight forward. It may need the scheduler to run, a "
+#~ "component to be manufactured...\n"
+#~ "* Available: When products are reserved, it is set to 'Available'.\n"
+#~ "* Done: When the shipment is processed, the state is 'Done'."
+#~ msgstr ""
+#~ "* Nuevo: Cuando se crea el movimiento de stock y aún no ha sido "
+#~ "confirmado.\n"
+#~ "* Esperando otro movimiento: Este estado aparece cuando un movimiento "
+#~ "está esperando otro, por ejemplo en un flujo encadenado.\n"
+#~ "* En espera de disponibilidad: Este estado se alcanza cuando no hay stock "
+#~ "disponible. Puede necesitar ejecutar el planificador, un componente a "
+#~ "fabricar...\n"
+#~ "* Disponible: Cuando los productos están reservados, se establece en "
+#~ "'Disponible'.\n"
+#~ "* Hecho: Cuando se procesa el envío, el estado es 'Hecho'."
+
+#~ msgid "Account Move"
+#~ msgstr "Movimiento de cuenta"
+
+#~ msgid ""
+#~ "All the stock moves having a chained destination move sharing the same "
+#~ "picking as the actual move's destination move"
+#~ msgstr ""
+#~ "Todos los movimientos de existencias que tienen un movimiento de destino "
+#~ "encadenado que comparte la misma recogida que el movimiento de destino "
+#~ "del movimiento real"
+
+#~ msgid "Amount of packages demanded."
+#~ msgstr "Cantidad de paquetes demandados."
+
+#~ msgid "Analytic Account Line"
+#~ msgstr "Línea de cuenta analítica"
+
+#~ msgid ""
+#~ "Available to Promise quantity minus quantities promised  to moves with "
+#~ "higher priority (in default UoM of the product)."
+#~ msgstr ""
+#~ "Cantidad disponible para Prometer menos las cantidades prometidas   a "
+#~ "movimientos con mayor prioridad (en la UdM por defecto del producto)."
+
+#~ msgid ""
+#~ "Available to Promise quantity minus quantities promised  to moves with "
+#~ "higher priority (in initial demand's UoM)."
+#~ msgstr ""
+#~ "Cantidad disponible para prometer menos las cantidades prometidas   a "
+#~ "movimientos con mayor prioridad (en la UdM de la demanda inicial)."
+
+#~ msgid "Common Dest Move"
+#~ msgstr "Movimiento de destino común"
+
+#~ msgid ""
+#~ "Date/time used to sort moves to deliver first. Used to calculate the "
+#~ "ordered available to promise."
+#~ msgstr ""
+#~ "Fecha/hora utilizada para ordenar los movimientos para entregar primero. "
+#~ "Se utiliza para calcular los pedidos disponibles para prometer."
+
+#~ msgid "Display Clear Serial"
+#~ msgstr "Visualizar Borrar Serie"
+
+#~ msgid "From Supplier"
+#~ msgstr "Desde proveedor"
+
+#~ msgid "Immediate Transfer"
+#~ msgstr "Transferencia inmediata"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Última modificación el"
+
+#~ msgid "Move Line Nosuggest"
+#~ msgstr "Linea de movimiento no sugerido"
+
+#~ msgid "Need Release"
+#~ msgstr "Liberación necesaria"
+
+#~ msgid "Ordered Available to Promise"
+#~ msgstr "Pedido Disponible para prometer"
+
+#~ msgid "Ordered Available to Promise (Real Qty)"
+#~ msgstr "Pedido Disponible para prometer (cantd Real)"
+
+#~ msgid "Package quantity"
+#~ msgstr "Cantidad de paquetes"
+
+#~ msgid "Part of move location"
+#~ msgstr "Parte de un movimiento entre ubicaciones"
+
+#~ msgid "Priority Date"
+#~ msgstr "Fecha prioritaria"
+
+#~ msgid "Qty by packaging"
+#~ msgstr "Cantidad por embalaje"
+
+#~ msgid ""
+#~ "Quantities promised to moves with higher priority than this move (in "
+#~ "default UoM of the product)."
+#~ msgstr ""
+#~ "Cantidades prometidas a movimientos con mayor prioridad que este "
+#~ "movimiento (en la UdM por defecto del producto)."
+
+#~ msgid "Quantity Done"
+#~ msgstr "Cantidad hecha"
+
+#~ msgid "Quantity Promised before this move"
+#~ msgstr "Cantidad Prometida antes de este movimiento"
+
+#~ msgid "Quantity Reserved"
+#~ msgstr "Cantidad reservada"
+
+#~ msgid "Quantity that has already been reserved for this move"
+#~ msgstr "Cantidad que ha sido ya reservada para este movimiento"
+
+#~ msgid "Release Ready"
+#~ msgstr "Liberación preparada"
+
+#~ msgid "Scrap"
+#~ msgstr "Desechar"
+
+#~ msgid "Stock Valuation Layer"
+#~ msgstr "Nivel de valoración de existencias"
+
+#~ msgid ""
+#~ "This is the quantity of products from an inventory point of view. For "
+#~ "moves in the state 'done', this is the quantity of products that were "
+#~ "actually moved. For other moves, this is the quantity of product that is "
+#~ "planned to be moved. Lowering this quantity does not generate a "
+#~ "backorder. Changing this quantity on assigned moves affects the product "
+#~ "reservation, and should be done with care."
+#~ msgstr ""
+#~ "Ésta es la cantidad de productos desde un punto de vista de inventario. "
+#~ "Para movimientos en el estado 'Realizado', ésta es la cantidad de "
+#~ "productos que se movieron realmente. Para otros movimientos, ésta es la "
+#~ "cantidad de producto que está planeado mover. Disminuyendo esta cantidad "
+#~ "no se genera un pedido en espera. Cambiando esta cantidad en movimientos "
+#~ "asignados, afecta la reserva de producto, y debe ser realizado con "
+#~ "cuidado."
+
+#~ msgid ""
+#~ "Trigger a decrease of the delivered/received quantity in the associated "
+#~ "Sale Order/Purchase Order"
+#~ msgstr ""
+#~ "Activar una disminución de la cantidad entregada/recibida en el pedido de "
+#~ "compra/venta asociado"
+
+#~ msgid "Unrelease Allowed"
+#~ msgstr "Desbloqueo permitido"
+
+#~ msgid "Update quantities on SO/PO"
+#~ msgstr "Actualizar las cantidades en SO/PO"
+
+#~ msgid "Volume"
+#~ msgstr "Volumen"
+
+#~ msgid "Volume unit of measure label"
+#~ msgstr "Etiqueta de unidad de medida de volumen"
+
+#~ msgid "Whether this move is a part of stock_location moves"
+#~ msgstr ""
+#~ "Si este movimiento es parte de movimiento de ubicaciones de existencias"
 
 #~ msgid ""
 #~ "Technical field depicting the warehouse to consider for the route "
