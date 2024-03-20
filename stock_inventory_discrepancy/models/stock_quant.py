@@ -76,6 +76,13 @@ class StockQuant(models.Model):
     def action_apply_inventory(self):
         if self.env.context.get("skip_exceeded_discrepancy", False):
             return super().action_apply_inventory()
+        inventory_discrepancy_enable = (
+            self.env["ir.config_parameter"]
+            .sudo()
+            .get_param("stock_inventory_discrepancy.inventory_discrepancy_enable")
+        )
+        if inventory_discrepancy_enable == "0":
+            return super().action_apply_inventory()
         over_discrepancy = self.filtered(lambda r: r.has_over_discrepancy)
         if over_discrepancy:
             action = self.env["ir.actions.act_window"]._for_xml_id(
