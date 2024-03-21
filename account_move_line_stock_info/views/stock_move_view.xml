@@ -7,7 +7,12 @@
         <field name="arch" type="xml">
             <group name="linked_group" position="after">
                 <group name="account_move_lines_grp" string="Journal Items" colspan="4">
-                    <field name="account_move_line_ids" readonly="1" nolabel="1" />
+                    <field
+                        name="account_move_line_ids"
+                        readonly="1"
+                        nolabel="1"
+                        colspan="2"
+                    />
                 </group>
             </group>
         </field>
@@ -18,17 +23,60 @@
         <field name="inherit_id" ref="stock.view_picking_form" />
         <field name="arch" type="xml">
             <xpath
-                expr="//notebook//form//field[@name='description_picking']/.."
+                expr="//notebook//tree//field[@name='description_picking']/.."
                 position="after"
             >
-                <group name="account_move_lines_grp" string="Journal Items">
-                    <field
-                        name="account_move_line_ids"
-                        readonly="1"
-                        nolabel="1"
-                        colspan="2"
-                    />
-                </group>
+                <form string="Stock Moves">
+                    <header>
+                        <field name="state" widget="statusbar" />
+                    </header>
+                    <group>
+                        <field name="product_uom_category_id" invisible="1" />
+                        <field name="additional" invisible="1" />
+                        <field name="move_lines_count" invisible="1" />
+                        <field name="company_id" invisible="1" />
+                        <field
+                            name="product_id"
+                            required="1"
+                            readonly="state != 'draft' or additional == False &amp; move_lines_count &gt; 0"
+                        />
+                        <field name="is_initial_demand_editable" invisible="1" />
+                        <field name="is_quantity_done_editable" invisible="1" />
+                        <field
+                            name="product_uom_qty"
+                            readonly="is_initial_demand_editable == False"
+                        />
+                        <field name="product_qty" invisible="1" readonly="1" />
+                        <field name="forecast_expected_date" invisible="1" />
+                        <field
+                            name="forecast_availability"
+                            string="Reserved"
+                            invisible="parent.picking_type_code != 'outgoing' or parent.state == 'done'"
+                            widget="forecast_widget"
+                        />
+                        <field
+                            name="quantity"
+                            string="Done"
+                            readonly="product_id == False"
+                        />
+                        <field
+                            name="product_uom"
+                            readonly="state != 'draft' and id != False"
+                            options="{'no_open': True, 'no_create': True}"
+                            string="Unit of Measure"
+                            groups="uom.group_uom"
+                        />
+                        <field name="description_picking" string="Description" />
+                    </group>
+                    <group name="account_move_lines_grp" string="Journal Items">
+                        <field
+                            name="account_move_line_ids"
+                            readonly="1"
+                            nolabel="1"
+                            colspan="2"
+                        />
+                    </group>
+                </form>
             </xpath>
         </field>
     </record>
