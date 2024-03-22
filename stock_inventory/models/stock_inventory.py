@@ -1,28 +1,59 @@
 from odoo import _, api, fields, models
-from odoo.exceptions import ValidationError
+from odoo.exceptions import UserError, ValidationError
 from odoo.osv import expression
+
+READONLY_STATES = {
+    "draft": [("readonly", False)],
+}
 
 
 class InventoryAdjustmentsGroup(models.Model):
     _name = "stock.inventory"
     _description = "Inventory Adjustment Group"
     _order = "date desc, id desc"
+    _inherit = [
+        "mail.thread",
+    ]
 
-    name = fields.Char(required=True, default="Inventory", string="Inventory Reference")
+    name = fields.Char(
+        required=True,
+        default="Inventory",
+        string="Inventory Reference",
+        readonly=True,
+        states=READONLY_STATES,
+    )
 
-    date = fields.Datetime(default=lambda self: fields.Datetime.now())
+    date = fields.Datetime(
+        default=lambda self: fields.Datetime.now(),
+        readonly=True,
+        states=READONLY_STATES,
+    )
 
     state = fields.Selection(
-        [("draft", "Draft"), ("in_progress", "In Progress"), ("done", "Done")],
+        [
+            ("draft", "Draft"),
+            ("in_progress", "In Progress"),
+            ("done", "Done"),
+            ("cancel", "Cancelled"),
+        ],
         default="draft",
+        tracking=True,
     )
 
     owner_id = fields.Many2one(
-        "res.partner", "Owner", help="This is the owner of the inventory adjustment"
+        "res.partner",
+        "Owner",
+        help="This is the owner of the inventory adjustment",
+        readonly=True,
+        states=READONLY_STATES,
     )
 
     location_ids = fields.Many2many(
-        "stock.location", string="Locations", domain="[('usage', '=', 'internal')]"
+        "stock.location",
+        string="Locations",
+        domain="[('usage', '=', 'internal')]",
+        readonly=True,
+        states=READONLY_STATES,
     )
 
     product_selection = fields.Selection(
@@ -35,23 +66,38 @@ class InventoryAdjustmentsGroup(models.Model):
         ],
         default="all",
         required=True,
+        readonly=True,
+        states=READONLY_STATES,
     )
 
-    product_ids = fields.Many2many("product.product", string="Products")
+    product_ids = fields.Many2many(
+        "product.product", string="Products", readonly=True, states=READONLY_STATES
+    )
 
-    stock_quant_ids = fields.Many2many("stock.quant", string="Inventory Adjustment")
+    stock_quant_ids = fields.Many2many(
+        "stock.quant",
+        string="Inventory Adjustment",
+        readonly=True,
+        states=READONLY_STATES,
+    )
 
-    category_id = fields.Many2one("product.category", string="Product Category")
+    category_id = fields.Many2one(
+        "product.category",
+        string="Product Category",
+        readonly=True,
+        states=READONLY_STATES,
+    )
 
     lot_ids = fields.Many2many(
-        "stock.lot",
-        string="Lot/Serial Numbers",
+        "stock.lot", string="Lot/Serial Numbers", readonly=True, states=READONLY_STATES
     )
 
     stock_move_ids = fields.One2many(
         "stock.move.line",
         "inventory_adjustment_id",
         string="Inventory Adjustments Done",
+        readonly=True,
+        states=READONLY_STATES,
     )
 
     count_stock_quants = fields.Integer(
@@ -65,25 +111,44 @@ class InventoryAdjustmentsGroup(models.Model):
     count_stock_moves = fields.Integer(
         compute="_compute_count_stock_moves", string="Stock Moves Lines"
     )
+    action_state_to_cancel_allowed = fields.Boolean(
+        compute="_compute_action_state_to_cancel_allowed"
+    )
 
     @api.depends("stock_quant_ids")
     def _compute_count_stock_quants(self):
-        self.count_stock_quants = len(self.stock_quant_ids)
-        count_todo = len(
-            self.stock_quant_ids.search(
-                [("id", "in", self.stock_quant_ids.ids), ("to_do", "=", "True")]
+        for rec in self:
+            quants = rec.stock_quant_ids
+            quants_to_do = quants.filtered(lambda q: q.to_do)
+            count_todo = len(quants_to_do)
+            rec.count_stock_quants = len(quants)
+            rec.count_stock_quants_string = "{} / {}".format(
+                count_todo, rec.count_stock_quants
             )
-        )
-        self.count_stock_quants_string = "{} / {}".format(
-            count_todo, self.count_stock_quants
-        )
 
     @api.depends("stock_move_ids")
     def _compute_count_stock_moves(self):
-        sm_ids = self.mapped("stock_move_ids").ids
-        self.count_stock_moves = len(sm_ids)
+        group_fname = "inventory_adjustment_id"
+        group_data = self.env["stock.move.line"].read_group(
+            [
+                (group_fname, "in", self.ids),
+            ],
+            [group_fname],
+            [group_fname],
+        )
+        data_by_adj_id = {
+            row[group_fname][0]: row.get(f"{group_fname}_count", 0)
+            for row in group_data
+        }
+        for rec in self:
+            rec.count_stock_moves = data_by_adj_id.get(rec.id, 0)
+
+    def _compute_action_state_to_cancel_allowed(self):
+        for rec in self:
+            rec.action_state_to_cancel_allowed = rec.state == "draft"
 
     def _get_quants(self, locations):
+        self.ensure_one()
         domain = []
         base_domain = self._get_base_domain(locations)
         if self.product_selection == "all":
@@ -101,7 +166,7 @@ class InventoryAdjustmentsGroup(models.Model):
     def _get_base_domain(self, locations):
         return [
             "|",
-            ("location_id", "in", locations.mapped("id")),
+            ("location_id", "in", locations.ids),
             ("location_id", "in", locations.child_ids.ids),
         ]
 
@@ -109,11 +174,13 @@ class InventoryAdjustmentsGroup(models.Model):
         return base_domain
 
     def _get_domain_manual_quants(self, base_domain):
+        self.ensure_one()
         return expression.AND(
             [base_domain, [("product_id", "in", self.product_ids.ids)]]
         )
 
     def _get_domain_one_quant(self, base_domain):
+        self.ensure_one()
         return expression.AND(
             [
                 base_domain,
@@ -124,6 +191,7 @@ class InventoryAdjustmentsGroup(models.Model):
         )
 
     def _get_domain_lot_quants(self, base_domain):
+        self.ensure_one()
         return expression.AND(
             [
                 base_domain,
@@ -135,6 +203,7 @@ class InventoryAdjustmentsGroup(models.Model):
         )
 
     def _get_domain_category_quants(self, base_domain):
+        self.ensure_one()
         return expression.AND(
             [
                 base_domain,
@@ -146,54 +215,102 @@ class InventoryAdjustmentsGroup(models.Model):
             ]
         )
 
-    def action_state_to_in_progress(self):
+    def _check_existing_in_progress_inventory(self):
+        self.ensure_one()
         active_rec = self.env["stock.inventory"].search(
             [
                 ("state", "=", "in_progress"),
                 "|",
-                ("location_ids", "in", self.location_ids.mapped("id")),
+                ("location_ids", "in", self.location_ids.ids),
                 ("location_ids", "in", self.location_ids.child_ids.ids),
             ],
             limit=1,
         )
         if active_rec:
-            raise ValidationError(
+            raise UserError(
                 _(
                     "There's already an Adjustment in Process using one requested Location: %s"
                 )
                 % active_rec.name
             )
-        self.state = "in_progress"
-        self.stock_quant_ids = self._get_quants(self.location_ids)
-        self.stock_quant_ids.update({"to_do": True})
+
+    def action_state_to_in_progress(self):
+        self.ensure_one()
+        self._check_existing_in_progress_inventory()
+        quants = self._get_quants(self.location_ids)
+        new_quants = self._create_missing_quants(quants)
+        quants += new_quants
+        self.write(
+            {
+                "state": "in_progress",
+                "stock_quant_ids": [(6, 0, quants.ids)],
+            }
+        )
+        quants.write(
+            {
+                "to_do": True,
+            }
+        )
         return
 
     def action_state_to_done(self):
+        self.ensure_one()
         self.state = "done"
         self.stock_quant_ids.update({"to_do": True})
         return
 
     def action_state_to_draft(self):
+        self.ensure_one()
         self.state = "draft"
         self.stock_quant_ids.update({"to_do": True})
         self.stock_quant_ids = None
         return
 
+    def action_state_to_cancel(self):
+        self.ensure_one()
+        self._check_action_state_to_cancel()
+        self.write(
+            {
+                "state": "cancel",
+            }
+        )
+
+    def _check_action_state_to_cancel(self):
+        for rec in self:
+            if not rec.action_state_to_cancel_allowed:
+                raise UserError(
+                    _(
+                        "You can't cancel this inventory %(display_name)s.",
+                        display_name=rec.display_name,
+                    )
+                )
+
     def action_view_inventory_adjustment(self):
+        self.ensure_one()
         result = self.env["stock.quant"].action_view_inventory()
-        ia_ids = self.mapped("stock_quant_ids").ids
-        result["domain"] = [("id", "in", ia_ids)]
-        result["search_view_id"] = self.env.ref("stock.quant_search_view").id
-        result["context"]["search_default_to_do"] = 1
+        context = result.get("context", {})
+        context.update(
+            {
+                "search_default_to_do": 1,
+                "inventory_id": self.id,
+            }
+        )
+        result.update(
+            {
+                "domain": [("stock_inventory_ids", "in", self.ids)],
+                "search_view_id": self.env.ref("stock.quant_search_view").id,
+                "context": context,
+            }
+        )
         return result
 
     def action_view_stock_moves(self):
+        self.ensure_one()
         result = self.env["ir.actions.act_window"]._for_xml_id(
             "stock_inventory.action_view_stock_move_line_inventory_tree"
         )
-        sm_ids = self.mapped("stock_move_ids").ids
-        result["domain"] = [("id", "in", sm_ids)]
-        result["context"] = []
+        result["domain"] = [("inventory_adjustment_id", "=", self.id)]
+        result["context"] = {}
         return result
 
     @api.constrains("product_selection", "product_ids")
@@ -214,3 +331,47 @@ class InventoryAdjustmentsGroup(models.Model):
                             " you are only able to add one product."
                         )
                     )
+
+    def _create_missing_quants(self, quants):
+        """
+        Create quant with 0 quantity in selected locations for selected
+        products to avoid having no smart button to perform the inventory.
+        This could be adpated to generate quants in other situations.
+        :param quants: existing quants
+        :return: existing quants + new quants
+        """
+        self.ensure_one()
+        Quant = self.env["stock.quant"]
+        if self.product_selection != "manual":
+            return Quant.browse()
+        quants_values = []
+        for product in self._get_product_without_quants(quants):
+            quants_values.extend(self._get_new_quants_values(product))
+        return Quant.create(quants_values)
+
+    def _get_product_without_quants(self, quants):
+        """
+        Returns product without quants based on selected products.
+        :param quants: existing quants
+        :return: products without quants
+        """
+        self.ensure_one()
+        product_without_quants = self.product_ids - quants.mapped("product_id")
+        return product_without_quants
+
+    def _get_new_quant_base_values(self, product):
+        self.ensure_one()
+        return {
+            "product_id": product.id,
+            "user_id": self.env.user.id,
+            "stock_inventory_ids": [(4, self.id)],
+        }
+
+    def _get_new_quants_values(self, product):
+        base_values = self._get_new_quant_base_values(product)
+        quants_values = []
+        for location in self.location_ids:
+            values = base_values.copy()
+            values["location_id"] = location.id
+            quants_values.append(values)
+        return quants_values
