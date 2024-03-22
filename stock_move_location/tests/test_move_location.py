@@ -206,6 +206,12 @@ class TestMoveLocation(TestsCommon):
         self.assertEqual(
             putaway_line.destination_location_id, self.internal_loc_2_shelf
         )
+        picking_action = wizard.action_move_location()
+        picking = self.env["stock.picking"].browse(picking_action["res_id"])
+        move_lines = picking.move_line_ids.filtered(
+            lambda sml: sml.product_id == self.product_no_lots
+        )
+        self.assertEqual(move_lines.location_dest_id, self.internal_loc_2_shelf)
 
     def test_delivery_order_assignation_after_transfer(self):
         """
