@@ -23,9 +23,24 @@ class TestStockInventory(TransactionCase):
         )
         self.product2 = self.env["product.product"].create(
             {
-                "name": "Product 1 test",
+                "name": "Product 2 test",
                 "type": "product",
                 "categ_id": self.product_categ.id,
+            }
+        )
+        self.product3 = self.env["product.product"].create(
+            {
+                "name": "Product 3 test",
+                "type": "product",
+                "categ_id": self.product_categ.id,
+            }
+        )
+        self.product4 = self.env["product.product"].create(
+            {
+                "name": "Product 4 test",
+                "type": "product",
+                "categ_id": self.product_categ.id,
+                "tracking": "lot",
             }
         )
         self.lot_1 = self.env["stock.lot"].create(
@@ -46,6 +61,13 @@ class TestStockInventory(TransactionCase):
             {
                 "product_id": self.product.id,
                 "name": "Lot 3",
+                "company_id": self.env.company.id,
+            }
+        )
+        self.lot1_p4 = self.env["stock.lot"].create(
+            {
+                "product_id": self.product4.id,
+                "name": "Lot P4",
                 "company_id": self.env.company.id,
             }
         )
@@ -555,3 +577,70 @@ class TestStockInventory(TransactionCase):
             expected_result,
             "The search function did not return the expected results",
         )
+
+    def test_manual_create_quants(self):
+        product = self.product3
+        loc = self.location3
+
+        old_quants = self.quant_model.search(
+            [
+                ("product_id", "=", product.id),
+            ]
+        )
+        self.assertFalse(bool(old_quants))
+
+        inv = self.inventory_model.create(
+            {
+                "name": "Inventory",
+                "product_selection": "manual",
+                "location_ids": [(6, 0, loc.ids)],
+                "product_ids": [(6, 0, product.ids)],
+                "auto_create_missing_quants": True,
+            }
+        )
+        inv.action_state_to_in_progress()
+        quant = inv.stock_quant_ids
+        self.assertEqual(len(quant), 1)
+        self.assertEqual(quant.product_id, product)
+        self.assertEqual(quant.location_id, loc)
+        self.assertTrue(bool(quant.user_id))
+
+    def test_lot_selection_create_quants(self):
+        product = self.product4
+        lot = self.lot1_p4
+        inventory1 = self.inventory_model.create(
+            {
+                "name": "Inventory_Test_7",
+                "product_selection": "lot",
+                "location_ids": [self.location3.id, self.location2.id],
+                "auto_create_missing_quants": True,
+                "product_ids": [
+                    (
+                        6,
+                        0,
+                        [
+                            product.id,
+                        ],
+                    )
+                ],
+                "lot_ids": [
+                    (
+                        6,
+                        0,
+                        [
+                            lot.id,
+                        ],
+                    ),
+                ],
+            }
+        )
+        existing_quants = self.quant_model.search(
+            [
+                ("product_id", "=", product.id),
+            ]
+        )
+        self.assertFalse(existing_quants)
+
+        self.assertEqual(len(inventory1.stock_quant_ids), 0)
+        inventory1._get_or_create_quants()
+        self.assertEqual(len(inventory1.stock_quant_ids), 2)

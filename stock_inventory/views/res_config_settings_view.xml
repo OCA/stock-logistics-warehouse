@@ -22,6 +22,16 @@
                         </div>
                     </div>
                 </div>
+                <div class="row mt16 o_settings_container">
+                    <div class="col-xs-12 col-md-6 o_setting_box">
+                        <div class="o_setting_left_pane">
+                            <field name="stock_inventory_auto_create_missing_quants" />
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="stock_inventory_auto_create_missing_quants" />
+                        </div>
+                    </div>
+                </div>
             </xpath>
         </field>
     </record>
