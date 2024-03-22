@@ -22,7 +22,14 @@ class TestStockInventory(TransactionCase):
         )
         self.product2 = self.env["product.product"].create(
             {
-                "name": "Product 1 test",
+                "name": "Product 2 test",
+                "type": "product",
+                "categ_id": self.product_categ.id,
+            }
+        )
+        self.product3 = self.env["product.product"].create(
+            {
+                "name": "Product 3 test",
                 "type": "product",
                 "categ_id": self.product_categ.id,
             }
@@ -313,3 +320,29 @@ class TestStockInventory(TransactionCase):
         self.assertEqual(inventory1.stock_move_ids.product_id.id, self.product2.id)
         self.assertEqual(inventory1.stock_move_ids.location_id.id, self.location3.id)
         inventory1.action_state_to_done()
+
+    def test_06_manual_create_quants(self):
+        product = self.product3
+        loc = self.location3
+
+        old_quants = self.quant_model.search(
+            [
+                ("product_id", "=", product.id),
+            ]
+        )
+        self.assertFalse(bool(old_quants))
+
+        inv = self.inventory_model.create(
+            {
+                "name": "Inventory",
+                "product_selection": "manual",
+                "location_ids": [(6, 0, loc.ids)],
+                "product_ids": [(6, 0, product.ids)],
+            }
+        )
+        inv.action_state_to_in_progress()
+        quant = inv.stock_quant_ids
+        self.assertEqual(len(quant), 1)
+        self.assertEqual(quant.product_id, product)
+        self.assertEqual(quant.location_id, loc)
+        self.assertTrue(bool(quant.user_id))

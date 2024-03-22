@@ -215,7 +215,7 @@ class InventoryAdjustmentsGroup(models.Model):
             ]
         )
 
-    def action_state_to_in_progress(self):
+    def _check_existing_in_progress_inventory(self):
         self.ensure_one()
         active_rec = self.env["stock.inventory"].search(
             [
@@ -233,7 +233,13 @@ class InventoryAdjustmentsGroup(models.Model):
                 )
                 % active_rec.name
             )
+
+    def action_state_to_in_progress(self):
+        self.ensure_one()
+        self._check_existing_in_progress_inventory()
         quants = self._get_quants(self.location_ids)
+        new_quants = self._create_missing_quants(quants)
+        quants += new_quants
         self.write(
             {
                 "state": "in_progress",
@@ -282,7 +288,6 @@ class InventoryAdjustmentsGroup(models.Model):
     def action_view_inventory_adjustment(self):
         self.ensure_one()
         result = self.env["stock.quant"].action_view_inventory()
-        ia_ids = self.mapped("stock_quant_ids").ids
         context = result.get("context", {})
         context.update(
             {
@@ -292,7 +297,7 @@ class InventoryAdjustmentsGroup(models.Model):
         )
         result.update(
             {
-                "domain": [("id", "in", ia_ids)],
+                "domain": [("stock_inventory_ids", "in", self.ids)],
                 "search_view_id": self.env.ref("stock.quant_search_view").id,
                 "context": context,
             }
@@ -326,3 +331,47 @@ class InventoryAdjustmentsGroup(models.Model):
                             " you are only able to add one product."
                         )
                     )
+
+    def _create_missing_quants(self, quants):
+        """
+        Create quant with 0 quantity in selected locations for selected
+        products to avoid having no smart button to perform the inventory.
+        This could be adpated to generate quants in other situations.
+        :param quants: existing quants
+        :return: existing quants + new quants
+        """
+        self.ensure_one()
+        Quant = self.env["stock.quant"]
+        if self.product_selection != "manual":
+            return Quant.browse()
+        quants_values = []
+        for product in self._get_product_without_quants(quants):
+            quants_values.extend(self._get_new_quants_values(product))
+        return Quant.create(quants_values)
+
+    def _get_product_without_quants(self, quants):
+        """
+        Returns product without quants based on selected products.
+        :param quants: existing quants
+        :return: products without quants
+        """
+        self.ensure_one()
+        product_without_quants = self.product_ids - quants.mapped("product_id")
+        return product_without_quants
+
+    def _get_new_quant_base_values(self, product):
+        self.ensure_one()
+        return {
+            "product_id": product.id,
+            "user_id": self.env.user.id,
+            "stock_inventory_ids": [(4, self.id)],
+        }
+
+    def _get_new_quants_values(self, product):
+        base_values = self._get_new_quant_base_values(product)
+        quants_values = []
+        for location in self.location_ids:
+            values = base_values.copy()
+            values["location_id"] = location.id
+            quants_values.append(values)
+        return quants_values

@@ -8,6 +8,11 @@ class StockQuant(models.Model):
         comodel_name="stock.inventory",
         compute="_compute_virtual_in_progress_inventory_id",
     )
+    stock_inventory_ids = fields.Many2many(
+        comodel_name="stock.inventory",
+        string="Inventory Adjustment",
+        readonly=True,
+    )
     to_do = fields.Boolean(default=True)
 
     def _compute_virtual_in_progress_inventory_id(self):
