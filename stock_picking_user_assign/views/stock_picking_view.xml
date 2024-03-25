@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="view_stock_picking_form" model="ir.ui.view">
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//header" postition="inside">
+                <button
+                    name="action_assign_to_me"
+                    string="Assign to Me"
+                    type="object"
+                    class="oe_highlight"
+                    attrs="{'invisible': &quot;[('user_id', '!=', False)]&quot;}"
+                    data-hotkey="q"
+                />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="vpicktree" model="ir.ui.view">
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.vpicktree" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" postition="inside">
+                <button
+                    name="action_assign_to_me"
+                    title="Assign to Me"
+                    type="object"
+                    class="oe_highlight"
+                    icon="fa-user-plus"
+                    attrs="{'invisible': [('user_id', '!=', False)]}"
+                    context="{'assign_user_and_open_form': True}"
+                />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="stock_picking_kanban" model="ir.ui.view">
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.stock_picking_kanban" />
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="user_id" invisible="1" />
+            </field>
+            <xpath expr="//t[@t-name='kanban-box']/div" position="inside">
+                    <t t-if="!record.user_id.raw_value">
+                        <button
+                        name="action_assign_to_me"
+                        class="btn btn-primary"
+                        icon="fa-user-plus"
+                        type="object"
+                        context="{'assign_user_and_open_form': True}"
+                    >
+                            <i class="fa fa-user-plus" title="Assign responsible" />
+                        </button>
+                    </t>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
