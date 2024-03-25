@@ -1,0 +1,71 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_inventory_line_product_cost
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2021-12-24 18:44+0000\n"
+"Last-Translator: Yves Le Doeuff <yld@alliasys.fr>\n"
+"Language-Team: none\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.3.2\n"
+
+#. module: stock_inventory_line_product_cost
+#: model:ir.model.fields,field_description:stock_inventory_line_product_cost.field_stock_inventory_line__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: stock_inventory_line_product_cost
+#: model:ir.model.fields,field_description:stock_inventory_line_product_cost.field_stock_inventory_line__id
+msgid "ID"
+msgstr ""
+
+#. module: stock_inventory_line_product_cost
+#: model:ir.model.fields,help:stock_inventory_line_product_cost.field_stock_inventory_line__product_cost
+msgid ""
+"In Standard Price & AVCO: value of the product (automatically computed in "
+"AVCO).\n"
+"        In FIFO: value of the next unit that will leave the stock "
+"(automatically computed).\n"
+"        Used to value the product when the purchase cost is not known (e.g. "
+"inventory adjustment).\n"
+"        Used to compute margins on sale orders."
+msgstr ""
+
+#. module: stock_inventory_line_product_cost
+#: model:ir.model,name:stock_inventory_line_product_cost.model_stock_inventory_line
+msgid "Inventory Line"
+msgstr "Ligne d'inventaire"
+
+#. module: stock_inventory_line_product_cost
+#: model:ir.model.fields,field_description:stock_inventory_line_product_cost.field_stock_inventory_line____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: stock_inventory_line_product_cost
+#: model:ir.model.fields,field_description:stock_inventory_line_product_cost.field_stock_inventory_line__product_cost
+msgid "Product Cost"
+msgstr "Coût"
+
+#~ msgid ""
+#~ "In Standard Price & AVCO: value of the product (automatically computed in "
+#~ "AVCO).\n"
+#~ "        In FIFO: value of the last unit that left the stock "
+#~ "(automatically computed).\n"
+#~ "        Used to value the product when the purchase cost is not known (e."
+#~ "g. inventory adjustment).\n"
+#~ "        Used to compute margins on sale orders."
+#~ msgstr ""
+#~ "En Prix Standard & AVCO : valeur du produit (calculée automatiquement en "
+#~ "AVCO).\n"
+#~ "        En FIFO : valeur de la dernière unité qui a quitté le stock "
+#~ "(calculée automatiquement).\n"
+#~ "        Utilisé pour évaluer le produit lorsque le coût d'achat n'est pas "
+#~ "connu (par exemple, ajustement de l'inventaire).\n"
+#~ "        Utilisé pour calculer les marges sur les ventes."
