@@ -1,0 +1,100 @@
+<?xml version="1.0" ?>
+<odoo noupdate="1">
+
+    <record id="ir_rule_stock_location_allowed_warehouse" model="ir.rule">
+        <field name="name">Stock locations from allowed Warehouse</field>
+        <field name="model_id" ref="stock.model_stock_location" />
+        <field
+            name="domain_force"
+        >['|',('warehouse_id', '=', False), '|', ('warehouse_id', 'in', user.warehouse_ids.ids), (1 if user.warehouse_ids.ids == [] else 0, "=", 1)]</field>
+        <field eval="1" name="perm_unlink" />
+        <field eval="1" name="perm_write" />
+        <field eval="1" name="perm_read" />
+        <field eval="1" name="perm_create" />
+    </record>
+
+
+    <record id="ir_rule_stock_picking_type_allowed_warehouse" model="ir.rule">
+        <field name="name">Stock pickings type from allowed Warehouse</field>
+        <field name="model_id" ref="stock.model_stock_picking_type" />
+        <field
+            name="domain_force"
+        >['|',('warehouse_id', '=', False), '|', ('warehouse_id', 'in', user.warehouse_ids.ids), (1 if user.warehouse_ids.ids == [] else 0, "=", 1)]</field>
+        <field eval="1" name="perm_unlink" />
+        <field eval="1" name="perm_write" />
+        <field eval="1" name="perm_read" />
+        <field eval="1" name="perm_create" />
+    </record>
+
+    <record id="ir_rule_stock_picking_allowed_warehouse" model="ir.rule">
+        <field name="name">Stock pickings from allowed Warehouse</field>
+        <field name="model_id" ref="stock.model_stock_picking" />
+        <field
+            name="domain_force"
+        >['|',('warehouse_id', '=', False), '|', ('warehouse_id', 'in', user.warehouse_ids.ids), (1 if user.warehouse_ids.ids == [] else 0, "=", 1)]</field>
+        <field eval="1" name="perm_unlink" />
+        <field eval="1" name="perm_write" />
+        <field eval="1" name="perm_read" />
+        <field eval="1" name="perm_create" />
+    </record>
+
+    <record id="ir_rule_stock_move_allowed_warehouse" model="ir.rule">
+        <field name="name">Stock moves from allowed Warehouse</field>
+        <field name="model_id" ref="stock.model_stock_move" />
+        <field
+            name="domain_force"
+        >['|',('warehouse_id', '=', False), '|', ('warehouse_id', 'in', user.warehouse_ids.ids), (1 if user.warehouse_ids.ids == [] else 0, "=", 1)]</field>
+        <field eval="1" name="perm_unlink" />
+        <field eval="1" name="perm_write" />
+        <field eval="1" name="perm_read" />
+        <field eval="1" name="perm_create" />
+    </record>
+    <record id="ir_rule_stock_move_line_allowed_warehouse" model="ir.rule">
+        <field name="name">Stock moves lines from allowed Warehouse</field>
+        <field name="model_id" ref="stock.model_stock_move_line" />
+        <field
+            name="domain_force"
+        >['|',('warehouse_id', '=', False), '|', ('warehouse_id', 'in', user.warehouse_ids.ids), (1 if user.warehouse_ids.ids == [] else 0, "=", 1)]</field>
+        <field eval="1" name="perm_unlink" />
+        <field eval="1" name="perm_write" />
+        <field eval="1" name="perm_read" />
+        <field eval="1" name="perm_create" />
+    </record>
+
+    <record id="ir_rule_stock_quant_allowed_warehouse" model="ir.rule">
+        <field name="name">Stock Quants from allowed Warehouse</field>
+        <field name="model_id" ref="stock.model_stock_quant" />
+        <field
+            name="domain_force"
+        >['|',('warehouse_id', '=', False), '|', ('warehouse_id', 'in', user.warehouse_ids.ids), (1 if user.warehouse_ids.ids == [] else 0, "=", 1)]</field>
+        <field eval="1" name="perm_unlink" />
+        <field eval="1" name="perm_write" />
+        <field eval="1" name="perm_read" />
+        <field eval="1" name="perm_create" />
+    </record>
+
+    <record id="ir_rule_stock_quant_package_allowed_warehouse" model="ir.rule">
+        <field name="name">Packages from allowed Warehouse</field>
+        <field name="model_id" ref="stock.model_stock_quant_package" />
+        <field
+            name="domain_force"
+        >['|',('warehouse_id', '=', False), '|', ('warehouse_id', 'in', user.warehouse_ids.ids), (1 if user.warehouse_ids.ids == [] else 0, "=", 1)]</field>
+        <field eval="1" name="perm_unlink" />
+        <field eval="1" name="perm_write" />
+        <field eval="1" name="perm_read" />
+        <field eval="1" name="perm_create" />
+    </record>
+
+    <record id="ir_rule_stock_warehouse_orderpoint_allowed_warehouse" model="ir.rule">
+        <field name="name">Orderpoints from allowed Warehouse</field>
+        <field name="model_id" ref="stock.model_stock_warehouse_orderpoint" />
+        <field
+            name="domain_force"
+        >['|',('warehouse_id', '=', False), '|', ('warehouse_id', 'in', user.warehouse_ids.ids), (1 if user.warehouse_ids.ids == [] else 0, "=", 1)]</field>
+        <field eval="1" name="perm_unlink" />
+        <field eval="1" name="perm_write" />
+        <field eval="1" name="perm_read" />
+        <field eval="1" name="perm_create" />
+    </record>
+
+</odoo>
