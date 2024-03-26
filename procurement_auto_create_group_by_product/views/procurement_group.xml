@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="procurement_group_form_view" model="ir.ui.view">
+        <field name="name">procurement_auto_create_group_by_product</field>
+        <field name="model">procurement.group</field>
+        <field name="inherit_id" ref="stock.procurement_group_form_view" />
+        <field name="arch" type="xml">
+            <field name="move_type" position="after">
+                <field name="product_id" />
+            </field>
+        </field>
+    </record>
+</odoo>

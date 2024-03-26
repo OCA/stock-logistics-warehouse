@@ -13,13 +13,6 @@ class ProcurementGroup(models.Model):
         rule = super()._get_rule(product_id, location_id, values)
         # If there isn't a date planned in the values it means that this
         # method has been called outside of a procurement process.
-        if (
-            rule
-            and not values.get("group_id")
-            and rule.auto_create_group
-            and values.get("date_planned")
-        ):
-            group_data = rule._prepare_auto_procurement_group_data()
-            group = self.env["procurement.group"].create(group_data)
-            values["group_id"] = group
+        if rule and rule.auto_create_group and values.get("date_planned"):
+            values["group_id"] = rule._get_auto_procurement_group(product_id)
         return rule
