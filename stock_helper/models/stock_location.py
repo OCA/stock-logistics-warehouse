@@ -32,16 +32,17 @@ class StockLocation(models.Model):
         With this methods we will really get the closest warehouse of a location
         """
         self.ensure_one()
+        WAREHOUSE = self.env["stock.warehouse"]
+        if not self.parent_path:
+            return WAREHOUSE.browse()
         location_ids = [int(x) for x in self.parent_path.split("/") if x]
-        warehouses = (
-            self.env["stock.warehouse"]
-            .search([("view_location_id", "in", location_ids)])
-            .sorted(lambda w: w.view_location_id.parent_path, reverse=True)
-        )
+        warehouses = WAREHOUSE.search(
+            [("view_location_id", "in", location_ids)]
+        ).sorted(lambda w: w.view_location_id.parent_path, reverse=True)
         for warehouse in warehouses:
             if self.parent_path.startswith(warehouse.view_location_id.parent_path):
                 return warehouse
-        return warehouses.browse()
+        return WAREHOUSE.browse()
 
     def _get_source_location_from_route(self, route, procure_method):
         self.ensure_one()
