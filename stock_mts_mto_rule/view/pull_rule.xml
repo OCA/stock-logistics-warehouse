@@ -16,6 +16,11 @@
                     groups="stock.group_adv_location"
                     attrs="{'invisible': [('action', '!=', 'split_procurement')]}"
                 />
+                <field
+                    name="mts_quantity_rule"
+                    groups="stock.group_adv_location"
+                    attrs="{'invisible': [('action', '!=', 'split_procurement')]}"
+                />
             </field>
         </field>
     </record>
@@ -32,6 +37,11 @@
                 />
                 <field
                     name="mto_rule_id"
+                    groups="stock.group_adv_location"
+                    attrs="{'invisible': [('action', '!=', 'split_procurement')]}"
+                />
+                <field
+                    name="mts_quantity_rule"
                     groups="stock.group_adv_location"
                     attrs="{'invisible': [('action', '!=', 'split_procurement')]}"
                 />
