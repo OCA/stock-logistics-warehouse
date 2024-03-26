@@ -17,6 +17,8 @@ class TestOrderpointGenerator(SavepointCase):
         cls.product_model = cls.env["product.product"]
         cls.p1 = cls.product_model.create({"name": "Unittest P1", "type": "product"})
         cls.p2 = cls.product_model.create({"name": "Unittest P2", "type": "product"})
+        cls.p3 = cls.product_model.create({"name": "template P3", "type": "product"})
+        cls.p4 = cls.product_model.create({"name": "template P4", "type": "product"})
         cls.wh1 = cls.env["stock.warehouse"].create(
             {"name": "TEST WH1", "code": "TST1"}
         )
@@ -35,7 +37,39 @@ class TestOrderpointGenerator(SavepointCase):
             "product_min_qty": 5.0,
             "qty_multiple": 1,
         }
+
+        cls.orderpoint_with_auto_products = {
+            "warehouse_id": cls.wh1.id,
+            "location_id": cls.wh1.lot_stock_id.id,
+            "name": "TEST-ORDERPOINT-002",
+            "product_max_qty": 15.0,
+            "product_min_qty": 5.0,
+            "qty_multiple": 1,
+            "auto_generate": True,
+            "trigger": "auto",
+            "auto_product_ids": cls.p3.ids,
+        }
+
+        cls.orderpoint_with_use_domain = {
+            "warehouse_id": cls.wh1.id,
+            "location_id": cls.wh1.lot_stock_id.id,
+            "name": "TEST-ORDERPOINT-003",
+            "product_max_qty": 15.0,
+            "product_min_qty": 5.0,
+            "qty_multiple": 1,
+            "auto_generate": True,
+            "trigger": "auto",
+            "use_product_domain": True,
+            "domain": "[('name', 'ilike', 'template')]",
+        }
+
         cls.template = cls.orderpoint_template_model.create(cls.orderpoint_fields_dict)
+        cls.template2 = cls.orderpoint_template_model.create(
+            cls.orderpoint_with_auto_products
+        )
+        cls.template3 = cls.orderpoint_template_model.create(
+            cls.orderpoint_with_use_domain
+        )
         # Create some moves for p1 and p2 so we can have a history to test
         # p1 [100, 50, 45, 55, 52]
         # t1 - p1 - stock.move location1 100 # 100
@@ -407,3 +441,11 @@ class TestOrderpointGenerator(SavepointCase):
         )
         self.assertEqual(orderpoints[0].product_min_qty, 100)
         self.assertEqual(orderpoints[1].product_min_qty, 1043)
+
+    def test_cron_create_auto_orderpoints(self):
+        """Create auto orderpoints from cron"""
+        self.orderpoint_template_model._cron_create_auto_orderpoints()
+        orderpoints = self.orderpoint_model.search(
+            [("product_id", "in", [self.p3.id, self.p4.id])]
+        )
+        self.assertTrue(orderpoints, msg="Must be created orderpoints")
