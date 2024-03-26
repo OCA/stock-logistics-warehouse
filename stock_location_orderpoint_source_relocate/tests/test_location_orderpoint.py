@@ -11,48 +11,52 @@ from odoo.addons.stock_move_source_relocate.tests.common import SourceRelocateCo
 
 
 class TestLocationOrderpoint(TestLocationOrderpointCommon, SourceRelocateCommon):
-    def test_auto_replenishment(self):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
         name = "Internal Replenishment"
-        replenishment_location = self.env["stock.location"].create(
+        cls.replenishment_location = cls.env["stock.location"].create(
             {
                 "name": name,
-                "location_id": self.wh.lot_stock_id.location_id.id,
+                "location_id": cls.wh.lot_stock_id.location_id.id,
             }
         )
-        internal_location = replenishment_location.create(
+        cls.internal_location = cls.env["stock.location"].create(
             {
                 "name": name,
-                "location_id": self.wh.lot_stock_id.id,
+                "location_id": cls.wh.lot_stock_id.id,
             }
         )
-        picking_type = self._create_picking_type(
-            name, replenishment_location, internal_location, self.wh
+        picking_type = cls._create_picking_type(
+            name, cls.replenishment_location, cls.internal_location, cls.wh
         )
-        route = self._create_route(
-            name, picking_type, replenishment_location, internal_location, self.wh
+        route = cls._create_route(
+            name,
+            picking_type,
+            cls.replenishment_location,
+            cls.internal_location,
+            cls.wh,
         )
+        cls.orderpoint = Form(cls.env["stock.location.orderpoint"])
+        cls.orderpoint.location_id = cls.internal_location
+        cls.orderpoint.route_id = route
+        cls.orderpoint = cls.orderpoint.save()
 
-        orderpoint = Form(self.env["stock.location.orderpoint"])
-        orderpoint.location_id = internal_location
-        orderpoint.route_id = route
-        orderpoint = orderpoint.save()
+        cls._create_incoming_move(10, cls.replenishment_location)
+        cls.job_func = cls.env["stock.location.orderpoint"].run_auto_replenishment
 
-        job_func = self.env["stock.location.orderpoint"].run_auto_replenishment
-
-        self._create_incoming_move(10, replenishment_location)
-        self._create_relocate_rule(
-            self.wh.lot_stock_id, internal_location, self.wh.out_type_id
-        )
+    def test_auto_replenishment_without_relocation(self):
         with trap_jobs() as trap:
-            move = self._create_outgoing_move(10, self.wh.lot_stock_id)
-            move.picking_type_id = self.wh.out_type_id.id
-            move._assign_picking()
-            move._action_assign()
-            self.assertEqual(move.location_id, internal_location)
-            trap.assert_jobs_count(1, only=job_func)
+            move = self._create_outgoing_move(
+                10,
+                self.internal_location,
+                defaults={"picking_type_id": self.wh.out_type_id.id},
+            )
+            self.assertEqual(move.location_id, self.internal_location)
+            trap.assert_jobs_count(1, only=self.job_func)
             trap.assert_enqueued_job(
-                job_func,
-                args=(move.product_id, internal_location, "location_id"),
+                self.job_func,
+                args=(move.product_id, self.internal_location, "location_id"),
                 kwargs={},
                 properties=dict(
                     identity_key=identity_exact,
@@ -61,5 +65,58 @@ class TestLocationOrderpoint(TestLocationOrderpointCommon, SourceRelocateCommon)
 
             self.product.invalidate_cache()
             trap.perform_enqueued_jobs()
-            replenish_move = self._get_replenishment_move(orderpoint)
-            self._check_replenishment_move(replenish_move, 10, orderpoint)
+            replenish_move = self._get_replenishment_move(self.orderpoint)
+            self._check_replenishment_move(replenish_move, 10, self.orderpoint)
+
+    def test_auto_replenishment_with_relocation(self):
+        self._create_relocate_rule(
+            self.wh.lot_stock_id, self.internal_location, self.wh.out_type_id
+        )
+        with trap_jobs() as trap:
+            move = self._create_outgoing_move(
+                10,
+                self.wh.lot_stock_id,
+                defaults={"picking_type_id": self.wh.out_type_id.id},
+            )
+            self.assertEqual(move.location_id, self.internal_location)
+            trap.assert_jobs_count(1, only=self.job_func)
+            trap.assert_enqueued_job(
+                self.job_func,
+                args=(move.product_id, self.internal_location, "location_id"),
+                kwargs={},
+                properties=dict(
+                    identity_key=identity_exact,
+                ),
+            )
+
+            self.product.invalidate_cache()
+            trap.perform_enqueued_jobs()
+            replenish_move = self._get_replenishment_move(self.orderpoint)
+            self._check_replenishment_move(replenish_move, 10, self.orderpoint)
+
+    def test_auto_replenishment_with_partial_relocation(self):
+        self._create_relocate_rule(
+            self.wh.lot_stock_id, self.internal_location, self.wh.out_type_id
+        )
+        self._create_quants(self.product, self.internal_location, 1)
+        with trap_jobs() as trap:
+            move = self._create_outgoing_move(
+                10,
+                self.wh.lot_stock_id,
+                defaults={"picking_type_id": self.wh.out_type_id.id},
+            )
+            self.assertEqual(move.location_id, self.wh.lot_stock_id)
+            trap.assert_jobs_count(1, only=self.job_func)
+            trap.assert_enqueued_job(
+                self.job_func,
+                args=(move.product_id, self.internal_location, "location_id"),
+                kwargs={},
+                properties=dict(
+                    identity_key=identity_exact,
+                ),
+            )
+
+            self.product.invalidate_cache()
+            trap.perform_enqueued_jobs()
+            replenish_move = self._get_replenishment_move(self.orderpoint)
+            self._check_replenishment_move(replenish_move, 9, self.orderpoint)

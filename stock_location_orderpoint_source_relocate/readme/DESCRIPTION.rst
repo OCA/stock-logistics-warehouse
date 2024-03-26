@@ -1,1 +1,1 @@
-Run an auto location orderpoint replenishment also after a move gets relocated by Stock Move Source Relocate
+Run the auto location orderpoint replenishment after the potiential move relocation by Stock Move Source Relocate

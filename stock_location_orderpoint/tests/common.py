@@ -20,8 +20,9 @@ class TestLocationOrderpointCommon(SavepointCase):
         cls.location_dest = cls.warehouse.lot_stock_id
         cls.env["stock.location.orderpoint"].search([]).write({"active": False})
 
-    def _create_picking_type(self, name, location_src, location_dest, warehouse):
-        return self.env["stock.picking.type"].create(
+    @classmethod
+    def _create_picking_type(cls, name, location_src, location_dest, warehouse):
+        return cls.env["stock.picking.type"].create(
             {
                 "name": name,
                 "sequence_code": f"INT/REPL/{location_src.name}",
@@ -33,8 +34,9 @@ class TestLocationOrderpointCommon(SavepointCase):
             }
         )
 
-    def _create_route(self, name, picking_type, location_src, location_dest, warehouse):
-        return self.env["stock.location.route"].create(
+    @classmethod
+    def _create_route(cls, name, picking_type, location_src, location_dest, warehouse):
+        return cls.env["stock.location.route"].create(
             {
                 "name": name,
                 "sequence": 0,
@@ -56,69 +58,79 @@ class TestLocationOrderpointCommon(SavepointCase):
             }
         )
 
-    def _create_picking_type_route_rule(self, location):
+    @classmethod
+    def _create_picking_type_route_rule(cls, location):
         name = "Internal Replenishment"
         name = f"{name}-{location.name}"
-        picking_type = self._create_picking_type(
-            name, location, self.location_dest, self.warehouse
+        picking_type = cls._create_picking_type(
+            name, location, cls.location_dest, cls.warehouse
         )
-        route = self._create_route(
-            name, picking_type, location, self.location_dest, self.warehouse
+        route = cls._create_route(
+            name, picking_type, location, cls.location_dest, cls.warehouse
         )
         return picking_type, route
 
-    def _create_orderpoint(self, **kwargs):
-        location_orderpoint = Form(self.env["stock.location.orderpoint"])
-        location_orderpoint.location_id = self.location_dest
+    @classmethod
+    def _create_orderpoint(cls, **kwargs):
+        location_orderpoint = Form(cls.env["stock.location.orderpoint"])
+        location_orderpoint.location_id = cls.location_dest
         for field, value in kwargs.items():
             setattr(location_orderpoint, field, value)
         return location_orderpoint.save()
 
-    def _create_move(self, name, qty, location, location_dest):
-        move = self.env["stock.move"].create(
+    @classmethod
+    def _create_move(cls, name, qty, location, location_dest, defaults=None):
+        vals = defaults or {}
+        vals.update(
             {
                 "name": name,
                 "date": datetime.today(),
-                "product_id": self.product.id,
-                "product_uom": self.uom_unit.id,
+                "product_id": cls.product.id,
+                "product_uom": cls.uom_unit.id,
                 "product_uom_qty": qty,
                 "location_id": location.id,
                 "location_dest_id": location_dest.id,
             }
         )
+        move = cls.env["stock.move"].create(vals)
         move._write({"create_date": datetime.now()})
         move._action_confirm()
         return move
 
-    def _create_scrap_move(self, qty, location):
-        scrap = self.env["stock.location"].search(
+    @classmethod
+    def _create_scrap_move(cls, qty, location):
+        scrap = cls.env["stock.location"].search(
             [("scrap_location", "=", True)], limit=1
         )
-        move = self._create_move("Scrap", qty, location, scrap)
+        move = cls._create_move("Scrap", qty, location, scrap)
         move.move_line_ids.write({"qty_done": qty})
         move._action_done()
         return move
 
-    def _create_incoming_move(self, qty, location):
-        move = self._create_move(
-            "Receive", qty, self.env.ref("stock.stock_location_suppliers"), location
+    @classmethod
+    def _create_incoming_move(cls, qty, location):
+        move = cls._create_move(
+            "Receive", qty, cls.env.ref("stock.stock_location_suppliers"), location
         )
         move.move_line_ids.write({"qty_done": qty})
         move._action_done()
         return move
 
-    def _create_outgoing_move(self, qty, location=None):
-        move = self._create_move(
+    @classmethod
+    def _create_outgoing_move(cls, qty, location=None, defaults=None):
+        move = cls._create_move(
             "Delivery",
             qty,
-            location or self.location_dest,
-            self.env.ref("stock.stock_location_customers"),
+            location or cls.location_dest,
+            cls.env.ref("stock.stock_location_customers"),
+            defaults=defaults,
         )
         move._action_assign()
         return move
 
-    def _create_quants(self, product, location, qty):
-        self.env["stock.quant"].create(
+    @classmethod
+    def _create_quants(cls, product, location, qty):
+        cls.env["stock.quant"].create(
             {
                 "product_id": product.id,
                 "location_id": location.id,
@@ -148,15 +160,17 @@ class TestLocationOrderpointCommon(SavepointCase):
         self.assertEqual(move.state, "assigned")
         self.assertEqual(move.priority, orderpoint.priority)
 
-    def _create_location(self, name):
-        return self.env["stock.location"].create(
-            {"name": name, "location_id": self.location_dest.location_id.id}
+    @classmethod
+    def _create_location(cls, name):
+        return cls.env["stock.location"].create(
+            {"name": name, "location_id": cls.location_dest.location_id.id}
         )
 
-    def _create_orderpoint_complete(self, location_name, **kwargs):
-        location = self._create_location(location_name)
-        picking_type, route = self._create_picking_type_route_rule(location)
+    @classmethod
+    def _create_orderpoint_complete(cls, location_name, **kwargs):
+        location = cls._create_location(location_name)
+        picking_type, route = cls._create_picking_type_route_rule(location)
         values = kwargs or {}
         values.update({"route_id": route})
-        orderpoint = self._create_orderpoint(**values)
+        orderpoint = cls._create_orderpoint(**values)
         return orderpoint, location
