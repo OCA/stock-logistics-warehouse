@@ -28,4 +28,7 @@ class StockInventory(models.Model):
             ("location_id.usage", "in", ["internal", "transit"]),
         ]
         action["domain"] = domain
+        action["context"] = {
+            "default_inventory_id": self.id,
+        }
         return action
