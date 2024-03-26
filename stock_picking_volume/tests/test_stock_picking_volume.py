@@ -1,6 +1,7 @@
 # Copyright 2023 ACSONE SA/NV
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
+from odoo.tests import Form
 from odoo.tests.common import TransactionCase
 
 
@@ -191,3 +192,24 @@ class TestStockPickingVolume(TransactionCase):
         self.assertEqual(
             self.product._get_volume_for_qty(5 * from_uom.factor, from_uom), 750
         )
+
+    def test_onchage_volume_uom_id(self):
+        """
+        Data:
+            one picking with one move line with 5 units of product
+        Test Case:
+            set 5 unit of product as available
+            get the volume of the picking
+            change the volume uom to L
+            get the volume of the picking again
+        Expected result:
+            volume first is 5 * 10 * 5 * 3 = 750
+            after changing the uom, volume  is (5 * 10 * 5 * 3)*1000 = 750000
+        """
+        self._set_product_qty(self.product, 5)
+        self.picking.action_confirm()
+        self.picking.action_assign()
+        self.assertEqual(self.picking.volume, 750)
+        with Form(self.picking) as picking_form:
+            picking_form.volume_uom_id = self.env.ref("uom.product_uom_litre")
+            self.assertEqual(picking_form.volume, 750000)
