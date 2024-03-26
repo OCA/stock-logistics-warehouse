@@ -349,9 +349,19 @@ class VerticalLiftOperationBase(models.AbstractModel):
         channel = "notify_vertical_lift_screen"
         bus_message = {
             "action": "refresh",
-            "params": {"model": self._name, "id": self.id},
+            "params": self._get_user_notification_params(),
         }
         self.env["bus.bus"].sendone(channel, bus_message)
+
+    def _get_user_notification_params(self):
+        return {
+            "model": self._name,
+            "id": self.id,
+            "shuttle_info": self._get_user_notification_params_shuttle_info(),
+        }
+
+    def _get_user_notification_params_shuttle_info(self):
+        return self.shuttle_id._get_user_notification_params_shuttle_info()
 
 
 class VerticalLiftOperationTransfer(models.AbstractModel):
@@ -416,7 +426,8 @@ class VerticalLiftOperationTransfer(models.AbstractModel):
     def on_barcode_scanned(self, barcode):
         self.ensure_one()
         self.env.user.notify_info(
-            "Scanned barcode: {}. Not implemented.".format(barcode)
+            "Scanned barcode: {}. Not implemented.".format(barcode),
+            params=self._get_user_notification_params(),
         )
 
     @api.depends("current_move_line_id.product_id.packaging_ids")

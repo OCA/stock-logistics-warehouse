@@ -62,7 +62,8 @@ class VerticalLiftOperationPick(models.Model):
                 self.next_step()
             else:
                 self.env.user.notify_warning(
-                    _("No location found for barcode {}").format(barcode)
+                    _("No location found for barcode {}").format(barcode),
+                    params=self._get_user_notification_params(),
                 )
 
     def _domain_move_lines_to_do(self):

@@ -70,7 +70,8 @@ class VerticalLiftOperationPut(models.Model):
             self.next_step()
         else:
             self.env.user.notify_warning(
-                _("No move line found for barcode {}").format(barcode)
+                _("No move line found for barcode {}").format(barcode),
+                params=self._get_user_notification_params(),
             )
 
     def _scan_tray_type_action(self, barcode):
@@ -85,11 +86,13 @@ class VerticalLiftOperationPut(models.Model):
                 self.env.user.notify_warning(
                     _('No free space for tray type "{}" in this shuttle.').format(
                         tray_type.display_name
-                    )
+                    ),
+                    params=self._get_user_notification_params(),
                 )
         else:
             self.env.user.notify_warning(
-                _("No tray type found for barcode {}").format(barcode)
+                _("No tray type found for barcode {}").format(barcode),
+                params=self._get_user_notification_params(),
             )
 
     def _find_tray_type(self, barcode):

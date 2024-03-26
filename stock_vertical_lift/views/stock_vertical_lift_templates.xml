@@ -15,6 +15,10 @@
                 type="text/javascript"
                 src="/stock_vertical_lift/static/src/js/vertical_lift.js"
             />
+            <script
+                type="text/javascript"
+                src="/stock_vertical_lift/static/src/js/web_client.js"
+            />
         </xpath>
     </template>
 </odoo>
