@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="report_delivery_document" inherit_id="stock.report_delivery_document">
+        <xpath expr="//div[@class='page']" position="inside">
+            <div name="dimensions_info">
+                <p class="m-0">
+                <strong>Dimensions of the picking: </strong>
+                </p>
+                <p class="m-0">
+                    <span>Length: </span>
+                    <span t-field="o.picking_length" />
+                    <span t-field="o.dimension_uom_name" />
+                </p>
+                <p class="m-0">
+                    <span>Width: </span>
+                    <span t-field="o.picking_width" />
+                    <span t-field="o.dimension_uom_name" />
+                </p>
+                <p class="m-0">
+                    <span>Height: </span>
+                    <span t-field="o.picking_height" />
+                    <span t-field="o.dimension_uom_name" />
+                </p>
+                <p class="m-0">
+                    <span>Volume: </span>
+                    <span t-field="o.volume" />
+                    <span t-field="o.volume_uom_name" />
+                </p>
+            </div>
+        </xpath>
+    </template>
+</odoo>
