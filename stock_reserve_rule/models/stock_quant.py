@@ -28,3 +28,13 @@ class StockQuant(models.Model):
             else:
                 seen[location] = quant
         return [(loc, quants) for loc, quants in seen.items()]
+
+    def group_by_lot(self):
+        seen = OrderedDict()
+        for quant in self:
+            lot = quant.lot_id
+            if lot in seen:
+                seen[lot] = seen[lot] | quant
+            else:
+                seen[lot] = quant
+        return [(lot, quants) for lot, quants in seen.items()]

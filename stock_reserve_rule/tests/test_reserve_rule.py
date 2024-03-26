@@ -2,148 +2,12 @@
 # Copyright 2019-2021 Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
 
 from odoo import exceptions, fields
-from odoo.tests import common
+from odoo.tests import Form
+
+from .common import ReserveRuleCommon
 
 
-class TestReserveRule(common.SavepointCase):
-    @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
-        cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
-        cls.partner_delta = cls.env.ref("base.res_partner_4")
-        cls.wh = cls.env["stock.warehouse"].create(
-            {
-                "name": "Base Warehouse",
-                "reception_steps": "one_step",
-                "delivery_steps": "pick_ship",
-                "code": "WHTEST",
-            }
-        )
-        cls.rule = cls.env.ref("stock_reserve_rule.stock_reserve_rule_1_demo")
-        cls.rule.active = True
-
-        cls.customer_loc = cls.env.ref("stock.stock_location_customers")
-
-        cls.loc_zone1 = cls.env["stock.location"].create(
-            {"name": "Zone1", "location_id": cls.wh.lot_stock_id.id}
-        )
-        cls.loc_zone1_bin1 = cls.env["stock.location"].create(
-            {"name": "Zone1 Bin1", "location_id": cls.loc_zone1.id}
-        )
-        cls.loc_zone1_bin2 = cls.env["stock.location"].create(
-            {"name": "Zone1 Bin2", "location_id": cls.loc_zone1.id}
-        )
-        cls.loc_zone2 = cls.env["stock.location"].create(
-            {"name": "Zone2", "location_id": cls.wh.lot_stock_id.id}
-        )
-        cls.loc_zone2_bin1 = cls.env["stock.location"].create(
-            {"name": "Zone2 Bin1", "location_id": cls.loc_zone2.id}
-        )
-        cls.loc_zone2_bin2 = cls.env["stock.location"].create(
-            {"name": "Zone2 Bin2", "location_id": cls.loc_zone2.id}
-        )
-        cls.loc_zone3 = cls.env["stock.location"].create(
-            {"name": "Zone3", "location_id": cls.wh.lot_stock_id.id}
-        )
-        cls.loc_zone3_bin1 = cls.env["stock.location"].create(
-            {"name": "Zone3 Bin1", "location_id": cls.loc_zone3.id}
-        )
-        cls.loc_zone3_bin2 = cls.env["stock.location"].create(
-            {"name": "Zone3 Bin2", "location_id": cls.loc_zone3.id}
-        )
-
-        cls.product1 = cls.env["product.product"].create(
-            {"name": "Product 1", "type": "product"}
-        )
-        cls.product2 = cls.env["product.product"].create(
-            {"name": "Product 2", "type": "product"}
-        )
-
-        cls.unit = cls.env["product.packaging.type"].create(
-            {"name": "Unit", "code": "UNIT", "sequence": 0}
-        )
-        cls.retail_box = cls.env["product.packaging.type"].create(
-            {"name": "Retail Box", "code": "PACK", "sequence": 3}
-        )
-        cls.transport_box = cls.env["product.packaging.type"].create(
-            {"name": "Transport Box", "code": "CASE", "sequence": 4}
-        )
-        cls.pallet = cls.env["product.packaging.type"].create(
-            {"name": "Pallet", "code": "PALLET", "sequence": 5}
-        )
-
-    def _create_picking(self, wh, products=None, location_src_id=None):
-        """Create picking
-
-        Products must be a list of tuples (product, quantity).
-        One stock move will be created for each tuple.
-        """
-        if products is None:
-            products = []
-
-        picking = self.env["stock.picking"].create(
-            {
-                "location_id": location_src_id or wh.lot_stock_id.id,
-                "location_dest_id": wh.wh_output_stock_loc_id.id,
-                "partner_id": self.partner_delta.id,
-                "picking_type_id": wh.pick_type_id.id,
-            }
-        )
-
-        for product, qty in products:
-            self.env["stock.move"].create(
-                {
-                    "name": product.name,
-                    "product_id": product.id,
-                    "product_uom_qty": qty,
-                    "product_uom": product.uom_id.id,
-                    "picking_id": picking.id,
-                    "location_id": location_src_id or wh.lot_stock_id.id,
-                    "location_dest_id": wh.wh_output_stock_loc_id.id,
-                    "state": "confirmed",
-                }
-            )
-        return picking
-
-    def _update_qty_in_location(
-        self, location, product, quantity, in_date=None, lot_id=None, owner_id=None
-    ):
-        self.env["stock.quant"]._update_available_quantity(
-            product,
-            location,
-            quantity,
-            in_date=in_date,
-            lot_id=lot_id,
-            owner_id=owner_id,
-        )
-
-    def _create_rule(self, rule_values, removal_values):
-        rule_config = {
-            "name": "Test Rule",
-            "location_id": self.wh.lot_stock_id.id,
-            "rule_removal_ids": [(0, 0, values) for values in removal_values],
-        }
-        rule_config.update(rule_values)
-        self.env["stock.reserve.rule"].create(rule_config)
-        # workaround for https://github.com/odoo/odoo/pull/41900
-        self.env["stock.reserve.rule"].invalidate_cache()
-
-    def _setup_packagings(self, product, packagings):
-        """Create packagings on a product
-        packagings is a list [(name, qty, packaging_type)]
-        """
-        self.env["product.packaging"].create(
-            [
-                {
-                    "name": name,
-                    "qty": qty,
-                    "product_id": product.id,
-                    "packaging_type_id": packaging_type.id,
-                }
-                for name, qty, packaging_type in packagings
-            ]
-        )
-
+class TestReserveRule(ReserveRuleCommon):
     def test_removal_rule_location_child_of_rule_location(self):
         # removal rule location is a child
         self._create_rule({}, [{"location_id": self.loc_zone1.id}])
@@ -822,3 +686,240 @@ class TestReserveRule(common.SavepointCase):
             ml, [{"location_id": self.loc_zone2_bin1.id, "product_qty": 80.0}]
         )
         self.assertEqual(move.state, "assigned")
+
+    def test_rule_full_lot_equals(self):
+        self._update_qty_in_location(
+            self.loc_zone4_bin1, self.product3, 100, lot_id=self.lot0_id
+        )
+        # Rule by lot
+        self._create_rule(
+            # different picking, should be excluded
+            {"picking_type_ids": [(6, 0, self.wh.out_type_id.ids)], "sequence": 1},
+            [
+                {
+                    "location_id": self.loc_zone4.id,
+                    "removal_strategy": "full_lot",
+                    "tolerance_requested_limit": "no_tolerance",
+                    "tolerance_requested_computation": "percentage",
+                    "tolerance_requested_value": 0.0,
+                }
+            ],
+        )
+
+        # Rule qty 100 != 50
+        picking = self._create_picking(
+            self.wh, [(self.product3, 50)], picking_type_id=self.wh.out_type_id.id
+        )
+        picking.action_assign()
+        move = picking.move_lines
+        self.assertFalse(move.move_line_ids)
+        self.assertEqual(move.state, "confirmed")
+
+        # Rule qty 100 == 100
+        picking = self._create_picking(
+            self.wh, [(self.product3, 100)], picking_type_id=self.wh.out_type_id.id
+        )
+        picking.action_assign()
+        move = picking.move_lines
+        self.assertRecordValues(
+            move.move_line_ids,
+            [
+                {
+                    "location_id": self.loc_zone4_bin1.id,
+                    "product_qty": 100,
+                    "lot_id": self.lot0_id.id,
+                },
+            ],
+        )
+        self.assertEqual(move.state, "assigned")
+        wizard_data = picking.button_validate()
+        wizard = Form(
+            self.env[wizard_data["res_model"]].with_context(wizard_data["context"])
+        ).save()
+        wizard.process()
+
+    def test_rule_validation(self):
+        rule = self._create_rule(
+            # different picking, should be excluded
+            {"picking_type_ids": [(6, 0, self.wh.out_type_id.ids)], "sequence": 1},
+            [
+                {
+                    "location_id": self.loc_zone4.id,
+                    "removal_strategy": "full_lot",
+                    "tolerance_requested_limit": "lower_limit",
+                    "tolerance_requested_computation": "absolute",
+                }
+            ],
+        )
+        with Form(
+            rule, view="stock_reserve_rule.view_stock_reserve_rule_form"
+        ) as form, form.rule_removal_ids.edit(0) as line:
+            with self.assertRaises(exceptions.UserError):
+                line.tolerance_requested_value = -1
+
+    def test_rule_tolerance_absolute(self):
+        self._update_qty_in_location(
+            self.loc_zone4_bin1, self.product3, 4, lot_id=self.lot0_id
+        )
+        self._create_rule(
+            # different picking, should be excluded
+            {"picking_type_ids": [(6, 0, self.wh.out_type_id.ids)], "sequence": 1},
+            [
+                {
+                    "location_id": self.loc_zone4.id,
+                    "removal_strategy": "full_lot",
+                    "tolerance_requested_limit": "upper_limit",
+                    "tolerance_requested_computation": "absolute",
+                    "tolerance_requested_value": 1.0,
+                }
+            ],
+        )
+        picking = self._create_picking(
+            self.wh, [(self.product3, 4)], picking_type_id=self.wh.out_type_id.id
+        )
+        picking.action_assign()
+        move = picking.move_lines
+        self.assertFalse(move.move_line_ids)
+
+        picking = self._create_picking(
+            self.wh, [(self.product3, 3)], picking_type_id=self.wh.out_type_id.id
+        )
+        picking.action_assign()
+        move = picking.move_lines
+        self.assertRecordValues(
+            move.move_line_ids,
+            [
+                {
+                    "location_id": self.loc_zone4_bin1.id,
+                    "product_qty": 3,
+                    "lot_id": self.lot0_id.id,
+                },
+            ],
+        )
+
+    def test_rule_tolerance_percent(self):
+        self._update_qty_in_location(
+            self.loc_zone4_bin1, self.product3, 5, lot_id=self.lot0_id
+        )
+        self._create_rule(
+            # different picking, should be excluded
+            {"picking_type_ids": [(6, 0, self.wh.out_type_id.ids)], "sequence": 1},
+            [
+                {
+                    "location_id": self.loc_zone4.id,
+                    "removal_strategy": "full_lot",
+                    "tolerance_requested_limit": "upper_limit",
+                    "tolerance_requested_computation": "percentage",
+                    "tolerance_requested_value": 50.0,
+                }
+            ],
+        )
+        picking = self._create_picking(
+            self.wh, [(self.product3, 4)], picking_type_id=self.wh.out_type_id.id
+        )
+        picking.action_assign()
+        move = picking.move_lines
+        self.assertRecordValues(
+            move.move_line_ids,
+            [
+                {
+                    "location_id": self.loc_zone4_bin1.id,
+                    "product_qty": 4,
+                    "lot_id": self.lot0_id.id,
+                },
+            ],
+        )
+
+    def test_rule_tolerance_lower_limit(self):
+        self._update_qty_in_location(
+            self.loc_zone4_bin1, self.product3, 3, lot_id=self.lot0_id
+        )
+        self._update_qty_in_location(
+            self.loc_zone1_bin1, self.product3, 5, lot_id=self.lot1_id
+        )
+        self._create_rule(
+            # different picking, should be excluded
+            {"picking_type_ids": [(6, 0, self.wh.out_type_id.ids)], "sequence": 1},
+            [
+                {
+                    "location_id": self.loc_zone1.id,
+                    "removal_strategy": "full_lot",
+                    "tolerance_requested_limit": "lower_limit",
+                    "tolerance_requested_computation": "percentage",
+                    "tolerance_requested_value": 50.0,
+                },
+                {
+                    "location_id": self.loc_zone4.id,
+                    "removal_strategy": "full_lot",
+                    "tolerance_requested_limit": "no_tolerance",
+                    "tolerance_requested_computation": "percentage",
+                    "tolerance_requested_value": 0.0,
+                },
+            ],
+        )
+        picking = self._create_picking(
+            self.wh, [(self.product3, 8)], picking_type_id=self.wh.out_type_id.id
+        )
+        picking.action_assign()
+        move = picking.move_lines
+        self.assertRecordValues(
+            move.move_line_ids,
+            [
+                {
+                    "location_id": self.loc_zone1_bin1.id,
+                    "product_qty": 5,
+                    "lot_id": self.lot1_id.id,
+                },
+                {
+                    "location_id": self.loc_zone4_bin1.id,
+                    "product_qty": 3,
+                    "lot_id": self.lot0_id.id,
+                },
+            ],
+        )
+
+    def test_rule_reserve_single_lot_from_multiple_location(self):
+        self._update_qty_in_location(
+            self.loc_zone1_bin1, self.product3, 10, lot_id=self.lot0_id
+        )
+        self._update_qty_in_location(
+            self.loc_zone1_bin2, self.product3, 5, lot_id=self.lot0_id
+        )
+        self._create_rule(
+            # different picking, should be excluded
+            {"picking_type_ids": [(6, 0, self.wh.out_type_id.ids)], "sequence": 1},
+            [
+                {
+                    "location_id": self.loc_zone1.id,
+                    "removal_strategy": "full_lot",
+                    "tolerance_requested_limit": "lower_limit",
+                    "tolerance_requested_computation": "percentage",
+                    "tolerance_requested_value": 50.0,
+                },
+                {
+                    "location_id": self.loc_zone1.id,
+                    "removal_strategy": "full_lot",
+                    "tolerance_requested_limit": "no_tolerance",
+                },
+            ],
+        )
+        picking = self._create_picking(
+            self.wh, [(self.product3, 15)], picking_type_id=self.wh.out_type_id.id
+        )
+        picking.action_assign()
+        move = picking.move_lines
+        self.assertRecordValues(
+            move.move_line_ids,
+            [
+                {
+                    "location_id": self.loc_zone1_bin1.id,
+                    "product_qty": 10,
+                    "lot_id": self.lot0_id.id,
+                },
+                {
+                    "location_id": self.loc_zone1_bin2.id,
+                    "product_qty": 5,
+                    "lot_id": self.lot0_id.id,
+                },
+            ],
+        )

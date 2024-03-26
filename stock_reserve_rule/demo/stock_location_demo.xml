@@ -12,6 +12,10 @@
         <field name="name">Zone C</field>
         <field name="location_id" ref="stock.stock_location_stock" />
     </record>
+    <record id="stock_location_zone_d_demo" model="stock.location">
+        <field name="name">Zone D</field>
+        <field name="location_id" ref="stock.stock_location_stock" />
+    </record>
     <record id="stock_location_zone_a_bin_1_demo" model="stock.location">
         <field name="name">Bin A1</field>
         <field name="location_id" ref="stock_location_zone_a_demo" />
@@ -23,5 +27,9 @@
     <record id="stock_location_zone_c_bin_1_demo" model="stock.location">
         <field name="name">Bin C1</field>
         <field name="location_id" ref="stock_location_zone_c_demo" />
+    </record>
+    <record id="stock_location_zone_d_bin_1_demo" model="stock.location">
+        <field name="name">Bin D1</field>
+        <field name="location_id" ref="stock_location_zone_d_demo" />
     </record>
 </odoo>
