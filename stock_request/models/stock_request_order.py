@@ -317,6 +317,16 @@ class StockRequestOrder(models.Model):
                 )
             )
 
+    @api.constrains("stock_request_ids")
+    def _check_location_empty_stock_request_ids(self):
+        if any(not request.stock_request_ids for request in self):
+            raise ValidationError(
+                _(
+                    "It is not possible to set empty stock request orders (maybe "
+                    "you should cancel it)."
+                )
+            )
+
     @api.model
     def _create_from_product_multiselect(self, products):
         if not products:
