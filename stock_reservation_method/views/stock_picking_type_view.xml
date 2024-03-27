@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="view_picking_type_form" model="ir.ui.view">
+            <field name="name">stock.picking.type.form.view</field>
+            <field name="model">stock.picking.type</field>
+            <field name="inherit_id" ref="stock.view_picking_type_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='warehouse_id']" position="after">
+                    <field
+                    name="reservation_method"
+                    attrs="{'invisible': [('code', '=', 'incoming')]}"
+                    widget="radio"
+                />
+                    <label
+                    for="reservation_days_before"
+                    string="Reserve before scheduled date"
+                    attrs="{'invisible': ['|', ('code', '=', 'incoming'), ('reservation_method', '!=', 'by_date')]}"
+                />
+                    <div
+                    class="o_row"
+                    attrs="{'invisible': ['|', ('code', '=', 'incoming'), ('reservation_method', '!=', 'by_date')]}"
+                >
+                        <span><field
+                            name="reservation_days_before"
+                            style="width: 23px;"
+                        /> days before/</span>
+                        <span><field
+                            name="reservation_days_before_priority"
+                            style="width: 23px;"
+                        /> days before when starred</span>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+
+</odoo>
