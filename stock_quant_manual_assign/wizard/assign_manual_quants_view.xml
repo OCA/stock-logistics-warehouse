@@ -12,14 +12,10 @@
                         <field name="package_id" groups="stock.group_tracking_lot" />
                         <field name="owner_id" groups="stock.group_tracking_owner" />
                         <field name="location_id" />
-                        <field name="on_hand" force_save="1" />
-                        <field name="reserved" force_save="1" />
-                        <field name="selected" widget="boolean_toggle" />
-                        <field
-                            name="qty"
-                            attrs="{'readonly':[('selected', '=', False)]}"
-                            sum="qty"
-                        />
+                        <field name="on_hand" />
+                        <field name="reserved" />
+                        <field name="selected" />
+                        <field name="qty" readonly="selected == False" sum="qty" />
                     </tree>
                 </field>
                 <group col='4' colspan="4">
