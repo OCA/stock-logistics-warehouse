@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <!-- System Parameter for Enabling Inventory Discrepancy -->
+    <record id="param_inventory_discrepancy_enable" model="ir.config_parameter">
+        <field
+            name="key"
+        >stock_inventory_discrepancy.inventory_discrepancy_enable</field>
+        <field name="value">1</field> <!-- Enable by default -->
+    </record>
+</odoo>
