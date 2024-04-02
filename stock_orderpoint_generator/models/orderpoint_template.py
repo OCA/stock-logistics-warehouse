@@ -92,7 +92,7 @@ class OrderpointTemplate(models.Model):
         help="Select trigger",
     )
     route_id = fields.Many2one(
-        string="Router",
+        string="Preferred Route",
         help="Choose router that you need",
         comodel_name="stock.location.route",
         domain=[],
