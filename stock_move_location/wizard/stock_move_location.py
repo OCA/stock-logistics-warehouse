@@ -7,25 +7,12 @@ from itertools import groupby
 
 from odoo import api, fields, models
 from odoo.fields import first
+from odoo.osv import expression
 
 
 class StockMoveLocationWizard(models.TransientModel):
     _name = "wiz.stock.move.location"
     _description = "Wizard move location"
-
-    def _get_default_picking_type_id(self):
-        company_id = self.env.context.get("company_id") or self.env.user.company_id.id
-        return (
-            self.env["stock.picking.type"]
-            .search(
-                [
-                    ("code", "=", "internal"),
-                    ("warehouse_id.company_id", "=", company_id),
-                ],
-                limit=1,
-            )
-            .id
-        )
 
     origin_location_disable = fields.Boolean(
         compute="_compute_readonly_locations",
@@ -54,7 +41,9 @@ class StockMoveLocationWizard(models.TransientModel):
         column2="move_location_line_wiz_id",
     )
     picking_type_id = fields.Many2one(
-        comodel_name="stock.picking.type", default=_get_default_picking_type_id
+        compute="_compute_picking_type_id",
+        comodel_name="stock.picking.type",
+        readonly=False,
     )
     picking_id = fields.Many2one(
         string="Connected Picking", comodel_name="stock.picking"
@@ -74,6 +63,28 @@ class StockMoveLocationWizard(models.TransientModel):
             if not rec.edit_locations:
                 rec.origin_location_disable = True
                 rec.destination_location_disable = True
+
+    @api.depends_context("company")
+    @api.depends("origin_location_id")
+    def _compute_picking_type_id(self):
+        company_id = self.env.context.get("company_id") or self.env.user.company_id.id
+        for rec in self:
+            picking_type = self.env["stock.picking.type"]
+            base_domain = [
+                ("code", "=", "internal"),
+                ("warehouse_id.company_id", "=", company_id),
+            ]
+            if rec.origin_location_id:
+                location_id = rec.origin_location_id
+                while location_id and not picking_type:
+                    domain = [("default_location_src_id", "=", location_id.id)]
+                    domain = expression.AND([base_domain, domain])
+                    picking_type = picking_type.search(domain, limit=1)
+                    # Move up to the parent location if no picking type found
+                    location_id = not picking_type and location_id.location_id or False
+            if not picking_type:
+                picking_type = picking_type.search(base_domain, limit=1)
+            rec.picking_type_id = picking_type.id
 
     @api.model
     def default_get(self, fields):
