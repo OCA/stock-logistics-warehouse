@@ -12,6 +12,7 @@ class StockDemandEstimate(models.Model):
     _name = "stock.demand.estimate"
     _description = "Stock Demand Estimate Line"
 
+    active = fields.Boolean(default=True)
     date_from = fields.Date(
         compute="_compute_dates", string="From (computed)", store=True
     )
