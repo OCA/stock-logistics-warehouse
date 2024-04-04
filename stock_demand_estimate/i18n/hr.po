@@ -20,6 +20,21 @@ msgstr ""
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 
 #. module: stock_demand_estimate
+#: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__active
+msgid "Active"
+msgstr ""
+
+#. module: stock_demand_estimate
+#: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_search
+msgid "All (Active/Inactive)"
+msgstr ""
+
+#. module: stock_demand_estimate
+#: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_form
+msgid "Archived"
+msgstr ""
+
+#. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__company_id
 msgid "Company"
 msgstr "Poduzeće"
