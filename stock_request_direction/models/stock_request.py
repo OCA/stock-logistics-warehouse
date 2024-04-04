@@ -9,7 +9,6 @@ class StockRequest(models.Model):
 
     direction = fields.Selection(
         [("outbound", "Outbound"), ("inbound", "Inbound")],
-        string="Direction",
         states={"draft": [("readonly", False)]},
         readonly=True,
     )

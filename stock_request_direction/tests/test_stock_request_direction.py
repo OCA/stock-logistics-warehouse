@@ -8,8 +8,9 @@ from odoo.addons.stock_request.tests.test_stock_request import TestStockRequest
 
 
 class TestStockRequestBase(TestStockRequest):
-    def setUp(self):
-        super(TestStockRequestBase, self).setUp()
+    @classmethod
+    def setUpClass(cls):
+        super(TestStockRequestBase, cls).setUpClass()
 
     def test_onchange_direction_request(self):
         # Outbound direction
@@ -116,6 +117,7 @@ class TestStockRequestBase(TestStockRequest):
             .create(vals)
         )
         self.assertEqual(order.location_id, self.warehouse.lot_stock_id)
+        order.stock_request_ids[:1].route_id = self.route
         order.direction = "inbound"
         order._onchange_location_id()
         order.onchange_location_id()
@@ -123,3 +125,4 @@ class TestStockRequestBase(TestStockRequest):
             order.stock_request_ids[:1].location_id,
             order.warehouse_id.lot_stock_id,
         )
+        self.assertFalse(order.stock_request_ids[:1].route_id)
