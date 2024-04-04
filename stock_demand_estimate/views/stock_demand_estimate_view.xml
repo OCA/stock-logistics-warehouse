@@ -4,7 +4,7 @@
         <field name="name">stock.demand.estimate.tree</field>
         <field name="model">stock.demand.estimate</field>
         <field name="arch" type="xml">
-            <tree>
+            <tree decoration-muted="active == False">
                 <field name="date_from" string="Date From" />
                 <field name="date_to" string="Date To" />
                 <field name="product_id" />
@@ -13,6 +13,7 @@
                 <field name="product_uom" />
                 <field name="product_qty" />
                 <field name="daily_qty" />
+                <field name="active" invisible="1" />
             </tree>
         </field>
     </record>
@@ -22,6 +23,12 @@
         <field name="arch" type="xml">
             <form>
                 <sheet>
+                    <widget
+                        name="web_ribbon"
+                        title="Archived"
+                        bg_color="bg-danger"
+                        attrs="{'invisible': [('active', '=', True)]}"
+                    />
                     <group>
                         <group name="dates_read" class="oe_read_only">
                             <field name="date_from" string="Date From" />
@@ -39,6 +46,7 @@
                             <field name="product_uom_qty" />
                             <field name="product_uom" />
                             <field name="daily_qty" />
+                            <field name="active" invisible="1" />
                         </group>
                     </group>
                 </sheet>
@@ -76,6 +84,11 @@
             <search string="Search Stock Demand Estimates">
                 <field name="product_id" />
                 <field name="location_id" />
+                <filter
+                    string="All (Active/Inactive)"
+                    name="all"
+                    domain="['|', ('active', '=', False), ('active', '=', True)]"
+                />
                 <separator />
                 <filter
                     name="expired"
