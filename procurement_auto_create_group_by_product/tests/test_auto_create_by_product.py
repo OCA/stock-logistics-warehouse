@@ -1,8 +1,10 @@
 # Copyright 2023 Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from odoo import api, registry
-from odoo.exceptions import UserError
+import psycopg2
+
+from odoo import api, registry, tools
+from odoo.service.model import PG_CONCURRENCY_ERRORS_TO_RETRY
 
 from odoo.addons.procurement_auto_create_group.tests.test_auto_create import (
     TestProcurementAutoCreateGroup,
@@ -135,9 +137,9 @@ class TestProcurementAutoCreateGroupByProduct(TestProcurementAutoCreateGroup):
             rule2.auto_create_group_by_product = True
             product2 = new_env["product.product"].browse(product.id)
             self.assertFalse(product2.auto_create_procurement_group_ids)
-            exception_msg = (
-                f"The auto procurement group for product {product2.name} "
-                "is already being created by someone else."
-            )
-            with self.assertRaisesRegex(UserError, exception_msg):
+            with self.assertRaises(psycopg2.OperationalError) as cm, tools.mute_logger(
+                "odoo.sql_db"
+            ):
                 rule2._get_auto_procurement_group(product2)
+            self.assertTrue(cm.exception.pgcode in PG_CONCURRENCY_ERRORS_TO_RETRY)
+            new_cr.rollback()
