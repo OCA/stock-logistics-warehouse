@@ -33,7 +33,7 @@ msgid "Done"
 msgstr "Valmis"
 
 #. module: stock_secondary_unit
-#: model:ir.model,name:stock_secondary_unit.model_product_product
+#: model:ir.model,name:stock_secondary_unit.model_product_template
 msgid "Product"
 msgstr "Tuote"
 
@@ -43,9 +43,9 @@ msgid "Product Moves (Stock Move Line)"
 msgstr "Tuotteiden siirrot (Stock Move Line)"
 
 #. module: stock_secondary_unit
-#: model:ir.model,name:stock_secondary_unit.model_product_template
-msgid "Product Template"
-msgstr "Tuotemalli"
+#: model:ir.model,name:stock_secondary_unit.model_product_product
+msgid "Product Variant"
+msgstr ""
 
 #. module: stock_secondary_unit
 #: model:ir.model.fields,field_description:stock_secondary_unit.field_product_product__secondary_unit_qty_available
@@ -104,6 +104,9 @@ msgstr ""
 "tarkoitus siirtää. Tämän määrän alentaminen ei synny takaisinkytkentää. "
 "Tämän määrän muuttaminen määrättyihin liikkeisiin vaikuttaa tuotteen "
 "varaamiseen, ja se on tehtävä huolellisesti."
+
+#~ msgid "Product Template"
+#~ msgstr "Tuotemalli"
 
 #~ msgid "Stock Product Secondary Unit"
 #~ msgstr "Tuotteen toinen varastointiyksikkö"

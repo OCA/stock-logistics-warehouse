@@ -6,10 +6,9 @@
         <field name="name">Product template Secondary Unit</field>
         <field name="model">product.template</field>
         <field name="inherit_id" ref="stock.view_template_property_form" />
-        <field name="groups_id" eval="[(4, ref('stock.group_stock_user'))]" />
         <field name="arch" type="xml">
             <xpath expr="//group[@name='inventory']" position="inside">
-                <group string="Secondary unit">
+                <group string="Secondary unit" groups="stock.group_stock_user">
                     <field
                         name="stock_secondary_uom_id"
                         options="{'no_create': True}"
@@ -24,7 +23,6 @@
             name="inherit_id"
             ref="stock.product_template_form_view_procurement_button"
         />
-        <field name="groups_id" eval="[(4, ref('stock.group_stock_user'))]" />
         <field name="arch" type="xml">
             <xpath expr="//button[@name='action_open_quants']" position="after">
                 <button
@@ -33,6 +31,7 @@
                     attrs="{'invisible':[('type', '!=', 'product')]}"
                     class="oe_stat_button"
                     icon="fa-building-o"
+                    groups="stock.group_stock_user"
                 >
                     <div class="o_form_field o_stat_info">
                         <span class="o_stat_value">
@@ -53,7 +52,6 @@
     <record id="product_form_view_procurement_button" model="ir.ui.view">
         <field name="model">product.product</field>
         <field name="inherit_id" ref="stock.product_form_view_procurement_button" />
-        <field name="groups_id" eval="[(4, ref('stock.group_stock_user'))]" />
         <field name="arch" type="xml">
             <xpath expr="//button[@name='action_open_quants']" position="after">
                 <button
@@ -62,6 +60,7 @@
                     attrs="{'invisible':[('type', '!=', 'product')]}"
                     class="oe_stat_button"
                     icon="fa-building-o"
+                    groups="stock.group_stock_user"
                 >
                     <div class="o_form_field o_stat_info">
                         <span class="o_stat_value">
@@ -82,13 +81,16 @@
     <record id="product_template_tree_view" model="ir.ui.view">
         <field name="model">product.template</field>
         <field name="inherit_id" ref="product.product_template_tree_view" />
-        <field name="groups_id" eval="[(4, ref('stock.group_stock_user'))]" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='uom_id']" position="after">
-                <field name="secondary_unit_qty_available" />
+                <field
+                    name="secondary_unit_qty_available"
+                    groups="stock.group_stock_user"
+                />
                 <field
                     name="stock_secondary_uom_id"
                     options="{'no_open': True, 'no_create': True}"
+                    groups="stock.group_stock_user"
                 />
             </xpath>
         </field>
@@ -96,13 +98,16 @@
     <record id="product_product_tree_view" model="ir.ui.view">
         <field name="model">product.product</field>
         <field name="inherit_id" ref="product.product_product_tree_view" />
-        <field name="groups_id" eval="[(4, ref('stock.group_stock_user'))]" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='uom_id']" position="after">
-                <field name="secondary_unit_qty_available" />
+                <field
+                    name="secondary_unit_qty_available"
+                    groups="stock.group_stock_user"
+                />
                 <field
                     name="stock_secondary_uom_id"
                     options="{'no_open': True, 'no_create': True}"
+                    groups="stock.group_stock_user"
                 />
             </xpath>
         </field>

@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 15.0\n"
+"Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -30,7 +30,7 @@ msgid "Done"
 msgstr ""
 
 #. module: stock_secondary_unit
-#: model:ir.model,name:stock_secondary_unit.model_product_product
+#: model:ir.model,name:stock_secondary_unit.model_product_template
 msgid "Product"
 msgstr ""
 
@@ -40,8 +40,8 @@ msgid "Product Moves (Stock Move Line)"
 msgstr ""
 
 #. module: stock_secondary_unit
-#: model:ir.model,name:stock_secondary_unit.model_product_template
-msgid "Product Template"
+#: model:ir.model,name:stock_secondary_unit.model_product_product
+msgid "Product Variant"
 msgstr ""
 
 #. module: stock_secondary_unit
