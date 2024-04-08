@@ -86,7 +86,7 @@ class StockLocation(models.Model):
                stock_quant.location_id
             HAVING count(distinct(product_id)) > 1
        """
-        self.env.cr.execute(SQL, (tuple(records.ids),))
+        self.env.cr.execute(SQL, (tuple(records.ids + [-1]),))
         product_ids_by_location_id = dict(self.env.cr.fetchall())
         for record in self:
             record_id = record.id

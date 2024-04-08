@@ -258,3 +258,8 @@ class TestStockLocation(TransactionCase):
         self.loc_lvl_1_1_1.flush_recordset()
         self.assertTrue(self.loc_lvl_1_1_1.has_restriction_violation)
         self.assertTrue(self.loc_lvl_1_1_1.restriction_violation_message)
+
+    def test_05(self):
+        """Check creation of new locations"""
+        loc = self.StockLocation.new({"name": "New Location"})
+        self.assertFalse(loc.has_restriction_violation)
