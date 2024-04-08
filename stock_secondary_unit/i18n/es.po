@@ -34,7 +34,7 @@ msgid "Done"
 msgstr "Hecho"
 
 #. module: stock_secondary_unit
-#: model:ir.model,name:stock_secondary_unit.model_product_product
+#: model:ir.model,name:stock_secondary_unit.model_product_template
 msgid "Product"
 msgstr "Producto"
 
@@ -44,9 +44,9 @@ msgid "Product Moves (Stock Move Line)"
 msgstr "Movimientos de productos (línea de movimiento de existencias)"
 
 #. module: stock_secondary_unit
-#: model:ir.model,name:stock_secondary_unit.model_product_template
-msgid "Product Template"
-msgstr "Plantilla de producto"
+#: model:ir.model,name:stock_secondary_unit.model_product_product
+msgid "Product Variant"
+msgstr ""
 
 #. module: stock_secondary_unit
 #: model:ir.model.fields,field_description:stock_secondary_unit.field_product_product__secondary_unit_qty_available
@@ -105,6 +105,9 @@ msgstr ""
 "está previsto mover. La reducción de esta cantidad no genera un pedido "
 "pendiente. La modificación de esta cantidad en los movimientos asignados "
 "afecta a la reserva de productos, y debe hacerse con cuidado."
+
+#~ msgid "Product Template"
+#~ msgstr "Plantilla de producto"
 
 #~ msgid "Stock Product Secondary Unit"
 #~ msgstr "Existencias de unidad secundaria del producto"
