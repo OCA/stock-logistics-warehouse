@@ -12,7 +12,11 @@ class StockMove(models.Model):
     }
 
     product_uom_qty = fields.Float(
-        store=True, readonly=False, compute="_compute_product_uom_qty", copy=True
+        store=True,
+        readonly=False,
+        compute="_compute_product_uom_qty",
+        copy=True,
+        precompute=True,
     )
 
     @api.depends("secondary_uom_qty", "secondary_uom_id")
@@ -42,7 +46,9 @@ class StockMoveLine(models.Model):
     _name = "stock.move.line"
     _secondary_unit_fields = {"qty_field": "qty_done", "uom_field": "product_uom_id"}
 
-    qty_done = fields.Float(store=True, readonly=False, compute="_compute_qty_done")
+    qty_done = fields.Float(
+        store=True, readonly=False, compute="_compute_qty_done", precompute=True
+    )
 
     @api.model
     def create(self, vals):

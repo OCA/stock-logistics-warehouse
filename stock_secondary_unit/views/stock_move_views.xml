@@ -6,13 +6,13 @@
         <field name="name">Stock Move Secondary Unit</field>
         <field name="model">stock.move.line</field>
         <field name="inherit_id" ref="stock.view_stock_move_line_operation_tree" />
-        <field name="groups_id" eval="[(4, ref('uom.group_uom'))]" />
         <field name="arch" type="xml">
-            <field name="product_uom_qty" position="before">
+            <field name="reserved_uom_qty" position="before">
                 <field
                     name="secondary_uom_qty"
                     attrs="{'readonly': [('state', 'in', ('done', 'cancel')), ('is_locked', '=', True)]}"
                     force_save="1"
+                    groups="uom.group_uom"
                 />
                 <field
                     name="secondary_uom_id"
@@ -21,6 +21,7 @@
                                          ('product_id', '=', False)]"
                     attrs="{'readonly': [('state', '!=', 'draft'), ('id', '!=', False)]}"
                     options="{'no_create': True}"
+                    groups="uom.group_uom"
                 />
             </field>
         </field>
@@ -32,13 +33,13 @@
             name="inherit_id"
             ref="stock.view_stock_move_line_detailed_operation_tree"
         />
-        <field name="groups_id" eval="[(4, ref('uom.group_uom'))]" />
         <field name="arch" type="xml">
-            <field name="product_uom_qty" position="before">
+            <field name="reserved_uom_qty" position="before">
                 <field
                     name="secondary_uom_qty"
                     attrs="{'readonly': [('state', 'in', ('done', 'cancel')), ('is_locked', '=', True)]}"
                     force_save="1"
+                    groups="uom.group_uom"
                 />
                 <field
                     name="secondary_uom_id"
@@ -47,6 +48,7 @@
                                          ('product_id', '=', False)]"
                     attrs="{'readonly': [('state', '!=', 'draft'), ('id', '!=', False)]}"
                     options="{'no_create': True}"
+                    groups="uom.group_uom"
                 />
             </field>
         </field>

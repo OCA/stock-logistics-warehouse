@@ -2,21 +2,14 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 from odoo.tests import Form, TransactionCase, tagged
 
+from odoo.addons.base.tests.common import DISABLED_MAIL_CONTEXT
+
 
 @tagged("-at_install", "post_install")
 class TestProductSecondaryUnit(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        # Remove this variable in v16 and put instead:
-        # from odoo.addons.base.tests.common import DISABLED_MAIL_CONTEXT
-        DISABLED_MAIL_CONTEXT = {
-            "tracking_disable": True,
-            "mail_create_nolog": True,
-            "mail_create_nosubscribe": True,
-            "mail_notrack": True,
-            "no_reset_password": True,
-        }
         cls.env = cls.env(context=dict(cls.env.context, **DISABLED_MAIL_CONTEXT))
         # Active multiple units of measure security group for user
         cls.env.user.groups_id = [(4, cls.env.ref("uom.group_uom").id)]
@@ -148,10 +141,10 @@ class TestProductSecondaryUnit(TransactionCase):
         delivery_order = StockPicking.create(do_vals)
         delivery_order.action_confirm()
         # Move is merged into 1 line for both stock.move and stock.move.line
-        self.assertEqual(len(delivery_order.move_lines), 1)
+        self.assertEqual(len(delivery_order.move_ids), 1)
         self.assertEqual(len(delivery_order.move_line_ids), 1)
         # Qty merged to 20, and secondary unit qty is 40line
-        uom_qty = sum(delivery_order.move_lines.mapped("product_uom_qty"))
+        uom_qty = sum(delivery_order.move_ids.mapped("product_uom_qty"))
         secondary_uom_qty = sum(
             delivery_order.move_line_ids.mapped("secondary_uom_qty")
         )
@@ -218,7 +211,7 @@ class TestProductSecondaryUnit(TransactionCase):
                 move.secondary_uom_id = product.product_tmpl_id.secondary_uom_ids[1]
         picking = picking_form.save()
         picking.action_confirm()
-        self.assertEqual(len(picking.move_lines), 2)
+        self.assertEqual(len(picking.move_ids), 2)
 
     def test_secondary_unit_merge_move_same_uom(self):
         product = self.product_template.product_variant_ids[0]
@@ -238,5 +231,5 @@ class TestProductSecondaryUnit(TransactionCase):
                 move.secondary_uom_id = product.product_tmpl_id.secondary_uom_ids[0]
         picking = picking_form.save()
         picking.action_confirm()
-        self.assertEqual(len(picking.move_lines), 1)
-        self.assertEqual(picking.move_lines.secondary_uom_qty, 2)
+        self.assertEqual(len(picking.move_ids), 1)
+        self.assertEqual(picking.move_ids.secondary_uom_qty, 2)
