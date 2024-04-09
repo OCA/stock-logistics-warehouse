@@ -13,15 +13,23 @@
                     name="product_packaging_qty"
                     groups="product.group_stock_packaging"
                     attrs="{
-                        'column_invisible': [
-                            ('parent.immediate_transfer', '=', True),
-                        ],
                         'readonly': [
                             '|',
                             ('product_packaging_id', '=', False),
                             ('is_initial_demand_editable', '=', False),
                         ],
                     }"
+                />
+            </xpath>
+
+            <xpath
+                expr="//field[@name='move_ids_without_package']/tree/field[@name='quantity_done']"
+                position="before"
+            >
+                <field
+                    name="product_packaging_qty_done"
+                    groups="product.group_stock_packaging"
+                    attrs="{'invisible': [('product_packaging_id', '=', False)]}"
                 />
             </xpath>
         </field>
