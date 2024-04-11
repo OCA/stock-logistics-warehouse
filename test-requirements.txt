@@ -1,1 +1,1 @@
-odoo-addon-stock_inventory_exclude_sublocation@git+https://github.com/OCA/stock-logistics-warehouse.git@refs/pull/1667/head#subdirectory=setup/stock_inventory_exclude_sublocation
+odoo-addon-stock_inventory_exclude_sublocation@git+https://github.com/OCA/stock-logistics-warehouse.git@refs/pull/1962/head#subdirectory=setup/stock_inventory_exclude_sublocation
