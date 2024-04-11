@@ -69,7 +69,9 @@ class StockRequestAllocation(models.Model):
     def _compute_requested_product_qty(self):
         for rec in self:
             rec.requested_product_qty = rec.product_uom_id._compute_quantity(
-                rec.requested_product_uom_qty, rec.product_id.uom_id
+                rec.requested_product_uom_qty,
+                rec.product_id.uom_id,
+                rounding_method="HALF-UP",
             )
 
     @api.depends(

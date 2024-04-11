@@ -32,7 +32,9 @@ class StockRequest(models.AbstractModel):
     def _compute_product_qty(self):
         for rec in self:
             rec.product_qty = rec.product_uom_id._compute_quantity(
-                rec.product_uom_qty, rec.product_id.product_tmpl_id.uom_id
+                rec.product_uom_qty,
+                rec.product_id.product_tmpl_id.uom_id,
+                rounding_method="HALF-UP",
             )
 
     name = fields.Char(copy=False, required=True, readonly=True, default="/")
