@@ -8,9 +8,28 @@ class InventoryAdjustmentsGroup(models.Model):
     _description = "Inventory Adjustment Group"
     _order = "date desc, id desc"
 
-    name = fields.Char(required=True, default="Inventory", string="Inventory Reference")
+    name = fields.Char(
+        required=True,
+        default="Inventory",
+        string="Inventory Reference",
+        states={"draft": [("readonly", False)]},
+        readonly=True,
+    )
 
-    date = fields.Datetime(default=lambda self: fields.Datetime.now())
+    date = fields.Datetime(
+        default=lambda self: fields.Datetime.now(),
+        states={"draft": [("readonly", False)]},
+        readonly=True,
+    )
+
+    company_id = fields.Many2one(
+        comodel_name="res.company",
+        readonly=True,
+        index=True,
+        states={"draft": [("readonly", False)]},
+        default=lambda self: self.env.company,
+        required=True,
+    )
 
     state = fields.Selection(
         [("draft", "Draft"), ("in_progress", "In Progress"), ("done", "Done")],
@@ -22,7 +41,10 @@ class InventoryAdjustmentsGroup(models.Model):
     )
 
     location_ids = fields.Many2many(
-        "stock.location", string="Locations", domain="[('usage', '=', 'internal')]"
+        "stock.location",
+        string="Locations",
+        domain="[('usage', '=', 'internal'), "
+        "'|', ('company_id', '=', company_id), ('company_id', '=', False)]",
     )
 
     product_selection = fields.Selection(
@@ -37,15 +59,24 @@ class InventoryAdjustmentsGroup(models.Model):
         required=True,
     )
 
-    product_ids = fields.Many2many("product.product", string="Products")
+    product_ids = fields.Many2many(
+        "product.product",
+        string="Products",
+        domain="['|', ('company_id', '=', company_id), ('company_id', '=', False)]",
+    )
 
-    stock_quant_ids = fields.Many2many("stock.quant", string="Inventory Adjustment")
+    stock_quant_ids = fields.Many2many(
+        "stock.quant",
+        string="Inventory Adjustment",
+        domain="['|', ('company_id', '=', company_id), ('company_id', '=', False)]",
+    )
 
     category_id = fields.Many2one("product.category", string="Product Category")
 
     lot_ids = fields.Many2many(
         "stock.lot",
         string="Lot/Serial Numbers",
+        domain="['|', ('company_id', '=', company_id), ('company_id', '=', False)]",
     )
 
     stock_move_ids = fields.One2many(
@@ -66,14 +97,24 @@ class InventoryAdjustmentsGroup(models.Model):
         compute="_compute_count_stock_moves", string="Stock Moves Lines"
     )
 
+    exclude_sublocation = fields.Boolean(
+        help="If enabled, it will only take into account "
+        "the locations selected, and not their children."
+    )
+
+    responsible_id = fields.Many2one(
+        comodel_name="res.users",
+        string="Assigned to",
+        states={"draft": [("readonly", False)]},
+        readonly=True,
+        tracking=True,
+        help="Specific responsible of Inventory Adjustment.",
+    )
+
     @api.depends("stock_quant_ids")
     def _compute_count_stock_quants(self):
         self.count_stock_quants = len(self.stock_quant_ids)
-        count_todo = len(
-            self.stock_quant_ids.search(
-                [("id", "in", self.stock_quant_ids.ids), ("to_do", "=", "True")]
-            )
-        )
+        count_todo = len(self.stock_quant_ids.filtered(lambda sq: sq.to_do))
         self.count_stock_quants_string = "{} / {}".format(
             count_todo, self.count_stock_quants
         )
@@ -99,11 +140,15 @@ class InventoryAdjustmentsGroup(models.Model):
         return self.env["stock.quant"].search(domain)
 
     def _get_base_domain(self, locations):
-        return [
-            "|",
-            ("location_id", "in", locations.mapped("id")),
-            ("location_id", "in", locations.child_ids.ids),
-        ]
+        return (
+            [
+                ("location_id", "in", locations.mapped("id")),
+            ]
+            if self.exclude_sublocation
+            else [
+                ("location_id", "child_of", locations.child_internal_location_ids.ids),
+            ]
+        )
 
     def _get_domain_all_quants(self, base_domain):
         return base_domain
@@ -146,13 +191,15 @@ class InventoryAdjustmentsGroup(models.Model):
             ]
         )
 
+    def refresh_stock_quant_ids(self):
+        for rec in self:
+            rec.stock_quant_ids = rec._get_quants(rec.location_ids)
+
     def action_state_to_in_progress(self):
         active_rec = self.env["stock.inventory"].search(
             [
                 ("state", "=", "in_progress"),
-                "|",
-                ("location_ids", "in", self.location_ids.mapped("id")),
-                ("location_ids", "in", self.location_ids.child_ids.ids),
+                ("location_ids", "child_of", self.location_ids.ids),
             ],
             limit=1,
         )
@@ -164,25 +211,48 @@ class InventoryAdjustmentsGroup(models.Model):
                 % active_rec.name
             )
         self.state = "in_progress"
-        self.stock_quant_ids = self._get_quants(self.location_ids)
-        self.stock_quant_ids.update({"to_do": True})
+        self.refresh_stock_quant_ids()
+        self.stock_quant_ids.update(
+            {
+                "to_do": True,
+                "user_id": self.responsible_id,
+                "inventory_date": self.date,
+            }
+        )
         return
 
     def action_state_to_done(self):
         self.state = "done"
-        self.stock_quant_ids.update({"to_do": True})
+        self.stock_quant_ids.update(
+            {
+                "to_do": True,
+                "user_id": False,
+                "inventory_date": False,
+            }
+        )
+        return
+
+    def action_auto_state_to_done(self):
+        self.ensure_one()
+        if not any(self.stock_quant_ids.filtered(lambda sq: sq.to_do)):
+            self.action_state_to_done()
         return
 
     def action_state_to_draft(self):
         self.state = "draft"
-        self.stock_quant_ids.update({"to_do": True})
+        self.stock_quant_ids.update(
+            {
+                "to_do": True,
+                "user_id": False,
+                "inventory_date": False,
+            }
+        )
         self.stock_quant_ids = None
         return
 
     def action_view_inventory_adjustment(self):
         result = self.env["stock.quant"].action_view_inventory()
-        ia_ids = self.mapped("stock_quant_ids").ids
-        result["domain"] = [("id", "in", ia_ids)]
+        result["domain"] = [("id", "in", self.stock_quant_ids.ids)]
         result["search_view_id"] = self.env.ref("stock.quant_search_view").id
         result["context"]["search_default_to_do"] = 1
         return result
@@ -195,6 +265,31 @@ class InventoryAdjustmentsGroup(models.Model):
         result["domain"] = [("id", "in", sm_ids)]
         result["context"] = []
         return result
+
+    @api.constrains("state", "location_ids")
+    def _check_inventory_in_progress_not_override(self):
+        inventories = self.search([("state", "=", "in_progress")])
+        for rec in inventories:
+            inventory = inventories.filtered(
+                lambda x: x.id != rec.id
+                and (
+                    any(i in x.location_ids for i in rec.location_ids)
+                    or (
+                        any(
+                            i in x.location_ids.child_internal_location_ids
+                            for i in rec.location_ids
+                        )
+                        and not x.exclude_sublocation
+                    )
+                )
+            )
+            if len(inventory) > 0:
+                raise ValidationError(
+                    _(
+                        "Cannot be more than one in progress inventory adjustment "
+                        "affecting the same location at the same time."
+                    )
+                )
 
     @api.constrains("product_selection", "product_ids")
     def _check_one_product_in_product_selection(self):
