@@ -41,7 +41,7 @@
                             name="action_view_inventory_adjustment"
                             class="oe_stat_button"
                             icon="fa-pencil-square-o"
-                            attrs="{'invisible':['|', ('state', 'in', ['draft', 'done']), ('count_stock_quants', '=', 0)]}"
+                            attrs="{'invisible':[('state', 'in', ['draft', 'done'])]}"
                         >
                             <field
                                 name="count_stock_quants_string"
@@ -82,9 +82,16 @@
                                 attrs="{'readonly':[('state', 'in', ['in_progress', 'done'])]}"
                                 required="1"
                             />
+                            <field
+                                name="exclude_sublocation"
+                                attrs="{'readonly':[('state', 'in', ['in_progress', 'done'])]}"
+                                required="1"
+                            />
                         </group>
                         <group>
                             <field name="date" />
+                            <field name="company_id" />
+                            <field name="responsible_id" />
                             <field
                                 name="owner_id"
                                 attrs="{'readonly':[('state', '=', 'done')]}"
@@ -124,6 +131,9 @@
         <field name="arch" type="xml">
             <tree>
                 <field name="name" />
+                <field name="product_selection" optional="hide" />
+                <field name="location_ids" widget="many2many_tags" optional="hide" />
+                <field name="responsible_id" optional="hide" />
                 <field
                     name="state"
                     widget="badge"
@@ -132,6 +142,7 @@
                     decoration-muted="state == 'draft'"
                 />
                 <field name="date" />
+                <field name="company_id" optional="hide" />
             </tree>
         </field>
     </record>
@@ -150,5 +161,7 @@
         sequence="30"
         action="action_view_inventory_group_form"
     />
-    <delete model="ir.ui.menu" id="stock.menu_action_inventory_tree" />
+    <record id="stock.menu_action_inventory_tree" model="ir.ui.menu">
+        <field name="active" eval="False" />
+    </record>
 </odoo>
