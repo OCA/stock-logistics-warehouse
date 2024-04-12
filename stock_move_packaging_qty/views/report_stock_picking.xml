@@ -40,5 +40,72 @@
                 <span t-field="move.product_packaging_qty" />
             </div>
         </xpath>
+
+        <xpath
+            expr="//table[@name='stock_move_table']/tbody//td[
+                1 + count(
+                    //table[@name='stock_move_table']
+                    //th[@name='th_sm_quantity']
+                    /preceding-sibling::*
+                )
+            ]"
+            position="inside"
+        >
+            <div
+                t-if="move.product_packaging_id"
+                class="text-secondary"
+                groups="product.group_stock_packaging"
+            >
+                <span t-field="move.product_packaging_id" />:
+                <span t-field="move.product_packaging_qty_done" />
+            </div>
+        </xpath>
+    </template>
+
+    <template
+        id="stock_report_delivery_aggregated_move_lines"
+        inherit_id="stock.stock_report_delivery_aggregated_move_lines"
+    >
+        <xpath expr="//td[@name='move_line_aggregated_qty_ordered']">
+            <div
+                t-if="aggregated_lines[line]['product_packaging']"
+                class="text-secondary"
+                groups="product.group_stock_packaging"
+            >
+                <span
+                    t-esc="aggregated_lines[line]['product_packaging'].display_name"
+                />:
+                <span t-esc="aggregated_lines[line]['product_packaging_qty']" />
+            </div>
+        </xpath>
+
+        <xpath expr="//td[@name='move_line_aggregated_qty_done']">
+            <div
+                t-if="aggregated_lines[line]['product_packaging']"
+                class="text-secondary"
+                groups="product.group_stock_packaging"
+            >
+                <span
+                    t-esc="aggregated_lines[line]['product_packaging'].display_name"
+                />:
+                <span t-esc="aggregated_lines[line]['product_packaging_qty_done']" />
+            </div>
+        </xpath>
+    </template>
+
+    <template
+        id="stock_report_delivery_has_serial_move_line"
+        inherit_id="stock.stock_report_delivery_has_serial_move_line"
+    >
+        <xpath expr="//td[@name='move_line_lot_qty_done']">
+            <div
+                t-if="ml.product_packaging_id"
+                class="text-secondary"
+                groups="product.group_stock_packaging"
+            >
+                <span t-field="ml.product_packaging_id" />:
+                <span t-field="ml.product_packaging_qty_done" />
+            </div>
+        </xpath>
     </template>
 </data>

@@ -10,7 +10,8 @@
     "depends": ["stock"],
     "data": [
         "views/report_stock_picking.xml",
-        "views/stock_move_tree_view.xml",
+        "views/stock_move_line_view.xml",
+        "views/stock_move_view.xml",
         "views/stock_picking_form_view.xml",
     ],
     "license": "LGPL-3",
