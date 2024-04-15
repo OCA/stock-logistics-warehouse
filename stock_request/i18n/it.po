@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-03-02 03:44+0000\n"
-"PO-Revision-Date: 2024-01-22 12:37+0000\n"
+"PO-Revision-Date: 2024-04-15 14:37+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -341,7 +341,7 @@ msgstr "Raggruppa per"
 #. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_res_config_settings__group_stock_request_order
 msgid "Group Stock Request Order"
-msgstr "Ordine richiesta di magazzino per gruppo"
+msgstr "Raggruppa ordine richiesta di magazzino"
 
 #. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_procurement_group__id
