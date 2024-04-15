@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-03-02 03:44+0000\n"
-"PO-Revision-Date: 2023-12-24 18:39+0000\n"
+"PO-Revision-Date: 2024-04-15 17:36+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -55,7 +55,7 @@ msgstr "Stato attività"
 #: model_terms:ir.ui.view,arch_db:stock_request.res_config_settings_view_form
 msgid "Add State to Stock Request and Stock Request Orders if activated."
 msgstr ""
-"Aggiungi uno Stato alla richiesta e ordini di richiesta di magazzino se "
+"Aggiungi uno stato alla richiesta e ordini di richiesta di magazzino se "
 "attivato."
 
 #. module: stock_request
@@ -236,7 +236,7 @@ msgstr "Data attesa"
 #: code:addons/stock_request/models/stock_request.py:206
 #, python-format
 msgid "Expected date must be equal to the order"
-msgstr "La data prevista deve essere uguale all'ordine"
+msgstr "La data attesa deve essere uguale all'ordine"
 
 #. module: stock_request
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
@@ -274,7 +274,7 @@ msgstr ""
 #. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_res_config_settings__group_stock_request_order
 msgid "Group Stock Request Order"
-msgstr "Ordine di richiesta stock per gruppo"
+msgstr "Raggruppa ordine richiesta di magazzino"
 
 #. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__id
@@ -547,7 +547,7 @@ msgstr "Gruppo di approvvigionamento"
 #: code:addons/stock_request/models/stock_request.py:192
 #, python-format
 msgid "Procurement group must be equal to the order"
-msgstr "Il gruppo di approvvigionamento deve essere uguale all'ordine"
+msgstr "Il gruppo di approvvigionamento deve essere lo stesso dall'ordine"
 
 #. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__product_id
@@ -608,7 +608,7 @@ msgstr "Quantità completata"
 #. module: stock_request
 #: model:ir.model.fields,help:stock_request.field_stock_request__qty_in_progress
 msgid "Quantity in progress."
-msgstr "Quantità in corso."
+msgstr "Quantità in lavorazione."
 
 #. module: stock_request
 #: model:ir.model.fields,help:stock_request.field_stock_request__product_qty
@@ -669,7 +669,7 @@ msgstr "Ricevi ogni prodotto quando disponibile"
 #: model:ir.actions.server,name:stock_request.action_template_generate_stock_request_orders
 #: model:ir.actions.server,name:stock_request.action_variant_generate_stock_request_orders
 msgid "Request Stock"
-msgstr "Richiedi lo stock"
+msgstr "Richiesta di magazzino"
 
 #. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_allocation__requested_product_qty
@@ -809,7 +809,7 @@ msgstr "Ordine richiesta di magazzino"
 #: model:ir.ui.menu,name:stock_request.stock_request_order_menu
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
 msgid "Stock Request Orders"
-msgstr "Ordini richiesta magazzino"
+msgstr "Ordini richiesta di magazzino"
 
 #. module: stock_request
 #: model:ir.model,name:stock_request.model_stock_request_abstract
