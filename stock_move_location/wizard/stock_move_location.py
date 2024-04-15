@@ -44,6 +44,7 @@ class StockMoveLocationWizard(models.TransientModel):
         compute="_compute_picking_type_id",
         comodel_name="stock.picking.type",
         readonly=False,
+        store=True,
     )
     picking_id = fields.Many2one(
         string="Connected Picking", comodel_name="stock.picking"
