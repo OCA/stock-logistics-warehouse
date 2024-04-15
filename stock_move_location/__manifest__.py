@@ -5,7 +5,7 @@
 
 {
     "name": "Move Stock Location",
-    "version": "15.0.1.4.0",
+    "version": "15.0.1.5.0",
     "author": "Julius Network Solutions, "
     "BCIM,"
     "Camptocamp,"
