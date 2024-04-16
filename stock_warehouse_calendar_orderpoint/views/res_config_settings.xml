@@ -39,6 +39,18 @@
                     >
                         <label for="orderpoint_on_workday" />
                     </div>
+                    <div
+                        class="o_setting_left_pane"
+                        attrs="{'invisible': [('orderpoint_on_workday', '=', False)]}"
+                    >
+                        <field name="orderpoint_on_workday_policy" />
+                    </div>
+                    <div
+                        class="o_setting_right_pane"
+                        attrs="{'invisible': [('orderpoint_on_workday', '=', False)]}"
+                    >
+                        <label for="orderpoint_on_workday_policy" />
+                    </div>
                 </div>
             </div>
         </field>

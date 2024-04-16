@@ -33,8 +33,9 @@ class CommonCalendarOrderpoint(SavepointCase):
             "stock_warehouse_calendar_orderpoint.resource_calendar_orderpoint_demo"
         )
         cls.wh.orderpoint_on_workday = True
+        cls.wh.orderpoint_on_workday_policy = "skip_to_first_workday"
         cls.wh.calendar_id = cls.env.ref("resource.resource_calendar_std")
         # 1 day delay for supplier
         cls.seller.delay = 1
-        # Company PO lead time
-        cls.wh.company_id.po_lead = 1
+        # Rule lead time
+        cls.orderpoint.rule_ids.delay = 2

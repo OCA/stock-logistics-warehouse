@@ -17,7 +17,7 @@ class TestCalendarOrderpoint(CommonCalendarOrderpoint):
 
     @freeze_time("2022-05-30 12:00")  # Monday
     def test_calendar_orderpoint_monday(self):
-        # Monday -> Wednesday + 2 days (seller delay + PO lead time) => Friday
+        # Monday -> Wednesday + 2 days rule delay => Friday
         self.assertEqual(str(self.orderpoint.lead_days_date), "2022-06-03")
 
     @freeze_time("2022-06-01 12:00")  # Wednesday during working hours
@@ -25,7 +25,7 @@ class TestCalendarOrderpoint(CommonCalendarOrderpoint):
         self.op_model.invalidate_cache(["lead_days_date"])  # Recompute field
         self.assertEqual(str(self.orderpoint.lead_days_date), "2022-06-03")
 
-    @freeze_time("2022-06-01 20:00")  # Wednesday outside working hours
+    @freeze_time("2022-06-01 20:00")  # Wednesday after working hours
     def test_calendar_orderpoint_wednesday_outside_working_hours(self):
         self.op_model.invalidate_cache(["lead_days_date"])  # Recompute field
         self.assertEqual(
@@ -49,3 +49,15 @@ class TestCalendarOrderpoint(CommonCalendarOrderpoint):
     def test_calendar_orderpoint_next_thursday(self):
         self.op_model.invalidate_cache(["lead_days_date"])
         self.assertEqual(str(self.orderpoint.lead_days_date), "2022-06-17")
+
+    @freeze_time("2022-06-01 12:00")  # Wednesday during working hours
+    def test_calendar_orderpoint_policy(self):
+        self.orderpoint.rule_ids.delay = 4
+        # 4 days are counted from Wednesday to Sunday => end on Monday
+        self.wh.orderpoint_on_workday_policy = "skip_to_first_workday"
+        self.op_model.invalidate_cache(["lead_days_date"])
+        self.assertEqual(str(self.orderpoint.lead_days_date), "2022-06-06")
+        # 4 days are counted from Wednesday, skipping the weekend => end on Tuesday
+        self.wh.orderpoint_on_workday_policy = "skip_all_non_workdays"
+        self.op_model.invalidate_cache(["lead_days_date"])
+        self.assertEqual(str(self.orderpoint.lead_days_date), "2022-06-07")
