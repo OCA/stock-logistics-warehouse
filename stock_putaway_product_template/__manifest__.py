@@ -2,7 +2,7 @@
 {
     "name": "Product template in putaway strategies",
     "summary": "Add product template in putaway strategies from the product view",
-    "version": "15.0.1.0.2",
+    "version": "15.0.1.1.0",
     "category": "Inventory",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "author": "Akretion, Odoo Community Association (OCA)",
