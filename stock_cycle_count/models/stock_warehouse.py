@@ -70,7 +70,7 @@ class StockWarehouse(models.Model):
     @api.model
     def _prepare_cycle_count(self, cycle_count_proposed):
         return {
-            "date_deadline": cycle_count_proposed["date"],
+            "automatic_deadline_date": cycle_count_proposed["date"],
             "location_id": cycle_count_proposed["location"].id,
             "cycle_count_rule_id": cycle_count_proposed["rule_type"].id,
             "state": "draft",
@@ -133,7 +133,7 @@ class StockWarehouse(models.Model):
                 )
                 cc_to_update.write(
                     {
-                        "date_deadline": cycle_count_proposed_date,
+                        "automatic_deadline_date": cycle_count_proposed_date,
                         "cycle_count_rule_id": cycle_count_proposed["rule_type"].id,
                     }
                 )
@@ -144,6 +144,24 @@ class StockWarehouse(models.Model):
         try:
             whs = self.search([])
             whs.action_compute_cycle_count_rules()
+            today = fields.Date.today()
+            cycle_counts = self.env["stock.cycle.count"].search(
+                [("date_deadline", "<=", today), ("state", "=", "draft")]
+            )
+            for cycle_count in cycle_counts:
+                open_cycle_counts = self.env["stock.cycle.count"].search(
+                    [
+                        ("location_id", "=", cycle_count.location_id.id),
+                        ("state", "=", "open"),
+                    ]
+                )
+                if open_cycle_counts:
+                    continue
+                cycle_count.action_create_inventory_adjustment()
+                try:
+                    cycle_count.stock_adjustment_ids.action_state_to_in_progress()
+                except Exception as e:
+                    _logger.info("Error when beginning an adjustment: %s", str(e))
         except Exception as e:
             _logger.info("Error while running stock_cycle_count cron job: %s", str(e))
             raise
