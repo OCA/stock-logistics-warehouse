@@ -1,0 +1,1 @@
+odoo-addon-stock_weighing @ git+https://github.com/OCA/stock-logistics-workflow.git@refs/pull/1572/head#subdirectory=setup/stock_weighing
