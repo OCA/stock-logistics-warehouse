@@ -153,7 +153,7 @@ class TestStockCycleCount(common.TransactionCase):
                 "name": "To be cancelled when running cron job.",
                 "cycle_count_rule_id": self.rule_periodic.id,
                 "location_id": loc.id,
-                "date_deadline": date_pre_existing_cc,
+                "automatic_deadline_date": date_pre_existing_cc,
             }
         )
         self.assertEqual(
@@ -188,14 +188,32 @@ class TestStockCycleCount(common.TransactionCase):
         move1._action_assign()
         move1.move_line_ids[0].qty_done = 1.0
         move1._action_done()
+        # Remove the pre_existing_count
+        self.inventory_model.search(
+            [("cycle_count_id", "=", pre_existing_count.id)], limit=1
+        ).unlink()
+        pre_existing_count.unlink()
+        # Execute cron for first time
         wh.cron_cycle_count()
-        self.assertNotEqual(
-            pre_existing_count.date_deadline,
-            date_pre_existing_cc,
-            "Date of pre-existing cycle counts has not been " "updated.",
+        # There are counts in state open(execution) and not in state draft
+        open_counts = self.cycle_count_model.search(
+            [("location_id", "in", locs.ids), ("state", "=", "open")]
         )
-        counts = self.cycle_count_model.search([("location_id", "in", locs.ids)])
-        self.assertTrue(counts, "Cycle counts not planned")
+        self.assertTrue(open_counts, "Cycle counts in execution state")
+        draft_counts = self.cycle_count_model.search(
+            [("location_id", "in", locs.ids), ("state", "=", "draft")]
+        )
+        self.assertFalse(draft_counts, "No Cycle counts in draft state")
+        # Execute the cron for second time
+        wh.cron_cycle_count()
+        # New cycle counts for same location created in draft state
+        draft_counts = self.cycle_count_model.search(
+            [("location_id", "in", locs.ids), ("state", "=", "draft")]
+        )
+        self.assertTrue(draft_counts, "No Cycle counts in draft state")
+        # Inventory adjustment only started for cycle counts in open state
+        self.assertTrue(open_counts.stock_adjustment_ids)
+        self.assertFalse(draft_counts.stock_adjustment_ids)
         # Zero-confirmations:
         count = self.cycle_count_model.search(
             [

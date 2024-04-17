@@ -144,3 +144,13 @@ class StockInventory(models.Model):
                         message=msg,
                     )
                 )
+
+    def action_state_to_in_progress(self):
+        res = super().action_state_to_in_progress()
+        self.stock_quant_ids.update(
+            {
+                "user_id": self.cycle_count_id.responsible_id,
+                "inventory_date": self.cycle_count_id.date_deadline,
+            }
+        )
+        return res

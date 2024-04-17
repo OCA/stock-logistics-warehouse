@@ -10,6 +10,7 @@
             <tree
                 decoration-muted="state == 'cancelled'"
                 decoration-info="state == 'draft'"
+                multi_edit="1"
             >
                 <field name="name" />
                 <field name="location_id" />
