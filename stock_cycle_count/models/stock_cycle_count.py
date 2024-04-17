@@ -32,6 +32,21 @@ class StockCycleCount(models.Model):
         readonly=True,
         states={"draft": [("readonly", False)]},
         tracking=True,
+        compute="_compute_date_deadline",
+        inverse="_inverse_date_deadline",
+        store=True,
+    )
+    automatic_deadline_date = fields.Date(
+        string="Automatic Required Date",
+        readonly=True,
+        states={"draft": [("readonly", False)]},
+        tracking=True,
+    )
+    manual_deadline_date = fields.Date(
+        string="Manual Required Date",
+        readonly=True,
+        states={"draft": [("readonly", False)]},
+        tracking=True,
     )
     cycle_count_rule_id = fields.Many2one(
         comodel_name="stock.cycle.count.rule",
@@ -124,3 +139,15 @@ class StockCycleCount(models.Model):
             action["views"] = [(res and res.id or False, "form")]
             action["res_id"] = adjustment_ids and adjustment_ids[0] or False
         return action
+
+    @api.depends("automatic_deadline_date", "manual_deadline_date")
+    def _compute_date_deadline(self):
+        for rec in self:
+            if rec.manual_deadline_date:
+                rec.date_deadline = rec.manual_deadline_date
+            else:
+                rec.date_deadline = rec.automatic_deadline_date
+
+    def _inverse_date_deadline(self):
+        for rec in self:
+            rec.manual_deadline_date = rec.date_deadline
