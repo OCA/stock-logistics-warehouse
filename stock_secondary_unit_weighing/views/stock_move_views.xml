@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_move_weight_kanban_view" model="ir.ui.view">
+        <field name="inherit_id" ref="stock_weighing.view_move_weight_kanban_view" />
+        <field name="model">stock.move</field>
+        <field name="arch" type="xml">
+            <div name="weight_card_footer" position="inside">
+                <span
+                    title="Secondary unit info"
+                    class="text-warning"
+                    t-if="record.secondary_uom_id.raw_value"
+                >
+                    <i class="fa fa-asterisk" />
+                    <em>
+                        <strong>
+                            <field name="secondary_uom_qty" />
+                            &amp;#10005;
+                            <field name="secondary_uom_id" />
+                        </strong>
+                    </em>
+                </span>
+            </div>
+        </field>
+    </record>
+</odoo>
