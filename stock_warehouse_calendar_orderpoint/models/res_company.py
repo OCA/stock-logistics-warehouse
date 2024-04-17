@@ -10,11 +10,15 @@ class ResCompany(models.Model):
     orderpoint_calendar_id = fields.Many2one(
         comodel_name="resource.calendar",
         string="Reordering Calendar",
-        help="Calendar used to compute the lead date of reordering rules",
+        help="Calendar used to compute the lead date of reordering rules\n"
+        "This value will be used as default value for new warehouses linked to this"
+        " company",
     )
     orderpoint_on_workday = fields.Boolean(
         string="Schedule the lead date on workday only",
-        help="Postpone the lead date to the first available workday",
+        help="Postpone the lead date to the first available workday\n"
+        "This value will be used as default value for new warehouses linked to this"
+        " company",
     )
     orderpoint_on_workday_policy = fields.Selection(
         [
@@ -30,6 +34,8 @@ class ResCompany(models.Model):
         "* skip non-workdays: compute the order date consuming lead delay days only on"
         " (eg: run action on Friday with 2 days lead delay -> skip Saturday and Sunday"
         " -> start consuming lead days on Monday as first lead day -> the result is"
-        " Tuesday)\n",
+        " Tuesday)\n"
+        "This value will be used as default value for new warehouses linked to this"
+        " company",
         default="skip_to_first_workday",  # Retro-compatible default value
     )

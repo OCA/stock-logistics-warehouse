@@ -11,15 +11,13 @@ class StockWarehouse(models.Model):
         comodel_name="resource.calendar",
         string="Reordering Calendar",
         default=lambda o: o._default_orderpoint_calendar_id(),
-        help="Calendar used to scheduled the execution of reordering rules",
+        help="Calendar used to compute the lead date of reordering rules",
     )
     orderpoint_on_workday = fields.Boolean(
         string="Reordering on Workday",
         default=lambda o: o._default_orderpoint_on_workday(),
-        help=(
-            "Postpone the lead date to the first available workday. "
-            "This is based on the Working Hours calendar."
-        ),
+        help="Postpone the lead date to the first available workday based on the"
+        " Working Hours calendar",
     )
     orderpoint_on_workday_policy = fields.Selection(
         [
@@ -36,7 +34,7 @@ class StockWarehouse(models.Model):
         "* skip non-workdays: compute the order date consuming lead delay days only on"
         " (eg: run action on Friday with 2 days lead delay -> skip Saturday and Sunday"
         " -> start consuming lead days on Monday as first lead day -> the result is"
-        " Tuesday)\n",
+        " Tuesday)",
     )
 
     def _default_orderpoint_calendar_id(self):
