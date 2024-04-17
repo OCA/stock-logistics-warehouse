@@ -7,8 +7,8 @@
   and assign the calendar to the "Reordering Calendar" field.
   This will be the default calendar for all newly created warehouses
   for the current company.
-  Optionnaly you can choose to postpone the computed lead date to the next
-  available weekday.
+  Optionally, you can choose to postpone the computed lead date according
+  to your workdays, and the policy to compute the next available workday.
 
 * In *Inventory > Configuration > Warehouse Management > Warehouses*
   you can set a different calendar for your warehouse.
