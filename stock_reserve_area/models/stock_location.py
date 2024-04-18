@@ -1,7 +1,7 @@
 # Copyright 2023 ForgeFlow SL.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import api, fields, models
+from odoo import fields, models
 
 
 class StockLocation(models.Model):
@@ -17,20 +17,22 @@ class StockLocation(models.Model):
 
     def write(self, vals):
         res = super().write(vals)
+        if not vals.get("reserve_area_ids"):
+            return res
+        new_reserve_areas = (
+            self.env["stock.reserve.area"].sudo().browse(vals["reserve_area_ids"])
+        )
+        self._update_impacted_moves(new_reserve_areas)
         return res
 
-    @api.depends("reserve_area_ids")
-    def _update_impacted_moves(self, vals):
+    def _update_impacted_moves(self, new_reserve_areas):
         """If a location is moved outside/inside an area we have to check stock_moves"""
-        if vals.get("reserve_area_ids"):
-            new_reserve_areas = (
-                self.env["stock.reserve.area"].sudo().browse(vals["reserve_area_ids"])
-            )
-            moves_poss_impacted = self.search(
+        for loc in self:
+            moves_poss_impacted = self.env["stock.move"].search(
                 [
                     "|",
-                    ("location_id", "=", self),
-                    ("location_dest_id", "=", self),
+                    ("location_id", "=", loc.id),
+                    ("location_dest_id", "=", loc.id),
                     ("state", "in", ("confirmed", "waiting", "partially_available")),
                 ]
             )

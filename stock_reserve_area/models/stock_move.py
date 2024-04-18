@@ -9,7 +9,10 @@ class StockMove(models.Model):
 
     reserve_area_line_ids = fields.One2many("stock.move.reserve.area.line", "move_id")
     reserve_area_ids = fields.Many2many(
-        "stock.reserve.area", compute="_compute_reserve_area_ids", store=True
+        "stock.reserve.area",
+        compute="_compute_reserve_area_ids",
+        store=True,
+        readonly=True,
     )
     area_reserved_availability = fields.Float(
         string="Reserved in Area",
@@ -84,7 +87,7 @@ class StockMove(models.Model):
         ):
             move.reserve_area_line_ids = move.create_reserve_area_lines()
         self._action_area_assign()  # new method to assign globally
-        super()._action_assign()
+        return super()._action_assign()
 
     def _get_available_quantity(
         self,
@@ -126,9 +129,9 @@ class StockMove(models.Model):
         ).unlink()
 
     def _do_unreserve(self):
-        super()._do_unreserve()
+        res = super()._do_unreserve()
         self._do_area_unreserve()
-        return True
+        return res
 
     def _action_done(self, cancel_backorder=False):
         res = super()._action_done(cancel_backorder)
@@ -139,86 +142,88 @@ class StockMove(models.Model):
         area_available_quantity = self.env[
             "stock.quant"
         ]._get_reserve_area_available_quantity(product_id, reserve_area_id)
-        if quantity > area_available_quantity:
-            outdated_move_domain = [
-                ("state", "not in", ["done", "cancel"]),
-                ("product_id", "=", product_id.id),
-                ("reserve_area_ids", "in", reserve_area_id.id),
-            ]
-            # We take the pickings with the latest scheduled date
-            outdated_candidates = (
-                self.env["stock.move"]
-                .search(outdated_move_domain)
-                .sorted(
-                    lambda cand: (
-                        -cand.picking_id.scheduled_date.timestamp()
-                        if cand.picking_id
-                        else -cand.id,
-                    )
+        if quantity <= area_available_quantity:
+            return
+        outdated_move_domain = [
+            ("state", "not in", ["done", "cancel"]),
+            ("product_id", "=", product_id.id),
+            ("reserve_area_ids", "in", reserve_area_id.id),
+        ]
+        # We take the pickings with the latest scheduled date
+        outdated_candidates = (
+            self.env["stock.move"]
+            .search(outdated_move_domain)
+            .sorted(
+                lambda cand: (
+                    -cand.picking_id.scheduled_date.timestamp()
+                    if cand.picking_id
+                    else -cand.id,
                 )
             )
-            # As the move's state is not computed over the move lines, we'll have to manually
-            # recompute the moves which we adapted their lines.
-            move_to_recompute_state = self
+        )
+        # As the move's state is not computed over the move lines, we'll have to manually
+        # recompute the moves which we adapted their lines.
+        move_to_recompute_state = self
 
-            for candidate in outdated_candidates:
-                rounding = candidate.product_uom.rounding
-                quantity_uom = product_id.uom_id._compute_quantity(
-                    quantity, candidate.product_uom, rounding_method="HALF-UP"
+        for candidate in outdated_candidates:
+            rounding = candidate.product_uom.rounding
+            quantity_uom = product_id.uom_id._compute_quantity(
+                quantity, candidate.product_uom, rounding_method="HALF-UP"
+            )
+            reserve_area_line = self.env["stock.move.reserve.area.line"].search(
+                [
+                    ("move_id", "=", candidate.id),
+                    ("reserve_area_id", "=", reserve_area_id.id),
+                    ("reserved_availability", ">", 0.0),
+                ]
+            )
+            if not reserve_area_line:
+                continue
+            if (
+                float_compare(
+                    reserve_area_line.reserved_availability,
+                    quantity_uom,
+                    precision_rounding=rounding,
                 )
-                reserve_area_line = self.env["stock.move.reserve.area.line"].search(
-                    [
-                        ("move_id", "=", candidate.id),
-                        ("reserve_area_id", "=", reserve_area_id.id),
-                        ("reserved_availability", ">", 0.0),
-                    ]
+                <= 0
+            ):
+                quantity_uom -= reserve_area_line.reserved_availability
+                reserve_area_line.reserved_availability = 0
+                move_to_recompute_state |= candidate
+                if float_is_zero(quantity_uom, precision_rounding=rounding):
+                    break
+            else:
+                # split this move line and assign the new part to our extra move
+                quantity_left = float_round(
+                    reserve_area_line.reserved_availability - quantity_uom,
+                    precision_rounding=rounding,
+                    rounding_method="UP",
                 )
-                if reserve_area_line:
-                    if (
-                        float_compare(
-                            reserve_area_line.reserved_availability,
-                            quantity_uom,
-                            precision_rounding=rounding,
-                        )
-                        <= 0
-                    ):
-                        quantity_uom -= reserve_area_line.reserved_availability
-                        reserve_area_line.reserved_availability = 0
-                        move_to_recompute_state |= candidate
-                        if float_is_zero(quantity_uom, precision_rounding=rounding):
-                            break
-                    else:
-                        # split this move line and assign the new part to our extra move
-                        quantity_left = float_round(
-                            reserve_area_line.reserved_availability - quantity_uom,
-                            precision_rounding=rounding,
-                            rounding_method="UP",
-                        )
-                        reserve_area_line.reserved_availability = quantity_left
-                        move_to_recompute_state |= candidate
-                    # cover case where units have been removed from the area and then a
-                    # move has reserved locally but not in area
-                    if (
-                        float_compare(
-                            candidate.area_reserved_availability,
-                            candidate.reserved_availability,
-                            precision_rounding=rounding,
-                        )
-                        < 0
-                    ):
-                        to_remove = float_round(
-                            candidate.reserved_availability
-                            - candidate.area_reserved_availability,
-                            precision_rounding=rounding,
-                            rounding_method="UP",
-                        )
-                        # treiem les quants d'algun move line
-                        mls = candidate.move_line_ids
-                        removed = 0
-                        for ml in mls:
-                            while removed < to_remove:
-                                ml_removed = min(ml.product_uom_qty, to_remove)
-                                ml.product_uom_qty -= ml_removed
-                                removed += ml_removed
-                        break
-            move_to_recompute_state._recompute_state()
+                reserve_area_line.reserved_availability = quantity_left
+                move_to_recompute_state |= candidate
+            # cover case where units have been removed from the area and then a
+            # move has reserved locally but not in area
+            if (
+                float_compare(
+                    candidate.area_reserved_availability,
+                    candidate.reserved_availability,
+                    precision_rounding=rounding,
+                )
+                < 0
+            ):
+                to_remove = float_round(
+                    candidate.reserved_availability
+                    - candidate.area_reserved_availability,
+                    precision_rounding=rounding,
+                    rounding_method="UP",
+                )
+                # remove the quantity from the move lines
+                mls = candidate.move_line_ids
+                removed = 0
+                for ml in mls:
+                    while removed < to_remove:
+                        ml_removed = min(ml.reserved_uom_qty, to_remove)
+                        ml.reserved_uom_qty -= ml_removed
+                        removed += ml_removed
+                break
+        move_to_recompute_state._recompute_state()

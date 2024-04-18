@@ -36,7 +36,7 @@ class StockQuant(models.Model):
         )
 
     def _gather_reserve_area(self, product_id, reserve_area_id):
-        self.env["stock.quant"].flush(["available_quantity"])
+        self.env["stock.quant"].flush_model(["available_quantity"])
         quant_ids = []
         for location_id in reserve_area_id.location_ids:
             if reserve_area_id.is_location_in_area(location_id):

@@ -14,19 +14,20 @@ class StockMoveLine(models.Model):
         lot_id=None,
         package_id=None,
         owner_id=None,
-        ml_to_ignore=None,
+        ml_ids_to_ignore=None,
     ):
-        super()._free_reservation(
+        res = super()._free_reservation(
             product_id,
             location_id,
             quantity,
             lot_id=lot_id,
             package_id=package_id,
             owner_id=owner_id,
-            ml_to_ignore=ml_to_ignore,
+            ml_ids_to_ignore=ml_ids_to_ignore,
         )
         reserve_area_ids = self.location_id.reserve_area_ids
         for area in reserve_area_ids:
             self.env["stock.move"]._free_reservation_area(
                 self.product_id, area, self.qty_done
             )
+        return res

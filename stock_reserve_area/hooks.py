@@ -68,7 +68,7 @@ select
   sm.id as move_id,
   sm.product_id as product_id,
   rel.stock_reserve_area_id as reserve_area_id,
-  coalesce(sum(sml.product_uom_qty), 0) as reserved_availability
+  coalesce(sum(sml.reserved_uom_qty), 0) as reserved_availability
 from stock_move as sm
 inner join stock_move_stock_reserve_area_rel as rel on rel.stock_move_id = sm.id
 left join stock_move_line as sml on sml.move_id = sm.id
@@ -81,7 +81,7 @@ and sm.location_dest_id not in (
     where reserve_area_id = rel.stock_reserve_area_id
     )
 group by sm.id, rel.stock_reserve_area_id, sm.picking_id, sm.product_id
-having coalesce(sum(sml.product_uom_qty), 0) > 0
+having coalesce(sum(sml.reserved_uom_qty), 0) > 0
 """
     )
 

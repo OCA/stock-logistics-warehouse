@@ -138,7 +138,7 @@ class StockReserveArea(models.Model):
 
     def unlink(self):
         locations = self.location_ids
-        super().unlink()
+        res = super().unlink()
         moves_impacted = self.env["stock.move"].search(
             [
                 ("location_id", "in", locations.ids),
@@ -150,6 +150,7 @@ class StockReserveArea(models.Model):
             ]
         )
         moves_impacted._compute_area_reserved_availability()
+        return res
 
     def action_open_reserved_moves(self):
         self.ensure_one()
@@ -158,7 +159,7 @@ class StockReserveArea(models.Model):
         )
         view_id = self.env.ref("stock_reserve_area.move_reserve_area_line_tree").id
         context = dict(self.env.context or {})
-        context["search_default_product_id"] = 1
+        context["search_default_group_product_id"] = 1
         return {
             "name": _("Reserved in Areas lines"),
             "type": "ir.actions.act_window",

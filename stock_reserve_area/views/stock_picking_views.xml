@@ -35,8 +35,8 @@
                     string="Area Reservations"
                     attrs="{'invisible':['|', ('state','=', 'done'),('reserve_area_line_ids', '=', [])]}"
                 >
-                    <field name="reserve_area_line_ids">
-                        <tree>
+                    <field name="reserve_area_line_ids" style="pointer-events:none;">
+                        <tree edit="false" create="false">
                             <field name="reserve_area_id" />
                             <field name="reserved_availability" />
                             <field name="product_id" />

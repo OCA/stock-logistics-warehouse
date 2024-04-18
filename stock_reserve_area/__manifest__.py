@@ -3,7 +3,7 @@
 {
     "name": "Stock Reservation Area",
     "summary": "Stock reservations on areas (group of locations)",
-    "version": "14.0.1.0.0",
+    "version": "16.0.1.0.0",
     "author": "ForgeFlow, Odoo Community Association (OCA)",
     "category": "Warehouse",
     "license": "AGPL-3",
