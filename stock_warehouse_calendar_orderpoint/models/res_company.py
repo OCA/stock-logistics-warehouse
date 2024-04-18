@@ -14,12 +14,6 @@ class ResCompany(models.Model):
         "This value will be used as default value for new warehouses linked to this"
         " company",
     )
-    orderpoint_on_workday = fields.Boolean(
-        string="Schedule the lead date on workday only",
-        help="Postpone the lead date to the first available workday\n"
-        "This value will be used as default value for new warehouses linked to this"
-        " company",
-    )
     orderpoint_on_workday_policy = fields.Selection(
         [
             ("skip_to_first_workday", "Skip to first workday"),

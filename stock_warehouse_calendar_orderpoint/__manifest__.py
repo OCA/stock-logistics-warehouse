@@ -3,7 +3,7 @@
 {
     "name": "Stock Warehouse Calendar (reordering rules)",
     "summary": "Adds a calendar to the Warehouse for reordering rules",
-    "version": "14.0.1.0.0",
+    "version": "14.0.1.1.0",
     "license": "LGPL-3",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "author": "Camptocamp, " "Odoo Community Association (OCA)",
@@ -13,9 +13,6 @@
         "views/res_config_settings.xml",
         "views/stock_warehouse.xml",
         "views/stock_warehouse_orderpoint.xml",
-    ],
-    "demo": [
-        "demo/resource_calendar.xml",
     ],
     "installable": True,
     "development_status": "Production/Stable",

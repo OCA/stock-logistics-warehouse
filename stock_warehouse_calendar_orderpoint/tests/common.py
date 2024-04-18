@@ -11,14 +11,46 @@ class CommonCalendarOrderpoint(SavepointCase):
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
         cls.product = cls.env.ref("product.product_delivery_02").copy()
         cls.wh = cls.env.ref("stock.warehouse0")
-        cls.wh.write(
+        days_names = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+        cls.working_hours_calendar = cls.env["resource.calendar"].create(
             {
-                "calendar_id": cls.env.ref("resource.resource_calendar_std").id,
-                "orderpoint_calendar_id": cls.env.ref(
-                    "stock_warehouse_calendar_orderpoint.resource_calendar_orderpoint_demo"
-                ).id,
-                "orderpoint_on_workday": True,
-                "orderpoint_on_workday_policy": "skip_to_first_workday",
+                "name": "Working Hours (Mon-Fri, 8-12 + 13-17)",
+                "tz": "UTC",
+                "attendance_ids": [
+                    (
+                        0,
+                        0,
+                        {
+                            "name": days_names[day],
+                            "dayofweek": str(day),
+                            "hour_from": hour,
+                            "hour_to": hour + 4,
+                            "day_period": "morning" if hour < 12 else "afternoon",
+                        },
+                    )
+                    for day in (0, 1, 2, 3, 4)
+                    for hour in (8, 13)
+                ],
+            }
+        )
+        cls.reordering_calendar = cls.env["resource.calendar"].create(
+            {
+                "name": "Reordering Hours (Wed 8-12 + 13-17, Sat 13-17)",
+                "tz": "UTC",
+                "attendance_ids": [
+                    (
+                        0,
+                        0,
+                        {
+                            "name": days_names[day],
+                            "dayofweek": str(day),
+                            "hour_from": hour,
+                            "hour_to": hour + 4,
+                            "day_period": "morning" if hour < 12 else "afternoon",
+                        },
+                    )
+                    for day, hour in ((2, 8), (2, 13), (5, 13))
+                ],
             }
         )
         cls.orderpoint = cls.env["stock.warehouse.orderpoint"].create(
@@ -31,4 +63,9 @@ class CommonCalendarOrderpoint(SavepointCase):
                 "product_uom": cls.env.ref("uom.product_uom_unit"),
             }
         )
-        cls.orderpoint.rule_ids.write({"action": "pull", "delay": 2})
+        # We want only 1 reordering rule of type "pull" to avoid inconsistent behaviors
+        cls.reordering_rule = cls.orderpoint.rule_ids[0]
+        cls.reordering_rule.action = "pull"
+        other_rules = cls.orderpoint.rule_ids - cls.reordering_rule
+        if other_rules:
+            other_rules.unlink()

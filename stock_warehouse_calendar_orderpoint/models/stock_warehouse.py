@@ -13,12 +13,6 @@ class StockWarehouse(models.Model):
         default=lambda o: o._default_orderpoint_calendar_id(),
         help="Calendar used to compute the lead date of reordering rules",
     )
-    orderpoint_on_workday = fields.Boolean(
-        string="Reordering on Workday",
-        default=lambda o: o._default_orderpoint_on_workday(),
-        help="Postpone the lead date to the first available workday based on the"
-        " Working Hours calendar",
-    )
     orderpoint_on_workday_policy = fields.Selection(
         [
             ("skip_to_first_workday", "Skip to first workday"),
@@ -39,9 +33,6 @@ class StockWarehouse(models.Model):
 
     def _default_orderpoint_calendar_id(self):
         return self.env.company.orderpoint_calendar_id
-
-    def _default_orderpoint_on_workday(self):
-        return self.env.company.orderpoint_on_workday
 
     def _default_orderpoint_on_workday_policy(self):
         return self.env.company.orderpoint_on_workday_policy
