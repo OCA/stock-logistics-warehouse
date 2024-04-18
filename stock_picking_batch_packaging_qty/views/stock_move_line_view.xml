@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 Moduon Team S.L.
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0) -->
+<data>
+    <record id="view_move_line_tree" model="ir.ui.view">
+        <field name="name">Add product packaging qty done info</field>
+        <field name="model">stock.move.line</field>
+        <field name="inherit_id" ref="stock_picking_batch.view_move_line_tree" />
+        <field name="arch" type="xml">
+            <field name="qty_done" position="before">
+                <field
+                    name="product_packaging_qty_done"
+                    attrs="{'invisible': [('product_packaging_id', '=', False)]}"
+                    groups="product.group_stock_packaging"
+                />
+                <field
+                    name="product_packaging_id"
+                    groups="product.group_stock_packaging"
+                />
+            </field>
+        </field>
+    </record>
+
+
+</data>
