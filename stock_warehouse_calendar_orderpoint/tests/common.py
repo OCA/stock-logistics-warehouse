@@ -63,9 +63,9 @@ class CommonCalendarOrderpoint(SavepointCase):
                 "product_uom": cls.env.ref("uom.product_uom_unit"),
             }
         )
-        # We want only 1 reordering rule of type "pull" to avoid inconsistent behaviors
+        # To avoid strange behaviors:
+        # - set the first rule to be of type "pull"
+        # - set all rules' delays to 0 (the "pull" rule's delay is updated in tests)
         cls.reordering_rule = cls.orderpoint.rule_ids[0]
         cls.reordering_rule.action = "pull"
-        other_rules = cls.orderpoint.rule_ids - cls.reordering_rule
-        if other_rules:
-            other_rules.unlink()
+        cls.orderpoint.rule_ids.write({"delay": 0})

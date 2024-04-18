@@ -6,7 +6,7 @@ from freezegun import freeze_time
 from .common import CommonCalendarOrderpoint
 
 
-class TestCalendarOrderpoint(CommonCalendarOrderpoint):
+class TestOrderpointLeadDaysDate(CommonCalendarOrderpoint):
     """Tests orderpoints' forecast date computations
 
     The OP calendar defines reordering slots as Wed 8-12 + 13-17, Sat 13-17.
