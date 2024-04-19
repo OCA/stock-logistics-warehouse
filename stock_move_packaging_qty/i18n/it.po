@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-03-19 15:37+0000\n"
+"PO-Revision-Date: 2024-04-19 07:37+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -19,57 +19,57 @@ msgstr ""
 #. module: stock_move_packaging_qty
 #: model_terms:ir.ui.view,arch_db:stock_move_packaging_qty.view_stock_move_operations
 msgid "<span> / </span>"
-msgstr ""
+msgstr "<span> / </span>"
 
 #. module: stock_move_packaging_qty
 #: model:ir.model.fields,help:stock_move_packaging_qty.field_stock_move__product_packaging_qty
 msgid "Amount of product packagings demanded."
-msgstr ""
+msgstr "Quantità di confezioni prodotto richiesta."
 
 #. module: stock_move_packaging_qty
 #: model:ir.model.fields,help:stock_move_packaging_qty.field_stock_move__product_packaging_qty_done
 msgid "Amount of product packagings done."
-msgstr ""
+msgstr "Quantità di confezioni prodotto completata."
 
 #. module: stock_move_packaging_qty
 #: model:ir.model.fields,field_description:stock_move_packaging_qty.field_stock_move_line__product_packaging_qty_done
 msgid "Done Pkg. Qty."
-msgstr ""
+msgstr "Q.tà confezioni completate"
 
 #. module: stock_move_packaging_qty
 #: model:ir.model.fields,field_description:stock_move_packaging_qty.field_stock_move_line__product_packaging_id
 msgid "Packaging"
-msgstr ""
+msgstr "Confezione"
 
 #. module: stock_move_packaging_qty
 #: model_terms:ir.ui.view,arch_db:stock_move_packaging_qty.view_stock_move_operations
 msgid "Packagings demanded"
-msgstr ""
+msgstr "Confezioni richieste"
 
 #. module: stock_move_packaging_qty
 #: model_terms:ir.ui.view,arch_db:stock_move_packaging_qty.view_stock_move_operations
 msgid "Packagings done"
-msgstr ""
+msgstr "Confezioni completate"
 
 #. module: stock_move_packaging_qty
 #: model:ir.model.fields,field_description:stock_move_packaging_qty.field_stock_move__product_packaging_qty
 msgid "Pkgs. Demand"
-msgstr ""
+msgstr "Confezioni richieste"
 
 #. module: stock_move_packaging_qty
 #: model:ir.model.fields,field_description:stock_move_packaging_qty.field_stock_move__product_packaging_qty_done
 msgid "Pkgs. Done"
-msgstr ""
+msgstr "Confezioni completate"
 
 #. module: stock_move_packaging_qty
 #: model:ir.model,name:stock_move_packaging_qty.model_stock_move_line
 msgid "Product Moves (Stock Move Line)"
-msgstr ""
+msgstr "Movimenti prodotto (riga movimento di magazzino)"
 
 #. module: stock_move_packaging_qty
 #: model:ir.model.fields,help:stock_move_packaging_qty.field_stock_move_line__product_packaging_qty_done
 msgid "Product packaging quantity done."
-msgstr ""
+msgstr "Quantità confezione prodotto completata."
 
 #. module: stock_move_packaging_qty
 #: model:ir.model,name:stock_move_packaging_qty.model_stock_move
@@ -84,6 +84,8 @@ msgid ""
 "There are %d move lines involved. Please set their product packaging done "
 "qty directly."
 msgstr ""
+"Ci sono %d righe movimento coinvolte. Impostare direttamente la loro "
+"quantità di confezione prodotto completata."
 
 #~ msgid "Amount of packages demanded."
 #~ msgstr "Quantità dei colli richiesti."
