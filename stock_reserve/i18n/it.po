@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-11-30 03:53+0000\n"
-"PO-Revision-Date: 2024-04-19 07:37+0000\n"
+"PO-Revision-Date: 2024-04-19 10:40+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -121,12 +121,12 @@ msgstr ""
 #. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation__product_packaging_qty
 msgid "Amount of product packagings demanded."
-msgstr "Quantità di imballaggi prodotto richiesta."
+msgstr "Quantità di confezioni prodotto richieste."
 
 #. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation__product_packaging_qty_done
 msgid "Amount of product packagings done."
-msgstr "Quantità di imballaggi prodotto completata."
+msgstr "Quantità di confezioni prodotto completate."
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__analytic_account_line_id
@@ -575,7 +575,7 @@ msgstr "Livello collo"
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__product_packaging_id
 msgid "Packaging"
-msgstr "Imballaggio"
+msgstr "Confezione"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__location_move
@@ -585,12 +585,12 @@ msgstr "Parte di un movimento ubicazione"
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__product_packaging_qty
 msgid "Pkgs. Demand"
-msgstr "Imballaggi richiesti"
+msgstr "Confezioni richieste"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__product_packaging_qty_done
 msgid "Pkgs. Done"
-msgstr "Imballaggi completati"
+msgstr "Confezioni completate"
 
 #. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation__route_ids
