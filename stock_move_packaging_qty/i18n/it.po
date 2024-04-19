@@ -17,19 +17,79 @@ msgstr ""
 "X-Generator: Weblate 4.17\n"
 
 #. module: stock_move_packaging_qty
+#: model_terms:ir.ui.view,arch_db:stock_move_packaging_qty.view_stock_move_operations
+msgid "<span> / </span>"
+msgstr ""
+
+#. module: stock_move_packaging_qty
 #: model:ir.model.fields,help:stock_move_packaging_qty.field_stock_move__product_packaging_qty
-msgid "Amount of packages demanded."
-msgstr "Quantità dei colli richiesti."
+msgid "Amount of product packagings demanded."
+msgstr ""
+
+#. module: stock_move_packaging_qty
+#: model:ir.model.fields,help:stock_move_packaging_qty.field_stock_move__product_packaging_qty_done
+msgid "Amount of product packagings done."
+msgstr ""
+
+#. module: stock_move_packaging_qty
+#: model:ir.model.fields,field_description:stock_move_packaging_qty.field_stock_move_line__product_packaging_qty_done
+msgid "Done Pkg. Qty."
+msgstr ""
+
+#. module: stock_move_packaging_qty
+#: model:ir.model.fields,field_description:stock_move_packaging_qty.field_stock_move_line__product_packaging_id
+msgid "Packaging"
+msgstr ""
+
+#. module: stock_move_packaging_qty
+#: model_terms:ir.ui.view,arch_db:stock_move_packaging_qty.view_stock_move_operations
+msgid "Packagings demanded"
+msgstr ""
+
+#. module: stock_move_packaging_qty
+#: model_terms:ir.ui.view,arch_db:stock_move_packaging_qty.view_stock_move_operations
+msgid "Packagings done"
+msgstr ""
 
 #. module: stock_move_packaging_qty
 #: model:ir.model.fields,field_description:stock_move_packaging_qty.field_stock_move__product_packaging_qty
-msgid "Pkg. Qty."
-msgstr "Q.tà collo"
+msgid "Pkgs. Demand"
+msgstr ""
+
+#. module: stock_move_packaging_qty
+#: model:ir.model.fields,field_description:stock_move_packaging_qty.field_stock_move__product_packaging_qty_done
+msgid "Pkgs. Done"
+msgstr ""
+
+#. module: stock_move_packaging_qty
+#: model:ir.model,name:stock_move_packaging_qty.model_stock_move_line
+msgid "Product Moves (Stock Move Line)"
+msgstr ""
+
+#. module: stock_move_packaging_qty
+#: model:ir.model.fields,help:stock_move_packaging_qty.field_stock_move_line__product_packaging_qty_done
+msgid "Product packaging quantity done."
+msgstr ""
 
 #. module: stock_move_packaging_qty
 #: model:ir.model,name:stock_move_packaging_qty.model_stock_move
 msgid "Stock Move"
 msgstr "Movimento di magazzino"
+
+#. module: stock_move_packaging_qty
+#. odoo-python
+#: code:addons/stock_move_packaging_qty/models/stock_move.py:0
+#, python-format
+msgid ""
+"There are %d move lines involved. Please set their product packaging done "
+"qty directly."
+msgstr ""
+
+#~ msgid "Amount of packages demanded."
+#~ msgstr "Quantità dei colli richiesti."
+
+#~ msgid "Pkg. Qty."
+#~ msgstr "Q.tà collo"
 
 #~ msgid "Package quantity"
 #~ msgstr "Quantità collo"

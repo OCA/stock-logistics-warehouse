@@ -87,7 +87,12 @@ msgstr ""
 
 #. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation__product_packaging_qty
-msgid "Amount of packages demanded."
+msgid "Amount of product packagings demanded."
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,help:stock_reserve.field_stock_reservation__product_packaging_qty_done
+msgid "Amount of product packagings done."
 msgstr ""
 
 #. module: stock_reserve
@@ -522,7 +527,12 @@ msgstr ""
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__product_packaging_qty
-msgid "Pkg. Qty."
+msgid "Pkgs. Demand"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__product_packaging_qty_done
+msgid "Pkgs. Done"
 msgstr ""
 
 #. module: stock_reserve

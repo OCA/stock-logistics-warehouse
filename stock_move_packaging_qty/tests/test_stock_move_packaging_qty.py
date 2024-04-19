@@ -12,7 +12,14 @@ class TestStockMovePackagingQty(TransactionCase):
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
         cls.env.user.groups_id |= cls.env.ref("product.group_stock_packaging")
         cls.partner = cls.env.ref("base.res_partner_12")
-        cls.product = cls.env.ref("product.product_product_9")
+        cls.product = cls.env["product.product"].create(
+            {
+                "name": "Test product",
+                "type": "consu",
+                "uom_id": cls.env.ref("uom.product_uom_unit").id,
+                "uom_po_id": cls.env.ref("uom.product_uom_unit").id,
+            }
+        )
         cls.packaging = cls.env["product.packaging"].create(
             {"name": "Test packaging", "product_id": cls.product.id, "qty": 5.0}
         )
@@ -59,3 +66,20 @@ class TestStockMovePackagingQty(TransactionCase):
             move_f.product_packaging_id = self.packaging
             self.assertEqual(move_f.product_uom_qty, 5)
             self.assertEqual(move_f.product_packaging_qty, 1)
+        picking = picking_f.save()
+        self.assertEqual(picking.state, "draft")
+        picking.action_assign()
+        picking.action_set_quantities_to_reservation()
+        self.assertRecordValues(
+            picking.move_ids_without_package,
+            [
+                {
+                    "product_id": self.product.id,
+                    "product_packaging_id": self.packaging.id,
+                    "product_packaging_qty_done": 1,
+                    "product_packaging_qty": 1,
+                    "product_uom_qty": 5,
+                }
+            ],
+        )
+        picking.button_validate()

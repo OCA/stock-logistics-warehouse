@@ -7,27 +7,89 @@ msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-03-18 07:54+0000\n"
-"PO-Revision-Date: 2024-03-18 07:54+0000\n"
-"Last-Translator: Jairo Llopis <jairo@moduon.team>\n"
+"PO-Revision-Date: 2024-04-18 10:38+0000\n"
+"Last-Translator: Jairo Llopis <yajo.sk8@gmail.com>\n"
 "Language-Team: none\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Weblate 4.17\n"
+
+#. module: stock_move_packaging_qty
+#: model_terms:ir.ui.view,arch_db:stock_move_packaging_qty.view_stock_move_operations
+msgid "<span> / </span>"
+msgstr "<span> / </span>"
 
 #. module: stock_move_packaging_qty
 #: model:ir.model.fields,help:stock_move_packaging_qty.field_stock_move__product_packaging_qty
-msgid "Amount of packages demanded."
+msgid "Amount of product packagings demanded."
 msgstr "Cantidad de envases pedidos."
 
 #. module: stock_move_packaging_qty
+#: model:ir.model.fields,help:stock_move_packaging_qty.field_stock_move__product_packaging_qty_done
+msgid "Amount of product packagings done."
+msgstr "Cantidad de envases hecha."
+
+#. module: stock_move_packaging_qty
+#: model:ir.model.fields,field_description:stock_move_packaging_qty.field_stock_move_line__product_packaging_qty_done
+msgid "Done Pkg. Qty."
+msgstr "Envs. hechos"
+
+#. module: stock_move_packaging_qty
+#: model:ir.model.fields,field_description:stock_move_packaging_qty.field_stock_move_line__product_packaging_id
+msgid "Packaging"
+msgstr "Envase"
+
+#. module: stock_move_packaging_qty
+#: model_terms:ir.ui.view,arch_db:stock_move_packaging_qty.view_stock_move_operations
+msgid "Packagings demanded"
+msgstr "Envases pedidos"
+
+#. module: stock_move_packaging_qty
+#: model_terms:ir.ui.view,arch_db:stock_move_packaging_qty.view_stock_move_operations
+msgid "Packagings done"
+msgstr "Envases hechos"
+
+#. module: stock_move_packaging_qty
 #: model:ir.model.fields,field_description:stock_move_packaging_qty.field_stock_move__product_packaging_qty
-msgid "Pkg. Qty."
-msgstr "Cant. Envs."
+msgid "Pkgs. Demand"
+msgstr "Envs. pedidos"
+
+#. module: stock_move_packaging_qty
+#: model:ir.model.fields,field_description:stock_move_packaging_qty.field_stock_move__product_packaging_qty_done
+msgid "Pkgs. Done"
+msgstr "Envs. hechos"
+
+#. module: stock_move_packaging_qty
+#: model:ir.model,name:stock_move_packaging_qty.model_stock_move_line
+msgid "Product Moves (Stock Move Line)"
+msgstr "Movimientos de existencias"
+
+#. module: stock_move_packaging_qty
+#: model:ir.model.fields,help:stock_move_packaging_qty.field_stock_move_line__product_packaging_qty_done
+msgid "Product packaging quantity done."
+msgstr "Cantidad de envases hechos."
 
 #. module: stock_move_packaging_qty
 #: model:ir.model,name:stock_move_packaging_qty.model_stock_move
 msgid "Stock Move"
 msgstr "Movimiento de existencias"
+
+#. module: stock_move_packaging_qty
+#. odoo-python
+#: code:addons/stock_move_packaging_qty/models/stock_move.py:0
+#, python-format
+msgid ""
+"There are %d move lines involved. Please set their product packaging done "
+"qty directly."
+msgstr ""
+"Hay %d líneas de movimiento de existencias envueltas. Por favor, establezca "
+"sus cantidades de envases directamente."
+
+#~ msgid "Amount of packages demanded."
+#~ msgstr "Cantidad de envases pedidos."
+
+#~ msgid "Pkg. Qty."
+#~ msgstr "Cant. Envs."

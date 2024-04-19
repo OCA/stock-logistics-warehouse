@@ -1,1 +1,1 @@
-Add packaging fields in the stock moves and their reports.
+Add packaging fields in the stock moves, their lines and their reports.
