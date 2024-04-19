@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-04-19 07:37+0000\n"
+"PO-Revision-Date: 2024-04-19 10:40+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -24,12 +24,12 @@ msgstr "<span> / </span>"
 #. module: stock_move_packaging_qty
 #: model:ir.model.fields,help:stock_move_packaging_qty.field_stock_move__product_packaging_qty
 msgid "Amount of product packagings demanded."
-msgstr "Quantità di confezioni prodotto richiesta."
+msgstr "Quantità di confezioni prodotto richieste."
 
 #. module: stock_move_packaging_qty
 #: model:ir.model.fields,help:stock_move_packaging_qty.field_stock_move__product_packaging_qty_done
 msgid "Amount of product packagings done."
-msgstr "Quantità di confezioni prodotto completata."
+msgstr "Quantità di confezioni prodotto completate."
 
 #. module: stock_move_packaging_qty
 #: model:ir.model.fields,field_description:stock_move_packaging_qty.field_stock_move_line__product_packaging_qty_done
