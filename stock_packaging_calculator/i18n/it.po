@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-11-21 13:33+0000\n"
+"PO-Revision-Date: 2024-04-19 07:37+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -19,12 +19,12 @@ msgstr ""
 #. module: stock_packaging_calculator
 #: model:ir.model.fields,field_description:stock_packaging_calculator.field_product_product__packaging_contained_mapping
 msgid "Packaging Contained Mapping"
-msgstr "Mappatura contenuto imballaggi"
+msgstr "Mappatura contenuto confezione"
 
 #. module: stock_packaging_calculator
 #: model:ir.model,name:stock_packaging_calculator.model_product_qty_by_packaging_mixin
 msgid "Product Qty By Packaging (Mixin)"
-msgstr "Q.tà prodotto per imballaggio (misto)"
+msgstr "Q.tà prodotto per confezione (mixin)"
 
 #. module: stock_packaging_calculator
 #: model:ir.model,name:stock_packaging_calculator.model_product_product
@@ -34,9 +34,9 @@ msgstr "Variante prodotto"
 #. module: stock_packaging_calculator
 #: model:ir.model.fields,field_description:stock_packaging_calculator.field_product_qty_by_packaging_mixin__product_qty_by_packaging_display
 msgid "Qty by packaging"
-msgstr "Q.tà per imballaggio"
+msgstr "Q.tà per confezione"
 
 #. module: stock_packaging_calculator
 #: model:ir.model.fields,help:stock_packaging_calculator.field_product_product__packaging_contained_mapping
 msgid "Technical field to store contained packaging. "
-msgstr "Campo tecnico per salvare gli imballaggi contenuti. "
+msgstr "Campo tecnico per salvare la confezione contenuta. "
