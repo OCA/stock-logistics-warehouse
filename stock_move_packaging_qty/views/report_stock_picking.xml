@@ -99,12 +99,13 @@
     >
         <xpath expr="//td[@name='move_line_lot_qty_done']">
             <div
-                t-if="ml.product_packaging_id"
+                t-if="move_line.product_packaging_id"
                 class="text-secondary"
                 groups="product.group_stock_packaging"
             >
-                <span t-field="ml.product_packaging_id" />:
-                <span t-field="ml.product_packaging_qty_done" />
+                <span t-field="move_line.product_packaging_id" />: <span
+                    t-field="move_line.product_packaging_qty_done"
+                />
             </div>
         </xpath>
     </template>
