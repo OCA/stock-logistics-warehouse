@@ -3,7 +3,7 @@
 {
     "name": "Stock Batch Packaging Qty",
     "summary": "Add packaging fields in stock picking batch",
-    "version": "16.0.1.0.0",
+    "version": "16.0.1.0.1",
     "author": "Moduon, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "category": "Warehouse",
