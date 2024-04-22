@@ -3,7 +3,7 @@
 {
     "name": "Stock Packaging Qty",
     "summary": "Add packaging fields in the stock moves",
-    "version": "16.0.1.3.1",
+    "version": "16.0.1.3.2",
     "author": "ForgeFlow, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "category": "Warehouse",
