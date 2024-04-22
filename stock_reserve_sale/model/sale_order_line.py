@@ -2,12 +2,20 @@
 # Copyright 2023 - Hugo Córdoba - FactorLibre - (hugo.cordoba@factorlibre.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 from odoo import api, fields, models
-from odoo.exceptions import UserError, except_orm
+from odoo.exceptions import UserError
 from odoo.tools.translate import _
 
 
 class SaleOrderLine(models.Model):
     _inherit = "sale.order.line"
+
+    reservation_ids = fields.One2many(
+        "stock.reservation", "sale_line_id", string="Stock Reservation", copy=False
+    )
+    is_stock_reservable = fields.Boolean(
+        compute="_compute_is_stock_reservable", readonly=True, string="Can be reserved"
+    )
+    is_readonly = fields.Boolean(compute="_compute_is_readonly", store=False)
 
     def _get_line_rule(self):
         """Get applicable rule for this product
@@ -16,9 +24,7 @@ class SaleOrderLine(models.Model):
         """
         StockRule = self.env["stock.rule"]
         product = self.product_id
-        product_route_ids = [
-            x.id for x in product.route_ids + product.categ_id.total_route_ids
-        ]
+        product_route_ids = (product.route_ids + product.categ_id.total_route_ids).ids
         rules = StockRule.search(
             [("route_id", "in", product_route_ids)],
             order="route_sequence, sequence",
@@ -26,18 +32,15 @@ class SaleOrderLine(models.Model):
         )
         if not rules:
             warehouse = self.order_id.warehouse_id
-            wh_routes = warehouse.route_ids
-            wh_route_ids = [route.id for route in wh_routes]
+            wh_route_ids = warehouse.route_ids.ids
             domain = [
                 "|",
                 ("warehouse_id", "=", warehouse.id),
                 ("warehouse_id", "=", False),
                 ("route_id", "in", wh_route_ids),
             ]
-            rules = StockRule.search(domain, order="route_sequence, sequence")
-        if rules:
-            fields.first(rules)
-        return False
+            rules = StockRule.search(domain, order="route_sequence, sequence", limit=1)
+        return rules
 
     def _get_procure_method(self):
         """Get procure_method depending on product routes"""
@@ -69,17 +72,8 @@ class SaleOrderLine(models.Model):
                 len(line.reservation_ids) > 0 or line.order_id.state != "draft"
             )
 
-    reservation_ids = fields.One2many(
-        "stock.reservation", "sale_line_id", string="Stock Reservation", copy=False
-    )
-    is_stock_reservable = fields.Boolean(
-        compute="_compute_is_stock_reservable", readonly=True, string="Can be reserved"
-    )
-    is_readonly = fields.Boolean(compute="_compute_is_readonly", store=False)
-
     def release_stock_reservation(self):
-        reserv_ids = [reserv.id for line in self for reserv in line.reservation_ids]
-        reservations = self.env["stock.reservation"].browse(reserv_ids)
+        reservations = self.reservation_ids
         reservations.release_reserve()
         return True
 
@@ -93,8 +87,7 @@ class SaleOrderLine(models.Model):
             for line in self:
                 if not line.reservation_ids:
                     continue
-                raise except_orm(
-                    _("Error"),
+                raise UserError(
                     _(
                         "You cannot change the product or unit of measure "
                         "of lines with a stock reservation. "
@@ -108,8 +101,7 @@ class SaleOrderLine(models.Model):
                 if not line.reservation_ids:
                     continue
                 if len(line.reservation_ids) > 1:
-                    raise except_orm(
-                        _("Error"),
+                    raise UserError(
                         _(
                             "Several stock reservations are linked with the "
                             "line. Impossible to adjust their quantity. "
@@ -130,10 +122,9 @@ class SaleOrderLine(models.Model):
             if line.reservation_ids:
                 raise UserError(
                     _(
-                        "Sale order line '['%(order_name)s'] '%(line_name)s'' has a "
+                        f"Sale order line '['{line.order_id.name}'] '{line.name}' has a "
                         "related reservation.\n"
                         "Please unreserve this line before delete the line"
                     )
-                    % {"order_name": line.order_id.name, "line_name": line.name}
                 )
         return super().unlink()

@@ -2,7 +2,6 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 from odoo import api, fields, models
 from odoo.exceptions import UserError
-from odoo.osv import expression
 from odoo.tools.translate import _
 
 _LINE_KEYS = ["product_id", "product_uom_qty"]
@@ -31,50 +30,36 @@ class SaleOrder(models.Model):
     has_stock_reservation = fields.Boolean(
         compute="_compute_stock_reservation",
         readonly=True,
-        multi="stock_reservation",
         store=True,
         string="Has Stock Reservations",
     )
     is_stock_reservable = fields.Boolean(
         compute="_compute_stock_reservation",
         readonly=True,
-        multi="stock_reservation",
         store=True,
         string="Can Have Stock Reservations",
     )
     reserves_count = fields.Integer(compute="_compute_reserves_count")
-    all_lines_reserved = fields.Boolean(
-        compute="_compute_reserves_count", store=True, default=False
-    )
+    all_lines_reserved = fields.Boolean(compute="_compute_reserves_count", store=False)
 
     def release_all_stock_reservation(self):
-        line_ids = [line.id for order in self for line in order.order_line]
-        lines = self.order_line.browse(line_ids)
+        lines = self.mapped("order_line")
         lines.release_stock_reservation()
         return True
 
     def _compute_reserves_count(self):
-        reserve_ids = self.env["stock.reservation"]._read_group(
-            domain=expression.AND(
-                [
-                    [("sale_id", "in", self.ids)],
-                ]
-            ),
-            fields=["sale_id"],
-            groupby=["sale_id"],
-        )
-        lines = self.order_line.filtered(
-            lambda l: l.product_id.detailed_type != "service"
+        reserves = self.env["stock.reservation"].search(
+            [("sale_id", "in", self.ids)],
         )
         for order in self:
-            if reserve_ids:
-                order.reserves_count = reserve_ids[0]["sale_id_count"]
-            else:
-                order.reserves_count = 0
-            if order.reserves_count == len(lines):
-                order.all_lines_reserved = True
-            else:
-                order.all_lines_reserved = False
+            lines = order.order_line.filtered(
+                lambda ln: ln.product_id.detailed_type != "service"
+            )
+            reserves_count = len(
+                reserves.filtered(lambda rsv, so=order: rsv.sale_id == so)
+            )
+            order.reserves_count = reserves_count
+            order.all_lines_reserved = bool(reserves_count == len(lines))
 
     def action_view_reserves_products(self):
         action = self.env["ir.actions.act_window"]._for_xml_id(
@@ -85,14 +70,11 @@ class SaleOrder(models.Model):
         return action
 
     def action_view_reserves_stock_picking(self):
-        stock_picking = ""
         action = self.env["ir.actions.actions"]._for_xml_id(
             "stock.action_picking_tree_all"
         )
-        stock_picking = (
-            self.env["stock.picking"]
-            .search([("origin", "=", self.name)])
-            .filtered(lambda a: a.state not in "cancel")
+        stock_picking = self.env["stock.picking"].search(
+            [("origin", "=", self.name), ("state", "!=", "cancel")], limit=1
         )
         if stock_picking:
             view_id = self.env.ref("stock.view_picking_form").id
@@ -133,7 +115,7 @@ class SaleOrder(models.Model):
             old_product = old_vals["product_id"].display_name
             new_product = ProductProduct.browse(new_vals["product_id"]).display_name
             body += _("<div>     <b>Product</b>: ")
-            body += "{} → {}</div>".format(old_product, new_product)
+            body += f"{old_product} → {new_product}</div>"
         if "product_uom_qty" in new_vals:
             if "product_id" not in new_vals:
                 body += _("<div>     <b>Product</b>: %s") % (
@@ -152,9 +134,8 @@ class SaleOrder(models.Model):
             if order.has_stock_reservation:
                 raise UserError(
                     _(
-                        "Sale Order %s has some reserved lines.\n"
+                        f"Sale Order {order.name} has some reserved lines.\n"
                         "Please unreserve this lines before delete the order."
                     )
-                    % (order.name)
                 )
         return super().unlink()
