@@ -14,7 +14,10 @@
                     t-value="(ml.qty_done if o.state == 'done' else ml.reserved_uom_qty) / ml.move_id.product_packaging_id.qty"
                 />
                 <span t-field="ml.move_id.product_packaging_id" />:
-                <span t-out="ml_packaging_qty" />
+                <span
+                    t-out="ml_packaging_qty"
+                    t-options="{'widget': 'float', 'decimal_precision': 'Product Unit of Measure'}"
+                />
             </div>
         </xpath>
     </template>
@@ -37,7 +40,10 @@
                 groups="product.group_stock_packaging"
             >
                 <span t-field="move.product_packaging_id" />:
-                <span t-field="move.product_packaging_qty" />
+                <span
+                    t-field="move.product_packaging_qty"
+                    t-options="{'widget': 'float', 'decimal_precision': 'Product Unit of Measure'}"
+                />
             </div>
         </xpath>
 
@@ -57,7 +63,10 @@
                 groups="product.group_stock_packaging"
             >
                 <span t-field="move.product_packaging_id" />:
-                <span t-field="move.product_packaging_qty_done" />
+                <span
+                    t-field="move.product_packaging_qty_done"
+                    t-options="{'widget': 'float', 'decimal_precision': 'Product Unit of Measure'}"
+                />
             </div>
         </xpath>
     </template>
@@ -75,7 +84,10 @@
                 <span
                     t-esc="aggregated_lines[line]['product_packaging'].display_name"
                 />:
-                <span t-esc="aggregated_lines[line]['product_packaging_qty']" />
+                <span
+                    t-esc="aggregated_lines[line]['product_packaging_qty']"
+                    t-options="{'widget': 'float', 'decimal_precision': 'Product Unit of Measure'}"
+                />
             </div>
         </xpath>
 
@@ -88,7 +100,10 @@
                 <span
                     t-esc="aggregated_lines[line]['product_packaging'].display_name"
                 />:
-                <span t-esc="aggregated_lines[line]['product_packaging_qty_done']" />
+                <span
+                    t-esc="aggregated_lines[line]['product_packaging_qty_done']"
+                    t-options="{'widget': 'float', 'decimal_precision': 'Product Unit of Measure'}"
+                />
             </div>
         </xpath>
     </template>
@@ -105,6 +120,7 @@
             >
                 <span t-field="move_line.product_packaging_id" />: <span
                     t-field="move_line.product_packaging_qty_done"
+                    t-options="{'widget': 'float', 'decimal_precision': 'Product Unit of Measure'}"
                 />
             </div>
         </xpath>
