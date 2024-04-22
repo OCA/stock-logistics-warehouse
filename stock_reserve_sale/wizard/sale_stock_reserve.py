@@ -1,6 +1,6 @@
 # Copyright 2013 Camptocamp SA - Guewen Baconnier
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
-from odoo import _, api, exceptions, fields, models
+from odoo import api, fields, models
 
 
 class SaleStockReserve(models.TransientModel):
@@ -9,42 +9,16 @@ class SaleStockReserve(models.TransientModel):
 
     @api.model
     def _default_location_id(self):
-        return self.env["stock.reservation"].get_location_from_ref(
-            "stock.stock_location_stock"
-        )
+        domain = [
+            "|",
+            ("company_id", "=", self.env.company.id),
+            ("company_id", "=", False),
+        ]
+        return self.env["stock.warehouse"].search(domain, limit=1).lot_stock_id
 
     @api.model
     def _default_location_dest_id(self):
         return self.env["stock.reservation"]._default_location_dest_id()
-
-    def _default_owner(self):
-        """If sale_owner_stock_sourcing is installed, it adds an owner field
-        on sale order lines. Use it.
-
-        """
-        model = self.env[self.env.context["active_model"]]
-        if model._name == "sale.order":
-            lines = model.browse(self.env.context["active_id"]).order_line
-        else:
-            lines = model.browse(self.env.context["active_ids"])
-
-        try:
-            owners = {line.stock_owner_id for line in lines}
-        except AttributeError:
-            return self.env["res.partner"]
-            # module sale_owner_stock_sourcing not installed, fine
-
-        if len(owners) == 1:
-            return owners.pop()
-        elif len(owners) > 1:
-            raise exceptions.Warning(
-                _(
-                    """The lines have different owners. Please reserve them
-                    individually with the reserve button on each one."""
-                )
-            )
-
-        return self.env["res.partner"]
 
     location_id = fields.Many2one(
         "stock.location", "Source Location", required=True, default=_default_location_id
@@ -62,7 +36,7 @@ class SaleStockReserve(models.TransientModel):
         "at the end of the validity.",
     )
     note = fields.Text("Notes")
-    owner_id = fields.Many2one("res.partner", "Stock Owner", default=_default_owner)
+    owner_id = fields.Many2one("res.partner", "Stock Owner")
 
     def _prepare_stock_reservation(self, line):
         self.ensure_one()
@@ -72,7 +46,7 @@ class SaleStockReserve(models.TransientModel):
         picking_type_id = reservation_env.with_context(
             warehouse_id=line.order_id.warehouse_id.id
         )._default_picking_type_id()
-        location_id = (self.location_id.id,)
+        location_id = self.location_id.id
         if picking_type_id and not location_id:
             picking = self.env["stock.picking"].new(
                 {"picking_type_id": picking_type_id}
@@ -108,7 +82,7 @@ class SaleStockReserve(models.TransientModel):
             "product_uom": line.product_uom.id,
             "product_uom_qty": line.product_uom_qty,
             "date_validity": self.date_validity,
-            "name": "{} ({})".format(line.order_id.name, line.name),
+            "name": f"{line.order_id.name} ({line.name})",
             "location_id": self.location_id.id,
             "location_dest_id": self.location_dest_id.id,
             "note": self.note,
@@ -128,23 +102,19 @@ class SaleStockReserve(models.TransientModel):
             vals = self._prepare_stock_reservation(line)
             reserv = self.env["stock.reservation"].create(vals)
             reserv.reserve()
-        return True
 
     def button_reserve(self):
-        env = self.env
         self.ensure_one()
-        close = {"type": "ir.actions.act_window_close"}
-        active_model = env.context.get("active_model")
-        active_ids = env.context.get("active_ids")
+        active_model = self.env.context.get("active_model")
+        active_ids = self.env.context.get("active_ids")
         if not (active_model and active_ids):
-            return close
+            return
 
         if active_model == "sale.order":
-            sales = env["sale.order"].browse(active_ids)
-            line_ids = [line.id for sale in sales for line in sale.order_line]
+            sales = self.env["sale.order"].browse(active_ids)
+            line_ids = sales.order_line.ids
 
         if active_model == "sale.order.line":
             line_ids = active_ids
 
         self.stock_reserve(line_ids)
-        return close

@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 {
     "name": "Stock Reserve Sales",
-    "version": "16.0.1.0.0",
+    "version": "17.0.1.0.0",
     "author": "Camptocamp, Odoo Community Association (OCA)",
     "category": "Warehouse",
     "license": "AGPL-3",
@@ -11,6 +11,7 @@
     "depends": ["sale_stock", "stock_reserve"],
     "data": [
         "wizard/sale_stock_reserve_view.xml",
+        "wizard/sale_stock_reserve_release_view.xml",
         "view/sale.xml",
         "view/stock_reserve.xml",
         "security/ir.model.access.csv",

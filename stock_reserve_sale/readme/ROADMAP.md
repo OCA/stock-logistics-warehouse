@@ -1,0 +1,2 @@
+- Indicate the quantity that the user wants to reserve for the line. Set the remaining quantity to be reserved as the default value.
+- Disable the ability to edit the destination location when creating a stock reservation for a specific sales order line. It should be a fixed, non-editable location.
