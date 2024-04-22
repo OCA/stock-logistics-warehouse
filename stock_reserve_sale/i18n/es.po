@@ -1,23 +1,19 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * stock_reserve_sale
+# 	* stock_reserve_sale
 #
-# Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: stock-logistics-warehouse (8.0)\n"
+"Project-Id-Version: Odoo Server 17.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-27 07:47+0000\n"
-"PO-Revision-Date: 2021-07-27 09:58+0200\n"
-"Last-Translator: Carlos <carlos.roca@tecnativa.com>\n"
-"Language-Team: Spanish (http://www.transifex.com/oca/OCA-stock-logistics-"
-"warehouse-8-0/language/es/)\n"
-"Language: es\n"
+"POT-Creation-Date: 2026-03-18 09:27+0000\n"
+"PO-Revision-Date: 2026-03-18 09:27+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.0.6\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
 
 #. module: stock_reserve_sale
 #: model_terms:ir.ui.view,arch_db:stock_reserve_sale.view_sale_stock_reserve_form
@@ -125,9 +121,19 @@ msgid "Pre-book products from stock"
 msgstr "Pre-reservar productos en stock"
 
 #. module: stock_reserve_sale
+#: model_terms:ir.ui.view,arch_db:stock_reserve_sale.view_sale_stock_reserve_release_form
+msgid "Quantity"
+msgstr "Cantidad"
+
+#. module: stock_reserve_sale
 #: model_terms:ir.ui.view,arch_db:stock_reserve_sale.view_order_form_reserve
 msgid "Release Reservation"
 msgstr "Liberar"
+
+#. module: stock_reserve_sale
+#: model_terms:ir.ui.view,arch_db:stock_reserve_sale.view_order_form_reserve
+msgid "Release Stock Reservation"
+msgstr "Liberar reserva de stock"
 
 #. module: stock_reserve_sale
 #: model:ir.model.fields,field_description:stock_reserve_sale.field_sale_stock_reserve__location_dest_id
@@ -159,6 +165,17 @@ msgstr "Pedido de venta"
 #: model:ir.model.fields,field_description:stock_reserve_sale.field_stock_reservation__sale_line_id
 msgid "Sale Order Line"
 msgstr "Linea de venta"
+
+#. module: stock_reserve_sale
+#. odoo-python
+#: code:addons/stock_reserve_sale/model/sale_order_line.py:0
+#, python-format
+msgid ""
+"Sale order line [%(order_name)s] '%(line_name)s' has a related reservation.\n"
+"Please unreserve this line before deleting it."
+msgstr ""
+"La línea de pedido de venta [%(order_name)s] '%(line_name)s' tiene una reserva relacionada.\n"
+"Por favor, libera esta línea antes de eliminarla."
 
 #. module: stock_reserve_sale
 #: model_terms:ir.ui.view,arch_db:stock_reserve_sale.view_stock_reservation_form
@@ -202,6 +219,21 @@ msgid "Stock Reservation"
 msgstr "Reserva de existencias"
 
 #. module: stock_reserve_sale
+#: model:ir.model.fields,field_description:stock_reserve_sale.field_sale_order__stock_reservation_ids
+#: model:ir.model.fields,field_description:stock_reserve_sale.field_sale_stock_reserve_release__reservation_ids
+msgid "Stock Reservations"
+msgstr "Reservas de existencias"
+
+#. module: stock_reserve_sale
+#: model_terms:ir.ui.view,arch_db:stock_reserve_sale.view_sale_stock_reserve_release_form
+msgid ""
+"The following stock reservations will be cancelled.\n"
+"                    Are you sure you want to proceed?"
+msgstr ""
+"Las siguientes reservas de stock serán canceladas.\n"
+"                    ¿Estás seguro de que quieres continuar?"
+
+#. module: stock_reserve_sale
 #: code:addons/stock_reserve_sale/wizard/sale_stock_reserve.py:0
 #, python-format
 msgid ""
@@ -237,9 +269,30 @@ msgid "sale.stock.reserve"
 msgstr ""
 
 #. module: stock_reserve_sale
-#: model_terms:ir.ui.view,arch_db:stock_reserve_sale.view_order_form_reserve
-msgid "Cancell all reserve"
+#: model:ir.actions.act_window,name:stock_reserve_sale.action_sale_stock_reserve_release
+#: model_terms:ir.ui.view,arch_db:stock_reserve_sale.view_sale_stock_reserve_release_form
+msgid "Cancel All Reservations"
 msgstr "Cancelar reservas"
+
+#. module: stock_reserve_sale
+#: model_terms:ir.ui.view,arch_db:stock_reserve_sale.view_order_form_reserve
+msgid "Cancel all reservations"
+msgstr "Cancelar reservas"
+
+#. module: stock_reserve_sale
+#: model_terms:ir.ui.view,arch_db:stock_reserve_sale.view_sale_stock_reserve_release_form
+msgid "Confirm Cancellation"
+msgstr "Confirmar cancelación"
+
+#. module: stock_reserve_sale
+#: model:ir.model,name:stock_reserve_sale.model_sale_stock_reserve_release
+msgid "Confirm Release of Stock Reservations"
+msgstr "Confirmar liberación de reservas de stock"
+
+#. module: stock_reserve_sale
+#: model_terms:ir.ui.view,arch_db:stock_reserve_sale.view_sale_stock_reserve_release_form
+msgid "Discard"
+msgstr "Descartar"
 
 #. module: stock_reserve_sale
 #: model_terms:ir.ui.view,arch_db:stock_reserve_sale.view_order_form_reserve
