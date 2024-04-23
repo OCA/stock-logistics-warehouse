@@ -7,9 +7,7 @@ from odoo.tests.common import SavepointCase
 class TestStockAccountChangeQtyReason(SavepointCase):
     @classmethod
     def setUpClass(cls):
-        super(TestStockAccountChangeQtyReason, cls).setUpClass()
-
-        # MODELS
+        super().setUpClass()
         cls.product_product_model = cls.env["product.product"]
         cls.product_category_model = cls.env["product.category"]
         cls.wizard_model = cls.env["stock.change.product.qty"]

@@ -10,7 +10,7 @@
             <field name="origin" position="after">
                 <field
                     name="preset_reason_id"
-                    invisible="[('preset_reason_id','=',False)]"
+                    attrs="{'invisible':[('preset_reason_id','=',False)]}"
                 />
             </field>
         </field>
