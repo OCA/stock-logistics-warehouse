@@ -43,7 +43,7 @@ addon | version | maintainers | summary
 [stock_location_lockdown](stock_location_lockdown/) | 15.0.1.0.1 |  | Prevent to add stock on locked locations
 [stock_location_route_description](stock_location_route_description/) | 15.0.1.0.0 |  | Add description field on stock routes.
 [stock_lot_filter_available](stock_lot_filter_available/) | 15.0.1.0.1 | [![CarlosRoca13](https://github.com/CarlosRoca13.png?size=30px)](https://github.com/CarlosRoca13) | Allow to filter lots by available on stock
-[stock_move_location](stock_move_location/) | 15.0.1.5.0 |  | This module allows to move all stock in a stock location to an other one.
+[stock_move_location](stock_move_location/) | 15.0.1.5.1 |  | This module allows to move all stock in a stock location to an other one.
 [stock_move_purchase_uom](stock_move_purchase_uom/) | 15.0.1.0.1 |  | Allow to use the purchase UoM in a stock move
 [stock_mts_mto_rule](stock_mts_mto_rule/) | 15.0.1.0.1 |  | Add a MTS+MTO route
 [stock_orderpoint_generator](stock_orderpoint_generator/) | 15.0.1.0.2 |  | Mass configuration of stock order points
