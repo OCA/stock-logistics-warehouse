@@ -68,7 +68,7 @@ class StockMoveLocationWizard(models.TransientModel):
     @api.depends_context("company")
     @api.depends("origin_location_id")
     def _compute_picking_type_id(self):
-        company_id = self.env.context.get("company_id") or self.env.user.company_id.id
+        company_id = self.env.context.get("company_id") or self.env.company.id
         for rec in self:
             picking_type = self.env["stock.picking.type"]
             base_domain = [
