@@ -98,6 +98,11 @@ msgid "Config Settings"
 msgstr ""
 
 #. module: stock_inventory
+#: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__auto_create_missing_quants
+msgid "Create missing quants"
+msgstr "Créer les quants manquants"
+
+#. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__create_uid
 msgid "Created by"
 msgstr "Créé par"

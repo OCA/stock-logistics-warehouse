@@ -159,7 +159,6 @@ class InventoryAdjustmentsGroup(models.Model):
         string="Create missing quants",
         readonly=True,
         states=READONLY_STATES,
-        default=False,
     )
 
     def _search_products_under_review_ids(self, operator, value):
@@ -451,6 +450,7 @@ class InventoryAdjustmentsGroup(models.Model):
             {
                 "search_default_to_do": 1,
                 "inventory_id": self.id,
+                "default_stock_inventory_ids": [(4, self.id)],
                 "default_to_do": True,
                 "default_user_id": self.env.user.id,
             }
@@ -605,7 +605,7 @@ class InventoryAdjustmentsGroup(models.Model):
         self.ensure_one()
         values = {
             "product_id": product.id,
-            "user_id": self.env.user.id,
+            "user_id": self.responsible_id.id or self.env.user.id,
             "stock_inventory_ids": [(4, self.id)],
         }
         values.update(kwargs)
