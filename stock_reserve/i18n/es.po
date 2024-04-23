@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-07-23 10:02+0000\n"
-"PO-Revision-Date: 2023-11-29 11:34+0000\n"
-"Last-Translator: kikopeiro <francisco.peiro@factorlibre.com>\n"
+"PO-Revision-Date: 2024-04-23 10:35+0000\n"
+"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
 "Language-Team: Spanish (https://www.transifex.com/oca/teams/23907/es/)\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
@@ -35,6 +35,13 @@ msgid ""
 "* Available: The product of the stock move is reserved.\n"
 "* Done: The product has been transferred and the transfer has been confirmed."
 msgstr ""
+"* Nuevo: El movimiento está creado pero no confirmado.\n"
+"* Esperando otro movimiento: Un movimiento de stock vinculado debe "
+"realizarse antes que éste.\n"
+"* Esperando Disponibilidad: El movimiento de stock está confirmado pero el "
+"producto no puede ser reservado.\n"
+"* Disponible: El producto del movimiento está reservado.\n"
+"* Realizado: El producto ha sido trasladado y el traslado ha sido confirmado."
 
 #. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation__location_dest_usage
@@ -243,7 +250,7 @@ msgstr "Asignar números de serie"
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__display_import_lot
 msgid "Display Import Lot"
-msgstr ""
+msgstr "Mostrar Lote de Importación"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__display_name
@@ -253,7 +260,7 @@ msgstr "Nombre mostrado"
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__product_packaging_quantity
 msgid "Done Packaging Quantity"
-msgstr ""
+msgstr "Hecho Cantidad de Envases"
 
 #. module: stock_reserve
 #: model_terms:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_search
@@ -466,7 +473,7 @@ msgstr "Embalaje"
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__picked
 msgid "Picked"
-msgstr ""
+msgstr "Seleccionado"
 
 #. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation__route_ids
@@ -528,7 +535,7 @@ msgstr "Propagar cancelación y división"
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__quantity
 msgid "Quantity"
-msgstr ""
+msgstr "Cantidad"
 
 #. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation__availability
@@ -599,7 +606,7 @@ msgstr "Reservado"
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__product_packaging_qty
 msgid "Reserved Packaging Quantity"
-msgstr ""
+msgstr "Cantidad de Envases Reservados"
 
 #. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation__date
@@ -611,7 +618,7 @@ msgstr ""
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__scrap_id
 msgid "Scrap operation"
-msgstr ""
+msgstr "Operación chatarra"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__scrapped
@@ -645,22 +652,22 @@ msgstr "Mostrar operaciones detalladas"
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__show_quant
 msgid "Show Quant"
-msgstr ""
+msgstr "Mostrar Cantd"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__show_reserved
 msgid "Show Reserved"
-msgstr ""
+msgstr "Mostrar Reservado"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__show_lots_m2o
 msgid "Show lot_id"
-msgstr ""
+msgstr "Mostrar lot_id"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__show_lots_text
 msgid "Show lot_name"
-msgstr ""
+msgstr "Mostrar lot_name"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__origin
@@ -726,6 +733,8 @@ msgid ""
 "This checkbox is just indicative, it doesn't validate or generate any "
 "product moves."
 msgstr ""
+"Esta casilla es sólo indicativa, no valida ni genera ningún movimiento del "
+"producto."
 
 #. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation__product_uom_qty
@@ -734,6 +743,9 @@ msgid ""
 "quantity does not generate a backorder.Changing this quantity on assigned "
 "moves affects the product reservation, and should be done with care."
 msgstr ""
+"Esta es la cantidad de producto que se planea mover.Bajar esta cantidad no "
+"genera un pedido pendiente.Cambiar esta cantidad en movimientos asignados "
+"afecta la reserva de producto, y debe hacerse con cuidado."
 
 #. module: stock_reserve
 #: model_terms:ir.actions.act_window,help:stock_reserve.action_stock_reservation_tree
