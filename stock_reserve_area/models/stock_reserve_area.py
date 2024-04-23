@@ -6,6 +6,7 @@ from odoo.exceptions import UserError
 
 class StockReserveArea(models.Model):
     _name = "stock.reserve.area"
+    _description = "Stock Reserve Area"
 
     name = fields.Char()
     active = fields.Boolean(default=True)
@@ -18,7 +19,7 @@ class StockReserveArea(models.Model):
         relation="stock_reserve_area_stock_location_rel",
         column1="reserve_area_id",
         column2="location_id",
-        help="Selected locations a and their children will belong to the Reserve Area",
+        help="Selected locations and their children will belong to the Reserve Area",
         domain="""[
         ('usage', 'in', ('internal', 'view')),
         ('company_id', '=', company_id)
@@ -32,14 +33,20 @@ class StockReserveArea(models.Model):
         compute="_compute_child_area_ids",
         store=True,
     )
+    parent_area_ids = fields.Many2many(
+        comodel_name="stock.reserve.area",
+        relation="stock_reserve_area_rel",
+        column1="stock_reserve_area_2",
+        column2="stock_reserve_area_1",
+    )
 
     @api.depends("location_ids")
     def _compute_child_area_ids(self):
         computed_areas = self.env.context.get(
             "computed_areas", self.env["stock.reserve.area"]
         )
-        child_areas = self.env["stock.reserve.area"]
         for area in self:
+            child_areas = self.env["stock.reserve.area"]
             if isinstance(area.id, models.NewId):
                 continue
             location_areas = area.location_ids.mapped("reserve_area_ids") - area
@@ -60,7 +67,7 @@ class StockReserveArea(models.Model):
 
     @api.constrains("location_ids")
     def check_location_ids(self):
-        # allareas have to be concentric areas.
+        # all areas have to be concentric areas.
         areas = self.location_ids.mapped(
             "reserve_area_ids"
         )  # areas that contain this area's locations
@@ -128,21 +135,22 @@ class StockReserveArea(models.Model):
                     move._do_unreserve()
                     move._action_assign()
 
-    @api.model
-    def create(self, vals):
-        res = super().create(vals)
-        moves_impacted = self.env["stock.move"].search(
-            [
-                ("location_id", "in", res.location_ids.ids),
-                ("location_dest_id", "not in", res.location_ids.ids),
-                (
-                    "state",
-                    "in",
-                    ("confirmed", "waiting", "assigned", "partially_available"),
-                ),
-            ]
-        )
-        res.update_reserve_area_lines(moves_impacted, res.location_ids, [])
+    @api.model_create_multi
+    def create(self, vals_list):
+        res = super().create(vals_list)
+        for area in res:
+            moves_impacted = self.env["stock.move"].search(
+                [
+                    ("location_id", "in", area.location_ids.ids),
+                    ("location_dest_id", "not in", area.location_ids.ids),
+                    (
+                        "state",
+                        "in",
+                        ("confirmed", "waiting", "assigned", "partially_available"),
+                    ),
+                ]
+            )
+            area.update_reserve_area_lines(moves_impacted, area.location_ids, [])
         return res
 
     def write(self, vals):
@@ -190,7 +198,9 @@ class StockReserveArea(models.Model):
         move_reserve_area_lines = self.env["stock.move.reserve.area.line"].search(
             [("reserve_area_id", "=", self.id), ("reserved_availability", "!=", 0)]
         )
-        view_id = self.env.ref("stock_reserve_area.move_reserve_area_line_tree").id
+        view_id = self.env.ref(
+            "stock_reserve_area.view_stock_move_reserve_area_line_tree"
+        ).id
         context = dict(self.env.context or {})
         context["search_default_group_product_id"] = 1
         return {

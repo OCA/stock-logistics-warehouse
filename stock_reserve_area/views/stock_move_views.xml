@@ -23,9 +23,10 @@
                 <group name="reserve_area_lines" string="Area Reservations">
                     <field name="reserve_area_line_ids" readonly="1">
                         <tree>
+                            <field name="product_id" />
                             <field name="reserve_area_id" />
                             <field name="reserved_availability" />
-                            <field name="product_id" />
+                            <field name="unreserved_qty" />
                         </tree>
                     </field>
                 </group>

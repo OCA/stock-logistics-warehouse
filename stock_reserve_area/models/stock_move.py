@@ -81,13 +81,13 @@ class StockMove(models.Model):
         ):
             move.reserve_area_line_ids._action_area_assign()
 
-    def _action_assign(self):
+    def _action_assign(self, force_qty=False):
         for move in self.filtered(
             lambda m: m.state in ["confirmed", "waiting", "partially_available"]
         ):
             move.reserve_area_line_ids = move.create_reserve_area_lines()
         self._action_area_assign()  # new method to assign globally
-        return super()._action_assign()
+        return super()._action_assign(force_qty=force_qty)
 
     def _get_available_quantity(
         self,

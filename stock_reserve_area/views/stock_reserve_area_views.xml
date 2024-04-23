@@ -43,6 +43,9 @@
                             <group name="child_areas">
                                 <field name="child_area_ids" widget="many2many_tags" />
                             </group>
+                            <group name="parent_areas">
+                                <field name="parent_area_ids" widget="many2many_tags" />
+                            </group>
                         </group>
 
                     </sheet>

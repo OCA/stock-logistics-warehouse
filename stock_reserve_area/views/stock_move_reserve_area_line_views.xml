@@ -13,6 +13,7 @@
                             <field name="product_id" />
                             <field name="reserve_area_id" />
                             <field name="reserved_availability" />
+                            <field name="unreserved_qty" />
                         </group>
                     </sheet>
                 </form>
@@ -28,6 +29,7 @@
                     <field name="product_id" />
                     <field name="reserve_area_id" />
                     <field name="reserved_availability" />
+                    <field name="unreserved_qty" />
                 </tree>
             </field>
         </record>

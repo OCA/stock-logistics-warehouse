@@ -16,14 +16,17 @@ class TestStockReserveArea(common.TransactionCase):
 
         """
         super().setUpClass()
-        cls.warehouse1 = cls.env["stock.warehouse"].create(
+        cls.warehouse_model = cls.env["stock.warehouse"]
+        cls.location_model = cls.env["stock.location"]
+        cls.reserve_area_model = cls.env["stock.reserve.area"]
+        cls.warehouse1 = cls.warehouse_model.create(
             {"name": "Test warehouse 1", "code": "TWH1"}
         )
-        cls.warehouse2 = cls.env["stock.warehouse"].create(
+        cls.warehouse2 = cls.warehouse_model.create(
             {"name": "Test warehouse 2", "code": "TWH2"}
         )
         cls.wh1_stock1 = cls.warehouse1.lot_stock_id
-        cls.wh1_stock2 = cls.env["stock.location"].create(
+        cls.wh1_stock2 = cls.location_model.create(
             {
                 "name": "Stock2",
                 "location_id": cls.warehouse1.view_location_id.id,
@@ -44,7 +47,7 @@ class TestStockReserveArea(common.TransactionCase):
             }
         )
 
-        cls.reserve_area1 = cls.env["stock.reserve.area"].search(
+        cls.reserve_area1 = cls.reserve_area_model.search(
             [("location_ids", "in", cls.warehouse1.view_location_id.id)]
         )
 
@@ -52,11 +55,11 @@ class TestStockReserveArea(common.TransactionCase):
         # but Stock2 location wasn't created yet
         cls.reserve_area1.location_ids += cls.wh1_stock2
 
-        cls.reserve_area2 = cls.env["stock.reserve.area"].search(
+        cls.reserve_area2 = cls.reserve_area_model.search(
             [("location_ids", "in", cls.warehouse2.view_location_id.id)]
         )
 
-        cls.stock_reserve_area_wh1_stck1 = cls.env["stock.reserve.area"].create(
+        cls.stock_reserve_area_wh1_stck1 = cls.reserve_area_model.create(
             {
                 "name": "WH1-Stock1",
                 "location_ids": [(6, 0, [cls.wh1_stock1.id])],
@@ -66,7 +69,7 @@ class TestStockReserveArea(common.TransactionCase):
 
         all_locations = cls.reserve_area1.location_ids + cls.reserve_area2.location_ids
 
-        cls.reserve_area_company = cls.env["stock.reserve.area"].create(
+        cls.reserve_area_company = cls.reserve_area_model.create(
             {
                 "name": "Company",
                 "location_ids": [(6, 0, all_locations.ids)],
@@ -218,8 +221,10 @@ class TestStockReserveArea(common.TransactionCase):
         for area_line in move.reserve_area_line_ids:
             if area_line.reserve_area_id.name == "Company":
                 self.assertEqual(area_line.reserved_availability, 1)
+                self.assertEqual(area_line.unreserved_qty, 0)
             else:
                 self.assertEqual(area_line.reserved_availability, 0)
+                self.assertEqual(area_line.unreserved_qty, 1)
 
         picking_out_area.do_unreserve()
         self.assertEqual(

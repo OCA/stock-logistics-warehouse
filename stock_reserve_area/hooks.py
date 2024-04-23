@@ -59,7 +59,8 @@ insert into stock_move_reserve_area_line
   move_id,
   product_id,
   reserve_area_id,
-  reserved_availability
+  reserved_availability,
+  unreserved_qty
   )
 
 select
@@ -68,7 +69,8 @@ select
   sm.id as move_id,
   sm.product_id as product_id,
   rel.stock_reserve_area_id as reserve_area_id,
-  coalesce(sum(sml.reserved_uom_qty), 0) as reserved_availability
+  coalesce(sum(sml.reserved_uom_qty), 0) as reserved_availability,
+  (sm.product_uom_qty - coalesce(sum(sml.reserved_uom_qty), 0)) as unreserved_qty
 from stock_move as sm
 inner join stock_move_stock_reserve_area_rel as rel on rel.stock_move_id = sm.id
 left join stock_move_line as sml on sml.move_id = sm.id
