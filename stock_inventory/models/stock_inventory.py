@@ -293,6 +293,8 @@ class InventoryAdjustmentsGroup(models.Model):
             {
                 "search_default_to_do": 1,
                 "inventory_id": self.id,
+                "default_stock_inventory_ids": [(4, self.id)],
+                "default_to_do": True,
             }
         )
         result.update(
@@ -342,7 +344,7 @@ class InventoryAdjustmentsGroup(models.Model):
         """
         self.ensure_one()
         Quant = self.env["stock.quant"]
-        if self.product_selection != "manual":
+        if self.product_selection not in ("manual", "one"):
             return Quant.browse()
         quants_values = []
         for product in self._get_product_without_quants(quants):

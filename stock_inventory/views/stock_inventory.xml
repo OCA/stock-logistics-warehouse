@@ -48,7 +48,7 @@
                             name="action_view_inventory_adjustment"
                             class="oe_stat_button"
                             icon="fa-pencil-square-o"
-                            attrs="{'invisible':['|', ('state', 'in', ['draft', 'done']), ('count_stock_quants', '=', 0)]}"
+                            attrs="{'invisible':[('state', 'in', ['draft', 'done'])]}"
                         >
                             <field
                                 name="count_stock_quants_string"
