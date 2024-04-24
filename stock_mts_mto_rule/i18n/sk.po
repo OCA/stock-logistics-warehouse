@@ -24,6 +24,11 @@ msgid "Action"
 msgstr ""
 
 #. module: stock_mts_mto_rule
+#: model:ir.model.fields.selection,name:stock_mts_mto_rule.selection__stock_rule__mts_quantity_rule__available
+msgid "Available"
+msgstr ""
+
+#. module: stock_mts_mto_rule
 #: model:ir.model.fields.selection,name:stock_mts_mto_rule.selection__stock_rule__action__split_procurement
 msgid "Choose between MTS and MTO"
 msgstr ""
@@ -70,6 +75,11 @@ msgid "MTS Rule"
 msgstr ""
 
 #. module: stock_mts_mto_rule
+#: model:ir.model.fields,field_description:stock_mts_mto_rule.field_stock_rule__mts_quantity_rule
+msgid "MTS quantity rule"
+msgstr ""
+
+#. module: stock_mts_mto_rule
 #: code:addons/stock_mts_mto_rule/models/stock_warehouse.py:0
 #, python-format
 msgid "MTS+MTO"
@@ -89,6 +99,11 @@ msgid "No MTS or MTO rule configured on procurement rule: %s!"
 msgstr ""
 
 #. module: stock_mts_mto_rule
+#: model:ir.model.fields.selection,name:stock_mts_mto_rule.selection__stock_rule__mts_quantity_rule__full
+msgid "No Split"
+msgstr ""
+
+#. module: stock_mts_mto_rule
 #: model:ir.model,name:stock_mts_mto_rule.model_stock_rule
 msgid "Stock Rule"
 msgstr ""
@@ -101,6 +116,14 @@ msgstr ""
 #. module: stock_mts_mto_rule
 #: model:ir.model,name:stock_mts_mto_rule.model_stock_warehouse
 msgid "Warehouse"
+msgstr ""
+
+#. module: stock_mts_mto_rule
+#: model:ir.model.fields,help:stock_mts_mto_rule.field_stock_rule__mts_quantity_rule
+msgid ""
+"With `Available` the MTS rule will be used for any available quantity.\n"
+"With`No Split` the MTS rule is only used, if the full requested quantity is "
+"available."
 msgstr ""
 
 #~ msgid "Procurement"
