@@ -94,6 +94,36 @@ class TestMtoMtsRoute(TransactionCase):
         self.assertEqual(1, len(move_mto))
         self.assertEqual("waiting", move_mto.state)
 
+    def test_mts_mto_route_no_split(self):
+        """Check the no split rule."""
+        mto_mts_route = self.env.ref("stock_mts_mto_rule.route_mto_mts")
+        mto_mts_route.rule_ids.mts_quantity_rule = "full"
+        self.product.route_ids = [(6, 0, [mto_mts_route.id])]
+        self._create_quant(1.0)
+        self.env["procurement.group"].run(
+            [
+                self.group.Procurement(
+                    self.product,
+                    2.0,
+                    self.uom,
+                    self.customer_loc,
+                    self.product.name,
+                    "test",
+                    self.warehouse.company_id,
+                    self.procurement_vals,
+                )
+            ]
+        )
+        moves = self.env["stock.move"].search(
+            [
+                ("group_id", "=", self.group.id),
+                ("location_dest_id", "=", self.customer_loc.id),
+            ]
+        )
+        self.assertEqual(1, len(moves))
+        self.assertEqual(2.0, moves[0].product_uom_qty)
+        self.assertEqual("make_to_order", moves[0].procure_method)
+
     def test_mts_mto_route_mto_only(self):
         mto_mts_route = self.env.ref("stock_mts_mto_rule.route_mto_mts")
         self.product.route_ids = [(6, 0, [mto_mts_route.id])]

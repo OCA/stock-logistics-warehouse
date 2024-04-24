@@ -2,7 +2,7 @@ This module add a Make To Stock + Make to Order Route.
 
 If you choose the make to stock + make to order rule instead of the make to
 order route, the creation of a purchase order will depend on the virtual stock.
-There are 3 cases :
+There are 3 cases (with the default splitting rule) :
 
 1. The virtual stock of the product is 0
     => It will act exactly like the make to order route.
@@ -25,3 +25,7 @@ A sale Order is made for 3 products A.
 2. 1 with a make to order rule and a quantity of 2.
 
 After validation, a purchase order with 2 products will be created.
+
+When using the No Split rule, the case 3 will not happen.
+When the virtual stock is less than the ordered quantity, the full quantity
+will be proucured through a make to order route (rule 1)
