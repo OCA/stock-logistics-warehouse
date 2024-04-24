@@ -51,8 +51,8 @@ class StockQuant(models.Model):
                 }
             )
             rec.to_do = False
-            if self.env.company.stock_inventory_auto_complete:
-                adjustment.action_auto_state_to_done()
+        if adjustment and self.env.company.stock_inventory_auto_complete:
+            adjustment.action_auto_state_to_done()
         return res
 
     def _get_inventory_fields_write(self):
