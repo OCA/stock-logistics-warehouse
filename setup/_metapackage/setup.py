@@ -20,6 +20,7 @@ setuptools.setup(
         'odoo-addon-stock_available_mrp>=15.0dev,<15.1dev',
         'odoo-addon-stock_available_unreserved>=15.0dev,<15.1dev',
         'odoo-addon-stock_change_qty_reason>=15.0dev,<15.1dev',
+        'odoo-addon-stock_cycle_count>=15.0dev,<15.1dev',
         'odoo-addon-stock_demand_estimate>=15.0dev,<15.1dev',
         'odoo-addon-stock_demand_estimate_matrix>=15.0dev,<15.1dev',
         'odoo-addon-stock_free_quantity>=15.0dev,<15.1dev',
