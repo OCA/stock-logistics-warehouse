@@ -25,15 +25,6 @@ class StockInventory(models.Model):
             if not inv.stock_quant_ids and inv.state == "done":
                 inv.inventory_accuracy = PERCENT
 
-    company_id = fields.Many2one(
-        "res.company",
-        "Company",
-        readonly=True,
-        index=True,
-        required=True,
-        states={"draft": [("readonly", False)]},
-        default=lambda self: self.env.company,
-    )
     prefill_counted_quantity = fields.Selection(
         string="Counted Quantities",
         help="Allows to start with a pre-filled counted quantity for each lines or "
@@ -56,11 +47,6 @@ class StockInventory(models.Model):
         digits=(3, 2),
         store=True,
         group_operator="avg",
-    )
-    responsible_id = fields.Many2one(
-        comodel_name="res.users",
-        tracking=True,
-        help="Specific responsible of Inventory Adjustment.",
     )
 
     def _get_default_counted_quantitites(self):

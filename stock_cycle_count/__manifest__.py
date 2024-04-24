@@ -10,11 +10,7 @@
     "author": "ForgeFlow, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "category": "Warehouse Management",
-    "depends": [
-        "stock_account",
-        "stock_inventory_discrepancy",
-        "stock_inventory_exclude_sublocation",
-    ],
+    "depends": ["stock_account", "stock_inventory_discrepancy", "stock_inventory"],
     "data": [
         "views/stock_cycle_count_view.xml",
         "views/stock_cycle_count_rule_view.xml",
