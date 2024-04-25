@@ -312,11 +312,13 @@ msgstr ""
 
 #. module: stock_cycle_count
 #: model:ir.model.fields.selection,name:stock_cycle_count.selection__res_company__inventory_adjustment_counted_quantities__counted
+#: model:ir.model.fields.selection,name:stock_cycle_count.selection__stock_inventory__prefill_counted_quantity__counted
 msgid "Default to stock on hand"
 msgstr ""
 
 #. module: stock_cycle_count
 #: model:ir.model.fields.selection,name:stock_cycle_count.selection__res_company__inventory_adjustment_counted_quantities__zero
+#: model:ir.model.fields.selection,name:stock_cycle_count.selection__stock_inventory__prefill_counted_quantity__zero
 msgid "Default to zero"
 msgstr ""
 
@@ -340,15 +342,8 @@ msgid "Disable Zero Confirmations"
 msgstr "Disabilita conferme-zero"
 
 #. module: stock_cycle_count
-#: model:ir.model.fields,field_description:stock_cycle_count.field_report_stock_location_accuracy__display_name
-#: model:ir.model.fields,field_description:stock_cycle_count.field_res_company__display_name
-#: model:ir.model.fields,field_description:stock_cycle_count.field_res_config_settings__display_name
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__display_name
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule__display_name
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_inventory__display_name
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_location__display_name
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_move__display_name
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_warehouse__display_name
 msgid "Display Name"
 msgstr "Nome da visualizzare"
 
@@ -400,11 +395,6 @@ msgid "Followers"
 msgstr "Iscritti"
 
 #. module: stock_cycle_count
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__message_channel_ids
-msgid "Followers (Channels)"
-msgstr "Followers (Canali)"
-
-#. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__message_partner_ids
 msgid "Followers (Partners)"
 msgstr "Iscritti (partner)"
@@ -415,15 +405,13 @@ msgid "Group By..."
 msgstr "Raggruppa per..."
 
 #. module: stock_cycle_count
-#: model:ir.model.fields,field_description:stock_cycle_count.field_report_stock_location_accuracy__id
-#: model:ir.model.fields,field_description:stock_cycle_count.field_res_company__id
-#: model:ir.model.fields,field_description:stock_cycle_count.field_res_config_settings__id
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__has_message
+msgid "Has Message"
+msgstr ""
+
+#. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__id
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule__id
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_inventory__id
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_location__id
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_move__id
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_warehouse__id
 msgid "ID"
 msgstr "ID"
 
@@ -435,7 +423,6 @@ msgstr "Se selezionato, i nuovi messaggi richiedono la tua attenzione."
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,help:stock_cycle_count.field_stock_cycle_count__message_has_error
-#: model:ir.model.fields,help:stock_cycle_count.field_stock_cycle_count__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr "Se selezionato, alcuni messaggi hanno un errore di consegna."
 
@@ -468,7 +455,6 @@ msgid "Inventories for location accuracy calculation"
 msgstr "Inventari per il calcolo della precisione dell'ubicazione"
 
 #. module: stock_cycle_count
-#: model:ir.model,name:stock_cycle_count.model_stock_inventory
 #: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_location_accuracy
 msgid "Inventory"
 msgstr "Inventario"
@@ -493,6 +479,11 @@ msgstr "Rettifica di magazzino"
 #: model:ir.model.fields,field_description:stock_cycle_count.field_res_company__inventory_adjustment_counted_quantities
 #: model:ir.model.fields,field_description:stock_cycle_count.field_res_config_settings__inventory_adjustment_counted_quantities
 msgid "Inventory Adjustment Counted quantities from Cycle Count"
+msgstr ""
+
+#. module: stock_cycle_count
+#: model:ir.model,name:stock_cycle_count.model_stock_inventory
+msgid "Inventory Adjustment Group"
 msgstr ""
 
 #. module: stock_cycle_count
@@ -521,15 +512,8 @@ msgid "Is Follower"
 msgstr "Sta seguendo"
 
 #. module: stock_cycle_count
-#: model:ir.model.fields,field_description:stock_cycle_count.field_report_stock_location_accuracy____last_update
-#: model:ir.model.fields,field_description:stock_cycle_count.field_res_company____last_update
-#: model:ir.model.fields,field_description:stock_cycle_count.field_res_config_settings____last_update
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count____last_update
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule____last_update
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_inventory____last_update
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_location____last_update
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_move____last_update
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_warehouse____last_update
 msgid "Last Modified on"
 msgstr "Ultima modifica il"
 
@@ -661,19 +645,9 @@ msgid "Required Date"
 msgstr "Data richiesta"
 
 #. module: stock_cycle_count
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_inventory__responsible_id
-msgid "Responsible"
-msgstr ""
-
-#. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule__rule_description
 msgid "Rule Description"
 msgstr "Descrizione regola"
-
-#. module: stock_cycle_count
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__message_has_sms_error
-msgid "SMS Delivery error"
-msgstr "Errore consegna SMS"
 
 #. module: stock_cycle_count
 #: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:0
@@ -717,11 +691,6 @@ msgid "Sets default counted quanities in Inventory Adjustments"
 msgstr ""
 
 #. module: stock_cycle_count
-#: model:ir.model.fields,help:stock_cycle_count.field_stock_inventory__responsible_id
-msgid "Specific responsible of Inventory Adjustment."
-msgstr ""
-
-#. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__state
 #: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_search_view
 msgid "State"
@@ -735,8 +704,6 @@ msgstr "Stato"
 #. module: stock_cycle_count
 #: model:ir.actions.act_window,name:stock_cycle_count.action_stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_inventory__cycle_count_id
-#: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_rule_tree_view
-#: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_tree_view
 msgid "Stock Cycle Count"
 msgstr "Inventario a rotazione di magazzino"
 
@@ -893,6 +860,12 @@ msgstr "Aree dove applicato"
 #: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_rule_form_view
 msgid "cycle counts test:"
 msgstr "test inventari a rotazione:"
+
+#~ msgid "Followers (Channels)"
+#~ msgstr "Followers (Canali)"
+
+#~ msgid "SMS Delivery error"
+#~ msgstr "Errore consegna SMS"
 
 #, python-format
 #~ msgid ""
