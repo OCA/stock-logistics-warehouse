@@ -203,7 +203,7 @@ class InventoryAdjustmentsGroup(models.Model):
             ],
             limit=1,
         )
-        if active_rec:
+        if active_rec and not self.exclude_sublocation:
             raise ValidationError(
                 _(
                     "There's already an Adjustment in Process using one requested Location: %s"
