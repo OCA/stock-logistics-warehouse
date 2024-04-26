@@ -72,6 +72,16 @@ msgid "Product packaging quantity done."
 msgstr "Quantità confezione prodotto completata."
 
 #. module: stock_move_packaging_qty
+#: model:ir.model.fields,help:stock_move_packaging_qty.field_stock_move_line__product_packaging_qty_reserved
+msgid "Product packaging quantity reserved."
+msgstr ""
+
+#. module: stock_move_packaging_qty
+#: model:ir.model.fields,field_description:stock_move_packaging_qty.field_stock_move_line__product_packaging_qty_reserved
+msgid "Reserved Pkg. Qty."
+msgstr ""
+
+#. module: stock_move_packaging_qty
 #: model:ir.model,name:stock_move_packaging_qty.model_stock_move
 msgid "Stock Move"
 msgstr "Movimento di magazzino"
