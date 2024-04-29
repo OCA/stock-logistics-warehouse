@@ -1,0 +1,7 @@
+<?xml version="1.0" ?>
+<odoo noupdate="1">
+    <record forcecreate="1" id="stock_reserve_area_init" model="ir.config_parameter">
+        <field name="key">stock_reserve_area.stock_reserve_area_init</field>
+        <field name="value">False</field>
+    </record>
+</odoo>

@@ -11,6 +11,7 @@
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "depends": ["stock"],
     "data": [
+        "data/ir_config_parameter.xml",
         "security/ir.model.access.csv",
         "security/stock_reserve_area_security.xml",
         "views/stock_reserve_area_views.xml",
@@ -21,6 +22,6 @@
     ],
     "auto_install": False,
     "installable": True,
-    "post_init_hook": "post_init_hook",
+    # "post_init_hook": "post_init_hook",
     "pre_init_hook": "pre_init_hook",
 }

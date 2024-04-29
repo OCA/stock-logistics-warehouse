@@ -49,6 +49,22 @@ class StockMove(models.Model):
         for move in self:
             move.reserve_area_ids = loc_to_area_map.get(move.location_id.id)
 
+    def _update_reserve_area_ids_hard(self):
+        query = """
+            INSERT INTO stock_move_stock_reserve_area_rel (stock_move_id, stock_reserve_area_id)
+            SELECT DISTINCT sm.id AS stock_move_id, srl.reserve_area_id AS stock_reserve_area_id
+            FROM stock_move sm
+            JOIN stock_location sl ON sm.location_id = sl.id
+            JOIN stock_reserve_area_stock_location_rel srl ON sl.id = srl.location_id
+            WHERE NOT EXISTS (
+            SELECT 1
+            FROM stock_move_stock_reserve_area_rel existing_rel
+            WHERE existing_rel.stock_move_id = sm.id
+            AND existing_rel.stock_reserve_area_id = srl.reserve_area_id
+            );
+        """
+        self.env.cr.execute(query)
+
     def _is_out_area(self, reserve_area_id):
         # out of area = true if source location in area and dest location outside
         for move in self:

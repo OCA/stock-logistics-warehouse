@@ -97,8 +97,67 @@ class StockReserveArea(models.Model):
             [("id", "child_of", self.location_ids.ids)]
         )
 
+    def _create_reservation_data_hard(self):
+        self.env.cr.execute(
+            """
+            insert into stock_move_reserve_area_line
+            (
+            create_uid,
+            create_date,
+            move_id,
+            product_id,
+            reserve_area_id,
+            reserved_availability,
+            unreserved_qty
+            )
+
+            select
+            1 as create_uid,
+            current_timestamp as create_date,
+            sm.id as move_id,
+            sm.product_id as product_id,
+            rel.stock_reserve_area_id as reserve_area_id,
+            coalesce(sum(sml.reserved_uom_qty), 0) as reserved_availability,
+            (sm.product_uom_qty - coalesce(sum(sml.reserved_uom_qty), 0)) as unreserved_qty
+            from stock_move as sm
+            inner join stock_move_stock_reserve_area_rel as rel on rel.stock_move_id = sm.id
+            left join stock_move_line as sml on sml.move_id = sm.id
+            where sm.state in ('assigned', 'partially_assigned')
+            and sm.id not in (
+            select move_id from stock_move_reserve_area_line group by move_id
+            )
+            and sm.location_dest_id not in (
+                select location_id from stock_reserve_area_stock_location_rel
+                where reserve_area_id = rel.stock_reserve_area_id
+                )
+            group by sm.id, rel.stock_reserve_area_id, sm.picking_id, sm.product_id
+            having coalesce(sum(sml.reserved_uom_qty), 0) > 0
+        """
+        )
+
+        self.env.cr.execute(
+            """
+            update stock_move as sm set area_reserved_availability = q.reserved_availability
+            from (
+            select move_id, min(reserved_availability) as reserved_availability
+            from stock_move_reserve_area_line
+            group by move_id
+            ) as q
+            where q.move_id = sm.id
+        """
+        )
+
+    @api.model
+    def action_initialize_reserve_area_data(self):
+        ICP = self.env["ir.config_parameter"].sudo()
+        if not ICP.get_param("stock_reserve_area.stock_reserve_area_init"):
+            self.env["stock.move"]._update_reserve_area_ids_hard()
+            self._create_reservation_data_hard()
+            ICP.set_param("stock_reserve_area.stock_reserve_area_init", "True")
+
     def update_reserve_area_lines(self, moves, locs_to_add, locs_to_delete):
-        if self.env.context.get("init_hook", False):
+        ICP = self.env["ir.config_parameter"].sudo()
+        if not ICP.get_param("stock_reserve_area.stock_reserve_area_init"):
             return
         for move in moves:
             reserve_area_line = self.env["stock.move.reserve.area.line"].search(
