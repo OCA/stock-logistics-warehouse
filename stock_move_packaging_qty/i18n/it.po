@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-04-19 10:40+0000\n"
+"PO-Revision-Date: 2024-04-29 14:40+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -74,12 +74,12 @@ msgstr "Quantità confezione prodotto completata."
 #. module: stock_move_packaging_qty
 #: model:ir.model.fields,help:stock_move_packaging_qty.field_stock_move_line__product_packaging_qty_reserved
 msgid "Product packaging quantity reserved."
-msgstr ""
+msgstr "Quantità imballo prodotto prenotata."
 
 #. module: stock_move_packaging_qty
 #: model:ir.model.fields,field_description:stock_move_packaging_qty.field_stock_move_line__product_packaging_qty_reserved
 msgid "Reserved Pkg. Qty."
-msgstr ""
+msgstr "Q.tà imb. prenotata"
 
 #. module: stock_move_packaging_qty
 #: model:ir.model,name:stock_move_packaging_qty.model_stock_move
