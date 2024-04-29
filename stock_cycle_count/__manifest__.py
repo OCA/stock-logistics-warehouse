@@ -17,6 +17,7 @@
         "views/stock_warehouse_view.xml",
         "views/stock_inventory_view.xml",
         "views/stock_location_view.xml",
+        "views/stock_move_line_view.xml",
         "views/res_config_settings_view.xml",
         "data/cycle_count_sequence.xml",
         "data/cycle_count_ir_cron.xml",
