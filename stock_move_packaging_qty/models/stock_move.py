@@ -2,7 +2,7 @@
 # Copyright 2021 ForgeFlow, S.L.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl).
 from odoo import _, api, exceptions, fields, models
-from odoo.tools import float_compare
+from odoo.tools import float_compare, float_round
 
 
 class StockMove(models.Model):
@@ -111,12 +111,7 @@ class StockMove(models.Model):
             if not line.product_packaging_id:
                 line.product_packaging_qty_done = 0
                 continue
-            line.product_packaging_qty_done = (
-                line.product_packaging_id._check_qty(
-                    line.qty_done, line.product_uom_id, "DOWN"
-                )
-                / line.product_packaging_id.qty
-            )
+            line.product_packaging_qty_done = line.product_packaging_qty_reserved
         return result
 
     def _clear_quantities_to_zero(self):
@@ -127,3 +122,63 @@ class StockMove(models.Model):
                 continue
             line.product_packaging_qty_done = 0
         return result
+
+    def _action_assign(self, force_qty=False):
+        """Set the packaging qty reserved when assigning."""
+        res = super()._action_assign(force_qty=force_qty)
+        moves_to_assign = self
+        move_lines_origin = self.env["stock.move.line"].read_group(
+            [
+                ("move_id", "in", moves_to_assign.mapped("move_orig_ids").ids),
+                (
+                    "move_id.state",
+                    "not in",
+                    ("draft", "waiting", "confirmed", "cancel"),
+                ),
+                ("move_id.product_packaging_id", "!=", False),
+            ],
+            ["qty_done", "product_packaging_qty_done"],
+            ["move_id", "location_dest_id", "lot_id", "result_package_id", "owner_id"],
+            lazy=False,
+        )
+        move_lines_origin_dict = {
+            (
+                ml.get("location_dest_id")[0] if ml.get("location_dest_id") else False,
+                ml.get("lot_id")[0] if ml.get("lot_id") else False,
+                ml.get("result_package_id")[0]
+                if ml.get("result_package_id")
+                else False,
+                ml.get("owner_id")[0] if ml.get("owner_id") else False,
+            ): {
+                "qty_done": ml.get("qty_done"),
+                "product_packaging_qty_done": ml.get("product_packaging_qty_done"),
+            }
+            for ml in move_lines_origin
+        }
+        for line in moves_to_assign.move_line_ids.filtered("product_packaging_id"):
+            found_move_lines_origin = move_lines_origin_dict.get(
+                (
+                    line.location_id.id,
+                    line.lot_id.id,
+                    line.package_id.id,
+                    line.owner_id.id,
+                ),
+                {},
+            )
+            if found_move_lines_origin and found_move_lines_origin.get(
+                "qty_done"
+            ) == round(
+                line.reserved_uom_qty,
+                self.env["decimal.precision"].precision_get("Product Unit of Measure"),
+            ):
+                line.product_packaging_qty_reserved = found_move_lines_origin.get(
+                    "product_packaging_qty_done"
+                )
+            elif not line.product_packaging_id.qty:
+                continue
+            else:
+                line.product_packaging_qty_reserved = float_round(
+                    line.reserved_qty / line.product_packaging_id.qty,
+                    precision_rounding=line.product_packaging_id.product_uom_id.rounding,
+                )
+        return res

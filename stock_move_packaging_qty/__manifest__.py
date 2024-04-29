@@ -16,5 +16,5 @@
     ],
     "license": "LGPL-3",
     "installable": True,
-    "maintainers": ["yajo"],
+    "maintainers": ["yajo", "EmilioPascual"],
 }
