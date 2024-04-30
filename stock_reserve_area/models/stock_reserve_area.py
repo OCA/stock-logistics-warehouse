@@ -97,7 +97,7 @@ class StockReserveArea(models.Model):
             [("id", "child_of", self.location_ids.ids)]
         )
 
-    def _create_reservation_data_hard(self):
+    def _create_reservation_data_sql(self):
         self.env.cr.execute(
             """
             insert into stock_move_reserve_area_line
@@ -122,7 +122,7 @@ class StockReserveArea(models.Model):
             from stock_move as sm
             inner join stock_move_stock_reserve_area_rel as rel on rel.stock_move_id = sm.id
             left join stock_move_line as sml on sml.move_id = sm.id
-            where sm.state in ('assigned', 'partially_assigned')
+            where sm.state in ('assigned', 'partially_available')
             and sm.id not in (
             select move_id from stock_move_reserve_area_line group by move_id
             )
@@ -150,14 +150,14 @@ class StockReserveArea(models.Model):
     @api.model
     def action_initialize_reserve_area_data(self):
         ICP = self.env["ir.config_parameter"].sudo()
-        if not ICP.get_param("stock_reserve_area.stock_reserve_area_init"):
-            self.env["stock.move"]._update_reserve_area_ids_hard()
-            self._create_reservation_data_hard()
-            ICP.set_param("stock_reserve_area.stock_reserve_area_init", "True")
+        self.env["stock.move"]._update_reserve_area_ids_sql()
+        self._create_reservation_data_sql()
+        ICP.set_param("stock_reserve_area.stock_reserve_area_init_mode", False)
 
     def update_reserve_area_lines(self, moves, locs_to_add, locs_to_delete):
         ICP = self.env["ir.config_parameter"].sudo()
-        if not ICP.get_param("stock_reserve_area.stock_reserve_area_init"):
+        if ICP.get_param("stock_reserve_area.stock_reserve_area_init_mode"):
+            # Do not update if the reserve data has not yet been initialized
             return
         for move in moves:
             reserve_area_line = self.env["stock.move.reserve.area.line"].search(
@@ -171,28 +171,25 @@ class StockReserveArea(models.Model):
                     or move.location_dest_id in locs_to_delete
                 )
             ):
-                # the move was within the same area but we removed dest location from it
-                # and now is out move the move didn't impact this area but now the
-                # source location is inside of it and it's out move
+                # The move is now an out move from the area because:
+                # 1. The source location is now part of the area
+                # 2. The destination location is no longer part of the area
                 move.reserve_area_ids |= self
-                if move.state not in ("confirmed", "waiting"):
-                    # TODO don't unreserve and reserve, reserve in area the locally reserved qty
-                    move._do_unreserve()
-                    move._action_assign()  # will create new reserve_area_line and reserve
+                if move._needs_area_reservation():
+                    lines = move.create_reserve_area_lines()
+                    lines._action_area_assign()
             elif not move._is_out_area(self) and (
                 move.location_dest_id in locs_to_add
                 or move.location_id in locs_to_delete
             ):
-                # 1. the move was out of the area but we dest loc is added in area so it
-                # is not out move anymore.
-                # 2. the move was out of the area but we remove source location from
-                # area so this area doesn't apply for reservation.
+                # The move is no longer an out move because:
+                # 1. The destination location is now part of the area.
+                # 2. The source location is no longer part of the area.
                 move.reserve_area_ids -= self
                 if reserve_area_line:
-                    # TODO don't unreserve and reserve, recalculate area_reserved_availability
                     reserve_area_line.unlink()
-                    move._do_unreserve()
-                    move._action_assign()
+                    # TODO: Do this in the unlink
+                    move._compute_area_reserved_availability()
 
     @api.model_create_multi
     def create(self, vals_list):
@@ -205,7 +202,7 @@ class StockReserveArea(models.Model):
                     (
                         "state",
                         "in",
-                        ("confirmed", "waiting", "assigned", "partially_available"),
+                        ("confirmed", "assigned", "partially_available"),
                     ),
                 ]
             )
@@ -229,7 +226,7 @@ class StockReserveArea(models.Model):
                     (
                         "state",
                         "in",
-                        ("confirmed", "waiting", "partially_available", "assigned"),
+                        ("confirmed", "partially_available", "assigned"),
                     ),
                 ]
             )
@@ -245,7 +242,7 @@ class StockReserveArea(models.Model):
                 (
                     "state",
                     "in",
-                    ("confirmed", "waiting", "partially_available", "assigned"),
+                    ("confirmed", "partially_available", "assigned"),
                 ),
             ]
         )

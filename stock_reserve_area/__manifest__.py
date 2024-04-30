@@ -14,6 +14,7 @@
         "data/ir_config_parameter.xml",
         "security/ir.model.access.csv",
         "security/stock_reserve_area_security.xml",
+        "wizard/stock_reserve_area_init.xml",
         "views/stock_reserve_area_views.xml",
         "views/stock_move_reserve_area_line_views.xml",
         "views/stock_location_views.xml",
@@ -22,6 +23,5 @@
     ],
     "auto_install": False,
     "installable": True,
-    # "post_init_hook": "post_init_hook",
     "pre_init_hook": "pre_init_hook",
 }

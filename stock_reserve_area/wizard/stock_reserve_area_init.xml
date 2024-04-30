@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_stock_reserve_area_init_wizard" model="ir.ui.view">
+        <field name="name">stock.reserve.area.init.form</field>
+        <field name="model">stock.reserve.area.init</field>
+        <field name="arch" type="xml">
+            <form>
+                <p>
+                This action will initialize all the reserve area data. It is meant to speed up the initial configuration
+                of the reserve areas in the system. Please, make sure to execute it only
+                after you have created all the relevant initial reserve areas.
+                </p>
+                <footer>
+                    <button
+                        name="action_reserve_area_init"
+                        string="init"
+                        type="object"
+                        class="btn-primary"
+                    />
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_stock_reserve_area_init" model="ir.actions.act_window">
+        <field name="name">Init Reserve Areas</field>
+        <field name="res_model">stock.reserve.area.init</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem
+        action="action_stock_reserve_area_init"
+        id="menu_stock_reserve_area_init"
+        parent="stock.menu_warehouse_config"
+        sequence="101"
+    />
+
+
+</odoo>

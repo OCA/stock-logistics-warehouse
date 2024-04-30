@@ -49,7 +49,7 @@ class StockMove(models.Model):
         for move in self:
             move.reserve_area_ids = loc_to_area_map.get(move.location_id.id)
 
-    def _update_reserve_area_ids_hard(self):
+    def _update_reserve_area_ids_sql(self):
         query = """
             INSERT INTO stock_move_stock_reserve_area_rel (stock_move_id, stock_reserve_area_id)
             SELECT DISTINCT sm.id AS stock_move_id, srl.reserve_area_id AS stock_reserve_area_id
@@ -74,6 +74,10 @@ class StockMove(models.Model):
                 return True
             return False
 
+    def _needs_area_reservation(self):
+        # Do not create area reservation for MTO moves (wating another operation)
+        return self.state in ["confirmed", "partially_available", "assigned"]
+
     def create_reserve_area_lines(self):
         line_ids = self.reserve_area_line_ids
         for reserve_area in self.reserve_area_ids:
@@ -91,17 +95,14 @@ class StockMove(models.Model):
         return line_ids
 
     def _action_area_assign(self):
-        for move in self.filtered(
-            lambda m: m.state in ["confirmed", "waiting", "partially_available"]
-            and m.reserve_area_line_ids
-        ):
-            move.reserve_area_line_ids._action_area_assign()
+        for move in self:
+            if move._needs_area_reservation() and move.reserve_area_line_ids:
+                move.reserve_area_line_ids._action_area_assign()
 
     def _action_assign(self, force_qty=False):
-        for move in self.filtered(
-            lambda m: m.state in ["confirmed", "waiting", "partially_available"]
-        ):
-            move.reserve_area_line_ids = move.create_reserve_area_lines()
+        for move in self:
+            if move._needs_area_reservation():
+                move.reserve_area_line_ids = move.create_reserve_area_lines()
         self._action_area_assign()  # new method to assign globally
         return super()._action_assign(force_qty=force_qty)
 
