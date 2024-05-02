@@ -5,16 +5,17 @@ from odoo.addons.stock_reserve_area.tests.test_stock_reserve import TestStockRes
 
 
 class TestStockReserveAreaMrp(TestStockReserveArea):
-    def setUp(self):
-        super().setUp()
-        self.manufacture_product = self.env["product.product"].create(
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.manufacture_product = cls.env["product.product"].create(
             {"name": "Test Product Manufacture", "type": "product"}
         )
-        self.bom = self.env["mrp.bom"].create(
+        cls.bom = cls.env["mrp.bom"].create(
             {
-                "product_tmpl_id": self.manufacture_product.product_tmpl_id.id,
+                "product_tmpl_id": cls.manufacture_product.product_tmpl_id.id,
                 "bom_line_ids": [
-                    (0, 0, {"product_id": self.product.id, "product_qty": 1}),
+                    (0, 0, {"product_id": cls.product.id, "product_qty": 1}),
                 ],
             }
         )
