@@ -43,7 +43,8 @@ class StockScrap(models.Model):
             ):
                 raise ValidationError(
                     _(
-                        "The selected reason code is not allowed for this product category."
+                        "The selected reason code is not allowed for this "
+                        "product category."
                     )
                 )
 
