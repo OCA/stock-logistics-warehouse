@@ -77,6 +77,9 @@ class TestStockCycleCount(common.TransactionCase):
         cls.product1 = cls.product_model.create(
             {"name": "Test Product 1", "type": "product", "default_code": "PROD1"}
         )
+        self.product2 = self.product_model.create(
+            {"name": "Test Product 2", "type": "product", "default_code": "PROD2"}
+        )
 
     @classmethod
     def _create_user(cls, login, groups, company):
@@ -352,5 +355,124 @@ class TestStockCycleCount(common.TransactionCase):
         with self.assertRaises(ValidationError):
             inventory.exclude_sublocation = False
         company = self.env["res.company"].create({"name": "Test"})
+
         with self.assertRaises(ValidationError):
             inventory.company_id = company
+
+    def test_inventory_adjustment_accuracy(self):
+        date = datetime.today() - timedelta(days=1)
+        # Create location
+        loc = self.stock_location_model.create(
+            {"name": "Test Location", "usage": "internal"}
+        )
+        # Create stock quants for specific location
+        quant1 = self.quant_model.create(
+            {
+                "product_id": self.product1.id,
+                "location_id": loc.id,
+                "quantity": 10.0,
+            }
+        )
+        quant2 = self.quant_model.create(
+            {
+                "product_id": self.product2.id,
+                "location_id": loc.id,
+                "quantity": 15.0,
+            }
+        )
+        # Create adjustments for specific location
+        adjustment = self.inventory_model.create(
+            {
+                "name": "Pre-existing inventory",
+                "location_ids": [(4, loc.id)],
+                "date": date,
+            }
+        )
+        # Start the adjustment
+        adjustment.action_state_to_in_progress()
+        # Check that there are stock quants for the specific location
+        self.assertTrue(self.env["stock.quant"].search([("location_id", "=", loc.id)]))
+        # Make the count of the stock
+        quant1.update(
+            {
+                "inventory_quantity": 5,
+            }
+        )
+        quant2.update(
+            {
+                "inventory_quantity": 10,
+            }
+        )
+        # Apply the changes
+        quant1._apply_inventory()
+        quant2._apply_inventory()
+        # Check that line_accuracy is calculated properly
+        sml = self.env["stock.move.line"].search(
+            [("location_id", "=", loc.id), ("product_id", "=", self.product1.id)]
+        )
+        self.assertEqual(sml.line_accuracy, 0.5)
+        sml = self.env["stock.move.line"].search(
+            [("location_id", "=", loc.id), ("product_id", "=", self.product2.id)]
+        )
+        self.assertEqual(sml.line_accuracy, 0.6667000000000001)
+        # Set Inventory Adjustment to Done
+        adjustment.action_state_to_done()
+        # Check that accuracy is correctly calculated
+        self.assertEqual(adjustment.inventory_accuracy, 60)
+
+    def test_zero_inventory_adjustment_accuracy(self):
+        date = datetime.today() - timedelta(days=1)
+        # Create location
+        loc = self.stock_location_model.create(
+            {"name": "Test Location", "usage": "internal"}
+        )
+        # Create stock quants for specific location
+        quant1 = self.quant_model.create(
+            {
+                "product_id": self.product1.id,
+                "location_id": loc.id,
+                "quantity": 0.0,
+            }
+        )
+        quant2 = self.quant_model.create(
+            {
+                "product_id": self.product2.id,
+                "location_id": loc.id,
+                "quantity": 300.0,
+            }
+        )
+        # Create adjustment for specific location
+        adjustment = self.inventory_model.create(
+            {
+                "name": "Pre-existing inventory qty zero",
+                "location_ids": [(4, loc.id)],
+                "date": date,
+            }
+        )
+        # Start the adjustment
+        adjustment.action_state_to_in_progress()
+        # Check that there are stock quants for the specific location
+        self.assertTrue(self.env["stock.quant"].search([("location_id", "=", loc.id)]))
+        # Make the count of the stock
+        quant1.update(
+            {
+                "inventory_quantity": 5,
+            }
+        )
+        quant2.update(
+            {
+                "inventory_quantity": 0,
+            }
+        )
+        # Apply the changes
+        quant1._apply_inventory()
+        quant2._apply_inventory()
+        # Check that line_accuracy is calculated properly
+        sml = self.env["stock.move.line"].search(
+            [("location_id", "=", loc.id), ("product_id", "=", self.product1.id)]
+        )
+        self.assertEqual(sml.line_accuracy, 0)
+        # Set Inventory Adjustment to Done
+        adjustment.action_state_to_done()
+        # Check that accuracy is correctly calculated
+        self.assertEqual(adjustment.inventory_accuracy, 0)
