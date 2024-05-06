@@ -255,22 +255,37 @@ class InventoryAdjustmentsGroup(models.Model):
         for rec in self:
             rec.stock_quant_ids = rec._get_quants(rec.location_ids)
 
+    def _get_quant_joined_names(self, quants, field):
+        return ", ".join(quants.mapped(f"{field}.display_name"))
+
     def action_state_to_in_progress(self):
         self.ensure_one()
-        active_rec = self.env["stock.inventory"].search(
-            [
-                ("state", "=", "in_progress"),
-                ("location_ids", "child_of", self.location_ids.ids),
-            ],
-            limit=1,
-        )
-        if active_rec:
-            raise UserError(
-                _(
-                    "There's already an Adjustment in Process using one requested Location: %s"
-                )
-                % active_rec.name
+        search_filter = [
+            (
+                "location_id",
+                "child_of" if not self.exclude_sublocation else "in",
+                self.location_ids.ids,
+            ),
+            ("to_do", "=", True),
+        ]
+
+        if self.product_ids:
+            search_filter.append(("product_id", "in", self.product_ids.ids))
+            error_field = "product_id"
+            error_message = _(
+                "There are active adjustments for the requested products: %s"
             )
+        else:
+            error_field = "location_id"
+            error_message = _(
+                "There's already an Adjustment in Process using one requested Location: %s"
+            )
+
+        quants = self.env["stock.quant"].search(search_filter)
+        if quants:
+            names = self._get_quant_joined_names(quants, error_field)
+            raise ValidationError(error_message % names)
+
         quants = self._get_quants(self.location_ids)
         self.write(
             {
@@ -292,7 +307,7 @@ class InventoryAdjustmentsGroup(models.Model):
         self.state = "done"
         self.stock_quant_ids.update(
             {
-                "to_do": True,
+                "to_do": False,
                 "user_id": False,
                 "inventory_date": False,
             }
@@ -310,7 +325,7 @@ class InventoryAdjustmentsGroup(models.Model):
         self.state = "draft"
         self.stock_quant_ids.update(
             {
-                "to_do": True,
+                "to_do": False,
                 "user_id": False,
                 "inventory_date": False,
             }
@@ -366,30 +381,38 @@ class InventoryAdjustmentsGroup(models.Model):
         result["context"] = {}
         return result
 
-    @api.constrains("state", "location_ids")
     def _check_inventory_in_progress_not_override(self):
-        inventories = self.search([("state", "=", "in_progress")])
-        for rec in inventories:
-            inventory = inventories.filtered(
-                lambda x: x.id != rec.id
-                and (
-                    any(i in x.location_ids for i in rec.location_ids)
-                    or (
-                        any(
-                            i in x.location_ids.child_internal_location_ids
-                            for i in rec.location_ids
+        for rec in self:
+            if rec.state == "in_progress":
+                location_condition = [
+                    (
+                        "location_ids",
+                        "child_of" if not rec.exclude_sublocation else "in",
+                        rec.location_ids.ids,
+                    )
+                ]
+                if rec.product_ids:
+                    product_condition = [
+                        ("state", "=", "in_progress"),
+                        ("id", "!=", rec.id),
+                        ("product_ids", "in", rec.product_ids.ids),
+                    ] + location_condition
+                    inventories = self.search(product_condition)
+                else:
+                    inventories = self.search(
+                        [("state", "=", "in_progress"), ("id", "!=", rec.id)]
+                        + location_condition
+                    )
+                for inventory in inventories:
+                    if any(
+                        i in inventory.location_ids.ids for i in rec.location_ids.ids
+                    ):
+                        raise ValidationError(
+                            _(
+                                "Cannot have more than one in-progress inventory adjustment "
+                                "affecting the same location or product at the same time."
+                            )
                         )
-                        and not x.exclude_sublocation
-                    )
-                )
-            )
-            if len(inventory) > 0:
-                raise ValidationError(
-                    _(
-                        "Cannot be more than one in progress inventory adjustment "
-                        "affecting the same location at the same time."
-                    )
-                )
 
     @api.constrains("product_selection", "product_ids")
     def _check_one_product_in_product_selection(self):
