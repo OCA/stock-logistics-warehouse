@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 Coninpe - Ivan Perez -->
+<odoo>
+    <record id="view_inventory_form" model="ir.ui.view">
+        <field
+            name="name"
+        >Inventory form view - stock_inventory_include_exhausted extension
+        </field>
+        <field name="model">stock.inventory</field>
+        <field name="inherit_id" ref="stock_inventory.view_inventory_group_form" />
+        <field name="arch" type="xml">
+            <field name="owner_id" position="after">
+                <field name="create_non_stocked" />
+            </field>
+        </field>
+    </record>
+</odoo>
