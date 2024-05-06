@@ -3,14 +3,15 @@
 
 {
     "name": "Stock Inventory Non Stocked",
-    "summary": "It adds a option to a create a 0 quantity quant for products without any stock and any quants.",
+    "summary": "It adds a option to a create a 0 quantity quant"
+    " for products without any stock and any quants.",
     "version": "16.0.1.0.0",
     "depends": [
         "stock",
         "stock_inventory",
         "stock_inventory_preparation_filter",
     ],
-    "author": "Ivan Perez, Coninpe",
+    "author": "Ivan Perez, Coninpe, Odoo Community Association (OCA)",
     "mantainers": ["linuxivan"],
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "category": "Warehouse",

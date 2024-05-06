@@ -47,7 +47,8 @@ class StockInventory(models.Model):
                 domain = self.product_domain
                 domain = (
                     domain[:-1]
-                    + """,('has_quants', '=', False), ("type", "=", "product"), ("active", "=", True)"""
+                    + """,('has_quants', '=', False), ("type", "=", "product"),
+                     ("active", "=", True)"""
                     + domain[-1:]
                 )
                 domain = ast.literal_eval(domain)
