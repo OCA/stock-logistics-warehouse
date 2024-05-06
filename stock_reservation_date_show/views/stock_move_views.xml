@@ -1,0 +1,22 @@
+<odoo>
+    <record id="view_move_tree" model="ir.ui.view">
+        <field name="name">stock.move.tree - stock_reservation_date_show</field>
+        <field name="model">stock.move</field>
+        <field name="inherit_id" ref="stock.view_move_tree" />
+        <field name="arch" type="xml">
+            <field name="state" position="after">
+                <field name="reservation_date" optional="hide" />
+            </field>
+        </field>
+    </record>
+    <record id="view_move_form" model="ir.ui.view">
+        <field name="name">stock.move.form - stock_reservation_date_show</field>
+        <field name="model">stock.move</field>
+        <field name="inherit_id" ref="stock.view_move_form" />
+        <field name="arch" type="xml">
+            <field name="date_deadline" position="after">
+                <field name="reservation_date" />
+            </field>
+        </field>
+    </record>
+</odoo>
