@@ -27,8 +27,3 @@ class StockPicking(models.Model):
                         for m in this.move_ids_without_package
                     ]
                 )
-
-    def action_assign(self):
-        result = super().action_assign()
-        self._compute_is_available()
-        return result

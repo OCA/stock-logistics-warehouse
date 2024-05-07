@@ -17,6 +17,8 @@ class StockMove(models.Model):
             or m.product_id.serial_auto_reserve
         )
         if self_not_serial:
-            return super(
+            result = super(
                 StockMove, self_not_serial.with_context(from_assign=True)
             )._action_assign()
+            move.picking_id._compute_is_available()
+            return result
