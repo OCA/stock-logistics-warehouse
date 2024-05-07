@@ -13,17 +13,16 @@ class StockPicking(models.Model):
     @api.depends("state")
     def _compute_is_available(self):
         self.is_available = False
-        for picking in self.filtered(lambda p: p.state == "waiting"):
+        for picking in self.filtered(lambda p: p.state in ("waiting", "confirmed")):
             unassigned_moves = picking.move_ids_without_package.filtered(
-                lambda a: a.state == "waiting"
+                lambda a: a.state
+                in ("waiting", "confirmed", "partially_available", "assigned")
             )  # this filters out the 'assigned' ones, for which items are already reserved
-            if this.move_ids_without_package:
-                this.is_available = all(
-                    [
-                        m.forecast_availability == m.product_uom_qty
-                        and m.reserved_availability
-                        < m.product_uom_qty  # Not sure if this line is necessary
-                        and not m.forecast_expected_date
-                        for m in this.move_ids_without_package
-                    ]
-                )
+            picking.is_available = all(
+                [
+                    m.forecast_availability == m.product_uom_qty
+                    and m.reserved_availability < m.product_uom_qty
+                    and not m.forecast_expected_date
+                    for m in unassigned_moves
+                ]
+            )

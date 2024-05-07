@@ -20,5 +20,5 @@ class StockMove(models.Model):
             result = super(
                 StockMove, self_not_serial.with_context(from_assign=True)
             )._action_assign()
-            move.picking_id._compute_is_available()
+            self_not_serial.picking_id._compute_is_available()
             return result
