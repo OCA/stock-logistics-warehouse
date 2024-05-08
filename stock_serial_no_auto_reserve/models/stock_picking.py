@@ -13,10 +13,9 @@ class StockPicking(models.Model):
     @api.depends("state", "move_ids_without_package.is_available")
     def _compute_is_available(self):
         for picking in self:
-            if picking.state in ("waiting", "confirmed"):
-                picking.is_available = all(
-                    [
-                        m.state in ("assigned", "done") or m.is_available
-                        for m in picking.move_ids_without_package
-                    ]
-                )
+            picking.is_available = picking.state in ("waiting", "confirmed") and all(
+                [
+                    m.state in ("assigned", "done") or m.is_available
+                    for m in picking.move_ids_without_package
+                ]
+            )
