@@ -14,4 +14,6 @@
     "data": [
         "views/product_templates.xml",
     ],
+    "pre_init_hook": "pre_init_hook",
+    "post_init_hook": "post_init_hook",
 }
