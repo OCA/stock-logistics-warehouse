@@ -7,22 +7,16 @@ class StockPicking(models.Model):
     _inherit = "stock.picking"
 
     is_available = fields.Boolean(
-        "Is Available", compute="_compute_is_available", store=True
+        "Is available but not ready", compute="_compute_is_available", store=True
     )
 
-    @api.depends("state")
+    @api.depends("state", "move_ids_without_package.is_available")
     def _compute_is_available(self):
-        self.is_available = False
-        for picking in self.filtered(lambda p: p.state in ("waiting", "confirmed")):
-            unassigned_moves = picking.move_ids_without_package.filtered(
-                lambda a: a.state
-                in ("waiting", "confirmed", "partially_available", "assigned")
-            )  # this filters out the 'assigned' ones, for which items are already reserved
-            picking.is_available = all(
-                [
-                    m.forecast_availability == m.product_uom_qty
-                    and m.reserved_availability < m.product_uom_qty
-                    and not m.forecast_expected_date
-                    for m in unassigned_moves
-                ]
-            )
+        for picking in self:
+            if picking.state in ("waiting", "confirmed"):
+                picking.is_available = all(
+                    [
+                        m.state in ("assigned", "done") or m.is_available
+                        for m in picking.move_ids_without_package
+                    ]
+                )
