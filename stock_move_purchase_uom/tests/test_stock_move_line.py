@@ -1,6 +1,6 @@
 # Copyright 2024 ForgeFlow S.L. (https://www.forgeflow.com)
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
-from odoo.odoo.tests import Form
+from odoo.tests import Form
 
 from .test_common import TestCommon
 
