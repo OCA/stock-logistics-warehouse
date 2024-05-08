@@ -3,7 +3,7 @@
 {
     "name": "Stock Move Purchase UoM",
     "summary": "Allow to use the purchase UoM in a stock move",
-    "version": "15.0.1.0.1",
+    "version": "15.0.1.0.2",
     "author": "ForgeFlow, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "category": "Warehouse",
