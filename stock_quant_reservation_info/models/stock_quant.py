@@ -9,7 +9,10 @@ class StockQuant(models.Model):
     def action_reserved_moves(self):
         self.ensure_one()
         action = {
-            "name": _("Reserved moves for: " + self.product_id.name),
+            "name": _(
+                "Reserved Moves for: %(product_name)s",
+                product_name=self.product_id.name,
+            ),
             "view_mode": "list,form",
             "res_model": "stock.move.line",
             "views": [
