@@ -7,9 +7,7 @@ from odoo import fields, models
 class StockMove(models.Model):
     _inherit = "stock.move"
 
-    is_available = fields.Boolean(
-        "Is available but not assigned"
-    )
+    is_available = fields.Boolean("Is available but not assigned")
 
     def _action_assign(self):
         """Dont auto-reserve products with serial number.
@@ -24,9 +22,7 @@ class StockMove(models.Model):
         if self_no_auto_reserve:
             self_no_auto_reserve._update_is_available()
         if self_auto_reserve:
-            result = super(
-                StockMove, self_auto_reserve.with_context(from_assign=True)
-            )._action_assign()
+            result = super(StockMove, self_auto_reserve)._action_assign()
             self_auto_reserve.is_available = False
             return result
 
