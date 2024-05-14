@@ -2,6 +2,7 @@
 <!-- Copyright 2019-2023 ForgeFlow S.L.
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
+
     <record id="reason_view_stock_quant_tree_inventory_editable" model="ir.ui.view">
         <field name="name">stock.quant.tree</field>
         <field name="model">stock.quant</field>
@@ -10,32 +11,15 @@
             <button name="action_inventory_history" position="before">
                 <field
                     name="reason"
-                    attrs="{'invisible': [('inventory_quantity_set', '=', False)]}"
+                    invisible="not inventory_quantity_set"
+                    groups="!stock_change_qty_reason.group_qty_reason_preset"
                 />
-            </button>
-        </field>
-    </record>
-    <record id="reason_stock_inventory_line_tree_reason_id" model="ir.ui.view">
-        <field name="name">stock.quant.tree.reason.code</field>
-        <field name="model">stock.quant</field>
-        <field
-            name="inherit_id"
-            ref="reason_view_stock_quant_tree_inventory_editable"
-        />
-        <field name="priority">99</field>
-        <field name="arch" type="xml">
-            <field name="reason" position="after">
                 <field
                     name="preset_reason_id"
                     string="Reason"
                     groups="stock_change_qty_reason.group_qty_reason_preset"
                 />
-            </field>
-            <xpath expr="//field[@name='reason']" position="attributes">
-                <t groups="stock_change_qty_reason.group_qty_reason_preset">
-                    <attribute name="invisible">True</attribute>
-                </t>
-            </xpath>
+            </button>
         </field>
     </record>
 </odoo>
