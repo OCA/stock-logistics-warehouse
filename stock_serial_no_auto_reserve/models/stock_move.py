@@ -8,7 +8,7 @@ class StockMove(models.Model):
     _inherit = "stock.move"
 
     is_available = fields.Boolean(
-        "Is available but not assigned", compute="_compute_is_available", store=True
+        "Is available but not assigned"
     )
 
     def _action_assign(self):
@@ -20,12 +20,9 @@ class StockMove(models.Model):
             lambda m: m.product_id.tracking != "serial"
             or m.product_id.serial_auto_reserve
         )
-        self_no_auto_reserve = self.filtered(
-            lambda m: m.product_id.tracking == "serial"
-            and not m.product_id.serial_auto_reserve
-        )
+        self_no_auto_reserve = self - self_auto_reserve
         if self_no_auto_reserve:
-            self_no_auto_reserve._compute_is_available()
+            self_no_auto_reserve._update_is_available()
         if self_auto_reserve:
             result = super(
                 StockMove, self_auto_reserve.with_context(from_assign=True)
@@ -33,7 +30,7 @@ class StockMove(models.Model):
             self_auto_reserve.is_available = False
             return result
 
-    def _compute_is_available(self):
+    def _update_is_available(self):
         for move in self.filtered(lambda m: m.state in ("waiting", "confirmed")):
             move.is_available = (
                 move.forecast_availability == move.product_uom_qty
