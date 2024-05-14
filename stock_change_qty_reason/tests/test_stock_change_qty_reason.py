@@ -9,7 +9,7 @@ from odoo.tests.common import TransactionCase
 class TestStockQuantityChangeReason(TransactionCase):
     @classmethod
     def setUpClass(cls):
-        super(TestStockQuantityChangeReason, cls).setUpClass()
+        super().setUpClass()
 
         # MODELS
         cls.stock_move_line = cls.env["stock.move.line"]

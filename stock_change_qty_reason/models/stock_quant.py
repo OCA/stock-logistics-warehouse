@@ -18,10 +18,17 @@ class StockQuant(models.Model):
         res.extend(["reason", "preset_reason_id"])
         return res
 
-    def _get_inventory_move_values(self, qty, location_id, location_dest_id, out=False):
+    def _get_inventory_move_values(
+        self,
+        qty,
+        location_id,
+        location_dest_id,
+        package_id=False,
+        package_dest_id=False,
+    ):
         # Called when user manually set a new quantity (via `inventory_quantity`)
         res = super()._get_inventory_move_values(
-            qty, location_id, location_dest_id, out
+            qty, location_id, location_dest_id, package_id, package_dest_id
         )
         # Aftect the reason to the move line
         context = (
