@@ -1,27 +1,26 @@
-# Copyright 2019 ForgeFlow S.L.
+# Copyright 2019-2024 ForgeFlow S.L.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from odoo.tests.common import SavepointCase
+from odoo.tests.common import TransactionCase
 
 
-class TestStockAccountChangeQtyReason(SavepointCase):
+class TestStockAccountChangeQtyReason(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
         cls.product_product_model = cls.env["product.product"]
         cls.product_category_model = cls.env["product.category"]
-        cls.wizard_model = cls.env["stock.change.product.qty"]
-        cls.stock_inventory = cls.env["stock.inventory"]
-        cls.preset_reason = cls.env["stock.inventory.line.reason"]
+        cls.stock_quant = cls.env["stock.quant"]
+        cls.preset_reason = cls.env["stock.quant.reason"]
+        cls.Account = cls.env["account.account"]
+        cls.stock_location = cls.env.ref("stock.stock_location_stock")
 
         # INSTANCES
         cls.stock_valuation_account = cls.env["account.account"].create(
             {
                 "name": "Stock Valuation",
-                "code": "Stock Valuation",
-                "user_type_id": cls.env.ref(
-                    "account.data_account_type_current_assets"
-                ).id,
+                "code": "StockValuation",
+                "account_type": "asset_current",
             }
         )
         cls.category = cls.product_category_model.create(
@@ -35,18 +34,12 @@ class TestStockAccountChangeQtyReason(SavepointCase):
 
         company = cls.env.ref("base.main_company")
 
-        # Instance: account type (receivable)
-        cls.type_recv = cls.env.ref("account.data_account_type_receivable")
-
-        # Instance: account type (payable)
-        cls.type_payable = cls.env.ref("account.data_account_type_payable")
-
         # account (receivable)
         cls.account_input = cls.env["account.account"].create(
             {
                 "name": "test_account_reason_input",
                 "code": "1234",
-                "user_type_id": cls.type_recv.id,
+                "account_type": "asset_receivable",
                 "company_id": company.id,
                 "reconcile": True,
             }
@@ -57,7 +50,7 @@ class TestStockAccountChangeQtyReason(SavepointCase):
             {
                 "name": "test_account_reason_output",
                 "code": "4321",
-                "user_type_id": cls.type_payable.id,
+                "account_type": "liability_payable",
                 "company_id": company.id,
                 "reconcile": True,
             }
@@ -74,15 +67,15 @@ class TestStockAccountChangeQtyReason(SavepointCase):
 
         # Start Inventory with 10 units
         cls.product = cls._create_product(cls, "product_product")
-        cls._product_change_qty(cls, cls.product, 10)
-        cls.inventory = cls.stock_inventory.create(
+        cls.inventory = cls.stock_quant.create(
             {
-                "name": "Inventory Adjustment Product",
-                "product_ids": [(4, cls.product.id)],
+                "product_id": cls.product.id,
                 "preset_reason_id": cls.reason.id,
+                "location_id": cls.stock_location.id,
+                "inventory_quantity": 10,
             }
         )
-        cls.inventory.action_start()
+        cls.inventory.action_apply_inventory()
 
     def _create_product(self, name):
         return self.product_product_model.create(
@@ -94,29 +87,21 @@ class TestStockAccountChangeQtyReason(SavepointCase):
             }
         )
 
-    def _product_change_qty(self, product, new_qty):
-        values = {
-            "product_tmpl_id": product.product_tmpl_id.id,
-            "product_id": product.id,
-            "new_quantity": new_qty,
-        }
-        wizard = self.wizard_model.create(values)
-        wizard.change_product_qty()
-
     def _create_reason(self, name, description=None):
         return self.preset_reason.create({"name": name, "description": description})
 
     def test_product_change_qty_account_input(self):
         # update qty on hand and add reason
-        self.inventory.line_ids[0].write({"product_qty": 100})
-        self.inventory.action_validate()
+        self.inventory.preset_reason_id = self.reason
+        self.inventory.write({"inventory_quantity": 100})
+        self.inventory.action_apply_inventory()
 
         # check stock moves and account moves created
-        stock_move = self.env["stock.move"].search(
-            [("product_id", "=", self.product.id), ("product_qty", "=", 90)]
+        stock_move_line = self.env["stock.move.line"].search(
+            [("product_id", "=", self.product.id), ("quantity", "=", 90)]
         )
         account_move = self.env["account.move"].search(
-            [("stock_move_id", "=", stock_move.id)]
+            [("stock_move_id", "=", stock_move_line.move_id.id)]
         )
 
         # asserts
@@ -138,8 +123,9 @@ class TestStockAccountChangeQtyReason(SavepointCase):
 
     def test_product_change_qty_account_output(self):
         # update qty on hand and add reason
-        self.inventory.line_ids[0].write({"product_qty": 5})
-        self.inventory.action_validate()
+        self.inventory.preset_reason_id = self.reason
+        self.inventory.write({"inventory_quantity": 5})
+        self.inventory.action_apply_inventory()
 
         # check stock moves and account moves created
         stock_move = self.env["stock.move"].search(

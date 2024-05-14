@@ -1,10 +1,10 @@
-# Copyright 2019 ForgeFlow S.L.
+# Copyright 2019-2024 ForgeFlow S.L.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 from odoo import fields, models
 
 
-class StockAccountInventoryChangeReason(models.Model):
-    _inherit = "stock.inventory.line.reason"
+class StockQuantReason(models.Model):
+    _inherit = "stock.quant.reason"
 
     account_reason_input_id = fields.Many2one(
         "account.account",
