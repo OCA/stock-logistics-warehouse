@@ -13,5 +13,5 @@ def post_init_hook(cr, registry):
     for result in results:
         move_id = result[0]
         move = env["stock.move"].browse(move_id)
-        move._compute_is_available()
+        move._update_is_available()
         cr.commit()
