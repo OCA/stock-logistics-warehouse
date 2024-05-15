@@ -2,7 +2,7 @@ from odoo import SUPERUSER_ID, api
 
 
 def pre_init_hook(cr):
-    cr.execute("ALTER TABLE stock_move ADD COLUMN is_available BOOLEAN")
+    cr.execute("ALTER TABLE stock_move ADD COLUMN IF NOT EXISTS is_available BOOLEAN")
     cr.execute("UPDATE stock_move SET is_available = FALSE")
 
 
