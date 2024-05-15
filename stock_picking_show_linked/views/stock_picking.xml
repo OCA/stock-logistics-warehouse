@@ -13,7 +13,7 @@
                     type="object"
                     name="action_stock_picking_destination"
                     icon="fa-truck"
-                    attrs="{'invisible': [('dest_picking_count', '==', 0)]}"
+                    invisible="dest_picking_count == 0"
                 >
                     <field
                         string="Dest. Transfers"
@@ -26,7 +26,7 @@
                     type="object"
                     name="action_stock_picking_origin"
                     icon="fa-truck"
-                    attrs="{'invisible': [('origin_picking_count', '==', 0)]}"
+                    invisible="origin_picking_count == 0"
                 >
                     <field
                         string="Origin Transfers"

@@ -1,4 +1,4 @@
-# Copyright 2022 ForgeFlow S.L. (https://www.forgeflow.com)
+# Copyright 2024 ForgeFlow S.L. (https://www.forgeflow.com)
 
 from odoo import api, fields, models
 
