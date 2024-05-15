@@ -12,36 +12,40 @@ class StockPicking(models.Model):
     @api.depends("move_ids")
     def _compute_picking_count(self):
         for record in self:
-            origin_pickings = record.mapped("move_ids.move_orig_ids.picking_id")
-            dest_pickings = record.mapped("move_ids.move_dest_ids.picking_id")
+            # Exclude the return as V17 already have return smart button.
+            origin_pickings = record.mapped("move_ids.move_orig_ids.picking_id") - record.return_ids
+            dest_pickings = record.mapped("move_ids.move_dest_ids.picking_id") - record.return_ids
             record.origin_picking_count = len(origin_pickings)
             record.dest_picking_count = len(dest_pickings)
 
     def _get_action_link(self, pickings):
-        result = self.env["ir.actions.actions"]._for_xml_id(
-            "stock.action_picking_tree_all"
-        )
-        # choose the view_mode accordingly
-        if not pickings or len(pickings) > 1:
-            result["domain"] = "[('id','in',%s)]" % pickings
-        elif len(pickings) == 1:
-            res = self.env.ref("stock.view_picking_form", False)
-            form_view = [(res and res.id or False, "form")]
-            if "views" in result:
-                result["views"] = form_view + [
-                    (state, view) for state, view in result["views"] if view != "form"
-                ]
-            else:
-                result["views"] = form_view
-            result["res_id"] = pickings[0]
-        return result
+        self.ensure_one()
+        from_view_id = self.env.ref("stock.view_picking_form", False)
+        list_view_id = self.env.ref("stock.vpicktree", False)
+
+        if len(pickings) == 1:
+            return {
+                "type": "ir.actions.act_window",
+                "res_model": "stock.picking",
+                "view_id": from_view_id,
+                "views": [[False, "form"]],
+                "res_id": pickings[0]
+            }
+        return {
+            "type": "ir.actions.act_window",
+            "res_model": "stock.picking",
+            "name": "Transfers",
+            "view_id": list_view_id,
+            "views": [[False, "tree"], [False, "form"]],
+            "domain": [('id', 'in', pickings)],
+        }
 
     def action_stock_picking_origin(self):
-        pick_ids = self.mapped("move_ids.move_orig_ids.picking_id")
+        pick_ids = self.mapped("move_ids.move_orig_ids.picking_id") - self.return_ids  # Exclude the return as V17 already have return smart button
         result = self._get_action_link(pick_ids.ids)
         return result
 
     def action_stock_picking_destination(self):
-        pick_ids = self.mapped("move_ids.move_dest_ids.picking_id")
+        pick_ids = self.mapped("move_ids.move_dest_ids.picking_id") - self.return_ids  # Exclude the return as V17 already have return smart button
         result = self._get_action_link(pick_ids.ids)
         return result
