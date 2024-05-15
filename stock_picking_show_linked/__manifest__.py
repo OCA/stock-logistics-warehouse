@@ -6,13 +6,11 @@
        (in the case of chained routes) through a button
        in the parent picking view.
     """,
-    "version": "16.0.1.0.0",
+    "version": "17.0.1.0.0",
     "author": "ForgeFlow, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "category": "Warehouse Management",
-    "depends": [
-        "stock",
-    ],
+    "depends": ["stock"],
     "data": ["views/stock_picking.xml"],
     "license": "AGPL-3",
     "installable": True,
