@@ -32,6 +32,11 @@ msgid "All Products"
 msgstr "Todos los productos"
 
 #. module: stock_inventory
+#: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__responsible_id
+msgid "Assigned to"
+msgstr ""
+
+#. module: stock_inventory
 #: model_terms:ir.ui.view,arch_db:stock_inventory.view_inventory_group_form
 msgid "Back to Draft"
 msgstr "Devolver a borrador"
@@ -40,6 +45,30 @@ msgstr "Devolver a borrador"
 #: model_terms:ir.ui.view,arch_db:stock_inventory.view_inventory_group_form
 msgid "Begin Adjustments"
 msgstr "Iniciar ajuste"
+
+#. module: stock_inventory
+#. odoo-python
+#: code:addons/stock_inventory/models/stock_inventory.py:0
+#, python-format
+msgid ""
+"Cannot be more than one in progress inventory adjustment affecting the same "
+"location at the same time."
+msgstr ""
+
+#. module: stock_inventory
+#: model:ir.model,name:stock_inventory.model_res_company
+msgid "Companies"
+msgstr ""
+
+#. module: stock_inventory
+#: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__company_id
+msgid "Company"
+msgstr ""
+
+#. module: stock_inventory
+#: model:ir.model,name:stock_inventory.model_res_config_settings
+msgid "Config Settings"
+msgstr ""
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__create_uid
@@ -72,9 +101,30 @@ msgid "Draft"
 msgstr "Borrador"
 
 #. module: stock_inventory
+#: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__exclude_sublocation
+msgid "Exclude Sublocation"
+msgstr ""
+
+#. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__id
 msgid "ID"
 msgstr "ID"
+
+#. module: stock_inventory
+#: model:ir.model.fields,help:stock_inventory.field_stock_inventory__exclude_sublocation
+msgid ""
+"If enabled, it will only take into account the locations selected, and not "
+"their children."
+msgstr ""
+
+#. module: stock_inventory
+#: model:ir.model.fields,help:stock_inventory.field_res_company__stock_inventory_auto_complete
+#: model:ir.model.fields,help:stock_inventory.field_res_config_settings__stock_inventory_auto_complete
+#: model_terms:ir.ui.view,arch_db:stock_inventory.res_config_settings_view_form
+msgid ""
+"If enabled, when all the quants prepared for the adjustment are done, the "
+"adjustment is automatically set to done."
+msgstr ""
 
 #. module: stock_inventory
 #: model:ir.model.fields.selection,name:stock_inventory.selection__stock_inventory__state__in_progress
@@ -193,9 +243,25 @@ msgid "Set to Done"
 msgstr "Pasar a hecho"
 
 #. module: stock_inventory
+#: model:ir.model.fields,help:stock_inventory.field_stock_inventory__responsible_id
+msgid "Specific responsible of Inventory Adjustment."
+msgstr ""
+
+#. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__state
 msgid "State"
 msgstr "Estado"
+
+#. module: stock_inventory
+#: model_terms:ir.ui.view,arch_db:stock_inventory.res_config_settings_view_form
+msgid "Stock Inventory"
+msgstr ""
+
+#. module: stock_inventory
+#: model:ir.model.fields,field_description:stock_inventory.field_res_company__stock_inventory_auto_complete
+#: model:ir.model.fields,field_description:stock_inventory.field_res_config_settings__stock_inventory_auto_complete
+msgid "Stock Inventory Auto Complete"
+msgstr ""
 
 #. module: stock_inventory
 #: model:ir.actions.act_window,name:stock_inventory.action_view_stock_move_line_inventory_tree
@@ -233,8 +299,8 @@ msgstr "Aplicar"
 #: code:addons/stock_inventory/models/stock_inventory.py:0
 #, python-format
 msgid ""
-"When 'Product Selection: Lot Serial Number' is selected you are only able to"
-" add one product."
+"When 'Product Selection: Lot Serial Number' is selected you are only able to "
+"add one product."
 msgstr ""
 "Cuando selecciona 'Selección de productos: Número de serie del lote' sólo "
 "puede añadir un producto."
