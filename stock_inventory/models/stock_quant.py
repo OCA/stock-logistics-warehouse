@@ -1,4 +1,4 @@
-from odoo import _, fields, models
+from odoo import _, api, fields, models
 
 
 class StockQuant(models.Model):
@@ -15,7 +15,10 @@ class StockQuant(models.Model):
                 .search([("state", "=", "in_progress")])
                 .filtered(
                     lambda x: rec.location_id in x.location_ids
-                    or rec.location_id in x.location_ids.child_ids
+                    or (
+                        rec.location_id in x.location_ids.child_internal_location_ids
+                        and not x.exclude_sublocation
+                    )
                 )
             )
             moves = record_moves.search(
@@ -36,9 +39,32 @@ class StockQuant(models.Model):
                 raise ValueError(_("No move lines have been created"))
             move = moves[len(moves) - 1]
             adjustment.stock_move_ids |= move
-            move.inventory_adjustment_id = adjustment
+            reference = move.reference
+            if adjustment.name and move.reference:
+                reference = adjustment.name + ": " + move.reference
+            elif adjustment.name:
+                reference = adjustment.name
+            move.write(
+                {
+                    "inventory_adjustment_id": adjustment.id,
+                    "reference": reference,
+                }
+            )
             rec.to_do = False
+        if adjustment and self.env.company.stock_inventory_auto_complete:
+            adjustment.action_auto_state_to_done()
         return res
 
     def _get_inventory_fields_write(self):
         return super()._get_inventory_fields_write() + ["to_do"]
+
+    @api.model
+    def create(self, vals):
+        res = super().create(vals)
+        if self.env.context.get(
+            "active_model", False
+        ) == "stock.inventory" and self.env.context.get("active_id", False):
+            self.env["stock.inventory"].browse(
+                self.env.context.get("active_id")
+            ).refresh_stock_quant_ids()
+        return res
