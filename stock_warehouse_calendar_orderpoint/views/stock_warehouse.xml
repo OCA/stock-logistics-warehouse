@@ -17,7 +17,7 @@
             <field name="calendar_id" position="attributes">
                 <attribute
                     name="attrs"
-                >{'required': [('orderpoint_on_workday_policy', '!=', False)]}</attribute>
+                >{'required': [('orderpoint_calendar_id', '!=', False), ('orderpoint_on_workday_policy', '!=', False)]}</attribute>
             </field>
         </field>
     </record>
