@@ -14,6 +14,7 @@
     "installable": True,
     "depends": [
         "stock",
+        "stock_location_warehouse",
     ],
     "data": [
         "views/stock_move_line.xml",
