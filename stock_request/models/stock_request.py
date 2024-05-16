@@ -125,10 +125,21 @@ class StockRequest(models.Model):
         ("name_uniq", "unique(name, company_id)", "Stock Request name must be unique")
     ]
 
+    def _get_all_origin_moves(self, move):
+        all_moves = move
+        if move.move_orig_ids:
+            for orig_move in move.move_orig_ids:
+                all_moves |= self._get_all_origin_moves(orig_move)
+        return all_moves
+
     @api.depends("allocation_ids", "allocation_ids.stock_move_id")
     def _compute_move_ids(self):
         for request in self:
-            request.move_ids = request.allocation_ids.mapped("stock_move_id")
+            move_ids = request.allocation_ids.mapped("stock_move_id")
+            all_moves = self.env["stock.move"]
+            for move in move_ids:
+                all_moves |= self._get_all_origin_moves(move)
+            request.move_ids = all_moves
 
     @api.depends(
         "allocation_ids",
