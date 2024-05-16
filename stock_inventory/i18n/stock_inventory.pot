@@ -29,6 +29,11 @@ msgid "All Products"
 msgstr ""
 
 #. module: stock_inventory
+#: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__responsible_id
+msgid "Assigned to"
+msgstr ""
+
+#. module: stock_inventory
 #: model_terms:ir.ui.view,arch_db:stock_inventory.view_inventory_group_form
 msgid "Back to Draft"
 msgstr ""
@@ -36,6 +41,30 @@ msgstr ""
 #. module: stock_inventory
 #: model_terms:ir.ui.view,arch_db:stock_inventory.view_inventory_group_form
 msgid "Begin Adjustments"
+msgstr ""
+
+#. module: stock_inventory
+#. odoo-python
+#: code:addons/stock_inventory/models/stock_inventory.py:0
+#, python-format
+msgid ""
+"Cannot be more than one in progress inventory adjustment affecting the same "
+"location at the same time."
+msgstr ""
+
+#. module: stock_inventory
+#: model:ir.model,name:stock_inventory.model_res_company
+msgid "Companies"
+msgstr ""
+
+#. module: stock_inventory
+#: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__company_id
+msgid "Company"
+msgstr ""
+
+#. module: stock_inventory
+#: model:ir.model,name:stock_inventory.model_res_config_settings
+msgid "Config Settings"
 msgstr ""
 
 #. module: stock_inventory
@@ -69,8 +98,29 @@ msgid "Draft"
 msgstr ""
 
 #. module: stock_inventory
+#: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__exclude_sublocation
+msgid "Exclude Sublocation"
+msgstr ""
+
+#. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__id
 msgid "ID"
+msgstr ""
+
+#. module: stock_inventory
+#: model:ir.model.fields,help:stock_inventory.field_stock_inventory__exclude_sublocation
+msgid ""
+"If enabled, it will only take into account the locations selected, and not "
+"their children."
+msgstr ""
+
+#. module: stock_inventory
+#: model:ir.model.fields,help:stock_inventory.field_res_company__stock_inventory_auto_complete
+#: model:ir.model.fields,help:stock_inventory.field_res_config_settings__stock_inventory_auto_complete
+#: model_terms:ir.ui.view,arch_db:stock_inventory.res_config_settings_view_form
+msgid ""
+"If enabled, when all the quants prepared for the adjustment are done, the "
+"adjustment is automatically set to done."
 msgstr ""
 
 #. module: stock_inventory
@@ -190,8 +240,24 @@ msgid "Set to Done"
 msgstr ""
 
 #. module: stock_inventory
+#: model:ir.model.fields,help:stock_inventory.field_stock_inventory__responsible_id
+msgid "Specific responsible of Inventory Adjustment."
+msgstr ""
+
+#. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__state
 msgid "State"
+msgstr ""
+
+#. module: stock_inventory
+#: model_terms:ir.ui.view,arch_db:stock_inventory.res_config_settings_view_form
+msgid "Stock Inventory"
+msgstr ""
+
+#. module: stock_inventory
+#: model:ir.model.fields,field_description:stock_inventory.field_res_company__stock_inventory_auto_complete
+#: model:ir.model.fields,field_description:stock_inventory.field_res_config_settings__stock_inventory_auto_complete
+msgid "Stock Inventory Auto Complete"
 msgstr ""
 
 #. module: stock_inventory
