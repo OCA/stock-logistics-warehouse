@@ -131,7 +131,9 @@ class TestPotentialQty(TransactionCase):
             company_id=chicago_id,
         )
         self.assertPotentialQty(
-            self.tmpl, 250.0, "Wrong template potential after receiving components"
+            self.tmpl.with_company(chicago_id),
+            250.0,
+            "Wrong template potential after receiving components",
         )
 
         test_user = self.env["res.users"].create(
@@ -232,7 +234,9 @@ class TestPotentialQty(TransactionCase):
             "variant 1's potential",
         )
         self.assertPotentialQty(
-            self.var2, 213.0, "Wrong variant 2 potential after receiving components"
+            self.var2.with_company(self.ref("stock.res_company_1")),
+            213.0,
+            "Wrong variant 2 potential after receiving components",
         )
         # Check by warehouse
         self.assertPotentialQty(
