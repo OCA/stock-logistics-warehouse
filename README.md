@@ -56,7 +56,7 @@ addon | version | maintainers | summary
 [stock_product_qty_by_packaging](stock_product_qty_by_packaging/) | 16.0.1.0.0 |  | Compute product quantity to pick by packaging
 [stock_putaway_product_template](stock_putaway_product_template/) | 16.0.1.1.0 | [![kevinkhao](https://github.com/kevinkhao.png?size=30px)](https://github.com/kevinkhao) [![sebastienbeau](https://github.com/sebastienbeau.png?size=30px)](https://github.com/sebastienbeau) | Add product template in putaway strategies from the product view
 [stock_quant_cost_info](stock_quant_cost_info/) | 16.0.1.0.0 |  | Shows the cost of the quants
-[stock_quant_manual_assign](stock_quant_manual_assign/) | 16.0.1.0.1 |  | Stock - Manual Quant Assignment
+[stock_quant_manual_assign](stock_quant_manual_assign/) | 16.0.1.1.0 |  | Stock - Manual Quant Assignment
 [stock_quant_safe_inventory](stock_quant_safe_inventory/) | 16.0.1.0.0 |  | Prevents the quantity on the quant from being updated if quantities have already been picked but not validated in pickings in progress.
 [stock_removal_location_by_priority](stock_removal_location_by_priority/) | 16.0.1.0.0 |  | Establish a removal priority on stock locations.
 [stock_reserve](stock_reserve/) | 16.0.1.3.0 |  | Stock reservations on products
