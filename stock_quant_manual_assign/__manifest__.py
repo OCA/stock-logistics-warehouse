@@ -7,7 +7,7 @@
 
 {
     "name": "Stock - Manual Quant Assignment",
-    "version": "16.0.1.0.1",
+    "version": "16.0.1.1.0",
     "category": "Warehouse",
     "license": "AGPL-3",
     "author": "AvanzOSC, "
