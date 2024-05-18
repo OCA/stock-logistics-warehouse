@@ -60,13 +60,16 @@ class AssignManualQuants(models.TransientModel):
 
     def assign_quants(self):
         move = self.move_id
-        move._do_unreserve()
+        self.move_id.move_line_ids.unlink()
         for line in self.quants_lines:
             line._assign_quant_line()
         if move.picking_type_id.auto_fill_qty_done:
-            # Auto-fill all lines as done
-            for ml in move.move_line_ids:
-                ml.qty_done = ml.reserved_uom_qty
+            if move.from_immediate_transfer:
+                move.quantity_done = self.lines_qty
+            else:
+                # Auto-fill all lines as done
+                for ml in move.move_line_ids:
+                    ml.qty_done = ml.reserved_uom_qty
         move._recompute_state()
         move.mapped("picking_id")._compute_state()
         return {}
