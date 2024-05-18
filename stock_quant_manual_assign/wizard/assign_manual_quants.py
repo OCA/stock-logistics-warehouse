@@ -60,7 +60,7 @@ class AssignManualQuants(models.TransientModel):
 
     def assign_quants(self):
         move = self.move_id
-        move._do_unreserve()
+        self.move_id.move_line_ids.unlink()
         for line in self.quants_lines:
             line._assign_quant_line()
         move._recompute_state()

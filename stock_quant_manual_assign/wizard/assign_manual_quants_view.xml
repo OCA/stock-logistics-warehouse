@@ -19,11 +19,7 @@
                             widget="boolean_toggle"
                             options="{'autosave': False}"
                         />
-                        <field
-                            name="qty"
-                            attrs="{'readonly':[('selected', '=', False)]}"
-                            sum="qty"
-                        />
+                        <field name="qty" readonly="selected == False" sum="qty" />
                     </tree>
                 </field>
                 <group col='4' colspan="4">
