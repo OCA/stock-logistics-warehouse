@@ -1,0 +1,40 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_picking_location_check
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-05-20 04:25+0000\n"
+"PO-Revision-Date: 2024-05-20 04:25+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_picking_location_check
+#. odoo-python
+#: code:addons/stock_picking_location_check/models/stock_picking.py:0
+#, python-format
+msgid "A move line location is not related to that of the picking: %s"
+msgstr "移動明細のロケーションが運送のものと不整合です: %s"
+
+#. module: stock_picking_location_check
+#: model:ir.model.fields,field_description:stock_picking_location_check.field_stock_picking__allow_location_inconsistency
+msgid "Allow Location Inconsistency"
+msgstr "ロケーション不整合を許可"
+
+#. module: stock_picking_location_check
+#: model:ir.model.fields,help:stock_picking_location_check.field_stock_picking__allow_location_inconsistency
+msgid ""
+"If enabled, no error is raised for location inconsistency between picking "
+"and its move lines at the time of validation."
+msgstr "選択した場合、検証時に運送と移動明細で不整合があってもエラーを出しません。"
+
+#. module: stock_picking_location_check
+#: model:ir.model,name:stock_picking_location_check.model_stock_picking
+msgid "Transfer"
+msgstr "運送"
