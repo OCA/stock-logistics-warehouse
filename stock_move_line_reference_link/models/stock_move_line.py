@@ -22,8 +22,6 @@ class StockMoveLine(models.Model):
                 else move_line.move_id
             )
             if record:
-                move_line.linked_reference = "{},{}".format(
-                    record._name, record.id or 0
-                )
+                move_line.linked_reference = f"{record._name},{record.id or 0}"
             else:
                 move_line.linked_reference = False
