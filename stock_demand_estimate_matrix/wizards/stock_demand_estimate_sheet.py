@@ -114,9 +114,9 @@ class StockDemandEstimateSheet(models.TransientModel):
     def _get_default_estimate_line(
         self, _range, product, uom_id, uom_qty, estimate_id=None
     ):
-        name_y = "{} - {}".format(product.name, product.uom_id.name)
+        name_y = f"{product.name} - {product.uom_id.name}"
         if product.default_code:
-            name_y += "[{}] {}".format(product.default_code, name_y)
+            name_y += f"[{product.default_code}] {name_y}"
         values = {
             "value_x": _range.name,
             "value_y": name_y,
