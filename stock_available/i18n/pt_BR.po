@@ -9,16 +9,17 @@ msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (9.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-07-03 20:56+0000\n"
-"PO-Revision-Date: 2019-08-30 14:23+0000\n"
-"Last-Translator: Rodrigo Macedo <rmsolucoeseminformatic4@gmail.com>\n"
-"Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/OCA-stock-"
-"logistics-warehouse-9-0/language/pt_BR/)\n"
+"PO-Revision-Date: 2024-05-20 19:34+0000\n"
+"Last-Translator: Rodrigo Macedo <sottomaiormacedotec@users.noreply."
+"translation.odoo-community.org>\n"
+"Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/"
+"OCA-stock-logistics-warehouse-9-0/language/pt_BR/)\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 3.8\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: stock_available
 #: model_terms:ir.ui.view,arch_db:stock_available.product_normal_form_view
@@ -64,7 +65,7 @@ msgstr "Definições de configuração"
 #: model:ir.model.fields,field_description:stock_available.field_product_template__display_name
 #: model:ir.model.fields,field_description:stock_available.field_res_config_settings__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Mostrar Nome"
 
 #. module: stock_available
 #: model:ir.model.fields,field_description:stock_available.field_res_config_settings__module_stock_available_sale
@@ -81,7 +82,7 @@ msgstr "Excluir entrada de mercadorias"
 #: model:ir.model.fields,field_description:stock_available.field_product_template__id
 #: model:ir.model.fields,field_description:stock_available.field_res_config_settings__id
 msgid "ID"
-msgstr ""
+msgstr "Identificação"
 
 #. module: stock_available
 #: model:ir.model.fields,field_description:stock_available.field_res_config_settings__module_stock_available_mrp
@@ -93,7 +94,7 @@ msgstr "Incluir o potencial de produção"
 #: model:ir.model.fields,field_description:stock_available.field_product_template____last_update
 #: model:ir.model.fields,field_description:stock_available.field_res_config_settings____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Última modificação em"
 
 #. module: stock_available
 #: model:ir.model.fields,field_description:stock_available.field_product_product__potential_qty
