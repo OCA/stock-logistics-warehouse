@@ -61,7 +61,7 @@ class StockDemandEstimateSheet(models.TransientModel):
             for product in sheet.product_ids:
                 for _range in ranges:
                     estimate = estimates.filtered(
-                        lambda x: (
+                        lambda x, _range=_range, product=product: (
                             x.date_range_id == _range and x.product_id == product
                         )
                     )
