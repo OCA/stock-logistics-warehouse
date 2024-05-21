@@ -1335,3 +1335,45 @@ class TestStockRequestOrderState(TestStockRequest):
         self.assertEqual(self.request_a.state, "cancel")
         self.assertEqual(self.request_b.state, "done")
         self.assertEqual(self.order.state, "done")
+
+    def test_rounding_half_up_in_progress_01(self):
+        product_half_up = self._create_product(
+            "HALFUP", "HalfUp Product", self.main_company.id
+        )
+        product_half_up.uom_id.rounding = 1.0
+        vals = {
+            "product_id": product_half_up.id,
+            "product_uom_id": product_half_up.uom_id.id,
+            "product_uom_qty": 0.5,
+            "company_id": self.main_company.id,
+            "warehouse_id": self.warehouse.id,
+            "location_id": self.virtual_loc.id,
+        }
+        stock_request = self.stock_request.create(vals)
+        stock_request.action_confirm()
+        self.assertEqual(
+            stock_request.qty_in_progress,
+            1,
+            "Quantity in progress should be the rounded up quantity after confirmation",
+        )
+
+    def test_rounding_half_up_in_progress_02(self):
+        product_half_up = self._create_product(
+            "HALFUP", "HalfUp Product", self.main_company.id
+        )
+        product_half_up.uom_id.rounding = 1.0
+        vals = {
+            "product_id": product_half_up.id,
+            "product_uom_id": product_half_up.uom_id.id,
+            "product_uom_qty": 1.49,
+            "company_id": self.main_company.id,
+            "warehouse_id": self.warehouse.id,
+            "location_id": self.virtual_loc.id,
+        }
+        stock_request = self.stock_request.create(vals)
+        stock_request.action_confirm()
+        self.assertEqual(
+            stock_request.qty_in_progress,
+            1,
+            "Quantity in progress should be the rounded down quantity after confirmation",
+        )

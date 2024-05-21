@@ -162,9 +162,15 @@ class StockRequest(models.Model):
             done_qty = abs(other_qty - incoming_qty)
             open_qty = sum(request.allocation_ids.mapped("open_product_qty"))
             uom = request.product_id.uom_id
-            request.qty_done = uom._compute_quantity(done_qty, request.product_uom_id)
+            request.qty_done = uom._compute_quantity(
+                done_qty,
+                request.product_uom_id,
+                rounding_method="HALF-UP",
+            )
             request.qty_in_progress = uom._compute_quantity(
-                open_qty, request.product_uom_id
+                open_qty,
+                request.product_uom_id,
+                rounding_method="HALF-UP",
             )
             request.qty_cancelled = (
                 max(
@@ -172,6 +178,7 @@ class StockRequest(models.Model):
                     uom._compute_quantity(
                         request.product_qty - done_qty - open_qty,
                         request.product_uom_id,
+                        rounding_method="HALF-UP",
                     ),
                 )
                 if request.allocation_ids
