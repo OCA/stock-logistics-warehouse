@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 {
     "name": "Consider the production potential is available to promise",
-    "version": "15.0.1.0.2",
+    "version": "15.0.1.0.3",
     "author": "Numérigraphe," "Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "category": "Hidden",
