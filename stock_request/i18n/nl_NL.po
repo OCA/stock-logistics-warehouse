@@ -757,6 +757,7 @@ msgstr ""
 #. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__route_id
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__route_id
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_order__route_id
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
 msgid "Route"
 msgstr ""
@@ -764,6 +765,7 @@ msgstr ""
 #. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__route_ids
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__route_ids
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_order__route_ids
 msgid "Routes"
 msgstr ""
 
@@ -970,6 +972,11 @@ msgstr ""
 #: code:addons/stock_request/models/stock_request.py:0
 #, python-format
 msgid "The picking policy must be equal to the order"
+msgstr ""
+
+#. module: stock_request
+#: model:ir.model.fields,help:stock_request.field_stock_request_order__route_id
+msgid "The route related to a stock request order"
 msgstr ""
 
 #. module: stock_request

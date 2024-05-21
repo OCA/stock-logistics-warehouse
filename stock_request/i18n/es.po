@@ -775,6 +775,7 @@ msgstr "Usuario Responsable"
 #. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__route_id
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__route_id
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_order__route_id
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_search
 msgid "Route"
 msgstr "Ruta"
@@ -782,6 +783,7 @@ msgstr "Ruta"
 #. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__route_ids
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_abstract__route_ids
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_order__route_ids
 msgid "Routes"
 msgstr "Rutas"
 
@@ -998,6 +1000,11 @@ msgstr ""
 #, python-format
 msgid "The picking policy must be equal to the order"
 msgstr "La política de albaranes debe coincidir"
+
+#. module: stock_request
+#: model:ir.model.fields,help:stock_request.field_stock_request_order__route_id
+msgid "The route related to a stock request order"
+msgstr ""
 
 #. module: stock_request
 #: code:addons/stock_request/models/stock_request_order.py:0
