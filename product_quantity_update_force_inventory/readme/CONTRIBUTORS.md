@@ -1,1 +1,2 @@
 - Héctor Villarreal \<<hector.villarreal@forgeflow.com>\>
+- Anaïs López \<<anais.lopez@forgeflow.com>\>

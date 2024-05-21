@@ -1,4 +1,4 @@
-# Copyright 2020 Forgeflow, S.L.
+# Copyright 2020-24 Forgeflow, S.L.
 #   (http://www.forgeflow.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
@@ -7,8 +7,8 @@ from odoo.tests.common import TransactionCase
 
 class TestStockQuantEditableViewBlock(TransactionCase):
     def setUp(self):
-        super(TestStockQuantEditableViewBlock, self).setUp()
-        self.inventory_model = self.env["stock.inventory"]
+        super().setUp()
+        self.inventory_model = self.env["stock.quant"]
         self.res_users_model = self.env["res.users"]
         self.company = self.env.ref("base.main_company")
         self.grp_stock_manager = self.env.ref("stock.group_stock_manager")

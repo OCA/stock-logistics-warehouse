@@ -1,4 +1,4 @@
-# Copyright 2018-20 ForgeFlow <http://www.forgeflow.com>
+# Copyright 2018-24 ForgeFlow <http://www.forgeflow.com>
 
 from odoo import api, models
 

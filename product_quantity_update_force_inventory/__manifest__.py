@@ -1,9 +1,9 @@
-# © 2016-2020 ForgeFlow S.L.
+# © 2016-2024 ForgeFlow S.L.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 {
     "name": "Product Quantity Update Force Inventory",
-    "version": "14.0.1.0.1",
+    "version": "17.0.1.0.0",
     "author": "ForgeFlow, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "category": "Warehouse",
