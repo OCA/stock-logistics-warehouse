@@ -12,11 +12,11 @@
                     <field name="cycle_count_planning_horizon" />
                     <field name="counts_for_accuracy_qty" />
                     <br />
-                    <center colspan="4">
-                        <h3 colspan="4">Cycle Count Rules
+                    <center colspan="2">
+                        <h3 colspan="2">Cycle Count Rules
                     applied in this Warehouse:</h3>
                     </center>
-                    <field name="cycle_count_rule_ids" nolabel="1" colspan="4">
+                    <field name="cycle_count_rule_ids" nolabel="1" colspan="2">
                         Cycle count rules</field>
                 </group>
             </notebook>
