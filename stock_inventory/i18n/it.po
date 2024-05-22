@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-04-04 09:26+0000\n"
+"PO-Revision-Date: 2024-05-22 15:33+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -34,7 +34,7 @@ msgstr "Tutti i prodotti"
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__responsible_id
 msgid "Assigned to"
-msgstr ""
+msgstr "Assegnato a"
 
 #. module: stock_inventory
 #: model_terms:ir.ui.view,arch_db:stock_inventory.view_inventory_group_form
@@ -54,21 +54,23 @@ msgid ""
 "Cannot be more than one in progress inventory adjustment affecting the same "
 "location at the same time."
 msgstr ""
+"Non ci può essere più di una rettifica di inventario di in corso che "
+"modifica la stessa ubicazioe nello stesso momento."
 
 #. module: stock_inventory
 #: model:ir.model,name:stock_inventory.model_res_company
 msgid "Companies"
-msgstr ""
+msgstr "Aziende"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__company_id
 msgid "Company"
-msgstr ""
+msgstr "Azienda"
 
 #. module: stock_inventory
 #: model:ir.model,name:stock_inventory.model_res_config_settings
 msgid "Config Settings"
-msgstr ""
+msgstr "Impostazioni configurazione"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__create_uid
@@ -103,7 +105,7 @@ msgstr "Bozza"
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__exclude_sublocation
 msgid "Exclude Sublocation"
-msgstr ""
+msgstr "Esclude sottoubicazioni"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__id
@@ -116,6 +118,8 @@ msgid ""
 "If enabled, it will only take into account the locations selected, and not "
 "their children."
 msgstr ""
+"Se abilitata, verrà presa in considerazione solo l'ubicazioni selezionate e "
+"non le figlie."
 
 #. module: stock_inventory
 #: model:ir.model.fields,help:stock_inventory.field_res_company__stock_inventory_auto_complete
@@ -125,6 +129,8 @@ msgid ""
 "If enabled, when all the quants prepared for the adjustment are done, the "
 "adjustment is automatically set to done."
 msgstr ""
+"Se abilitata, quando tutti i quanti preparati per la rettifica sono "
+"completati, la rettifica è automaticamente impostata ad eseguita."
 
 #. module: stock_inventory
 #: model:ir.model.fields.selection,name:stock_inventory.selection__stock_inventory__state__in_progress
@@ -245,7 +251,7 @@ msgstr "Imposta a eseguito"
 #. module: stock_inventory
 #: model:ir.model.fields,help:stock_inventory.field_stock_inventory__responsible_id
 msgid "Specific responsible of Inventory Adjustment."
-msgstr ""
+msgstr "Responsabile specifico rettifiche di magazzino."
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__state
@@ -255,13 +261,13 @@ msgstr "Stato"
 #. module: stock_inventory
 #: model_terms:ir.ui.view,arch_db:stock_inventory.res_config_settings_view_form
 msgid "Stock Inventory"
-msgstr ""
+msgstr "Inventario di magazzino"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_res_company__stock_inventory_auto_complete
 #: model:ir.model.fields,field_description:stock_inventory.field_res_config_settings__stock_inventory_auto_complete
 msgid "Stock Inventory Auto Complete"
-msgstr ""
+msgstr "Auto completamento inventario di magazzino"
 
 #. module: stock_inventory
 #: model:ir.actions.act_window,name:stock_inventory.action_view_stock_move_line_inventory_tree
