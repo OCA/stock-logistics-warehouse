@@ -9,35 +9,36 @@ msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-06-24 03:04+0000\n"
-"PO-Revision-Date: 2017-06-24 03:04+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
-"Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/"
-"teams/23907/pt_BR/)\n"
+"PO-Revision-Date: 2024-05-22 02:57+0000\n"
+"Last-Translator: Rodrigo Macedo <sottomaiormacedotec@users.noreply."
+"translation.odoo-community.org>\n"
+"Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/teams/"
+"23907/pt_BR/)\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: procurement_auto_create_group
 #: model:ir.model.fields,field_description:procurement_auto_create_group.field_stock_rule__auto_create_group
 msgid "Auto-create Procurement Group"
-msgstr ""
+msgstr "Criar automaticamente grupo de compras"
 
 #. module: procurement_auto_create_group
 #. odoo-python
 #: code:addons/procurement_auto_create_group/models/stock_rule.py:0
 #, python-format
 msgid "No sequence defined for procurement group."
-msgstr ""
+msgstr "Nenhuma sequência definida para o grupo de compras."
 
 #. module: procurement_auto_create_group
 #: model:ir.model,name:procurement_auto_create_group.model_procurement_group
-#, fuzzy
 msgid "Procurement Group"
-msgstr "Aquisição"
+msgstr "Grupo de Aquisições"
 
 #. module: procurement_auto_create_group
 #: model:ir.model,name:procurement_auto_create_group.model_stock_rule
 msgid "Stock Rule"
-msgstr ""
+msgstr "Regra de Estoque"
