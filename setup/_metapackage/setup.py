@@ -11,6 +11,7 @@ setuptools.setup(
         'odoo14-addon-account_move_line_product',
         'odoo14-addon-account_move_line_stock_info',
         'odoo14-addon-procurement_auto_create_group',
+        'odoo14-addon-procurement_auto_create_group_by_product',
         'odoo14-addon-product_quantity_update_force_inventory',
         'odoo14-addon-product_route_profile',
         'odoo14-addon-sale_stock_on_hand_popup',

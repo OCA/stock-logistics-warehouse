@@ -23,7 +23,8 @@ addon | version | maintainers | summary
 --- | --- | --- | ---
 [account_move_line_product](account_move_line_product/) | 14.0.1.0.0 |  | Displays the product in the journal entries and items
 [account_move_line_stock_info](account_move_line_stock_info/) | 14.0.2.3.1 |  | Account Move Line Stock Info
-[procurement_auto_create_group](procurement_auto_create_group/) | 14.0.1.2.0 |  | Allows to configure the system to propose automatically new procurement groups during the procurement run.
+[procurement_auto_create_group](procurement_auto_create_group/) | 14.0.1.3.0 |  | Allows to configure the system to propose automatically new procurement groups during the procurement run.
+[procurement_auto_create_group_by_product](procurement_auto_create_group_by_product/) | 14.0.1.1.0 |  | Generate one picking per product on the procurement run.
 [product_quantity_update_force_inventory](product_quantity_update_force_inventory/) | 14.0.1.0.1 |  | Product Quantity Update Force Inventory
 [product_route_profile](product_route_profile/) | 14.0.1.0.3 | [![Kev-Roche](https://github.com/Kev-Roche.png?size=30px)](https://github.com/Kev-Roche) | Add Route profile concept on product
 [sale_stock_on_hand_popup](sale_stock_on_hand_popup/) | 14.0.2.0.0 | [![aleuffre](https://github.com/aleuffre.png?size=30px)](https://github.com/aleuffre) [![renda-dev](https://github.com/renda-dev.png?size=30px)](https://github.com/renda-dev) [![PicchiSeba](https://github.com/PicchiSeba.png?size=30px)](https://github.com/PicchiSeba) | Sale Stock On Hand Popup
