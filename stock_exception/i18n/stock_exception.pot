@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 14.0\n"
+"Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -56,10 +56,7 @@ msgid "Demand quantity must be positive"
 msgstr ""
 
 #. module: stock_exception
-#: model:ir.model.fields,field_description:stock_exception.field_exception_rule__display_name
 #: model:ir.model.fields,field_description:stock_exception.field_stock_exception_confirm__display_name
-#: model:ir.model.fields,field_description:stock_exception.field_stock_move__display_name
-#: model:ir.model.fields,field_description:stock_exception.field_stock_picking__display_name
 msgid "Display Name"
 msgstr ""
 
@@ -84,10 +81,7 @@ msgid "Exceptions to resolve"
 msgstr ""
 
 #. module: stock_exception
-#: model:ir.model.fields,field_description:stock_exception.field_exception_rule__id
 #: model:ir.model.fields,field_description:stock_exception.field_stock_exception_confirm__id
-#: model:ir.model.fields,field_description:stock_exception.field_stock_move__id
-#: model:ir.model.fields,field_description:stock_exception.field_stock_picking__id
 msgid "ID"
 msgstr ""
 
@@ -100,10 +94,7 @@ msgid "Ignore Exceptions"
 msgstr ""
 
 #. module: stock_exception
-#: model:ir.model.fields,field_description:stock_exception.field_exception_rule____last_update
 #: model:ir.model.fields,field_description:stock_exception.field_stock_exception_confirm____last_update
-#: model:ir.model.fields,field_description:stock_exception.field_stock_move____last_update
-#: model:ir.model.fields,field_description:stock_exception.field_stock_picking____last_update
 msgid "Last Modified on"
 msgstr ""
 
@@ -164,7 +155,6 @@ msgstr ""
 #. module: stock_exception
 #: model:ir.actions.server,name:stock_exception.ir_cron_test_stock_picking_except_ir_actions_server
 #: model:ir.cron,cron_name:stock_exception.ir_cron_test_stock_picking_except
-#: model:ir.cron,name:stock_exception.ir_cron_test_stock_picking_except
 msgid "Stock: Test Draft Pickings Exception"
 msgstr ""
 
