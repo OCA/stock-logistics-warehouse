@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 Akretion
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="stock_quant_packaging_info_form_view">
+        <field name="name">stock.quant.packaging.info.form</field>
+        <field name="model">stock.quant.packaging.info</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <field name="quant_id" />
+                    <field name="packaging_id" />
+                    <field name="qty_per_pkg" />
+                    <field name="qty" />
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="stock_quant_packaging_info_search_view">
+        <field name="name">stock.quant.packaging.info.search</field>
+        <field name="model">stock.quant.packaging.info</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="quant_id" />
+                <field name="packaging_id" />
+                <field name="qty_per_pkg" />
+                <field name="qty" />
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="stock_quant_packaging_info_tree_view">
+        <field name="name">stock.quant.packaging.info.tree</field>
+        <field name="model">stock.quant.packaging.info</field>
+        <field name="arch" type="xml">
+            <tree editable="top">
+                <field name="quant_id" />
+                <field name="packaging_id" />
+                <field name="qty_per_pkg" />
+                <field name="qty" />
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="stock_quant_packaging_info_act_window">
+        <field name="name">Stock Quant Packaging Info</field>
+        <field name="res_model">stock.quant.packaging.info</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record model="ir.ui.menu" id="stock_quant_packaging_info_menu">
+        <field name="name">Stock Quant Packaging Info</field>
+        <field name="parent_id" ref="stock.menu_stock_root" />
+        <field name="action" ref="stock_quant_packaging_info_act_window" />
+        <field name="sequence" eval="16" />
+    </record>
+
+</odoo>

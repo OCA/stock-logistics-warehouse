@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 Akretion
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.model.access" id="stock_quant_packaging_info_access_stock_user">
+        <field name="name">stock.quant.packaging.info access stock user</field>
+        <field name="model_id" ref="model_stock_quant_packaging_info" />
+        <field name="group_id" ref="stock.group_stock_user" />
+        <field name="perm_read" eval="1" />
+        <field name="perm_create" eval="1" />
+        <field name="perm_write" eval="1" />
+        <field name="perm_unlink" eval="1" />
+    </record>
+
+</odoo>
