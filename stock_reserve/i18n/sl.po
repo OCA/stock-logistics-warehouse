@@ -339,6 +339,11 @@ msgid "If ticked, you will be able to select entire packages to move"
 msgstr ""
 
 #. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__ignore_exception
+msgid "Ignore Exceptions"
+msgstr ""
+
+#. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__from_immediate_transfer
 msgid "Immediate Transfer"
 msgstr ""
