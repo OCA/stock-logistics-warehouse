@@ -9,6 +9,7 @@ class StockQuant(models.Model):
     def _apply_inventory(self):
         res = super()._apply_inventory()
         record_moves = self.env["stock.move.line"]
+        adjustment = self.env["stock.inventory"].browse()
         for rec in self:
             adjustment = (
                 self.env["stock.inventory"]
