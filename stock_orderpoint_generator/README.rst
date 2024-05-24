@@ -17,19 +17,20 @@ Order point generator
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fstock--logistics--warehouse-lightgray.png?logo=github
-    :target: https://github.com/OCA/stock-logistics-warehouse/tree/15.0/stock_orderpoint_generator
+    :target: https://github.com/OCA/stock-logistics-warehouse/tree/17.0/stock_orderpoint_generator
     :alt: OCA/stock-logistics-warehouse
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/stock-logistics-warehouse-15-0/stock-logistics-warehouse-15-0-stock_orderpoint_generator
+    :target: https://translation.odoo-community.org/projects/stock-logistics-warehouse-17-0/stock-logistics-warehouse-17-0-stock_orderpoint_generator
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/stock-logistics-warehouse&target_branch=15.0
+    :target: https://runboat.odoo-community.org/builds?repo=OCA/stock-logistics-warehouse&target_branch=17.0
     :alt: Try me on Runboat
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-Add a wizard to configure reordering rules for multiple products in one go,
-and allow to automatically update reordering rules from rule templates.
+Add a wizard to configure reordering rules for multiple products in one
+go, and allow to automatically update reordering rules from rule
+templates.
 
 **Table of contents**
 
@@ -39,43 +40,47 @@ and allow to automatically update reordering rules from rule templates.
 Configuration
 =============
 
-Reordering rule templates can be configured in "Inventory > Configuration >
-Products > Reordering Rule Templates".
+Reordering rule templates can be configured in "Inventory >
+Configuration > Products > Reordering Rule Templates".
 
-The frequency of the cron that updates the Reordering Rules can be configured
-in "Settings > Technical > Automation > Scheduled Actions". The name of the
-scheduled action is "Reordering Rule Templates Generator".
+The frequency of the cron that updates the Reordering Rules can be
+configured in "Settings > Technical > Automation > Scheduled Actions".
+The name of the scheduled action is "Reordering Rule Templates
+Generator".
 
 Usage
 =====
 
-By activating the "Create Rules Automatically" on a reordering rule template,
-you are able to select a list of products. Any change on the template will then
-be replicated on the products Reordering Rules. The change is not immediate as
-it is processed by a scheduled action.
+By activating the "Create Rules Automatically" on a reordering rule
+template, you are able to select a list of products. Any change on the
+template will then be replicated on the products Reordering Rules. The
+change is not immediate as it is processed by a scheduled action.
 
-Aditionally, minimum and maximum quantity fields can be computed automatically
-if desired for the set of products and according to the desired criteria for
-the time range given. To do so:
+Aditionally, minimum and maximum quantity fields can be computed
+automatically if desired for the set of products and according to the
+desired criteria for the time range given. To do so:
 
-#. In an Orderpoint template, check "Auto minimum" or "Auto maximum" or both.
-#. The criteria fields for either one or another are visible now.
-#. Select a time range of moves to evalute. For every product a history of
-   the resulting stock for every move in such range and the location given
-   on the Orderpoint template will be obtained.
-#. Select a criteria method to compute the minimum o maximum quantity:
+1. In an Orderpoint template, check "Auto minimum" or "Auto maximum" or
+   both.
+2. The criteria fields for either one or another are visible now.
+3. Select a time range of moves to evalute. For every product a history
+   of the resulting stock for every move in such range and the location
+   given on the Orderpoint template will be obtained.
+4. Select a criteria method to compute the minimum o maximum quantity:
 
-   - Maximum: the maximum stock value for the given period.
-   - Most frequent: the median of the history of stock values for the specified
-     range. Useful when a large amount of history values are obtained, as it
-     tends to avoid deviation caused by extreme values in a common avarage.
-   - Average: Arithmetic mean of the stock history.
-   - Minimum: the minimum stock value for the given period.
+   -  Maximum: the maximum stock value for the given period.
+   -  Most frequent: the median of the history of stock values for the
+      specified range. Useful when a large amount of history values are
+      obtained, as it tends to avoid deviation caused by extreme values
+      in a common avarage.
+   -  Average: Arithmetic mean of the stock history.
+   -  Minimum: the minimum stock value for the given period.
 
-Lastly, you can promptly create Reordering Rules for a product or a product
-template using the "Reordering Rules Generator". Note that it will replace all
-the existing rules for the product. You will usually not want to use this
-feature on products that have Automatic Reordering Rules Templates.
+Lastly, you can promptly create Reordering Rules for a product or a
+product template using the "Reordering Rules Generator". Note that it
+will replace all the existing rules for the product. You will usually
+not want to use this feature on products that have Automatic Reordering
+Rules Templates.
 
 Bug Tracker
 ===========
@@ -83,7 +88,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/stock-logistics-warehouse/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/stock-logistics-warehouse/issues/new?body=module:%20stock_orderpoint_generator%0Aversion:%2015.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/stock-logistics-warehouse/issues/new?body=module:%20stock_orderpoint_generator%0Aversion:%2017.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -91,26 +96,26 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * Camptocamp
 * Tecnativa
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* Yannick Vaucher <yannick.vaucher@camptocamp.com>
-* Matthieu Dietrich <matthieu.dietrich@camptocamp.com>
-* Cyril Gaudin <cyril.gaudin@camptocamp.com>
-* Guewen Baconnier <guewen.baconnier@camptocamp.com>
-* `Tecnativa <https://www.tecnativa.com>`_:
+-  Yannick Vaucher <yannick.vaucher@camptocamp.com>
+-  Matthieu Dietrich <matthieu.dietrich@camptocamp.com>
+-  Cyril Gaudin <cyril.gaudin@camptocamp.com>
+-  Guewen Baconnier <guewen.baconnier@camptocamp.com>
+-  `Tecnativa <https://www.tecnativa.com>`__:
 
-  * Vicent Cubells
-  * David Vidal
-  * Víctor Martínez
+   -  Vicent Cubells
+   -  David Vidal
+   -  Víctor Martínez
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is maintained by the OCA.
 
@@ -122,6 +127,6 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
-This module is part of the `OCA/stock-logistics-warehouse <https://github.com/OCA/stock-logistics-warehouse/tree/15.0/stock_orderpoint_generator>`_ project on GitHub.
+This module is part of the `OCA/stock-logistics-warehouse <https://github.com/OCA/stock-logistics-warehouse/tree/17.0/stock_orderpoint_generator>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.
