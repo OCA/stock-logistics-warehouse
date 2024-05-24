@@ -21,12 +21,12 @@ class ProductProduct(models.Model):
         "the reordering rules of the product.",
     )
 
-    @api.model
-    def create(self, vals):
-        record = super().create(vals)
-        if vals.get("auto_orderpoint_template_ids"):
-            record.auto_orderpoint_template_ids.create_orderpoints(record)
-        return record
+    @api.model_create_multi
+    def create(self, vals_list):
+        products = super().create(vals_list)
+        for product in products.filtered(lambda pp: pp.auto_orderpoint_template_ids):
+            product.auto_orderpoint_template_ids.create_orderpoints(product)
+        return products
 
     def write(self, vals):
         result = super().write(vals)
@@ -118,9 +118,9 @@ class ProductProduct(models.Model):
         if to_date:
             domain += [("date", "<=", to_date)]
         move_lines = self.env["stock.move.line"].read_group(
-            domain, ["product_id", "qty_done"], ["product_id"]
+            domain, ["product_id", "quantity"], ["product_id"]
         )
-        return {p["product_id"][0]: p["qty_done"] for p in move_lines}
+        return {p["product_id"][0]: p["quantity"] for p in move_lines}
 
     def _compute_historic_quantities_dict(
         self, location_id=False, from_date=False, to_date=False

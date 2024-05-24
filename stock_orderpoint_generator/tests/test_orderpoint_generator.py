@@ -4,7 +4,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from odoo import models
 from odoo.exceptions import UserError
-from odoo.tests import Form, TransactionCase
+from odoo.tests import TransactionCase
 
 
 class TestOrderpointGenerator(TransactionCase):
@@ -64,7 +64,8 @@ class TestOrderpointGenerator(TransactionCase):
             {
                 "move_id": cls.p1m1.id,
                 "product_id": cls.p1.id,
-                "qty_done": 100,
+                "quantity": 100,
+                "picked": True,
                 "product_uom_id": cls.p1.uom_id.id,
                 "location_id": cls.supplier_loc.id,
                 "location_dest_id": cls.wh1.lot_stock_id.id,
@@ -86,7 +87,8 @@ class TestOrderpointGenerator(TransactionCase):
             {
                 "move_id": cls.p1m2.id,
                 "product_id": cls.p1.id,
-                "qty_done": 50,
+                "quantity": 50,
+                "picked": True,
                 "product_uom_id": cls.p1.uom_id.id,
                 "location_id": cls.wh1.lot_stock_id.id,
                 "location_dest_id": cls.customer_loc.id,
@@ -110,7 +112,8 @@ class TestOrderpointGenerator(TransactionCase):
             {
                 "move_id": cls.p1m3.id,
                 "product_id": cls.p1.id,
-                "qty_done": 5,
+                "quantity": 5,
+                "picked": True,
                 "product_uom_id": cls.p1.uom_id.id,
                 "location_id": cls.wh1.lot_stock_id.id,
                 "location_dest_id": cls.customer_loc.id,
@@ -132,7 +135,8 @@ class TestOrderpointGenerator(TransactionCase):
             {
                 "move_id": cls.p1m4.id,
                 "product_id": cls.p1.id,
-                "qty_done": 10,
+                "quantity": 10,
+                "picked": True,
                 "product_uom_id": cls.p1.uom_id.id,
                 "location_id": cls.supplier_loc.id,
                 "location_dest_id": cls.wh1.lot_stock_id.id,
@@ -154,7 +158,8 @@ class TestOrderpointGenerator(TransactionCase):
             {
                 "move_id": cls.p1m5.id,
                 "product_id": cls.p1.id,
-                "qty_done": 3,
+                "quantity": 3,
+                "picked": True,
                 "product_uom_id": cls.p1.uom_id.id,
                 "location_id": cls.wh1.lot_stock_id.id,
                 "location_dest_id": cls.customer_loc.id,
@@ -180,7 +185,8 @@ class TestOrderpointGenerator(TransactionCase):
             {
                 "move_id": cls.p2m1.id,
                 "product_id": cls.p2.id,
-                "qty_done": 1000,
+                "quantity": 1000,
+                "picked": True,
                 "product_uom_id": cls.p2.uom_id.id,
                 "location_id": cls.supplier_loc.id,
                 "location_dest_id": cls.wh1.lot_stock_id.id,
@@ -202,7 +208,8 @@ class TestOrderpointGenerator(TransactionCase):
             {
                 "move_id": cls.p2m2.id,
                 "product_id": cls.p2.id,
-                "qty_done": 50,
+                "quantity": 50,
+                "picked": True,
                 "product_uom_id": cls.p2.uom_id.id,
                 "location_id": cls.wh1.lot_stock_id.id,
                 "location_dest_id": cls.customer_loc.id,
@@ -224,7 +231,8 @@ class TestOrderpointGenerator(TransactionCase):
             {
                 "move_id": cls.p2m3.id,
                 "product_id": cls.p2.id,
-                "qty_done": 7,
+                "quantity": 7,
+                "picked": True,
                 "product_uom_id": cls.p2.uom_id.id,
                 "location_id": cls.wh1.lot_stock_id.id,
                 "location_dest_id": cls.customer_loc.id,
@@ -246,7 +254,8 @@ class TestOrderpointGenerator(TransactionCase):
             {
                 "move_id": cls.p2m4.id,
                 "product_id": cls.p2.id,
-                "qty_done": 100,
+                "quantity": 100,
+                "picked": True,
                 "product_uom_id": cls.p2.uom_id.id,
                 "location_id": cls.supplier_loc.id,
                 "location_dest_id": cls.wh1.lot_stock_id.id,
@@ -268,7 +277,8 @@ class TestOrderpointGenerator(TransactionCase):
             {
                 "move_id": cls.p2m5.id,
                 "product_id": cls.p2.id,
-                "qty_done": 3,
+                "quantity": 3,
+                "picked": True,
                 "product_uom_id": cls.p2.uom_id.id,
                 "location_id": cls.wh1.lot_stock_id.id,
                 "location_dest_id": cls.customer_loc.id,
@@ -312,13 +322,9 @@ class TestOrderpointGenerator(TransactionCase):
         self.check_orderpoint(products, self.template, self.orderpoint_fields_dict)
 
     def test_template_variants_orderpoint(self):
-        product_form = Form(self.p1.product_tmpl_id)
-        with product_form.attribute_line_ids.new() as attribute:
-            attribute.attribute_id = self.attr
-            attribute.value_ids.add(self.attr_value_a)
-            attribute.value_ids.add(self.attr_value_b)
-        product_form.save()
-        wizard = self.wizard_over_products(self.p1.product_tmpl_id, self.template)
+        """Raise error if product has multiple variants"""
+        product_template = self.env.ref("product.product_product_11_product_template")
+        wizard = self.wizard_over_products(product_template, self.template)
         with self.assertRaises(UserError):
             wizard.action_configure()
 

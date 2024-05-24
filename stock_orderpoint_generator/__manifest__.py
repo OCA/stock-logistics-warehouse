@@ -5,7 +5,7 @@
 {
     "name": "Order point generator",
     "summary": "Mass configuration of stock order points",
-    "version": "15.0.1.0.2",
+    "version": "17.0.1.0.0",
     "author": "Camptocamp, Tecnativa, Odoo Community Association (OCA)",
     "category": "Warehouse",
     "license": "AGPL-3",

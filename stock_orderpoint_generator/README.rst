@@ -114,6 +114,10 @@ Contributors
    -  David Vidal
    -  Víctor Martínez
 
+-  `360ERP <https://www.360erp.com>`__:
+
+   -  Andrea Stirpe
+
 Maintainers
 -----------
 

@@ -6,3 +6,5 @@
   - Vicent Cubells
   - David Vidal
   - Víctor Martínez
+- [360ERP](https://www.360erp.com):
+  - Andrea Stirpe
