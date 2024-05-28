@@ -77,7 +77,7 @@ class TestStockCycleCount(common.TransactionCase):
         cls.product1 = cls.product_model.create(
             {"name": "Test Product 1", "type": "product", "default_code": "PROD1"}
         )
-        self.product2 = self.product_model.create(
+        cls.product2 = cls.product_model.create(
             {"name": "Test Product 2", "type": "product", "default_code": "PROD2"}
         )
 
