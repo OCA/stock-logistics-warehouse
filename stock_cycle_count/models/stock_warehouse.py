@@ -158,10 +158,6 @@ class StockWarehouse(models.Model):
                 if open_cycle_counts:
                     continue
                 cycle_count.action_create_inventory_adjustment()
-                try:
-                    cycle_count.stock_adjustment_ids.action_state_to_in_progress()
-                except Exception as e:
-                    _logger.info("Error when beginning an adjustment: %s", str(e))
         except Exception as e:
             _logger.info("Error while running stock_cycle_count cron job: %s", str(e))
             raise

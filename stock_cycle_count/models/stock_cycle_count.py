@@ -1,9 +1,12 @@
 # Copyright 2017-18 ForgeFlow S.L.
 #   (http://www.forgeflow.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
+import logging
 
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
+
+_logger = logging.getLogger(__name__)
 
 
 class StockCycleCount(models.Model):
@@ -117,7 +120,11 @@ class StockCycleCount(models.Model):
                 inv.prefill_counted_quantity = (
                     rec.company_id.inventory_adjustment_counted_quantities
                 )
-                inv.action_state_to_in_progress()
+                try:
+                    inv.action_state_to_in_progress()
+                except Exception as e:
+                    _logger.info("Error when beginning an adjustment: %s", str(e))
+
                 if inv.prefill_counted_quantity == "zero":
                     inv.stock_quant_ids.write({"inventory_quantity": 0})
                 else:
