@@ -35,7 +35,6 @@ class StockInventory(models.Model):
         default=False,
     )
 
-
     def _update_cycle_state(self):
         for inv in self:
             if inv.cycle_count_id and inv.state == "done":
