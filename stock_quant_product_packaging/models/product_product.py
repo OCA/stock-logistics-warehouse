@@ -18,3 +18,13 @@ class ProductProduct(models.Model):
             rec.stock_quant_packaging_infos = ", ".join(
                 rec.stock_quant_ids.mapped("packaging_info_str")
             )
+            res = ", ".join(
+                [
+                    f"{info}, "
+                    for info in rec.stock_quant_ids.mapped("packaging_info_str")
+                    if info
+                ]
+            )
+            if res:
+                res = res[:-2]
+            rec.stock_quant_packaging_infos = res
