@@ -8,10 +8,10 @@ from odoo.tools.sql import column_exists, create_column
 _logger = logging.getLogger(__name__)
 
 
-def pre_init_hook(cr):
+def pre_init_hook(env):
     """Pre init create volume column on stock.picking and stock.move"""
-    if not column_exists(cr, "stock_move", "volume"):
-        create_column(cr, "stock_move", "volume", "numeric")
+    if not column_exists(env.cr, "stock_move", "volume"):
+        create_column(env.cr, "stock_move", "volume", "numeric")
         # First we compute the reserved qty by move_id
         # the reserved qty is the sum of the reserved qty of the move lines
         # linked to the move
@@ -19,39 +19,28 @@ def pre_init_hook(cr):
         # If the move is in state partially available, or assigned, the volume
         # is the reserved qty * the product volume
         # else the volume is the move quantity * the product volume
-        cr.execute(
+        env.cr.execute(
             """
-            with reserved_qty_by_move as (
-                select
-                    move_id,
-                    product_id,
-                    sum(reserved_qty) as reserved_qty
-                from stock_move_line
-                group by move_id, product_id
-            )
-            update stock_move
-                set volume =
+            UPDATE stock_move
+                SET volume =
                     CASE
                         WHEN state in ('partially_available', 'assigned') THEN
-                            reserved_qty * pp.volume
+                            quantity * pp.volume
                         ELSE
                             product_uom_qty * pp.volume
                     END
-            from reserved_qty_by_move
-            join product_product pp on pp.id = reserved_qty_by_move.product_id
-            where
-                stock_move.id = reserved_qty_by_move.move_id
-                and state not in ('done', 'cancel')
+            FROM product_product pp
+            WHERE state NOT IN ('done', 'cancel') and pp.id = stock_move.product_id
             """
         )
-        _logger.info(f"{cr.rowcount} rows updated in stock_move")
+        _logger.info(f"{env.cr.rowcount} rows updated in stock_move")
 
-    if not column_exists(cr, "stock_picking", "volume"):
-        create_column(cr, "stock_picking", "volume", "numeric")
+    if not column_exists(env.cr, "stock_picking", "volume"):
+        create_column(env.cr, "stock_picking", "volume", "numeric")
         # we recompute the volume of the pickings not in state done or cancel
         # the volume is the sum of the volume of the moves linked to the picking
         # that are not in state done or cancel
-        cr.execute(
+        env.cr.execute(
             """
             update stock_picking
                 set volume = (
@@ -64,4 +53,4 @@ def pre_init_hook(cr):
             where state not in ('done', 'cancel')
             """
         )
-        _logger.info(f"{cr.rowcount} rows updated in stock_picking")
+        _logger.info(f"{env.cr.rowcount} rows updated in stock_picking")
