@@ -12,13 +12,19 @@
                     <div class="oe_button_box" name="button_box" />
                     <group name="options">
                         <field name="edit_locations" widget="boolean_toggle" />
-                        <field
-                            name="apply_putaway_strategy"
-                            string="Apply putaway strategy for moving products"
-                            widget="boolean_toggle"
-                            groups="stock.group_stock_multi_locations"
-                        />
-                    </group>
+                    </div>
+                    <div>
+                        <label for="exclude_reserved_qty">
+                            Exclude Reserved Quantities
+                        </label>
+                        <field name="exclude_reserved_qty" widget="boolean_toggle" />
+                    </div>
+                    <div groups="stock.group_stock_multi_locations">
+                        <label for="apply_putaway_strategy">
+                Apply putaway strategy for moving products
+            </label>
+                        <field name="apply_putaway_strategy" widget="boolean_toggle" />
+                    </div>
                     <group name="picking_type">
                         <field name="picking_type_id" />
                     </group>
@@ -33,6 +39,7 @@
                             name="destination_location_id"
                             readonly="destination_location_disable"
                         />
+                        <field name="company_id" invisible="1" />
                     </group>
                     <group name="filters">
                     </group>
@@ -90,6 +97,11 @@
                                 />
                                 <field
                                     name="reserved_quantity"
+                                    readonly="1"
+                                    force_save="1"
+                                />
+                                <field
+                                    name="total_quantity"
                                     readonly="1"
                                     force_save="1"
                                 />
