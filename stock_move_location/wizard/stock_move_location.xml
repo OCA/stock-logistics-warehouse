@@ -16,6 +16,12 @@
                         </label>
                         <field name="edit_locations" widget="boolean_toggle" />
                     </div>
+                    <div>
+                        <label for="exclude_reserved_qty">
+                            Exclude Reserved Quantities
+                        </label>
+                        <field name="exclude_reserved_qty" widget="boolean_toggle" />
+                    </div>
                     <div groups="stock.group_stock_multi_locations">
                         <label for="apply_putaway_strategy">
                 Apply putaway strategy for moving products
@@ -36,6 +42,7 @@
                             name="destination_location_id"
                             readonly="destination_location_disable"
                         />
+                        <field name="company_id" invisible="1" />
                     </group>
                     <group name="lines">
                         <field
@@ -91,6 +98,11 @@
                                 />
                                 <field
                                     name="reserved_quantity"
+                                    readonly="1"
+                                    force_save="1"
+                                />
+                                <field
+                                    name="total_quantity"
                                     readonly="1"
                                     force_save="1"
                                 />
