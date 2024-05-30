@@ -3,7 +3,6 @@
 # Copyright 2019 Sergio Teruel - Tecnativa <sergio.teruel@tecnativa.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 
-from itertools import groupby
 
 from odoo import api, fields, models
 from odoo.fields import first
@@ -102,7 +101,9 @@ class StockMoveLocationWizard(models.TransientModel):
     @api.model
     def _prepare_wizard_move_lines(self, quants):
         res = []
-        exclude_reserved_qty = self.env.context.get("only_reserved_qty", False)
+        exclude_reserved_qty = self.env.context.get(
+            "only_reserved_qty", self.exclude_reserved_qty
+        )
         if not exclude_reserved_qty:
             res = [
                 (
@@ -125,9 +126,7 @@ class StockMoveLocationWizard(models.TransientModel):
             ]
         else:
             # if need move only available qty per product on location
-            for _product, quant in groupby(quants, lambda r: r.product_id):
-                # we need only one quant per product
-                quant = list(quant)[0]
+            for quant in quants:
                 qty = quant._get_available_quantity(
                     quant.product_id,
                     quant.location_id,
@@ -196,8 +195,7 @@ class StockMoveLocationWizard(models.TransientModel):
         groups = self.group_lines()
         moves = self.env["stock.move"]
         for lines in groups.values():
-            move = self._create_move(picking, lines)
-            moves |= move
+            moves |= self._create_move(picking, lines)
         return moves
 
     def _get_move_values(self, picking, lines):
@@ -224,18 +222,19 @@ class StockMoveLocationWizard(models.TransientModel):
         lines.create_move_lines(picking, move)
         if self.env.context.get("planned"):
             for line in lines:
-                available_quantity = self.env["stock.quant"]._get_available_quantity(
+                quants = self.env["stock.quant"]._gather(
                     line.product_id,
                     line.origin_location_id,
                     lot_id=line.lot_id,
                     package_id=line.package_id,
                     owner_id=line.owner_id,
-                    strict=True,
+                    strict=False,
+                    qty=line.move_quantity,
                 )
                 move._update_reserved_quantity(
                     line.move_quantity,
-                    available_quantity,
                     line.origin_location_id,
+                    quant_ids=quants,
                     lot_id=line.lot_id,
                     package_id=line.package_id,
                     owner_id=line.owner_id,
@@ -247,7 +246,7 @@ class StockMoveLocationWizard(models.TransientModel):
             move.move_line_ids.write({"state": "assigned"})
         return move
 
-    def _unreserve_moves(self):
+    def _unreserve_moves(self, picking):
         """
         Try to unreserve moves that they has reserved quantity before user
         moves products from a location to other one and change move origin
@@ -256,9 +255,14 @@ class StockMoveLocationWizard(models.TransientModel):
         """
         moves_to_reassign = self.env["stock.move"]
         lines_to_ckeck_reverve = self.stock_move_location_line_ids.filtered(
-            lambda l: (
-                l.move_quantity > l.max_quantity - l.reserved_quantity
-                and not l.origin_location_id.should_bypass_reservation()
+            lambda line: (
+                line.move_quantity
+                > (
+                    line.max_quantity
+                    if self.exclude_reserved_qty
+                    else line.max_quantity - line.reserved_quantity
+                )
+                and not line.origin_location_id.should_bypass_reservation()
             )
         )
         for line in lines_to_ckeck_reverve:
@@ -270,7 +274,8 @@ class StockMoveLocationWizard(models.TransientModel):
                     ("lot_id", "=", line.lot_id.id),
                     ("package_id", "=", line.package_id.id),
                     ("owner_id", "=", line.owner_id.id),
-                    ("qty_done", ">", 0.0),
+                    ("quantity", ">", 0.0),
+                    ("picking_id", "!=", picking.id),
                 ]
             )
             moves_to_unreserve = move_lines.mapped("move_id")
@@ -281,17 +286,10 @@ class StockMoveLocationWizard(models.TransientModel):
 
     def action_move_location(self):
         self.ensure_one()
-        if not self.picking_id:
-            picking = self._create_picking()
-        else:
-            picking = self.picking_id
-        # Prevent putaway rules to be excuted when we don't need to
-        picking = picking.with_context(
-            avoid_putaway_rules=not self.apply_putaway_strategy
-        )
+        picking = self.picking_id if self.picking_id else self._create_picking()
         self._create_moves(picking)
         if not self.env.context.get("planned"):
-            moves_to_reassign = self._unreserve_moves()
+            moves_to_reassign = self._unreserve_moves(picking)
             picking.button_validate()
             moves_to_reassign._action_assign()
         self.picking_id = picking
@@ -330,7 +328,12 @@ class StockMoveLocationWizard(models.TransientModel):
 
     def _get_stock_move_location_lines_values(self):
         product_obj = self.env["product.product"]
+        quant_obj = self.env["stock.quant"]
+        lot_obj = self.env["stock.lot"]
         product_data = []
+        exclude_reserved_qty = self.env.context.get(
+            "only_reserved_qty", self.exclude_reserved_qty
+        )
         for group in self._get_group_quants():
             product = product_obj.browse(group["product_id"][0]).exists()
             # Apply the putaway strategy
@@ -339,6 +342,13 @@ class StockMoveLocationWizard(models.TransientModel):
                 and self.destination_location_id._get_putaway_strategy(product).id
                 or self.destination_location_id.id
             )
+            res_qty = group.get("reserved_quantity") or 0.0
+            if not res_qty:
+                lot = lot_obj.browse(group.get("lot_id"))
+                quants = quant_obj._gather(product, self.origin_location_id, lot_id=lot)
+                res_qty = sum(quants.mapped("reserved_quantity"))
+            total_qty = group.get("quantity") or 0.0
+            max_qty = total_qty if not exclude_reserved_qty else total_qty - res_qty
             product_data.append(
                 {
                     "product_id": product.id,

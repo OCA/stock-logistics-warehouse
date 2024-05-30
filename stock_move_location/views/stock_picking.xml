@@ -9,7 +9,7 @@
             <button name="action_confirm" position="before">
                 <button
                     name="button_fillwithstock"
-                    states="draft"
+                    invisible="state != 'draft'"
                     string="Fill with stock"
                     type="object"
                     class="oe_highlight"
