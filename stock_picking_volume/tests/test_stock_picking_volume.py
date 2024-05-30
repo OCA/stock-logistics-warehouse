@@ -120,7 +120,7 @@ class TestStockPickingVolume(TransactionCase):
         self._set_product_qty(self.product, 1)
         self.picking.action_confirm()
         self.picking.action_assign()
-        self.picking.move_line_ids.qty_done = 1
+        self.picking.move_line_ids.quantity = 1
         self.picking.button_validate()
         self.assertEqual(self.picking.volume, 150)
 
@@ -140,7 +140,7 @@ class TestStockPickingVolume(TransactionCase):
         self._set_product_qty(self.product, 1)
         self.picking.action_confirm()
         self.picking.action_assign()
-        self.picking.move_line_ids.qty_done = 1
+        self.picking.move_line_ids.quantity = 1
         self.picking.button_validate()
         self.picking.action_cancel()
         self.assertEqual(self.picking.volume, 750)
@@ -179,10 +179,10 @@ class TestStockPickingVolume(TransactionCase):
         )
         self.picking.action_confirm()
         self.picking.action_assign()
-        self.picking.invalidate_cache()
+        self.picking.invalidate_model()
         self.assertEqual(self.picking.volume, 750 * 2)
         self.picking.move_ids[1]._action_cancel()
-        self.picking.invalidate_cache()
+        self.picking.invalidate_model()
         self.assertEqual(self.picking.volume, 750)
 
     def test_product_volume(self):
