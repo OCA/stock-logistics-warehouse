@@ -5,10 +5,10 @@
         <field name="model">stock.picking.type</field>
         <field name="inherit_id" ref="stock.view_picking_type_form" />
         <field name="arch" type="xml">
-            <field name="show_operations" position="after">
+            <field name="create_backorder" position="after">
                 <field
                     name="show_move_onhand"
-                    attrs='{"invisible": [("code", "not in", ["internal"])]}'
+                    invisible="code != 'internal'"
                 />
             </field>
         </field>

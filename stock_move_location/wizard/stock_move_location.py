@@ -224,18 +224,19 @@ class StockMoveLocationWizard(models.TransientModel):
         lines.create_move_lines(picking, move)
         if self.env.context.get("planned"):
             for line in lines:
-                available_quantity = self.env["stock.quant"]._get_available_quantity(
+                quants = self.env["stock.quant"]._gather(
                     line.product_id,
                     line.origin_location_id,
                     lot_id=line.lot_id,
                     package_id=line.package_id,
                     owner_id=line.owner_id,
                     strict=False,
+                    qty=line.move_quantity,
                 )
                 move._update_reserved_quantity(
                     line.move_quantity,
-                    available_quantity,
                     line.origin_location_id,
+                    quant_ids=quants,
                     lot_id=line.lot_id,
                     package_id=line.package_id,
                     owner_id=line.owner_id,

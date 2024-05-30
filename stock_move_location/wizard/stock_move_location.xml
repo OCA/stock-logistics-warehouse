@@ -29,12 +29,12 @@
                         <field name="origin_location_disable" invisible="True" />
                         <field
                             name="origin_location_id"
-                            attrs="{'readonly': [('origin_location_disable', '=', True)]}"
+                            readonly="origin_location_disable"
                         />
                         <field name="destination_location_disable" invisible="True" />
                         <field
                             name="destination_location_id"
-                            attrs="{'readonly': [('destination_location_disable', '=', True)]}"
+                            readonly="destination_location_disable"
                         />
                     </group>
                     <group name="lines">
@@ -86,7 +86,7 @@
                                 <field name="custom" invisible="1" />
                                 <field
                                     name="max_quantity"
-                                    attrs="{'readonly': [('custom', '!=', True)]}"
+                                    readonly="not custom"
                                     force_save="1"
                                 />
                                 <field
