@@ -7,7 +7,7 @@ import odoo.tests.common as common
 
 class TestFillwithStock(common.TransactionCase):
     def setUp(self):
-        super(TestFillwithStock, self).setUp()
+        super().setUp()
         self.env = self.env(
             context=dict(
                 self.env.context,
