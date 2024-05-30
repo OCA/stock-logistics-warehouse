@@ -44,6 +44,9 @@ class StockMoveLocationWizardLine(models.TransientModel):
     max_quantity = fields.Float(
         string="Maximum available quantity", digits="Product Unit of Measure"
     )
+    total_quantity = fields.Float(
+        string="Total existence quantity", digits="Product Unit of Measure"
+    )
     reserved_quantity = fields.Float(digits="Product Unit of Measure")
     custom = fields.Boolean(string="Custom line", default=True)
 
@@ -63,28 +66,6 @@ class StockMoveLocationWizardLine(models.TransientModel):
                 raise ValidationError(
                     _("Move quantity can not exceed max quantity or be negative")
                 )
-
-    def get_max_quantity(self):
-        self.product_uom_id = self.product_id.uom_id
-        search_args = [
-            ("location_id", "=", self.origin_location_id.id),
-            ("product_id", "=", self.product_id.id),
-        ]
-        if self.lot_id:
-            search_args.append(("lot_id", "=", self.lot_id.id))
-        else:
-            search_args.append(("lot_id", "=", False))
-        if self.package_id:
-            search_args.append(("package_id", "=", self.package_id.id))
-        else:
-            search_args.append(("package_id", "=", False))
-        if self.owner_id:
-            search_args.append(("owner_id", "=", self.owner_id.id))
-        else:
-            search_args.append(("owner_id", "=", False))
-        res = self.env["stock.quant"].read_group(search_args, ["quantity"], [])
-        max_quantity = res[0]["quantity"]
-        return max_quantity
 
     def create_move_lines(self, picking, move):
         for line in self:
