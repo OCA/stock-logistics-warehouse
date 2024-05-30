@@ -38,17 +38,20 @@ class StockMoveLocationWizard(models.TransientModel):
         "move_location_wizard_id",
         string="Move Location lines",
     )
+    company_id = fields.Many2one("res.company", default=lambda self: self.env.company)
     picking_type_id = fields.Many2one(
         compute="_compute_picking_type_id",
         comodel_name="stock.picking.type",
         readonly=False,
         store=True,
+        domain="[('company_id', '=', company_id), ('code', '=', 'internal')]",
     )
     picking_id = fields.Many2one(
         string="Connected Picking", comodel_name="stock.picking"
     )
     edit_locations = fields.Boolean(default=True)
     apply_putaway_strategy = fields.Boolean()
+    exclude_reserved_qty = fields.Boolean(default=True)
 
     @api.depends("edit_locations")
     def _compute_readonly_locations(self):
@@ -66,15 +69,20 @@ class StockMoveLocationWizard(models.TransientModel):
     @api.depends_context("company")
     @api.depends("origin_location_id")
     def _compute_picking_type_id(self):
-        company_id = self.env.context.get("company_id") or self.env.company.id
         for rec in self:
             picking_type = self.env["stock.picking.type"]
             base_domain = [
-                ("code", "in", ("internal", "outgoing")),
-                ("warehouse_id.company_id", "=", company_id),
+                ("code", "=", "internal"),
+                ("warehouse_id.company_id", "=", self.company_id.id),
             ]
             if rec.origin_location_id:
                 location_id = rec.origin_location_id
+                if (
+                    location_id
+                    and rec.picking_type_id
+                    and rec.picking_type_id.default_location_src_id == location_id
+                ):
+                    continue
                 while location_id and not picking_type:
                     domain = [("default_location_src_id", "=", location_id.id)]
                     domain = expression.AND([base_domain, domain])
@@ -101,10 +109,7 @@ class StockMoveLocationWizard(models.TransientModel):
     @api.model
     def _prepare_wizard_move_lines(self, quants):
         res = []
-        exclude_reserved_qty = self.env.context.get(
-            "only_reserved_qty", self.exclude_reserved_qty
-        )
-        if not exclude_reserved_qty:
+        if not self.exclude_reserved_qty:
             res = [
                 (
                     0,
@@ -114,6 +119,7 @@ class StockMoveLocationWizard(models.TransientModel):
                         "move_quantity": quant.quantity,
                         "max_quantity": quant.quantity,
                         "reserved_quantity": quant.reserved_quantity,
+                        "total_quantity": quant.quantity,
                         "origin_location_id": quant.location_id.id,
                         "lot_id": quant.lot_id.id,
                         "package_id": quant.package_id.id,
@@ -130,6 +136,9 @@ class StockMoveLocationWizard(models.TransientModel):
                 qty = quant._get_available_quantity(
                     quant.product_id,
                     quant.location_id,
+                    quant.lot_id,
+                    quant.package_id,
+                    quant.owner_id,
                 )
                 if qty:
                     res.append(
@@ -141,6 +150,7 @@ class StockMoveLocationWizard(models.TransientModel):
                                 "move_quantity": qty,
                                 "max_quantity": qty,
                                 "reserved_quantity": quant.reserved_quantity,
+                                "total_quantity": quant.quantity,
                                 "origin_location_id": quant.location_id.id,
                                 "lot_id": quant.lot_id.id,
                                 "package_id": quant.package_id.id,
@@ -151,11 +161,6 @@ class StockMoveLocationWizard(models.TransientModel):
                         )
                     )
         return res
-
-    @api.onchange("origin_location_id")
-    def _onchange_origin_location_id(self):
-        if not self.env.context.get("origin_location_disable", False):
-            self._clear_lines()
 
     @api.onchange("destination_location_id")
     def _onchange_destination_location_id(self):
@@ -255,14 +260,9 @@ class StockMoveLocationWizard(models.TransientModel):
         """
         moves_to_reassign = self.env["stock.move"]
         lines_to_ckeck_reverve = self.stock_move_location_line_ids.filtered(
-            lambda line: (
-                line.move_quantity
-                > (
-                    line.max_quantity
-                    if self.exclude_reserved_qty
-                    else line.max_quantity - line.reserved_quantity
-                )
-                and not line.origin_location_id.should_bypass_reservation()
+            lambda l: (
+                l.move_quantity > l.max_quantity
+                and not l.origin_location_id.should_bypass_reservation()
             )
         )
         for line in lines_to_ckeck_reverve:
@@ -342,19 +342,18 @@ class StockMoveLocationWizard(models.TransientModel):
                 and self.destination_location_id._get_putaway_strategy(product).id
                 or self.destination_location_id.id
             )
-            res_qty = group.get("reserved_quantity") or 0.0
-            if not res_qty:
-                lot = lot_obj.browse(group.get("lot_id"))
-                quants = quant_obj._gather(product, self.origin_location_id, lot_id=lot)
-                res_qty = sum(quants.mapped("reserved_quantity"))
-            total_qty = group.get("quantity") or 0.0
-            max_qty = total_qty if not exclude_reserved_qty else total_qty - res_qty
+            res_qty = group.get("reserved_quantity", 0.0)
+            total_qty = group.get("quantity", 0.0)
+            max_qty = (
+                total_qty if not self.exclude_reserved_qty else total_qty - res_qty
+            )
             product_data.append(
                 {
                     "product_id": product.id,
-                    "move_quantity": group.get("quantity") or 0,
-                    "max_quantity": group.get("quantity") or 0,
-                    "reserved_quantity": group.get("reserved_quantity"),
+                    "move_quantity": max_qty,
+                    "max_quantity": max_qty,
+                    "reserved_quantity": res_qty,
+                    "total_quantity": total_qty,
                     "origin_location_id": self.origin_location_id.id,
                     "destination_location_id": location_dest_id,
                     # cursor returns None instead of False
@@ -371,21 +370,7 @@ class StockMoveLocationWizard(models.TransientModel):
             )
         return product_data
 
-    def _reset_stock_move_location_lines(self):
-        lines = []
-        line_model = self.env["wiz.stock.move.location.line"]
-        for line_val in self._get_stock_move_location_lines_values():
-            if line_val.get("max_quantity") <= 0:
-                continue
-            line = line_model.create(line_val)
-            line.max_quantity = line.get_max_quantity()
-            line.reserved_quantity = line.reserved_quantity
-            lines.append(line)
-        self.update(
-            {"stock_move_location_line_ids": [(6, 0, [line.id for line in lines])]}
-        )
-
-    @api.onchange("origin_location_id")
+    @api.onchange("origin_location_id", "exclude_reserved_qty")
     def onchange_origin_location(self):
         # Get origin_location_disable context key to prevent load all origin
         # location products when user opens the wizard from stock quants to
@@ -394,7 +379,12 @@ class StockMoveLocationWizard(models.TransientModel):
             not self.env.context.get("origin_location_disable")
             and self.origin_location_id
         ):
-            self._reset_stock_move_location_lines()
+            lines = [[5, 0, 0]] + [
+                [0, 0, line_vals]
+                for line_vals in self._get_stock_move_location_lines_values()
+                if line_vals.get("max_quantity", 0.0) > 0.0
+            ]
+            self.update({"stock_move_location_line_ids": lines})
 
     def clear_lines(self):
         self._clear_lines()
