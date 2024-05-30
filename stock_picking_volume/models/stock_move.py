@@ -5,7 +5,6 @@ from odoo import api, fields, models
 
 
 class StockMove(models.Model):
-
     _inherit = "stock.move"
 
     volume = fields.Float(
@@ -20,12 +19,12 @@ class StockMove(models.Model):
         string="Volume unit of measure label", compute="_compute_volume_uom_name"
     )
 
-    @api.depends("product_id", "product_uom_qty", "state", "move_line_ids.reserved_qty")
+    @api.depends("product_id", "product_uom_qty", "state", "quantity")
     def _compute_volume(self):
         for move in self:
             qty = move.product_uom_qty
             if move.state in ("partially_available", "assigned"):
-                qty = move.reserved_availability
+                qty = move.quantity
             new_volume = move.product_id._get_volume_for_qty(qty, move.product_uom)
             if move.volume != new_volume:
                 move.volume = new_volume
