@@ -17,26 +17,27 @@ Stock Picking Volume
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fstock--logistics--warehouse-lightgray.png?logo=github
-    :target: https://github.com/OCA/stock-logistics-warehouse/tree/16.0/stock_picking_volume
+    :target: https://github.com/OCA/stock-logistics-warehouse/tree/17.0/stock_picking_volume
     :alt: OCA/stock-logistics-warehouse
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/stock-logistics-warehouse-16-0/stock-logistics-warehouse-16-0-stock_picking_volume
+    :target: https://translation.odoo-community.org/projects/stock-logistics-warehouse-17-0/stock-logistics-warehouse-17-0-stock_picking_volume
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/stock-logistics-warehouse&target_branch=16.0
+    :target: https://runboat.odoo-community.org/builds?repo=OCA/stock-logistics-warehouse&target_branch=17.0
     :alt: Try me on Runboat
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-For some processes, you need to know the volume of your stock picking. This could
-be useful for example to know the device to use to process it. An other use case
-could be to know how many trucks you need to deliver your products.
+For some processes, you need to know the volume of your stock picking.
+This could be useful for example to know the device to use to process
+it. An other use case could be to know how many trucks you need to
+deliver your products.
 
-By default, the delivery module from Odoo will compute the picking weight.
-Unfortunately, it will not compute the volume. This module will add the volume
-computation to the picking and to the stock move. This information will be
-stored in the database and will be available on the picking form view and
-on the stock move form view.
+By default, the delivery module from Odoo will compute the picking
+weight. Unfortunately, it will not compute the volume. This module will
+add the volume computation to the picking and to the stock move. This
+information will be stored in the database and will be available on the
+picking form view and on the stock move form view.
 
 **Table of contents**
 
@@ -46,22 +47,22 @@ on the stock move form view.
 Usage
 =====
 
-In order to have a pertinent value for the computed volume, the dimension fields
-must be set on all the products.
+In order to have a pertinent value for the computed volume, the
+dimension fields must be set on all the products.
 
 The computed volume depends on the move state.
 
-* If the move is done, the volume is the volume for the qty done.
-* If the move is cancelled or draft waiting, the volume is the volume for the
-  qty to do.
-* if the move is available or partially available, the volume is the volume
-  for the reserved quantity.
+-  If the move is done, the volume is the volume for the qty done.
+-  If the move is cancelled or draft waiting, the volume is the volume
+   for the qty to do.
+-  if the move is available or partially available, the volume is the
+   volume for the reserved quantity.
 
-When the module is installed on an existing database, the volume field is only
-computed for the stock moves of pickings not yet processed.
-The moves in a cancelled or done picking are not updated to avoid to freeze the
-database for a long time during the upgrade process if it contains a lot of
-stock moves and pickings.
+When the module is installed on an existing database, the volume field
+is only computed for the stock moves of pickings not yet processed. The
+moves in a cancelled or done picking are not updated to avoid to freeze
+the database for a long time during the upgrade process if it contains a
+lot of stock moves and pickings.
 
 Bug Tracker
 ===========
@@ -69,7 +70,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/stock-logistics-warehouse/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/stock-logistics-warehouse/issues/new?body=module:%20stock_picking_volume%0Aversion:%2016.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/stock-logistics-warehouse/issues/new?body=module:%20stock_picking_volume%0Aversion:%2017.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -77,25 +78,25 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * ACSONE SA/NV
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* Laurent Mignon <laurent.mignon@acsone.eu> (https://www.acsone.eu/)
+-  Laurent Mignon <laurent.mignon@acsone.eu> (https://www.acsone.eu/)
 
 Other credits
-~~~~~~~~~~~~~
+-------------
 
 The development of this module has been financially supported by:
 
-* ACSONE SA/NV
-* Alcyon Benelux
+-  ACSONE SA/NV
+-  Alcyon Benelux
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is maintained by the OCA.
 
@@ -115,6 +116,6 @@ Current `maintainer <https://odoo-community.org/page/maintainer-role>`__:
 
 |maintainer-lmignon| 
 
-This module is part of the `OCA/stock-logistics-warehouse <https://github.com/OCA/stock-logistics-warehouse/tree/16.0/stock_picking_volume>`_ project on GitHub.
+This module is part of the `OCA/stock-logistics-warehouse <https://github.com/OCA/stock-logistics-warehouse/tree/17.0/stock_picking_volume>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.
