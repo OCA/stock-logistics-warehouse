@@ -4,6 +4,7 @@
 
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
+from odoo.osv.expression import NEGATIVE_TERM_OPERATORS
 
 NOPACKAGE = "nopackage"
 SINGLEPACKAGE = "singlepackage"
@@ -38,6 +39,67 @@ class StockLocation(models.Model):
             (MULTIPACKAGE, "Mandatory"),
             (SINGLEPACKAGE, "Mandatory and unique"),
         ]
+
+    has_package_restriction_violation = fields.Boolean(
+        compute="_compute_has_package_restriction_violation",
+        search="_search_has_package_restriction_violation",
+    )
+
+    def _has_package_restriction_violation_query(self):
+        self.flush()
+        query = """
+            SELECT stock_quant.location_id
+            FROM stock_quant
+            JOIN stock_location ON stock_location.id = stock_quant.location_id
+            WHERE
+                quantity != 0
+                AND stock_location.package_restriction IS NOT NULL
+            """
+        if self:
+            query += "AND stock_quant.location_id in %s"
+        query += f"""
+            GROUP BY
+                stock_quant.location_id, stock_location.package_restriction
+            HAVING
+                (
+                    stock_location.package_restriction = '{NOPACKAGE}'
+                    AND count(distinct(stock_quant.package_id)) > 0
+                ) OR (
+                    stock_location.package_restriction = '{SINGLEPACKAGE}'
+                    AND (
+                        count(distinct(stock_quant.package_id)) > 1
+                        OR count(*) FILTER (WHERE stock_quant.package_id IS NULL) > 0
+                    )
+                ) OR (
+                    stock_location.package_restriction = '{MULTIPACKAGE}'
+                    AND count(*) FILTER (WHERE stock_quant.package_id IS NULL) > 0
+                )
+        """
+        return query
+
+    @api.depends("package_restriction")
+    def _compute_has_package_restriction_violation(self):
+        self.env.cr.execute(
+            self._has_package_restriction_violation_query(), (tuple(self.ids),)
+        )
+        error_ids = [r[0] for r in self.env.cr.fetchall()]
+        for location in self:
+            location.has_package_restriction_violation = location.id in error_ids
+
+    def _search_has_package_restriction_violation(self, operator, value):
+        search_has_violation = (
+            # has_restriction_violation != False
+            (operator in NEGATIVE_TERM_OPERATORS and not value)
+            # has_restriction_violation = True
+            or (operator not in NEGATIVE_TERM_OPERATORS and value)
+        )
+        self.env.cr.execute(self._has_package_restriction_violation_query())
+        error_ids = [r[0] for r in self.env.cr.fetchall()]
+        if search_has_violation:
+            op = "in"
+        else:
+            op = "not in"
+        return [("id", op, error_ids)]
 
     def _check_package_restriction(self, move_lines=None):
         """Check if the location respect the package restrictions
