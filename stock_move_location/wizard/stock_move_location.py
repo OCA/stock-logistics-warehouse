@@ -203,8 +203,7 @@ class StockMoveLocationWizard(models.TransientModel):
         groups = self.group_lines()
         moves = self.env["stock.move"]
         for lines in groups.values():
-            move = self._create_move(picking, lines)
-            moves |= move
+            moves |= self._create_move(picking, lines)
         return moves
 
     def _get_move_values(self, picking, lines):
@@ -278,7 +277,7 @@ class StockMoveLocationWizard(models.TransientModel):
                     ("lot_id", "=", line.lot_id.id),
                     ("package_id", "=", line.package_id.id),
                     ("owner_id", "=", line.owner_id.id),
-                    ("qty_done", ">", 0.0),
+                    ("quantity", ">", 0.0),
                 ]
             )
             moves_to_unreserve = move_lines.mapped("move_id")
@@ -289,10 +288,7 @@ class StockMoveLocationWizard(models.TransientModel):
 
     def action_move_location(self):
         self.ensure_one()
-        if not self.picking_id:
-            picking = self._create_picking()
-        else:
-            picking = self.picking_id
+        picking = self.picking_id if self.picking_id else self._create_picking()
         self._create_moves(picking)
         if not self.env.context.get("planned"):
             moves_to_reassign = self._unreserve_moves()
@@ -336,8 +332,8 @@ class StockMoveLocationWizard(models.TransientModel):
                 and self.destination_location_id._get_putaway_strategy(product).id
                 or self.destination_location_id.id
             )
-            res_qty = group.get("reserved_quantity", 0.0)
-            total_qty = group.get("quantity", 0.0)
+            res_qty = group.get("reserved_quantity") or 0.0
+            total_qty = group.get("quantity") or 0.0
             max_qty = (
                 total_qty if not self.exclude_reserved_qty else total_qty - res_qty
             )

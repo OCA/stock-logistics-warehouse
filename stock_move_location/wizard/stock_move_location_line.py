@@ -70,7 +70,7 @@ class StockMoveLocationWizardLine(models.TransientModel):
     def create_move_lines(self, picking, move):
         for line in self:
             values = line._get_move_line_values(picking, move)
-            if not self.env.context.get("planned") and values.get("qty_done") <= 0:
+            if not self.env.context.get("planned") and values.get("quantity") <= 0:
                 continue
             self.env["stock.move.line"].create(values)
         return True
@@ -82,7 +82,7 @@ class StockMoveLocationWizardLine(models.TransientModel):
             and self.destination_location_id._get_putaway_strategy(self.product_id).id
             or self.destination_location_id.id
         )
-        qty_todo, qty_done = self._get_available_quantity()
+        qty_done = self._get_available_quantity()
         return {
             "product_id": self.product_id.id,
             "lot_id": self.lot_id.id,
@@ -91,7 +91,7 @@ class StockMoveLocationWizardLine(models.TransientModel):
             "owner_id": self.owner_id.id,
             "location_id": self.origin_location_id.id,
             "location_dest_id": location_dest_id,
-            "qty_done": qty_done,
+            "quantity": qty_done,
             "product_uom_id": self.product_uom_id.id,
             "picking_id": picking.id,
             "move_id": move.id,
@@ -107,7 +107,7 @@ class StockMoveLocationWizardLine(models.TransientModel):
             return 0
         if self.env.context.get("planned"):
             # for planned transfer we don't care about the amounts at all
-            return self.move_quantity, 0
+            return 0.0
         search_args = [
             ("location_id", "=", self.origin_location_id.id),
             ("product_id", "=", self.product_id.id),
@@ -134,6 +134,4 @@ class StockMoveLocationWizardLine(models.TransientModel):
         available_qty_lt_move_qty = (
             self._compare(available_qty, self.move_quantity, rounding) == -1
         )
-        if available_qty_lt_move_qty:
-            return available_qty
-        return 0, self.move_quantity
+        return available_qty if available_qty_lt_move_qty else self.move_quantity

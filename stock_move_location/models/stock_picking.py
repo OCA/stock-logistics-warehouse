@@ -42,9 +42,13 @@ class StockPicking(models.Model):
             raise UserError(_("Moves lines already exists"))
 
     def _get_movable_quants(self):
-        return self.env["stock.quant"].search(
-            [
-                ("location_id", "=", self.location_id.id),
-                ("quantity", ">", 0.0),
-            ]
+        return (
+            self.env["stock.quant"]
+            .search(
+                [
+                    ("location_id", "=", self.location_id.id),
+                    ("quantity", ">", 0.0),
+                ]
+            )
+            .filtered(lambda quant: quant.quantity - quant.reserved_quantity > 0.0)
         )

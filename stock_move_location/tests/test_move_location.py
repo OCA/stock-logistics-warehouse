@@ -272,7 +272,7 @@ class TestMoveLocation(TestsCommon):
         self.assertEqual(delivery_picking.state, "confirmed")
         internal_picking.action_confirm()
         internal_picking.action_assign()
-        internal_picking.move_line_ids.qty_done = (
+        internal_picking.move_line_ids.quantity = (
             internal_picking.move_line_ids.reserved_uom_qty
         )
         internal_picking.button_validate()
