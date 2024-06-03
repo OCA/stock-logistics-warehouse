@@ -36,4 +36,23 @@
             </xpath>
         </field>
     </record>
+
+    <record id="quant_search_last_has_over_discrepancy" model="ir.ui.view">
+        <field name="name">stock.quant.last_has_over_discrepancy.search</field>
+        <field name="model">stock.quant</field>
+        <field name="inherit_id" ref="stock.quant_search_view" />
+        <field eval="10" name="priority" />
+        <field name="arch" type="xml">
+            <field name="owner_id" position="after">
+                <field name="has_over_discrepancy" />
+            </field>
+            <filter name="internal_loc" position="after">
+                <filter
+                    name='has_over_discrepancy'
+                    string="Over Discrepancy"
+                    domain="[('has_over_discrepancy','=', True)]"
+                />
+            </filter>
+        </field>
+    </record>
 </odoo>
