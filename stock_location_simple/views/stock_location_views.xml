@@ -26,19 +26,32 @@
                     />
                     <label for="name" class="oe_edit_only" />
                     <h1>
-                        <field name="name"/>
+                        <field
+                            name="name"
+                            attrs="{'readonly': [('is_linked_to_warehouse', '=', True)]}"
+                        />
                     </h1>
-                    <label for="location_id" class="oe_edit_only"/>
+                    <label for="location_id" class="oe_edit_only" />
                     <h2>
-                        <field name="location_id" required="1" domain="[('usage', '=', 'internal')]"/>
+                        <field
+                            name="location_id"
+                            required="1"
+                            domain="[('usage', '=', 'internal')]"
+                            attrs="{'readonly': [('is_linked_to_warehouse', '=', True)]}"
+                        />
                     </h2>
 
                     <group>
-                            <field name="active" invisible="1"/>
-                            <field name="company_id" groups="base.group_multi_company"/>
+                            <field name="active" invisible="1" />
+                            <field name="is_linked_to_warehouse" invisible="1" />
+                            <field
+                            name="company_id"
+                            groups="base.group_multi_company"
+                            attrs="{'readonly': [('is_linked_to_warehouse', '=', True)]}"
+                        />
                     </group>
 
-                    <field name="comment" placeholder="External note..."/>
+                    <field name="comment" placeholder="External note..." />
                 </sheet>
             </form>
         </field>
