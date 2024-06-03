@@ -1,6 +1,7 @@
 # Copyright 2023 Tecnativa - Ernesto Tejeda
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
-from odoo import api, fields, models
+from odoo import _, api, fields, models
+from odoo.exceptions import UserError
 
 
 class StockQuant(models.Model):
@@ -23,8 +24,28 @@ class StockQuant(models.Model):
         compute="_compute_discrepancy_threshold",
     )
     has_over_discrepancy = fields.Boolean(
-        compute="_compute_has_over_discrepancy",
+        compute="_compute_has_over_discrepancy", search="_search_has_over_discrepancy"
     )
+
+    def _search_has_over_discrepancy(self, operator, value):
+        if operator not in ["=", "!="]:
+            raise UserError(_("This operator is not supported"))
+        if value == "True":
+            value = True
+        elif value == "False":
+            value = False
+        if not isinstance(value, bool):
+            raise UserError(_("Value should be True or False (not %s)") % value)
+        ids = []
+        for quant in self.search([]):
+            has_over_discrepancy = (
+                quant.discrepancy_percent > quant.location_id.discrepancy_threshold
+            )
+            if (operator == "=" and has_over_discrepancy == value) or (
+                operator == "!=" and has_over_discrepancy != value
+            ):
+                ids.append(quant.id)
+        return [("id", "in", ids)]
 
     @api.depends("quantity", "inventory_quantity")
     def _compute_discrepancy(self):
