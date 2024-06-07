@@ -1,0 +1,219 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * stock_inventory_discrepancy
+#
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-11-30 03:53+0000\n"
+"PO-Revision-Date: 2023-07-26 22:10+0000\n"
+"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
+"Language-Team: Spanish (https://www.transifex.com/oca/teams/23907/es/)\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
+
+#. module: stock_inventory_discrepancy
+#: model_terms:ir.ui.view,arch_db:stock_inventory_discrepancy.confirm_discrepancy_wizard
+msgid "Apply"
+msgstr "Aplicar"
+
+#. module: stock_inventory_discrepancy
+#: model_terms:ir.ui.view,arch_db:stock_inventory_discrepancy.confirm_discrepancy_wizard
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: stock_inventory_discrepancy
+#: model:ir.model,name:stock_inventory_discrepancy.model_confirm_discrepancy_wiz
+msgid "Confim discrepancy wizard"
+msgstr "Asistente de discrepancias de Confim"
+
+#. module: stock_inventory_discrepancy
+#: model:ir.actions.act_window,name:stock_inventory_discrepancy.confirm_discrepancy_action
+msgid "Confirm discrepancy"
+msgstr "Confirmar discrepancia"
+
+#. module: stock_inventory_discrepancy
+#: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_confirm_discrepancy_wiz__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: stock_inventory_discrepancy
+#: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_confirm_discrepancy_wiz__create_date
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: stock_inventory_discrepancy
+#: model_terms:ir.ui.view,arch_db:stock_inventory_discrepancy.confirm_discrepancy_wizard
+msgid "Dates does not match"
+msgstr "Las fechas no coinciden"
+
+#. module: stock_inventory_discrepancy
+#: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_confirm_discrepancy_wiz__discrepancy_quant_ids
+msgid "Discrepancy Quant"
+msgstr "Cuantía de la discrepancia"
+
+#. module: stock_inventory_discrepancy
+#: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_stock_quant__discrepancy_percent
+msgid "Discrepancy percent (%)"
+msgstr "Porcentaje de discrepancia (%)"
+
+#. module: stock_inventory_discrepancy
+#: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_confirm_discrepancy_wiz__display_name
+msgid "Display Name"
+msgstr "Nombre a Mostrar"
+
+#. module: stock_inventory_discrepancy
+#: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_stock_quant__has_over_discrepancy
+msgid "Has Over Discrepancy"
+msgstr "Tiene más discrepancia"
+
+#. module: stock_inventory_discrepancy
+#: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_confirm_discrepancy_wiz__id
+msgid "ID"
+msgstr "ID (identificación)"
+
+#. module: stock_inventory_discrepancy
+#: model:ir.model,name:stock_inventory_discrepancy.model_stock_location
+msgid "Inventory Locations"
+msgstr "Localizaciones de Inventario"
+
+#. module: stock_inventory_discrepancy
+#: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_confirm_discrepancy_wiz____last_update
+msgid "Last Modified on"
+msgstr "Última Modificación el"
+
+#. module: stock_inventory_discrepancy
+#: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_confirm_discrepancy_wiz__write_uid
+msgid "Last Updated by"
+msgstr "Actualizado por última vez por"
+
+#. module: stock_inventory_discrepancy
+#: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_confirm_discrepancy_wiz__write_date
+msgid "Last Updated on"
+msgstr "Última Actualización el"
+
+#. module: stock_inventory_discrepancy
+#: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_stock_location__discrepancy_threshold
+#: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_stock_warehouse__discrepancy_threshold
+#: model:ir.model.fields,help:stock_inventory_discrepancy.field_stock_quant__discrepancy_threshold
+msgid "Maximum Discrepancy Rate Threshold"
+msgstr "Umbral máximo de tasa de discrepancia"
+
+#. module: stock_inventory_discrepancy
+#: model:ir.model.fields,help:stock_inventory_discrepancy.field_stock_warehouse__discrepancy_threshold
+msgid ""
+"Maximum Discrepancy Rate allowed for any product when doing an Inventory "
+"Adjustment. Threshold defined in involved Location has preference."
+msgstr ""
+"Tasa de Discrepancia Máxima permitida para cualquier producto al hacer un "
+"Ajuste de Inventario. El umbral definido en la Ubicación implicada tiene "
+"preferencia."
+
+#. module: stock_inventory_discrepancy
+#: model:ir.model.fields,help:stock_inventory_discrepancy.field_stock_location__discrepancy_threshold
+msgid ""
+"Maximum Discrepancy Rate allowed for any product when doing an Inventory "
+"Adjustment. Thresholds defined in Locations have preference over Warehouse's "
+"ones."
+msgstr ""
+"Tasa de Discrepancia Máxima permitida para cualquier producto al hacer un "
+"Ajuste de Inventario. Los umbrales definidos en Ubicaciones tienen "
+"preferencia sobre los del Almacén."
+
+#. module: stock_inventory_discrepancy
+#. odoo-python
+#: code:addons/stock_inventory_discrepancy/hooks.py:0
+#, python-format
+msgid "Only a stock manager can validate an inventory adjustment."
+msgstr "Sólo un gestor de existencias puede validar un ajuste de inventario."
+
+#. module: stock_inventory_discrepancy
+#: model:ir.model.fields,help:stock_inventory_discrepancy.field_stock_location__propagate_discrepancy_threshold
+msgid "Propagate Maximum Discrepancy Rate Threshold to child locations"
+msgstr ""
+"Propagar el umbral de tasa de discrepancia máxima a las ubicaciones "
+"secundarias"
+
+#. module: stock_inventory_discrepancy
+#: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_stock_location__propagate_discrepancy_threshold
+msgid "Propagate discrepancy threshold"
+msgstr "Propagar el umbral de discrepancia"
+
+#. module: stock_inventory_discrepancy
+#: model:ir.model,name:stock_inventory_discrepancy.model_stock_quant
+msgid "Quants"
+msgstr "Cantidades"
+
+#. module: stock_inventory_discrepancy
+#: model:ir.model.fields,help:stock_inventory_discrepancy.field_stock_quant__discrepancy_percent
+msgid "The discrepancy expressed in percent with theoretical quantity as basis"
+msgstr ""
+"La discrepancia expresada en porcentaje con la cantidad teórica como base"
+
+#. module: stock_inventory_discrepancy
+#: model_terms:ir.ui.view,arch_db:stock_inventory_discrepancy.confirm_discrepancy_wizard
+msgid ""
+"The following products have exceeded the discrepancy threshold.\n"
+"                    Are you sure you want to proceed?"
+msgstr ""
+"Los siguientes productos han superado el umbral de discrepancia.\n"
+"                    Está seguro de que desea continuar?"
+
+#. module: stock_inventory_discrepancy
+#: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_stock_quant__discrepancy_threshold
+msgid "Threshold (%)"
+msgstr "Umbral (%)"
+
+#. module: stock_inventory_discrepancy
+#: model:res.groups,name:stock_inventory_discrepancy.group_stock_inventory_validation
+msgid "Validate Inventory Adjustments"
+msgstr "Validar los ajustes de inventario"
+
+#. module: stock_inventory_discrepancy
+#: model:res.groups,name:stock_inventory_discrepancy.group_stock_inventory_validation_always
+msgid "Validate Inventory Adjustments excceded threshold"
+msgstr "Validar Ajustes de Inventario umbral superado"
+
+#. module: stock_inventory_discrepancy
+#: model:ir.model,name:stock_inventory_discrepancy.model_stock_warehouse
+msgid "Warehouse"
+msgstr "Almacén"
+
+#. module: stock_inventory_discrepancy
+#. odoo-python
+#: code:addons/stock_inventory_discrepancy/wizards/confirm_discrepancy_wiz.py:0
+#, python-format
+msgid ""
+"You cannot apply inventory adjustments if there are products that exceed the "
+"discrepancy threshold. Only users with rights to apply them can proceed."
+msgstr ""
+"No se pueden aplicar ajustes de inventario si hay productos que superan el "
+"umbral de discrepancia. Sólo los usuarios con derechos para aplicarlos "
+"pueden proceder."
+
+#. module: stock_inventory_discrepancy
+#: model_terms:ir.ui.view,arch_db:stock_inventory_discrepancy.confirm_discrepancy_wizard
+msgid ""
+"You cannot confirm the inventory adjustment,\n"
+"                    the following products have exceeded the discrepancy "
+"threshold.\n"
+"                    Only users with permissions to apply them can proceed."
+msgstr ""
+"No se puede confirmar el ajuste de inventario,\n"
+"                    los siguientes productos han superado el umbral de "
+"discrepancia.\n"
+"                    Sólo los usuarios con permisos para aplicarlos pueden "
+"proceder."
+
+#~ msgid "Inventory"
+#~ msgstr "Inventario"
+
+#~ msgid "Inventory Line"
+#~ msgstr "Línea inventario"
