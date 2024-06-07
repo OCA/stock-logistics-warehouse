@@ -86,11 +86,6 @@ msgid "Inventory Locations"
 msgstr "Ubicazioni di inventario"
 
 #. module: stock_inventory_discrepancy
-#: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_confirm_discrepancy_wiz____last_update
-msgid "Last Modified on"
-msgstr "Ultima modifica il"
-
-#. module: stock_inventory_discrepancy
 #: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_confirm_discrepancy_wiz__write_uid
 msgid "Last Updated by"
 msgstr "Ultimo aggiornamento di"
@@ -155,7 +150,8 @@ msgstr "Quanti"
 #. module: stock_inventory_discrepancy
 #: model:ir.model.fields,help:stock_inventory_discrepancy.field_stock_quant__discrepancy_percent
 msgid "The discrepancy expressed in percent with theoretical quantity as basis"
-msgstr "La differenza espressa in percentuale con la quantità teorica come base"
+msgstr ""
+"La differenza espressa in percentuale con la quantità teorica come base"
 
 #. module: stock_inventory_discrepancy
 #: model_terms:ir.ui.view,arch_db:stock_inventory_discrepancy.confirm_discrepancy_wizard
@@ -210,6 +206,9 @@ msgstr ""
 "                    i seguenti prodotti hanno ecceduto la sogli a di "
 "differenza.\n"
 "                    Solo gli utenti autorizzati possono procedere."
+
+#~ msgid "Last Modified on"
+#~ msgstr "Ultima modifica il"
 
 #~ msgid "Inventory"
 #~ msgstr "Inventario"

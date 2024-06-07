@@ -1,4 +1,4 @@
-# Copyright 2017-2020 ForgeFlow S.L. (http://www.forgeflow.com)
+# Copyright 2017-2024 ForgeFlow S.L. (http://www.forgeflow.com)
 # Copyright 2023 Tecnativa - Carolina Fernandez
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 {
@@ -6,7 +6,7 @@
     "summary": "Adds the capability to show the discrepancy of every line in "
     "an inventory and to block the inventory validation when the "
     "discrepancy is over a user defined threshold.",
-    "version": "16.0.1.0.0",
+    "version": "17.0.1.0.0",
     "author": "ForgeFlow, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "category": "Warehouse",

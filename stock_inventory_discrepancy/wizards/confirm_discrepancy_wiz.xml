@@ -9,9 +9,6 @@
             <button name="action_apply_inventory" position="attributes">
                 <attribute name="invisible">True</attribute>
             </button>
-            <button name="action_set_inventory_quantity_to_zero" position="attributes">
-                <attribute name="invisible">True</attribute>
-            </button>
         </field>
     </record>
     <record id="confirm_discrepancy_wizard" model="ir.ui.view">
