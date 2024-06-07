@@ -85,11 +85,6 @@ msgid "Inventory Locations"
 msgstr ""
 
 #. module: stock_inventory_discrepancy
-#: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_confirm_discrepancy_wiz____last_update
-msgid "Last Modified on"
-msgstr ""
-
-#. module: stock_inventory_discrepancy
 #: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_confirm_discrepancy_wiz__write_uid
 msgid "Last Updated by"
 msgstr ""
