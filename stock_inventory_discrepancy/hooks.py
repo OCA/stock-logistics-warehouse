@@ -31,7 +31,8 @@ def post_load_hook():
         self = self.sudo()
         # END HOOK
         for quant in self:
-            # Create and validate a move so that the quant matches its `inventory_quantity`.
+            # Create and validate a move so that the
+            # quant matches its `inventory_quantity`.
             if (
                 float_compare(
                     quant.inventory_diff_quantity,
@@ -47,6 +48,7 @@ def post_load_hook():
                             quant.company_id
                         ).property_stock_inventory,
                         quant.location_id,
+                        package_dest_id=quant.package_id,
                     )
                 )
             else:
@@ -57,7 +59,7 @@ def post_load_hook():
                         quant.product_id.with_company(
                             quant.company_id
                         ).property_stock_inventory,
-                        out=True,
+                        package_id=quant.package_id,
                     )
                 )
         moves = (
@@ -73,4 +75,4 @@ def post_load_hook():
         self.write({"inventory_quantity": 0, "user_id": False})
         self.write({"inventory_diff_quantity": 0})
 
-    StockQuant._patch_method("_apply_inventory", _apply_inventory_discrepancy)
+    StockQuant._apply_inventory = _apply_inventory_discrepancy
