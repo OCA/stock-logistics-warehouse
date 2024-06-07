@@ -1,4 +1,4 @@
-# Copyright 2017-18 ForgeFlow S.L.
+# Copyright 2017-24 ForgeFlow S.L.
 #   (http://www.forgeflow.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 

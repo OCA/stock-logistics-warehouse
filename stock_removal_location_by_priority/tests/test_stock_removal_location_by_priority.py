@@ -1,4 +1,4 @@
-# Copyright 2017-18 ForgeFlow S.L.
+# Copyright 2017-24 ForgeFlow S.L.
 #   (http://www.forgeflow.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
@@ -10,7 +10,7 @@ from odoo.tests.common import TransactionCase
 
 class TestStockRemovalLocationByPriority(TransactionCase):
     def setUp(self):
-        super(TestStockRemovalLocationByPriority, self).setUp()
+        super().setUp()
         self.res_users_model = self.env["res.users"]
         self.stock_location_model = self.env["stock.location"]
         self.stock_warehouse_model = self.env["stock.warehouse"]
