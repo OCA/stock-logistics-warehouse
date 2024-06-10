@@ -6,7 +6,7 @@ import unicodedata
 from collections import namedtuple
 
 from odoo import api, models
-from odoo.tools import float_compare
+from odoo.tools import float_compare, float_is_zero, float_round
 
 from odoo.addons.base_sparse_field.models.fields import Serialized
 
@@ -112,13 +112,21 @@ class Product(models.Model):
 
     def _product_qty_by_packaging(self, pkg_by_qty, qty, with_contained=False):
         """Produce a list of dictionaries of packaging info."""
-        # TODO: refactor to handle fractional quantities (eg: 0.5 Kg)
         res = []
         prepare_values = self.env.context.get(
             "_packaging_values_handler", self._prepare_qty_by_packaging_values
         )
         for pkg in pkg_by_qty:
             qty_per_pkg, qty = self._qty_by_pkg(pkg.qty, qty)
+            # To handle fractional quantities (eg: 0.5 Kg)
+            if pkg.is_unit and not float_is_zero(
+                qty, precision_rounding=self.uom_id.rounding
+            ):
+                # `is_unit` package always be the last package by the sorting
+                # it has the same uom with the product, just sum the quantity
+                qty_per_pkg += float_round(qty, precision_rounding=self.uom_id.rounding)
+                qty = 0
+
             if qty_per_pkg:
                 value = prepare_values(pkg, qty_per_pkg)
                 if with_contained:
@@ -191,7 +199,7 @@ class Product(models.Model):
         )
         # Collect all strings representations
         as_string = []
-        for record, info in zip(records, _qty_by_packaging):
+        for record, info in zip(records, _qty_by_packaging, strict=True):
             bit = _qty_by_packaging_as_str(record, info["qty"])
             if bit:
                 as_string.append(bit)

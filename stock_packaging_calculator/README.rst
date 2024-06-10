@@ -80,10 +80,7 @@ flag:
 Known issues / Roadmap
 ======================
 
-TODO
 
-1. Fractional quantities (eg: 0.5 Kg) are lost when counting units
-2. Maybe rely on packaging_uom
 
 Bug Tracker
 ===========
@@ -108,6 +105,7 @@ Contributors
 
 -  Simone Orsi <simahawk@gmail.com>
 -  Christopher Ormaza <chris.ormaza@forgeflow.com>
+-  Nguyen Minh Chien <chien@trobz.com>
 
 Maintainers
 -----------
