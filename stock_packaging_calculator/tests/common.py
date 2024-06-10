@@ -4,7 +4,6 @@ from odoo.tests import TransactionCase
 
 
 class TestCommon(TransactionCase):
-
     at_install = False
     post_install = True
     maxDiff = None
