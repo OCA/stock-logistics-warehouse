@@ -1,9 +1,9 @@
 # Copyright 2020 Camptocamp SA
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl)
-from odoo.tests import TransactionCase
+from odoo.addons.base.tests.common import BaseCommon
 
 
-class TestCommon(TransactionCase):
+class TestCommon(BaseCommon):
     at_install = False
     post_install = True
     maxDiff = None
@@ -11,7 +11,6 @@ class TestCommon(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
         cls.uom_unit = cls.env.ref("uom.product_uom_unit")
         cls.product_a = cls.env["product.product"].create(
             {

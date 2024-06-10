@@ -55,6 +55,7 @@ class TestCalc(TestCommon):
         """Test fractional qty is lost."""
         expected = [
             make_pkg_values(self.pkg_box, qty=1),
+            make_pkg_values(self.uom_unit, qty=0.5),
         ]
         self.assertEqual(self.product_a.product_qty_by_packaging(50.5), expected)
 
