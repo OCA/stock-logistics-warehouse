@@ -17,18 +17,19 @@ Stock packaging calculator
     :target: http://www.gnu.org/licenses/lgpl-3.0-standalone.html
     :alt: License: LGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fstock--logistics--warehouse-lightgray.png?logo=github
-    :target: https://github.com/OCA/stock-logistics-warehouse/tree/16.0/stock_packaging_calculator
+    :target: https://github.com/OCA/stock-logistics-warehouse/tree/17.0/stock_packaging_calculator
     :alt: OCA/stock-logistics-warehouse
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/stock-logistics-warehouse-16-0/stock-logistics-warehouse-16-0-stock_packaging_calculator
+    :target: https://translation.odoo-community.org/projects/stock-logistics-warehouse-17-0/stock-logistics-warehouse-17-0-stock_packaging_calculator
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/stock-logistics-warehouse&target_branch=16.0
+    :target: https://runboat.odoo-community.org/builds?repo=OCA/stock-logistics-warehouse&target_branch=17.0
     :alt: Try me on Runboat
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-Basic module providing an helper method to calculate the quantity of product by packaging.
+Basic module providing an helper method to calculate the quantity of
+product by packaging.
 
 **Table of contents**
 
@@ -40,40 +41,41 @@ Usage
 
 Imagine you have the following packagings:
 
-* Pallet: 1000 Units
-* Big box: 500 Units
-* Box: 50 Units
+-  Pallet: 1000 Units
+-  Big box: 500 Units
+-  Box: 50 Units
 
 and you have to pick from your warehouse 2860 Units.
 
 Then you can do:
 
-    .. code-block::
+   ::
 
-        >>> product.product_qty_by_packaging(2860)
+      >>> product.product_qty_by_packaging(2860)
 
-        [
-            {"id": 1, "qty": 2, "name": "Pallet"},
-            {"id": 2, "qty": 1, "name": "Big box"},
-            {"id": 3, "qty": 7, "name": "Box"},
-            {"id": 100, "qty": 10, "name": "Units"},
-        ]
+      [
+          {"id": 1, "qty": 2, "name": "Pallet"},
+          {"id": 2, "qty": 1, "name": "Big box"},
+          {"id": 3, "qty": 7, "name": "Box"},
+          {"id": 100, "qty": 10, "name": "Units"},
+      ]
 
-With this you can show a proper message to warehouse operators to quickly pick the quantity they need.
+With this you can show a proper message to warehouse operators to
+quickly pick the quantity they need.
 
-Optionally you can get contained packaging by passing `with_contained` flag:
+Optionally you can get contained packaging by passing with_contained
+flag:
 
+   ::
 
-    .. code-block::
+      >>> product.product_qty_by_packaging(2860, with_contained=True)
 
-        >>> product.product_qty_by_packaging(2860, with_contained=True)
-
-        [
-            {"id": 1, "qty": 2, "name": "Pallet", "contained": [{"id": 2, "qty": 2, "name": "Big box"}]},
-            {"id": 2, "qty": 1, "name": "Big box", "contained": [{"id": 3, "qty": 10, "name": "Box"}]},
-            {"id": 3, "qty": 7, "name": "Box", "contained": [{"id": 100, "qty": 50, "name": "Units"}]},
-            {"id": 100, "qty": 10, "name": "Units", "contained": []},},
-        ]
+      [
+          {"id": 1, "qty": 2, "name": "Pallet", "contained": [{"id": 2, "qty": 2, "name": "Big box"}]},
+          {"id": 2, "qty": 1, "name": "Big box", "contained": [{"id": 3, "qty": 10, "name": "Box"}]},
+          {"id": 3, "qty": 7, "name": "Box", "contained": [{"id": 100, "qty": 50, "name": "Units"}]},
+          {"id": 100, "qty": 10, "name": "Units", "contained": []},},
+      ]
 
 Known issues / Roadmap
 ======================
@@ -81,7 +83,7 @@ Known issues / Roadmap
 TODO
 
 1. Fractional quantities (eg: 0.5 Kg) are lost when counting units
-2. Maybe rely on `packaging_uom`
+2. Maybe rely on packaging_uom
 
 Bug Tracker
 ===========
@@ -89,7 +91,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/stock-logistics-warehouse/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/stock-logistics-warehouse/issues/new?body=module:%20stock_packaging_calculator%0Aversion:%2016.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/stock-logistics-warehouse/issues/new?body=module:%20stock_packaging_calculator%0Aversion:%2017.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -97,18 +99,18 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * Camptocamp
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* Simone Orsi <simahawk@gmail.com>
-* Christopher Ormaza <chris.ormaza@forgeflow.com>
+-  Simone Orsi <simahawk@gmail.com>
+-  Christopher Ormaza <chris.ormaza@forgeflow.com>
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is maintained by the OCA.
 
@@ -120,6 +122,6 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
-This module is part of the `OCA/stock-logistics-warehouse <https://github.com/OCA/stock-logistics-warehouse/tree/16.0/stock_packaging_calculator>`_ project on GitHub.
+This module is part of the `OCA/stock-logistics-warehouse <https://github.com/OCA/stock-logistics-warehouse/tree/17.0/stock_packaging_calculator>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.
