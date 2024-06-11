@@ -41,14 +41,20 @@ class StockLocation(models.Model):
         ]
 
     has_package_restriction_violation = fields.Boolean(
-        compute="_compute_has_package_restriction_violation",
+        compute="_compute_package_restriction_violation",
         search="_search_has_package_restriction_violation",
+    )
+
+    package_restriction_violation_message = fields.Char(
+        compute="_compute_package_restriction_violation",
     )
 
     def _has_package_restriction_violation_query(self):
         self.flush()
         query = """
-            SELECT stock_quant.location_id
+            SELECT stock_quant.location_id,
+            (count(distinct(stock_quant.package_id)) > 1)::bool as has_multiple_packages,
+            (count(*) FILTER (WHERE stock_quant.package_id IS NULL) > 0)::bool as has_no_package
             FROM stock_quant
             JOIN stock_location ON stock_location.id = stock_quant.location_id
             WHERE
@@ -78,13 +84,50 @@ class StockLocation(models.Model):
         return query
 
     @api.depends("package_restriction")
-    def _compute_has_package_restriction_violation(self):
+    def _compute_package_restriction_violation(self):
         self.env.cr.execute(
             self._has_package_restriction_violation_query(), (tuple(self.ids),)
         )
-        error_ids = [r[0] for r in self.env.cr.fetchall()]
+        errors = {r[0]: r[1:] for r in self.env.cr.fetchall()}
         for location in self:
-            location.has_package_restriction_violation = location.id in error_ids
+            error = errors.get(location.id)
+            if not error:
+                location.has_package_restriction_violation = False
+                location.package_restriction_violation_message = False
+                continue
+            location.has_package_restriction_violation = True
+            if location.package_restriction == NOPACKAGE:
+                location.package_restriction_violation_message = _(
+                    "This location should only contain items without package "
+                    "but it contains the package(s): {packages}"
+                ).format(
+                    packages=", ".join(location.quant_ids.package_id.mapped("name"))
+                )
+            else:
+                messages = []
+                has_multiple_package, has_no_package = error
+                if has_multiple_package:
+                    messages.append(
+                        _(
+                            "This location should only contain a single package "
+                            "but it contains the package(s): {packages}"
+                        ).format(
+                            packages=", ".join(
+                                location.quant_ids.package_id.mapped("name")
+                            )
+                        )
+                    )
+                if has_no_package:
+                    products = location.quant_ids.filtered(
+                        lambda q: not q.package_id
+                    ).product_id
+                    messages.append(
+                        _(
+                            "This location should only contain items in a package "
+                            "but it contains the items of product(s): {products}"
+                        ).format(products=", ".join(products.mapped("name")))
+                    )
+                location.package_restriction_violation_message = "\n".join(messages)
 
     def _search_has_package_restriction_violation(self, operator, value):
         search_has_violation = (

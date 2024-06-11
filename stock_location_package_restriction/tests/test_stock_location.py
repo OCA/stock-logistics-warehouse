@@ -16,35 +16,42 @@ class TestStockLocation(TestLocationPackageRestrictionCommon):
         self._change_product_qty(self.product_1, self.location_1, False, 50)
         self.location_1.package_restriction = NOPACKAGE
         self.assertFalse(self.location_1.has_package_restriction_violation)
+        self.assertFalse(self.location_1.package_restriction_violation_message)
 
     def test_location_no_package_location_ko(self):
         self._change_product_qty(self.product_1, self.location_1, self.pack_1, 50)
         self.location_1.package_restriction = NOPACKAGE
         self.assertTrue(self.location_1.has_package_restriction_violation)
+        self.assertTrue(self.location_1.package_restriction_violation_message)
 
     def test_location_multi_package_location_ok(self):
         self._change_product_qty(self.product_1, self.location_1, self.pack_1, 50)
         self._change_product_qty(self.product_1, self.location_1, self.pack_2, 50)
         self.location_1.package_restriction = MULTIPACKAGE
         self.assertFalse(self.location_1.has_package_restriction_violation)
+        self.assertFalse(self.location_1.package_restriction_violation_message)
 
     def test_location_multi_package_location_ko(self):
         self._change_product_qty(self.product_1, self.location_1, False, 50)
         self.location_1.package_restriction = MULTIPACKAGE
         self.assertTrue(self.location_1.has_package_restriction_violation)
+        self.assertTrue(self.location_1.package_restriction_violation_message)
 
     def test_location_single_package_location_ok(self):
         self._change_product_qty(self.product_1, self.location_1, self.pack_1, 50)
         self.location_1.package_restriction = SINGLEPACKAGE
         self.assertFalse(self.location_1.has_package_restriction_violation)
+        self.assertFalse(self.location_1.package_restriction_violation_message)
 
     def test_location_single_package_location_ko_multi(self):
         self._change_product_qty(self.product_1, self.location_1, self.pack_1, 50)
         self._change_product_qty(self.product_1, self.location_1, self.pack_2, 50)
         self.location_1.package_restriction = SINGLEPACKAGE
         self.assertTrue(self.location_1.has_package_restriction_violation)
+        self.assertTrue(self.location_1.package_restriction_violation_message)
 
     def test_location_single_package_location_ko_no(self):
         self._change_product_qty(self.product_1, self.location_1, False, 50)
         self.location_1.package_restriction = SINGLEPACKAGE
         self.assertTrue(self.location_1.has_package_restriction_violation)
+        self.assertTrue(self.location_1.package_restriction_violation_message)
