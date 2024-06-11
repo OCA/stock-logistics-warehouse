@@ -161,7 +161,7 @@ class TestStockMove(TestLocationPackageRestrictionCommon):
         picking.action_assign()
         # Processing only one move out of two
         line_to_process = picking.move_line_ids[0]
-        line_to_process.qty_done = line_to_process.product_qty
+        line_to_process.qty_done = line_to_process.reserved_qty
         wizard_action = picking.button_validate()
         wizard_context = wizard_action.get("context", {})
         wizard = (

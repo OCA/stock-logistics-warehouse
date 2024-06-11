@@ -88,7 +88,7 @@ class TestLocationPackageRestrictionCommon(SavepointCase):
             {
                 "product_id": product.id,
                 "package_id": package and package.id,
-                "inventory_quantity": qty,
+                "inventory_quantity_auto_apply": qty,
                 "location_id": location.id,
             }
         )
@@ -138,5 +138,5 @@ class TestLocationPackageRestrictionCommon(SavepointCase):
     def _process_picking(cls, picking):
         picking.action_assign()
         for line in picking.move_line_ids:
-            line.qty_done = line.product_qty
+            line.qty_done = line.reserved_qty
         picking.button_validate()

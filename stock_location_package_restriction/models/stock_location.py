@@ -50,7 +50,8 @@ class StockLocation(models.Model):
     )
 
     def _has_package_restriction_violation_query(self):
-        self.flush()
+        self.flush_model()
+        self.quant_ids.flush_model()
         query = """
             SELECT stock_quant.location_id,
             (count(distinct(stock_quant.package_id)) > 1)::bool as has_multiple_packages,
