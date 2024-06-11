@@ -154,12 +154,15 @@ class TestsCommon(common.TransactionCase):
             amount,
         )
 
-    def _create_wizard(self, origin_location, destination_location):
+    def _create_wizard(
+        self, origin_location, destination_location, exclude_reserved_qty=False
+    ):
         move_location_wizard = self.env["wiz.stock.move.location"]
         return move_location_wizard.create(
             {
                 "origin_location_id": origin_location.id,
                 "destination_location_id": destination_location.id,
+                "exclude_reserved_qty": exclude_reserved_qty,
             }
         )
 

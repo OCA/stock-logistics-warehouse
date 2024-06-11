@@ -17,6 +17,7 @@ class StockPicking(models.Model):
         context = {
             "active_ids": self._get_movable_quants().ids,
             "active_model": "stock.quant",
+            "only_reserved_qty": True,
             "planned": True,
         }
         move_wizard = (
