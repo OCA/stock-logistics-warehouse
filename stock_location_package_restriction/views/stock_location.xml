@@ -13,7 +13,7 @@
                     class="alert alert-danger"
                     role="alert"
                     attrs="{'invisible': [('has_package_restriction_violation','=',False)]}"
-                >Package restriction is not respected</div>
+                ><field name="package_restriction_violation_message" /></div>
             </div>
             <xpath expr="//group[last()]">
                 <group name="restrictions" string="Restrictions">
