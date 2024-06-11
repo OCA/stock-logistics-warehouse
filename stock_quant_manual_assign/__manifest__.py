@@ -7,7 +7,7 @@
 
 {
     "name": "Stock - Manual Quant Assignment",
-    "version": "16.0.1.1.0",
+    "version": "17.0.1.0.0",
     "category": "Warehouse",
     "license": "AGPL-3",
     "author": "AvanzOSC, "
@@ -21,7 +21,6 @@
         "wizard/assign_manual_quants_view.xml",
         "views/stock_move_view.xml",
         "security/ir.model.access.csv",
-        "views/stock_picking_type_views.xml",
     ],
     "installable": True,
 }

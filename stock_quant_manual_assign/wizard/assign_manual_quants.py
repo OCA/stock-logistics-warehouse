@@ -63,10 +63,6 @@ class AssignManualQuants(models.TransientModel):
         move._do_unreserve()
         for line in self.quants_lines:
             line._assign_quant_line()
-        if move.picking_type_id.auto_fill_qty_done:
-            # Auto-fill all lines as done
-            for ml in move.move_line_ids:
-                ml.qty_done = ml.reserved_uom_qty
         move._recompute_state()
         move.mapped("picking_id")._compute_state()
         return {}
@@ -115,7 +111,7 @@ class AssignManualQuants(models.TransientModel):
                 and ml.package_id == quant.package_id
             )
         )
-        line["qty"] = sum(move_lines.mapped("reserved_uom_qty"))
+        line["qty"] = sum(move_lines.mapped("quantity_product_uom"))
         line["selected"] = bool(line["qty"])
         line["reserved"] = quant.reserved_quantity - line["qty"]
         return line
@@ -199,12 +195,12 @@ class AssignManualQuantsLines(models.TransientModel):
         for record in self.filtered("qty"):
             quant = record.quant_id
             move_lines = record.assign_wizard.move_id.move_line_ids.filtered(
-                lambda ml: (
+                lambda ml, quant=quant: (
                     ml.location_id == quant.location_id and ml.lot_id == quant.lot_id
                 )
             )
             reserved = quant.reserved_quantity - sum(
-                move_lines.mapped("reserved_uom_qty")
+                move_lines.mapped("quantity_product_uom")
             )
             if (
                 float_compare(
@@ -247,7 +243,6 @@ class AssignManualQuantsLines(models.TransientModel):
                 return
             move._update_reserved_quantity(
                 self.qty,
-                available_quantity,
                 self.quant_id.location_id,
                 lot_id=self.quant_id.lot_id,
                 package_id=self.quant_id.package_id,

@@ -100,7 +100,7 @@ class TestStockQuantManualAssign(TransactionCase):
         self.assertEqual(wizard.lines_qty, 0.0, "None selected must give 0")
         self.assertEqual(
             sum(line.qty for line in wizard.quants_lines),
-            self.move.reserved_availability,
+            self.move.quantity,
         )
         self.assertEqual(wizard.move_qty, self.move.product_uom_qty)
 
@@ -148,21 +148,6 @@ class TestStockQuantManualAssign(TransactionCase):
             2,
             "There are 2 quants selected",
         )
-        self.assertFalse(self.move.picking_type_id.auto_fill_qty_done)
-        self.assertEqual(sum(self.move.move_line_ids.mapped("qty_done")), 0.0)
-
-    def test_quant_manual_assign_auto_fill_qty_done(self):
-        wizard = self.quant_assign_wizard.with_context(active_id=self.move.id).create(
-            {}
-        )
-        wizard.quants_lines[0].write({"selected": True})
-        wizard.quants_lines[0]._onchange_selected()
-        wizard.quants_lines[1].write({"selected": True, "qty": 50.0})
-        self.assertEqual(wizard.lines_qty, 150.0)
-        self.picking_type.auto_fill_qty_done = True
-        wizard.assign_quants()
-        self.assertTrue(self.move.picking_type_id.auto_fill_qty_done)
-        self.assertEqual(sum(self.move.move_line_ids.mapped("qty_done")), 150.0)
 
     def test_quant_assign_wizard_after_availability_check(self):
         self.move._action_assign()
@@ -186,5 +171,5 @@ class TestStockQuantManualAssign(TransactionCase):
         )
         self.assertEqual(
             sum(line.qty for line in wizard.quants_lines),
-            self.move.reserved_availability,
+            self.move.quantity,
         )
