@@ -22,9 +22,11 @@ class LocationAccuracyReport(models.AbstractModel):
     def _get_location_data(self, locations):
         data = dict()
         inventory_obj = self.env["stock.inventory"]
+        location_ids = locations.mapped("id")
+        counts = inventory_obj.search([("location_id", "in", location_ids)])
         for loc in locations:
-            counts = inventory_obj.search(self._get_inventory_domain(loc.id))
-            data[loc] = counts
+            loc_counts = counts.filtered(lambda c: c.location_id == loc)
+            data[loc] = loc_counts
         return data
 
     def render_html(self, data=None):
