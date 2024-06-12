@@ -84,20 +84,23 @@ class StockCycleCount(models.Model):
             "responsible_id": self.responsible_id.id,
         }
 
-    @api.model
-    def create(self, vals):
-        vals["name"] = self.env["ir.sequence"].next_by_code("stock.cycle.count") or ""
-        return super(StockCycleCount, self).create(vals)
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            vals["name"] = (
+                self.env["ir.sequence"].next_by_code("stock.cycle.count") or ""
+            )
+        return super().create(vals_list)
 
     def action_create_inventory_adjustment(self):
-        if any([s != "draft" for s in self.mapped("state")]):
+        if any([state != "draft" for state in self.mapped("state")]):
             raise UserError(_("You can only confirm cycle counts in state 'Planned'."))
         for rec in self:
             data = rec._prepare_inventory_adjustment()
             inv = self.env["stock.inventory"].create(data)
-            if self.company_id.auto_start_inventory_from_cycle_count:
+            if rec.company_id.auto_start_inventory_from_cycle_count:
                 inv.prefill_counted_quantity = (
-                    self.company_id.inventory_adjustment_counted_quantities
+                    rec.company_id.inventory_adjustment_counted_quantities
                 )
                 inv.action_state_to_in_progress()
                 if inv.prefill_counted_quantity == "zero":
@@ -109,9 +112,9 @@ class StockCycleCount(models.Model):
         return True
 
     def action_view_inventory(self):
-        action = self.env.ref(
+        action = self.env["ir.actions.act_window"]._for_xml_id(
             "stock_inventory.action_view_inventory_group_form"
-        ).read()[0]
+        )
         action["context"] = {}
         adjustment_ids = self.mapped("stock_adjustment_ids").ids
         if len(adjustment_ids) > 1:

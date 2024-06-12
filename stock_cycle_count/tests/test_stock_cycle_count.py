@@ -8,84 +8,80 @@ from odoo.tests import common
 
 
 class TestStockCycleCount(common.TransactionCase):
-    def setUp(self):
-        super(TestStockCycleCount, self).setUp()
-        self.res_users_model = self.env["res.users"]
-        self.cycle_count_model = self.env["stock.cycle.count"]
-        self.stock_cycle_count_rule_model = self.env["stock.cycle.count.rule"]
-        self.inventory_model = self.env["stock.inventory"]
-        self.stock_location_model = self.env["stock.location"]
-        self.stock_move_model = self.env["stock.move"]
-        self.stock_warehouse_model = self.env["stock.warehouse"]
-        self.product_model = self.env["product.product"]
-        self.quant_model = self.env["stock.quant"]
-        self.move_model = self.env["stock.move"]
+    @classmethod
+    def setUpClass(cls):
+        super(TestStockCycleCount, cls).setUpClass()
+        cls.res_users_model = cls.env["res.users"]
+        cls.cycle_count_model = cls.env["stock.cycle.count"]
+        cls.stock_cycle_count_rule_model = cls.env["stock.cycle.count.rule"]
+        cls.inventory_model = cls.env["stock.inventory"]
+        cls.stock_location_model = cls.env["stock.location"]
+        cls.stock_move_model = cls.env["stock.move"]
+        cls.stock_warehouse_model = cls.env["stock.warehouse"]
+        cls.product_model = cls.env["product.product"]
+        cls.quant_model = cls.env["stock.quant"]
+        cls.move_model = cls.env["stock.move"]
 
-        self.company = self.env.ref("base.main_company")
-        self.partner = self.env.ref("base.res_partner_1")
-        self.g_stock_manager = self.env.ref("stock.group_stock_manager")
-        self.g_stock_user = self.env.ref("stock.group_stock_user")
+        cls.company = cls.env.ref("base.main_company")
+        cls.partner = cls.env.ref("base.res_partner_1")
+        cls.g_stock_manager = cls.env.ref("stock.group_stock_manager")
+        cls.g_stock_user = cls.env.ref("stock.group_stock_user")
 
         # Create users:
-        self.manager = self._create_user(
-            "user_1", [self.g_stock_manager], self.company
-        ).id
-        self.user = self._create_user("user_2", [self.g_stock_user], self.company).id
+        cls.manager = cls._create_user("user_1", [cls.g_stock_manager], cls.company).id
+        cls.user = cls._create_user("user_2", [cls.g_stock_user], cls.company).id
 
         # Create warehouses:
-        self.big_wh = self.stock_warehouse_model.create(
+        cls.big_wh = cls.stock_warehouse_model.create(
             {"name": "BIG", "code": "B", "cycle_count_planning_horizon": 30}
         )
-        self.small_wh = self.stock_warehouse_model.create(
-            {"name": "SMALL", "code": "S"}
-        )
+        cls.small_wh = cls.stock_warehouse_model.create({"name": "SMALL", "code": "S"})
 
         # Create rules:
-        self.rule_periodic = self._create_stock_cycle_count_rule_periodic(
-            self.manager, "rule_1", [2, 7]
+        cls.rule_periodic = cls._create_stock_cycle_count_rule_periodic(
+            cls.manager, "rule_1", [2, 7]
         )
-        self.rule_turnover = self._create_stock_cycle_count_rule_turnover(
-            self.manager, "rule_2", [100]
+        cls.rule_turnover = cls._create_stock_cycle_count_rule_turnover(
+            cls.manager, "rule_2", [100]
         )
-        self.rule_accuracy = self._create_stock_cycle_count_rule_accuracy(
-            self.manager, "rule_3", [5], self.big_wh.view_location_id.ids
+        cls.rule_accuracy = cls._create_stock_cycle_count_rule_accuracy(
+            cls.manager, "rule_3", [5], cls.big_wh.view_location_id.ids
         )
-        self.zero_rule = self._create_stock_cycle_count_rule_zero(
-            self.manager, "rule_4"
-        )
+        cls.zero_rule = cls._create_stock_cycle_count_rule_zero(cls.manager, "rule_4")
 
         # Configure warehouses:
-        self.rule_ids = [
-            self.rule_periodic.id,
-            self.rule_turnover.id,
-            self.rule_accuracy.id,
-            self.zero_rule.id,
+        cls.rule_ids = [
+            cls.rule_periodic.id,
+            cls.rule_turnover.id,
+            cls.rule_accuracy.id,
+            cls.zero_rule.id,
         ]
-        self.big_wh.write({"cycle_count_rule_ids": [(6, 0, self.rule_ids)]})
+        cls.big_wh.write({"cycle_count_rule_ids": [(6, 0, cls.rule_ids)]})
 
         # Create a location:
-        self.count_loc = self.stock_location_model.create(
+        cls.count_loc = cls.stock_location_model.create(
             {"name": "Place", "usage": "production"}
         )
-        self.stock_location_model._parent_store_compute()
+        cls.stock_location_model._parent_store_compute()
 
         # Create a cycle count:
-        self.cycle_count_1 = self.cycle_count_model.with_user(self.manager).create(
+        cls.cycle_count_1 = cls.cycle_count_model.with_user(cls.manager).create(
             {
                 "name": "Test cycle count",
-                "cycle_count_rule_id": self.rule_periodic.id,
-                "location_id": self.count_loc.id,
+                "cycle_count_rule_id": cls.rule_periodic.id,
+                "location_id": cls.count_loc.id,
             }
         )
 
         # Create a product:
-        self.product1 = self.product_model.create(
+        cls.product1 = cls.product_model.create(
             {"name": "Test Product 1", "type": "product", "default_code": "PROD1"}
         )
 
-    def _create_user(self, login, groups, company):
+    @classmethod
+    def _create_user(cls, login, groups, company):
         group_ids = [group.id for group in groups]
-        user = self.res_users_model.create(
+        user = cls.res_users_model.create(
             {
                 "name": login,
                 "login": login,
@@ -97,8 +93,9 @@ class TestStockCycleCount(common.TransactionCase):
         )
         return user
 
-    def _create_stock_cycle_count_rule_periodic(self, uid, name, values):
-        rule = self.stock_cycle_count_rule_model.with_user(uid).create(
+    @classmethod
+    def _create_stock_cycle_count_rule_periodic(cls, uid, name, values):
+        rule = cls.stock_cycle_count_rule_model.with_user(uid).create(
             {
                 "name": name,
                 "rule_type": "periodic",
@@ -108,8 +105,9 @@ class TestStockCycleCount(common.TransactionCase):
         )
         return rule
 
-    def _create_stock_cycle_count_rule_turnover(self, uid, name, values):
-        rule = self.stock_cycle_count_rule_model.with_user(uid).create(
+    @classmethod
+    def _create_stock_cycle_count_rule_turnover(cls, uid, name, values):
+        rule = cls.stock_cycle_count_rule_model.with_user(uid).create(
             {
                 "name": name,
                 "rule_type": "turnover",
@@ -118,8 +116,9 @@ class TestStockCycleCount(common.TransactionCase):
         )
         return rule
 
-    def _create_stock_cycle_count_rule_accuracy(self, uid, name, values, zone_ids):
-        rule = self.stock_cycle_count_rule_model.with_user(uid).create(
+    @classmethod
+    def _create_stock_cycle_count_rule_accuracy(cls, uid, name, values, zone_ids):
+        rule = cls.stock_cycle_count_rule_model.with_user(uid).create(
             {
                 "name": name,
                 "rule_type": "accuracy",
@@ -130,8 +129,9 @@ class TestStockCycleCount(common.TransactionCase):
         )
         return rule
 
-    def _create_stock_cycle_count_rule_zero(self, uid, name):
-        rule = self.stock_cycle_count_rule_model.with_user(uid).create(
+    @classmethod
+    def _create_stock_cycle_count_rule_zero(cls, uid, name):
+        rule = cls.stock_cycle_count_rule_model.with_user(uid).create(
             {"name": name, "rule_type": "zero"}
         )
         return rule
@@ -263,7 +263,6 @@ class TestStockCycleCount(common.TransactionCase):
         for r in rules:
             r._compute_rule_description()
             self.assertTrue(r.rule_description, "No description provided")
-        self.rule_accuracy._onchange_locaton_ids()
         self.assertEqual(
             self.rule_accuracy.warehouse_ids.ids,
             self.big_wh.ids,

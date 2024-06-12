@@ -12,6 +12,47 @@ class StockCycleCountRule(models.Model):
     _name = "stock.cycle.count.rule"
     _description = "Stock Cycle Counts Rules"
 
+    name = fields.Char(required=True)
+    rule_type = fields.Selection(
+        selection="_selection_rule_types", string="Type of rule", required=True
+    )
+    rule_description = fields.Char(compute="_compute_rule_description")
+    active = fields.Boolean(default=True)
+    periodic_qty_per_period = fields.Integer(string="Counts per period", default=1)
+    periodic_count_period = fields.Integer(string="Period in days")
+    turnover_inventory_value_threshold = fields.Float()
+    currency_id = fields.Many2one(
+        comodel_name="res.currency", string="Currency", compute="_compute_currency_id"
+    )
+    accuracy_threshold = fields.Float(
+        string="Minimum Accuracy Threshold", digits=(3, 2)
+    )
+    apply_in = fields.Selection(
+        string="Apply this rule in:",
+        selection=[
+            ("warehouse", "Selected warehouses"),
+            ("location", "Selected Location Zones."),
+        ],
+        default="warehouse",
+    )
+    warehouse_ids = fields.Many2many(
+        comodel_name="stock.warehouse",
+        relation="warehouse_cycle_count_rule_rel",
+        column1="rule_id",
+        column2="warehouse_id",
+        string="Warehouses where applied",
+        compute="_compute_warehouse_ids",
+        store=True,
+        readonly=False,
+    )
+    location_ids = fields.Many2many(
+        comodel_name="stock.location",
+        relation="location_cycle_count_rule_rel",
+        column1="rule_id",
+        column2="location_id",
+        string="Zones where applied",
+    )
+
     def _compute_currency_id(self):
         for rec in self:
             rec.currency_id = self.env.user.company_id.currency_id
@@ -94,53 +135,15 @@ class StockCycleCountRule(models.Model):
             if rec.periodic_count_period < 0:
                 raise ValidationError(_("You cannot define a negative period."))
 
-    @api.onchange("location_ids")
-    def _onchange_locaton_ids(self):
-        """Get the warehouses for the selected locations."""
-        wh_ids = []
-        for loc in self.location_ids:
-            wh_ids.append(loc.warehouse_id.id)
-        wh_ids = list(set(wh_ids))
-        wh_ids = [wh for wh in wh_ids if wh]
-        self.warehouse_ids = self.env["stock.warehouse"].browse(wh_ids)
-
-    name = fields.Char(required=True)
-    rule_type = fields.Selection(
-        selection="_selection_rule_types", string="Type of rule", required=True
-    )
-    rule_description = fields.Char(compute="_compute_rule_description")
-    active = fields.Boolean(default=True)
-    periodic_qty_per_period = fields.Integer(string="Counts per period", default=1)
-    periodic_count_period = fields.Integer(string="Period in days")
-    turnover_inventory_value_threshold = fields.Float()
-    currency_id = fields.Many2one(
-        comodel_name="res.currency", string="Currency", compute="_compute_currency_id"
-    )
-    accuracy_threshold = fields.Float(
-        string="Minimum Accuracy Threshold", digits=(3, 2)
-    )
-    apply_in = fields.Selection(
-        string="Apply this rule in:",
-        selection=[
-            ("warehouse", "Selected warehouses"),
-            ("location", "Selected Location Zones."),
-        ],
-        default="warehouse",
-    )
-    warehouse_ids = fields.Many2many(
-        comodel_name="stock.warehouse",
-        relation="warehouse_cycle_count_rule_rel",
-        column1="rule_id",
-        column2="warehouse_id",
-        string="Warehouses where applied",
-    )
-    location_ids = fields.Many2many(
-        comodel_name="stock.location",
-        relation="location_cycle_count_rule_rel",
-        column1="rule_id",
-        column2="location_id",
-        string="Zones where applied",
-    )
+    @api.depends("location_ids")
+    def _compute_warehouse_ids(self):
+        for record in self:
+            wh_ids = []
+            for loc in record.location_ids:
+                if loc.warehouse_id:  # Make sure warehouse_id is set
+                    wh_ids.append(loc.warehouse_id.id)
+            wh_ids = list(set(wh_ids))  # Remove duplicates
+            record.warehouse_ids = [(6, 0, wh_ids)]
 
     def compute_rule(self, locs):
         if self.rule_type == "periodic":
@@ -184,7 +187,7 @@ class StockCycleCountRule(models.Model):
                     ) + timedelta(days=period)
                     if next_date < datetime.today():
                         next_date = datetime.today()
-                except Exception as e:
+                except AttributeError as e:
                     raise UserError(
                         _(
                             "Error found determining the frequency of periodic "
@@ -220,35 +223,36 @@ class StockCycleCountRule(models.Model):
     @api.model
     def _compute_rule_turnover(self, locs):
         cycle_counts = []
+        location_ids = locs.mapped("id")
+        inventories = self.env["stock.inventory"].search(
+            [
+                ("location_ids", "in", location_ids),
+                ("state", "in", ["confirm", "done", "draft"]),
+            ]
+        )
+        inventory_dates_by_location = {loc.id: [] for loc in locs}
+        for inventory in inventories:
+            for location in inventory.location_ids:
+                if location.id in inventory_dates_by_location:
+                    inventory_dates_by_location[location.id].append(inventory.date)
+
         for loc in locs:
-            last_inventories = (
-                self.env["stock.inventory"]
-                .search(
-                    [
-                        ("location_ids", "in", [loc.id]),
-                        ("state", "in", ["confirm", "done", "draft"]),
-                    ]
-                )
-                .mapped("date")
-            )
+            last_inventories = inventory_dates_by_location.get(loc.id, [])
             if last_inventories:
                 latest_inventory = sorted(last_inventories, reverse=True)[0]
                 moves = self._get_turnover_moves(loc, latest_inventory)
                 if moves:
-                    total_turnover = 0.0
-                    for m in moves:
-                        turnover = self._compute_turnover(m)
-                        total_turnover += turnover
+                    total_turnover = sum(self._compute_turnover(m) for m in moves)
                     try:
                         if total_turnover > self.turnover_inventory_value_threshold:
                             next_date = datetime.today()
                             cycle_count = self._propose_cycle_count(next_date, loc)
                             cycle_counts.append(cycle_count)
-                    except Exception as e:
+                    except AttributeError as e:
                         raise UserError(
                             _(
-                                "Error found when comparing turnover with the "
-                                "rule threshold. %s"
+                                "Error found when comparing turnover "
+                                "with the rule threshold. %s"
                             )
                             % str(e)
                         ) from e

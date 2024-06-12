@@ -41,7 +41,7 @@ class StockWarehouse(models.Model):
     @api.model
     def _get_cycle_count_locations_search_domain(self, parent):
         domain = [
-            ("parent_path", "=like", parent.parent_path + "%"),
+            ("id", "child_of", parent.id),
             ("cycle_count_disabled", "=", False),
         ]
         return domain
@@ -81,56 +81,62 @@ class StockWarehouse(models.Model):
         returns a list with required dates for the cycle count of each
         location"""
         for rec in self:
-            proposed_cycle_counts = []
-            rules = rec._cycle_count_rules_to_compute()
-            for rule in rules:
-                locations = rec._search_cycle_count_locations(rule)
-                if locations:
-                    proposed_cycle_counts.extend(rule.compute_rule(locations))
+            proposed_cycle_counts = rec._get_proposed_cycle_counts()
             if proposed_cycle_counts:
-                locations = list({d["location"] for d in proposed_cycle_counts})
-                for loc in locations:
-                    proposed_for_loc = list(
-                        filter(lambda x: x["location"] == loc, proposed_cycle_counts)
-                    )
-                    earliest_date = min(d["date"] for d in proposed_for_loc)
-                    cycle_count_proposed = list(
-                        filter(lambda x: x["date"] == earliest_date, proposed_for_loc)
-                    )[0]
-                    domain = [("location_id", "=", loc.id), ("state", "in", ["draft"])]
-                    existing_cycle_counts = self.env["stock.cycle.count"].search(domain)
-                    if existing_cycle_counts:
-                        existing_earliest_date = sorted(
-                            existing_cycle_counts.mapped("date_deadline")
-                        )[0]
-                        existing_earliest_date = fields.Date.from_string(
-                            existing_earliest_date
-                        )
-                        cycle_count_proposed_date = fields.Date.from_string(
-                            cycle_count_proposed["date"]
-                        )
-                        if cycle_count_proposed_date < existing_earliest_date:
-                            cc_to_update = existing_cycle_counts.search(
-                                [("date_deadline", "=", existing_earliest_date)]
-                            )
-                            cc_to_update.write(
-                                {
-                                    "date_deadline": cycle_count_proposed_date,
-                                    "cycle_count_rule_id": cycle_count_proposed[
-                                        "rule_type"
-                                    ].id,
-                                }
-                            )
-                    delta = (
-                        fields.Datetime.from_string(cycle_count_proposed["date"])
-                        - datetime.today()
-                    )
-                    if (
-                        not existing_cycle_counts
-                        and delta.days < rec.cycle_count_planning_horizon
-                    ):
-                        cc_vals = self._prepare_cycle_count(cycle_count_proposed)
-                        self.env["stock.cycle.count"].create(cc_vals)
+                cc_vals_list = rec._process_cycle_counts(proposed_cycle_counts)
+                self.env["stock.cycle.count"].create(cc_vals_list)
+
+    def _get_proposed_cycle_counts(self):
+        proposed_cycle_counts = []
+        rules = self._cycle_count_rules_to_compute()
+        for rule in rules:
+            locations = self._search_cycle_count_locations(rule)
+            if locations:
+                proposed_cycle_counts.extend(rule.compute_rule(locations))
+        return proposed_cycle_counts
+
+    def _process_cycle_counts(self, proposed_cycle_counts):
+        cc_vals_list = []
+        locations = list({d["location"] for d in proposed_cycle_counts})
+        for loc in locations:
+            proposed_for_loc = list(
+                filter(lambda x: x["location"] == loc, proposed_cycle_counts)
+            )
+            earliest_date = min(d["date"] for d in proposed_for_loc)
+            cycle_count_proposed = next(
+                filter(lambda x: x["date"] == earliest_date, proposed_for_loc)
+            )
+            self._handle_existing_cycle_counts(loc, cycle_count_proposed)
+            delta = (
+                fields.Datetime.from_string(cycle_count_proposed["date"])
+                - datetime.today()
+            )
+            if delta.days < self.cycle_count_planning_horizon:
+                cc_vals = self._prepare_cycle_count(cycle_count_proposed)
+                cc_vals_list.append(cc_vals)
+        return cc_vals_list
+
+    def _handle_existing_cycle_counts(self, location, cycle_count_proposed):
+        domain = [("location_id", "=", location.id), ("state", "in", ["draft"])]
+        existing_cycle_counts = self.env["stock.cycle.count"].search(domain)
+        if existing_cycle_counts:
+            existing_earliest_date = sorted(
+                existing_cycle_counts.mapped("date_deadline")
+            )[0]
+            existing_earliest_date = fields.Date.from_string(existing_earliest_date)
+            cycle_count_proposed_date = fields.Date.from_string(
+                cycle_count_proposed["date"]
+            )
+            if cycle_count_proposed_date < existing_earliest_date:
+                cc_to_update = existing_cycle_counts.filtered(
+                    lambda x: x.date_deadline == existing_earliest_date
+                )
+                cc_to_update.write(
+                    {
+                        "date_deadline": cycle_count_proposed_date,
+                        "cycle_count_rule_id": cycle_count_proposed["rule_type"].id,
+                    }
+                )
 
     @api.model
     def cron_cycle_count(self):
