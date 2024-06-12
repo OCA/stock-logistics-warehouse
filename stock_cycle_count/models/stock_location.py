@@ -21,28 +21,6 @@ except (ImportError, IOError) as err:
 class StockLocation(models.Model):
     _inherit = "stock.location"
 
-    def _compute_loc_accuracy(self):
-        for rec in self:
-            history = self.env["stock.inventory"].search(
-                [("location_ids", "in", rec.id), ("state", "=", "done")],
-                order="write_date desc",
-            )
-            if history:
-                wh = rec.warehouse_id
-                if (
-                    wh.counts_for_accuracy_qty
-                    and len(history) > wh.counts_for_accuracy_qty
-                ):
-                    rec.loc_accuracy = mean(
-                        history[: wh.counts_for_accuracy_qty].mapped(
-                            "inventory_accuracy"
-                        )
-                    )
-                else:
-                    rec.loc_accuracy = mean(history.mapped("inventory_accuracy"))
-            else:
-                rec.loc_accuracy = 0
-
     zero_confirmation_disabled = fields.Boolean(
         string="Disable Zero Confirmations",
         help="Define whether this location will trigger a zero-confirmation "
@@ -60,19 +38,46 @@ class StockLocation(models.Model):
         string="Inventory Accuracy", compute="_compute_loc_accuracy", digits=(3, 2)
     )
 
+    def _compute_loc_accuracy(self):
+        history = self.env["stock.inventory"].search(
+            [("location_ids", "in", self.ids), ("state", "=", "done")],
+            order="write_date desc",
+        )
+        for rec in self:
+            loc_history = history.filtered_domain([("location_ids", "in", rec.id)])
+            if loc_history:
+                wh = rec.warehouse_id
+                if (
+                    wh.counts_for_accuracy_qty
+                    and len(loc_history) > wh.counts_for_accuracy_qty
+                ):
+                    rec.loc_accuracy = mean(
+                        loc_history[: wh.counts_for_accuracy_qty].mapped(
+                            "inventory_accuracy"
+                        )
+                    )
+                else:
+                    rec.loc_accuracy = mean(loc_history.mapped("inventory_accuracy"))
+            else:
+                rec.loc_accuracy = 0
+
     def _get_zero_confirmation_domain(self):
         self.ensure_one()
         domain = [("location_id", "=", self.id), ("quantity", ">", 0.0)]
         return domain
 
     def check_zero_confirmation(self):
+        rule_model = self.env["stock.cycle.count.rule"]
+        warehouse_ids = self.mapped("warehouse_id.id")
+        zero_rules = rule_model.search(
+            [("rule_type", "=", "zero"), ("warehouse_ids", "in", warehouse_ids)]
+        )
+        warehouse_to_rules = {rule.warehouse_ids.id: rule for rule in zero_rules}
+
         for rec in self:
             if not rec.zero_confirmation_disabled:
                 wh = rec.warehouse_id
-                rule_model = self.env["stock.cycle.count.rule"]
-                zero_rule = rule_model.search(
-                    [("rule_type", "=", "zero"), ("warehouse_ids", "=", wh.id)]
-                )
+                zero_rule = warehouse_to_rules.get(wh.id)
                 if zero_rule:
                     quants = self.env["stock.quant"].search(
                         rec._get_zero_confirmation_domain()
