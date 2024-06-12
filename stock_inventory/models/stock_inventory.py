@@ -107,7 +107,6 @@ class InventoryAdjustmentsGroup(models.Model):
         string="Assigned to",
         states={"draft": [("readonly", False)]},
         readonly=True,
-        tracking=True,
         help="Specific responsible of Inventory Adjustment.",
     )
 
