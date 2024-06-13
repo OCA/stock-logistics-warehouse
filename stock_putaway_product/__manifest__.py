@@ -10,7 +10,7 @@
     'website': 'https://github.com/OCA/stock-logistics-warehouse',
     'author': 'Apertoso N.V., '
               'Tecnativa, '
-              'Camptocamp SA, '
+              'Camptocamp, '
               'Odoo Community Association (OCA)',
     'license': 'AGPL-3',
     'depends': [

@@ -6,7 +6,7 @@
                """ via accounts.""",
     'category': "Warehouse Management",
     'version': "11.0.1.0.0",
-    'author': "Camptocamp SA,"
+    'author': "Camptocamp,"
               " Odoo Community Association (OCA)",
     'website': "https://github.com/OCA/stock-logistics-warehouse",
     'license': "AGPL-3",
