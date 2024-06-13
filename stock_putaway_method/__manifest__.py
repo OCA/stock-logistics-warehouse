@@ -6,7 +6,7 @@
     "version": "14.0.1.0.0",
     "category": "Inventory",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
-    "author": "Camptocamp SA, " "Odoo Community Association (OCA)",
+    "author": "Camptocamp, " "Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "depends": ["product", "stock"],
     "data": ["views/product_strategy_views.xml"],
