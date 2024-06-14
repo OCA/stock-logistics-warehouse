@@ -86,10 +86,12 @@ class StockLocation(models.Model):
 
     @api.depends("package_restriction")
     def _compute_package_restriction_violation(self):
-        self.env.cr.execute(
-            self._has_package_restriction_violation_query(), (tuple(self.ids),)
-        )
-        errors = {r[0]: r[1:] for r in self.env.cr.fetchall()}
+        errors = {}
+        if self.ids:
+            self.env.cr.execute(
+                self._has_package_restriction_violation_query(), (tuple(self.ids),)
+            )
+            errors = {r[0]: r[1:] for r in self.env.cr.fetchall()}
         for location in self:
             error = errors.get(location.id)
             if not error:
