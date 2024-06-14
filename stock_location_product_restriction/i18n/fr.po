@@ -81,8 +81,9 @@ msgstr "Mouvement de stock"
 #, python-format
 msgid ""
 "The location {location} can only contain items of the same product. You plan "
-"to move different products to this location. ({products})"
-msgstr ""
+"to put different products into this location. ({products})"
+msgstr "L'emplacement {location} ne peut contenir que des articles identiques. Vous "
+"essayer de mettre d'autres articles dans cet emplacement. ({products}) "
 
 #. module: stock_location_product_restriction
 #. odoo-python
@@ -103,10 +104,13 @@ msgstr "Ne respecte pas les règles"
 #: code:addons/stock_location_product_restriction/models/stock_move.py:0
 #, python-format
 msgid ""
-"You plan to move the product {product} to the location {location} but the "
+"You plan to add the product {product} into the location {location} but the "
 "location must only contain items of same product and already contains items "
 "of other product(s) ({existing_products})."
-msgstr ""
+msgstr "Vous essayer d'ajouter le produit {product} dans l'emplacemet {location} mais l'"
+"emplacement ne peut contenir que des articles identiques et contient déja "
+"d'autes articles ({existing_products})"
+
 
 #~ msgid "Has restriction violation"
 #~ msgstr "Ne respecte pas les règles"
