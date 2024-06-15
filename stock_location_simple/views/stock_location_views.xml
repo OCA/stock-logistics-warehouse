@@ -36,7 +36,7 @@
                         <field
                             name="location_id"
                             required="1"
-                            domain="[('usage', '=', 'internal')]"
+                            domain="[('usage', '=', 'internal'), ('is_technical_location', '=', False)]"
                             attrs="{'readonly': [('is_linked_to_warehouse', '=', True)]}"
                         />
                     </h2>
@@ -61,20 +61,22 @@
         <field name="name">stock.location.simple.tree</field>
         <field name="model">stock.location</field>
         <field name="arch" type="xml">
-            <!-- TODO: decoration info if lockdown, if view, if linked to a warehouse -->
-            <tree string="Stock Location">
+            <tree string="Locations" decoration-muted="is_linked_to_warehouse == True">
                 <field name="active" invisible="1" />
                 <field name="complete_name" string="Location" />
                 <field name="company_id" groups="base.group_multi_company" />
+                <field name="is_linked_to_warehouse" invisible="1" />
             </tree>
         </field>
     </record>
 
     <record id="stock_location_simple_act_window" model="ir.actions.act_window">
-        <field name="name">Stock Location</field>
+        <field name="name">Locations</field>
         <field name="res_model">stock.location</field>
         <field name="view_mode">tree,form</field>
-        <field name="domain">[("usage", "=", "internal")]</field>
+        <field
+            name="domain"
+        >[("usage", "=", "internal"), ("is_technical_location", "=", False)]</field>
     </record>
 
     <record
