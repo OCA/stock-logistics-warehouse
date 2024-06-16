@@ -7,7 +7,7 @@
     "author": "MT Software, BCIM, Odoo Community Association (OCA)",
     "summary": "Run an auto location orderpoint replenishment "
     "after the move relocation done by Stock Move Source Relocate",
-    "version": "14.0.1.0.2",
+    "version": "14.0.1.0.3",
     "development_status": "Alpha",
     "data": [],
     "depends": [
