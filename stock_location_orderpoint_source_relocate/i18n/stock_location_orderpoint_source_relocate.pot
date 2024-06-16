@@ -14,16 +14,19 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: stock_location_orderpoint_source_relocate
+#: model:ir.model.fields,field_description:stock_location_orderpoint_source_relocate.field_stock_location_orderpoint__display_name
 #: model:ir.model.fields,field_description:stock_location_orderpoint_source_relocate.field_stock_move__display_name
 msgid "Display Name"
 msgstr ""
 
 #. module: stock_location_orderpoint_source_relocate
+#: model:ir.model.fields,field_description:stock_location_orderpoint_source_relocate.field_stock_location_orderpoint__id
 #: model:ir.model.fields,field_description:stock_location_orderpoint_source_relocate.field_stock_move__id
 msgid "ID"
 msgstr ""
 
 #. module: stock_location_orderpoint_source_relocate
+#: model:ir.model.fields,field_description:stock_location_orderpoint_source_relocate.field_stock_location_orderpoint____last_update
 #: model:ir.model.fields,field_description:stock_location_orderpoint_source_relocate.field_stock_move____last_update
 msgid "Last Modified on"
 msgstr ""
@@ -31,4 +34,9 @@ msgstr ""
 #. module: stock_location_orderpoint_source_relocate
 #: model:ir.model,name:stock_location_orderpoint_source_relocate.model_stock_move
 msgid "Stock Move"
+msgstr ""
+
+#. module: stock_location_orderpoint_source_relocate
+#: model:ir.model,name:stock_location_orderpoint_source_relocate.model_stock_location_orderpoint
+msgid "Stock location orderpoint"
 msgstr ""
