@@ -113,10 +113,7 @@
     <!-- Modify name and groups_id on original stock.location menu -->
     <record id="stock.menu_action_location_form" model="ir.ui.menu">
         <field name="name">Locations Technical</field>
-        <field name="parent_id" ref="stock.menu_warehouse_config" />
-        <field name="action" ref="stock.action_location_form" />
-        <field name="sequence" eval="2" />
-        <field name="groups_id" eval="[(4, ref('base.group_erp_manager'))]" />
+        <field name="groups_id" eval="[(6, 0, [ref('base.group_erp_manager')])]" />
     </record>
 
 </odoo>

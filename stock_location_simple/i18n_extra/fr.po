@@ -1,0 +1,4 @@
+#. module: stock
+#: model:ir.ui.menu,name:stock.menu_action_location_form
+msgid "Locations Technical"
+msgstr "Emplacements Technique"
