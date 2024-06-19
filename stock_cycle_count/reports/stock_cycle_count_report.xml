@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2017 ForgeFlow S.L.
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <template id="report_cyclecount">
+        <t t-call="web.html_container">
+            <t t-call="web.internal_layout">
+                <div class="page">
+                    <table class="table table-condensed">
+                        <thead>
+                            <tr>
+                                <th>Cycle Count #</th>
+                                <th>Location</th>
+                                <th>Required Date</th>
+                                <th>Assigned to</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody class="sale_tbody">
+                            <t t-foreach="docs" t-as="doc">
+                                <tr>
+                                    <td>
+                                        <span t-field="doc.name" />
+                                    </td>
+                                    <td>
+                                        <span t-field="doc.location_id" />
+                                    </td>
+                                    <td>
+                                        <span t-field="doc.date_deadline" />
+                                    </td>
+                                    <td>
+                                        <span t-field="doc.responsible_id" />
+                                    </td>
+                                    <td class="text-right">
+                                        <span t-field="doc.state" />
+                                    </td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+    <!-- Report action -->
+    <record id="action_report_stock_cycle_count" model="ir.actions.report">
+        <field name="model">stock.cycle.count</field>
+        <field name="report_name">stock_cycle_count.report_cyclecount</field>
+        <field name="name">Cycle Count</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="groups_id" eval="[(4, ref('stock.group_stock_user'))]" />
+    </record>
+</odoo>

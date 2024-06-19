@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2017 ForgeFlow S.L.
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <!-- Templates -->
+    <template id="stock_location_accuracy">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <div class="oe_structure" />
+                        <h3>
+                            <span>Location:</span>
+                            <span t-field="doc.name" />
+                        </h3>
+                        <div class="row mt32 mb32" id="informations">
+                            <div class="col-xs-6">
+                                <strong>Complete name:</strong>
+                                <p t-field="doc.complete_name" />
+                            </div>
+                            <div class="col-xs-3">
+                                <strong>Current Accuracy:</strong>
+                                <p t-field="doc.loc_accuracy" />
+                            </div>
+                        </div>
+                        <table class="table table-condensed">
+                            <thead>
+                                <tr>
+                                    <th>Inventory</th>
+                                    <th class="text-right">Date</th>
+                                    <th class="text-right">Accuracy</th>
+                                </tr>
+                            </thead>
+                            <tbody class="sale_tbody">
+                                <t t-foreach="data[doc]" t-as="l">
+                                    <tr>
+                                        <td>
+                                            <span t-field="l.name" />
+                                        </td>
+                                        <td class="text-right">
+                                            <span t-field="l.date" />
+                                        </td>
+                                        <td class="text-right">
+                                            <span t-field="l.inventory_accuracy" />
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+    <!-- Report action -->
+    <record id="action_report_stock_location_accuracy" model="ir.actions.report">
+        <field name="model">stock.location</field>
+        <field name="report_name">stock_location_accuracy</field>
+        <field name="name">Accuracy Report</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="groups_id" eval="[(4, ref('stock.group_stock_user'))]" />
+    </record>
+</odoo>
