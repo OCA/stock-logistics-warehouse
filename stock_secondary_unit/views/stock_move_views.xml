@@ -13,6 +13,7 @@
                     attrs="{'readonly': [('state', 'in', ('done', 'cancel')), ('is_locked', '=', True)]}"
                     force_save="1"
                     groups="uom.group_uom"
+                    optional="show"
                 />
                 <field
                     name="secondary_uom_id"
@@ -22,6 +23,7 @@
                     attrs="{'readonly': [('state', '!=', 'draft'), ('id', '!=', False)]}"
                     options="{'no_create': True}"
                     groups="uom.group_uom"
+                    optional="show"
                 />
             </field>
         </field>
@@ -40,6 +42,7 @@
                     attrs="{'readonly': [('state', 'in', ('done', 'cancel')), ('is_locked', '=', True)]}"
                     force_save="1"
                     groups="uom.group_uom"
+                    optional="show"
                 />
                 <field
                     name="secondary_uom_id"
@@ -49,6 +52,7 @@
                     attrs="{'readonly': [('state', '!=', 'draft'), ('id', '!=', False)]}"
                     options="{'no_create': True}"
                     groups="uom.group_uom"
+                    optional="show"
                 />
             </field>
         </field>
