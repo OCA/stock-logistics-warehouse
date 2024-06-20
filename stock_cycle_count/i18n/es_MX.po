@@ -714,7 +714,7 @@ msgstr "Movimiento bursátil"
 #, python-format
 msgid ""
 "The Inventory Adjustment is inconsistent with the Cycle Count:\n"
-"%s"
+"%(message)s"
 msgstr ""
 
 #. module: stock_cycle_count
