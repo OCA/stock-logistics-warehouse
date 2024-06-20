@@ -53,4 +53,5 @@ class StockMoveLine(models.Model):
 
     @api.depends("secondary_uom_id", "secondary_uom_qty")
     def _compute_qty_done(self):
-        self._compute_helper_target_field_qty()
+        for record in self:
+            record._compute_helper_target_field_qty()
