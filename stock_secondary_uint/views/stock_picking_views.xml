@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2018 Tecnativa - Sergio Teruel
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="view_picking_form" model="ir.ui.view">
+        <field name="name">Stock Picking Secondary Unit</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//field[@name='move_ids_without_package']/tree/field[@name='quantity']"
+                position="before"
+            >
+                <field name="show_operations" invisible="1" />
+                <field
+                    name="secondary_uom_qty"
+                    readonly="not is_initial_demand_editable or (show_operations and is_locked and not is_initial_demand_editable)"
+                    groups="uom.group_uom"
+                />
+                <field
+                    name="secondary_uom_id"
+                    domain="['|', ('product_id', '=', product_id),
+                                '&amp;', ('product_tmpl_id.product_variant_ids', 'in', [product_id]),
+                                         ('product_id', '=', False)]"
+                    options="{'no_create': True}"
+                    readonly="not is_initial_demand_editable or (show_operations and is_locked and not is_initial_demand_editable)"
+                    groups="uom.group_uom"
+                />
+                <!-- FIXME : column_invisible -->
+                <!-- <field
+                    name="secondary_uom_qty"
+                    column_invisible="parent.immediate_transfer"
+                    readonly="not is_initial_demand_editable or (show_operations and is_locked and not is_initial_demand_editable)"
+                    groups="uom.group_uom"
+                />
+                <field
+                    name="secondary_uom_id"
+                    domain="['|', ('product_id', '=', product_id),
+                                '&amp;', ('product_tmpl_id.product_variant_ids', 'in', [product_id]),
+                                         ('product_id', '=', False)]"
+                    options="{'no_create': True}"
+                    column_invisible="parent.immediate_transfer"
+                    readonly="not is_initial_demand_editable or (show_operations and is_locked and not is_initial_demand_editable)"
+                    groups="uom.group_uom"
+                /> -->
+            </xpath>
+            <!-- FIXME -->
+            <!-- <xpath
+                expr="//field[@name='move_ids_without_package']/form//field[@name='quantity']"
+                position="before"
+            >
+                <field
+                    name="secondary_uom_qty"
+                    invisible="parent.immediate_transfer"
+                    readonly="not is_initial_demand_editable"
+                    groups="uom.group_uom"
+                />
+                <field
+                    name="secondary_uom_id"
+                    domain="['|', ('product_id', '=', product_id),
+                                '&amp;', ('product_tmpl_id.product_variant_ids', 'in', [product_id]),
+                                         ('product_id', '=', False)]"
+                    options="{'no_create': True}"
+                    invisible="parent.immediate_transfer"
+                    readonly="not is_initial_demand_editable"
+                    groups="uom.group_uom"
+                />
+            </xpath> -->
+        </field>
+    </record>
+</odoo>
