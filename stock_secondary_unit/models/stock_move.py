@@ -40,7 +40,7 @@ class StockMove(models.Model):
 class StockMoveLine(models.Model):
     _inherit = ["stock.move.line", "product.secondary.unit.mixin"]
     _name = "stock.move.line"
-    _secondary_unit_fields = {"qty_field": "qty_done", "uom_field": "product_uom_id"}
+    _secondary_unit_fields = {"qty_field": "quantity", "uom_field": "product_uom_id"}
 
     qty_done = fields.Float(store=True, readonly=False, compute="_compute_qty_done")
 

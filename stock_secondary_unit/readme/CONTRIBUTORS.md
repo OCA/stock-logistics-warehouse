@@ -5,3 +5,4 @@
 - Kitti Upariphutthiphong \<<kittiu@ecosoft.co.th>\>
 - Pimolnat Suntian \<<pimolnats@ecosoft.co.th>\>
 - Alan Ramos \<<alan.ramos@jarsa.com.mx>\>
+- Frederic Grall \<<fgr@apik.cloud>\>

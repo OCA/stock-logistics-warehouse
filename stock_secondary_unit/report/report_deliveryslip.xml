@@ -22,7 +22,7 @@
             </td>
         </xpath>
         <xpath
-            expr='//table[@t-if="o.move_line_ids and o.state==&apos;done&apos;"]/thead/tr/th'
+            expr='//table[@name="stock_move_line_table"]/thead/tr/th'
             position="after"
         >
             <th>
