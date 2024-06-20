@@ -11,20 +11,6 @@ PERCENT = 100.0
 class StockInventory(models.Model):
     _inherit = "stock.inventory"
 
-    @api.depends("state", "stock_quant_ids")
-    def _compute_inventory_accuracy(self):
-        for inv in self:
-            theoretical = sum(inv.stock_quant_ids.mapped(lambda x: abs(x.quantity)))
-            abs_discrepancy = sum(
-                inv.stock_quant_ids.mapped(lambda x: abs(x.inventory_diff_quantity))
-            )
-            if theoretical:
-                inv.inventory_accuracy = max(
-                    PERCENT * (theoretical - abs_discrepancy) / theoretical, 0.0
-                )
-            if not inv.stock_quant_ids and inv.state == "done":
-                inv.inventory_accuracy = PERCENT
-
     prefill_counted_quantity = fields.Selection(
         string="Counted Quantities",
         help="Allows to start with a pre-filled counted quantity for each lines or "
@@ -49,20 +35,19 @@ class StockInventory(models.Model):
         group_operator="avg",
     )
 
-    def _get_default_counted_quantitites(self):
-        company_id = self.env.context.get("default_company_id", self.env.company)
-        return company_id.inventory_adjustment_counted_quantities or "counted"
-
-    prefill_counted_quantity = fields.Selection(
-        string="Counted Quantities",
-        help="Allows to start with a pre-filled counted quantity for each lines or "
-        "with all counted quantities set to zero.",
-        default=_get_default_counted_quantitites,
-        selection=[
-            ("counted", "Default to stock on hand"),
-            ("zero", "Default to zero"),
-        ],
-    )
+    @api.depends("state", "stock_quant_ids")
+    def _compute_inventory_accuracy(self):
+        for inv in self:
+            theoretical = sum(inv.stock_quant_ids.mapped(lambda x: abs(x.quantity)))
+            abs_discrepancy = sum(
+                inv.stock_quant_ids.mapped(lambda x: abs(x.inventory_diff_quantity))
+            )
+            if theoretical:
+                inv.inventory_accuracy = max(
+                    PERCENT * (theoretical - abs_discrepancy) / theoretical, 0.0
+                )
+            if not inv.stock_quant_ids and inv.state == "done":
+                inv.inventory_accuracy = PERCENT
 
     def _update_cycle_state(self):
         for inv in self:
@@ -99,21 +84,22 @@ class StockInventory(models.Model):
         return True
 
     def action_state_to_done(self):
-        res = super(StockInventory, self).action_state_to_done()
+        res = super().action_state_to_done()
         self._update_cycle_state()
         return res
 
     def action_force_done(self):
-        res = super(StockInventory, self).action_force_done()
+        res = super().action_force_done()
         self._update_cycle_state()
         return res
 
-    @api.model
-    def create(self, vals):
-        res = super().create(vals)
-        if not res.cycle_count_id:
-            res._link_to_planned_cycle_count()
-        return res
+    @api.model_create_multi
+    def create(self, vals_list):
+        inventories = super().create(vals_list)
+        for inv in inventories:
+            if not inv.cycle_count_id:
+                inv._link_to_planned_cycle_count()
+        return inventories
 
     def _is_consistent_with_cycle_count(self):
         self.ensure_one()
@@ -153,7 +139,9 @@ class StockInventory(models.Model):
             if not is_consistent:
                 raise ValidationError(
                     _(
-                        "The Inventory Adjustment is inconsistent with the Cycle Count:\n%s"
+                        "The Inventory Adjustment is inconsistent "
+                        "with the Cycle Count:\n%(message)s",
+                        message=msg,
                     )
                     % msg
                 )
