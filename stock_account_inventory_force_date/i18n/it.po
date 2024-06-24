@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-01-15 11:36+0000\n"
+"PO-Revision-Date: 2024-06-24 14:36+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -24,7 +24,7 @@ msgstr "Aziende"
 #. module: stock_account_inventory_force_date
 #: model:res.groups,name:stock_account_inventory_force_date.group_stock_account_inventory_force_date
 msgid "Force Inventory Adjustment Date"
-msgstr "Forza Data Rettifica Inventario"
+msgstr "Forza data rettifica inventario"
 
 #. module: stock_account_inventory_force_date
 #: model:ir.model.fields,field_description:stock_account_inventory_force_date.field_stock_inventory__force_inventory_date
