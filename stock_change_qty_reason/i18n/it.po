@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-06-03 01:23+0000\n"
-"PO-Revision-Date: 2023-12-13 15:34+0000\n"
+"PO-Revision-Date: 2024-06-24 14:35+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -57,7 +57,7 @@ msgid ""
 "Update Quantities Wizard."
 msgstr ""
 "Abilita l'utilizzo di causali predefinite per la gestione degli inventari di "
-"rettifica e i wizard per l'aggiornamento delle quantità prodotto."
+"rettifica e le procedure guidate per l'aggiornamento delle quantità prodotto."
 
 #. module: stock_change_qty_reason
 #: model:ir.model.fields,field_description:stock_change_qty_reason.field_stock_quant_reason__id
