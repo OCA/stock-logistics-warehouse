@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-05-22 15:33+0000\n"
+"PO-Revision-Date: 2024-06-24 13:40+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -44,7 +44,7 @@ msgstr "Ritorna a bozza"
 #. module: stock_inventory
 #: model_terms:ir.ui.view,arch_db:stock_inventory.view_inventory_group_form
 msgid "Begin Adjustments"
-msgstr "Inizia correzioni"
+msgstr "Inizia rettifiche"
 
 #. module: stock_inventory
 #. odoo-python
