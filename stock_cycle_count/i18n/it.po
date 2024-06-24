@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-06-10 05:35+0000\n"
-"PO-Revision-Date: 2024-05-17 12:39+0000\n"
+"PO-Revision-Date: 2024-06-24 13:40+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -32,6 +32,9 @@ msgid ""
 "specific.\" aria-label=\"Values set here are company-specific.\" groups="
 "\"base.group_multi_company\" role=\"img\"/>"
 msgstr ""
+"<span class=\"fa fa-lg fa-building-o\" title=\"I valori impostati qui sono "
+"specifici per azienda.\" aria-label=\"I valori impostati qui sono specifici "
+"per azienda.\" groups=\"base.group_multi_company\" role=\"img\"/>"
 
 #. module: stock_cycle_count
 #: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_location_accuracy
@@ -86,12 +89,16 @@ msgid ""
 "Allows to start with a pre-filled counted quantity for each lines or with "
 "all counted quantities set to zero."
 msgstr ""
+"Consente di iniziare con una quantità contata precompilata per ogni riga o "
+"con tutte le quantità impostate a zero."
 
 #. module: stock_cycle_count
 #: code:addons/stock_cycle_count/models/stock_inventory.py:0
 #, python-format
 msgid "An adjustment linked to a cycle count should exclude the sublocations."
 msgstr ""
+"Una rettifica collegata ad un inventario a rotazione dovrebbe escludere le "
+"sotto ubicazioni."
 
 #. module: stock_cycle_count
 #: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_rule_form_view
@@ -125,7 +132,7 @@ msgstr "Conteggio allegati"
 #: model:ir.model.fields,field_description:stock_cycle_count.field_res_company__auto_start_inventory_from_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_res_config_settings__auto_start_inventory_from_cycle_count
 msgid "Auto Start Inventory Adjustment from Cycle Count"
-msgstr ""
+msgstr "Avvio automatico rettifiche inventario da inventario a rotazione"
 
 #. module: stock_cycle_count
 #: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_form_view
@@ -141,7 +148,7 @@ msgstr "Annullato"
 #. module: stock_cycle_count
 #: model:ir.model,name:stock_cycle_count.model_res_company
 msgid "Companies"
-msgstr ""
+msgstr "Aziende"
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__company_id
@@ -156,7 +163,7 @@ msgstr "Calcola regole conteggio a rotazione"
 #. module: stock_cycle_count
 #: model:ir.model,name:stock_cycle_count.model_res_config_settings
 msgid "Config Settings"
-msgstr ""
+msgstr "Impostazioni configurazione"
 
 #. module: stock_cycle_count
 #: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_form_view
@@ -171,7 +178,7 @@ msgstr "Conferma inventari a rotazione"
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_inventory__prefill_counted_quantity
 msgid "Counted Quantities"
-msgstr ""
+msgstr "Quantità contate"
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule__periodic_qty_per_period
@@ -308,19 +315,19 @@ msgstr "Data limite"
 #. module: stock_cycle_count
 #: model_terms:ir.ui.view,arch_db:stock_cycle_count.res_config_settings_view_form_cycle_adjustment
 msgid "Default Counted Quantity Mode"
-msgstr ""
+msgstr "Modo quantità contata predefinita"
 
 #. module: stock_cycle_count
 #: model:ir.model.fields.selection,name:stock_cycle_count.selection__res_company__inventory_adjustment_counted_quantities__counted
 #: model:ir.model.fields.selection,name:stock_cycle_count.selection__stock_inventory__prefill_counted_quantity__counted
 msgid "Default to stock on hand"
-msgstr ""
+msgstr "Predefinito a giacienza a disposizione"
 
 #. module: stock_cycle_count
 #: model:ir.model.fields.selection,name:stock_cycle_count.selection__res_company__inventory_adjustment_counted_quantities__zero
 #: model:ir.model.fields.selection,name:stock_cycle_count.selection__stock_inventory__prefill_counted_quantity__zero
 msgid "Default to zero"
-msgstr ""
+msgstr "Predefinito a zero"
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,help:stock_cycle_count.field_stock_location__cycle_count_disabled
@@ -407,7 +414,7 @@ msgstr "Raggruppa per..."
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__has_message
 msgid "Has Message"
-msgstr ""
+msgstr "Ha un messaggio"
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__id
@@ -436,6 +443,8 @@ msgid ""
 "If enabled, confirming a Cycle Count will start the related Inventory "
 "Adjustment."
 msgstr ""
+"Se abilitato, confermando un inventario a rotazione inizierà le relative "
+"rettifiche di inventario."
 
 #. module: stock_cycle_count
 #: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_rule_form_view
@@ -473,18 +482,19 @@ msgstr "Conteggio correzioni inventario"
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__stock_adjustment_ids
 msgid "Inventory Adjustment"
-msgstr "Rettifica di magazzino"
+msgstr "Rettifica di inventario"
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_res_company__inventory_adjustment_counted_quantities
 #: model:ir.model.fields,field_description:stock_cycle_count.field_res_config_settings__inventory_adjustment_counted_quantities
 msgid "Inventory Adjustment Counted quantities from Cycle Count"
 msgstr ""
+"Rettifiche di inventario delle quantità contate da intentario a rotazione"
 
 #. module: stock_cycle_count
 #: model:ir.model,name:stock_cycle_count.model_stock_inventory
 msgid "Inventory Adjustment Group"
-msgstr ""
+msgstr "Gruppo rettifiche d'inventario"
 
 #. module: stock_cycle_count
 #: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_form_view
@@ -571,7 +581,7 @@ msgstr "Soglia precisione minima"
 #. module: stock_cycle_count
 #: model_terms:ir.ui.view,arch_db:stock_cycle_count.view_inventory_filter
 msgid "My Adjustments"
-msgstr ""
+msgstr "Le mie rettifiche"
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__name
@@ -688,7 +698,7 @@ msgstr "Magazzini selezionati"
 #. module: stock_cycle_count
 #: model_terms:ir.ui.view,arch_db:stock_cycle_count.res_config_settings_view_form_cycle_adjustment
 msgid "Sets default counted quanities in Inventory Adjustments"
-msgstr ""
+msgstr "Imposta le quantità contate predefinite nelle rettifiche di inventario"
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__state
@@ -734,12 +744,17 @@ msgid ""
 "The Inventory Adjustment is inconsistent with the Cycle Count:\n"
 "%s"
 msgstr ""
+"Le rettifiche di inventario sono inconsistenti con l'inventario a rotazione:"
+"\n"
+"%s"
 
 #. module: stock_cycle_count
 #: code:addons/stock_cycle_count/models/stock_inventory.py:0
 #, python-format
 msgid "The adjustment should be done for all products in the location."
 msgstr ""
+"Le rettifiche dovrebbero essere eseguite per tutti i prodotti "
+"nell'ubicazione."
 
 #. module: stock_cycle_count
 #: code:addons/stock_cycle_count/models/stock_inventory.py:0
@@ -748,12 +763,15 @@ msgid ""
 "The company of the adjustment does not match with the company in the cycle "
 "count."
 msgstr ""
+"L'azienda delle rettifiche non corrisponde con l'azienda nell'inventario a "
+"rotazione."
 
 #. module: stock_cycle_count
 #: code:addons/stock_cycle_count/models/stock_inventory.py:0
 #, python-format
 msgid "The location in the inventory does not match with the cycle count."
 msgstr ""
+"L'ubicazione nel magazzino non corrisponde con nell'inventario a rotazione."
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule__turnover_inventory_value_threshold
