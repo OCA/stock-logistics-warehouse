@@ -6,41 +6,43 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2024-06-24 13:40+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: stock_valuation_layer_total_value
 #: model_terms:ir.ui.view,arch_db:stock_valuation_layer_total_value.stock_valuation_layer_form
 msgid "Child Layers"
-msgstr ""
+msgstr "Livelli figli"
 
 #. module: stock_valuation_layer_total_value
 #: model:ir.model.fields,field_description:stock_valuation_layer_total_value.field_stock_valuation_layer__unit_price_with_extra_cost
 msgid "New unit price (with additional costs)"
-msgstr ""
+msgstr "Prezzo unitario nuovo (con costi addizionali)"
 
 #. module: stock_valuation_layer_total_value
 #: model:ir.model,name:stock_valuation_layer_total_value.model_stock_valuation_layer
 msgid "Stock Valuation Layer"
-msgstr ""
+msgstr "Livello valutazione magazzino"
 
 #. module: stock_valuation_layer_total_value
 #: model:ir.model.fields,help:stock_valuation_layer_total_value.field_stock_valuation_layer__total_value_with_additional_costs
 msgid ""
 "This is the sum of the total value's layer and total value of child layers"
-msgstr ""
+msgstr "Questa è la somma del totale del valore del livello e dei suoi figli"
 
 #. module: stock_valuation_layer_total_value
 #: model:ir.model.fields,help:stock_valuation_layer_total_value.field_stock_valuation_layer__unit_price_with_extra_cost
 msgid "This is the unit cost after the additional costs are added"
-msgstr ""
+msgstr "Questo è il costo unitario dopo l'aggiunta dei costi addizionali"
 
 #. module: stock_valuation_layer_total_value
 #: model:ir.model.fields,field_description:stock_valuation_layer_total_value.field_stock_valuation_layer__total_value_with_additional_costs
 msgid "Total value (with additional costs)"
-msgstr ""
+msgstr "Valore totale (con costi addizionali)"
