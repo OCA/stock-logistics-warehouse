@@ -13,6 +13,7 @@
                     name="secondary_uom_qty"
                     attrs="{'readonly': [('state', 'in', ('done', 'cancel')), ('is_locked', '=', True)]}"
                     force_save="1"
+                    optional="show"
                 />
                 <field
                     name="secondary_uom_id"
@@ -21,6 +22,7 @@
                                          ('product_id', '=', False)]"
                     attrs="{'readonly': [('state', '!=', 'draft'), ('id', '!=', False)]}"
                     options="{'no_create': True}"
+                    optional="show"
                 />
             </field>
         </field>
@@ -39,6 +41,7 @@
                     name="secondary_uom_qty"
                     attrs="{'readonly': [('state', 'in', ('done', 'cancel')), ('is_locked', '=', True)]}"
                     force_save="1"
+                    optional="show"
                 />
                 <field
                     name="secondary_uom_id"
@@ -47,6 +50,7 @@
                                          ('product_id', '=', False)]"
                     attrs="{'readonly': [('state', '!=', 'draft'), ('id', '!=', False)]}"
                     options="{'no_create': True}"
+                    optional="show"
                 />
             </field>
         </field>
