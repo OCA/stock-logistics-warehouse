@@ -26,10 +26,14 @@ class TestStockCycleCount(common.TransactionCase):
         cls.partner = cls.env.ref("base.res_partner_1")
         cls.g_stock_manager = cls.env.ref("stock.group_stock_manager")
         cls.g_stock_user = cls.env.ref("stock.group_stock_user")
+        cls.g_manager_settings = cls.env.ref("base.group_system")
 
         # Create users:
         cls.manager = cls._create_user("user_1", [cls.g_stock_manager], cls.company).id
         cls.user = cls._create_user("user_2", [cls.g_stock_user], cls.company).id
+        cls.admin_settings_user = cls._create_user(
+            "user_boss", [cls.g_stock_manager, cls.g_manager_settings], cls.company
+        ).id
 
         # Create warehouses:
         cls.big_wh = cls.stock_warehouse_model.create(
@@ -230,17 +234,21 @@ class TestStockCycleCount(common.TransactionCase):
         """Tests workflow."""
         with self.assertRaises(AccessError):
             self.cycle_count_1.action_create_inventory_adjustment()
+        # actually the inv adjustment was not created
+        # but test were not failing because the next serach was
+        # returning an empty recorset
+        self.cycle_count_1.with_user(
+            self.admin_settings_user
+        ).action_create_inventory_adjustment()
         inventory = self.inventory_model.search(
             [("cycle_count_id", "=", self.cycle_count_1.id)]
         )
-        with self.assertRaises(AssertionError):
-            self.assertTrue(inventory, "Inventory not created.")
+        self.assertEqual(len(inventory), 1)
         inventory.action_state_to_in_progress()
         inventory.action_state_to_done()
-        with self.assertRaises(AssertionError):
-            self.assertEqual(
-                self.cycle_count_1.state, "done", "Cycle count not set as done."
-            )
+        self.assertEqual(
+            self.cycle_count_1.state, "done", "Cycle count not set as done."
+        )
         self.cycle_count_1.do_cancel()
         self.assertEqual(
             self.cycle_count_1.state, "cancelled", "Cycle count not set as cancelled."
