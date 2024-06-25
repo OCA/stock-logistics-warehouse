@@ -15,10 +15,14 @@ class StockQuant(models.Model):
                 self.env["stock.inventory"]
                 .search([("state", "=", "in_progress")])
                 .filtered(
-                    lambda x: rec.location_id in x.location_ids
-                    or (
-                        rec.location_id in x.location_ids.child_internal_location_ids
-                        and not x.exclude_sublocation
+                    lambda x: (rec.product_id in x._get_products())
+                    and (
+                        rec.location_id in x.location_ids
+                        or (
+                            rec.location_id
+                            in x.location_ids.child_internal_location_ids
+                            and not x.exclude_sublocation
+                        )
                     )
                 )
             )

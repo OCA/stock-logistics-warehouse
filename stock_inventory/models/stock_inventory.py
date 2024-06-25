@@ -190,25 +190,49 @@ class InventoryAdjustmentsGroup(models.Model):
             ]
         )
 
+    def _get_products(self):
+        self.ensure_one()
+        if self.product_selection == "all":
+            return self.env["product.product"].search([])
+        elif self.product_selection == "category" and self.category_id:
+            return self.env["product.product"].search(
+                [
+                    "|",
+                    ("categ_id", "=", self.category_id.id),
+                    ("categ_id", "in", self.category_id.child_id.ids),
+                ]
+            )
+        else:
+            return self.product_ids
+
+    def _get_overlapping_inventories(self):
+        self.ensure_one()
+        inventories = self.search([("state", "=", "in_progress")])
+        if not inventories:
+            return self.env["stock.inventory"].browse()
+        inventory_products = self._get_products()
+        overlapping_inventories = inventories.filtered(
+            lambda x: (
+                (
+                    any(i in x.location_ids for i in self.location_ids)
+                    or (
+                        any(
+                            i in x.location_ids.child_internal_location_ids
+                            for i in self.location_ids
+                        )
+                        and not x.exclude_sublocation
+                    )
+                )
+                and any(product in inventory_products for product in x._get_products())
+            )
+        )
+        return overlapping_inventories
+
     def refresh_stock_quant_ids(self):
         for rec in self:
             rec.stock_quant_ids = rec._get_quants(rec.location_ids)
 
     def action_state_to_in_progress(self):
-        active_rec = self.env["stock.inventory"].search(
-            [
-                ("state", "=", "in_progress"),
-                ("location_ids", "child_of", self.location_ids.ids),
-            ],
-            limit=1,
-        )
-        if active_rec:
-            raise ValidationError(
-                _(
-                    "There's already an Adjustment in Process using one requested Location: %s"
-                )
-                % active_rec.name
-            )
         self.state = "in_progress"
         self.refresh_stock_quant_ids()
         self.stock_quant_ids.update(
@@ -265,28 +289,18 @@ class InventoryAdjustmentsGroup(models.Model):
         result["context"] = []
         return result
 
-    @api.constrains("state", "location_ids")
+    @api.constrains(
+        "state", "location_ids", "product_ids", "category_id", "product_selection"
+    )
     def _check_inventory_in_progress_not_override(self):
         inventories = self.search([("state", "=", "in_progress")])
         for rec in inventories:
-            inventory = inventories.filtered(
-                lambda x: x.id != rec.id
-                and (
-                    any(i in x.location_ids for i in rec.location_ids)
-                    or (
-                        any(
-                            i in x.location_ids.child_internal_location_ids
-                            for i in rec.location_ids
-                        )
-                        and not x.exclude_sublocation
-                    )
-                )
-            )
-            if len(inventory) > 0:
+            overlapping_inventories = rec._get_overlapping_inventories()
+            if len(overlapping_inventories) > 1:
                 raise ValidationError(
                     _(
                         "Cannot be more than one in progress inventory adjustment "
-                        "affecting the same location at the same time."
+                        "affecting the same location and product at the same time."
                     )
                 )
 

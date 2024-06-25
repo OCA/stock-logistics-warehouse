@@ -14,6 +14,9 @@ class TestStockInventory(TransactionCase):
         self.inventory_model = self.env["stock.inventory"]
         self.location_model = self.env["stock.location"]
         self.product_categ = self.env["product.category"].create({"name": "Test Categ"})
+        self.product_categ2 = self.env["product.category"].create(
+            {"name": "Test Categ2"}
+        )
         self.product = self.env["product.product"].create(
             {
                 "name": "Product 1 test",
@@ -26,6 +29,13 @@ class TestStockInventory(TransactionCase):
                 "name": "Product 1 test",
                 "type": "product",
                 "categ_id": self.product_categ.id,
+            }
+        )
+        self.product3 = self.env["product.product"].create(
+            {
+                "name": "Product 3 test",
+                "type": "product",
+                "categ_id": self.product_categ2.id,
             }
         )
         self.lot_1 = self.env["stock.production.lot"].create(
@@ -409,3 +419,44 @@ class TestStockInventory(TransactionCase):
         self.assertEqual(inventory1.count_stock_moves, 2)
         self.assertEqual(inventory1.count_stock_quants, 2)
         self.assertEqual(inventory1.state, "done")
+
+    def test_08_category_selection(self):
+        # test several adjustments in the same location
+        # can coexist if the products involved are different
+        self.quant_model.sudo().create(
+            {
+                "product_id": self.product3.id,
+                "quantity": 100.0,
+                "location_id": self.location3.id,
+            }
+        )
+        inventory1 = self.inventory_model.create(
+            {
+                "name": "Inventory_Test_8",
+                "product_selection": "category",
+                "location_ids": [self.location3.id],
+                "category_id": self.product_categ.id,
+            }
+        )
+        inventory1.action_state_to_in_progress()
+        # now the other category, all good
+        inventory2 = self.inventory_model.create(
+            {
+                "name": "Inventory_Test_9",
+                "product_selection": "category",
+                "location_ids": [self.location3.id],
+                "category_id": self.product_categ2.id,
+            }
+        )
+        inventory2.action_state_to_in_progress()
+        # Now try again for the same product
+        inventory3 = self.inventory_model.create(
+            {
+                "name": "Inventory_Test_10",
+                "product_selection": "one",
+                "location_ids": [self.location3.id],
+                "product_ids": [self.product3.id],
+            }
+        )
+        with self.assertRaises(ValidationError), self.cr.savepoint():
+            inventory3.action_state_to_in_progress()
