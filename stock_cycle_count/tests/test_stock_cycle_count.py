@@ -228,19 +228,16 @@ class TestStockCycleCount(common.TransactionCase):
 
     def test_cycle_count_workflow(self):
         """Tests workflow."""
-        with self.assertRaises(AccessError):
-            self.cycle_count_1.action_create_inventory_adjustment()
+        self.cycle_count_1.action_create_inventory_adjustment()
         inventory = self.inventory_model.search(
             [("cycle_count_id", "=", self.cycle_count_1.id)]
         )
-        with self.assertRaises(AssertionError):
-            self.assertTrue(inventory, "Inventory not created.")
+        self.assertTrue(inventory, "Inventory not created.")
         inventory.action_state_to_in_progress()
         inventory.action_state_to_done()
-        with self.assertRaises(AssertionError):
-            self.assertEqual(
-                self.cycle_count_1.state, "done", "Cycle count not set as done."
-            )
+        self.assertEqual(
+            self.cycle_count_1.state, "done", "Cycle count not set as done."
+        )
         self.cycle_count_1.do_cancel()
         self.assertEqual(
             self.cycle_count_1.state, "cancelled", "Cycle count not set as cancelled."
@@ -248,12 +245,10 @@ class TestStockCycleCount(common.TransactionCase):
 
     def test_view_methods(self):
         """Tests the methods used to handle views."""
-        with self.assertRaises(AccessError):
-            self.cycle_count_1.action_create_inventory_adjustment()
-        self.cycle_count_1.sudo().action_view_inventory()
+        self.cycle_count_1.action_create_inventory_adjustment()
+        self.cycle_count_1.action_view_inventory()
         inv_count = self.cycle_count_1.inventory_adj_count
-        with self.assertRaises(AssertionError):
-            self.assertEqual(inv_count, 1, "View method failing.")
+        self.assertEqual(inv_count, 1, "View method failing.")
         rules = [
             self.rule_periodic,
             self.rule_turnover,
@@ -323,17 +318,21 @@ class TestStockCycleCount(common.TransactionCase):
 
     def test_cycle_count_contrains(self):
         """Test the various constrains defined in the inventory adjustment."""
-        with self.assertRaises(AccessError):
-            self.cycle_count_1.action_create_inventory_adjustment()
+        self.cycle_count_1.action_create_inventory_adjustment()
         inventory = self.inventory_model.search(
             [("cycle_count_id", "=", self.cycle_count_1.id)]
         )
-        inventory.product_ids = self.product1
-        inventory.location_ids = False
+        with self.assertRaises(ValidationError):
+            inventory.product_ids = self.product1
+        with self.assertRaises(ValidationError):
+            inventory.location_ids = False
         loc = self.stock_location_model.create(
             {"name": "Second Location", "usage": "internal"}
         )
-        inventory.location_ids += loc
-        inventory.exclude_sublocation = False
+        with self.assertRaises(ValidationError):
+            inventory.location_ids += loc
+        with self.assertRaises(ValidationError):
+            inventory.exclude_sublocation = False
         company = self.env["res.company"].create({"name": "Test"})
-        inventory.company_id = company
+        with self.assertRaises(ValidationError):
+            inventory.company_id = company
