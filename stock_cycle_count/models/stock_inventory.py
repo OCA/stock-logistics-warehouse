@@ -143,5 +143,4 @@ class StockInventory(models.Model):
                         "with the Cycle Count:\n%(message)s",
                         message=msg,
                     )
-                    % msg
                 )
