@@ -17,6 +17,16 @@ msgstr ""
 "X-Generator: Weblate 4.17\n"
 
 #. module: stock_inventory
+#: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__message_needaction
+msgid "Action Needed"
+msgstr ""
+
+#. module: stock_inventory
+#: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__action_state_to_cancel_allowed
+msgid "Action State To Cancel Allowed"
+msgstr ""
+
+#. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__count_stock_quants
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__count_stock_quants_string
 msgid "Adjustments"
@@ -33,6 +43,11 @@ msgid "Assigned to"
 msgstr ""
 
 #. module: stock_inventory
+#: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__message_attachment_count
+msgid "Attachment Count"
+msgstr ""
+
+#. module: stock_inventory
 #: model_terms:ir.ui.view,arch_db:stock_inventory.view_inventory_group_form
 msgid "Back to Draft"
 msgstr "Volver a borrador"
@@ -41,6 +56,16 @@ msgstr "Volver a borrador"
 #: model_terms:ir.ui.view,arch_db:stock_inventory.view_inventory_group_form
 msgid "Begin Adjustments"
 msgstr "Inicio de las adaptaciones"
+
+#. module: stock_inventory
+#: model_terms:ir.ui.view,arch_db:stock_inventory.view_inventory_group_form
+msgid "Cancel"
+msgstr ""
+
+#. module: stock_inventory
+#: model:ir.model.fields.selection,name:stock_inventory.selection__stock_inventory__state__cancel
+msgid "Cancelled"
+msgstr ""
 
 #. module: stock_inventory
 #: code:addons/stock_inventory/models/stock_inventory.py:0
@@ -101,9 +126,35 @@ msgid "Exclude Sublocation"
 msgstr ""
 
 #. module: stock_inventory
+#: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__message_follower_ids
+msgid "Followers"
+msgstr ""
+
+#. module: stock_inventory
+#: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__message_partner_ids
+msgid "Followers (Partners)"
+msgstr ""
+
+#. module: stock_inventory
+#: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__has_message
+msgid "Has Message"
+msgstr ""
+
+#. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__id
 msgid "ID"
 msgstr "ID (identificación)"
+
+#. module: stock_inventory
+#: model:ir.model.fields,help:stock_inventory.field_stock_inventory__message_needaction
+#: model:ir.model.fields,help:stock_inventory.field_stock_inventory__message_unread
+msgid "If checked, new messages require your attention."
+msgstr ""
+
+#. module: stock_inventory
+#: model:ir.model.fields,help:stock_inventory.field_stock_inventory__message_has_error
+msgid "If checked, some messages have a delivery error."
+msgstr ""
 
 #. module: stock_inventory
 #: model:ir.model.fields,help:stock_inventory.field_stock_inventory__exclude_sublocation
@@ -154,6 +205,11 @@ msgid "Inventory Reference"
 msgstr "Referencia de inventario"
 
 #. module: stock_inventory
+#: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__message_is_follower
+msgid "Is Follower"
+msgstr ""
+
+#. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory____last_update
 msgid "Last Modified on"
 msgstr "Última Modificación el"
@@ -185,15 +241,55 @@ msgid "Lot/Serial Numbers"
 msgstr "Lote/Números de serie"
 
 #. module: stock_inventory
+#: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__message_main_attachment_id
+msgid "Main Attachment"
+msgstr ""
+
+#. module: stock_inventory
 #: model:ir.model.fields.selection,name:stock_inventory.selection__stock_inventory__product_selection__manual
 msgid "Manual Selection"
 msgstr "Selección manual"
+
+#. module: stock_inventory
+#: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__message_has_error
+msgid "Message Delivery error"
+msgstr ""
+
+#. module: stock_inventory
+#: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__message_ids
+msgid "Messages"
+msgstr ""
 
 #. module: stock_inventory
 #: code:addons/stock_inventory/models/stock_quant.py:0
 #, python-format
 msgid "No move lines have been created"
 msgstr "No se han creado líneas de movimiento"
+
+#. module: stock_inventory
+#: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__message_needaction_counter
+msgid "Number of Actions"
+msgstr ""
+
+#. module: stock_inventory
+#: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__message_has_error_counter
+msgid "Number of errors"
+msgstr ""
+
+#. module: stock_inventory
+#: model:ir.model.fields,help:stock_inventory.field_stock_inventory__message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr ""
+
+#. module: stock_inventory
+#: model:ir.model.fields,help:stock_inventory.field_stock_inventory__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr ""
+
+#. module: stock_inventory
+#: model:ir.model.fields,help:stock_inventory.field_stock_inventory__message_unread_counter
+msgid "Number of unread messages"
+msgstr ""
 
 #. module: stock_inventory
 #: model:ir.model.fields.selection,name:stock_inventory.selection__stock_inventory__product_selection__one
@@ -286,6 +382,26 @@ msgid "To Do"
 msgstr "Para hacer"
 
 #. module: stock_inventory
+#: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__message_unread
+msgid "Unread Messages"
+msgstr ""
+
+#. module: stock_inventory
+#: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__message_unread_counter
+msgid "Unread Messages Counter"
+msgstr ""
+
+#. module: stock_inventory
+#: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__website_message_ids
+msgid "Website Messages"
+msgstr ""
+
+#. module: stock_inventory
+#: model:ir.model.fields,help:stock_inventory.field_stock_inventory__website_message_ids
+msgid "Website communication history"
+msgstr ""
+
+#. module: stock_inventory
 #: code:addons/stock_inventory/models/stock_inventory.py:0
 #, python-format
 msgid ""
@@ -311,6 +427,12 @@ msgstr ""
 msgid "You can only delete inventory adjustments groups in draft state."
 msgstr ""
 "Sólo puede eliminar grupos de ajustes de inventario en estado borrador."
+
+#. module: stock_inventory
+#: code:addons/stock_inventory/models/stock_inventory.py:0
+#, python-format
+msgid "You can't cancel this inventory %(display_name)s."
+msgstr ""
 
 #. module: stock_inventory
 #: model_terms:ir.ui.view,arch_db:stock_inventory.view_inventory_group_form
