@@ -4,7 +4,7 @@ from odoo import _, api, fields, models
 class StockQuant(models.Model):
     _inherit = "stock.quant"
 
-    to_do = fields.Boolean(default=True)
+    to_do = fields.Boolean(default=False)
 
     def _apply_inventory(self):
         res = super()._apply_inventory()
