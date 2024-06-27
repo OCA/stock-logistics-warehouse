@@ -20,6 +20,13 @@
                         attrs="{'invisible':['|',('state', 'in', ['draft', 'done']), ('count_stock_moves', '!=', 0)]}"
                         string="Back to Draft"
                     />
+                    <field name="action_state_to_cancel_allowed" invisible="1" />
+                    <button
+                        type="object"
+                        name="action_state_to_cancel"
+                        attrs="{'invisible':[('action_state_to_cancel_allowed', '=', False),]}"
+                        string="Cancel"
+                    />
                     <button
                         type="object"
                         name="action_state_to_done"
@@ -70,16 +77,11 @@
                 </div>
                     <group>
                         <group>
-                            <field
-                                name="product_selection"
-                                widget="radio"
-                                attrs="{'readonly':[('state', 'in', ['in_progress', 'done'])]}"
-                            />
+                            <field name="product_selection" widget="radio" />
                             <field
                                 name="location_ids"
                                 string="Locations"
                                 widget="many2many_tags"
-                                attrs="{'readonly':[('state', 'in', ['in_progress', 'done'])]}"
                                 required="1"
                             />
                             <field
@@ -99,27 +101,31 @@
                             <field
                                 name="product_ids"
                                 widget="many2many_tags"
-                                attrs="{'readonly':[('state', 'in', ['in_progress', 'done'])], 'required': [('product_selection', 'in', ['manual', 'lot'])],'invisible': [('product_selection', 'in', ['all', 'category', 'one'])]}"
+                                attrs="{'required': [('product_selection', 'in', ['manual', 'lot'])],'invisible': [('product_selection', 'in', ['all', 'category', 'one'])]}"
                             />
                             <field
                                 name="product_ids"
                                 widget="many2many_tags"
                                 options="{'limit': 10}"
-                                attrs="{'readonly':[('state', 'in', ['in_progress', 'done'])], 'required': [('product_selection', '=', 'one')],'invisible': [('product_selection', '!=', 'one')]}"
+                                attrs="{'required': [('product_selection', '=', 'one')],'invisible': [('product_selection', '!=', 'one')]}"
                             />
                             <field
                                 name="category_id"
-                                attrs="{'readonly':[('state', 'in', ['in_progress', 'done'])], 'required': [('product_selection', '=', 'category')],'invisible': [('product_selection', '!=', 'category')]}"
+                                attrs="{'required': [('product_selection', '=', 'category')],'invisible': [('product_selection', '!=', 'category')]}"
                             />
                             <field
                                 name="lot_ids"
                                 widget="many2many_tags"
                                 domain="[('product_id', 'in', product_ids)]"
-                                attrs="{'readonly':[('state', 'in', ['in_progress', 'done'])], 'required': [('product_selection', '=', 'lot')],'invisible': [('product_selection', '!=', 'lot')]}"
+                                attrs="{'required': [('product_selection', '=', 'lot')],'invisible': [('product_selection', '!=', 'lot')]}"
                             />
                         </group>
                     </group>
                 </sheet>
+                <div class="oe_chatter">
+                  <field name="message_follower_ids" widget="mail_followers" />
+                  <field name="message_ids" widget="mail_thread" />
+                </div>
             </form>
         </field>
     </record>
@@ -144,6 +150,18 @@
                 <field name="date" />
                 <field name="company_id" optional="hide" />
             </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="stock_inventory_search_view">
+        <field name="model">stock.inventory</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="location_ids" />
+                <field name="date" />
+                <field name="state" />
+            </search>
         </field>
     </record>
 
