@@ -76,11 +76,9 @@ msgstr ""
 #: code:addons/stock_inventory/models/stock_inventory.py:0
 #, python-format
 msgid ""
-"Cannot be more than one in progress inventory adjustment affecting the same "
-"location at the same time."
+"Cannot have more than one in-progress inventory adjustment affecting the "
+"same location or product at the same time."
 msgstr ""
-"Non ci può essere più di una rettifica di inventario di in corso che "
-"modifica la stessa ubicazioe nello stesso momento."
 
 #. module: stock_inventory
 #: model:ir.model,name:stock_inventory.model_res_company
@@ -373,6 +371,13 @@ msgstr "Righe movimenti di magazzino"
 #. odoo-python
 #: code:addons/stock_inventory/models/stock_inventory.py:0
 #, python-format
+msgid "There are active adjustments for the requested products: %s"
+msgstr ""
+
+#. module: stock_inventory
+#. odoo-python
+#: code:addons/stock_inventory/models/stock_inventory.py:0
+#, python-format
 msgid ""
 "There's already an Adjustment in Process using one requested Location: %s"
 msgstr ""
@@ -432,3 +437,11 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:stock_inventory.view_inventory_group_form
 msgid "e.g. Annual inventory"
 msgstr "es. invntario annuale"
+
+#, python-format
+#~ msgid ""
+#~ "Cannot be more than one in progress inventory adjustment affecting the "
+#~ "same location at the same time."
+#~ msgstr ""
+#~ "Non ci può essere più di una rettifica di inventario di in corso che "
+#~ "modifica la stessa ubicazioe nello stesso momento."
