@@ -76,8 +76,8 @@ msgstr ""
 #: code:addons/stock_inventory/models/stock_inventory.py:0
 #, python-format
 msgid ""
-"Cannot be more than one in progress inventory adjustment affecting the same "
-"location at the same time."
+"Cannot have more than one in-progress inventory adjustment affecting the "
+"same location or product at the same time."
 msgstr ""
 
 #. module: stock_inventory
@@ -362,6 +362,13 @@ msgstr "Líneas de movimiento de existencias"
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__count_stock_moves
 msgid "Stock Moves Lines"
 msgstr "Líneas de movimiento de existencias"
+
+#. module: stock_inventory
+#. odoo-python
+#: code:addons/stock_inventory/models/stock_inventory.py:0
+#, python-format
+msgid "There are active adjustments for the requested products: %s"
+msgstr ""
 
 #. module: stock_inventory
 #. odoo-python
