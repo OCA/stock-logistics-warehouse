@@ -1,3 +1,6 @@
+# Copyright 2020-24 ForgeFlow, S.L.
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
+
 from odoo import _, fields, models
 from odoo.exceptions import UserError
 
@@ -14,7 +17,8 @@ class StockPicking(models.Model):
             if not record.picking_type_id.allow_pull_list_server_action:
                 raise UserError(
                     _(
-                        "Operation type of %(name)s transfer did not handle server action",
+                        "Operation type of %(name)s transfer does not allow "
+                        "pull list server action.",
                         name=record.name,
                     )
                 )
@@ -23,11 +27,3 @@ class StockPicking(models.Model):
         )
         res = pull_wizard.action_prepare()
         return res
-
-
-class StockPickingType(models.Model):
-    _inherit = "stock.picking.type"
-
-    allow_pull_list_server_action = fields.Boolean(
-        string="Allow pull list server action", default=False
-    )

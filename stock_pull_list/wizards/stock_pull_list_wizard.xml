@@ -50,7 +50,7 @@
         <field name="arch" type="xml">
             <form>
                 <group string="Needs">
-                    <field name="line_ids" readonly="1" nolabel="1">
+                    <field name="line_ids" readonly="1" nolabel="1" colspan="2">
                         <tree>
                             <field name="wizard_id" invisible="1" />
                             <field name="product_id" />
