@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-07-28 02:58+0000\n"
-"PO-Revision-Date: 2024-03-12 09:35+0000\n"
+"PO-Revision-Date: 2024-07-01 10:47+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -36,8 +36,8 @@ msgid ""
 "created only if the virtual stock is less than 0 else, the product will be "
 "taken from stocks"
 msgstr ""
-"Se questo nuovo ruolo è selezionato nel prodotto dalla vista, un ordine di "
-"acquisto verrà creato solo se la giacenza virtuale è inferiore a zero "
+"Se la nuova rotta è selezionata nella mascheda del prodotto, l'ordine di "
+"acquisto verrà creato solo se la giacenza virtuale è inferiore a zero, "
 "altrimenti il prodotto verrà prelevato dalle giacenze"
 
 #. module: stock_mts_mto_rule
@@ -48,7 +48,7 @@ msgid ""
 "Inconsistency between the source locations of the mts and mto rules linked "
 "to the procurement rule: %s! It should be the same."
 msgstr ""
-"Inconsistena tra le ubicazioni di origine delle regole MTS e MTO collegata "
+"Inconsistenza tra le ubicazioni di origine delle regole MTS e MTO collegata "
 "alla regola di approvvigionamento: %s! Deve essere la stessa."
 
 #. module: stock_mts_mto_rule
@@ -79,7 +79,7 @@ msgstr "MTS+MTO"
 #: model:stock.route,name:stock_mts_mto_rule.route_mto_mts
 #, python-format
 msgid "Make To Order + Make To Stock"
-msgstr "Produrre per ordine + Produre per magazzino"
+msgstr "Produrre per ordine + Produrre per magazzino"
 
 #. module: stock_mts_mto_rule
 #. odoo-python
