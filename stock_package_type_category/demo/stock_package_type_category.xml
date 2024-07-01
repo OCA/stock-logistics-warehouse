@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo noupdate="1">
+
+    <record model="stock.package.type.category" id="stock_package_type_category_desk">
+        <field name="name">Desks</field>
+        <field name="code">DESK</field>
+    </record>
+
+    <record model="stock.package.type.category" id="stock_package_type_category_parts">
+        <field name="name">Spare Parts</field>
+        <field name="code">PARTS</field>
+    </record>
+
+</odoo>
