@@ -11,6 +11,7 @@ class StockPackageTypeCategory(models.Model):
 
     name = fields.Char(translate=True, required=True)
     code = fields.Char(required=True)
+    color = fields.Integer(default=0)
 
     _sql_constraints = [
         (

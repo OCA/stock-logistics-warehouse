@@ -14,6 +14,7 @@
                     <group>
                         <field name="name" />
                         <field name="code" />
+                        <field name="color" widget="color_picker" />
                     </group>
                 </sheet>
             </form>
@@ -41,6 +42,7 @@
         <field name="arch" type="xml">
             <tree>
                 <field name="name" />
+                <field name="color" widget="color_picker" />
             </tree>
         </field>
     </record>

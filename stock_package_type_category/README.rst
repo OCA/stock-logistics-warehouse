@@ -47,8 +47,8 @@ Configuration
 -  You should have activated the 'Packages' configuration in Inventory >
    Configuration > Settings > Operations.
 -  Go to Inventory > Configuration > Delivery > Package Type Categories.
--  Add as many categories you need by filling in a name and a code
-   (unique).
+-  Add as many categories you need by filling in a name, a code (unique)
+   and a color(if needed).
 -  Then, fill in the category on package type that need it.
 
 Bug Tracker
