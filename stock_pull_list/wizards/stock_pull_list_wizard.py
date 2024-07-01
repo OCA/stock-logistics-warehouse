@@ -109,9 +109,7 @@ class PullListWizard(models.TransientModel):
 
     def _get_available_qty(self, product, location):
         product_obj = self.env["product.product"]
-        product_l = product_obj.with_context({"location": location.id}).browse(
-            product.id
-        )
+        product_l = product_obj.with_context(location=location.id).browse(product.id)
         if self.exclude_reserved:
             return product_l.free_qty
         return product_l.qty_available
