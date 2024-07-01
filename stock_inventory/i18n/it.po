@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-06-24 13:40+0000\n"
+"PO-Revision-Date: 2024-07-01 10:47+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -24,12 +24,12 @@ msgstr "N° correzioni"
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__message_needaction
 msgid "Action Needed"
-msgstr ""
+msgstr "Azione richiesta"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__action_state_to_cancel_allowed
 msgid "Action State To Cancel Allowed"
-msgstr ""
+msgstr "Consentita azione stato da annullare"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__count_stock_quants_string
@@ -49,7 +49,7 @@ msgstr "Assegnato a"
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__message_attachment_count
 msgid "Attachment Count"
-msgstr ""
+msgstr "Conteggio allegati"
 
 #. module: stock_inventory
 #: model_terms:ir.ui.view,arch_db:stock_inventory.view_inventory_group_form
@@ -64,12 +64,12 @@ msgstr "Inizia rettifiche"
 #. module: stock_inventory
 #: model_terms:ir.ui.view,arch_db:stock_inventory.view_inventory_group_form
 msgid "Cancel"
-msgstr ""
+msgstr "Annulla"
 
 #. module: stock_inventory
 #: model:ir.model.fields.selection,name:stock_inventory.selection__stock_inventory__state__cancel
 msgid "Cancelled"
-msgstr ""
+msgstr "Annullato"
 
 #. module: stock_inventory
 #. odoo-python
@@ -79,6 +79,8 @@ msgid ""
 "Cannot have more than one in-progress inventory adjustment affecting the "
 "same location or product at the same time."
 msgstr ""
+"Non ci può essere più di una rettifica di inventario di in corso che "
+"modifica la stessa ubicazione o prodotto nello stesso momento."
 
 #. module: stock_inventory
 #: model:ir.model,name:stock_inventory.model_res_company
@@ -133,17 +135,17 @@ msgstr "Esclude sottoubicazioni"
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__message_follower_ids
 msgid "Followers"
-msgstr ""
+msgstr "Seguito da"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__message_partner_ids
 msgid "Followers (Partners)"
-msgstr ""
+msgstr "Seguito da (partner)"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__has_message
 msgid "Has Message"
-msgstr ""
+msgstr "Ha un messaggio"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__id
@@ -153,12 +155,12 @@ msgstr "ID"
 #. module: stock_inventory
 #: model:ir.model.fields,help:stock_inventory.field_stock_inventory__message_needaction
 msgid "If checked, new messages require your attention."
-msgstr ""
+msgstr "Se selezionata, nuovi messaggi richiedono attenzione."
 
 #. module: stock_inventory
 #: model:ir.model.fields,help:stock_inventory.field_stock_inventory__message_has_error
 msgid "If checked, some messages have a delivery error."
-msgstr ""
+msgstr "Se selezionata, alcuni messaggi hanno un errore di consegna."
 
 #. module: stock_inventory
 #: model:ir.model.fields,help:stock_inventory.field_stock_inventory__exclude_sublocation
@@ -215,7 +217,7 @@ msgstr "Riferimento inventario"
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__message_is_follower
 msgid "Is Follower"
-msgstr ""
+msgstr "Segue"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory____last_update
@@ -251,7 +253,7 @@ msgstr "Numeri di lotto/serie"
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__message_main_attachment_id
 msgid "Main Attachment"
-msgstr ""
+msgstr "Allegato principale"
 
 #. module: stock_inventory
 #: model:ir.model.fields.selection,name:stock_inventory.selection__stock_inventory__product_selection__manual
@@ -261,12 +263,12 @@ msgstr "Selezione manuale"
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__message_has_error
 msgid "Message Delivery error"
-msgstr ""
+msgstr "Errore di consegna messaggio"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__message_ids
 msgid "Messages"
-msgstr ""
+msgstr "Messaggi"
 
 #. module: stock_inventory
 #. odoo-python
@@ -278,22 +280,22 @@ msgstr "Non sono state create righe di movimento"
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__message_needaction_counter
 msgid "Number of Actions"
-msgstr ""
+msgstr "Numero di azioni"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__message_has_error_counter
 msgid "Number of errors"
-msgstr ""
+msgstr "Numero di errori"
 
 #. module: stock_inventory
 #: model:ir.model.fields,help:stock_inventory.field_stock_inventory__message_needaction_counter
 msgid "Number of messages requiring action"
-msgstr ""
+msgstr "Numero di messaggi che richiedono un'azione"
 
 #. module: stock_inventory
 #: model:ir.model.fields,help:stock_inventory.field_stock_inventory__message_has_error_counter
 msgid "Number of messages with delivery error"
-msgstr ""
+msgstr "Numero di messaggi con errore di consegna"
 
 #. module: stock_inventory
 #: model:ir.model.fields.selection,name:stock_inventory.selection__stock_inventory__product_selection__one
@@ -372,7 +374,7 @@ msgstr "Righe movimenti di magazzino"
 #: code:addons/stock_inventory/models/stock_inventory.py:0
 #, python-format
 msgid "There are active adjustments for the requested products: %s"
-msgstr ""
+msgstr "Ci sono delle rettifiche attive per il prodotto richiesto: %s"
 
 #. module: stock_inventory
 #. odoo-python
@@ -397,12 +399,12 @@ msgstr "Da fare"
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__website_message_ids
 msgid "Website Messages"
-msgstr ""
+msgstr "Messaggi sito web"
 
 #. module: stock_inventory
 #: model:ir.model.fields,help:stock_inventory.field_stock_inventory__website_message_ids
 msgid "Website communication history"
-msgstr ""
+msgstr "Cronologia comunicazioni sito web"
 
 #. module: stock_inventory
 #. odoo-python
@@ -431,7 +433,7 @@ msgstr ""
 #: code:addons/stock_inventory/models/stock_inventory.py:0
 #, python-format
 msgid "You can't cancel this inventory %(display_name)s."
-msgstr ""
+msgstr "Non si può annullare questo inventario %(display_name)s."
 
 #. module: stock_inventory
 #: model_terms:ir.ui.view,arch_db:stock_inventory.view_inventory_group_form
