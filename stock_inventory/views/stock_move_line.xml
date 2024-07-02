@@ -10,7 +10,7 @@
                 <field name="lot_id" />
                 <field name="location_id" />
                 <field name="location_dest_id" />
-                <field name="qty_done" />
+                <field name="quantity" />
                 <field name="company_id" optional="hide" />
                 <field name="reference" optional="show" />
             </tree>

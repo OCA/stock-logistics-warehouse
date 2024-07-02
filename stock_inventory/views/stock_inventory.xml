@@ -11,27 +11,27 @@
                         type="object"
                         name="action_state_to_in_progress"
                         class="oe_highlight"
-                        attrs="{'invisible':[('state', 'in', ['in_progress', 'done'])]}"
+                        invisible="state in ('in_progress', 'done')"
                         string="Begin Adjustments"
                     />
                     <button
                         type="object"
                         name="action_state_to_draft"
-                        attrs="{'invisible':['|',('state', 'in', ['draft', 'done']), ('count_stock_moves', '!=', 0)]}"
+                        invisible="state in ('draft', 'done') or count_stock_moves != 0"
                         string="Back to Draft"
                     />
                     <field name="action_state_to_cancel_allowed" invisible="1" />
                     <button
                         type="object"
                         name="action_state_to_cancel"
-                        attrs="{'invisible':[('action_state_to_cancel_allowed', '=', False),]}"
+                        invisible="not action_state_to_cancel_allowed"
                         string="Cancel"
                     />
                     <button
                         type="object"
                         name="action_state_to_done"
                         class="oe_highlight"
-                        attrs="{'invisible':[('state', 'in', ['draft', 'done'])]}"
+                        invisible="state in ('draft', 'done')"
                         string="Set to Done"
                     />
                     <field
@@ -48,7 +48,7 @@
                             name="action_view_inventory_adjustment"
                             class="oe_stat_button"
                             icon="fa-pencil-square-o"
-                            attrs="{'invisible':[('state', 'in', ['draft', 'done'])]}"
+                            invisible="state in ('draft', 'done')"
                         >
                             <field
                                 name="count_stock_quants_string"
@@ -62,7 +62,7 @@
                             name="action_view_stock_moves"
                             class="oe_stat_button"
                             icon="fa-cubes"
-                            attrs="{'invisible':['|', ('state', '=', 'draft'), ('count_stock_moves', '=', 0)]}"
+                            invisible="state == 'draft' or count_stock_moves == 0"
                         >
                             <field
                                 name="count_stock_moves"
@@ -73,51 +73,65 @@
                     </div>
                     <div class="oe_title" name="title">
                     <label for="name" class="oe_edit_only" />
-                    <h1><field name="name" placeholder="e.g. Annual inventory" /></h1>
+                    <h1><field
+                                name="name"
+                                placeholder="e.g. Annual inventory"
+                                readonly="state != 'draft'"
+                            /></h1>
                 </div>
                     <group>
                         <group>
-                            <field name="product_selection" widget="radio" />
+                            <field
+                                name="product_selection"
+                                widget="radio"
+                                readonly="state != 'draft'"
+                            />
                             <field
                                 name="location_ids"
                                 string="Locations"
                                 widget="many2many_tags"
                                 required="1"
+                                readonly="state != 'draft'"
                             />
                             <field
                                 name="exclude_sublocation"
-                                attrs="{'readonly':[('state', 'in', ['in_progress', 'done'])]}"
+                                readonly="state in ['in_progress', 'done']"
                                 required="1"
                             />
                         </group>
                         <group>
-                            <field name="date" />
-                            <field name="company_id" />
-                            <field name="responsible_id" />
-                            <field
-                                name="owner_id"
-                                attrs="{'readonly':[('state', '=', 'done')]}"
-                            />
+                            <field name="date" readonly="state != 'draft'" />
+                            <field name="company_id" readonly="state != 'draft'" />
+                            <field name="responsible_id" readonly="state != 'draft'" />
+                            <field name="owner_id" readonly="state != 'draft'" />
                             <field
                                 name="product_ids"
                                 widget="many2many_tags"
-                                attrs="{'required': [('product_selection', 'in', ['manual', 'lot'])],'invisible': [('product_selection', 'in', ['all', 'category', 'one'])]}"
+                                readonly="state != 'draft'"
+                                required="product_selection in ['manual', 'lot']"
+                                invisible="product_selection in ['all', 'category', 'one']"
                             />
                             <field
                                 name="product_ids"
                                 widget="many2many_tags"
                                 options="{'limit': 10}"
-                                attrs="{'required': [('product_selection', '=', 'one')],'invisible': [('product_selection', '!=', 'one')]}"
+                                required="product_selection == 'one'"
+                                invisible="product_selection != 'one'"
+                                readonly="state != 'draft'"
                             />
                             <field
                                 name="category_id"
-                                attrs="{'required': [('product_selection', '=', 'category')],'invisible': [('product_selection', '!=', 'category')]}"
+                                required="product_selection == 'category'"
+                                invisible="product_selection != 'category'"
+                                readonly="state != 'draft'"
                             />
                             <field
                                 name="lot_ids"
                                 widget="many2many_tags"
                                 domain="[('product_id', 'in', product_ids)]"
-                                attrs="{'required': [('product_selection', '=', 'lot')],'invisible': [('product_selection', '!=', 'lot')]}"
+                                readonly="state in ['in_progress', 'done']"
+                                required="product_selection == 'lot'"
+                                invisible="product_selection != 'lot'"
                             />
                         </group>
                     </group>
@@ -175,7 +189,7 @@
     <menuitem
         id="menu_action_inventory_tree"
         name="Inventory Adjustments"
-        parent="stock.menu_stock_warehouse_mgmt"
+        parent="stock.menu_stock_adjustments"
         sequence="30"
         action="action_view_inventory_group_form"
     />
