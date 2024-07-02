@@ -2,10 +2,6 @@ from odoo import _, api, fields, models
 from odoo.exceptions import UserError, ValidationError
 from odoo.osv import expression
 
-READONLY_STATES = {
-    "draft": [("readonly", False)],
-}
-
 
 class InventoryAdjustmentsGroup(models.Model):
     _name = "stock.inventory"
@@ -20,20 +16,17 @@ class InventoryAdjustmentsGroup(models.Model):
         default="Inventory",
         string="Inventory Reference",
         readonly=True,
-        states=READONLY_STATES,
     )
 
     date = fields.Datetime(
         default=lambda self: fields.Datetime.now(),
         readonly=True,
-        states=READONLY_STATES,
     )
 
     company_id = fields.Many2one(
         comodel_name="res.company",
         readonly=True,
         index=True,
-        states={"draft": [("readonly", False)]},
         default=lambda self: self.env.company,
         required=True,
     )
@@ -54,7 +47,6 @@ class InventoryAdjustmentsGroup(models.Model):
         "Owner",
         help="This is the owner of the inventory adjustment",
         readonly=True,
-        states=READONLY_STATES,
     )
 
     location_ids = fields.Many2many(
@@ -63,7 +55,6 @@ class InventoryAdjustmentsGroup(models.Model):
         domain="[('usage', '=', 'internal'), "
         "'|', ('company_id', '=', company_id), ('company_id', '=', False)]",
         readonly=True,
-        states=READONLY_STATES,
     )
 
     product_selection = fields.Selection(
@@ -77,7 +68,6 @@ class InventoryAdjustmentsGroup(models.Model):
         default="all",
         required=True,
         readonly=True,
-        states=READONLY_STATES,
     )
 
     product_ids = fields.Many2many(
@@ -85,7 +75,6 @@ class InventoryAdjustmentsGroup(models.Model):
         string="Products",
         domain="['|', ('company_id', '=', company_id), ('company_id', '=', False)]",
         readonly=True,
-        states=READONLY_STATES,
     )
 
     stock_quant_ids = fields.Many2many(
@@ -93,14 +82,12 @@ class InventoryAdjustmentsGroup(models.Model):
         string="Inventory Adjustment",
         domain="['|', ('company_id', '=', company_id), ('company_id', '=', False)]",
         readonly=True,
-        states=READONLY_STATES,
     )
 
     category_id = fields.Many2one(
         "product.category",
         string="Product Category",
         readonly=True,
-        states=READONLY_STATES,
     )
 
     lot_ids = fields.Many2many(
@@ -108,7 +95,6 @@ class InventoryAdjustmentsGroup(models.Model):
         string="Lot/Serial Numbers",
         domain="['|', ('company_id', '=', company_id), ('company_id', '=', False)]",
         readonly=True,
-        states=READONLY_STATES,
     )
 
     stock_move_ids = fields.One2many(
@@ -116,7 +102,6 @@ class InventoryAdjustmentsGroup(models.Model):
         "inventory_adjustment_id",
         string="Inventory Adjustments Done",
         readonly=True,
-        states=READONLY_STATES,
     )
 
     count_stock_quants = fields.Integer(
@@ -276,7 +261,8 @@ class InventoryAdjustmentsGroup(models.Model):
         else:
             error_field = "location_id"
             error_message = _(
-                "There's already an Adjustment in Process using one requested Location: %s"
+                "There's already an Adjustment in Process using one "
+                "requested Location: %s"
             )
 
         quants = self.env["stock.quant"].search(search_filter)
@@ -407,8 +393,9 @@ class InventoryAdjustmentsGroup(models.Model):
                     ):
                         raise ValidationError(
                             _(
-                                "Cannot have more than one in-progress inventory adjustment "
-                                "affecting the same location or product at the same time."
+                                "Cannot have more than one in-progress inventory "
+                                "adjustment affecting the same location or product "
+                                "at the same time."
                             )
                         )
 

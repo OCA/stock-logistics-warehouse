@@ -7,7 +7,7 @@ from odoo.tests.common import TransactionCase
 
 class TestStockInventory(TransactionCase):
     def setUp(self):
-        super(TestStockInventory, self).setUp()
+        super().setUp()
         self.env.company.stock_inventory_auto_complete = False
         self.quant_model = self.env["stock.quant"]
         self.move_model = self.env["stock.move.line"]
@@ -142,7 +142,7 @@ class TestStockInventory(TransactionCase):
         self.assertEqual(inventory1.count_stock_moves, 1)
         self.assertEqual(inventory1.count_stock_quants, 3)
         self.assertEqual(inventory1.count_stock_quants_string, "2 / 3")
-        self.assertEqual(inventory1.stock_move_ids.qty_done, 8)
+        self.assertEqual(inventory1.stock_move_ids.quantity, 8)
         self.assertEqual(inventory1.stock_move_ids.product_id.id, self.product.id)
         self.assertEqual(inventory1.stock_move_ids.lot_id.id, self.lot_1.id)
         self.assertEqual(inventory1.stock_move_ids.location_id.id, self.location1.id)
@@ -176,7 +176,7 @@ class TestStockInventory(TransactionCase):
         self.assertEqual(inventory1.count_stock_moves, 1)
         self.assertEqual(inventory1.count_stock_quants, 2)
         self.assertEqual(inventory1.count_stock_quants_string, "1 / 2")
-        self.assertEqual(inventory1.stock_move_ids.qty_done, 26)
+        self.assertEqual(inventory1.stock_move_ids.quantity, 26)
         self.assertEqual(inventory1.stock_move_ids.product_id.id, self.product.id)
         self.assertEqual(inventory1.stock_move_ids.lot_id.id, self.lot_3.id)
         self.assertEqual(inventory1.stock_move_ids.location_id.id, self.location3.id)
@@ -226,7 +226,7 @@ class TestStockInventory(TransactionCase):
         self.assertEqual(inventory1.count_stock_moves, 1)
         self.assertEqual(inventory1.count_stock_quants, 2)
         self.assertEqual(inventory1.count_stock_quants_string, "1 / 2")
-        self.assertEqual(inventory1.stock_move_ids.qty_done, 26)
+        self.assertEqual(inventory1.stock_move_ids.quantity, 26)
         self.assertEqual(inventory1.stock_move_ids.product_id.id, self.product.id)
         self.assertEqual(inventory1.stock_move_ids.lot_id.id, self.lot_3.id)
         self.assertEqual(inventory1.stock_move_ids.location_id.id, self.location3.id)
@@ -276,7 +276,7 @@ class TestStockInventory(TransactionCase):
         self.assertEqual(inventory1.count_stock_moves, 1)
         self.assertEqual(inventory1.count_stock_quants, 1)
         self.assertEqual(inventory1.count_stock_quants_string, "0 / 1")
-        self.assertEqual(inventory1.stock_move_ids.qty_done, 26)
+        self.assertEqual(inventory1.stock_move_ids.quantity, 26)
         self.assertEqual(inventory1.stock_move_ids.product_id.id, self.product.id)
         self.assertEqual(inventory1.stock_move_ids.lot_id.id, self.lot_3.id)
         self.assertEqual(inventory1.stock_move_ids.location_id.id, self.location3.id)
@@ -310,7 +310,7 @@ class TestStockInventory(TransactionCase):
         self.assertEqual(inventory1.count_stock_moves, 1)
         self.assertEqual(inventory1.count_stock_quants, 1)
         self.assertEqual(inventory1.count_stock_quants_string, "0 / 1")
-        self.assertEqual(inventory1.stock_move_ids.qty_done, 26)
+        self.assertEqual(inventory1.stock_move_ids.quantity, 26)
         self.assertEqual(inventory1.stock_move_ids.product_id.id, self.product2.id)
         self.assertEqual(inventory1.stock_move_ids.location_id.id, self.location3.id)
         inventory1.action_state_to_done()
@@ -354,7 +354,7 @@ class TestStockInventory(TransactionCase):
         self.assertEqual(inventory1.count_stock_moves, 1)
         self.assertEqual(inventory1.count_stock_quants, 1)
         self.assertEqual(inventory1.count_stock_quants_string, "0 / 1")
-        self.assertEqual(inventory1.stock_move_ids.qty_done, 8)
+        self.assertEqual(inventory1.stock_move_ids.quantity, 8)
         self.assertEqual(inventory1.stock_move_ids.product_id.id, self.product.id)
         self.assertEqual(inventory1.stock_move_ids.lot_id.id, self.lot_1.id)
         self.assertEqual(inventory1.stock_move_ids.location_id.id, self.location1.id)
@@ -399,7 +399,7 @@ class TestStockInventory(TransactionCase):
         self.assertEqual(inventory1.count_stock_moves, 1)
         self.assertEqual(inventory1.count_stock_quants, 2)
         self.assertEqual(inventory1.count_stock_quants_string, "1 / 2")
-        self.assertEqual(inventory1.stock_move_ids.qty_done, 26)
+        self.assertEqual(inventory1.stock_move_ids.quantity, 26)
         self.assertEqual(inventory1.stock_move_ids.product_id.id, self.product.id)
         self.assertEqual(inventory1.stock_move_ids.lot_id.id, self.lot_3.id)
         self.assertEqual(inventory1.stock_move_ids.location_id.id, self.location3.id)

@@ -15,7 +15,7 @@ class StockQuant(models.Model):
                 self.env["stock.inventory"]
                 .search([("state", "=", "in_progress")])
                 .filtered(
-                    lambda x: rec.location_id in x.location_ids
+                    lambda x, rec=rec: rec.location_id in x.location_ids
                     or (
                         rec.location_id in x.location_ids.child_internal_location_ids
                         and not x.exclude_sublocation
@@ -32,7 +32,7 @@ class StockQuant(models.Model):
                 ],
                 order="create_date asc",
             ).filtered(
-                lambda x: not x.company_id.id
+                lambda x, rec=rec: not x.company_id.id
                 or not rec.company_id.id
                 or rec.company_id.id == x.company_id.id
             )
