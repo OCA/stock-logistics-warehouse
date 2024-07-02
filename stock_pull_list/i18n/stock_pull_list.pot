@@ -1,0 +1,303 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_pull_list
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_pull_list
+#: model_terms:ir.ui.view,arch_db:stock_pull_list.view_run_stock_pull_list_wizard_wizard
+msgid ""
+"All existing Stock moves moving outside of the location specified will be considered demand.\n"
+"                You can filter these moves in the section below."
+msgstr ""
+
+#. module: stock_pull_list
+#: model:ir.model.fields,help:stock_pull_list.field_stock_pull_list_wizard__consolidate_by_product
+msgid ""
+"All needs for each product will be grouped in one line, disregarding date."
+msgstr ""
+
+#. module: stock_pull_list
+#: model:ir.model.fields,field_description:stock_pull_list.field_stock_picking_type__allow_pull_list_server_action
+msgid "Allow pull list server action"
+msgstr ""
+
+#. module: stock_pull_list
+#: model_terms:ir.ui.view,arch_db:stock_pull_list.view_run_stock_pull_list_wizard_wizard_step_2
+msgid "Apply Filter"
+msgstr ""
+
+#. module: stock_pull_list
+#: model:ir.model.fields,field_description:stock_pull_list.field_stock_pull_list_wizard__available_in_source_location
+msgid "Available In Source Location"
+msgstr ""
+
+#. module: stock_pull_list
+#: model:ir.model.fields,field_description:stock_pull_list.field_stock_pull_list_wizard_line__available_qty
+msgid "Available Qty"
+msgstr ""
+
+#. module: stock_pull_list
+#: model_terms:ir.ui.view,arch_db:stock_pull_list.view_run_stock_pull_list_wizard_wizard
+#: model_terms:ir.ui.view,arch_db:stock_pull_list.view_run_stock_pull_list_wizard_wizard_step_2
+msgid "Cancel"
+msgstr ""
+
+#. module: stock_pull_list
+#: code:addons/stock_pull_list/models/stock_picking.py:0
+#, python-format
+msgid "Choose transfers with same source location"
+msgstr ""
+
+#. module: stock_pull_list
+#: model:ir.model.fields,field_description:stock_pull_list.field_stock_pull_list_wizard__consolidate_by_product
+msgid "Consolidate By Product"
+msgstr ""
+
+#. module: stock_pull_list
+#: model:ir.model.fields,field_description:stock_pull_list.field_stock_pull_list_wizard__create_uid
+#: model:ir.model.fields,field_description:stock_pull_list.field_stock_pull_list_wizard_line__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: stock_pull_list
+#: model:ir.model.fields,field_description:stock_pull_list.field_stock_pull_list_wizard__create_date
+#: model:ir.model.fields,field_description:stock_pull_list.field_stock_pull_list_wizard_line__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: stock_pull_list
+#: model:ir.model.fields,field_description:stock_pull_list.field_stock_pull_list_wizard_line__date
+msgid "Date"
+msgstr ""
+
+#. module: stock_pull_list
+#: model:ir.model.fields,field_description:stock_pull_list.field_stock_pull_list_wizard__date_to
+msgid "Date To"
+msgstr ""
+
+#. module: stock_pull_list
+#: model:ir.model.fields,field_description:stock_pull_list.field_stock_pull_list_wizard__location_dest_id
+msgid "Destination Location"
+msgstr ""
+
+#. module: stock_pull_list
+#: model:ir.model.fields,field_description:stock_pull_list.field_stock_picking__display_name
+#: model:ir.model.fields,field_description:stock_pull_list.field_stock_picking_type__display_name
+#: model:ir.model.fields,field_description:stock_pull_list.field_stock_pull_list_wizard__display_name
+#: model:ir.model.fields,field_description:stock_pull_list.field_stock_pull_list_wizard_line__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: stock_pull_list
+#: model:ir.model.fields,field_description:stock_pull_list.field_stock_pull_list_wizard__exclude_reserved
+msgid "Exclude Reserved"
+msgstr ""
+
+#. module: stock_pull_list
+#: model_terms:ir.ui.view,arch_db:stock_pull_list.view_run_stock_pull_list_wizard_wizard_step_2
+msgid "Filter Selected"
+msgstr ""
+
+#. module: stock_pull_list
+#: model_terms:ir.ui.view,arch_db:stock_pull_list.view_run_stock_pull_list_wizard_wizard
+msgid "Filtering"
+msgstr ""
+
+#. module: stock_pull_list
+#: model:ir.actions.act_window,name:stock_pull_list.action_stock_pull_list_wizard
+#: model:ir.actions.server,name:stock_pull_list.stock_generate_pull_list
+#: model:ir.ui.menu,name:stock_pull_list.menu_stock_pull_list_wizard
+msgid "Generate Pull List"
+msgstr ""
+
+#. module: stock_pull_list
+#: code:addons/stock_pull_list/wizards/stock_pull_list_wizard.py:0
+#, python-format
+msgid "Generated Procurement Groups"
+msgstr ""
+
+#. module: stock_pull_list
+#: model:ir.model.fields,field_description:stock_pull_list.field_stock_pull_list_wizard__group_by_rule
+msgid "Group By Rule"
+msgstr ""
+
+#. module: stock_pull_list
+#: model:ir.model.fields,field_description:stock_pull_list.field_stock_picking__id
+#: model:ir.model.fields,field_description:stock_pull_list.field_stock_picking_type__id
+#: model:ir.model.fields,field_description:stock_pull_list.field_stock_pull_list_wizard__id
+#: model:ir.model.fields,field_description:stock_pull_list.field_stock_pull_list_wizard_line__id
+msgid "ID"
+msgstr ""
+
+#. module: stock_pull_list
+#: model:ir.model.fields,field_description:stock_pull_list.field_stock_pull_list_wizard_line__incoming_qty
+msgid "Incoming Qty"
+msgstr ""
+
+#. module: stock_pull_list
+#: model:ir.model.fields,field_description:stock_pull_list.field_stock_picking____last_update
+#: model:ir.model.fields,field_description:stock_pull_list.field_stock_picking_type____last_update
+#: model:ir.model.fields,field_description:stock_pull_list.field_stock_pull_list_wizard____last_update
+#: model:ir.model.fields,field_description:stock_pull_list.field_stock_pull_list_wizard_line____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: stock_pull_list
+#: model:ir.model.fields,field_description:stock_pull_list.field_stock_pull_list_wizard__write_uid
+#: model:ir.model.fields,field_description:stock_pull_list.field_stock_pull_list_wizard_line__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: stock_pull_list
+#: model:ir.model.fields,field_description:stock_pull_list.field_stock_pull_list_wizard__write_date
+#: model:ir.model.fields,field_description:stock_pull_list.field_stock_pull_list_wizard_line__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: stock_pull_list
+#: model:ir.model.fields,field_description:stock_pull_list.field_stock_pull_list_wizard__line_ids
+msgid "Line"
+msgstr ""
+
+#. module: stock_pull_list
+#: model:ir.model.fields,field_description:stock_pull_list.field_stock_pull_list_wizard__location_id
+#: model:ir.model.fields,field_description:stock_pull_list.field_stock_pull_list_wizard_line__location_id
+msgid "Location"
+msgstr ""
+
+#. module: stock_pull_list
+#: model:ir.model.fields,field_description:stock_pull_list.field_stock_pull_list_wizard__max_lines
+msgid "Max Lines"
+msgstr ""
+
+#. module: stock_pull_list
+#: model:ir.model.fields,field_description:stock_pull_list.field_stock_pull_list_wizard_line__needed_qty
+msgid "Needed Qty"
+msgstr ""
+
+#. module: stock_pull_list
+#: model_terms:ir.ui.view,arch_db:stock_pull_list.view_run_stock_pull_list_wizard_wizard_step_2
+msgid "Needs"
+msgstr ""
+
+#. module: stock_pull_list
+#: code:addons/stock_pull_list/models/stock_picking.py:0
+#, python-format
+msgid "Operation type of %(name)s transfer did not handle server action"
+msgstr ""
+
+#. module: stock_pull_list
+#: model:ir.model,name:stock_pull_list.model_stock_picking_type
+msgid "Picking Type"
+msgstr ""
+
+#. module: stock_pull_list
+#: model_terms:ir.ui.view,arch_db:stock_pull_list.view_run_stock_pull_list_wizard_wizard
+msgid "Prepare"
+msgstr ""
+
+#. module: stock_pull_list
+#: model_terms:ir.ui.view,arch_db:stock_pull_list.view_run_stock_pull_list_wizard_wizard_step_2
+msgid "Procure"
+msgstr ""
+
+#. module: stock_pull_list
+#: model:ir.model.fields,field_description:stock_pull_list.field_stock_pull_list_wizard__procurement_group_ids
+msgid "Procurement Group"
+msgstr ""
+
+#. module: stock_pull_list
+#: model:ir.model.fields,field_description:stock_pull_list.field_stock_pull_list_wizard_line__product_id
+msgid "Product"
+msgstr ""
+
+#. module: stock_pull_list
+#: code:addons/stock_pull_list/wizards/stock_pull_list_wizard.py:0
+#, python-format
+msgid "Pull List"
+msgstr ""
+
+#. module: stock_pull_list
+#: model:ir.model.fields,field_description:stock_pull_list.field_stock_pull_list_wizard_line__raw_demand_qty
+msgid "Raw Demand Qty"
+msgstr ""
+
+#. module: stock_pull_list
+#: model:ir.model.fields,field_description:stock_pull_list.field_stock_pull_list_wizard__rule_action
+msgid "Rule Action"
+msgstr ""
+
+#. module: stock_pull_list
+#: model:ir.model.fields,field_description:stock_pull_list.field_stock_pull_list_wizard__select_all
+msgid "Select All"
+msgstr ""
+
+#. module: stock_pull_list
+#: model:ir.model.fields,help:stock_pull_list.field_stock_pull_list_wizard__available_in_source_location
+msgid ""
+"Select only rules with enough available stock in source location. Applies "
+"for rules with a source location."
+msgstr ""
+
+#. module: stock_pull_list
+#: model:ir.model.fields,field_description:stock_pull_list.field_stock_pull_list_wizard_line__selected
+msgid "Selected"
+msgstr ""
+
+#. module: stock_pull_list
+#: model_terms:ir.ui.view,arch_db:stock_pull_list.view_run_stock_pull_list_wizard_wizard_step_2
+msgid "Split/Grouping Options"
+msgstr ""
+
+#. module: stock_pull_list
+#: model:ir.model,name:stock_pull_list.model_stock_pull_list_wizard
+msgid "Stock Pull List Wizard"
+msgstr ""
+
+#. module: stock_pull_list
+#: model:ir.model,name:stock_pull_list.model_stock_pull_list_wizard_line
+msgid "Stock Pull List Wizard Line"
+msgstr ""
+
+#. module: stock_pull_list
+#: model:ir.model.fields,field_description:stock_pull_list.field_stock_pull_list_wizard_line__stock_rule_id
+msgid "Stock Rule"
+msgstr ""
+
+#. module: stock_pull_list
+#: model_terms:ir.ui.view,arch_db:stock_pull_list.view_run_stock_pull_list_wizard_wizard
+msgid ""
+"The pull list checks the stock situation at the given location and calculates\n"
+"                the shortfall quantities (quantity needed to cover all needs) for products."
+msgstr ""
+
+#. module: stock_pull_list
+#: model:ir.model,name:stock_pull_list.model_stock_picking
+msgid "Transfer"
+msgstr ""
+
+#. module: stock_pull_list
+#: model:ir.model.fields,field_description:stock_pull_list.field_stock_pull_list_wizard__warehouse_id
+msgid "Warehouse"
+msgstr ""
+
+#. module: stock_pull_list
+#: model:ir.model.fields,field_description:stock_pull_list.field_stock_pull_list_wizard_line__wizard_id
+msgid "Wizard"
+msgstr ""
+
+#. module: stock_pull_list
+#: model_terms:ir.ui.view,arch_db:stock_pull_list.view_run_stock_pull_list_wizard_wizard
+#: model_terms:ir.ui.view,arch_db:stock_pull_list.view_run_stock_pull_list_wizard_wizard_step_2
+msgid "or"
+msgstr ""
