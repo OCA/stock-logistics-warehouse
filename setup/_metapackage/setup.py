@@ -43,6 +43,7 @@ setuptools.setup(
         'odoo-addon-stock_picking_volume>=16.0dev,<16.1dev',
         'odoo-addon-stock_picking_volume_packaging>=16.0dev,<16.1dev',
         'odoo-addon-stock_product_qty_by_packaging>=16.0dev,<16.1dev',
+        'odoo-addon-stock_pull_list>=16.0dev,<16.1dev',
         'odoo-addon-stock_putaway_product_template>=16.0dev,<16.1dev',
         'odoo-addon-stock_quant_cost_info>=16.0dev,<16.1dev',
         'odoo-addon-stock_quant_manual_assign>=16.0dev,<16.1dev',
