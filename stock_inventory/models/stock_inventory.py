@@ -154,9 +154,7 @@ class InventoryAdjustmentsGroup(models.Model):
             quants_to_do = quants.filtered(lambda q: q.to_do)
             count_todo = len(quants_to_do)
             rec.count_stock_quants = len(quants)
-            rec.count_stock_quants_string = "{} / {}".format(
-                count_todo, rec.count_stock_quants
-            )
+            rec.count_stock_quants_string = f"{count_todo} / {rec.count_stock_quants}"
 
     @api.depends("stock_move_ids")
     def _compute_count_stock_moves(self):
