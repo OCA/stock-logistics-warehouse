@@ -151,13 +151,13 @@ class StockRequestOrder(models.Model):
         for item in self:
             states = item.stock_request_ids.mapped("state")
             if not item.stock_request_ids or all(x == "draft" for x in states):
-                item.state = "draft"
+                item.write({"state": "draft"})
             elif all(x == "cancel" for x in states):
-                item.state = "cancel"
+                item.write({"state": "cancel"})
             elif all(x in ("done", "cancel") for x in states):
-                item.state = "done"
+                item.write({"state": "done"})
             else:
-                item.state = "open"
+                item.write({"state": "open"})
 
     @api.depends("stock_request_ids.allocation_ids")
     def _compute_picking_ids(self):
