@@ -12,13 +12,13 @@ from odoo.addons.procurement_auto_create_group.tests.test_auto_create import (
 
 
 class TestProcurementAutoCreateGroupByProduct(TestProcurementAutoCreateGroup):
-    def test_pull_push_auto_create_group_not_by_product(self):
+    def test_pull_push_auto_create_group_not_by_product(
+        self,
+    ):  # pylint: disable=missing-return
         """Test pull flow that without option to group by product"""
         self.pull_push_rule_auto.auto_create_group_by_product = False
         # Behavior should be the same
-        super(
-            TestProcurementAutoCreateGroupByProduct, self
-        ).test_02_pull_push_auto_create_group()
+        super().test_02_pull_push_auto_create_group()
 
     def test_pull_push_auto_create_group_by_product(self):
         """Test pull flow that with option to group by product"""
@@ -59,12 +59,12 @@ class TestProcurementAutoCreateGroupByProduct(TestProcurementAutoCreateGroup):
             "Move invalid quantity.",
         )
 
-    def test_push_auto_create_group_not_by_product(self):
+    def test_push_auto_create_group_not_by_product(
+        self,
+    ):  # pylint: disable=missing-return
         """Test push flow that without option to group by product"""
         self.push_rule_auto.auto_create_group_by_product = False
-        super(
-            TestProcurementAutoCreateGroupByProduct, self
-        ).test_05_push_auto_create_group()
+        super().test_05_push_auto_create_group()
 
     def test_push_auto_create_group_by_product(self):
         """Test push flow that with option to group by product"""
@@ -127,7 +127,7 @@ class TestProcurementAutoCreateGroupByProduct(TestProcurementAutoCreateGroup):
         # Use another transaction to test the advisory lock
         with registry(self.env.cr.dbname).cursor() as new_cr:
             new_env = api.Environment(new_cr, self.env.uid, self.env.context)
-            new_env["product.product"].invalidate_cache(
+            new_env["product.product"].invalidate_model(
                 ["auto_create_procurement_group_ids"],
                 [
                     product.id,
