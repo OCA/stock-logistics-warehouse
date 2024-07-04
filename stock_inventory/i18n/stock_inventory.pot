@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -154,6 +154,7 @@ msgstr ""
 
 #. module: stock_inventory
 #: model:ir.model.fields,help:stock_inventory.field_stock_inventory__message_has_error
+#: model:ir.model.fields,help:stock_inventory.field_stock_inventory__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr ""
 
@@ -211,11 +212,6 @@ msgid "Is Follower"
 msgstr ""
 
 #. module: stock_inventory
-#: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory____last_update
-msgid "Last Modified on"
-msgstr ""
-
-#. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__write_uid
 msgid "Last Updated by"
 msgstr ""
@@ -239,11 +235,6 @@ msgstr ""
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__lot_ids
 msgid "Lot/Serial Numbers"
-msgstr ""
-
-#. module: stock_inventory
-#: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__message_main_attachment_id
-msgid "Main Attachment"
 msgstr ""
 
 #. module: stock_inventory
@@ -322,6 +313,11 @@ msgstr ""
 #. module: stock_inventory
 #: model:ir.model,name:stock_inventory.model_stock_quant
 msgid "Quants"
+msgstr ""
+
+#. module: stock_inventory
+#: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__message_has_sms_error
+msgid "SMS Delivery error"
 msgstr ""
 
 #. module: stock_inventory
