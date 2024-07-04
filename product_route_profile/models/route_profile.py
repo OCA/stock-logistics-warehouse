@@ -14,10 +14,9 @@ class RouteProfile(models.Model):
         comodel_name="res.company",
         default=lambda self: self.env.company.id,
         required=False,
-        string="Company",
     )
     route_ids = fields.Many2many(
-        "stock.location.route",
+        comodel_name="stock.route",
         string="Routes",
         domain=[("product_selectable", "=", True)],
     )
