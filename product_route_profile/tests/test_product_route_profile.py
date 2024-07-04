@@ -8,7 +8,7 @@ from odoo.tests.common import TransactionCase
 class TestProductRouteProfile(TransactionCase):
     @classmethod
     def setUpClass(cls):
-        super(TestProductRouteProfile, cls).setUpClass()
+        super().setUpClass()
 
         cls.company_bis = cls.env["res.company"].create(
             {

@@ -64,11 +64,24 @@ class ProductTemplate(models.Model):
             "route_ids": [(6, 0, self.route_ids.ids)],
         }
 
-    @api.model
-    def create(self, vals):
-        route_profile_id = vals.get("route_profile_id", False)
-        if route_profile_id:
-            route_profile = self.env["route.profile"].browse(route_profile_id)
-            vals["route_ids"] = [(6, 0, route_profile.route_ids.ids)]
-            self = self.with_context(skip_inverse_route_ids=True)
-        return super(ProductTemplate, self).create(vals)
+    @api.model_create_multi
+    def create(self, vals_list):
+        vals_with_profile = []
+        vals_without_profile = []
+        for vals in vals_list:
+            route_profile_id = vals.get("route_profile_id")
+            if route_profile_id:
+                vals = vals.copy()
+                route_profile = self.env["route.profile"].browse(route_profile_id)
+                vals["route_ids"] = [(6, 0, route_profile.route_ids.ids)]
+                vals_with_profile.append(vals)
+            else:
+                vals_without_profile.append(vals)
+        res = self.env["product.template"]
+        if vals_without_profile:
+            res += super().create(vals_without_profile)
+        if vals_with_profile:
+            res += super(
+                ProductTemplate, self.with_context(skip_inverse_route_ids=True)
+            ).create(vals_with_profile)
+        return res
