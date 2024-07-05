@@ -22,3 +22,23 @@ class TestPackageCategory(BaseCommon):
                     "code": "DESK",
                 }
             )
+
+    def test_category_search(self):
+        self.categ = self.category_obj.create(
+            {
+                "name": "Test Category",
+                "code": "TEST",
+            }
+        )
+        package_type = self.env["stock.package.type"].create(
+            {
+                "name": "Little Box",
+                "category_id": self.categ.id,
+            }
+        )
+
+        self.assertEqual("Little Box (TEST)", package_type.display_name)
+
+        package_search = self.env["stock.package.type"].name_search("TEST")
+
+        self.assertEqual([(package_type.id, package_type.name)], package_search)
