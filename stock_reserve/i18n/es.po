@@ -792,6 +792,16 @@ msgid "View Reservation Move"
 msgstr "Ver movimiento de reserva"
 
 #. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__volume
+msgid "Volume"
+msgstr "Volumen"
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__volume_uom_name
+msgid "Volume unit of measure label"
+msgstr "Etiqueta de unidad de medida de volumen"
+
+#. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__warehouse_id
 msgid "Warehouse"
 msgstr "Almacén"
@@ -964,12 +974,6 @@ msgstr ""
 
 #~ msgid "Update quantities on SO/PO"
 #~ msgstr "Actualizar las cantidades en SO/PO"
-
-#~ msgid "Volume"
-#~ msgstr "Volumen"
-
-#~ msgid "Volume unit of measure label"
-#~ msgstr "Etiqueta de unidad de medida de volumen"
 
 #~ msgid "Whether this move is a part of stock_location moves"
 #~ msgstr ""
