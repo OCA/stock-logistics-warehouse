@@ -10,6 +10,9 @@
     "development_status": "Production/Stable",
     "category": "Warehouse",
     "depends": ["stock"],
+    "data": [
+        "views/res_company.xml",
+    ],
     "installable": True,
     "maintainers": ["victoralmau"],
 }

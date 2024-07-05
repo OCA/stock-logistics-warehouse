@@ -2,16 +2,13 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
 from odoo.exceptions import ValidationError
-from odoo.tests.common import Form, TransactionCase
+from odoo.tests.common import Form, SavepointCase
 
 
-class TestLocationArchiveConstraint(TransactionCase):
+class TestLocationArchiveConstraint(SavepointCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.env = cls.env(
-            context=dict(cls.env.context, test_stock_archive_constraint=True)
-        )
         cls.company = cls.env.ref("base.main_company")
         cls.product_1 = cls._create_product(cls, "Product 1")
         cls.product_2 = cls._create_product(cls, "Product 2")
@@ -27,7 +24,7 @@ class TestLocationArchiveConstraint(TransactionCase):
     def _create_product(self, name):
         product_form = Form(self.env["product.product"])
         product_form.name = name
-        product_form.detailed_type = "product"
+        product_form.type = "product"
         return product_form.save()
 
     def _create_stock_location(self, name):
@@ -48,6 +45,7 @@ class TestLocationArchiveConstraint(TransactionCase):
 
     def _create_stock_move(self, location_id, location_dest_id, product_id, qty):
         stock_move_form = Form(self.env["stock.move"])
+        stock_move_form.name = product_id.display_name
         stock_move_form.location_id = location_id
         stock_move_form.location_dest_id = location_dest_id
         stock_move_form.product_id = product_id
@@ -62,6 +60,7 @@ class TestLocationArchiveConstraint(TransactionCase):
                 "location_id": location_id.id,
                 "location_dest_id": location_dest_id.id,
                 "product_id": product_id.id,
+                "product_uom_qty": qty,
                 "product_uom_id": product_id.uom_id.id,
                 "qty_done": qty,
                 "state": "done",
@@ -102,10 +101,22 @@ class TestLocationArchiveConstraint(TransactionCase):
             self.product_2,
             20.00,
         )
+        self.company.active_stock_constraint = True
         self.product_1.active = False
         self.assertFalse(self.product_1.active)
         with self.assertRaises(ValidationError):
             self.product_2.active = False
+
+    def test_archive_product_with_stock_move_in_no_constraint(self):
+        self._create_stock_move(
+            self.env.ref("stock.stock_location_suppliers"),
+            self.stock_location,
+            self.product_2,
+            20.00,
+        )
+        self.product_1.active = False
+        self.assertFalse(self.product_1.active)
+        self.product_2.active = False
 
     def test_archive_product_with_stock_move_line_in(self):
         self._create_stock_move_line(
@@ -116,6 +127,7 @@ class TestLocationArchiveConstraint(TransactionCase):
         )
         self.product_1.active = False
         self.assertFalse(self.product_1.active)
+        self.company.active_stock_constraint = True
         with self.assertRaises(ValidationError):
             self.product_2.active = False
 
@@ -128,6 +140,7 @@ class TestLocationArchiveConstraint(TransactionCase):
         )
         self.product_1.active = False
         self.assertFalse(self.product_1.active)
+        self.company.active_stock_constraint = True
         with self.assertRaises(ValidationError):
             self.product_2.active = False
 
@@ -153,6 +166,7 @@ class TestLocationArchiveConstraint(TransactionCase):
         self._create_stock_quant(self.stock_location, self.product_2, 20.00)
         self.product_1.active = False
         self.assertFalse(self.product_1.active)
+        self.company.active_stock_constraint = True
         with self.assertRaises(ValidationError):
             self.product_2.active = False
 
@@ -160,6 +174,7 @@ class TestLocationArchiveConstraint(TransactionCase):
         self._create_stock_quant(self.stock_location_child, self.product_2, 20.00)
         self.product_1.active = False
         self.assertFalse(self.product_1.active)
+        self.company.active_stock_constraint = True
         with self.assertRaises(ValidationError):
             self.product_2.active = False
 
@@ -175,6 +190,7 @@ class TestLocationArchiveConstraint(TransactionCase):
 
     def test_archive_stock_location(self):
         self._create_stock_quant(self.stock_location, self.product_2, 20.00)
+        self.company.active_stock_constraint = True
         with self.assertRaises(ValidationError):
             self.stock_location.with_context(do_not_check_quant=True).active = False
 
@@ -186,5 +202,135 @@ class TestLocationArchiveConstraint(TransactionCase):
 
     def test_archive_stock_location_child(self):
         self._create_stock_quant(self.stock_location_child, self.product_2, 20.00)
+        self.company.active_stock_constraint = True
         with self.assertRaises(ValidationError):
             self.stock_location.with_context(do_not_check_quant=True).active = False
+
+    def test_archive_product_from_ohter_company(self):
+        company_id2 = self.env["res.company"].browse(2)
+        user_demo = self.env.ref("base.user_demo")
+        user_demo.write(
+            {"company_ids": [(6, 0, [company_id2.id])], "company_id": company_id2.id}
+        )
+        admin_inventory_group = self.env.ref("stock.group_stock_manager")
+        admin_inventory_group.write({"users": [(4, user_demo.id)]})
+        company_id = self.env["res.company"].browse(1)
+        location_id = self.env.ref("stock.stock_location_stock")
+        product = (
+            self.env["product.product"]
+            .with_company(company_id.id)
+            .create(
+                {
+                    "name": "Test",
+                    "type": "product",
+                }
+            )
+        )
+        self.env["stock.quant"].create(
+            {
+                "product_id": product.id,
+                "quantity": 10,
+                "location_id": location_id.id,
+                "company_id": company_id.id,
+            }
+        )
+        self.assertEqual(product.qty_available, 10)
+        company_id.active_stock_constraint = True
+        with self.assertRaises(ValidationError):
+            product.with_company(company_id2.id).with_user(user_demo).active = False
+
+    def test_archive_product_from_ohter_company_no_constraint(self):
+        company_id2 = self.env["res.company"].browse(2)
+        user_demo = self.env.ref("base.user_demo")
+        user_demo.write(
+            {"company_ids": [(6, 0, [company_id2.id])], "company_id": company_id2.id}
+        )
+        admin_inventory_group = self.env.ref("stock.group_stock_manager")
+        admin_inventory_group.write({"users": [(4, user_demo.id)]})
+        company_id = self.env["res.company"].browse(1)
+        location_id = self.env.ref("stock.stock_location_stock")
+        product = (
+            self.env["product.product"]
+            .with_company(company_id.id)
+            .create(
+                {
+                    "name": "Test",
+                    "type": "product",
+                }
+            )
+        )
+        self.env["stock.quant"].create(
+            {
+                "product_id": product.id,
+                "quantity": 10,
+                "location_id": location_id.id,
+                "company_id": company_id.id,
+            }
+        )
+        self.assertEqual(product.qty_available, 10)
+        product.with_company(company_id2.id).with_user(user_demo).active = False
+        self.assertFalse(product.active)
+
+    def test_archive_product_template_from_ohter_company(self):
+        company_id2 = self.env["res.company"].browse(2)
+        user_demo = self.env.ref("base.user_demo")
+        user_demo.write(
+            {"company_ids": [(6, 0, [company_id2.id])], "company_id": company_id2.id}
+        )
+        admin_inventory_group = self.env.ref("stock.group_stock_manager")
+        admin_inventory_group.write({"users": [(4, user_demo.id)]})
+        company_id = self.env["res.company"].browse(1)
+        location_id = self.env.ref("stock.stock_location_stock")
+        product = (
+            self.env["product.product"]
+            .with_company(company_id.id)
+            .create(
+                {
+                    "name": "Test",
+                    "type": "product",
+                }
+            )
+        )
+        self.env["stock.quant"].create(
+            {
+                "product_id": product.id,
+                "quantity": 10,
+                "location_id": location_id.id,
+                "company_id": company_id.id,
+            }
+        )
+        self.assertEqual(product.qty_available, 10)
+        company_id.active_stock_constraint = True
+        with self.assertRaises(ValidationError):
+            product.product_tmpl_id.active = False
+
+    def test_archive_product_template_from_ohter_company_no_constraint(self):
+        company_id2 = self.env["res.company"].browse(2)
+        user_demo = self.env.ref("base.user_demo")
+        user_demo.write(
+            {"company_ids": [(6, 0, [company_id2.id])], "company_id": company_id2.id}
+        )
+        admin_inventory_group = self.env.ref("stock.group_stock_manager")
+        admin_inventory_group.write({"users": [(4, user_demo.id)]})
+        company_id = self.env["res.company"].browse(1)
+        location_id = self.env.ref("stock.stock_location_stock")
+        product = (
+            self.env["product.product"]
+            .with_company(company_id.id)
+            .create(
+                {
+                    "name": "Test",
+                    "type": "product",
+                }
+            )
+        )
+        self.env["stock.quant"].create(
+            {
+                "product_id": product.id,
+                "quantity": 10,
+                "location_id": location_id.id,
+                "company_id": company_id.id,
+            }
+        )
+        self.assertEqual(product.qty_available, 10)
+        product.product_tmpl_id.active = False
