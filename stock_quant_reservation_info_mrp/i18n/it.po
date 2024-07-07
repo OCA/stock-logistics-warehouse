@@ -17,21 +17,6 @@ msgstr ""
 "X-Generator: Weblate 4.17\n"
 
 #. module: stock_quant_reservation_info_mrp
-#: model:ir.model.fields,field_description:stock_quant_reservation_info_mrp.field_stock_move_line__display_name
-msgid "Display Name"
-msgstr "Nome visualizzato"
-
-#. module: stock_quant_reservation_info_mrp
-#: model:ir.model.fields,field_description:stock_quant_reservation_info_mrp.field_stock_move_line__id
-msgid "ID"
-msgstr "ID"
-
-#. module: stock_quant_reservation_info_mrp
-#: model:ir.model.fields,field_description:stock_quant_reservation_info_mrp.field_stock_move_line____last_update
-msgid "Last Modified on"
-msgstr "Ultima modifica il"
-
-#. module: stock_quant_reservation_info_mrp
 #: model_terms:ir.ui.view,arch_db:stock_quant_reservation_info_mrp.view_stock_move_line_reserved_info_form
 #: model_terms:ir.ui.view,arch_db:stock_quant_reservation_info_mrp.view_stock_move_line_reserved_info_tree
 msgid "Manufacturing Order"
@@ -46,3 +31,12 @@ msgstr "Movimenti prodotto (riga movimento di magazzino)"
 #: model_terms:ir.ui.view,arch_db:stock_quant_reservation_info_mrp.view_stock_move_line_reserved_info_tree
 msgid "Related MO"
 msgstr "OP relativo"
+
+#~ msgid "Display Name"
+#~ msgstr "Nome visualizzato"
+
+#~ msgid "ID"
+#~ msgstr "ID"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Ultima modifica il"
