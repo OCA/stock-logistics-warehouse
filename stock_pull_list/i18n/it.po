@@ -37,8 +37,8 @@ msgstr ""
 
 #. module: stock_pull_list
 #: model:ir.model.fields,field_description:stock_pull_list.field_stock_picking_type__allow_pull_list_server_action
-msgid "Allow pull list server action"
-msgstr "Permetti azione del server per lista prelevamento"
+msgid "Allow Pull List Server Action"
+msgstr ""
 
 #. module: stock_pull_list
 #: model_terms:ir.ui.view,arch_db:stock_pull_list.view_run_stock_pull_list_wizard_wizard_step_2
@@ -62,6 +62,7 @@ msgid "Cancel"
 msgstr "Annulla"
 
 #. module: stock_pull_list
+#. odoo-python
 #: code:addons/stock_pull_list/models/stock_picking.py:0
 #, python-format
 msgid "Choose transfers with same source location"
@@ -100,8 +101,6 @@ msgid "Destination Location"
 msgstr "Ubicazione di destinazione"
 
 #. module: stock_pull_list
-#: model:ir.model.fields,field_description:stock_pull_list.field_stock_picking__display_name
-#: model:ir.model.fields,field_description:stock_pull_list.field_stock_picking_type__display_name
 #: model:ir.model.fields,field_description:stock_pull_list.field_stock_pull_list_wizard__display_name
 #: model:ir.model.fields,field_description:stock_pull_list.field_stock_pull_list_wizard_line__display_name
 msgid "Display Name"
@@ -130,6 +129,7 @@ msgid "Generate Pull List"
 msgstr "Genera lista prelevamento"
 
 #. module: stock_pull_list
+#. odoo-python
 #: code:addons/stock_pull_list/wizards/stock_pull_list_wizard.py:0
 #, python-format
 msgid "Generated Procurement Groups"
@@ -141,8 +141,6 @@ msgid "Group By Rule"
 msgstr "Regola raggruppa per"
 
 #. module: stock_pull_list
-#: model:ir.model.fields,field_description:stock_pull_list.field_stock_picking__id
-#: model:ir.model.fields,field_description:stock_pull_list.field_stock_picking_type__id
 #: model:ir.model.fields,field_description:stock_pull_list.field_stock_pull_list_wizard__id
 #: model:ir.model.fields,field_description:stock_pull_list.field_stock_pull_list_wizard_line__id
 msgid "ID"
@@ -154,8 +152,6 @@ msgid "Incoming Qty"
 msgstr "Q.tà in entrata"
 
 #. module: stock_pull_list
-#: model:ir.model.fields,field_description:stock_pull_list.field_stock_picking____last_update
-#: model:ir.model.fields,field_description:stock_pull_list.field_stock_picking_type____last_update
 #: model:ir.model.fields,field_description:stock_pull_list.field_stock_pull_list_wizard____last_update
 #: model:ir.model.fields,field_description:stock_pull_list.field_stock_pull_list_wizard_line____last_update
 msgid "Last Modified on"
@@ -200,12 +196,12 @@ msgid "Needs"
 msgstr "Necessario"
 
 #. module: stock_pull_list
+#. odoo-python
 #: code:addons/stock_pull_list/models/stock_picking.py:0
 #, python-format
-msgid "Operation type of %(name)s transfer did not handle server action"
+msgid ""
+"Operation type of %(name)s transfer does not allow pull list server action."
 msgstr ""
-"Il tipo di operazione del trasferimento %(name)s non ha gestito l'azione del "
-"server"
 
 #. module: stock_pull_list
 #: model:ir.model,name:stock_pull_list.model_stock_picking_type
@@ -233,6 +229,7 @@ msgid "Product"
 msgstr "Prodotto"
 
 #. module: stock_pull_list
+#. odoo-python
 #: code:addons/stock_pull_list/wizards/stock_pull_list_wizard.py:0
 #, python-format
 msgid "Pull List"
@@ -320,3 +317,12 @@ msgstr "Procedura guidata"
 #: model_terms:ir.ui.view,arch_db:stock_pull_list.view_run_stock_pull_list_wizard_wizard_step_2
 msgid "or"
 msgstr "o"
+
+#~ msgid "Allow pull list server action"
+#~ msgstr "Permetti azione del server per lista prelevamento"
+
+#, python-format
+#~ msgid "Operation type of %(name)s transfer did not handle server action"
+#~ msgstr ""
+#~ "Il tipo di operazione del trasferimento %(name)s non ha gestito l'azione "
+#~ "del server"
