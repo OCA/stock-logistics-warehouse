@@ -17,24 +17,6 @@ msgstr ""
 "X-Generator: Weblate 4.17\n"
 
 #. module: stock_quant_reservation_info
-#: model:ir.model.fields,field_description:stock_quant_reservation_info.field_stock_move_line__display_name
-#: model:ir.model.fields,field_description:stock_quant_reservation_info.field_stock_quant__display_name
-msgid "Display Name"
-msgstr "Nome visualizzato"
-
-#. module: stock_quant_reservation_info
-#: model:ir.model.fields,field_description:stock_quant_reservation_info.field_stock_move_line__id
-#: model:ir.model.fields,field_description:stock_quant_reservation_info.field_stock_quant__id
-msgid "ID"
-msgstr "ID"
-
-#. module: stock_quant_reservation_info
-#: model:ir.model.fields,field_description:stock_quant_reservation_info.field_stock_move_line____last_update
-#: model:ir.model.fields,field_description:stock_quant_reservation_info.field_stock_quant____last_update
-msgid "Last Modified on"
-msgstr "Ultima modifica il"
-
-#. module: stock_quant_reservation_info
 #: model:ir.model,name:stock_quant_reservation_info.model_stock_move_line
 msgid "Product Moves (Stock Move Line)"
 msgstr "Movimenti prodotto (riga movimento di magazzino)"
@@ -58,5 +40,18 @@ msgstr "Movimenti prenotati"
 #. module: stock_quant_reservation_info
 #: code:addons/stock_quant_reservation_info/models/stock_quant.py:0
 #, python-format
-msgid "Reserved moves for: "
-msgstr "Movimenti prenotati per: "
+msgid "Reserved Moves for: %(product_name)s"
+msgstr ""
+
+#~ msgid "Display Name"
+#~ msgstr "Nome visualizzato"
+
+#~ msgid "ID"
+#~ msgstr "ID"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Ultima modifica il"
+
+#, python-format
+#~ msgid "Reserved moves for: "
+#~ msgstr "Movimenti prenotati per: "
