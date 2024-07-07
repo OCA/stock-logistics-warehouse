@@ -157,6 +157,7 @@ msgstr ""
 
 #. module: stock_inventory
 #: model:ir.model.fields,help:stock_inventory.field_stock_inventory__message_has_error
+#: model:ir.model.fields,help:stock_inventory.field_stock_inventory__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr ""
 
@@ -214,11 +215,6 @@ msgid "Is Follower"
 msgstr ""
 
 #. module: stock_inventory
-#: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory____last_update
-msgid "Last Modified on"
-msgstr "Última modificación"
-
-#. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__write_uid
 msgid "Last Updated by"
 msgstr "Última actualización"
@@ -243,11 +239,6 @@ msgstr "Lote/Número de serie"
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__lot_ids
 msgid "Lot/Serial Numbers"
 msgstr "Lote/Número de serie"
-
-#. module: stock_inventory
-#: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__message_main_attachment_id
-msgid "Main Attachment"
-msgstr ""
 
 #. module: stock_inventory
 #: model:ir.model.fields.selection,name:stock_inventory.selection__stock_inventory__product_selection__manual
@@ -326,6 +317,11 @@ msgstr "Productos"
 #: model:ir.model,name:stock_inventory.model_stock_quant
 msgid "Quants"
 msgstr "Cantidades"
+
+#. module: stock_inventory
+#: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr ""
 
 #. module: stock_inventory
 #: model_terms:ir.ui.view,arch_db:stock_inventory.view_inventory_group_form
@@ -434,3 +430,6 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:stock_inventory.view_inventory_group_form
 msgid "e.g. Annual inventory"
 msgstr "Por ejemplo, inventario anual"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Última modificación"
