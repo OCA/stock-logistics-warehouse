@@ -12,14 +12,21 @@
                         <field name="package_id" />
                         <field name="owner_id" />
                         <field name="location_id" />
-                        <field name="on_hand" />
-                        <field name="reserved" />
+                        <field name="on_hand_view" />
+                        <field name="reserved_view" />
+                        <field name="on_hand" invisible="1" />
+                        <field name="reserved" invisible="1" />
                         <field name="selected" />
+                        <field
+                            name="hijack"
+                            attrs="{'readonly':[('selected', '=', False)], 'invisible':[('reserved', '&lt;=', 0)]}"
+                        />
                         <field
                             name="qty"
                             attrs="{'readonly':[('selected', '=', False)]}"
                             sum="qty"
                         />
+                        <field name="qty_had_hijack" invisible="1" />
                     </tree>
                 </field>
                 <group col='4' colspan="4">
