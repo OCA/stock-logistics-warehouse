@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-11-24 11:33+0000\n"
-"Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
+"PO-Revision-Date: 2024-07-08 08:59+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.17\n"
+"X-Generator: Weblate 5.6.2\n"
 
 #. module: stock_pull_list
 #: model_terms:ir.ui.view,arch_db:stock_pull_list.view_run_stock_pull_list_wizard_wizard
@@ -38,7 +38,7 @@ msgstr ""
 #. module: stock_pull_list
 #: model:ir.model.fields,field_description:stock_pull_list.field_stock_picking_type__allow_pull_list_server_action
 msgid "Allow Pull List Server Action"
-msgstr ""
+msgstr "Permetti azione del server per lista prelievo"
 
 #. module: stock_pull_list
 #: model_terms:ir.ui.view,arch_db:stock_pull_list.view_run_stock_pull_list_wizard_wizard_step_2
@@ -202,6 +202,8 @@ msgstr "Necessario"
 msgid ""
 "Operation type of %(name)s transfer does not allow pull list server action."
 msgstr ""
+"Il tipo operazione del trasferimento %(name)s non consente l'azione server "
+"lista prelievo."
 
 #. module: stock_pull_list
 #: model:ir.model,name:stock_pull_list.model_stock_picking_type
