@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<templates>
+    <t
+        t-name="VlmTaskRequestListView.buttons"
+        t-inherit="web.ListView.Buttons"
+        t-inherit-mode="primary"
+        owl="1"
+    >
+        <xpath expr="//t[contains(@t-if, 'isExportEnable')]" position="before">
+            <button
+                t-if="nbSelected"
+                type="button"
+                class="btn btn-secondary"
+                t-on-click="onClickVlmRequest"
+            >
+                <i
+                    class="fa fa-rocket"
+                    title="Perform tasks"
+                    role="image"
+                /> Perform tasks
+            </button>
+        </xpath>
+    </t>
+</templates>

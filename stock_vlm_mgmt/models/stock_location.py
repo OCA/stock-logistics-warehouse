@@ -13,7 +13,12 @@ class StockLocation(models.Model):
             ("test", "Test"),
         ],
     )
-    vlm_address = fields.Char()
+    vlm_address = fields.Char(
+        help=(
+            "An VLM normally will be behind some propietary proxy that handles several "
+            "VLMs at once, so we need to set which one corresponds to this location"
+        )
+    )
     vlm_hostname = fields.Char()
     vlm_port = fields.Char()
     vlm_removal_strategy = fields.Selection(
