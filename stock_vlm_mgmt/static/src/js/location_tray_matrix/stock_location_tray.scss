@@ -1,0 +1,24 @@
+// Widget in form view
+.o_field_location_tray_matrix {
+    table {
+        height: 200px;
+        tr {
+            td {
+                min-width: 250px;
+            }
+        }
+    }
+}
+// Widget in list view
+.o_location_tray_matrix_cell {
+    .o_field_location_tray_matrix {
+        table {
+            height: 70px;
+            tr {
+                td {
+                    min-width: 25px;
+                }
+            }
+        }
+    }
+}

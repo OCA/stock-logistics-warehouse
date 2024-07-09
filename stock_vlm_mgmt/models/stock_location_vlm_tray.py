@@ -1,6 +1,7 @@
 # Copyright 2023 Tecnativa - David Vidal
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from odoo import _, api, fields, models
+from odoo.osv import expression
 
 
 class StockLocationVlmTray(models.Model):
@@ -11,7 +12,9 @@ class StockLocationVlmTray(models.Model):
     location_id = fields.Many2one(
         comodel_name="stock.location", domain=[("is_vlm", "=", True)]
     )
-    tray_type_id = fields.Many2one(comodel_name="stock.location.vlm.tray.type")
+    tray_type_id = fields.Many2one(
+        comodel_name="stock.location.vlm.tray.type", required=True
+    )
     tray_matrix = fields.Serialized(compute="_compute_tray_matrix")
     is_full = fields.Boolean()
 
@@ -29,7 +32,12 @@ class StockLocationVlmTray(models.Model):
                 "first_empty_cell": [],
             }
             for position in cell_not_empty:
-                tray_matrix["cells"][position["pos_y"] - 1][position["pos_x"] - 1] = 1
+                # Let's be gentle with positioning errors.
+                try:
+                    tray_matrix["cells"][position["pos_y"]][position["pos_x"]] = 1
+                # pylint: disable=except-pass
+                except IndexError:
+                    pass
             for row, cells in enumerate(tray_matrix["cells"]):
                 if 0 not in cells:
                     continue
@@ -41,8 +49,10 @@ class StockLocationVlmTray(models.Model):
         """See the vlm quants belonging to the tray"""
         self.ensure_one()
         domain = [("tray_id", "=", self.id)]
-        if pos_x and pos_y:
-            domain += [("pos_x", "=", pos_x), ("pos_y", "=", pos_y)]
+        if (pos_x is not None) and (pos_y is not None):
+            domain = expression.AND(
+                [domain, [("pos_x", "=", pos_x), ("pos_y", "=", pos_y)]]
+            )
         vlm_quant = self.env["stock.quant.vlm"].search(domain)
         action = self.env["ir.actions.act_window"]._for_xml_id(
             "stock_vlm_mgmt.location_quant_vlm_action"
