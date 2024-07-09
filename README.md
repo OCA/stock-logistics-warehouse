@@ -27,6 +27,7 @@ addon | version | maintainers | summary
 [stock_inventory](stock_inventory/) | 17.0.1.0.0 |  | Allows to do an easier follow up of the Inventory Adjustments
 [stock_inventory_discrepancy](stock_inventory_discrepancy/) | 17.0.1.0.0 |  | Adds the capability to show the discrepancy of every line in an inventory and to block the inventory validation when the discrepancy is over a user defined threshold.
 [stock_mts_mto_rule](stock_mts_mto_rule/) | 17.0.1.0.0 |  | Add a MTS+MTO route
+[stock_packaging_calculator](stock_packaging_calculator/) | 17.0.1.0.0 |  | Compute product quantity to pick by packaging
 [stock_picking_volume](stock_picking_volume/) | 17.0.1.0.0 | [![lmignon](https://github.com/lmignon.png?size=30px)](https://github.com/lmignon) | Compute volume information on stock moves and pickings
 [stock_removal_location_by_priority](stock_removal_location_by_priority/) | 17.0.1.0.0 |  | Establish a removal priority on stock locations.
 [stock_reserve](stock_reserve/) | 17.0.1.0.0 |  | Stock reservations on products
