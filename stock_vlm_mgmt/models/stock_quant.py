@@ -77,6 +77,7 @@ class StockQuantVlm(models.Model):
             )
             if quant:
                 quant.inventory_quantity = quant_quantity
+                quant._apply_inventory()
             else:
                 vlm_quant.quant_id = quant.create(
                     {
@@ -85,6 +86,7 @@ class StockQuantVlm(models.Model):
                         "inventory_quantity": quant_quantity,
                     }
                 )
+                vlm_quant.quant_id._apply_inventory()
 
     def write(self, vals):
         if self._is_inventory_mode() and "quantity" in vals:
@@ -101,7 +103,7 @@ class StockQuantVlm(models.Model):
         return vlm_quant
 
     def unlink(self):
-        """We need to trigger the quantities update whenever this happens"""
+        # We need to trigger the quantities update whenever this happens
         for vlm_quant in self:
             vlm_quant.with_context(vlm_inventory_mode=True).quantity = 0
         return super().unlink()
