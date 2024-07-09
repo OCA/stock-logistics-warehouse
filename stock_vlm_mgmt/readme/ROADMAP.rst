@@ -15,4 +15,3 @@
   the proper links.
 * Not a requiste right now, but we could need to support batch pickings. Let's deal
   with the basics for now anyway.
-* Support inventories.

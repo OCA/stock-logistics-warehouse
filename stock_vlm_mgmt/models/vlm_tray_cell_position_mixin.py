@@ -11,8 +11,42 @@ class VlmTrayCellPositionMixin(models.AbstractModel):
     tray_id = fields.Many2one(comodel_name="stock.location.vlm.tray")
     tray_type_id = fields.Many2one(comodel_name="stock.location.vlm.tray.type")
     tray_matrix = fields.Serialized(compute="_compute_tray_matrix")
-    pos_x = fields.Integer()
-    pos_y = fields.Integer()
+    pos_x = fields.Integer(compute="_compute_pos", readonly=False, store=True)
+    pos_y = fields.Integer(compute="_compute_pos", readonly=False, store=True)
+    human_pos_x = fields.Integer(
+        string="X",
+        compute="_compute_human_pos_x",
+        inverse="_inverse_human_pos_x",
+        readonly=False,
+    )
+    human_pos_y = fields.Integer(
+        string="Y",
+        compute="_compute_human_pos_y",
+        inverse="_inverse_human_pos_y",
+        readonly=False,
+    )
+
+    @api.depends("pos_x")
+    def _compute_human_pos_x(self):
+        for record in self:
+            record.human_pos_x = record.pos_x + 1
+
+    @api.depends("pos_y")
+    def _compute_human_pos_y(self):
+        for record in self:
+            record.human_pos_y = record.pos_y + 1
+
+    @api.depends("tray_matrix")
+    def _compute_pos(self):
+        for record in self:
+            if not record.tray_matrix["selected"]:
+                continue
+            record.update(
+                {
+                    "pos_x": record.tray_matrix["selected"][0],
+                    "pos_y": record.tray_matrix["selected"][1],
+                }
+            )
 
     @api.depends("pos_x", "pos_y", "tray_type_id", "tray_id")
     def _compute_tray_matrix(self):
@@ -30,6 +64,7 @@ class VlmTrayCellPositionMixin(models.AbstractModel):
                 # Let's be gentle with positioning errors.
                 try:
                     tray_matrix["cells"][position["pos_y"]][position["pos_x"]] = 1
+                # pylint: disable=except-pass
                 except IndexError:
                     pass
             for row, cells in enumerate(tray_matrix["cells"]):

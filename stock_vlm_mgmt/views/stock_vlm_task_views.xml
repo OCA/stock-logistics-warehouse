@@ -13,7 +13,7 @@
                     />
                 </header>
                 <sheet>
-                    <div class="oe_button_box">
+                    <div class="oe_button_box" name="button_box">
                         <button
                             string="Command"
                             help="Send task to the VLM"
@@ -65,6 +65,7 @@
                 <field name="state" />
                 <button
                     name="action_do_tasks"
+                    title="Do tasks"
                     type="object"
                     icon="fa-rocket"
                     attrs="{'invisible': [('state', '=', 'done')]}"

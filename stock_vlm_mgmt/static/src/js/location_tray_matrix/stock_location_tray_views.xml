@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<templates>
+    <t t-name="stock_vlm_mgmt.location_tray_matrix" owl="1">
+        <t
+            t-set="cell_min_width"
+            t-value="state.cells.length and (100 / state.cells[0].length) or 0"
+        />
+        <table class="table-responsibe table-bordered text-center bg-light w-100">
+            <tbody>
+                <t t-foreach="state.cells" t-as="row" t-key="row_index">
+                    <tr>
+                        <t t-foreach="row" t-as="cell" t-key="cell_index">
+                            <t
+                                t-set="cell_coordinates"
+                                t-value="[cell_index, row_index]"
+                            />
+                            <t
+                                t-set="is_selected"
+                                t-value="state.selected.toString() === cell_coordinates.toString()"
+                            />
+                            <td
+                                t-att-data-coordinates="cell_coordinates"
+                                t-attf-class="{{cell ? 'bg-success' : ''}} {{cell ? 'text-success' : 'text-light'}} {{is_selected ? 'border-warning border-3' : ''}}"
+                                t-on-click="onClickCell"
+                                role="button"
+                            >·</td>
+                        </t>
+                    </tr>
+                </t>
+            </tbody>
+        </table>
+    </t>
+</templates>

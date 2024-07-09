@@ -5,7 +5,7 @@
         <field name="arch" type="xml">
             <form>
                 <sheet>
-                    <div class="oe_button_box">
+                    <div class="oe_button_box" name="button_box">
                         <button
                             string="Call tray"
                             class="oe_stat_button"
@@ -32,6 +32,7 @@
                             <field name="is_full" invisible="1" readonly="1" />
                             <field
                                 name="tray_matrix"
+                                string="Tray layout"
                                 widget="location_tray_matrix"
                                 options="{'click_action': 'action_tray_content'}"
                                 nolabel="1"
