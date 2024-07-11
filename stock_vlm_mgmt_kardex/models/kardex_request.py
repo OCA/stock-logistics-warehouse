@@ -78,7 +78,7 @@ class KardexRequest:
         try:
             parsed_data.update({k: v for k, v in zip(KARDEX_KEYS, data.split(";"))})
         except Exception:
-            pass
+            _logger.debug(f"Exception parsing data: {data}")
         if parsed_data.get("qty"):
             # Strip dots
             parsed_data["qty"] = parsed_data["qty"].replace(".", "")
