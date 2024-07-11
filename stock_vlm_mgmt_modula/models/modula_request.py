@@ -118,20 +118,22 @@ class ModulaRequest:
             headers={"User-Agent": "Custom", "Accept": "application/json"},
         )
 
-    def _gather_jobs(self) -> requests.models.Response:
+    def _gather_jobs(self, timeout: float = 5) -> requests.models.Response:
         """Retrieve jobs ids and states"""
         return requests.get(
             urljoin(self.url, "/api/jobs/CFG-EXP-ESEGUI"),
             auth=(self.user, self.password),
+            timeout=timeout,
         )
 
-    def _ack_job(self, job_id: str) -> requests.models.Response:
+    def _ack_job(self, job_id: str, timeout: float = 5) -> requests.models.Response:
         """Sent when the tasks are performed in Odoo"""
         return requests.post(
             urljoin(self.url, "/api/jobs/CFG-EXP-ESEGUI/ACK"),
             auth=(self.user, self.password),
             json={"GUID": job_id},
             headers={"User-Agent": "Custom", "Accept": "application/json"},
+            timeout=timeout,
         )
 
     def request_operation(self, data: dict) -> dict:
