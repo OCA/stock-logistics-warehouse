@@ -3,7 +3,7 @@
 {
     "name": "Kardex integration with stock_vlm_mgmt",
     "summary": "Light alternative for Kardex VLM integrations",
-    "version": "14.0.1.0.0",
+    "version": "16.0.1.0.0",
     "author": "Tecnativa, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "maintainers": ["chienandalu"],
