@@ -1,0 +1,39 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_valuation_layer_inventory_filter
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-07-10 09:42+0000\n"
+"PO-Revision-Date: 2024-07-10 11:43+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.4\n"
+
+#. module: stock_valuation_layer_inventory_filter
+#: model_terms:ir.ui.view,arch_db:stock_valuation_layer_inventory_filter.view_inventory_valuation_search
+msgid "Date"
+msgstr "Fecha"
+
+#. module: stock_valuation_layer_inventory_filter
+#: model_terms:ir.ui.view,arch_db:stock_valuation_layer_inventory_filter.view_inventory_valuation_search
+msgid "Inventory"
+msgstr "Inventario"
+
+#. module: stock_valuation_layer_inventory_filter
+#: model:ir.model.fields,field_description:stock_valuation_layer_inventory_filter.field_stock_valuation_layer__reference
+#: model_terms:ir.ui.view,arch_db:stock_valuation_layer_inventory_filter.view_inventory_valuation_search
+msgid "Reference"
+msgstr "Referencia"
+
+#. module: stock_valuation_layer_inventory_filter
+#: model:ir.model,name:stock_valuation_layer_inventory_filter.model_stock_valuation_layer
+msgid "Stock Valuation Layer"
+msgstr "Capa de valoración de stock"

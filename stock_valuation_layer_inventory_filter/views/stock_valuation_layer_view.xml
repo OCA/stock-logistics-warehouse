@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 Moduon Team S.L.
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0) -->
+<data>
+    <record id="view_inventory_valuation_search" model="ir.ui.view">
+        <field name="model">stock.valuation.layer</field>
+        <field name="inherit_id" ref="stock_account.view_inventory_valuation_search" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='product_tmpl_id']" position="after">
+                <field name="reference" />
+            </xpath>
+            <xpath expr="//filter[@name='outgoing']" position="after">
+                <separator />
+                <filter
+                    string="Inventory"
+                    name="inventory"
+                    domain="[('stock_move_id.is_inventory', '=', True)]"
+                />
+            </xpath>
+            <xpath expr="//group" position="before">
+                <filter string="Date" name="flt_date" date="create_date" />
+            </xpath>
+            <xpath expr="//group" position="inside">
+                <filter
+                    string="Reference"
+                    name="grp_reference"
+                    domain="[]"
+                    context="{'group_by': 'reference'}"
+                />
+                <filter
+                    string="Date"
+                    name="grp_date"
+                    domain="[]"
+                    context="{'group_by': 'create_date'}"
+                />
+            </xpath>
+        </field>
+    </record>
+</data>
