@@ -57,6 +57,7 @@ setuptools.setup(
         'odoo-addon-stock_valuation_layer_accounting_date>=16.0dev,<16.1dev',
         'odoo-addon-stock_valuation_layer_inventory_filter>=16.0dev,<16.1dev',
         'odoo-addon-stock_valuation_layer_total_value>=16.0dev,<16.1dev',
+        'odoo-addon-stock_vlm_mgmt>=16.0dev,<16.1dev',
         'odoo-addon-stock_warehouse_calendar>=16.0dev,<16.1dev',
     ],
     classifiers=[
