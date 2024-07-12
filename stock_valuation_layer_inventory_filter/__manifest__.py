@@ -4,7 +4,7 @@
 {
     "name": "Stock Valuation Layer Inventory Filter",
     "summary": "Allows to filter Inventory Adjustments on Stock Valuation Layers",
-    "version": "16.0.1.0.0",
+    "version": "16.0.1.0.1",
     "development_status": "Alpha",
     "category": "Inventory/Inventory",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
