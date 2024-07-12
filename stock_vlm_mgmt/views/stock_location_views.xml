@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_location_form" model="ir.ui.view">
+        <field name="model">stock.location</field>
+        <field name="inherit_id" ref="stock.view_location_form" />
+        <field name="arch" type="xml">
+            <div class="oe_button_box" position="inside">
+                <button
+                    string="Trays"
+                    class="oe_stat_button"
+                    icon="fa-inbox"
+                    name="action_view_vlm_tray"
+                    type="object"
+                    attrs="{'invisible': [('is_vlm', '=', False)]}"
+                />
+                <button
+                    string="VLM Structure"
+                    class="oe_stat_button"
+                    icon="fa-table"
+                    name="action_view_vlm_quants"
+                    type="object"
+                    attrs="{'invisible': [('is_vlm', '=', False)]}"
+                />
+                <button
+                    string="Release trays"
+                    class="oe_stat_button"
+                    icon="fa-outdent"
+                    name="action_release_vlm_trays"
+                    type="object"
+                    attrs="{'invisible': [('is_vlm', '=', False)]}"
+                />
+            </div>
+            <group name="additional_info" position="inside">
+                <field
+                    name="is_vlm"
+                    attrs="{'invisible': [('usage', 'not in', ('inventory', 'internal'))]}"
+                />
+                <field
+                    name="vlm_vendor"
+                    attrs="{'invisible': [('is_vlm', '=', False)]}"
+                />
+            </group>
+            <xpath expr="//group[@name='additional_info']/.." position="inside">
+                <group
+                    string="VLM backend configuration"
+                    name="vlm_config"
+                    attrs="{'invisible': [('is_vlm', '=', False)]}"
+                >
+                    <field
+                        name="vlm_hostname"
+                        attrs="{'required': [('is_vlm', '=', True)]}"
+                    />
+                    <field
+                        name="vlm_port"
+                        attrs="{'required': [('is_vlm', '=', True)]}"
+                    />
+                    <field
+                        name="vlm_address"
+                        attrs="{'required': [('is_vlm', '=', True)]}"
+                    />
+                    <field name="vlm_user" />
+                    <field name="vlm_password" password="True" />
+                    <field
+                        name="vlm_removal_strategy"
+                        attrs="{'required': [('is_vlm', '=', True)]}"
+                    />
+                    <field
+                        name="vlm_sequence_id"
+                        attrs="{'required': [('is_vlm', '=', True)]}"
+                    />
+                </group>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_location_search" model="ir.ui.view">
+        <field name="model">stock.location</field>
+        <field name="inherit_id" ref="stock.view_location_search" />
+        <field name="arch" type="xml">
+            <separator position="before">
+                <filter
+                    name="vlm"
+                    string="Vertical Lift Module"
+                    domain="[('is_vlm', '=', True)]"
+                    help="Vertical Lift Module locations"
+                />
+            </separator>
+        </field>
+    </record>
+    <record id="vlm_location_action" model="ir.actions.act_window">
+        <field name="name">Vertical Lift Modules</field>
+        <field name="res_model">stock.location</field>
+        <field name="context">{}</field>
+        <field name="domain">[('is_vlm', '=', True)]</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem
+        id="vlm_locations_menu"
+        parent="stock.menu_warehouse_config"
+        action="vlm_location_action"
+        groups="stock.group_stock_manager"
+    />
+</odoo>
