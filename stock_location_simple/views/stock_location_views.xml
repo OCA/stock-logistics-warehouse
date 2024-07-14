@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 Akretion
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record id="stock_location_simple_form_view" model="ir.ui.view">
+        <field name="name">stock.location.simple.form</field>
+        <field name="model">stock.location</field>
+        <field name="arch" type="xml">
+            <form string="Stock Location">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button
+                            string="Current Stock"
+                            class="oe_stat_button"
+                            icon="fa-cubes"
+                            name="%(stock.location_open_quants)d"
+                            type="action"
+                        />
+                    </div>
+                    <widget
+                        name="web_ribbon"
+                        title="Archived"
+                        bg_color="bg-danger"
+                        attrs="{'invisible': [('active', '=', True)]}"
+                    />
+                    <label for="name" class="oe_edit_only" />
+                    <h1>
+                        <field
+                            name="name"
+                            attrs="{'readonly': [('is_linked_to_warehouse', '=', True)]}"
+                        />
+                    </h1>
+                    <label for="location_id" class="oe_edit_only" />
+                    <h2>
+                        <field
+                            name="location_id"
+                            required="1"
+                            domain="[('usage', '=', 'internal'), ('is_technical_location', '=', False)]"
+                            attrs="{'readonly': [('is_linked_to_warehouse', '=', True)]}"
+                        />
+                    </h2>
+
+                    <group>
+                            <field name="active" invisible="1" />
+                            <field name="is_linked_to_warehouse" invisible="1" />
+                            <field
+                            name="company_id"
+                            groups="base.group_multi_company"
+                            attrs="{'readonly': [('is_linked_to_warehouse', '=', True)]}"
+                        />
+                    </group>
+
+                    <field name="comment" placeholder="External note..." />
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="stock_location_simple_tree_view" model="ir.ui.view">
+        <field name="name">stock.location.simple.tree</field>
+        <field name="model">stock.location</field>
+        <field name="arch" type="xml">
+            <tree string="Locations" decoration-muted="is_linked_to_warehouse == True">
+                <field name="active" invisible="1" />
+                <field name="complete_name" string="Location" />
+                <field name="company_id" groups="base.group_multi_company" />
+                <field name="is_linked_to_warehouse" invisible="1" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="stock_location_simple_act_window" model="ir.actions.act_window">
+        <field name="name">Locations</field>
+        <field name="res_model">stock.location</field>
+        <field name="view_mode">tree,form</field>
+        <field
+            name="domain"
+        >[("usage", "=", "internal"), ("is_technical_location", "=", False)]</field>
+    </record>
+
+    <record
+        id="stock_location_simple_act_window_tree"
+        model="ir.actions.act_window.view"
+    >
+        <field name="sequence" eval="1" />
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="stock_location_simple_tree_view" />
+        <field name="act_window_id" ref="stock_location_simple_act_window" />
+    </record>
+
+    <record
+        id="stock_location_simple_act_window_form"
+        model="ir.actions.act_window.view"
+    >
+        <field name="sequence" eval="3" />
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="stock_location_simple_form_view" />
+        <field name="act_window_id" ref="stock_location_simple_act_window" />
+    </record>
+
+    <record id="stock_location_simple_menu" model="ir.ui.menu">
+        <field name="name">Locations</field>
+        <field name="parent_id" ref="stock.menu_warehouse_config" />
+        <field name="action" ref="stock_location_simple_act_window" />
+        <field name="sequence" eval="0" />
+        <field
+            name="groups_id"
+            eval="[(4, ref('stock.group_stock_multi_locations'))]"
+        />
+    </record>
+
+    <!-- Modify name and groups_id on original stock.location menu -->
+    <record id="stock.menu_action_location_form" model="ir.ui.menu">
+        <field name="name">Locations Technical</field>
+        <field name="groups_id" eval="[(6, 0, [ref('base.group_erp_manager')])]" />
+    </record>
+
+</odoo>
