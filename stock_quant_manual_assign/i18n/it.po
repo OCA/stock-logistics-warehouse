@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-01-16 14:36+0000\n"
-"PO-Revision-Date: 2023-11-17 14:35+0000\n"
+"PO-Revision-Date: 2024-07-16 13:58+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.17\n"
+"X-Generator: Weblate 5.6.2\n"
 
 #. module: stock_quant_manual_assign
 #: model:ir.ui.view,arch_db:stock_quant_manual_assign.assign_manual_quants_form_view
@@ -120,7 +120,7 @@ msgstr ""
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines_quant
 msgid "Quant"
-msgstr "Quantità"
+msgstr "Quanto"
 
 #. module: stock_quant_manual_assign
 #: code:addons/stock_quant_manual_assign/wizard/assign_manual_quants.py:24
