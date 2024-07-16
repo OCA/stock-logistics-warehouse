@@ -159,7 +159,6 @@ msgstr "Se selezionata, nuovi messaggi richiedono attenzione."
 
 #. module: stock_inventory
 #: model:ir.model.fields,help:stock_inventory.field_stock_inventory__message_has_error
-#: model:ir.model.fields,help:stock_inventory.field_stock_inventory__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr "Se selezionata, alcuni messaggi hanno un errore di consegna."
 
@@ -325,11 +324,6 @@ msgid "Quants"
 msgstr "Quanti"
 
 #. module: stock_inventory
-#: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__message_has_sms_error
-msgid "SMS Delivery error"
-msgstr "Errore consegna SMS"
-
-#. module: stock_inventory
 #: model_terms:ir.ui.view,arch_db:stock_inventory.view_inventory_group_form
 msgid "Set to Done"
 msgstr "Imposta a eseguito"
@@ -435,6 +429,9 @@ msgstr "Non si può annullare questo inventario %(display_name)s."
 #: model_terms:ir.ui.view,arch_db:stock_inventory.view_inventory_group_form
 msgid "e.g. Annual inventory"
 msgstr "es. invntario annuale"
+
+#~ msgid "SMS Delivery error"
+#~ msgstr "Errore consegna SMS"
 
 #~ msgid "Last Modified on"
 #~ msgstr "Ultima modifica il"
