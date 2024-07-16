@@ -154,7 +154,6 @@ msgstr ""
 
 #. module: stock_inventory
 #: model:ir.model.fields,help:stock_inventory.field_stock_inventory__message_has_error
-#: model:ir.model.fields,help:stock_inventory.field_stock_inventory__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr ""
 
@@ -313,11 +312,6 @@ msgstr ""
 #. module: stock_inventory
 #: model:ir.model,name:stock_inventory.model_stock_quant
 msgid "Quants"
-msgstr ""
-
-#. module: stock_inventory
-#: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__message_has_sms_error
-msgid "SMS Delivery error"
 msgstr ""
 
 #. module: stock_inventory
