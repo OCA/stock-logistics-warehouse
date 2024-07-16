@@ -31,8 +31,8 @@ msgstr "Ubicazioni di inventario"
 #: code:addons/stock_location_lockdown/models/stock_location.py:0
 #, python-format
 msgid ""
-"It is impossible to prohibit this location from                    receiving"
-" products as it already contains some."
+"It is impossible to prohibit this location from                    receiving "
+"products as it already contains some."
 msgstr ""
 "Non è possibile bloccare la ricezione di prodotti                    in "
 "questa ubicazione perché ha già giacenze."
