@@ -6,13 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2024-07-16 11:58+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.6.2\n"
 
 #. module: stock_vlm_mgmt
 #. odoo-python
@@ -20,7 +22,7 @@ msgstr ""
 #: code:addons/stock_vlm_mgmt/models/stock_location_vlm_tray.py:0
 #, python-format
 msgid "%(user)s has requested a release of the trays from Odoo"
-msgstr ""
+msgstr "Il rilascio del vassoio da Odoo è stasto richiesto da %(user)s"
 
 #. module: stock_vlm_mgmt
 #: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.vlm_task_action_form_view
@@ -28,16 +30,18 @@ msgid ""
 "&amp;nbsp;\n"
 "                        <i class=\"fa fa-info-circle\"/>&amp;nbsp;"
 msgstr ""
+"&amp;nbsp;\n"
+"                        <i class=\"fa fa-info-circle\"/>&amp;nbsp;"
 
 #. module: stock_vlm_mgmt
 #: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.vlm_task_action_form_view
 msgid "<i class=\"fa fa-exclamation-triangle\"/>&amp;nbsp;"
-msgstr ""
+msgstr "<i class=\"fa fa-exclamation-triangle\"/>&amp;nbsp;"
 
 #. module: stock_vlm_mgmt
 #: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.vlm_task_action_form_view
 msgid "<i class=\"fa fa-info-circle\"/>&amp;nbsp;Splitted from&amp;nbsp;"
-msgstr ""
+msgstr "<i class=\"fa fa-info-circle\"/>&amp;nbsp;Diviso da&amp;nbsp;"
 
 #. module: stock_vlm_mgmt
 #: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.svm_operation_picking_form_view
@@ -45,21 +49,24 @@ msgid ""
 "<i class=\"fa fa-rocket\"/>&amp;nbsp;\n"
 "                    Pending VLM tasks. Proceed to complete them.&amp;nbsp;"
 msgstr ""
+"<i class=\"fa fa-rocket\"/>&amp;nbsp;\n"
+"                    Lavori VLM in attesa. Procedere per "
+"completarli.&amp;nbsp;"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model,name:stock_vlm_mgmt.model_stock_vlm_task_action
 msgid "Actions to perform on vlm task exceptions"
-msgstr ""
+msgstr "Azioni da eseguire nei lavori eccezzione VIM"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location_vlm_tray_type__active
 msgid "Active"
-msgstr ""
+msgstr "Attivo"
 
 #. module: stock_vlm_mgmt
 #: model_terms:ir.actions.act_window,help:stock_vlm_mgmt.action_stock_location_tray_type
 msgid "Add a Location Tray Type"
-msgstr ""
+msgstr "Aggiungere un tipo vassoio ubicazione"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields,help:stock_vlm_mgmt.field_stock_location__vlm_address
@@ -67,47 +74,50 @@ msgid ""
 "An VLM normally will be behind some propietary proxy that handles several "
 "VLMs at once, so we need to set which one corresponds to this location"
 msgstr ""
+"Un VLM sarà normalmente dietro a qualche proxy proprietario che gestisce "
+"diversi VLM contemporaneamente, quindi serve impostare quale corrisponde a "
+"questa ubicazione"
 
 #. module: stock_vlm_mgmt
 #: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.view_stock_location_tray_type_form
 #: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.view_stock_location_tray_type_search
 msgid "Archived"
-msgstr ""
+msgstr "In archivio"
 
 #. module: stock_vlm_mgmt
 #: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.view_location_vlm_tray_tree
 msgid "Call"
-msgstr ""
+msgstr "Chiamata"
 
 #. module: stock_vlm_mgmt
 #: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.view_location_vlm_tray_form
 msgid "Call tray"
-msgstr ""
+msgstr "Chiama vassoio"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location_vlm_tray_type__code
 msgid "Code"
-msgstr ""
+msgstr "Codice"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location_vlm_tray_type__cols
 msgid "Cols"
-msgstr ""
+msgstr "Colonne"
 
 #. module: stock_vlm_mgmt
 #: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.view_vlm_task_form
 msgid "Command"
-msgstr ""
+msgstr "Comando"
 
 #. module: stock_vlm_mgmt
 #: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.view_stock_quant_vlm_form
 msgid "Content"
-msgstr ""
+msgstr "Contenuto"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields.selection,name:stock_vlm_mgmt.selection__stock_vlm_task__task_type__count
 msgid "Count"
-msgstr ""
+msgstr "Conteggio"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location_vlm_tray__create_uid
@@ -116,7 +126,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task__create_uid
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task_action__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Creato da"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location_vlm_tray__create_date
@@ -125,7 +135,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task__create_date
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task_action__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Creato il"
 
 #. module: stock_vlm_mgmt
 #: model_terms:ir.actions.act_window,help:stock_vlm_mgmt.action_stock_location_tray_type
@@ -133,26 +143,28 @@ msgid ""
 "Define the number of rows and cols on a tray,\n"
 "                depending of the boxes size."
 msgstr ""
+"Definire il numero di righe e colonne in un vassoio,\n"
+"                in funzione della dimensione delle scatole."
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location_vlm_tray_type__depth
 msgid "Depth"
-msgstr ""
+msgstr "Profondità"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location_vlm_tray_type__depth_per_cell
 msgid "Depth Per Cell"
-msgstr ""
+msgstr "Profondità per cella"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields,help:stock_vlm_mgmt.field_stock_location_vlm_tray_type__depth
 msgid "Depth of the tray in mm"
-msgstr ""
+msgstr "Profondità dell vassoio in millimetri"
 
 #. module: stock_vlm_mgmt
 #: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.view_stock_quant_inventory_tree
 msgid "Details"
-msgstr ""
+msgstr "Dettagli"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location_vlm_tray__display_name
@@ -161,12 +173,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task__display_name
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task_action__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nome visualizzato"
 
 #. module: stock_vlm_mgmt
 #: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.view_vlm_task_tree
 msgid "Do tasks"
-msgstr ""
+msgstr "Esegui lavori"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields.selection,name:stock_vlm_mgmt.selection__stock_vlm_task__state__done
@@ -175,57 +187,57 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.view_vlm_task_tree
 #: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.vlm_task_action_form_view
 msgid "Done"
-msgstr ""
+msgstr "Eseguito"
 
 #. module: stock_vlm_mgmt
 #: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.vlm_task_search_view
 msgid "Done tasks"
-msgstr ""
+msgstr "Lavori eseguiti"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields.selection,name:stock_vlm_mgmt.selection__stock_vlm_task_action__state__edit
 msgid "Edit"
-msgstr ""
+msgstr "Modifica"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields.selection,name:stock_vlm_mgmt.selection__stock_location__vlm_removal_strategy__fifo
 msgid "FIFO"
-msgstr ""
+msgstr "FIFO"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields.selection,name:stock_vlm_mgmt.selection__stock_vlm_task__task_type__get
 msgid "Get"
-msgstr ""
+msgstr "Ottieni"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_picking__has_pending_vlm_tasks
 msgid "Has Pending Vlm Tasks"
-msgstr ""
+msgstr "Ha dei lavori VIM in attesa"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_move_line__has_vlm_operation
 msgid "Has Vlm Operation"
-msgstr ""
+msgstr "Ha operazione VIM"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_picking__has_vlm_operations
 msgid "Has Vlm Operations"
-msgstr ""
+msgstr "Ha operazioni VIM"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_picking__has_vlm_pending_operations
 msgid "Has Vlm Pending Operations"
-msgstr ""
+msgstr "Ha delle operazioni VIM in attesa"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location_vlm_tray_type__height
 msgid "Height"
-msgstr ""
+msgstr "Altezza"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields,help:stock_vlm_mgmt.field_stock_location_vlm_tray_type__height
 msgid "Height of the tray in mm"
-msgstr ""
+msgstr "Altezza del vassoio in mm"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location_vlm_tray__id
@@ -234,37 +246,37 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task__id
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task_action__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task_action__image_512
 msgid "Image 512"
-msgstr ""
+msgstr "Immagine 512"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model,name:stock_vlm_mgmt.model_stock_location_vlm_tray
 msgid "Individual trays in a Vertical Lift Module"
-msgstr ""
+msgstr "Vassoi individuali in un magazzino verticale"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model,name:stock_vlm_mgmt.model_stock_location
 msgid "Inventory Locations"
-msgstr ""
+msgstr "Ubicazioni di inventario"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location_vlm_tray__is_full
 msgid "Is Full"
-msgstr ""
+msgstr "È pieno"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location__is_vlm
 msgid "Is Vlm"
-msgstr ""
+msgstr "È VIM"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields.selection,name:stock_vlm_mgmt.selection__stock_location__vlm_removal_strategy__lifo
 msgid "LIFO"
-msgstr ""
+msgstr "LIFO"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location_vlm_tray____last_update
@@ -273,7 +285,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task____last_update
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task_action____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Ultima modifica il"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location_vlm_tray__write_uid
@@ -282,7 +294,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task__write_uid
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task_action__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Ultimo aggiornamento di"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location_vlm_tray__write_date
@@ -291,17 +303,17 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task__write_date
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task_action__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Ultimo aggiornamento il"
 
 #. module: stock_vlm_mgmt
 #: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.view_stock_location_tray_type_form
 msgid "Layout"
-msgstr ""
+msgstr "Disposizione"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields.selection,name:stock_vlm_mgmt.selection__stock_location__vlm_removal_strategy__optimal
 msgid "Less carrier movements"
-msgstr ""
+msgstr "Meno movimenti trasportatore"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location_vlm_tray__location_id
@@ -309,51 +321,51 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task__location_id
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task_action__location_id
 msgid "Location"
-msgstr ""
+msgstr "Ubicazione"
 
 #. module: stock_vlm_mgmt
 #: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.view_stock_location_tray_type_search
 msgid "Location Tray Type"
-msgstr ""
+msgstr "Tipo vassoio ubicazione"
 
 #. module: stock_vlm_mgmt
 #: model:ir.actions.act_window,name:stock_vlm_mgmt.action_stock_location_tray_type
 #: model:ir.ui.menu,name:stock_vlm_mgmt.menu_stock_location_tray_type
 msgid "Location Tray Types"
-msgstr ""
+msgstr "Tipi vassolio ubicazione"
 
 #. module: stock_vlm_mgmt
 #: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.vlm_task_action_form_view
 msgid "Manual set"
-msgstr ""
+msgstr "Impostazione manuale"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task__move_line_ids
 msgid "Move Line"
-msgstr ""
+msgstr "Riga movimento"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location_vlm_tray__name
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location_vlm_tray_type__name
 msgid "Name"
-msgstr ""
+msgstr "Nome"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task_action__next_vlm_task_id
 msgid "Next Vlm Task"
-msgstr ""
+msgstr "Lavoro VIM successivo"
 
 #. module: stock_vlm_mgmt
 #: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.vlm_task_action_form_view
 msgid "Next 🡺"
-msgstr ""
+msgstr "Successivo 🡺"
 
 #. module: stock_vlm_mgmt
 #. odoo-python
 #: code:addons/stock_vlm_mgmt/models/stock_location.py:0
 #, python-format
 msgid "No implemented request connector for this vendor!"
-msgstr ""
+msgstr "Nessun connettore richiesta implementato per questo fornitore!"
 
 #. module: stock_vlm_mgmt
 #. odoo-python
@@ -363,13 +375,15 @@ msgid ""
 "No quantity was processed. Do you want to put the goods in another position?"
 " (you can also skip the task)"
 msgstr ""
+"Nessuna quantità è stata elaborata. Si vuole mettere la merce in un'altra "
+"posizione? (si può anche saltare il lavoro)"
 
 #. module: stock_vlm_mgmt
 #: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.view_vlm_task_form
 #: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.view_vlm_task_tree
 #: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.vlm_task_search_view
 msgid "Operation"
-msgstr ""
+msgstr "Operazione"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields.selection,name:stock_vlm_mgmt.selection__stock_vlm_task__state__pending
@@ -377,17 +391,17 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.view_vlm_task_form
 #: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.view_vlm_task_tree
 msgid "Pending"
-msgstr ""
+msgstr "In attesa"
 
 #. module: stock_vlm_mgmt
 #: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.vlm_task_search_view
 msgid "Pending tasks"
-msgstr ""
+msgstr "Lavori in attesa"
 
 #. module: stock_vlm_mgmt
 #: model:ir.actions.server,name:stock_vlm_mgmt.vlm_operation_bulk_task_action
 msgid "Perform VLM Tasks"
-msgstr ""
+msgstr "Elavora lavori VLM"
 
 #. module: stock_vlm_mgmt
 #. odoo-javascript
@@ -395,7 +409,7 @@ msgstr ""
 #: code:addons/stock_vlm_mgmt/static/src/js/vlm_request_button/vlm_request_views.xml:0
 #, python-format
 msgid "Perform tasks"
-msgstr ""
+msgstr "Elabora lavori"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_quant_vlm__pos_x
@@ -403,7 +417,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task_action__pos_x
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_vlm_tray_cell_position_mixin__pos_x
 msgid "Pos X"
-msgstr ""
+msgstr "Pos X"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_quant_vlm__pos_y
@@ -411,52 +425,52 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task_action__pos_y
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_vlm_tray_cell_position_mixin__pos_y
 msgid "Pos Y"
-msgstr ""
+msgstr "Pos Y"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task_action__previous_vlm_task_id
 msgid "Previous Vlm Task"
-msgstr ""
+msgstr "Lavoro VIM precedente"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_quant_vlm__product_id
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task__product_id
 #: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.vlm_quant_search_view
 msgid "Product"
-msgstr ""
+msgstr "Prodotto"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model,name:stock_vlm_mgmt.model_stock_move_line
 msgid "Product Moves (Stock Move Line)"
-msgstr ""
+msgstr "Movimenti prodotto (riga movimento magazzino)"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields.selection,name:stock_vlm_mgmt.selection__stock_vlm_task__task_type__put
 msgid "Put"
-msgstr ""
+msgstr "Metti"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_quant_vlm__quant_id
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task__quant_id
 msgid "Quant"
-msgstr ""
+msgstr "Quanto"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_quant_vlm__quantity
 msgid "Quantity"
-msgstr ""
+msgstr "Quantità"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task__quantity_done
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task_action__quantity_done
 msgid "Quantity Done"
-msgstr ""
+msgstr "Quantità completata"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task__quantity_pending
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task_action__quantity_pending
 msgid "Quantity Pending"
-msgstr ""
+msgstr "Quantità in attesa"
 
 #. module: stock_vlm_mgmt
 #. odoo-python
@@ -467,91 +481,94 @@ msgid ""
 " demand!. Please check it. If it's ok, you can fix it now and save the task "
 "manually."
 msgstr ""
+"Disallineamento quantità! La qquantità indicata dal VLM è maggiore della "
+"richiesta originale. Controllare. Se corretto, si può correggere ora e "
+"salvare manualmente il lavoro."
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields,help:stock_vlm_mgmt.field_stock_move_line__vlm_pending_quantity
 msgid "Quantity pending on VLM Operations"
-msgstr ""
+msgstr "Quantità in attesa nelle operazioni sul VLM"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model,name:stock_vlm_mgmt.model_stock_quant
 msgid "Quants"
-msgstr ""
+msgstr "Quanti"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task__reference
 #: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.view_stock_quant_vlm_form
 msgid "Reference"
-msgstr ""
+msgstr "Riferimento"
 
 #. module: stock_vlm_mgmt
 #: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.view_location_form
 msgid "Release trays"
-msgstr ""
+msgstr "Rilascio vassoi"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location_vlm_tray_type__rows
 msgid "Rows"
-msgstr ""
+msgstr "Piani"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task_action__vlm_task_id
 msgid "Selected task"
-msgstr ""
+msgstr "Lavoro selezionato"
 
 #. module: stock_vlm_mgmt
 #: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.view_vlm_task_form
 msgid "Send task to the VLM"
-msgstr ""
+msgstr "Invia lavoro al VLM"
 
 #. module: stock_vlm_mgmt
 #: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.view_stock_location_tray_type_form
 msgid "Sizes"
-msgstr ""
+msgstr "Dimensioni"
 
 #. module: stock_vlm_mgmt
 #: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.vlm_task_action_form_view
 msgid "Skip"
-msgstr ""
+msgstr "Salta"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task__skipped
 #: model:ir.model.fields.selection,name:stock_vlm_mgmt.selection__stock_vlm_task_action__state__skipped
 #: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.vlm_task_action_form_view
 msgid "Skipped"
-msgstr ""
+msgstr "Saltato"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task__splitted_vlm_task_id
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task_action__splitted_vlm_task_id
 msgid "Splitted Vlm Task"
-msgstr ""
+msgstr "Lavoro VLM diviso"
 
 #. module: stock_vlm_mgmt
 #: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.vlm_task_action_form_view
 msgid "Start task"
-msgstr ""
+msgstr "Inizia lavoro"
 
 #. module: stock_vlm_mgmt
 #: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.svm_operation_picking_form_view
 msgid "Start tasks"
-msgstr ""
+msgstr "Inizia lavori"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task__state
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task_action__state
 msgid "State"
-msgstr ""
+msgstr "Stato"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task__task_type
 msgid "Task Type"
-msgstr ""
+msgstr "Tipo lavoro"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields.selection,name:stock_vlm_mgmt.selection__stock_location__vlm_vendor__test
 msgid "Test"
-msgstr ""
+msgstr "Test"
 
 #. module: stock_vlm_mgmt
 #. odoo-python
@@ -562,20 +579,23 @@ msgid ""
 "operation on the VLM? Make sure there aren't unconsistencies with the "
 "recorded data"
 msgstr ""
+"La risposta del comando è andata persa per un motivo sconosciuto. "
+"L'operazione è stata eseguita sul VLM? Assicurarsi che non ci sia "
+"inconsistenza nei dati registrati"
 
 #. module: stock_vlm_mgmt
 #. odoo-python
 #: code:addons/stock_vlm_mgmt/models/stock_location.py:0
 #, python-format
 msgid "The connection was refused by the VLM and couldn't be stablished."
-msgstr ""
+msgstr "La connessione è stata rifiutata dal VLM e non può essere stabilita."
 
 #. module: stock_vlm_mgmt
 #. odoo-python
 #: code:addons/stock_vlm_mgmt/wizards/stock_vlm_task_action.py:0
 #, python-format
 msgid "The quantity reported is greater than the one set in the task!"
-msgstr ""
+msgstr "La quantità riportata è maggiore di quella impostata nel lavoro!"
 
 #. module: stock_vlm_mgmt
 #. odoo-python
@@ -583,6 +603,7 @@ msgstr ""
 #, python-format
 msgid "The task couldn't be performed due to a timeout in the request"
 msgstr ""
+"Il lavoro non può essere eseguito a causa della scadenza della richiesta"
 
 #. module: stock_vlm_mgmt
 #. odoo-python
@@ -592,18 +613,20 @@ msgid ""
 "The task couldn't be performed. Try again or check  the vertical lift module"
 " for hardware issues"
 msgstr ""
+"Il lavoro non può essere eseguito. Riprovare o controllare il magazzino "
+"verticale per problemi meccanici"
 
 #. module: stock_vlm_mgmt
 #. odoo-python
 #: code:addons/stock_vlm_mgmt/models/stock_location.py:0
 #, python-format
 msgid "The task was cancelled by the VLM"
-msgstr ""
+msgstr "Il lavoro è stato annullato dal VLM"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model,name:stock_vlm_mgmt.model_stock_picking
 msgid "Transfer"
-msgstr ""
+msgstr "Trasferimento"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_quant_vlm__tray_id
@@ -611,12 +634,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task_action__tray_id
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_vlm_tray_cell_position_mixin__tray_id
 msgid "Tray"
-msgstr ""
+msgstr "Vassoio"
 
 #. module: stock_vlm_mgmt
 #: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.view_stock_location_tray_type_form
 msgid "Tray Configuration"
-msgstr ""
+msgstr "Configurazione vassoio"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location_vlm_tray__tray_matrix
@@ -626,7 +649,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task_action__tray_matrix
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_vlm_tray_cell_position_mixin__tray_matrix
 msgid "Tray Matrix"
-msgstr ""
+msgstr "Matrice vassoio"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location_vlm_tray__tray_type_id
@@ -635,267 +658,267 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task_action__tray_type_id
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_vlm_tray_cell_position_mixin__tray_type_id
 msgid "Tray Type"
-msgstr ""
+msgstr "Tipo vassoio"
 
 #. module: stock_vlm_mgmt
 #: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.view_location_vlm_tray_form
 msgid "Tray contents"
-msgstr ""
+msgstr "Contenuti vassoio"
 
 #. module: stock_vlm_mgmt
 #: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.view_location_vlm_tray_tree
 msgid "Tray inventory"
-msgstr ""
+msgstr "Giagenza vassoio"
 
 #. module: stock_vlm_mgmt
 #: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.view_location_vlm_tray_form
 msgid "Tray layout"
-msgstr ""
+msgstr "Schema vassoio"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model,name:stock_vlm_mgmt.model_vlm_tray_cell_position_mixin
 msgid "Tray position helpers"
-msgstr ""
+msgstr "Aiuto posizione vassoio"
 
 #. module: stock_vlm_mgmt
 #. odoo-javascript
 #: code:addons/stock_vlm_mgmt/static/src/js/location_tray_matrix/stock_location_tray.esm.js:0
 #, python-format
 msgid "Tray storage layout"
-msgstr ""
+msgstr "Schema deposito vassoio"
 
 #. module: stock_vlm_mgmt
 #: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.view_location_form
 #: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.vlm_quant_search_view
 #: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.vlm_task_search_view
 msgid "Trays"
-msgstr ""
+msgstr "Vassoi"
 
 #. module: stock_vlm_mgmt
 #: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.vlm_quant_search_view
 #: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.vlm_task_search_view
 msgid "VLM"
-msgstr ""
+msgstr "VLM"
 
 #. module: stock_vlm_mgmt
 #: model:ir.actions.act_window,name:stock_vlm_mgmt.action_vlm_task_action
 msgid "VLM Operation Action"
-msgstr ""
+msgstr "Azione operazione VLM"
 
 #. module: stock_vlm_mgmt
 #: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.vlm_task_action_form_view
 msgid "VLM Operation action needed"
-msgstr ""
+msgstr "Azione richiesta operazione VLM"
 
 #. module: stock_vlm_mgmt
 #: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.view_location_form
 msgid "VLM Structure"
-msgstr ""
+msgstr "Struttura VLM"
 
 #. module: stock_vlm_mgmt
 #: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.svm_operation_picking_form_view
 msgid "VLM Tasks"
-msgstr ""
+msgstr "Lavori VLM"
 
 #. module: stock_vlm_mgmt
 #: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.view_stock_location_tray_type_form
 msgid "VLM Tray Type"
-msgstr ""
+msgstr "Tipo vassoio VLM"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model,name:stock_vlm_mgmt.model_stock_location_vlm_tray_type
 msgid "VLM Tray configuration"
-msgstr ""
+msgstr "Configurazione vassoio VLM"
 
 #. module: stock_vlm_mgmt
 #: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.view_location_form
 msgid "VLM backend configuration"
-msgstr ""
+msgstr "Configurazione backend VLM"
 
 #. module: stock_vlm_mgmt
 #: model:ir.ui.menu,name:stock_vlm_mgmt.menu_vlm_config
 #: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.view_location_search
 msgid "Vertical Lift Module"
-msgstr ""
+msgstr "Magazzino verticale"
 
 #. module: stock_vlm_mgmt
 #: model:ir.actions.act_window,name:stock_vlm_mgmt.location_quant_form_action
 #: model:ir.actions.act_window,name:stock_vlm_mgmt.location_quant_vlm_action
 #: model:ir.ui.menu,name:stock_vlm_mgmt.menu_vlm_quant
 msgid "Vertical Lift Module Quants"
-msgstr ""
+msgstr "Quanti magazzino verticale"
 
 #. module: stock_vlm_mgmt
 #: model:ir.actions.act_window,name:stock_vlm_mgmt.vlm_task_action
 #: model:ir.ui.menu,name:stock_vlm_mgmt.vlm_task_menu
 msgid "Vertical Lift Module Tasks"
-msgstr ""
+msgstr "Lavori magazzino verticale"
 
 #. module: stock_vlm_mgmt
 #: model:ir.actions.act_window,name:stock_vlm_mgmt.location_vlm_tray_action
 #: model:ir.ui.menu,name:stock_vlm_mgmt.menu_vlm_config_trays
 msgid "Vertical Lift Module Trays"
-msgstr ""
+msgstr "Vassoi magazzino verticale"
 
 #. module: stock_vlm_mgmt
 #: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.view_location_search
 msgid "Vertical Lift Module locations"
-msgstr ""
+msgstr "Ubicazioni magazzino verticale"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model,name:stock_vlm_mgmt.model_stock_quant_vlm
 msgid "Vertical Lift Module structure inside the quant"
-msgstr ""
+msgstr "Struttura magazzino verticale all'interno del quanto"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model,name:stock_vlm_mgmt.model_stock_vlm_task
 msgid "Vertical Lift Module task"
-msgstr ""
+msgstr "Lavoro magazzino verticale"
 
 #. module: stock_vlm_mgmt
 #: model:ir.actions.act_window,name:stock_vlm_mgmt.vlm_location_action
 #: model:ir.ui.menu,name:stock_vlm_mgmt.vlm_locations_menu
 msgid "Vertical Lift Modules"
-msgstr ""
+msgstr "Magazzini verticali"
 
 #. module: stock_vlm_mgmt
 #: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.view_stock_quant_tree
 #: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.view_stock_quant_tree_editable
 #: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.view_stock_quant_tree_inventory_editable
 msgid "View in VLM"
-msgstr ""
+msgstr "Visualizza nel VLM"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location__vlm_address
 msgid "Vlm Address"
-msgstr ""
+msgstr "Indirizzo VLM"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location__vlm_hostname
 msgid "Vlm Hostname"
-msgstr ""
+msgstr "Hostname VLM"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_picking__vlm_move_line_ids
 msgid "Vlm Move Line"
-msgstr ""
+msgstr "Riga movimento VLM"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location__vlm_password
 msgid "Vlm Password"
-msgstr ""
+msgstr "Password VLM"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_picking__vlm_pending_move_line_ids
 msgid "Vlm Pending Move Line"
-msgstr ""
+msgstr "Riga movimento VLM in attesa"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_move_line__vlm_pending_quantity
 msgid "Vlm Pending Quantity"
-msgstr ""
+msgstr "Quantità in attesa VLM"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location__vlm_port
 msgid "Vlm Port"
-msgstr ""
+msgstr "Porta VLM"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_quant__vlm_quant_ids
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task__vlm_quant_id
 msgid "Vlm Quant"
-msgstr ""
+msgstr "Quanto VLM"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location__vlm_removal_strategy
 msgid "Vlm Removal Strategy"
-msgstr ""
+msgstr "Strategia di prelievo VLM"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location__vlm_sequence_id
 msgid "Vlm Sequence"
-msgstr ""
+msgstr "Sequenza VLM"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_picking__vlm_task_ids
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task_action__vlm_task_ids
 msgid "Vlm Task"
-msgstr ""
+msgstr "Lavoro VLM"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task_action__vlm_tasks_partial
 msgid "Vlm Tasks Partial"
-msgstr ""
+msgstr "Lavori parziali VLM"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task_action__vlm_tasks_progress
 msgid "Vlm Tasks Progress"
-msgstr ""
+msgstr "Avanzamento lavori VLM"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task_action__vlm_tasks_total
 msgid "Vlm Tasks Total"
-msgstr ""
+msgstr "Totale lavori VLM"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location__vlm_tray_ids
 msgid "Vlm Tray"
-msgstr ""
+msgstr "Vassoio VLM"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location__vlm_user
 msgid "Vlm User"
-msgstr ""
+msgstr "Utente VLM"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location__vlm_vendor
 msgid "Vlm Vendor"
-msgstr ""
+msgstr "Forintore VLM"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields.selection,name:stock_vlm_mgmt.selection__stock_vlm_task__state__waiting
 #: model:ir.model.fields.selection,name:stock_vlm_mgmt.selection__stock_vlm_task_action__state__waiting
 msgid "Waiting"
-msgstr ""
+msgstr "In attesa"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task_action__warning
 msgid "Warning"
-msgstr ""
+msgstr "Attenzione"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location_vlm_tray_type__width
 msgid "Width"
-msgstr ""
+msgstr "Larghezza"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location_vlm_tray_type__width_per_cell
 msgid "Width Per Cell"
-msgstr ""
+msgstr "Larghezza per cella"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields,help:stock_vlm_mgmt.field_stock_location_vlm_tray_type__width
 msgid "Width of the tray in mm"
-msgstr ""
+msgstr "Larghezza del vassoio in mm"
 
 #. module: stock_vlm_mgmt
 #. odoo-python
 #: code:addons/stock_vlm_mgmt/models/stock_quant.py:0
 #, python-format
 msgid "You can't change the product"
-msgstr ""
+msgstr "Non si può modificare il prodotto"
 
 #. module: stock_vlm_mgmt
 #: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.view_stock_location_tray_type_form
 msgid "mm /"
-msgstr ""
+msgstr "mm /"
 
 #. module: stock_vlm_mgmt
 #: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.view_stock_location_tray_type_form
 msgid "mm per cell"
-msgstr ""
+msgstr "mm per cella"
 
 #. module: stock_vlm_mgmt
 #: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.vlm_task_action_form_view
 msgid "🡸 Previous"
-msgstr ""
+msgstr "🡸 Precedente"
