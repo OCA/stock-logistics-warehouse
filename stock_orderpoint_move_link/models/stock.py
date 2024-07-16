@@ -27,8 +27,8 @@ class StockRule(models.Model):
             company_id,
             values,
         )
-        if "orderpoint_id" in values:
+        if values.get("orderpoint_id"):
             vals["orderpoint_ids"] = [(4, values["orderpoint_id"].id)]
-        elif "orderpoint_ids" in values:
+        elif values.get("orderpoint_ids"):
             vals["orderpoint_ids"] = [(4, o.id) for o in values["orderpoint_ids"]]
         return vals
