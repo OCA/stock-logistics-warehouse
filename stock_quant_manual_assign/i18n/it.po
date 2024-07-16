@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: stock-logistics-warehouse (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-01-18 18:31+0000\n"
-"PO-Revision-Date: 2023-11-22 18:33+0000\n"
+"PO-Revision-Date: 2024-07-16 13:58+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/"
 "OCA-stock-logistics-warehouse-8-0/language/it/)\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.17\n"
+"X-Generator: Weblate 5.6.2\n"
 
 #. module: stock_quant_manual_assign
 #: view:assign.manual.quants:stock_quant_manual_assign.assign_manual_quants_form_view
@@ -127,7 +127,7 @@ msgstr ""
 #. module: stock_quant_manual_assign
 #: field:assign.manual.quants.lines,quant:0
 msgid "Quant"
-msgstr "Quantità"
+msgstr "Quanto"
 
 #. module: stock_quant_manual_assign
 #: code:addons/stock_quant_manual_assign/wizard/assign_manual_quants.py:24
