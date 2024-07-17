@@ -4,8 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 13.0\n"
+"Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-07-17 12:33+0000\n"
+"PO-Revision-Date: 2024-07-17 12:33+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -31,8 +33,8 @@ msgid ""
 msgstr ""
 
 #. module: stock_quant_expiration_date_tree
-#: model:ir.model.fields,field_description:stock_quant_expiration_date_tree.field_stock_quant__life_date
-msgid "End of Life Date"
+#: model:ir.model.fields,field_description:stock_quant_expiration_date_tree.field_stock_quant__expiration_date
+msgid "Expiration Date"
 msgstr ""
 
 #. module: stock_quant_expiration_date_tree
@@ -41,22 +43,10 @@ msgid "Quants"
 msgstr ""
 
 #. module: stock_quant_expiration_date_tree
-#: model:ir.model.fields,field_description:stock_quant_expiration_date_tree.field_stock_quant__removal_date
-msgid "Removal Date"
-msgstr ""
-
-#. module: stock_quant_expiration_date_tree
-#: model:ir.model.fields,help:stock_quant_expiration_date_tree.field_stock_quant__life_date
+#: model:ir.model.fields,help:stock_quant_expiration_date_tree.field_stock_quant__expiration_date
 msgid ""
 "This is the date on which the goods with this Serial Number may become "
 "dangerous and must not be consumed."
-msgstr ""
-
-#. module: stock_quant_expiration_date_tree
-#: model:ir.model.fields,help:stock_quant_expiration_date_tree.field_stock_quant__removal_date
-msgid ""
-"This is the date on which the goods with this Serial Number should be "
-"removed from the stock. This date will be used in FEFO removal strategy."
 msgstr ""
 
 #. module: stock_quant_expiration_date_tree
