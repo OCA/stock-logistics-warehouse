@@ -7,19 +7,12 @@ from odoo import fields, models
 class StockQuant(models.Model):
     _inherit = "stock.quant"
 
-    life_date = fields.Datetime(
-        string="End of Life Date",
-        related="lot_id.life_date",
+    expiration_date = fields.Datetime(
+        related="lot_id.expiration_date",
     )
     use_date = fields.Datetime(
-        string="Best before Date",
         related="lot_id.use_date",
     )
-    removal_date = fields.Datetime(
-        string="Removal Date",
-        related="lot_id.removal_date",
-    )
     alert_date = fields.Datetime(
-        string="Alert Date",
         related="lot_id.alert_date",
     )
