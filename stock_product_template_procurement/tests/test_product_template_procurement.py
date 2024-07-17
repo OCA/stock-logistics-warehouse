@@ -142,21 +142,42 @@ class TestReservationBasedOnPlannedConsumedDate(SavepointCase):
         )
 
     def test_procurement_using_product_template(self):
-        self.env["procurement.group"].run(
+        procurement_group = self.env["procurement.group"].create(
+            {"name": "test product.template procurement"}
+        )
+        res = self.env["procurement.group"].run(
             [
                 self.env["procurement.group"].Procurement(
-                    self.product_template,
+                    False,
                     1.0,
                     self.product_template.uom_id,
                     self.customer_loc,
                     "Test",
                     "Odoo test",
                     self.env.company,
-                    {},
+                    {
+                        "group_id": procurement_group,
+                        "product_template_id": self.product_template.id,
+                    },
                 )
             ]
         )
-        moves = self.env["stock.move"].search(
-            [("product_id", "=", self.product_disposable.id)]
+
+        self.assertEqual(
+            len(procurement_group.stock_move_ids),
+            2,
+            "Expected two stock.move: 1 pick + 1 ship got types: %s"
+            % (
+                procurement_group.stock_move_ids.picking_id.mapped(
+                    "picking_type_id.name"
+                )
+            ),
         )
-        self.assertEqual(len(moves), 2, "Expected two stock.move: 1 pick + 1 ship")
+        moves = self.env["stock.move"].search(
+            [("product_template_id", "=", self.product_disposable.product_tmpl_id.id)]
+        )
+        self.assertEqual(
+            len(moves),
+            2,
+        )
+        self.assertEqual(len(moves.move_line_ids), 4)
