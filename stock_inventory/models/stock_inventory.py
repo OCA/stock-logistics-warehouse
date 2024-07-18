@@ -395,13 +395,7 @@ class InventoryAdjustmentsGroup(models.Model):
     def action_state_to_done(self):
         self.ensure_one()
         self.state = "done"
-        self.stock_quant_ids.update(
-            {
-                "to_do": False,
-                "user_id": False,
-                "inventory_date": False,
-            }
-        )
+        self._reset_quant_inventory_values()
         return
 
     def action_auto_state_to_done(self):
@@ -413,19 +407,14 @@ class InventoryAdjustmentsGroup(models.Model):
     def action_state_to_draft(self):
         self.ensure_one()
         self.state = "draft"
-        self.stock_quant_ids.update(
-            {
-                "to_do": False,
-                "user_id": False,
-                "inventory_date": False,
-            }
-        )
+        self._reset_quant_inventory_values()
         self.stock_quant_ids = None
         return
 
     def action_state_to_cancel(self):
         self.ensure_one()
         self._check_action_state_to_cancel()
+        self._reset_quant_inventory_values()
         self.write(
             {
                 "state": "cancel",
@@ -472,6 +461,16 @@ class InventoryAdjustmentsGroup(models.Model):
         result["domain"] = [("inventory_adjustment_id", "=", self.id)]
         result["context"] = {}
         return result
+
+    def _reset_quant_inventory_values(self):
+        self.ensure_one()
+        self.stock_quant_ids.write(
+            {
+                "to_do": False,
+                "user_id": False,
+                "inventory_date": False,
+            }
+        )
 
     def _check_inventory_in_progress_not_override(self):
         for rec in self:
