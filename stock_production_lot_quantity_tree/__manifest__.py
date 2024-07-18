@@ -5,7 +5,7 @@
     "name": "Stock Production Lot Quantity Tree",
     "summary": """
         Allows to display product quantity field on production lot tree view""",
-    "version": "13.0.1.0.0",
+    "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV,Odoo Community Association (OCA)",
     "maintainers": ["rousseldenis"],
