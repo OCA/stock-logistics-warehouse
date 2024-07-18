@@ -3,3 +3,4 @@
 * `Xtendoo <https://xtendoo.es>`_:
 
     * Manuel Calero
+* Adriana Saiz <adriana.saiz@factorlibre.com>
