@@ -117,19 +117,10 @@ class StockCycleCount(models.Model):
             data = rec._prepare_inventory_adjustment()
             inv = self.env["stock.inventory"].create(data)
             if rec.company_id.auto_start_inventory_from_cycle_count:
-                inv.prefill_counted_quantity = (
-                    rec.company_id.inventory_adjustment_counted_quantities
-                )
                 try:
                     inv.action_state_to_in_progress()
                 except Exception as e:
                     _logger.info("Error when beginning an adjustment: %s", str(e))
-
-                if inv.prefill_counted_quantity == "zero":
-                    inv.stock_quant_ids.write({"inventory_quantity": 0})
-                else:
-                    for quant in inv.stock_quant_ids:
-                        quant.write({"inventory_quantity": quant.quantity})
         self.write({"state": "open"})
         return True
 
