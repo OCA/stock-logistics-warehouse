@@ -161,6 +161,7 @@
                 <field name="location_ids" />
                 <field name="date" />
                 <field name="state" />
+                <field name="product_ids" string="Product" />
             </search>
         </field>
     </record>
