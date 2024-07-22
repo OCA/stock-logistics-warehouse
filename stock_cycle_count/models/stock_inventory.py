@@ -155,10 +155,18 @@ class StockInventory(models.Model):
 
     def action_state_to_in_progress(self):
         res = super().action_state_to_in_progress()
+        self.prefill_counted_quantity = (
+            self.company_id.inventory_adjustment_counted_quantities
+        )
         self.stock_quant_ids.update(
             {
                 "user_id": self.cycle_count_id.responsible_id,
                 "inventory_date": self.cycle_count_id.date_deadline,
             }
         )
+        if self.prefill_counted_quantity == "zero":
+            self.stock_quant_ids.write({"inventory_quantity": 0})
+        elif self.prefill_counted_quantity == "counted":
+            for quant in self.stock_quant_ids:
+                quant.write({"inventory_quantity": quant.quantity})
         return res
