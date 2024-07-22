@@ -256,19 +256,28 @@ class InventoryAdjustmentsGroup(models.Model):
             search_filter.append(("product_id", "in", self.product_ids.ids))
             error_field = "product_id"
             error_message = _(
-                "There are active adjustments for the requested products: %s"
+                "There are active adjustments for the requested products: %(names)s. "
+                "Blocking adjustments: %(blocking_names)s"
             )
         else:
             error_field = "location_id"
             error_message = _(
-                "There's already an Adjustment in Process using one "
-                "requested Location: %s"
+                "There's already an Adjustment in Process "
+                "using one requested Location: %(names)s. "
+                "Blocking adjustments: %(blocking_names)s"
             )
 
         quants = self.env["stock.quant"].search(search_filter)
         if quants:
-            names = self._get_quant_joined_names(quants, error_field)
-            raise ValidationError(error_message % names)
+            inventory_ids = self.env["stock.inventory"].search(
+                [("stock_quant_ids", "in", quants.ids), ("state", "=", "in_progress")]
+            )
+            if inventory_ids:
+                blocking_names = ", ".join(inventory_ids.mapped("name"))
+                names = self._get_quant_joined_names(quants, error_field)
+                raise ValidationError(
+                    error_message % {"names": names, "blocking_names": blocking_names}
+                )
 
         quants = self._get_quants(self.location_ids)
         self.write(
