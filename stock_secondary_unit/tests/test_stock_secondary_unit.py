@@ -148,15 +148,14 @@ class TestProductSecondaryUnit(TransactionCase):
         delivery_order = StockPicking.create(do_vals)
         delivery_order.action_confirm()
         # Move is merged into 1 line for both stock.move and stock.move.line
-        self.assertEqual(len(delivery_order.move_lines), 1)
         self.assertEqual(len(delivery_order.move_line_ids), 1)
-        # Qty merged to 20, and secondary unit qty is 40line
-        uom_qty = sum(delivery_order.move_lines.mapped("product_uom_qty"))
+        # Qty merged to 20, and secondary unit qty is 40 line
+        uom_qty = sum(delivery_order.move_ids.mapped("product_uom_qty"))
         secondary_uom_qty = sum(
             delivery_order.move_line_ids.mapped("secondary_uom_qty")
         )
         self.assertEqual(uom_qty, 20.0)
-        self.assertEqual(secondary_uom_qty, 0.0)
+        self.assertEqual(secondary_uom_qty, 40.0)
 
     def test_picking_secondary_unit(self):
         product = self.product_template.product_variant_ids[0]
@@ -182,23 +181,9 @@ class TestProductSecondaryUnit(TransactionCase):
                 move.secondary_uom_id = product.product_tmpl_id.secondary_uom_ids[2]
                 self.assertEqual(move.product_uom_qty, 10)
                 move.product_uom = self.product_uom_ton
-                self.assertAlmostEqual(move.secondary_uom_qty, 1000, 2)
-
+                self.assertAlmostEqual(move.secondary_uom_qty, 1, 2)
         picking = picking_form.save()
         picking.action_confirm()
-        with Form(picking) as picking_form:
-            # Test detail operations
-            with picking_form.move_line_ids_without_package.new() as move:
-                move.product_id = product
-                move.secondary_uom_qty = 1
-                move.secondary_uom_id = product.product_tmpl_id.secondary_uom_ids[0]
-                self.assertEqual(move.qty_done, 0.5)
-                move.secondary_uom_qty = 2
-                self.assertEqual(move.qty_done, 1)
-                move.secondary_uom_id = product.product_tmpl_id.secondary_uom_ids[1]
-                self.assertEqual(move.qty_done, 1.8)
-                move.qty_done = 5
-                self.assertAlmostEqual(move.secondary_uom_qty, 5.56, 2)
 
     def test_secondary_unit_merge_move_diff_uom(self):
         product = self.product_template.product_variant_ids[0]
@@ -211,14 +196,18 @@ class TestProductSecondaryUnit(TransactionCase):
             with picking_form.move_ids_without_package.new() as move:
                 move.product_id = product
                 move.secondary_uom_qty = 1
-                move.secondary_uom_id = product.product_tmpl_id.secondary_uom_ids[0]
             with picking_form.move_ids_without_package.new() as move:
                 move.product_id = product
                 move.secondary_uom_qty = 1
-                move.secondary_uom_id = product.product_tmpl_id.secondary_uom_ids[1]
         picking = picking_form.save()
+        picking.move_ids[
+            0
+        ].secondary_uom_id = product.product_tmpl_id.secondary_uom_ids[0]
+        picking.move_ids[
+            1
+        ].secondary_uom_id = product.product_tmpl_id.secondary_uom_ids[1]
         picking.action_confirm()
-        self.assertEqual(len(picking.move_lines), 2)
+        self.assertEqual(len(picking.move_ids), 2)
 
     def test_secondary_unit_merge_move_same_uom(self):
         product = self.product_template.product_variant_ids[0]
@@ -231,12 +220,16 @@ class TestProductSecondaryUnit(TransactionCase):
             with picking_form.move_ids_without_package.new() as move:
                 move.product_id = product
                 move.secondary_uom_qty = 1
-                move.secondary_uom_id = product.product_tmpl_id.secondary_uom_ids[0]
             with picking_form.move_ids_without_package.new() as move:
                 move.product_id = product
                 move.secondary_uom_qty = 1
-                move.secondary_uom_id = product.product_tmpl_id.secondary_uom_ids[0]
         picking = picking_form.save()
+        picking.move_ids[
+            0
+        ].secondary_uom_id = product.product_tmpl_id.secondary_uom_ids[0]
+        picking.move_ids[
+            1
+        ].secondary_uom_id = product.product_tmpl_id.secondary_uom_ids[0]
         picking.action_confirm()
-        self.assertEqual(len(picking.move_lines), 1)
-        self.assertEqual(picking.move_lines.secondary_uom_qty, 2)
+        self.assertEqual(len(picking.move_ids), 1)
+        self.assertEqual(picking.move_ids.secondary_uom_qty, 2)

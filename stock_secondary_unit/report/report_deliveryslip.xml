@@ -22,7 +22,7 @@
             </td>
         </xpath>
         <xpath
-            expr='//table[@t-if="o.move_line_ids and o.state==&apos;done&apos;"]/thead/tr/th'
+            expr='//table[@t-elif="o.move_line_ids and o.state==&apos;done&apos;"]/thead/tr/th'
             position="after"
         >
             <th>
@@ -38,6 +38,17 @@
             <td>
                 <span t-field="move_line.secondary_uom_qty" />
                 <span t-field="move_line.secondary_uom_id" />
+            </td>
+        </xpath>
+    </template>
+    <template
+        id="stock_report_delivery_aggregated_move_lines"
+        inherit_id="stock.stock_report_delivery_aggregated_move_lines"
+    >
+        <xpath expr="//tr[@t-foreach='aggregated_lines']/td[1]" position="after">
+            <td>
+                <span t-field="aggregated_lines[line]['move'].secondary_uom_qty" />
+                <span t-field="aggregated_lines[line]['move'].secondary_uom_id" />
             </td>
         </xpath>
     </template>
