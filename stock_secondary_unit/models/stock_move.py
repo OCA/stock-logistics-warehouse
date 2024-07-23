@@ -12,16 +12,36 @@ class StockMove(models.Model):
     }
 
     product_uom_qty = fields.Float(
-        store=True, readonly=False, compute="_compute_product_uom_qty", copy=True
+        store=True,
+        readonly=False,
+        compute="_compute_product_uom_qty",
+        copy=True,
+        precompute=True,
     )
 
     @api.depends("secondary_uom_qty", "secondary_uom_id")
     def _compute_product_uom_qty(self):
         self._compute_helper_target_field_qty()
 
-    @api.onchange("product_uom")
-    def onchange_product_uom_for_secondary(self):
-        self._onchange_helper_product_uom_for_secondary()
+    @api.depends("product_id")
+    def _compute_product_uom(self):
+        res = super()._compute_product_uom()
+        for move in self:
+            move._onchange_helper_product_uom_for_secondary()
+        return res
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            product = self.env["product.product"].browse(vals.get("product_id", False))
+            if product:
+                vals.update(
+                    {
+                        "secondary_uom_id": product.stock_secondary_uom_id.id
+                        or product.product_tmpl_id.stock_secondary_uom_id.id,
+                    }
+                )
+        return super().create(vals_list)
 
     @api.model
     def _prepare_merge_moves_distinct_fields(self):
@@ -40,17 +60,16 @@ class StockMove(models.Model):
 class StockMoveLine(models.Model):
     _inherit = ["stock.move.line", "product.secondary.unit.mixin"]
     _name = "stock.move.line"
-    _secondary_unit_fields = {"qty_field": "qty_done", "uom_field": "product_uom_id"}
+    _secondary_unit_fields = {"qty_field": "quantity", "uom_field": "product_uom_id"}
 
-    qty_done = fields.Float(store=True, readonly=False, compute="_compute_qty_done")
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            move = self.env["stock.move"].browse(vals.get("move_id", False))
+            if move.secondary_uom_id:
+                vals["secondary_uom_id"] = move.secondary_uom_id.id
+        return super().create(vals_list)
 
-    @api.model
-    def create(self, vals):
-        move = self.env["stock.move"].browse(vals.get("move_id", False))
-        if move.secondary_uom_id:
-            vals["secondary_uom_id"] = move.secondary_uom_id.id
-        return super().create(vals)
-
-    @api.depends("secondary_uom_id", "secondary_uom_qty")
-    def _compute_qty_done(self):
+    @api.depends("secondary_uom_id", "secondary_uom_qty", "quant_id")
+    def _compute_quantity(self):
         self._compute_helper_target_field_qty()
