@@ -62,8 +62,8 @@ If you want to transfer a full quant:
 -  Select the quantities which you want move to another location
 
 If you go to the Inventory Dashboard you can see the button "Move from
-location" in each of the picking types (only applicable to internal
-transfers). Press it and you will be directed to the wizard.
+location" in each of the picking types (only applicable to internal and
+outgoing transfers). Press it and you will be directed to the wizard.
 
 |image1|
 
@@ -142,6 +142,8 @@ Contributors
 -  Quartile <https://www.quartile.co>
 
    -  Aung Ko Ko Lin
+
+-  Laurent Mignon <laurent.mignon@acsone.eu>
 
 Maintainers
 -----------
