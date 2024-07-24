@@ -8,9 +8,10 @@ from .test_common import TestsCommon
 
 
 class TestMoveLocation(TestsCommon):
-    def setUp(self):
-        super().setUp()
-        self.setup_product_amounts()
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.setup_product_amounts()
 
     def test_move_location_wizard(self):
         """Test a simple move."""

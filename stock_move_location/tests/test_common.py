@@ -92,46 +92,49 @@ class TestsCommon(common.TransactionCase):
         )
         cls.package = cls.env["stock.quant.package"].create({})
         cls.package1 = cls.env["stock.quant.package"].create({})
+
         cls.package2 = cls.env["stock.quant.package"].create({})
 
-    def setup_product_amounts(self):
-        self.set_product_amount(self.product_no_lots, self.internal_loc_1, 123)
-        self.set_product_amount(
-            self.product_lots, self.internal_loc_1, 1.0, lot_id=self.lot1
+    @classmethod
+    def setup_product_amounts(cls):
+        cls.set_product_amount(cls.product_no_lots, cls.internal_loc_1, 123)
+        cls.set_product_amount(
+            cls.product_lots, cls.internal_loc_1, 1.0, lot_id=cls.lot1
         )
-        self.set_product_amount(
-            self.product_lots, self.internal_loc_1, 1.0, lot_id=self.lot2
+        cls.set_product_amount(
+            cls.product_lots, cls.internal_loc_1, 1.0, lot_id=cls.lot2
         )
-        self.set_product_amount(
-            self.product_lots, self.internal_loc_1, 1.0, lot_id=self.lot3
+        cls.set_product_amount(
+            cls.product_lots, cls.internal_loc_1, 1.0, lot_id=cls.lot3
         )
-        self.set_product_amount(
-            self.product_package,
-            self.internal_loc_1,
+        cls.set_product_amount(
+            cls.product_package,
+            cls.internal_loc_1,
             1.0,
-            lot_id=self.lot4,
-            package_id=self.package,
+            lot_id=cls.lot4,
+            package_id=cls.package,
         )
-        self.set_product_amount(
-            self.product_package,
-            self.internal_loc_1,
+        cls.set_product_amount(
+            cls.product_package,
+            cls.internal_loc_1,
             1.0,
-            lot_id=self.lot4,
-            package_id=self.package1,
+            lot_id=cls.lot4,
+            package_id=cls.package1,
         )
-        self.set_product_amount(
-            self.product_package,
-            self.internal_loc_1,
+        cls.set_product_amount(
+            cls.product_package,
+            cls.internal_loc_1,
             1.0,
-            lot_id=self.lot5,
-            package_id=self.package2,
-            owner_id=self.partner,
+            lot_id=cls.lot5,
+            package_id=cls.package2,
+            owner_id=cls.partner,
         )
 
+    @classmethod
     def set_product_amount(
-        self, product, location, amount, lot_id=None, package_id=None, owner_id=None
+        cls, product, location, amount, lot_id=None, package_id=None, owner_id=None
     ):
-        self.env["stock.quant"]._update_available_quantity(
+        cls.env["stock.quant"]._update_available_quantity(
             product,
             location,
             amount,
