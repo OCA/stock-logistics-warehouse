@@ -10,18 +10,15 @@
             <form>
                 <sheet>
                     <div class="oe_button_box" name="button_box" />
-                    <div>
-                        <label for="edit_locations">
-                            Edit Locations
-                        </label>
+                    <group name="options">
                         <field name="edit_locations" widget="boolean_toggle" />
-                    </div>
-                    <div groups="stock.group_stock_multi_locations">
-                        <label for="apply_putaway_strategy">
-                Apply putaway strategy for moving products
-            </label>
-                        <field name="apply_putaway_strategy" widget="boolean_toggle" />
-                    </div>
+                        <field
+                            name="apply_putaway_strategy"
+                            string="Apply putaway strategy for moving products"
+                            widget="boolean_toggle"
+                            groups="stock.group_stock_multi_locations"
+                        />
+                    </group>
                     <group name="picking_type">
                         <field name="picking_type_id" />
                     </group>
@@ -36,6 +33,8 @@
                             name="destination_location_id"
                             attrs="{'readonly': [('destination_location_disable', '=', True)]}"
                         />
+                    </group>
+                    <group name="filters">
                     </group>
                     <group name="lines">
                         <field
