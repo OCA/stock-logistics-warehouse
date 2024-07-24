@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record model="ir.ui.view" id="stock_package_type_form">
+        <field name="name">stock.package.type.form</field>
+        <field name="model">stock.package.type</field>
+        <field name="inherit_id" ref="stock.stock_package_type_form" />
+        <field name="arch" type="xml">
+            <div name="size" position="after">
+                <label for="volume" />
+                <div class="o_row" name="base_volume">
+                    <field name="volume" />
+                    <span><field name="volume_uom_name" /></span>
+                </div>
+            </div>
+        </field>
+    </record>
+
+</odoo>
