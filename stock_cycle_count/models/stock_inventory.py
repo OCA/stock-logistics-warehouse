@@ -158,12 +158,6 @@ class StockInventory(models.Model):
         self.prefill_counted_quantity = (
             self.company_id.inventory_adjustment_counted_quantities
         )
-        self.stock_quant_ids.update(
-            {
-                "user_id": self.cycle_count_id.responsible_id,
-                "inventory_date": self.cycle_count_id.date_deadline,
-            }
-        )
         if self.prefill_counted_quantity == "zero":
             self.stock_quant_ids.write({"inventory_quantity": 0})
         elif self.prefill_counted_quantity == "counted":
