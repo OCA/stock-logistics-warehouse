@@ -71,7 +71,7 @@ class StockMoveLocationWizard(models.TransientModel):
         for rec in self:
             picking_type = self.env["stock.picking.type"]
             base_domain = [
-                ("code", "=", "internal"),
+                ("code", "in", ("internal", "outgoing")),
                 ("warehouse_id.company_id", "=", company_id),
             ]
             if rec.origin_location_id:
