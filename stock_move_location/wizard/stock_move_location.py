@@ -303,25 +303,32 @@ class StockMoveLocationWizard(models.TransientModel):
         )
         return action
 
+    def _get_quants_domain(self):
+        return [("location_id", "=", self.origin_location_id.id)]
+
     def _get_group_quants(self):
-        location_id = self.origin_location_id
-        # Using sql as search_group doesn't support aggregation functions
-        # leading to overhead in queries to DB
-        query = """
-            SELECT product_id, lot_id, package_id, owner_id, SUM(quantity) AS quantity,
-                SUM(reserved_quantity) AS reserved_quantity
-            FROM stock_quant
-            WHERE location_id = %s
-            GROUP BY product_id, lot_id, package_id, owner_id
-        """
-        self.env.cr.execute(query, (location_id.id,))
-        return self.env.cr.dictfetchall()
+        domain = self._get_quants_domain()
+        result = self.env["stock.quant"].read_group(
+            domain=domain,
+            fields=[
+                "product_id",
+                "lot_id",
+                "package_id",
+                "owner_id",
+                "quantity:sum",
+                "reserved_quantity:sum",
+            ],
+            groupby=["product_id", "lot_id", "package_id", "owner_id"],
+            orderby="id",
+            lazy=False,
+        )
+        return result
 
     def _get_stock_move_location_lines_values(self):
         product_obj = self.env["product.product"]
         product_data = []
         for group in self._get_group_quants():
-            product = product_obj.browse(group.get("product_id")).exists()
+            product = product_obj.browse(group["product_id"][0]).exists()
             # Apply the putaway strategy
             location_dest_id = (
                 self.apply_putaway_strategy
@@ -337,14 +344,32 @@ class StockMoveLocationWizard(models.TransientModel):
                     "origin_location_id": self.origin_location_id.id,
                     "destination_location_id": location_dest_id,
                     # cursor returns None instead of False
-                    "lot_id": group.get("lot_id") or False,
-                    "package_id": group.get("package_id") or False,
-                    "owner_id": group.get("owner_id") or False,
+                    "lot_id": group["lot_id"][0] if group.get("lot_id") else False,
+                    "package_id": group["package_id"][0]
+                    if group.get("package_id")
+                    else False,
+                    "owner_id": group["owner_id"][0]
+                    if group.get("owner_id")
+                    else False,
                     "product_uom_id": product.uom_id.id,
                     "custom": False,
                 }
             )
         return product_data
+
+    def _reset_stock_move_location_lines(self):
+        lines = []
+        line_model = self.env["wiz.stock.move.location.line"]
+        for line_val in self._get_stock_move_location_lines_values():
+            if line_val.get("max_quantity") <= 0:
+                continue
+            line = line_model.create(line_val)
+            line.max_quantity = line.get_max_quantity()
+            line.reserved_quantity = line.reserved_quantity
+            lines.append(line)
+        self.update(
+            {"stock_move_location_line_ids": [(6, 0, [line.id for line in lines])]}
+        )
 
     @api.onchange("origin_location_id")
     def onchange_origin_location(self):
@@ -355,18 +380,7 @@ class StockMoveLocationWizard(models.TransientModel):
             not self.env.context.get("origin_location_disable")
             and self.origin_location_id
         ):
-            lines = []
-            line_model = self.env["wiz.stock.move.location.line"]
-            for line_val in self._get_stock_move_location_lines_values():
-                if line_val.get("max_quantity") <= 0:
-                    continue
-                line = line_model.create(line_val)
-                line.max_quantity = line.get_max_quantity()
-                line.reserved_quantity = line.reserved_quantity
-                lines.append(line)
-            self.update(
-                {"stock_move_location_line_ids": [(6, 0, [line.id for line in lines])]}
-            )
+            self._reset_stock_move_location_lines()
 
     def clear_lines(self):
         self._clear_lines()
