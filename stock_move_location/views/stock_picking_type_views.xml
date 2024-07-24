@@ -8,7 +8,7 @@
             <field name="show_operations" position="after">
                 <field
                     name="show_move_onhand"
-                    attrs='{"invisible": [("code", "not in", ["internal"])]}'
+                    attrs='{"invisible": [("code", "not in", ["internal", "outgoing"])]}'
                 />
             </field>
         </field>
