@@ -176,6 +176,10 @@
                 <field name="date" />
                 <field name="state" />
                 <field name="product_ids" string="Product" />
+                <field
+                    name="products_under_review_ids"
+                    string="Products Under Review"
+                />
             </search>
         </field>
     </record>
