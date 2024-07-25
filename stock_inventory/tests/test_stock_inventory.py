@@ -521,3 +521,37 @@ class TestStockInventory(TransactionCase):
         self.assertTrue(inventory.stock_quant_ids)
         inventory.action_state_to_done()
         self.assertTrue(all(not quant.to_do for quant in quants))
+
+    def test_11_products_under_review(self):
+        inventory1 = self.inventory_model.create(
+            {
+                "name": "Inventory_Test_Under_Review_1",
+                "product_selection": "all",
+                "location_ids": [self.location1.id],
+            }
+        )
+        inventory1.action_state_to_in_progress()
+        self.assertEqual(inventory1.state, "in_progress")
+        self.assertIn(self.product, inventory1.products_under_review_ids)
+        inventory1.action_state_to_done()
+        self.assertEqual(inventory1.state, "done")
+        self.assertEqual(inventory1.products_under_review_ids.ids, [])
+
+    def test_12_search_products_under_review(self):
+        inventory = self.inventory_model.create(
+            {
+                "name": "Inventory for Search Test",
+                "product_selection": "all",
+                "location_ids": [self.location1.id],
+            }
+        )
+        inventory.action_state_to_in_progress()
+        search_result = self.inventory_model._search_products_under_review_ids(
+            "=", self.product.id
+        )
+        expected_result = [("id", "in", [inventory.id]), ("state", "=", "in_progress")]
+        self.assertEqual(
+            search_result,
+            expected_result,
+            "The search function did not return the expected results",
+        )
