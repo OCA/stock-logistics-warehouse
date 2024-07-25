@@ -43,6 +43,12 @@ class StockPicking(models.Model):
                 return rec._popup_exceptions()
         return super().action_confirm()
 
+    def button_validate(self):
+        for rec in self:
+            if rec.detect_exceptions() and not rec.ignore_exception:
+                return rec._popup_exceptions()
+        return super().button_validate()
+
     @api.model
     def _get_popup_action(self):
         action = self.env.ref("stock_exception.action_stock_exception_confirm")
