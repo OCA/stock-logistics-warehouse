@@ -6,6 +6,13 @@ class StockQuant(models.Model):
 
     to_do = fields.Boolean(default=False)
 
+    stock_inventory_ids = fields.Many2many(
+        "stock.inventory",
+        "stock_inventory_stock_quant_rel",
+        string="Stock Inventories",
+        copy=False,
+    )
+
     def _apply_inventory(self):
         res = super()._apply_inventory()
         record_moves = self.env["stock.move.line"]
