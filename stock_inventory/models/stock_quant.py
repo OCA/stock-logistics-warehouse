@@ -12,23 +12,18 @@ class StockQuant(models.Model):
         string="Stock Inventories",
         copy=False,
     )
+    current_inventory_id = fields.Many2one(
+        "stock.inventory",
+        string="Current Inventory",
+        store=True,
+    )
 
     def _apply_inventory(self):
         res = super()._apply_inventory()
         record_moves = self.env["stock.move.line"]
         adjustment = self.env["stock.inventory"].browse()
         for rec in self:
-            adjustment = (
-                self.env["stock.inventory"]
-                .search([("state", "=", "in_progress")])
-                .filtered(
-                    lambda x, rec=rec: rec.location_id in x.location_ids
-                    or (
-                        rec.location_id in x.location_ids.child_internal_location_ids
-                        and not x.exclude_sublocation
-                    )
-                )
-            )
+            adjustment = rec.current_inventory_id
             moves = record_moves.search(
                 [
                     ("product_id", "=", rec.product_id.id),
@@ -59,6 +54,7 @@ class StockQuant(models.Model):
                 }
             )
             rec.to_do = False
+            rec.current_inventory_id = False
         if adjustment and self.env.company.stock_inventory_auto_complete:
             adjustment.action_auto_state_to_done()
         return res
