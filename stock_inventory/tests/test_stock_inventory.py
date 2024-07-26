@@ -555,3 +555,37 @@ class TestStockInventory(TransactionCase):
             expected_result,
             "The search function did not return the expected results",
         )
+
+    def test_13_multiple_inventories_different_products_same_location(self):
+        inventory1 = self.inventory_model.create(
+            {
+                "name": "Inventory1 for Product1",
+                "product_ids": [(6, 0, [self.product.id])],
+                "location_ids": [(6, 0, [self.location3.id])],
+                "product_selection": "manual",
+            }
+        )
+        inventory2 = self.inventory_model.create(
+            {
+                "name": "Inventory2 for Product2",
+                "product_ids": [(6, 0, [self.product2.id])],
+                "location_ids": [(6, 0, [self.location3.id])],
+                "product_selection": "manual",
+            }
+        )
+        inventory1.action_state_to_in_progress()
+        inventory2.action_state_to_in_progress()
+        self.assertEqual(inventory1.state, "in_progress")
+        self.assertEqual(inventory2.state, "in_progress")
+        self.assertEqual(
+            inventory1.stock_quant_ids.filtered(
+                lambda q: q.product_id == self.product
+            ).current_inventory_id,
+            inventory1,
+        )
+        self.assertEqual(
+            inventory2.stock_quant_ids.filtered(
+                lambda q: q.product_id == self.product2
+            ).current_inventory_id,
+            inventory2,
+        )
