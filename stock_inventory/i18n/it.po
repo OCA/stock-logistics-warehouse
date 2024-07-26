@@ -308,6 +308,11 @@ msgid "Owner"
 msgstr "Proprietario"
 
 #. module: stock_inventory
+#: model_terms:ir.ui.view,arch_db:stock_inventory.stock_inventory_search_view
+msgid "Product"
+msgstr ""
+
+#. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__category_id
 #: model:ir.model.fields.selection,name:stock_inventory.selection__stock_inventory__product_selection__category
 msgid "Product Category"
@@ -329,6 +334,12 @@ msgid "Products"
 msgstr "Prodotti"
 
 #. module: stock_inventory
+#: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__products_under_review_ids
+#: model_terms:ir.ui.view,arch_db:stock_inventory.stock_inventory_search_view
+msgid "Products Under Review"
+msgstr ""
+
+#. module: stock_inventory
 #: model:ir.model,name:stock_inventory.model_stock_quant
 msgid "Quants"
 msgstr "Quanti"
@@ -347,6 +358,11 @@ msgstr "Responsabile specifico rettifiche di magazzino."
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__state
 msgid "State"
 msgstr "Stato"
+
+#. module: stock_inventory
+#: model:ir.model.fields,field_description:stock_inventory.field_stock_quant__stock_inventory_ids
+msgid "Stock Inventories"
+msgstr ""
 
 #. module: stock_inventory
 #: model_terms:ir.ui.view,arch_db:stock_inventory.res_config_settings_view_form
@@ -373,17 +389,19 @@ msgstr "Righe movimenti di magazzino"
 #. odoo-python
 #: code:addons/stock_inventory/models/stock_inventory.py:0
 #, python-format
-msgid "There are active adjustments for the requested products: %s"
-msgstr "Ci sono delle rettifiche attive per il prodotto richiesto: %s"
+msgid ""
+"There are active adjustments for the requested products: %(names)s. Blocking "
+"adjustments: %(blocking_names)s"
+msgstr ""
 
 #. module: stock_inventory
 #. odoo-python
 #: code:addons/stock_inventory/models/stock_inventory.py:0
 #, python-format
 msgid ""
-"There's already an Adjustment in Process using one requested Location: %s"
+"There's already an Adjustment in Process using one requested Location: "
+"%(names)s. Blocking adjustments: %(blocking_names)s"
 msgstr ""
-"Esiste già un processo di rettifica in corso che utilizza l'ubicazione: %s"
 
 #. module: stock_inventory
 #: model:ir.model.fields,help:stock_inventory.field_stock_inventory__owner_id
@@ -439,6 +457,16 @@ msgstr "Non si può annullare questo inventario %(display_name)s."
 #: model_terms:ir.ui.view,arch_db:stock_inventory.view_inventory_group_form
 msgid "e.g. Annual inventory"
 msgstr "es. invntario annuale"
+
+#, python-format
+#~ msgid "There are active adjustments for the requested products: %s"
+#~ msgstr "Ci sono delle rettifiche attive per il prodotto richiesto: %s"
+
+#, python-format
+#~ msgid ""
+#~ "There's already an Adjustment in Process using one requested Location: %s"
+#~ msgstr ""
+#~ "Esiste già un processo di rettifica in corso che utilizza l'ubicazione: %s"
 
 #, python-format
 #~ msgid ""
