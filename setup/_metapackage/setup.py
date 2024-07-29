@@ -33,6 +33,7 @@ setuptools.setup(
         'odoo-addon-stock_move_location>=16.0dev,<16.1dev',
         'odoo-addon-stock_move_packaging_qty>=16.0dev,<16.1dev',
         'odoo-addon-stock_mts_mto_rule>=16.0dev,<16.1dev',
+        'odoo-addon-stock_package_type_volume>=16.0dev,<16.1dev',
         'odoo-addon-stock_packaging_calculator>=16.0dev,<16.1dev',
         'odoo-addon-stock_packaging_calculator_packaging_level>=16.0dev,<16.1dev',
         'odoo-addon-stock_picking_batch_packaging_qty>=16.0dev,<16.1dev',
