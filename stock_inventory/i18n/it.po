@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-07-08 08:59+0000\n"
+"PO-Revision-Date: 2024-07-29 08:58+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -300,7 +300,7 @@ msgstr "Proprietario"
 #. module: stock_inventory
 #: model_terms:ir.ui.view,arch_db:stock_inventory.stock_inventory_search_view
 msgid "Product"
-msgstr ""
+msgstr "Prodotto"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__category_id
@@ -327,7 +327,7 @@ msgstr "Prodotti"
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__products_under_review_ids
 #: model_terms:ir.ui.view,arch_db:stock_inventory.stock_inventory_search_view
 msgid "Products Under Review"
-msgstr ""
+msgstr "Prodotto in revisione"
 
 #. module: stock_inventory
 #: model:ir.model,name:stock_inventory.model_stock_quant
@@ -352,7 +352,7 @@ msgstr "Stato"
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_quant__stock_inventory_ids
 msgid "Stock Inventories"
-msgstr ""
+msgstr "Inventari di magazzino"
 
 #. module: stock_inventory
 #: model_terms:ir.ui.view,arch_db:stock_inventory.res_config_settings_view_form
@@ -383,6 +383,8 @@ msgid ""
 "There are active adjustments for the requested products: %(names)s. Blocking "
 "adjustments: %(blocking_names)s"
 msgstr ""
+"Ci sono delle rettifiche attive per il prodotto %(names)s. Rettifiche "
+"bloccanti: %(blocking_names)s"
 
 #. module: stock_inventory
 #. odoo-python
@@ -392,6 +394,8 @@ msgid ""
 "There's already an Adjustment in Process using one requested Location: "
 "%(names)s. Blocking adjustments: %(blocking_names)s"
 msgstr ""
+"C'è già una rettifica in corso che utilizza l'ubicazione richiesta: %(names)"
+"s. Rettifiche bloccanti: %(blocking_names)s"
 
 #. module: stock_inventory
 #: model:ir.model.fields,help:stock_inventory.field_stock_inventory__owner_id
