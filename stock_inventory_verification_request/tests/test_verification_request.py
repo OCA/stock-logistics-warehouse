@@ -6,45 +6,45 @@ import odoo.tests.common as common
 from odoo.exceptions import AccessError
 
 
-class TestStockVerificationRequest(common.SavepointCase):
-    @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
+class TestStockVerificationRequest(common.TransactionCase):
+    def setUp(self):
+        super().setUp()
         # disable tracking test suite wise
-        cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
-        cls.user_model = cls.env["res.users"].with_context(no_reset_password=True)
+        self.env = self.env(context=dict(self.env.context, tracking_disable=True))
+        self.user_model = self.env["res.users"].with_context(no_reset_password=True)
 
-        cls.obj_wh = cls.env["stock.warehouse"]
-        cls.obj_location = cls.env["stock.location"]
-        cls.obj_inventory = cls.env["stock.inventory"]
-        cls.obj_product = cls.env["product.product"]
-        cls.obj_svr = cls.env["stock.slot.verification.request"]
-        cls.obj_move = cls.env["stock.move"]
+        self.obj_wh = self.env["stock.warehouse"]
+        self.obj_location = self.env["stock.location"]
+        self.obj_inventory = self.env["stock.inventory"]
+        self.obj_product = self.env["product.product"]
+        self.obj_svr = self.env["stock.slot.verification.request"]
+        self.obj_move = self.env["stock.move"]
+        self.stock_quant_obj = self.env["stock.quant"]
 
-        cls.product1 = cls.obj_product.create(
+        self.product1 = self.obj_product.create(
             {
                 "name": "Test Product 1",
                 "type": "product",
                 "default_code": "PROD1",
             }
         )
-        cls.product2 = cls.obj_product.create(
+        self.product2 = self.obj_product.create(
             {
                 "name": "Test Product 2",
                 "type": "product",
                 "default_code": "PROD2",
             }
         )
-        cls.test_loc = cls.obj_location.create(
+        self.test_loc = self.obj_location.create(
             {"name": "Test Location", "usage": "internal", "discrepancy_threshold": 0.1}
         )
 
         # Create Stock manager able to force validation on inventories.
-        group_stock_man = cls.env.ref("stock.group_stock_manager")
-        group_inventory_all = cls.env.ref(
+        group_stock_man = self.env.ref("stock.group_stock_manager")
+        group_inventory_all = self.env.ref(
             "stock_inventory_discrepancy." "group_stock_inventory_validation_always"
         )
-        cls.manager = cls.env["res.users"].create(
+        self.manager = self.env["res.users"].create(
             {
                 "name": "Test Manager",
                 "login": "manager",
@@ -52,8 +52,8 @@ class TestStockVerificationRequest(common.SavepointCase):
                 "groups_id": [(6, 0, [group_stock_man.id, group_inventory_all.id])],
             }
         )
-        group_stock_user = cls.env.ref("stock.group_stock_user")
-        cls.user = cls.env["res.users"].create(
+        group_stock_user = self.env.ref("stock.group_stock_user")
+        self.user = self.env["res.users"].create(
             {
                 "name": "Test User",
                 "login": "user",
@@ -61,82 +61,48 @@ class TestStockVerificationRequest(common.SavepointCase):
                 "groups_id": [(6, 0, [group_stock_user.id])],
             }
         )
-
-        cls.starting_inv = cls.obj_inventory.create(
+        self.quant1 = self.stock_quant_obj.create(
             {
-                "name": "Starting inventory",
-                "filter": "product",
-                "line_ids": [
-                    (
-                        0,
-                        0,
-                        {
-                            "product_id": cls.product1.id,
-                            "product_uom_id": cls.env.ref("uom.product_uom_unit").id,
-                            "product_qty": 2.0,
-                            "location_id": cls.test_loc.id,
-                        },
-                    ),
-                    (
-                        0,
-                        0,
-                        {
-                            "product_id": cls.product2.id,
-                            "product_uom_id": cls.env.ref("uom.product_uom_unit").id,
-                            "product_qty": 4.0,
-                            "location_id": cls.test_loc.id,
-                        },
-                    ),
-                ],
+                "location_id": self.test_loc.id,
+                "product_id": self.product1.id,
+                "inventory_quantity": 20.0,
             }
-        )
-        cls.starting_inv.action_force_done()
+        ).action_apply_inventory()
+        self.quant2 = self.stock_quant_obj.create(
+            {
+                "location_id": self.test_loc.id,
+                "product_id": self.product2.id,
+                "inventory_quantity": 30.0,
+            }
+        ).action_apply_inventory()
 
     def test_svr_creation(self):
         """Tests the creation of Slot Verification Requests."""
         inventory = self.obj_inventory.create(
             {
                 "name": "Generate over discrepancy in both lines.",
-                "location_id": self.test_loc.id,
-                "filter": "none",
-                "line_ids": [
-                    (
-                        0,
-                        0,
-                        {
-                            "product_id": self.product1.id,
-                            "product_uom_id": self.env.ref("uom.product_uom_unit").id,
-                            "product_qty": 3.0,
-                            "location_id": self.test_loc.id,
-                        },
-                    ),
-                    (
-                        0,
-                        0,
-                        {
-                            "product_id": self.product2.id,
-                            "product_uom_id": self.env.ref("uom.product_uom_unit").id,
-                            "product_qty": 3.0,
-                            "location_id": self.test_loc.id,
-                        },
-                    ),
-                ],
+                "product_selection": "manual",
+                "location_ids": [(6, 0, [self.test_loc.id])],
+                "product_ids": [(6, 0, [self.product1.id, self.product2.id])],
             }
         )
-        inventory.with_context({"normal_view": True}).action_validate()
+        inventory.action_state_to_in_progress()
         self.assertEqual(
             inventory.state,
-            "pending",
+            "in_progress",
             "Inventory Adjustment not changing to Pending to " "Approve.",
         )
         previous_count = len(self.obj_svr.search([]))
-        inventory.sudo(self.user).action_request_verification()
+        for quant in inventory.stock_quant_ids:
+            quant.write({"inventory_quantity": 10.0})
+            quant.action_request_verification()
         current_count = len(self.obj_svr.search([]))
         self.assertEqual(
             current_count, previous_count + 2, "Slot Verification Request not created."
         )
-        # Test the method to open SVR from inventory lines:
-        inventory.line_ids[0].action_open_svr()
+        # Test the method to open SVR from quants
+        for quant in inventory.stock_quant_ids:
+            quant.action_open_svr()
 
     def test_svr_workflow(self):
         """Tests workflow of Slot Verification Request."""
@@ -153,16 +119,16 @@ class TestStockVerificationRequest(common.SavepointCase):
             "Slot Verification Request not created from scratch.",
         )
         with self.assertRaises(AccessError):
-            test_svr.sudo(self.user).action_confirm()
-        test_svr.sudo(self.manager).action_confirm()
+            test_svr.with_user(self.user).action_confirm()
+        test_svr.action_confirm()
         self.assertEqual(
             test_svr.state, "open", "Slot Verification Request not confirmed properly."
         )
-        test_svr.sudo(self.manager).action_solved()
+        test_svr.action_solved()
         self.assertEqual(
             test_svr.state, "done", "Slot Verification Request not marked as solved."
         )
-        test_svr.sudo(self.manager).action_cancel()
+        test_svr.action_cancel()
         self.assertEqual(
             test_svr.state,
             "cancelled",
@@ -178,10 +144,70 @@ class TestStockVerificationRequest(common.SavepointCase):
                 "product_id": self.product1.id,
             }
         )
-        test_svr.sudo(self.manager).action_confirm()
-        self.assertEqual(test_svr.involved_move_count, 1, "Unexpected involved move")
+        test_svr.action_confirm()
+        self.assertEqual(test_svr.involved_quant_count, 1, "Unexpected involved move")
         self.assertEqual(
-            test_svr.involved_inv_line_count, 1, "Unexpected involved inventory line"
+            test_svr.involved_quant_count, 1, "Unexpected involved inventory line"
         )
-        test_svr.action_view_inv_lines()
-        test_svr.action_view_moves()
+        test_svr.action_view_move_lines()
+        test_svr.action_view_quants()
+
+    def test_svr_full_workflow(self):
+        test_svr = self.env["stock.slot.verification.request"].create(
+            {
+                "location_id": self.test_loc.id,
+                "state": "wait",
+                "product_id": self.product1.id,
+            }
+        )
+        self.assertEqual(
+            test_svr.state,
+            "wait",
+            "Slot Verification Request not created in waiting state.",
+        )
+        test_svr.action_confirm()
+        self.assertEqual(
+            test_svr.state, "open", "Slot Verification Request not confirmed properly."
+        )
+        test_svr.action_solved()
+        self.assertEqual(
+            test_svr.state, "done", "Slot Verification Request not marked as solved."
+        )
+        test_svr.write({"state": "wait"})
+        test_svr.action_confirm()
+        test_svr.action_cancel()
+        self.assertEqual(
+            test_svr.state,
+            "cancelled",
+            "Slot Verification Request not marked as cancelled.",
+        )
+
+    def test_user_permissions_on_svr(self):
+        """Tests that users without the correct permissions cannot change SVR state."""
+        test_svr = self.env["stock.slot.verification.request"].create(
+            {
+                "location_id": self.test_loc.id,
+                "state": "wait",
+                "product_id": self.product1.id,
+            }
+        )
+        with self.assertRaises(AccessError):
+            test_svr.with_user(self.user).action_confirm()
+        test_svr.action_confirm()
+        with self.assertRaises(AccessError):
+            test_svr.with_user(self.user).action_solved()
+
+
+def test_action_view_methods(self):
+    """Tests the view methods in Slot Verification Request."""
+    svr = self.obj_svr.create(
+        {
+            "location_id": self.test_loc.id,
+            "state": "wait",
+            "product_id": self.product1.id,
+        }
+    )
+    svr.action_view_move_lines()
+    svr.action_view_quants()
+    svr.action_create_inventory_adjustment()
+    svr.action_view_inventories()

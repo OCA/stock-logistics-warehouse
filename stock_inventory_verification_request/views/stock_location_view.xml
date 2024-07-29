@@ -7,14 +7,14 @@
         <field name="model">stock.location</field>
         <field name="inherit_id" ref="stock.view_location_form" />
         <field name="arch" type="xml">
-            <button name="toggle_active" position="before">
+            <div name="button_box" position="inside">
                 <button
                     string="Slot Verification Request"
                     name="action_open_svr"
                     type="object"
                     icon="fa-sticky-note"
                 />
-            </button>
+            </div>
         </field>
     </record>
 
