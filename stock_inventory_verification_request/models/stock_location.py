@@ -2,7 +2,7 @@
 #   (http://www.forgeflow.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from odoo import api, fields, models
+from odoo import fields, models
 
 
 class StockLocation(models.Model):
@@ -14,7 +14,6 @@ class StockLocation(models.Model):
         inverse_name="location_id",
     )
 
-    @api.multi
     def action_open_svr(self):
         """Open the corresponding Slot Verification Request directly from the
         Location."""

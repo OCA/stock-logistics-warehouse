@@ -5,12 +5,13 @@
     "name": "Stock Inventory Verification Request",
     "summary": "Adds the capability to request a Slot Verification when "
     "a inventory is Pending to Approve",
-    "version": "12.0.3.0.1",
+    "version": "15.0.1.0.0",
     "maintainers": ["LoisRForgeFlow"],
     "author": "ForgeFlow, " "Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "category": "Warehouse",
     "depends": [
+        "stock_inventory",
         "stock_inventory_discrepancy",
         "mail",
     ],

@@ -7,7 +7,7 @@
         <field name="name">stock.slot.verification.request.tree</field>
         <field name="model">stock.slot.verification.request</field>
         <field name="arch" type="xml">
-            <tree string="Stock Slot Verification Request">
+            <tree default_order="id desc">
                 <field name="name" />
                 <field name="location_id" />
                 <field name="product_id" />
@@ -25,7 +25,7 @@
         <field name="name">stock.slot.verification.request.form</field>
         <field name="model">stock.slot.verification.request</field>
         <field name="arch" type="xml">
-            <form string="Stock Slot Verification Request">
+            <form>
                 <header>
                     <button
                         name="action_create_inventory_adjustment"
@@ -81,13 +81,13 @@
                             />
                           </button>
                           <button
-                            name="action_view_moves"
+                            name="action_view_move_lines"
                             type="object"
                             class="oe_stat_button"
                             icon="fa-arrows-h"
                         >
                               <field
-                                name="involved_move_count"
+                                name="involved_move_line_count"
                                 widget="statinfo"
                                 help="Stock Moves related to the given location and product."
                                 modifiers="{'readonly': true}"
@@ -95,17 +95,17 @@
                             />
                           </button>
                           <button
-                            name="action_view_inv_lines"
+                            name="action_view_quants"
                             type="object"
                             class="oe_stat_button"
                             icon="fa-list"
                         >
                               <field
-                                name="involved_inv_line_count"
+                                name="involved_quant_count"
                                 widget="statinfo"
-                                help="Inventory Adjustment Lines related to the given location and product."
+                                help="Stock related to the given location and product."
                                 modifiers="{'readonly': true}"
-                                string="Inv. Adj. Lines Involved"
+                                string="Stock Reviewed"
                             />
                           </button>
                     </div>
@@ -119,6 +119,7 @@
                         <group>
                             <field name="location_id" />
                             <field name="product_id" />
+                            <field name="lot_id" />
                             <field
                                 name="company_id"
                                 groups="base.group_multi_company"
@@ -127,7 +128,7 @@
                             <field name="create_date" readonly="1" />
                             <field name="responsible_id" />
                             <field name="inventory_id" />
-                            <field name="inventory_line_id" />
+                            <field name="quant_id" />
                         </group>
                         <group>
                             <field name="notes" />
@@ -146,7 +147,7 @@
         <field name="name">stock.slot.verification.request.search</field>
         <field name="model">stock.slot.verification.request</field>
         <field name="arch" type="xml">
-            <search string="Stock Slot Verification Request">
+            <search>
                 <field name="name" />
                 <field name="location_id" />
                 <field name="product_id" />
@@ -183,13 +184,14 @@
         </field>
     </record>
 
-    <act_window
-        id="action_slot_verification_request"
-        name="Stock Slot Verification Request"
-        res_model="stock.slot.verification.request"
-        context="{'search_default_wait_state':1,'search_default_open_state':1}"
-        view_mode="tree,form"
-    />
+    <record id="action_slot_verification_request" model="ir.actions.act_window">
+        <field name="name">Stock Slot Verification Request</field>
+        <field name="res_model">stock.slot.verification.request</field>
+        <field
+            name="context"
+        >{'search_default_wait_state':1,'search_default_open_state':1}</field>
+        <field name="view_mode">tree,form</field>
+    </record>
     <menuitem
         id="menu_slot_verification_request"
         name="Slot Verification Request"
