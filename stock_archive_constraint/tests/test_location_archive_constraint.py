@@ -2,23 +2,15 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
 from odoo.exceptions import ValidationError
-from odoo.tests.common import Form, TransactionCase
+from odoo.tests.common import Form
+
+from odoo.addons.base.tests.common import BaseCommon
 
 
-class TestLocationArchiveConstraint(TransactionCase):
+class TestLocationArchiveConstraint(BaseCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        # Remove this variable in v16 and put instead:
-        # from odoo.addons.base.tests.common import DISABLED_MAIL_CONTEXT
-        DISABLED_MAIL_CONTEXT = {
-            "tracking_disable": True,
-            "mail_create_nolog": True,
-            "mail_create_nosubscribe": True,
-            "mail_notrack": True,
-            "no_reset_password": True,
-        }
-        cls.env = cls.env(context=dict(cls.env.context, **DISABLED_MAIL_CONTEXT))
         cls.env = cls.env(
             context=dict(cls.env.context, test_stock_archive_constraint=True)
         )
@@ -58,7 +50,6 @@ class TestLocationArchiveConstraint(TransactionCase):
 
     def _create_stock_move(self, location_id, location_dest_id, product_id, qty):
         stock_move_form = Form(self.env["stock.move"])
-        stock_move_form.name = product_id.display_name
         stock_move_form.location_id = location_id
         stock_move_form.location_dest_id = location_dest_id
         stock_move_form.product_id = product_id
@@ -73,9 +64,8 @@ class TestLocationArchiveConstraint(TransactionCase):
                 "location_id": location_id.id,
                 "location_dest_id": location_dest_id.id,
                 "product_id": product_id.id,
-                "product_uom_qty": qty,
                 "product_uom_id": product_id.uom_id.id,
-                "qty_done": qty,
+                "quantity": qty,
                 "state": "done",
             }
         )
@@ -92,7 +82,7 @@ class TestLocationArchiveConstraint(TransactionCase):
         )
         stock_picking.action_confirm()
         for line in stock_picking.move_ids_without_package:
-            line.quantity_done = line.product_uom_qty
+            line.quantity = line.product_uom_qty
         stock_picking.button_validate()
 
     def test_archive_product_ok(self):

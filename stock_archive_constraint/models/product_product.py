@@ -29,7 +29,8 @@ class ProductProduct(models.Model):
         if res:
             raise ValidationError(
                 _(
-                    "It is not possible to archive product '%(display_name)s' which has "
+                    "It is not possible to archive product "
+                    "'%(display_name)s' which has "
                     "associated stock quantities."
                 )
                 % {"display_name": res.product_id.display_name}
@@ -49,7 +50,8 @@ class ProductProduct(models.Model):
         if res:
             raise ValidationError(
                 _(
-                    "It is not possible to archive product '%(display_name)s' which has "
+                    "It is not possible to archive product "
+                    "'%(display_name)s' which has "
                     "associated picking lines."
                 )
                 % {"display_name": res.product_id.display_name}
@@ -69,7 +71,8 @@ class ProductProduct(models.Model):
         if res:
             raise ValidationError(
                 _(
-                    "It is not possible to archive product '%(display_name)s' which has "
+                    "It is not possible to archive product "
+                    "'%(display_name)s' which has "
                     "associated stock reservations."
                 )
                 % {"display_name": res.product_id.display_name}
