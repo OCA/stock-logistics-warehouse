@@ -6,35 +6,37 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2024-07-31 08:58+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.6.2\n"
 
 #. module: stock_package_type_volume
 #: model:ir.model,name:stock_package_type_volume.model_stock_package_type
 msgid "Stock package type"
-msgstr ""
+msgstr "Tipo collo magazzino"
 
 #. module: stock_package_type_volume
 #: model:ir.model.fields,help:stock_package_type_volume.field_stock_package_type__volume
 msgid "The Packaging volume"
-msgstr ""
+msgstr "Volume dell'imballaggio"
 
 #. module: stock_package_type_volume
 #: model:ir.model.fields,field_description:stock_package_type_volume.field_stock_package_type__volume
 msgid "Volume"
-msgstr ""
+msgstr "Volume"
 
 #. module: stock_package_type_volume
 #: model:ir.model.fields,field_description:stock_package_type_volume.field_stock_package_type__volume_uom_id
 msgid "Volume Units of Measure"
-msgstr ""
+msgstr "Unità di misura del volume"
 
 #. module: stock_package_type_volume
 #: model:ir.model.fields,field_description:stock_package_type_volume.field_stock_package_type__volume_uom_name
 msgid "Volume Uom Name"
-msgstr ""
+msgstr "Nome udm volume"
