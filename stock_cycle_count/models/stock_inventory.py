@@ -34,6 +34,26 @@ class StockInventory(models.Model):
         group_operator="avg",
         default=False,
     )
+    responsible_id = fields.Many2one(
+        states={"draft": [("readonly", False)], "in_progress": [("readonly", False)]},
+        tracking=True,
+    )
+
+    def write(self, vals):
+        result = super().write(vals)
+        if "responsible_id" in vals:
+            if not self.env.context.get("no_propagate"):
+                if (
+                    self.cycle_count_id
+                    and self.cycle_count_id.responsible_id.id != vals["responsible_id"]
+                ):
+                    self.cycle_count_id.with_context(no_propagate=True).write(
+                        {"responsible_id": vals["responsible_id"]}
+                    )
+            for quant in self.mapped("stock_quant_ids"):
+                if quant.user_id.id != vals["responsible_id"]:
+                    quant.write({"user_id": vals["responsible_id"]})
+        return result
 
     def _update_cycle_state(self):
         for inv in self:

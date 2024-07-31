@@ -570,3 +570,63 @@ class TestStockCycleCount(common.TransactionCase):
         adjustment_2.action_state_to_in_progress()
         # Check that the inventory_quantity is 0
         self.assertEqual(quant_2.inventory_quantity, 0.0)
+
+    def test_responsible_id_propagation_with_inventory_adjustment(self):
+        additional_user = self._create_user(
+            "user_3", [self.g_stock_manager], self.company
+        )
+        additional_user_2 = self._create_user(
+            "user_4", [self.g_stock_manager], self.company
+        )
+        self.cycle_count_1.responsible_id = self.manager
+        self.assertEqual(
+            self.cycle_count_1.responsible_id.id,
+            self.manager,
+            "Initial responsible not correctly assigned.",
+        )
+        self.quant_model.create(
+            {
+                "product_id": self.product1.id,
+                "location_id": self.count_loc.id,
+                "quantity": 100,
+            }
+        )
+        self.cycle_count_1.action_create_inventory_adjustment()
+        inventory = self.cycle_count_1.stock_adjustment_ids[0]
+        self.assertEqual(
+            inventory.responsible_id.id,
+            self.cycle_count_1.responsible_id.id,
+            "Inventory responsible does not match cycle count responsible.",
+        )
+        for quant in inventory.stock_quant_ids:
+            self.assertEqual(
+                quant.user_id.id,
+                inventory.responsible_id.id,
+                "Quant user does not match inventory responsible.",
+            )
+        self.cycle_count_1.responsible_id = additional_user.id
+        inventory.invalidate_cache()
+        self.cycle_count_1.stock_adjustment_ids[0].stock_quant_ids.invalidate_cache()
+        self.assertEqual(
+            inventory.responsible_id.id,
+            additional_user.id,
+            "Inventory responsible not updated after cycle count responsible change.",
+        )
+        for quant in inventory.stock_quant_ids:
+            self.assertEqual(
+                quant.user_id.id,
+                additional_user.id,
+                "Quant user not updated after inventory responsible change.",
+            )
+        inventory.responsible_id = additional_user_2
+        self.assertEqual(
+            self.cycle_count_1.responsible_id.id,
+            additional_user_2.id,
+            "Cycle Count not updated after inventory responsible change.",
+        )
+        for quant in inventory.stock_quant_ids:
+            self.assertEqual(
+                quant.user_id.id,
+                additional_user_2.id,
+                "Quant user not updated after inventory responsible change.",
+            )
