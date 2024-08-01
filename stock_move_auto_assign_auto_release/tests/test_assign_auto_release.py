@@ -188,13 +188,13 @@ class TestAssignAutoRelease(PromiseReleaseCommonCase):
         self.assertTrue(
             all(
                 move.need_release and not move.release_ready
-                for move in shipping.move_lines
+                for move in shipping.move_ids
             )
         )
         with trap_jobs() as trap:
             self._receive_product(self.product1, 100)
             shipping.invalidate_cache()
-            shipping.move_lines.invalidate_cache()
+            shipping.move_ids.invalidate_cache()
             trap.perform_enqueued_jobs()
             job = self._get_job_for_method(
                 trap.enqueued_jobs, shipping.auto_release_available_to_promise
@@ -203,16 +203,16 @@ class TestAssignAutoRelease(PromiseReleaseCommonCase):
         with trap_jobs() as trap:
             self._receive_product(self.product2, 100)
             shipping.invalidate_cache()
-            shipping.move_lines.invalidate_cache()
+            shipping.move_ids.invalidate_cache()
             trap.perform_enqueued_jobs()
             job = self._get_job_for_method(
                 trap.enqueued_jobs, shipping.auto_release_available_to_promise
             )
             job.perform()
-        move_product1 = shipping.move_lines.filtered(
+        move_product1 = shipping.move_ids.filtered(
             lambda m: m.product_id == self.product1
         )
-        move_product2 = shipping.move_lines - move_product1
+        move_product2 = shipping.move_ids - move_product1
         self.assertFalse(move_product2.release_ready)
         self.assertFalse(move_product2.need_release)
         self.assertFalse(move_product1.need_release)
