@@ -11,5 +11,7 @@ class ResCompany(models.Model):
     stock_inventory_auto_complete = fields.Boolean(
         help="If enabled, when all the quants prepared for the adjustment "
         "are done, the adjustment is automatically set to done.",
-        default=False,
+    )
+    stock_inventory_auto_create_missing_quants = fields.Boolean(
+        help="If enabled, missing quants will be created on the inventory confirmation",
     )
