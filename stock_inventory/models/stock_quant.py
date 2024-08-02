@@ -18,11 +18,10 @@ class StockQuant(models.Model):
         record_moves = self.env["stock.move.line"]
         adjustment = self.env["stock.inventory"].browse()
         for rec in self:
-            adjustment = (
-                self.env["stock.inventory"]
-                .search([("state", "=", "in_progress")])
-                .filtered(
-                    lambda x: rec.location_id in x.location_ids
+            adjustment = rec.stock_inventory_ids.filtered(
+                lambda x: x.state == "in_progress"
+                and (
+                    rec.location_id in x.location_ids
                     or (
                         rec.location_id in x.location_ids.child_internal_location_ids
                         and not x.exclude_sublocation
