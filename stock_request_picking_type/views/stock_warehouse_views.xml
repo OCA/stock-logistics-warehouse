@@ -1,0 +1,12 @@
+<odoo>
+    <record id="view_warehouse_form_inherited" model="ir.ui.view">
+        <field name="name">stock.warehouse.form.inherited</field>
+        <field name="model">stock.warehouse</field>
+        <field name="inherit_id" ref="stock.view_warehouse"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet/notebook/page[@name='technical_info']/group/group[2]" position="inside">
+                <field name="stock_request_type_id" readonly="1"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
