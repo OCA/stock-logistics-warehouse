@@ -36,13 +36,19 @@ class StockRule(models.Model):
                     ) % (rule.name,)
                     raise ValidationError(msg)
 
+    def _get_product_location_context(self, src_location_id, values):
+        context = {"location": src_location_id}
+        if values.get("restrict_lot_id"):
+            context["lot_id"] = values["restrict_lot_id"]
+        return context
+
     def get_mto_qty_to_order(self, product, product_qty, product_uom, values):
         self.ensure_one()
         precision = self.env["decimal.precision"].precision_get(
             "Product Unit of Measure"
         )
         src_location_id = self.mts_rule_id.location_src_id.id
-        product_location = product.with_context(location=src_location_id)
+        product_location = product.with_context(**self._get_product_location_context(src_location_id, values))
         virtual_available = product_location.virtual_available
         qty_available = product.uom_id._compute_quantity(virtual_available, product_uom)
         if float_compare(qty_available, 0.0, precision_digits=precision) > 0:
