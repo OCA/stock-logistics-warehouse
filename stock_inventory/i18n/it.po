@@ -99,6 +99,11 @@ msgid "Created on"
 msgstr ""
 
 #. module: stock_inventory
+#: model:ir.model.fields,field_description:stock_inventory.field_stock_quant__current_inventory_id
+msgid "Current Inventory"
+msgstr ""
+
+#. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__date
 msgid "Date"
 msgstr ""
