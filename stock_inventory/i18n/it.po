@@ -108,6 +108,11 @@ msgid "Created on"
 msgstr "Creato il"
 
 #. module: stock_inventory
+#: model:ir.model.fields,field_description:stock_inventory.field_stock_quant__current_inventory_id
+msgid "Current Inventory"
+msgstr ""
+
+#. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__date
 msgid "Date"
 msgstr "Data"
@@ -394,8 +399,8 @@ msgid ""
 "There's already an Adjustment in Process using one requested Location: "
 "%(names)s. Blocking adjustments: %(blocking_names)s"
 msgstr ""
-"C'è già una rettifica in corso che utilizza l'ubicazione richiesta: %(names)"
-"s. Rettifiche bloccanti: %(blocking_names)s"
+"C'è già una rettifica in corso che utilizza l'ubicazione richiesta: "
+"%(names)s. Rettifiche bloccanti: %(blocking_names)s"
 
 #. module: stock_inventory
 #: model:ir.model.fields,help:stock_inventory.field_stock_inventory__owner_id
