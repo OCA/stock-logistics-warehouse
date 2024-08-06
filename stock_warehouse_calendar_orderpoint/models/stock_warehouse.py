@@ -1,7 +1,7 @@
 # Copyright 2022 Camptocamp SA
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl)
 
-from odoo import fields, models
+from odoo import api, fields, models
 
 
 class StockWarehouse(models.Model):
@@ -31,8 +31,28 @@ class StockWarehouse(models.Model):
         " Tuesday)",
     )
 
+    def get_company_from_ctx(self):
+        company = self.env.company
+        if self.env.context.get("force_wh_company"):
+            company = (
+                self.env["res.company"]
+                .browse(self.env.context["force_wh_company"])
+                .exists()
+            )
+        return company
+
     def _default_orderpoint_calendar_id(self):
-        return self.env.company.orderpoint_calendar_id
+        company = self.get_company_from_ctx()
+        return company.orderpoint_calendar_id
 
     def _default_orderpoint_on_workday_policy(self):
-        return self.env.company.orderpoint_on_workday_policy
+        company = self.get_company_from_ctx()
+        return company.orderpoint_on_workday_policy
+
+    @api.model
+    def create(self, vals):
+        # We want to propagate the company_id in the case when we create a new company
+        # and a corresponding WH is being created as a result.
+        if vals.get("company_id"):
+            self = self.with_context(force_wh_company=vals["company_id"])
+        return super().create(vals)
