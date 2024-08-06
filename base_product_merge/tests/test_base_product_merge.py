@@ -7,7 +7,7 @@ from odoo.tests.common import TransactionCase
 class TestBaseProductMerge(TransactionCase):
     @classmethod
     def setUpClass(cls):
-        super(TestBaseProductMerge, cls).setUpClass()
+        super().setUpClass()
         cls.product_model = cls.env["product.product"]
         cls.base_product_merge_model = cls.env["base.product.merge"]
 
