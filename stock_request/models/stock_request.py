@@ -137,6 +137,18 @@ class StockRequest(models.Model):
         ("name_uniq", "unique(name, company_id)", "Stock Request name must be unique")
     ]
 
+    @api.constrains("state", "product_qty")
+    def _check_qty(self):
+        for rec in self:
+            if rec.state == "draft" and rec.product_qty <= 0:
+                raise ValidationError(
+                    _("Stock Request product quantity has to be strictly positive.")
+                )
+            elif rec.state != "draft" and rec.product_qty < 0:
+                raise ValidationError(
+                    _("Stock Request product quantity cannot be negative.")
+                )
+
     @api.depends(
         "route_id",
         "product_id",

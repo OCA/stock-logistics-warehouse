@@ -206,14 +206,6 @@ class StockRequest(models.AbstractModel):
                 )
             )
 
-    @api.constrains("product_qty")
-    def _check_qty(self):
-        for rec in self:
-            if rec.product_qty <= 0:
-                raise ValidationError(
-                    _("Stock Request product quantity has to be strictly positive.")
-                )
-
     @api.onchange("warehouse_id")
     def onchange_warehouse_id(self):
         """Finds location id for changed warehouse."""
