@@ -180,10 +180,13 @@ class InventoryAdjustmentsGroup(models.Model):
         for rec in self:
             quants = rec.stock_quant_ids
             quants_to_do = quants.filtered(lambda q: q.to_do)
-            count_todo = len(quants_to_do)
+            quants_pending_to_review = quants_to_do.filtered(
+                lambda q: q.current_inventory_id.id == rec.id
+            )
+            count_pending_to_review = len(quants_pending_to_review)
             rec.count_stock_quants = len(quants)
             rec.count_stock_quants_string = "{} / {}".format(
-                count_todo, rec.count_stock_quants
+                count_pending_to_review, rec.count_stock_quants
             )
 
     @api.depends("stock_move_ids")
@@ -336,6 +339,7 @@ class InventoryAdjustmentsGroup(models.Model):
                 "to_do": True,
                 "user_id": self.responsible_id,
                 "inventory_date": self.date,
+                "current_inventory_id": self.id,
             }
         )
         return
@@ -343,11 +347,14 @@ class InventoryAdjustmentsGroup(models.Model):
     def action_state_to_done(self):
         self.ensure_one()
         self.state = "done"
-        self.stock_quant_ids.update(
+        self.stock_quant_ids.filtered(
+            lambda q: q.current_inventory_id.id == self.id
+        ).update(
             {
                 "to_do": False,
                 "user_id": False,
                 "inventory_date": False,
+                "current_inventory_id": False,
             }
         )
         return
@@ -361,11 +368,14 @@ class InventoryAdjustmentsGroup(models.Model):
     def action_state_to_draft(self):
         self.ensure_one()
         self.state = "draft"
-        self.stock_quant_ids.update(
+        self.stock_quant_ids.filtered(
+            lambda q: q.current_inventory_id.id == self.id
+        ).update(
             {
                 "to_do": False,
                 "user_id": False,
                 "inventory_date": False,
+                "current_inventory_id": False,
             }
         )
         self.stock_quant_ids = None
@@ -403,7 +413,10 @@ class InventoryAdjustmentsGroup(models.Model):
         )
         result.update(
             {
-                "domain": [("id", "in", self.stock_quant_ids.ids)],
+                "domain": [
+                    ("id", "in", self.stock_quant_ids.ids),
+                    ("current_inventory_id", "=", self.id),
+                ],
                 "search_view_id": self.env.ref("stock.quant_search_view").id,
                 "context": context,
             }
