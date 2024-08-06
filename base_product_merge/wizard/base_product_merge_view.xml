@@ -15,12 +15,12 @@
                         products from this list to avoid merging them.
                     </p>
                     <field name="ptype" invisible="1" />
-                    <group attrs="{'invisible' :[('ptype' ,'!=' ,'product.product' )]}">
+                    <group invisible="ptype != 'product.product'">
                         <group>
                             <field
                                 name="dst_product_id"
                                 domain="[('id', 'in', product_ids)]"
-                                attrs="{'required' :[('ptype' ,'=' ,'product.product' )]}"
+                                required="ptype == 'product.product'"
                                 options="{'no_create_edit': True, 'no_create': True}"
                             />
                             <field
@@ -31,14 +31,12 @@
                         </group>
                         <field name="product_ids" nolabel="1" />
                     </group>
-                    <group
-                        attrs="{'invisible' :[('ptype' ,'!=' ,'product.template' )]}"
-                    >
+                    <group invisible="ptype != 'product.template'">
                         <group>
                             <field
                                 name="dst_product_tmpl_id"
                                 domain="[('id', 'in', product_tmpl_ids)]"
-                                attrs="{'required' :[('ptype' ,'=' ,'product.template')]}"
+                                required="ptype == 'product.template'"
                                 options="{'no_create_edit': True, 'no_create': True}"
                             />
                             <field
