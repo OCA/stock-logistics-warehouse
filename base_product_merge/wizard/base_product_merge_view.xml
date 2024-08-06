@@ -1,0 +1,80 @@
+<?xml version="1.0" ?>
+<odoo>
+
+    <record model="ir.ui.view" id="view_base_product_merge_form">
+        <field name="name">base.product.merge.form</field>
+        <field name="model">base.product.merge</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Merge Products">
+                <sheet>
+                    <p class="oe_grey">
+                        The selected products will be merged together. All
+                        documents linking to one of these products will be
+                        redirected to the aggregated product. You can remove
+                        products from this list to avoid merging them.
+                    </p>
+                    <field name="ptype" invisible="1" />
+                    <group invisible="ptype != 'product.product'">
+                        <group>
+                            <field
+                                name="dst_product_id"
+                                domain="[('id', 'in', product_ids)]"
+                                required="ptype == 'product.product'"
+                                options="{'no_create_edit': True, 'no_create': True}"
+                            />
+                            <field
+                                name="merge_method"
+                                groups="base.group_no_one"
+                                required="1"
+                            />
+                        </group>
+                        <field name="product_ids" nolabel="1" />
+                    </group>
+                    <group invisible="ptype != 'product.template'">
+                        <group>
+                            <field
+                                name="dst_product_tmpl_id"
+                                domain="[('id', 'in', product_tmpl_ids)]"
+                                required="ptype == 'product.template'"
+                                options="{'no_create_edit': True, 'no_create': True}"
+                            />
+                            <field
+                                name="merge_method"
+                                groups="base.group_no_one"
+                                required="1"
+                            />
+                        </group>
+                        <field name="product_tmpl_ids" nolabel="1" />
+                    </group>
+                </sheet>
+                <footer>
+                    <button
+                        name="action_merge"
+                        string="Merge Products"
+                        class="oe_highlight"
+                        type="object"
+                    />
+                    <button special="cancel" string="Cancel" class="oe_link" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="action_product_merge" model="ir.actions.act_window">
+        <field name="name">Merge Products</field>
+        <field name="binding_model_id" ref="product.model_product_product" />
+        <field name="res_model">base.product.merge</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <record id="action_product_template_merge" model="ir.actions.act_window">
+        <field name="name">Merge Products</field>
+        <field name="binding_model_id" ref="product.model_product_template" />
+        <field name="res_model">base.product.merge</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>
