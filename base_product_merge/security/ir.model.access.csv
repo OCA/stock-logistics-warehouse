@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+base_product_merge.access_base_product_merge,access_base_product_merge,base_product_merge.model_base_product_merge,base_product_merge.res_group_merge_duplicate_product,1,1,1,1
