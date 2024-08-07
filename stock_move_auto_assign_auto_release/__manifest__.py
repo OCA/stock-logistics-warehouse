@@ -5,7 +5,7 @@
     "name": "Stock Move Auto Assign Auto Release",
     "summary": """
         Auto release moves after auto assign""",
-    "version": "16.0.1.1.1",
+    "version": "16.0.1.1.2",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV,Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
