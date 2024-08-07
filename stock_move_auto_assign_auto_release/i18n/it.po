@@ -17,6 +17,12 @@ msgstr ""
 "X-Generator: Weblate 4.17\n"
 
 #. module: stock_move_auto_assign_auto_release
+#: code:addons/stock_move_auto_assign_auto_release/models/stock_picking.py:0
+#, python-format
+msgid "Auto release available to promise %(name)s"
+msgstr ""
+
+#. module: stock_move_auto_assign_auto_release
 #: model:ir.model.fields,field_description:stock_move_auto_assign_auto_release.field_product_product__display_name
 #: model:ir.model.fields,field_description:stock_move_auto_assign_auto_release.field_stock_move__display_name
 #: model:ir.model.fields,field_description:stock_move_auto_assign_auto_release.field_stock_picking__display_name
