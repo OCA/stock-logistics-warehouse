@@ -1,4 +1,5 @@
 # Copyright 2022 ACSONE SA/NV
+# Copyright 2024 Michael Tietz (MT Software) <mtietz@mt-software.de>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo import _, api, fields, models
@@ -67,6 +68,6 @@ class StockMove(models.Model):
         )
         job_options.setdefault("identity_key", identity_exact)
         delayable = product.delayable(**job_options)
-        release_job = delayable.moves_auto_release()
+        release_job = delayable.pickings_auto_release()
         job.on_done(release_job)
         return job

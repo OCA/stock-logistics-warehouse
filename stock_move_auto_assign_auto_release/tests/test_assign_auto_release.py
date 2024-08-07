@@ -1,4 +1,5 @@
 # Copyright 2022 ACSONE SA/NV
+# Copyright 2024 Michael Tietz (MT Software) <mtietz@mt-software.de>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 from datetime import datetime
 
@@ -82,7 +83,7 @@ class TestAssignAutoRelease(PromiseReleaseCommonCase):
         move.move_line_ids.location_dest_id = self.loc_bin1.id
         move._action_done()
 
-    def test_product_moves_auto_release(self):
+    def test_product_pickings_auto_release(self):
         """Test job method, update qty available and launch auto release on
         the product"""
         self.assertEqual(1, len(self.unreleased_move))
@@ -90,7 +91,13 @@ class TestAssignAutoRelease(PromiseReleaseCommonCase):
         self.assertEqual(5, self.picking.move_lines.product_qty)
         # put stock in Stock/Shelf 1, the move has a source location in Stock
         self._update_qty_in_location(self.loc_bin1, self.product1, 100)
-        self.product1.moves_auto_release()
+        with trap_jobs() as trap:
+            self.product1.pickings_auto_release()
+            job = self._get_job_for_method(
+                trap.enqueued_jobs,
+                self.unreleased_move.picking_id.auto_release_available_to_promise,
+            )
+            job.perform()
         self.assertFalse(self.unreleased_move.need_release)
         self.assertEqual(1, len(self.picking.move_lines))
         self.assertEqual(10, self.picking.move_lines.product_qty)
@@ -115,7 +122,7 @@ class TestAssignAutoRelease(PromiseReleaseCommonCase):
             )
             # and a second one to auto release
             trap.assert_enqueued_job(
-                self.product1.moves_auto_release,
+                self.product1.pickings_auto_release,
                 args=(),
                 kwargs={},
                 properties=dict(
@@ -127,7 +134,7 @@ class TestAssignAutoRelease(PromiseReleaseCommonCase):
                 trap.enqueued_jobs, self.product1.moves_auto_assign
             )
             job2 = self._get_job_for_method(
-                trap.enqueued_jobs, self.product1.moves_auto_release
+                trap.enqueued_jobs, self.product1.pickings_auto_release
             )
             self.assertIn(job1, job2.depends_on)
 
@@ -166,3 +173,54 @@ class TestAssignAutoRelease(PromiseReleaseCommonCase):
         for domain in NOT_RELEASABLE_DOMAINS:
             self.assertIn(move_released, self.env["stock.move"].search(domain))
             self.assertNotIn(move_not_released, self.env["stock.move"].search(domain))
+
+    def test_picking_policy_one_async_receive(self):
+        self.shipping.action_cancel()
+        self.picking.action_cancel()
+        shipping = self._out_picking(
+            self._create_picking_chain(
+                self.wh,
+                [(self.product1, 10), (self.product2, 10)],
+                date=datetime(2019, 9, 2, 16, 0),
+            )
+        )
+        shipping.release_policy = "one"
+        shipping.move_type = "one"
+        self.assertTrue(
+            all(
+                move.need_release and not move.release_ready
+                for move in shipping.move_lines
+            )
+        )
+        with trap_jobs() as trap:
+            self._receive_product(self.product1, 100)
+            shipping.invalidate_cache()
+            shipping.move_lines.invalidate_cache()
+            jobs = trap.enqueued_jobs
+        with trap_jobs() as trap:
+            for job in jobs:
+                job.perform()
+            job = self._get_job_for_method(
+                trap.enqueued_jobs, shipping.auto_release_available_to_promise
+            )
+            self.assertFalse(job)
+        with trap_jobs() as trap:
+            self._receive_product(self.product2, 100)
+            shipping.invalidate_cache()
+            shipping.move_lines.invalidate_cache()
+            jobs = trap.enqueued_jobs
+        with trap_jobs() as trap:
+            for job in jobs:
+                job.perform()
+            job = self._get_job_for_method(
+                trap.enqueued_jobs, shipping.auto_release_available_to_promise
+            )
+            job.perform()
+        move_product1 = shipping.move_lines.filtered(
+            lambda m: m.product_id == self.product1
+        )
+        move_product2 = shipping.move_lines - move_product1
+        self.assertFalse(move_product2.release_ready)
+        self.assertFalse(move_product2.need_release)
+        self.assertFalse(move_product1.need_release)
+        self.assertFalse(move_product1.release_ready)
