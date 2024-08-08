@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 ForgeFlow S.L. (https://www.forgeflow.com)
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0) -->
+<odoo>
+    <record id="view_stock_request_order_form_inherit_bom" model="ir.ui.view">
+        <field name="name">stock.request.order.form.inherit.bom</field>
+        <field name="model">stock.request.order</field>
+        <field name="inherit_id" ref="stock_request.stock_request_order_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='picking_policy']" position="after">
+                <field name="product_bom_id" />
+                <field
+                    name="quantity_bom"
+                    attrs="{'invisible': [('product_bom_id', '=', False)]}"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>
