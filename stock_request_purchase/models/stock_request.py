@@ -42,10 +42,11 @@ class StockRequest(models.Model):
     def action_cancel(self):
         """Propagate the cancellation to the generated purchase orders."""
         res = super().action_cancel()
-        self.sudo().purchase_ids.filtered(
-            lambda x: x.state not in ("purchase", "done", "cancel")
-            and x.stock_request_ids == self
-        ).button_cancel()
+        if not self.env.context.get("skip_cancel_po_from_stock_request"):
+            self.sudo().purchase_ids.filtered(
+                lambda x: x.state not in ("purchase", "done", "cancel")
+                and x.stock_request_ids == self
+            ).button_cancel()
         return res
 
     def action_view_purchase(self):
