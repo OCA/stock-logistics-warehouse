@@ -1,0 +1,138 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* base_product_merge
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#. module: base_product_merge
+#: model_terms:ir.ui.view,arch_db:base_product_merge.view_base_product_merge_form
+msgid "Cancel"
+msgstr ""
+
+#. module: base_product_merge
+#: model:ir.model.fields,field_description:base_product_merge.field_base_product_merge__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: base_product_merge
+#: model:ir.model.fields,field_description:base_product_merge.field_base_product_merge__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: base_product_merge
+#: model:ir.model.fields,field_description:base_product_merge.field_base_product_merge__dst_product_id
+#: model:ir.model.fields,field_description:base_product_merge.field_base_product_merge__dst_product_tmpl_id
+msgid "Destination product"
+msgstr ""
+
+#. module: base_product_merge
+#: model:ir.model.fields,field_description:base_product_merge.field_base_product_merge__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: base_product_merge
+#. odoo-python
+#: code:addons/base_product_merge/wizard/base_product_merge.py:0
+#, python-format
+msgid "Error occurred while merging products."
+msgstr ""
+
+#. module: base_product_merge
+#: model:ir.model.fields,field_description:base_product_merge.field_base_product_merge__id
+msgid "ID"
+msgstr ""
+
+#. module: base_product_merge
+#: model:ir.model.fields,field_description:base_product_merge.field_base_product_merge____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: base_product_merge
+#: model:ir.model.fields,field_description:base_product_merge.field_base_product_merge__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: base_product_merge
+#: model:ir.model.fields,field_description:base_product_merge.field_base_product_merge__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: base_product_merge
+#: model:ir.model.fields,field_description:base_product_merge.field_base_product_merge__merge_method
+msgid "Merge Method"
+msgstr ""
+
+#. module: base_product_merge
+#: model:ir.actions.act_window,name:base_product_merge.action_product_merge
+#: model:ir.actions.act_window,name:base_product_merge.action_product_template_merge
+#: model_terms:ir.ui.view,arch_db:base_product_merge.view_base_product_merge_form
+msgid "Merge Products"
+msgstr ""
+
+#. module: base_product_merge
+#: model:res.groups,name:base_product_merge.res_group_merge_duplicate_product
+msgid "Merge duplicate products"
+msgstr ""
+
+#. module: base_product_merge
+#: model:ir.model,name:base_product_merge.model_base_product_merge
+msgid "Merges two products"
+msgstr ""
+
+#. module: base_product_merge
+#: model:ir.model.fields.selection,name:base_product_merge.selection__base_product_merge__merge_method__orm
+msgid "ORM"
+msgstr ""
+
+#. module: base_product_merge
+#: model:ir.model.fields.selection,name:base_product_merge.selection__base_product_merge__ptype__product_product
+msgid "Product"
+msgstr ""
+
+#. module: base_product_merge
+#: model:ir.model.fields,field_description:base_product_merge.field_base_product_merge__product_ids
+#: model:ir.model.fields,field_description:base_product_merge.field_base_product_merge__product_tmpl_ids
+msgid "Products to merge"
+msgstr ""
+
+#. module: base_product_merge
+#: model:ir.model.fields,field_description:base_product_merge.field_base_product_merge__ptype
+msgid "Ptype"
+msgstr ""
+
+#. module: base_product_merge
+#: model:ir.model.fields.selection,name:base_product_merge.selection__base_product_merge__merge_method__sql
+msgid "SQL"
+msgstr ""
+
+#. module: base_product_merge
+#: model:ir.model.fields.selection,name:base_product_merge.selection__base_product_merge__ptype__product_template
+msgid "Template"
+msgstr ""
+
+#. module: base_product_merge
+#: model_terms:ir.ui.view,arch_db:base_product_merge.view_base_product_merge_form
+msgid ""
+"The selected products will be merged together. All\n"
+"                        documents linking to one of these products will be\n"
+"                        redirected to the aggregated product. You can remove\n"
+"                        products from this list to avoid merging them."
+msgstr ""
+
+#. module: base_product_merge
+#. odoo-python
+#: code:addons/base_product_merge/wizard/base_product_merge.py:0
+#: code:addons/base_product_merge/wizard/base_product_merge.py:0
+#, python-format
+msgid "You cannot merge product to it self."
+msgstr ""
