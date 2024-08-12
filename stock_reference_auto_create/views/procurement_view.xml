@@ -8,14 +8,11 @@
             <field name="group_propagation_option" position="after">
                 <field
                     name="auto_create_group"
-                    attrs="{'invisible':[('group_propagation_option','!=','propagate')]}"
+                    invisible="group_propagation_option != 'propagate'"
                 />
             </field>
             <field name="auto" position="after">
-                <field
-                    name="auto_create_group"
-                    attrs="{'invisible':[('action','!=','push')]}"
-                />
+                <field name="auto_create_group" invisible="action != 'push'" />
             </field>
         </field>
     </record>
