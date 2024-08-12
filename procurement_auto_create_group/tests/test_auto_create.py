@@ -161,7 +161,7 @@ class TestProcurementAutoCreateGroup(TransactionCase):
             }
         )
         picking.action_confirm()
-        picking.move_ids.write({"quantity_done": 1.0})
+        picking.move_ids.write({"quantity": 1.0})
         picking.button_validate()
 
     def test_01_pull_push_no_auto_create_group(self):
