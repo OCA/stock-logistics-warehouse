@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 Matt Taylor
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="stock_valuation_layer_lot_form" model="ir.ui.view">
+        <field name="name">stock.valuation.layer.lot.form</field>
+        <field name="model">stock.valuation.layer</field>
+        <field name="inherit_id" ref="stock_account.stock_valuation_layer_form" />
+        <field name="arch" type="xml">
+             <xpath expr="//field[@name='product_id']" position="after">
+                <field name="lot_id" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="stock_valuation_layer_lot_tree" model="ir.ui.view">
+        <field name="name">stock.valuation.layer.lot.tree</field>
+        <field name="model">stock.valuation.layer</field>
+        <field name="inherit_id" ref="stock_account.stock_valuation_layer_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='product_id']" position="after">
+                <field name="lot_id" />
+            </xpath>
+            <xpath expr="//field[@name='value']" position="after">
+                <groupby name="lot_id">
+                    <field name="specific_ident_cost" invisible="1" />
+                    <field name="cost_method" invisible="1" />
+                    <field name="quantity_svl" invisible="1" />
+                    <button
+                        name="action_revaluation"
+                        icon="fa-plus"
+                        title="Add Manual Valuation"
+                        type="object"
+                        attrs="{'invisible':['|', ('cost_method', '!=', 'fifo'), '|', ('specific_ident_cost', '=', False), ('quantity_svl', '&lt;=', 0)]}"
+                    />
+                </groupby>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_inventory_valuation_lot_search" model="ir.ui.view">
+        <field name="name">Inventory Valuation</field>
+        <field name="model">stock.valuation.layer</field>
+        <field name="inherit_id" ref="stock_account.view_inventory_valuation_search" />
+        <field name="arch" type="xml">
+            <!-- <xpath expr="//field[@name='group_by_product_id']" position="after"> -->
+            <group position="inside">
+                <filter
+                    string='Product'
+                    name="group_by_product_id"
+                    context="{'group_by': 'product_id'}"
+                />
+                <filter
+                    string='Lot/Serial'
+                    name="group_by_lot_id"
+                    context="{'group_by': 'lot_id'}"
+                />
+            <!-- </xpath> -->
+            </group>
+        </field>
+    </record>
+</odoo>
