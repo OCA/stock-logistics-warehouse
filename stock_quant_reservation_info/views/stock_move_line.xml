@@ -15,7 +15,7 @@
                     attrs="{'invisible': [('picking_id', '=', False)]}"
                 />
                 <field name="origin" />
-                <field name="product_uom_qty" />
+                <field name="reserved_uom_qty" />
             </tree>
         </field>
     </record>
