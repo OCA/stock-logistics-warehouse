@@ -1,0 +1,57 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_quant_reservation_info
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2024-07-29 10:58+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.6.2\n"
+
+#. module: stock_quant_reservation_info
+#: model:ir.model,name:stock_quant_reservation_info.model_stock_move_line
+msgid "Product Moves (Stock Move Line)"
+msgstr "Movimenti prodotto (riga movimento di magazzino)"
+
+#. module: stock_quant_reservation_info
+#: model:ir.model,name:stock_quant_reservation_info.model_stock_quant
+msgid "Quants"
+msgstr "Quanti"
+
+#. module: stock_quant_reservation_info
+#: model_terms:ir.ui.view,arch_db:stock_quant_reservation_info.view_stock_move_line_reserved_info_tree
+msgid "Related Document"
+msgstr "Documento correlato"
+
+#. module: stock_quant_reservation_info
+#: model_terms:ir.ui.view,arch_db:stock_quant_reservation_info.view_stock_quant_tree_reserved_quantity
+#: model_terms:ir.ui.view,arch_db:stock_quant_reservation_info.view_stock_quant_tree_reserved_quantity_editable
+msgid "Reserved Moves"
+msgstr "Movimenti prenotati"
+
+#. module: stock_quant_reservation_info
+#: code:addons/stock_quant_reservation_info/models/stock_quant.py:0
+#, python-format
+msgid "Reserved Moves for: %(product_name)s"
+msgstr ""
+
+#~ msgid "Display Name"
+#~ msgstr "Nome visualizzato"
+
+#~ msgid "ID"
+#~ msgstr "ID"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Ultima modifica il"
+
+#, python-format
+#~ msgid "Reserved moves for: "
+#~ msgstr "Movimenti prenotati per: "
