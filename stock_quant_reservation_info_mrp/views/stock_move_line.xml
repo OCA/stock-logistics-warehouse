@@ -31,6 +31,7 @@
                     name="production_id"
                     string="Manufacturing Order"
                     attrs="{'invisible': [('production_id', '=', False)]}"
+                    readonly="1"
                 />
             </field>
         </field>
