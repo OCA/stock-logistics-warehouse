@@ -1,1 +1,2 @@
-This module allows to look which pickings, manufacture orders, etc. are reserving the products and check the following source.
+This module allows to easily find out which transfers or manufacturing orders
+are reserving a product and navigate to those transfers or MOs.
