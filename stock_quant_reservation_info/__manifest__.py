@@ -1,11 +1,10 @@
-# Copyright 2019-2020 ForgeFlow S.L.
-#   (https://www.forgeflow.com)
+# Copyright 2022 ForgeFlow <http://www.forgeflow.com>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 {
     "name": "Stock Move Reservation Info",
     "summary": "Allows to see the reserved info of Products",
-    "version": "15.0.1.0.0",
+    "version": "16.0.1.0.0",
     "author": "ForgeFlow, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "category": "Generic",
