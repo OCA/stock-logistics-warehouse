@@ -38,6 +38,7 @@ msgid "Reserved Moves"
 msgstr "Movimenti prenotati"
 
 #. module: stock_quant_reservation_info
+#. odoo-python
 #: code:addons/stock_quant_reservation_info/models/stock_quant.py:0
 #, python-format
 msgid "Reserved Moves for: %(product_name)s"
