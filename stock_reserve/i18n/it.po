@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-11-30 03:53+0000\n"
-"PO-Revision-Date: 2024-06-04 15:41+0000\n"
+"PO-Revision-Date: 2024-08-17 10:58+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.17\n"
+"X-Generator: Weblate 5.6.2\n"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_product_product__reservation_count
@@ -154,7 +154,7 @@ msgstr ""
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__bom_line_id
 msgid "BoM Line"
-msgstr ""
+msgstr "Riga DiBa"
 
 #. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation__procure_method
@@ -176,11 +176,12 @@ msgstr ""
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation__byproduct_id
 msgid "By-product line that generated the move in a manufacturing order"
 msgstr ""
+"Riga sottoprodotto che ha generato il movimento in un ordine di produzione"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__byproduct_id
 msgid "By-products"
-msgstr ""
+msgstr "Sottoprodotti"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__product_uom_category_id
@@ -223,7 +224,7 @@ msgstr "Confermata"
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__consume_unbuild_id
 msgid "Consumed Disassembly Order"
-msgstr ""
+msgstr "Ordine smontaggio consumato"
 
 #. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation__product_uom_category_id
@@ -238,12 +239,12 @@ msgstr ""
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__cost_share
 msgid "Cost Share (%)"
-msgstr ""
+msgstr "Quota costo (%)"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__created_production_id
 msgid "Created Production Order"
-msgstr ""
+msgstr "Ordine di produzione creato"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__create_uid
@@ -268,6 +269,13 @@ msgid ""
 "Otherwise, this includes goods stored in any Stock Location with 'internal' "
 "type."
 msgstr ""
+"Quantità attuale di prodotti.\n"
+"In un contesto con una sola ubicazione di magazzino, include beni stoccati "
+"in questa ubicazione o qualsiasi delle sue figlie.\n"
+"In un contesto con un solo magazzino, include beni stoccati nell'ubicazione "
+"di questo magazzino o una qualsiasi delle figlie.\n"
+"Stoccate nell'ubicazione di questo negozio, o qualsiasi delle sue figlie.\n"
+"Altrimenti, include beni stoccati in qualsiasi ubicazione di tipo 'interno'."
 
 #. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation__date_deadline
@@ -356,7 +364,7 @@ msgstr "Dettagli visibili"
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__unbuild_id
 msgid "Disassembly Order"
-msgstr ""
+msgstr "Ordine smontaggio"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__display_assign_serial
@@ -376,7 +384,7 @@ msgstr "Nome visualizzato"
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__is_done
 msgid "Done"
-msgstr ""
+msgstr "Eseguito"
 
 #. module: stock_reserve
 #: model_terms:ir.ui.view,arch_db:stock_reserve.view_stock_reservation_search
@@ -391,7 +399,7 @@ msgstr "Assicura la tracciabilità di un prodotto stoccabile nel magazzino."
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__order_finished_lot_id
 msgid "Finished Lot/Serial Number"
-msgstr ""
+msgstr "Numero di lotto/serie finito"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__next_serial
@@ -414,6 +422,14 @@ msgid ""
 "Otherwise, this includes goods stored in any Stock Location with 'internal' "
 "type."
 msgstr ""
+"Quantità previsionale (calcolata come quantità disponibile - uscite + "
+"entrate)\n"
+"In un contesto con una sola ubicazione di magazzino, include i beni stoccati "
+"in questa ubicazione o qualsiasi delle sue figlie.\n"
+"In un contesto con un solo magazzino, include i beni stoccati "
+"nell'ubicazione di magazzino di questo magazzino o qualsiasi delle figlie.\n"
+"Altrimenti, include i beni stoccati in qualsiasi ubicazione di tipo "
+"'interno'."
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__forecast_expected_date
@@ -506,7 +522,7 @@ msgstr "Giustificazioni"
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__description_bom_line
 msgid "Kit"
-msgstr ""
+msgstr "Confezione"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation____last_update
@@ -536,7 +552,7 @@ msgstr "Ubicazioni"
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__manual_consumption
 msgid "Manual Consumption"
-msgstr ""
+msgstr "Consumo manuale"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__picking_type_entire_packs
@@ -597,7 +613,7 @@ msgstr "Numero di NS"
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__operation_id
 msgid "Operation To Consume"
-msgstr ""
+msgstr "Operazione da consumare"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__picking_type_id
@@ -607,7 +623,7 @@ msgstr "Tipo di operazione"
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__allowed_operation_ids
 msgid "Operations"
-msgstr ""
+msgstr "Operazioni"
 
 #. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation__partner_id
@@ -723,12 +739,12 @@ msgstr "Prodotto"
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__product_virtual_available
 msgid "Product Forecasted Quantity"
-msgstr ""
+msgstr "Quantità prodotto prevista"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__product_qty_available
 msgid "Product On Hand Quantity"
-msgstr ""
+msgstr "Quantità prodotto disponibile"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__product_tmpl_id
@@ -758,12 +774,12 @@ msgstr "Prodotto con tracciamento"
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__raw_material_production_id
 msgid "Production Order for components"
-msgstr ""
+msgstr "Ordine di produzione per componenti"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__production_id
 msgid "Production Order for finished products"
-msgstr ""
+msgstr "Ordine di produzione per prodotti finiti"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__propagate_cancel
@@ -802,7 +818,7 @@ msgstr "Quantità prenotata"
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__should_consume_qty
 msgid "Quantity To Consume"
-msgstr ""
+msgstr "Quantità da consumare"
 
 #. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation__availability
@@ -990,6 +1006,9 @@ msgid ""
 "The percentage of the final production cost for this by-product. The total "
 "of all by-products' cost share must be smaller or equal to 100."
 msgstr ""
+"La percentuale del costo finale di produzione di questo sottoprodotto. Il "
+"totale di tutte le quote di costo dei sottoprodotti deve essere inferiore o "
+"uguale a 100."
 
 #. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation__rule_id
@@ -1049,7 +1068,7 @@ msgstr "Tipo di operazione"
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__unit_factor
 msgid "Unit Factor"
-msgstr ""
+msgstr "Fattore unità"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__price_unit
@@ -1104,6 +1123,10 @@ msgid ""
 "If not activated, and any of the components consumption is edited manually "
 "on the manufacturing order, Odoo assumes manual consumption also."
 msgstr ""
+"Quando attivata, la registrazione dei consumi per il componente viene "
+"registrata solo manualmente.\n"
+"Se non attivata e ogni consumo dei componenti è modificato a mano "
+"nell'ordinei di produzione, Odoo presume anche il consumo manuale."
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__additional
@@ -1118,7 +1141,7 @@ msgstr "Se questo movimento fa parte dei movimenti tra ubicazioni"
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__workorder_id
 msgid "Work Order To Consume"
-msgstr ""
+msgstr "Ordine di lavoro da consumare"
 
 #. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation__warehouse_id
