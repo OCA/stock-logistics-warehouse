@@ -38,7 +38,7 @@ class VlmTrayCellPositionMixin(models.AbstractModel):
 
     @api.depends("tray_matrix")
     def _compute_pos(self):
-        for record in self:
+        for record in self.filtered("tray_matrix"):
             if not record.tray_matrix["selected"]:
                 continue
             record.update(
