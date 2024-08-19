@@ -131,6 +131,7 @@ class StockLocation(models.Model):
         action["context"] = dict(
             self.env.context,
             vlm_inventory_mode=True,
+            default_location_id=self.id,
         )
         view_id = self.env.ref("stock_vlm_mgmt.view_stock_quant_inventory_tree").id
         action.update(
