@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-11-30 23:41+0000\n"
+"PO-Revision-Date: 2024-08-22 10:06+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.17\n"
+"X-Generator: Weblate 5.6.2\n"
 
 #. module: stock_picking_product_interchangeable
 #: model:ir.model.fields,field_description:stock_picking_product_interchangeable.field_stock_picking__available_pass_interchangeable
@@ -65,7 +65,7 @@ msgstr "Pass intercambiabile"
 #. module: stock_picking_product_interchangeable
 #: model:ir.model,name:stock_picking_product_interchangeable.model_stock_picking_type
 msgid "Picking Type"
-msgstr "Tipologia prelievo"
+msgstr "Tipo prelievo"
 
 #. module: stock_picking_product_interchangeable
 #: model:product.template,name:stock_picking_product_interchangeable.product_template_plate
