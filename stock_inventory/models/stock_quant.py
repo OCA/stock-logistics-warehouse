@@ -60,7 +60,7 @@ class StockQuant(models.Model):
         return res
 
     def _get_inventory_fields_write(self):
-        return super()._get_inventory_fields_write() + ["to_do"]
+        return super()._get_inventory_fields_write() + ["to_do", "current_inventory_id"]
 
     @api.model_create_multi
     def create(self, vals_list):
