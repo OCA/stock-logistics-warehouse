@@ -21,6 +21,12 @@ class StockQuant(models.Model):
         )
         return action
 
+    @api.model
+    def _get_inventory_fields_create(self):
+        fields = super()._get_inventory_fields_create()
+        fields.extend(["vlm_quant_ids"])
+        return fields
+
 
 class StockQuantVlm(models.Model):
     _name = "stock.quant.vlm"
