@@ -8,9 +8,8 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-09-15 08:37+0000\n"
 "PO-Revision-Date: 2020-09-15 08:37+0000\n"
-"Last-Translator: Niklas Tom Hucke\n"
+"Last-Translator: \n"
 "Language-Team: \n"
-"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -19,62 +18,62 @@ msgstr ""
 #. module: partner_location_auto_create
 #: model:ir.model,name:partner_location_auto_create.model_res_company
 msgid "Companies"
-msgstr "Unternehmen"
+msgstr ""
 
 #. module: partner_location_auto_create
 #: model:ir.model,name:partner_location_auto_create.model_res_partner
 msgid "Contact"
-msgstr "Kontakt"
+msgstr ""
 
 #. module: partner_location_auto_create
 #: model:ir.model.fields,field_description:partner_location_auto_create.field_res_company__default_customer_location
 msgid "Default Customer Location"
-msgstr "Standard Kundenstandort"
+msgstr ""
 
 #. module: partner_location_auto_create
 #: model:ir.model.fields,field_description:partner_location_auto_create.field_res_company__default_supplier_location
 msgid "Default Supplier Location"
-msgstr "Standard Lieferantenstandort"
+msgstr ""
 
 #. module: partner_location_auto_create
 #: model:ir.model,name:partner_location_auto_create.model_stock_location
 msgid "Inventory Locations"
-msgstr "Inventar-Standorte"
+msgstr ""
 
 #. module: partner_location_auto_create
 #: model:ir.model.fields,field_description:partner_location_auto_create.field_res_partner__location_ids
 #: model:ir.model.fields,field_description:partner_location_auto_create.field_res_users__location_ids
 #: model_terms:ir.ui.view,arch_db:partner_location_auto_create.view_partner_form
 msgid "Locations"
-msgstr "Standorte"
+msgstr ""
 
 #. module: partner_location_auto_create
 #: model:ir.model.fields,field_description:partner_location_auto_create.field_res_partner__locations_count
 #: model:ir.model.fields,field_description:partner_location_auto_create.field_res_users__locations_count
 msgid "Locations Count"
-msgstr "Anzahl Standorte"
+msgstr ""
 
 #. module: partner_location_auto_create
 #: model_terms:ir.ui.view,arch_db:partner_location_auto_create.view_company_form
 msgid "Logistics"
-msgstr "Logistik"
+msgstr ""
 
 #. module: partner_location_auto_create
 #: model:ir.model.fields,field_description:partner_location_auto_create.field_stock_location__main_partner_location
 msgid "Main Partner Location"
-msgstr "Haupt Standort"
+msgstr ""
 
 #. module: partner_location_auto_create
 #: model:ir.model.fields,field_description:partner_location_auto_create.field_stock_location__partner_id
 msgid "Owner"
-msgstr "Eigentümer"
+msgstr ""
 
 #. module: partner_location_auto_create
 #: model:ir.model.fields,help:partner_location_auto_create.field_stock_location__partner_id
 msgid "Owner of the location if not internal"
-msgstr "Externer Eigentümer des Standorts"
+msgstr ""
 
 #. module: partner_location_auto_create
 #: model:ir.model.fields,help:partner_location_auto_create.field_stock_location__main_partner_location
 msgid "The root location for a partner's location for a specific type."
-msgstr "Der Hauptstandort für einen Standort eines bestimmten Typen"
+msgstr ""

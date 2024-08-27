@@ -1,18 +1,18 @@
-<?xml version="1.0" ?>
-<openerp>
-    <data>
-
-        <record id="view_company_form" model="ir.ui.view">
-            <field name="name">Company Form Default Stock Locations</field>
-            <field name="model">res.company</field>
-            <field name="inherit_id" ref="procurement.mrp_company" />
-            <field name="arch" type="xml">
-                <group name="logistics_grp" position="inside">
-                    <field name="default_customer_location" />
-                    <field name="default_supplier_location" />
-                </group>
-            </field>
-        </record>
-
-    </data>
-</openerp>
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_company_form" model="ir.ui.view">
+        <field name="name">Company Form Default Stock Locations</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//sheet/notebook" position="inside">
+                <page string="Logistics">
+                    <group>
+                        <field name="default_customer_location" />
+                        <field name="default_supplier_location" />
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

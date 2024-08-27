@@ -19,7 +19,11 @@
 #
 ##############################################################################
 
-from openerp import api, fields, models
+import logging
+
+from odoo import fields, models
+
+_logger = logging.getLogger(__name__)
 
 
 class ResCompany(models.Model):
@@ -37,13 +41,13 @@ class ResCompany(models.Model):
         default=lambda self: self.env.ref("stock.stock_location_suppliers"),
     )
 
-    @api.multi
     def get_default_location(self, usage):
-        "Return the company's default location related to a usage type"
+        """Return the company's default location related to a usage type"""
         self.ensure_one()
-
-        return (
-            self.default_customer_location
-            if usage == "customer"
-            else self.default_supplier_location
-        )
+        if self.id:
+            return (
+                self.default_customer_location
+                if usage == "customer"
+                else self.default_supplier_location
+            )
+        return None

@@ -21,21 +21,23 @@
 
 {
     "name": "Partner Location Auto Create",
-    "version": "0.1",
+    "version": "13.0.1.0.4",
     "author": "Savoir-faire Linux,Odoo Community Association (OCA)",
     "category": "Warehouse",
     "license": "AGPL-3",
     "complexity": "normal",
     "images": [],
     "website": "https://github.com/OCA/stock-logistics-warehouse",
-    "depends": ["sale_stock",],
+    "depends": ["stock", "sale_stock"],
     "demo": [],
     "data": [
         "views/res_partner_view.xml",
         "views/res_company_view.xml",
         "views/stock_location_view.xml",
+        "views/purchase_order_view.xml",
+        "views/sale_order_view.xml",
     ],
     "test": [],
     "auto_install": False,
-    "installable": False,
+    "installable": True,
 }

@@ -19,23 +19,37 @@
 #
 ##############################################################################
 
-from openerp import _, api, fields, models
+from odoo import _, api, fields, models
 
 
 class ResPartner(models.Model):
     _inherit = "res.partner"
 
-    locations_count = fields.Integer(compute="_compute_locations_count", store=False)
+    locations_count = fields.Integer(
+        compute="_compute_locations_count", store=False, default=0
+    )
 
     location_ids = fields.One2many("stock.location", "partner_id", string="Locations")
 
-    @api.one
     @api.depends("location_ids")
     def _compute_locations_count(self):
         self.locations_count = len(self.location_ids)
 
-    @api.multi
+    @api.model
+    def default_get(self, fields):
+        res = super(ResPartner, self).default_get(fields)
+        if "company_id" in fields:
+            res["company_id"] = self.env.user.company_id.id
+
+        res["customer_rank"] = 1
+        # Update: not all partners must be suppliers by default
+        # (only partners created from vendors list view,
+        # rfq form views ...)
+
+        return res
+
     def button_locations(self):
+        """Return ir.actions.act_window to show related locations of the customer"""
         self.ensure_one()
 
         res = {
@@ -54,49 +68,63 @@ class ResPartner(models.Model):
 
         return res
 
-    @api.multi
+    # Returns location which matches usage and has main_partner_location == True
     def get_main_location(self, usage):
+        """Return main location of the partner"""
         self.ensure_one()
         return self.location_ids.filtered(
             lambda l: l.usage == usage and l.main_partner_location
         )
 
-    @api.one
+    def get_parent_location(self, usage):
+        return self.env.ref(f"stock.stock_location_{usage}s")
+
     def _create_main_partner_location(self):
-        if self.customer and self.property_stock_customer.partner_id != self:
+        """Create the main partner location.
+
+        Create a location for customers with the parent "Partner Location/Customers".
+        Create a location for vendors with the parent "Partner Location/Vendors"."""
+        # Create location for customers
+        if self.customer_rank > 0 and self.property_stock_customer.partner_id != self:
             location_customer = self.get_main_location(
                 "customer"
             ) or self._create_main_location("customer")
 
             self.write({"property_stock_customer": location_customer})
 
-        if self.supplier and self.property_stock_supplier.partner_id != self:
+        # Create location for vendors
+        if self.supplier_rank > 0 and self.property_stock_supplier.partner_id != self:
             location_supplier = self.get_main_location(
                 "supplier"
             ) or self._create_main_location("supplier")
 
             self.write({"property_stock_supplier": location_supplier})
 
-    @api.multi
     def _create_main_location(self, usage):
+        """Create stock.location for the partner"""
         self.ensure_one()
 
-        parent = self.get_main_location(usage) or self.company_id.get_default_location(
-            usage
+        parent = (
+            self.get_main_location(usage)
+            or self.company_id.get_default_location(usage)
+            or self.get_parent_location(usage)
         )
 
-        return self.env["stock.location"].create(
-            {
-                "name": self.name,
-                "usage": usage,
-                "partner_id": self.id,
-                "company_id": self.company_id.id,
-                "location_id": parent.id,
-                "main_partner_location": True,
-            }
+        return (
+            self.env["stock.location"]
+            .sudo()
+            .create(
+                {
+                    "name": self.name,
+                    "usage": usage,
+                    "partner_id": self.id,
+                    "company_id": self.company_id.id,
+                    "location_id": parent.id if parent is not None else None,
+                    "main_partner_location": True,
+                }
+            )
         )
 
-    @api.one
     def _remove_locations(self):
         """
         Unlink all locations related to the partner
@@ -123,24 +151,29 @@ class ResPartner(models.Model):
         """ The first time a partner is created, a main customer
         and / or supplier location is created for this partner """
         partner = super(ResPartner, self).create(vals)
-
-        if vals.get("is_company", False):
+        if partner.is_company:
             partner._create_main_partner_location()
-
         return partner
 
-    @api.multi
     def write(self, vals):
         if vals.get("name"):
             for partner in self:
                 locations = partner.location_ids.filtered(
                     lambda l: l.name == partner.name
                 )
-                locations.write({"name": vals.get("name")})
+                locations.sudo().write({"name": vals.get("name")})
 
         res = super(ResPartner, self).write(vals)
 
-        if vals.get("is_company") or vals.get("customer") or vals.get("supplier"):
+        # Update: If the partner is changed to be a supplier
+        # (adding tag 'Lieferant') then a supplier stock location
+        # should be generated (if needed)
+        if (
+            vals.get("is_company")
+            or vals.get("customer")
+            or vals.get("supplier")
+            or vals.get("category_id")
+        ):
             for partner in self.filtered("is_company"):
                 partner._create_main_partner_location()
 

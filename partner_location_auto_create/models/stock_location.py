@@ -19,8 +19,8 @@
 #
 ##############################################################################
 
-from openerp import _, api, fields, models
-from openerp.exceptions import Warning
+from odoo import _, api, fields, models
+from odoo.exceptions import Warning
 
 
 class StockLocation(models.Model):
@@ -30,10 +30,14 @@ class StockLocation(models.Model):
         "Main Partner Location",
         help="The root location for a partner's location for a specific " "type.",
     )
+    partner_id = fields.Many2one(
+        "res.partner", "Owner", help="Owner of the location if not internal"
+    )
 
-    @api.one
+    # @api.constrains('main_partner_location', 'usage')
     @api.constrains("partner_id", "main_partner_location", "usage")
     def _check_main_location(self):
+        """Raise warning if partner already has a main location linked to it."""
         partner = self.partner_id
 
         if partner and len(partner.get_main_location(self.usage)) > 1:
@@ -42,6 +46,7 @@ class StockLocation(models.Model):
                 % (partner.name, self.usage)
             )
 
+    # @api.onchange('usage')
     @api.onchange("partner_id", "usage")
     def _onchange_parent_location(self):
         if self.partner_id:

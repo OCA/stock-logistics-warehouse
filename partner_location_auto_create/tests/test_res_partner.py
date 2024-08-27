@@ -18,8 +18,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-
-from openerp.tests.common import TransactionCase
+from odoo.tests.common import TransactionCase
 
 
 class TestPartnerLocations(TransactionCase):
@@ -30,7 +29,7 @@ class TestPartnerLocations(TransactionCase):
         self.location_model = self.env["stock.location"]
         self.company_model = self.env["res.company"]
 
-        self.company_2 = self.company_model.create({"name": "Test Company"})
+        self.company_2 = self.company_model.create({"name": "Test Company 2"})
 
         self.customer_location = self.env.ref("stock.stock_location_customers")
         self.supplier_location = self.env.ref("stock.stock_location_suppliers")
@@ -84,6 +83,7 @@ class TestPartnerLocations(TransactionCase):
                 "customer": True,
                 "supplier": True,
                 "is_company": True,
+                "company_id": self.company_2.id,
             }
         )
 
@@ -109,6 +109,9 @@ class TestPartnerLocations(TransactionCase):
         self.customer_a.refresh()
         self.supplier_b.refresh()
 
+    def test_count_locations(self):
+        self.assertEqual(self.company_2.partner_id.company_id, self.company_2)
+
     def test_partner_inactive(self):
         self._create_locations()
 
@@ -125,9 +128,7 @@ class TestPartnerLocations(TransactionCase):
         # Test with customer A
         self.assertEqual(self.customer_a.property_stock_customer.name, "Customer A")
 
-        self.customer_a.property_stock_customer.write(
-            {"name": "Location A-1",}
-        )
+        self.customer_a.property_stock_customer.write({"name": "Location A-1"})
 
         self.customer_a.write({"name": "Customer AA"})
 
@@ -273,13 +274,11 @@ class TestPartnerLocations(TransactionCase):
     def test_partner_write_is_company_false(self):
         """
         Test that locations related to a partner are unlinked
-        when a is_company is set to False
+        when an is_company is set to False
         """
         self._create_locations()
 
         self.assertEqual(len(self.customer_a.location_ids), 3)
-        self.customer_a.write(
-            {"supplier": True, "is_company": False,}
-        )
+        self.customer_a.write({"supplier": True, "is_company": False})
         self.customer_a.refresh()
         self.assertEqual(len(self.customer_a.location_ids), 0)
