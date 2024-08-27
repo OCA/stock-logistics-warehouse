@@ -130,6 +130,11 @@ msgid "Only a stock manager can validate an inventory adjustment."
 msgstr "Sólo un gestor de existencias puede validar un ajuste de inventario."
 
 #. module: stock_inventory_discrepancy
+#: model_terms:ir.ui.view,arch_db:stock_inventory_discrepancy.quant_search_last_has_over_discrepancy
+msgid "Over Discrepancy"
+msgstr ""
+
+#. module: stock_inventory_discrepancy
 #: model:ir.model.fields,help:stock_inventory_discrepancy.field_stock_location__propagate_discrepancy_threshold
 msgid "Propagate Maximum Discrepancy Rate Threshold to child locations"
 msgstr ""
@@ -162,6 +167,13 @@ msgstr ""
 "                    Está seguro de que desea continuar?"
 
 #. module: stock_inventory_discrepancy
+#. odoo-python
+#: code:addons/stock_inventory_discrepancy/models/stock_quant.py:0
+#, python-format
+msgid "This operator is not supported"
+msgstr ""
+
+#. module: stock_inventory_discrepancy
 #: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_stock_quant__discrepancy_threshold
 msgid "Threshold (%)"
 msgstr "Umbral (%)"
@@ -175,6 +187,13 @@ msgstr "Validar los ajustes de inventario"
 #: model:res.groups,name:stock_inventory_discrepancy.group_stock_inventory_validation_always
 msgid "Validate Inventory Adjustments excceded threshold"
 msgstr "Validar Ajustes de Inventario umbral superado"
+
+#. module: stock_inventory_discrepancy
+#. odoo-python
+#: code:addons/stock_inventory_discrepancy/models/stock_quant.py:0
+#, python-format
+msgid "Value should be True or False (not %s)"
+msgstr ""
 
 #. module: stock_inventory_discrepancy
 #: model:ir.model,name:stock_inventory_discrepancy.model_stock_warehouse
