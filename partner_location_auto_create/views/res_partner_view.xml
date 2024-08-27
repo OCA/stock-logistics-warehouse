@@ -1,23 +1,28 @@
-<?xml version="1.0"?>
+<?xml version="1.0" ?>
 <openerp>
     <data>
 
-        <record id="view_partner_form" model="ir.ui.view" >
+        <record id="view_partner_form" model="ir.ui.view">
             <field name="name">Partner Form Locations</field>
             <field name="model">res.partner</field>
-            <field name="inherit_id" ref="stock.view_partner_property_form"/>
+            <field name="inherit_id" ref="stock.view_partner_property_form" />
             <field name="arch" type="xml">
                 <div name="buttons" position="inside">
                     <button
-                            class="oe_inline oe_stat_button"
-                            type="object"
-                            context="{
+                        class="oe_inline oe_stat_button"
+                        type="object"
+                        context="{
                                 'default_partner_id': id,
                                 'default_usage': supplier and 'supplier' or 'customer',
                             }"
-                            name="button_locations"
-                            icon="fa-list">
-                        <field string="Locations" name="locations_count" widget="statinfo"/>
+                        name="button_locations"
+                        icon="fa-list"
+                    >
+                        <field
+                            string="Locations"
+                            name="locations_count"
+                            widget="statinfo"
+                        />
                     </button>
                 </div>
 

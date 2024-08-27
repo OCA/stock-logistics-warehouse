@@ -1,4 +1,3 @@
-# -*- encoding: utf-8 -*-
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
@@ -20,29 +19,30 @@
 #
 ##############################################################################
 
-from openerp import models, fields, api, _
+from openerp import _, api, fields, models
 from openerp.exceptions import Warning
 
 
 class StockLocation(models.Model):
-    _inherit = 'stock.location'
+    _inherit = "stock.location"
 
     main_partner_location = fields.Boolean(
-        'Main Partner Location',
-        help="The root location for a partner's location for a specific "
-        "type.")
+        "Main Partner Location",
+        help="The root location for a partner's location for a specific " "type.",
+    )
 
     @api.one
-    @api.constrains('partner_id', 'main_partner_location', 'usage')
+    @api.constrains("partner_id", "main_partner_location", "usage")
     def _check_main_location(self):
         partner = self.partner_id
 
         if partner and len(partner.get_main_location(self.usage)) > 1:
             raise Warning(
-                _('The partner %s already has a main location '
-                    'of type %s.') % (partner.name, self.usage))
+                _("The partner %s already has a main location " "of type %s.")
+                % (partner.name, self.usage)
+            )
 
-    @api.onchange('partner_id', 'usage')
+    @api.onchange("partner_id", "usage")
     def _onchange_parent_location(self):
         if self.partner_id:
             self.location_id = self.partner_id.get_main_location(self.usage).id

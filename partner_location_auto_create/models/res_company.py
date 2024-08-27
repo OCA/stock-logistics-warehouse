@@ -1,4 +1,3 @@
-# -*- encoding: utf-8 -*-
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
@@ -20,19 +19,23 @@
 #
 ##############################################################################
 
-from openerp import models, fields, api
+from openerp import api, fields, models
 
 
 class ResCompany(models.Model):
-    _inherit = 'res.company'
+    _inherit = "res.company"
 
     default_customer_location = fields.Many2one(
-        'stock.location', 'Default Customer Location',
-        default=lambda self: self.env.ref('stock.stock_location_customers'))
+        "stock.location",
+        "Default Customer Location",
+        default=lambda self: self.env.ref("stock.stock_location_customers"),
+    )
 
     default_supplier_location = fields.Many2one(
-        'stock.location', 'Default Supplier Location',
-        default=lambda self: self.env.ref('stock.stock_location_suppliers'))
+        "stock.location",
+        "Default Supplier Location",
+        default=lambda self: self.env.ref("stock.stock_location_suppliers"),
+    )
 
     @api.multi
     def get_default_location(self, usage):
@@ -40,5 +43,7 @@ class ResCompany(models.Model):
         self.ensure_one()
 
         return (
-            self.default_customer_location if usage == 'customer' else
-            self.default_supplier_location)
+            self.default_customer_location
+            if usage == "customer"
+            else self.default_supplier_location
+        )

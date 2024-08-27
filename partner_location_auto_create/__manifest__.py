@@ -1,4 +1,3 @@
-# -*- encoding: utf-8 -*-
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
@@ -21,24 +20,22 @@
 ##############################################################################
 
 {
-    'name': 'Partner Location Auto Create',
-    'version': '0.1',
-    'author': 'Savoir-faire Linux,Odoo Community Association (OCA)',
-    'category': 'Warehouse',
-    'license': 'AGPL-3',
-    'complexity': 'normal',
-    'images': [],
-    'website': 'https://github.com/OCA/stock-logistics-warehouse',
-    'depends': [
-        'sale_stock',
+    "name": "Partner Location Auto Create",
+    "version": "0.1",
+    "author": "Savoir-faire Linux,Odoo Community Association (OCA)",
+    "category": "Warehouse",
+    "license": "AGPL-3",
+    "complexity": "normal",
+    "images": [],
+    "website": "https://github.com/OCA/stock-logistics-warehouse",
+    "depends": ["sale_stock",],
+    "demo": [],
+    "data": [
+        "views/res_partner_view.xml",
+        "views/res_company_view.xml",
+        "views/stock_location_view.xml",
     ],
-    'demo': [],
-    'data': [
-        'views/res_partner_view.xml',
-        'views/res_company_view.xml',
-        'views/stock_location_view.xml',
-    ],
-    'test': [],
-    'auto_install': False,
-    'installable': False,
+    "test": [],
+    "auto_install": False,
+    "installable": False,
 }
