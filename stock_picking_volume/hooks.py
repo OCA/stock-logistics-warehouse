@@ -32,16 +32,16 @@ def pre_init_hook(cr):
             update stock_move
                 set volume =
                     CASE
-                        WHEN state in ('partially_available', 'assigned') THEN
-                            product_qty * pp.volume
+                        WHEN stock_move.state in ('partially_available', 'assigned') THEN
+                            reserved_qty_by_move.product_qty * pp.volume
                         ELSE
-                            product_uom_qty * pp.volume
+                            stock_move.product_uom_qty * pp.volume
                     END
             from reserved_qty_by_move
             join product_product pp on pp.id = reserved_qty_by_move.product_id
             where
                 stock_move.id = reserved_qty_by_move.move_id
-                and state not in ('done', 'cancel')
+                and stock_move.state not in ('done', 'cancel')
             """
         )
         _logger.info(f"{cr.rowcount} rows updated in stock_move")
