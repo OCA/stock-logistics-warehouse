@@ -11,7 +11,7 @@ _logger = logging.getLogger(__name__)
 def pre_init_hook(cr):
     """Pre init create volume column on stock.picking and stock.move"""
     if not column_exists(cr, "stock_move", "volume"):
-        create_column(cr, "stock_move", "volume", "numeric")
+        create_column(cr, "stock_move", "volume", "double precision")
         # First we compute the reserved qty by move_id
         # the reserved qty is the sum of the reserved qty of the move lines
         # linked to the move
@@ -47,7 +47,7 @@ def pre_init_hook(cr):
         _logger.info(f"{cr.rowcount} rows updated in stock_move")
 
     if not column_exists(cr, "stock_picking", "volume"):
-        create_column(cr, "stock_picking", "volume", "numeric")
+        create_column(cr, "stock_picking", "volume", "double precision")
         # we recompute the volume of the pickings not in state done or cancel
         # the volume is the sum of the volume of the moves linked to the picking
         # that are not in state done or cancel
