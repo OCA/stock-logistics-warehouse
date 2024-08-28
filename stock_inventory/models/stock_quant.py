@@ -37,7 +37,12 @@ class StockQuant(models.Model):
     )
 
     def _apply_inventory(self):
-        res = super()._apply_inventory()
+        context = dict(self.env.context)
+        context.pop("default_to_do", False)
+        context.pop("default_stock_inventory_ids", False)
+        res = super(
+            StockQuant, self.with_context(context)  # pylint: disable=W8121
+        )._apply_inventory()
         record_moves = self.env["stock.move.line"]
         adjustment = self.env["stock.inventory"].browse()
         for rec in self:
