@@ -27,6 +27,6 @@ def post_init_hook(cr, registry):
 def pre_init_hook(cr):
     """Pre init create volume column on stock.picking and stock.move"""
     if not column_exists(cr, "stock_move", "volume"):
-        create_column(cr, "stock_move", "volume", "numeric")
+        create_column(cr, "stock_move", "volume", "double precision")
     if not column_exists(cr, "stock_picking", "volume"):
-        create_column(cr, "stock_picking", "volume", "numeric")
+        create_column(cr, "stock_picking", "volume", "double precision")
