@@ -24,13 +24,15 @@ def pre_init_hook(env):
             UPDATE stock_move
                 SET volume =
                     CASE
-                        WHEN state in ('partially_available', 'assigned') THEN
-                            quantity * pp.volume
+                        WHEN stock_move.state in ('partially_available', 'assigned')
+                        THEN
+                            stock_move.quantity * pp.volume
                         ELSE
-                            product_uom_qty * pp.volume
+                            stock_move.product_uom_qty * pp.volume
                     END
             FROM product_product pp
-            WHERE state NOT IN ('done', 'cancel') and pp.id = stock_move.product_id
+            WHERE stock_move.state NOT IN ('done', 'cancel')
+            AND pp.id = stock_move.product_id
             """
         )
         _logger.info(f"{env.cr.rowcount} rows updated in stock_move")
