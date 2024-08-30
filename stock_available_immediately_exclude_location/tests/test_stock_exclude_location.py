@@ -1,10 +1,10 @@
 # Copyright 2023 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo.tests.common import TransactionCase
+from odoo.tests.common import SavepointCase
 
 
-class TestStockLogisticsWarehouse(TransactionCase):
+class TestStockLogisticsWarehouse(SavepointCase):
     @classmethod
     def setUpClass(cls) -> None:
         super().setUpClass()
@@ -56,6 +56,6 @@ class TestStockLogisticsWarehouse(TransactionCase):
         q = self.product.with_context(**ctx_loc).immediately_usable_qty
         self.assertEqual(q, 11.0)
         self.pack_location.exclude_from_immediately_usable_qty = True
-        self.product.invalidate_recordset()  # force recompute
+        self.product.invalidate_cache()  # force recompute
         q = self.product.with_context(**ctx_loc).immediately_usable_qty
         self.assertEqual(q, 7.0)
