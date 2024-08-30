@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+
+        <!-- External ID is not present: stock.view_location_form -->
+        <record id="view_location_form" model="ir.ui.view">
+            <field name="name">stock.location.form</field>
+            <field name="model">stock.location</field>
+            <field name="inherit_id" ref="stock.view_location_form" />
+            <field name="arch" type="xml">
+                <field name="usage" position="after">
+                    <field name="main_partner_location" />
+                    <field name="partner_id" />
+                </field>
+            </field>
+        </record>
+
+    </data>
+</odoo>

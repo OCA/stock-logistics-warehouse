@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_partner_form" model="ir.ui.view">
+        <field name="name">Partner Form Locations</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="stock.view_partner_stock_form" />
+        <field name="arch" type="xml">
+            <div name="button_box" position="inside">
+                <button
+                    class="oe_stat_button"
+                    type="object"
+                    context="{
+                            'default_partner_id': id,
+                        }"
+                    name="button_locations"
+                    icon="fa-list"
+                >
+                    <field
+                        string="Locations"
+                        name="locations_count"
+                        widget="statinfo"
+                    />
+                </button>
+            </div>
+
+            <field name="property_stock_customer" position="attributes">
+                <attribute name="domain">[
+                    ('partner_id', 'in', [id, False]),
+                    ('usage', '=', 'customer'),
+                    ('company_id', 'in', [company_id, False]),
+                ]</attribute>
+            </field>
+            <field name="property_stock_supplier" position="attributes">
+                <attribute name="domain">[
+                    ('partner_id', 'in', [id, False]),
+                    ('company_id', 'in', [company_id, False]),
+                ]</attribute>
+            </field>
+        </field>
+    </record>
+</odoo>

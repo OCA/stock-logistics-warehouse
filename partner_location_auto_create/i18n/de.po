@@ -1,0 +1,80 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* partner_location_auto_create
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-09-15 08:37+0000\n"
+"PO-Revision-Date: 2020-09-15 08:37+0000\n"
+"Last-Translator: Niklas Tom Hucke\n"
+"Language-Team: \n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: partner_location_auto_create
+#: model:ir.model,name:partner_location_auto_create.model_res_company
+msgid "Companies"
+msgstr "Unternehmen"
+
+#. module: partner_location_auto_create
+#: model:ir.model,name:partner_location_auto_create.model_res_partner
+msgid "Contact"
+msgstr "Kontakt"
+
+#. module: partner_location_auto_create
+#: model:ir.model.fields,field_description:partner_location_auto_create.field_res_company__default_customer_location
+msgid "Default Customer Location"
+msgstr "Standard Kundenstandort"
+
+#. module: partner_location_auto_create
+#: model:ir.model.fields,field_description:partner_location_auto_create.field_res_company__default_supplier_location
+msgid "Default Supplier Location"
+msgstr "Standard Lieferantenstandort"
+
+#. module: partner_location_auto_create
+#: model:ir.model,name:partner_location_auto_create.model_stock_location
+msgid "Inventory Locations"
+msgstr "Inventar-Standorte"
+
+#. module: partner_location_auto_create
+#: model:ir.model.fields,field_description:partner_location_auto_create.field_res_partner__location_ids
+#: model:ir.model.fields,field_description:partner_location_auto_create.field_res_users__location_ids
+#: model_terms:ir.ui.view,arch_db:partner_location_auto_create.view_partner_form
+msgid "Locations"
+msgstr "Standorte"
+
+#. module: partner_location_auto_create
+#: model:ir.model.fields,field_description:partner_location_auto_create.field_res_partner__locations_count
+#: model:ir.model.fields,field_description:partner_location_auto_create.field_res_users__locations_count
+msgid "Locations Count"
+msgstr "Anzahl Standorte"
+
+#. module: partner_location_auto_create
+#: model_terms:ir.ui.view,arch_db:partner_location_auto_create.view_company_form
+msgid "Logistics"
+msgstr "Logistik"
+
+#. module: partner_location_auto_create
+#: model:ir.model.fields,field_description:partner_location_auto_create.field_stock_location__main_partner_location
+msgid "Main Partner Location"
+msgstr "Haupt Standort"
+
+#. module: partner_location_auto_create
+#: model:ir.model.fields,field_description:partner_location_auto_create.field_stock_location__partner_id
+msgid "Owner"
+msgstr "Eigentümer"
+
+#. module: partner_location_auto_create
+#: model:ir.model.fields,help:partner_location_auto_create.field_stock_location__partner_id
+msgid "Owner of the location if not internal"
+msgstr "Externer Eigentümer des Standorts"
+
+#. module: partner_location_auto_create
+#: model:ir.model.fields,help:partner_location_auto_create.field_stock_location__main_partner_location
+msgid "The root location for a partner's location for a specific type."
+msgstr "Der Hauptstandort für einen Standort eines bestimmten Typen"
