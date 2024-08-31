@@ -1,0 +1,922 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_vlm_mgmt
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2024-09-01 11:06+0000\n"
+"Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
+"Language-Team: none\n"
+"Language: sl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
+"n%100==4 ? 2 : 3;\n"
+"X-Generator: Weblate 5.6.2\n"
+
+#. module: stock_vlm_mgmt
+#. odoo-python
+#: code:addons/stock_vlm_mgmt/models/stock_location.py:0
+#: code:addons/stock_vlm_mgmt/models/stock_location_vlm_tray.py:0
+#, python-format
+msgid "%(user)s has requested a release of the trays from Odoo"
+msgstr "%(user)s je preko Odoo zahteval sprostitev predalov"
+
+#. module: stock_vlm_mgmt
+#: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.vlm_task_action_form_view
+msgid ""
+"&amp;nbsp;\n"
+"                        <i class=\"fa fa-info-circle\"/>&amp;nbsp;"
+msgstr ""
+"&amp;nbsp;\n"
+"                        <i class=\"fa fa-info-circle\"/>&amp;nbsp;"
+
+#. module: stock_vlm_mgmt
+#: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.vlm_task_action_form_view
+msgid "<i class=\"fa fa-exclamation-triangle\"/>&amp;nbsp;"
+msgstr "<i class=\"fa fa-exclamation-triangle\"/>&amp;nbsp;"
+
+#. module: stock_vlm_mgmt
+#: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.vlm_task_action_form_view
+msgid "<i class=\"fa fa-info-circle\"/>&amp;nbsp;Splitted from&amp;nbsp;"
+msgstr "<i class=\"fa fa-info-circle\"/>&amp;nbsp;razdeljeno iz&amp;nbsp;"
+
+#. module: stock_vlm_mgmt
+#: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.svm_operation_picking_form_view
+msgid ""
+"<i class=\"fa fa-rocket\"/>&amp;nbsp;\n"
+"                    Pending VLM tasks. Proceed to complete them.&amp;nbsp;"
+msgstr ""
+"<i class=\"fa fa-rocket\"/>&amp;nbsp;\n"
+"                    Naloge VLM, ki čakajo na izvedbo. Nadaljujte, da jih "
+"dokončate.&amp;nbsp;"
+
+#. module: stock_vlm_mgmt
+#: model:ir.model,name:stock_vlm_mgmt.model_stock_vlm_task_action
+msgid "Actions to perform on vlm task exceptions"
+msgstr "Ukrepi, ki jih je treba izvesti pri izjemah opravil vlm"
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location_vlm_tray_type__active
+msgid "Active"
+msgstr "Aktivno"
+
+#. module: stock_vlm_mgmt
+#: model_terms:ir.actions.act_window,help:stock_vlm_mgmt.action_stock_location_tray_type
+msgid "Add a Location Tray Type"
+msgstr "Dodaj vrsto preala za lokacijo"
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields,help:stock_vlm_mgmt.field_stock_location__vlm_address
+msgid ""
+"An VLM normally will be behind some propietary proxy that handles several "
+"VLMs at once, so we need to set which one corresponds to this location"
+msgstr ""
+"VLM je običajno v ozadju nekega lastniškega proxy, ki obdeluje več VLM "
+"hkrati, zato moramo nastaviti, kateri ustreza tej lokaciji"
+
+#. module: stock_vlm_mgmt
+#: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.view_stock_location_tray_type_form
+#: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.view_stock_location_tray_type_search
+msgid "Archived"
+msgstr "Arhivirano"
+
+#. module: stock_vlm_mgmt
+#: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.view_location_vlm_tray_tree
+msgid "Call"
+msgstr "Pokliči"
+
+#. module: stock_vlm_mgmt
+#: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.view_location_vlm_tray_form
+msgid "Call tray"
+msgstr "Pokliči predal"
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location_vlm_tray_type__code
+msgid "Code"
+msgstr "Koda"
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location_vlm_tray_type__cols
+msgid "Cols"
+msgstr "Stolpci"
+
+#. module: stock_vlm_mgmt
+#: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.view_vlm_task_form
+msgid "Command"
+msgstr "Ukaz"
+
+#. module: stock_vlm_mgmt
+#: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.view_stock_quant_vlm_form
+msgid "Content"
+msgstr "Vsebina"
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields.selection,name:stock_vlm_mgmt.selection__stock_vlm_task__task_type__count
+msgid "Count"
+msgstr "Število"
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location_vlm_tray__create_uid
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location_vlm_tray_type__create_uid
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_quant_vlm__create_uid
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task__create_uid
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task_action__create_uid
+msgid "Created by"
+msgstr "Ustvaril"
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location_vlm_tray__create_date
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location_vlm_tray_type__create_date
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_quant_vlm__create_date
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task__create_date
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task_action__create_date
+msgid "Created on"
+msgstr "Ustvarjeno"
+
+#. module: stock_vlm_mgmt
+#: model_terms:ir.actions.act_window,help:stock_vlm_mgmt.action_stock_location_tray_type
+msgid ""
+"Define the number of rows and cols on a tray,\n"
+"                depending of the boxes size."
+msgstr ""
+"Določite število vrstic in stolpcev v predalu,\n"
+"                odvisno od velikosti polja."
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location_vlm_tray_type__depth
+msgid "Depth"
+msgstr "Globina"
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location_vlm_tray_type__depth_per_cell
+msgid "Depth Per Cell"
+msgstr "Globina na celico"
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields,help:stock_vlm_mgmt.field_stock_location_vlm_tray_type__depth
+msgid "Depth of the tray in mm"
+msgstr "Globina predala v mm"
+
+#. module: stock_vlm_mgmt
+#: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.view_stock_quant_inventory_tree
+msgid "Details"
+msgstr "Podrobnosti"
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location_vlm_tray__display_name
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location_vlm_tray_type__display_name
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_quant_vlm__display_name
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task__display_name
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task_action__display_name
+msgid "Display Name"
+msgstr "Prikazani naziv"
+
+#. module: stock_vlm_mgmt
+#: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.view_vlm_task_tree
+msgid "Do tasks"
+msgstr "Opravi naloge"
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields.selection,name:stock_vlm_mgmt.selection__stock_vlm_task__state__done
+#: model:ir.model.fields.selection,name:stock_vlm_mgmt.selection__stock_vlm_task_action__state__done
+#: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.view_vlm_task_form
+#: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.view_vlm_task_tree
+#: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.vlm_task_action_form_view
+msgid "Done"
+msgstr "Opravljeno"
+
+#. module: stock_vlm_mgmt
+#: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.vlm_task_search_view
+msgid "Done tasks"
+msgstr "Opravljene naloge"
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields.selection,name:stock_vlm_mgmt.selection__stock_vlm_task_action__state__edit
+msgid "Edit"
+msgstr "Uredi"
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields.selection,name:stock_vlm_mgmt.selection__stock_location__vlm_removal_strategy__fifo
+msgid "FIFO"
+msgstr "FIFO"
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields.selection,name:stock_vlm_mgmt.selection__stock_vlm_task__task_type__get
+msgid "Get"
+msgstr "Pridobi"
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_picking__has_pending_vlm_tasks
+msgid "Has Pending Vlm Tasks"
+msgstr "Ima čakajoča opravila Vlm"
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_move_line__has_vlm_operation
+msgid "Has Vlm Operation"
+msgstr "Vsebuje VLM operacije"
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_picking__has_vlm_operations
+msgid "Has Vlm Operations"
+msgstr "Vsebuje VLM operacije"
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_picking__has_vlm_pending_operations
+msgid "Has Vlm Pending Operations"
+msgstr "Vsebuje VLM čakajoče operacije"
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location_vlm_tray_type__height
+msgid "Height"
+msgstr "Višina"
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields,help:stock_vlm_mgmt.field_stock_location_vlm_tray_type__height
+msgid "Height of the tray in mm"
+msgstr "Višina predala v mm"
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location_vlm_tray__id
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location_vlm_tray_type__id
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_quant_vlm__id
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task__id
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task_action__id
+msgid "ID"
+msgstr "ID"
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task_action__image_512
+msgid "Image 512"
+msgstr "Slika 512"
+
+#. module: stock_vlm_mgmt
+#: model:ir.model,name:stock_vlm_mgmt.model_stock_location_vlm_tray
+msgid "Individual trays in a Vertical Lift Module"
+msgstr "Posamezni predali v VL"
+
+#. module: stock_vlm_mgmt
+#: model:ir.model,name:stock_vlm_mgmt.model_stock_location
+msgid "Inventory Locations"
+msgstr "Lokacije inventarja"
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location_vlm_tray__is_full
+msgid "Is Full"
+msgstr "Je polno"
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location__is_vlm
+msgid "Is Vlm"
+msgstr "Je VLM"
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields.selection,name:stock_vlm_mgmt.selection__stock_location__vlm_removal_strategy__lifo
+msgid "LIFO"
+msgstr "LIFO"
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location_vlm_tray____last_update
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location_vlm_tray_type____last_update
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_quant_vlm____last_update
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task____last_update
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task_action____last_update
+msgid "Last Modified on"
+msgstr "Zadnjič spremenjeno"
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location_vlm_tray__write_uid
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location_vlm_tray_type__write_uid
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_quant_vlm__write_uid
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task__write_uid
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task_action__write_uid
+msgid "Last Updated by"
+msgstr "Zadnji posodobil"
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location_vlm_tray__write_date
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location_vlm_tray_type__write_date
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_quant_vlm__write_date
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task__write_date
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task_action__write_date
+msgid "Last Updated on"
+msgstr "Zadnjič posodobljeno"
+
+#. module: stock_vlm_mgmt
+#: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.view_stock_location_tray_type_form
+msgid "Layout"
+msgstr "Postavitev"
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields.selection,name:stock_vlm_mgmt.selection__stock_location__vlm_removal_strategy__optimal
+msgid "Less carrier movements"
+msgstr "Manj premikov nosilca"
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location_vlm_tray__location_id
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_quant_vlm__location_id
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task__location_id
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task_action__location_id
+msgid "Location"
+msgstr "Lokacija"
+
+#. module: stock_vlm_mgmt
+#: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.view_stock_location_tray_type_search
+msgid "Location Tray Type"
+msgstr "Tip predala lokacije"
+
+#. module: stock_vlm_mgmt
+#: model:ir.actions.act_window,name:stock_vlm_mgmt.action_stock_location_tray_type
+#: model:ir.ui.menu,name:stock_vlm_mgmt.menu_stock_location_tray_type
+msgid "Location Tray Types"
+msgstr "Tipi predalov lokacij"
+
+#. module: stock_vlm_mgmt
+#: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.vlm_task_action_form_view
+msgid "Manual set"
+msgstr "Ročno nastavljeno"
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task__move_line_ids
+msgid "Move Line"
+msgstr "Vrstica premika"
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location_vlm_tray__name
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location_vlm_tray_type__name
+msgid "Name"
+msgstr "Naziv"
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task_action__next_vlm_task_id
+msgid "Next Vlm Task"
+msgstr "Naslednja VLM naloga"
+
+#. module: stock_vlm_mgmt
+#: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.vlm_task_action_form_view
+msgid "Next 🡺"
+msgstr "Naslednje 🡺"
+
+#. module: stock_vlm_mgmt
+#. odoo-python
+#: code:addons/stock_vlm_mgmt/models/stock_location.py:0
+#, python-format
+msgid "No implemented request connector for this vendor!"
+msgstr "Za to znamko še ni implementirana povezava!"
+
+#. module: stock_vlm_mgmt
+#. odoo-python
+#: code:addons/stock_vlm_mgmt/wizards/stock_vlm_task_action.py:0
+#, python-format
+msgid ""
+"No quantity was processed. Do you want to put the goods in another position?"
+" (you can also skip the task)"
+msgstr ""
+"Nobena količina ni bila obdelana. Ali želite blago postaviti na drugo mesto? "
+"(nalogo lahko tudi preskočite)"
+
+#. module: stock_vlm_mgmt
+#: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.view_vlm_task_form
+#: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.view_vlm_task_tree
+#: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.vlm_task_search_view
+msgid "Operation"
+msgstr "Operacija"
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields.selection,name:stock_vlm_mgmt.selection__stock_vlm_task__state__pending
+#: model:ir.model.fields.selection,name:stock_vlm_mgmt.selection__stock_vlm_task_action__state__pending
+#: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.view_vlm_task_form
+#: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.view_vlm_task_tree
+msgid "Pending"
+msgstr "Na čakanju"
+
+#. module: stock_vlm_mgmt
+#: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.vlm_task_search_view
+msgid "Pending tasks"
+msgstr "Naloge na čakanju"
+
+#. module: stock_vlm_mgmt
+#: model:ir.actions.server,name:stock_vlm_mgmt.vlm_operation_bulk_task_action
+msgid "Perform VLM Tasks"
+msgstr "Izvedi naloge VLM"
+
+#. module: stock_vlm_mgmt
+#. odoo-javascript
+#: code:addons/stock_vlm_mgmt/static/src/js/vlm_request_button/vlm_request_views.xml:0
+#: code:addons/stock_vlm_mgmt/static/src/js/vlm_request_button/vlm_request_views.xml:0
+#, python-format
+msgid "Perform tasks"
+msgstr "Izvedi naloge"
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_quant_vlm__pos_x
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task__pos_x
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task_action__pos_x
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_vlm_tray_cell_position_mixin__pos_x
+msgid "Pos X"
+msgstr "Poz X"
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_quant_vlm__pos_y
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task__pos_y
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task_action__pos_y
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_vlm_tray_cell_position_mixin__pos_y
+msgid "Pos Y"
+msgstr "Poz Y"
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task_action__previous_vlm_task_id
+msgid "Previous Vlm Task"
+msgstr "Prejšnja VLM naloga"
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_quant_vlm__product_id
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task__product_id
+#: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.vlm_quant_search_view
+msgid "Product"
+msgstr "Proizvod"
+
+#. module: stock_vlm_mgmt
+#: model:ir.model,name:stock_vlm_mgmt.model_stock_move_line
+msgid "Product Moves (Stock Move Line)"
+msgstr "Premiki proizvoda (vrstice premikov zaloge)"
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields.selection,name:stock_vlm_mgmt.selection__stock_vlm_task__task_type__put
+msgid "Put"
+msgstr "Vstavi"
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_quant_vlm__quant_id
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task__quant_id
+msgid "Quant"
+msgstr "Kvant"
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_quant_vlm__quantity
+msgid "Quantity"
+msgstr "Količina"
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task__quantity_done
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task_action__quantity_done
+msgid "Quantity Done"
+msgstr "Opravljena količina"
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task__quantity_pending
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task_action__quantity_pending
+msgid "Quantity Pending"
+msgstr "Količina v čakanju"
+
+#. module: stock_vlm_mgmt
+#. odoo-python
+#: code:addons/stock_vlm_mgmt/wizards/stock_vlm_task_action.py:0
+#, python-format
+msgid ""
+"Quantity mismatch! The quantity reported by the VLM is greater than original"
+" demand!. Please check it. If it's ok, you can fix it now and save the task "
+"manually."
+msgstr ""
+"Količinsko neskladje! Količina, ki jo je sporočil VLM, je večja od prvotnega "
+"povpraševanja!. Prosimo, preverite jo. Če je v redu, jo lahko zdaj popravite "
+"in ročno shranite nalogo."
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields,help:stock_vlm_mgmt.field_stock_move_line__vlm_pending_quantity
+msgid "Quantity pending on VLM Operations"
+msgstr "Čakajoča količina na VLM operacijah"
+
+#. module: stock_vlm_mgmt
+#: model:ir.model,name:stock_vlm_mgmt.model_stock_quant
+msgid "Quants"
+msgstr "Kvanti"
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task__reference
+#: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.view_stock_quant_vlm_form
+msgid "Reference"
+msgstr "Sklic"
+
+#. module: stock_vlm_mgmt
+#: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.view_location_form
+msgid "Release trays"
+msgstr "Sprosti predale"
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location_vlm_tray_type__rows
+msgid "Rows"
+msgstr "Vrste"
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task_action__vlm_task_id
+msgid "Selected task"
+msgstr "Izbrana naloga"
+
+#. module: stock_vlm_mgmt
+#: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.view_vlm_task_form
+msgid "Send task to the VLM"
+msgstr "Pošlji nalogo v VLM"
+
+#. module: stock_vlm_mgmt
+#: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.view_stock_location_tray_type_form
+msgid "Sizes"
+msgstr "Velikosti"
+
+#. module: stock_vlm_mgmt
+#: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.vlm_task_action_form_view
+msgid "Skip"
+msgstr "Preskoči"
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task__skipped
+#: model:ir.model.fields.selection,name:stock_vlm_mgmt.selection__stock_vlm_task_action__state__skipped
+#: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.vlm_task_action_form_view
+msgid "Skipped"
+msgstr "Preskočeno"
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task__splitted_vlm_task_id
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task_action__splitted_vlm_task_id
+msgid "Splitted Vlm Task"
+msgstr "Razdeljena VLM naloga"
+
+#. module: stock_vlm_mgmt
+#: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.vlm_task_action_form_view
+msgid "Start task"
+msgstr "Zaženi nalogo"
+
+#. module: stock_vlm_mgmt
+#: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.svm_operation_picking_form_view
+msgid "Start tasks"
+msgstr "Zaženi naloge"
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task__state
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task_action__state
+msgid "State"
+msgstr "Stanje"
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task__task_type
+msgid "Task Type"
+msgstr "Tip naloge"
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields.selection,name:stock_vlm_mgmt.selection__stock_location__vlm_vendor__test
+msgid "Test"
+msgstr "Test"
+
+#. module: stock_vlm_mgmt
+#. odoo-python
+#: code:addons/stock_vlm_mgmt/models/stock_location.py:0
+#, python-format
+msgid ""
+"The command response has been lost for unknown reasons. Did you perform the "
+"operation on the VLM? Make sure there aren't unconsistencies with the "
+"recorded data"
+msgstr ""
+"Odziv ukaza je bil iz neznanih razlogov izgubljen. Ali ste operacijo izvedli "
+"na VLM? Prepričajte se, da ni neskladij z zapisanimi podatki"
+
+#. module: stock_vlm_mgmt
+#. odoo-python
+#: code:addons/stock_vlm_mgmt/models/stock_location.py:0
+#, python-format
+msgid "The connection was refused by the VLM and couldn't be stablished."
+msgstr "VLM je zavrnil povezavo in je ni bilo mogoče vzpostaviti."
+
+#. module: stock_vlm_mgmt
+#. odoo-python
+#: code:addons/stock_vlm_mgmt/wizards/stock_vlm_task_action.py:0
+#, python-format
+msgid "The quantity reported is greater than the one set in the task!"
+msgstr "Sporočena količina je večja od količine, določene v nalogi!"
+
+#. module: stock_vlm_mgmt
+#. odoo-python
+#: code:addons/stock_vlm_mgmt/models/stock_location.py:0
+#, python-format
+msgid "The task couldn't be performed due to a timeout in the request"
+msgstr "Naloge ni bilo mogoče izvesti zaradi časovne omejitve zahteve"
+
+#. module: stock_vlm_mgmt
+#. odoo-python
+#: code:addons/stock_vlm_mgmt/models/stock_location.py:0
+#, python-format
+msgid ""
+"The task couldn't be performed. Try again or check  the vertical lift module"
+" for hardware issues"
+msgstr ""
+"Naloge ni bilo mogoče izvesti. Poskusite znova ali preverite, ali ima modul "
+"za navpično dvigalo težave s strojno opremo."
+
+#. module: stock_vlm_mgmt
+#. odoo-python
+#: code:addons/stock_vlm_mgmt/models/stock_location.py:0
+#, python-format
+msgid "The task was cancelled by the VLM"
+msgstr "VLM je nalogo preklical"
+
+#. module: stock_vlm_mgmt
+#: model:ir.model,name:stock_vlm_mgmt.model_stock_picking
+msgid "Transfer"
+msgstr "Prenos"
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_quant_vlm__tray_id
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task__tray_id
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task_action__tray_id
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_vlm_tray_cell_position_mixin__tray_id
+msgid "Tray"
+msgstr "Predal"
+
+#. module: stock_vlm_mgmt
+#: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.view_stock_location_tray_type_form
+msgid "Tray Configuration"
+msgstr "Konfiguracija predala"
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location_vlm_tray__tray_matrix
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location_vlm_tray_type__tray_matrix
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_quant_vlm__tray_matrix
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task__tray_matrix
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task_action__tray_matrix
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_vlm_tray_cell_position_mixin__tray_matrix
+msgid "Tray Matrix"
+msgstr "Matrika predala"
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location_vlm_tray__tray_type_id
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_quant_vlm__tray_type_id
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task__tray_type_id
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task_action__tray_type_id
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_vlm_tray_cell_position_mixin__tray_type_id
+msgid "Tray Type"
+msgstr "Tip predala"
+
+#. module: stock_vlm_mgmt
+#: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.view_location_vlm_tray_form
+msgid "Tray contents"
+msgstr "Vsebina predala"
+
+#. module: stock_vlm_mgmt
+#: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.view_location_vlm_tray_tree
+msgid "Tray inventory"
+msgstr "Inventar predala"
+
+#. module: stock_vlm_mgmt
+#: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.view_location_vlm_tray_form
+msgid "Tray layout"
+msgstr "Postavitev predala"
+
+#. module: stock_vlm_mgmt
+#: model:ir.model,name:stock_vlm_mgmt.model_vlm_tray_cell_position_mixin
+msgid "Tray position helpers"
+msgstr "Pomoč pri pozicijah predala"
+
+#. module: stock_vlm_mgmt
+#. odoo-javascript
+#: code:addons/stock_vlm_mgmt/static/src/js/location_tray_matrix/stock_location_tray.esm.js:0
+#, python-format
+msgid "Tray storage layout"
+msgstr "Razporeditev shranjevanja predala"
+
+#. module: stock_vlm_mgmt
+#: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.view_location_form
+#: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.vlm_quant_search_view
+#: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.vlm_task_search_view
+msgid "Trays"
+msgstr "Predali"
+
+#. module: stock_vlm_mgmt
+#: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.vlm_quant_search_view
+#: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.vlm_task_search_view
+msgid "VLM"
+msgstr "VLM"
+
+#. module: stock_vlm_mgmt
+#: model:ir.actions.act_window,name:stock_vlm_mgmt.action_vlm_task_action
+msgid "VLM Operation Action"
+msgstr "Akcija operacije VLM"
+
+#. module: stock_vlm_mgmt
+#: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.vlm_task_action_form_view
+msgid "VLM Operation action needed"
+msgstr ""
+
+#. module: stock_vlm_mgmt
+#: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.view_location_form
+msgid "VLM Structure"
+msgstr ""
+
+#. module: stock_vlm_mgmt
+#: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.svm_operation_picking_form_view
+msgid "VLM Tasks"
+msgstr ""
+
+#. module: stock_vlm_mgmt
+#: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.view_stock_location_tray_type_form
+msgid "VLM Tray Type"
+msgstr ""
+
+#. module: stock_vlm_mgmt
+#: model:ir.model,name:stock_vlm_mgmt.model_stock_location_vlm_tray_type
+msgid "VLM Tray configuration"
+msgstr ""
+
+#. module: stock_vlm_mgmt
+#: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.view_location_form
+msgid "VLM backend configuration"
+msgstr ""
+
+#. module: stock_vlm_mgmt
+#: model:ir.ui.menu,name:stock_vlm_mgmt.menu_vlm_config
+#: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.view_location_search
+msgid "Vertical Lift Module"
+msgstr ""
+
+#. module: stock_vlm_mgmt
+#: model:ir.actions.act_window,name:stock_vlm_mgmt.location_quant_form_action
+#: model:ir.actions.act_window,name:stock_vlm_mgmt.location_quant_vlm_action
+#: model:ir.ui.menu,name:stock_vlm_mgmt.menu_vlm_quant
+msgid "Vertical Lift Module Quants"
+msgstr ""
+
+#. module: stock_vlm_mgmt
+#: model:ir.actions.act_window,name:stock_vlm_mgmt.vlm_task_action
+#: model:ir.ui.menu,name:stock_vlm_mgmt.vlm_task_menu
+msgid "Vertical Lift Module Tasks"
+msgstr ""
+
+#. module: stock_vlm_mgmt
+#: model:ir.actions.act_window,name:stock_vlm_mgmt.location_vlm_tray_action
+#: model:ir.ui.menu,name:stock_vlm_mgmt.menu_vlm_config_trays
+msgid "Vertical Lift Module Trays"
+msgstr ""
+
+#. module: stock_vlm_mgmt
+#: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.view_location_search
+msgid "Vertical Lift Module locations"
+msgstr ""
+
+#. module: stock_vlm_mgmt
+#: model:ir.model,name:stock_vlm_mgmt.model_stock_quant_vlm
+msgid "Vertical Lift Module structure inside the quant"
+msgstr ""
+
+#. module: stock_vlm_mgmt
+#: model:ir.model,name:stock_vlm_mgmt.model_stock_vlm_task
+msgid "Vertical Lift Module task"
+msgstr ""
+
+#. module: stock_vlm_mgmt
+#: model:ir.actions.act_window,name:stock_vlm_mgmt.vlm_location_action
+#: model:ir.ui.menu,name:stock_vlm_mgmt.vlm_locations_menu
+msgid "Vertical Lift Modules"
+msgstr ""
+
+#. module: stock_vlm_mgmt
+#: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.view_stock_quant_tree
+#: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.view_stock_quant_tree_editable
+#: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.view_stock_quant_tree_inventory_editable
+msgid "View in VLM"
+msgstr ""
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location__vlm_address
+msgid "Vlm Address"
+msgstr ""
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location__vlm_hostname
+msgid "Vlm Hostname"
+msgstr ""
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_picking__vlm_move_line_ids
+msgid "Vlm Move Line"
+msgstr ""
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location__vlm_password
+msgid "Vlm Password"
+msgstr ""
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_picking__vlm_pending_move_line_ids
+msgid "Vlm Pending Move Line"
+msgstr ""
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_move_line__vlm_pending_quantity
+msgid "Vlm Pending Quantity"
+msgstr ""
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location__vlm_port
+msgid "Vlm Port"
+msgstr ""
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_quant__vlm_quant_ids
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task__vlm_quant_id
+msgid "Vlm Quant"
+msgstr ""
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location__vlm_removal_strategy
+msgid "Vlm Removal Strategy"
+msgstr ""
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location__vlm_sequence_id
+msgid "Vlm Sequence"
+msgstr ""
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_picking__vlm_task_ids
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task_action__vlm_task_ids
+msgid "Vlm Task"
+msgstr ""
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task_action__vlm_tasks_partial
+msgid "Vlm Tasks Partial"
+msgstr ""
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task_action__vlm_tasks_progress
+msgid "Vlm Tasks Progress"
+msgstr ""
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task_action__vlm_tasks_total
+msgid "Vlm Tasks Total"
+msgstr ""
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location__vlm_tray_ids
+msgid "Vlm Tray"
+msgstr ""
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location__vlm_user
+msgid "Vlm User"
+msgstr ""
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location__vlm_vendor
+msgid "Vlm Vendor"
+msgstr ""
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields.selection,name:stock_vlm_mgmt.selection__stock_vlm_task__state__waiting
+#: model:ir.model.fields.selection,name:stock_vlm_mgmt.selection__stock_vlm_task_action__state__waiting
+msgid "Waiting"
+msgstr ""
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task_action__warning
+msgid "Warning"
+msgstr ""
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location_vlm_tray_type__width
+msgid "Width"
+msgstr ""
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location_vlm_tray_type__width_per_cell
+msgid "Width Per Cell"
+msgstr ""
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields,help:stock_vlm_mgmt.field_stock_location_vlm_tray_type__width
+msgid "Width of the tray in mm"
+msgstr ""
+
+#. module: stock_vlm_mgmt
+#. odoo-python
+#: code:addons/stock_vlm_mgmt/models/stock_quant.py:0
+#, python-format
+msgid "You can't change the product"
+msgstr ""
+
+#. module: stock_vlm_mgmt
+#: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.view_stock_location_tray_type_form
+msgid "mm /"
+msgstr ""
+
+#. module: stock_vlm_mgmt
+#: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.view_stock_location_tray_type_form
+msgid "mm per cell"
+msgstr ""
+
+#. module: stock_vlm_mgmt
+#: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.vlm_task_action_form_view
+msgid "🡸 Previous"
+msgstr ""
