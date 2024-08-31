@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-07-28 02:58+0000\n"
-"PO-Revision-Date: 2023-04-11 12:25+0000\n"
+"PO-Revision-Date: 2024-08-31 17:06+0000\n"
 "Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: Slovenian (https://www.transifex.com/oca/teams/23907/sl/)\n"
 "Language: sl\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
 "n%100==4 ? 2 : 3;\n"
-"X-Generator: Weblate 4.14.1\n"
+"X-Generator: Weblate 5.6.2\n"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_product_product__reservation_count
@@ -220,21 +220,28 @@ msgid ""
 "Otherwise, this includes goods stored in any Stock Location with 'internal' "
 "type."
 msgstr ""
+"Trenutna količina izdelkov.\n"
+"V kontekstu z eno samo lokacijo zaloge to vključuje blago, ki je shranjeno "
+"na tej lokaciji ali kateri koli njej podrejeni lokaciji.\n"
+"V kontekstu z enim skladiščem to vključuje blago, ki je shranjeno na "
+"lokaciji zalog tega skladišča ali na kateri koli njemu podrejeni lokaciji.\n"
+"V nasprotnem primeru to vključuje blago, shranjeno v kateri koli lokaciji "
+"zaloge z vrsto „internal“."
 
 #. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation__date_deadline
 msgid "Date Promise to the customer on the top level document (SO/PO)"
-msgstr ""
+msgstr "Datum, ki obljubi stranki na dokumentu najvišje ravni (SO/PO)"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__date
 msgid "Date Scheduled"
-msgstr ""
+msgstr "Predvideni datum"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__reservation_date
 msgid "Date to Reserve"
-msgstr ""
+msgstr "Datum rezervacije"
 
 #. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation__date_priority
