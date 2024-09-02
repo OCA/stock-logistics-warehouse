@@ -1091,6 +1091,11 @@ msgid "Update quantities on SO/PO"
 msgstr "Aggiorna quantità in OV/OP"
 
 #. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__use_expiration_date
+msgid "Use Expiration Date"
+msgstr ""
+
+#. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__date_validity
 msgid "Validity Date"
 msgstr "Data validità"
@@ -1127,6 +1132,14 @@ msgstr ""
 "registrata solo manualmente.\n"
 "Se non attivata e ogni consumo dei componenti è modificato a mano "
 "nell'ordinei di produzione, Odoo presume anche il consumo manuale."
+
+#. module: stock_reserve
+#: model:ir.model.fields,help:stock_reserve.field_stock_reservation__use_expiration_date
+msgid ""
+"When this box is ticked, you have the possibility to specify dates to manage "
+"product expiration, on the product and on the corresponding lot/serial "
+"numbers"
+msgstr ""
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__additional
