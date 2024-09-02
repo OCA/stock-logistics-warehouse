@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 Xtendoo
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record model="ir.ui.view" id="view_stock_quant_tree_editable_inherit">
+        <field name="name">stock.quant.tree.editable.inherit</field>
+        <field name="model">stock.quant</field>
+        <field name="inherit_id" ref="stock.view_stock_quant_tree_editable" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='product_uom_id']" position="after">
+                <field name="expiration_date" optional="hide" />
+                <field name="use_date" optional="hide" />
+                <field name="alert_date" optional="hide" />
+            </xpath>
+        </field>
+    </record>
+</odoo>
