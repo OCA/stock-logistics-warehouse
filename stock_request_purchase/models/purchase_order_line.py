@@ -12,6 +12,21 @@ class PurchaseOrderLine(models.Model):
         comodel_name="stock.request", string="Stock Requests", copy=False
     )
 
+    def unlink(self):
+        """
+        Cancel the stock.request
+        related to the purchase order line
+        because it does not occur automatically
+        and causes inconsistency by keeping the SR state as 'In Progress' (open).
+        """
+        stock_request_to_cancel = self.env["stock.request"]
+        for purchase_line in self:
+            stock_request_to_cancel |= purchase_line.stock_request_ids
+        res = super().unlink()
+        if stock_request_to_cancel:
+            stock_request_to_cancel.action_cancel()
+        return res
+
     def _prepare_stock_moves(self, picking):
         res = super()._prepare_stock_moves(picking)
 
