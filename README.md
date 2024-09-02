@@ -62,6 +62,7 @@ addon | version | maintainers | summary
 [stock_pull_list](stock_pull_list/) | 16.0.1.0.0 | [![LoisRForgeFlow](https://github.com/LoisRForgeFlow.png?size=30px)](https://github.com/LoisRForgeFlow) | The pull list checks the stock situation and calculates needed quantities.
 [stock_putaway_product_template](stock_putaway_product_template/) | 16.0.1.1.0 | [![kevinkhao](https://github.com/kevinkhao.png?size=30px)](https://github.com/kevinkhao) [![sebastienbeau](https://github.com/sebastienbeau.png?size=30px)](https://github.com/sebastienbeau) | Add product template in putaway strategies from the product view
 [stock_quant_cost_info](stock_quant_cost_info/) | 16.0.1.0.0 |  | Shows the cost of the quants
+[stock_quant_expiration_date_tree](stock_quant_expiration_date_tree/) | 16.0.1.0.0 | [![Manuel Calero](https://github.com/Manuel Calero.png?size=30px)](https://github.com/Manuel Calero) | Allows to display expirations dates on stock quant tree view
 [stock_quant_manual_assign](stock_quant_manual_assign/) | 16.0.1.1.0 |  | Stock - Manual Quant Assignment
 [stock_quant_reservation_info](stock_quant_reservation_info/) | 16.0.1.0.1 |  | Allows to see the reserved info of Products
 [stock_quant_reservation_info_mrp](stock_quant_reservation_info_mrp/) | 16.0.1.0.0 |  | Allows to see the manufacturing order related to the reserved info of Products

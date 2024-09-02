@@ -49,6 +49,7 @@ setuptools.setup(
         'odoo-addon-stock_pull_list>=16.0dev,<16.1dev',
         'odoo-addon-stock_putaway_product_template>=16.0dev,<16.1dev',
         'odoo-addon-stock_quant_cost_info>=16.0dev,<16.1dev',
+        'odoo-addon-stock_quant_expiration_date_tree>=16.0dev,<16.1dev',
         'odoo-addon-stock_quant_manual_assign>=16.0dev,<16.1dev',
         'odoo-addon-stock_quant_reservation_info>=16.0dev,<16.1dev',
         'odoo-addon-stock_quant_reservation_info_mrp>=16.0dev,<16.1dev',
