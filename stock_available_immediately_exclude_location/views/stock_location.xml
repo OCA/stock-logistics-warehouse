@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2020 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+  <record model="ir.ui.view" id="stock_location_form_view">
+    <field name="name">stock.location.form (in
+            alc_stock_available_immediately)
+        </field>
+    <field name="model">stock.location</field>
+    <field name="inherit_id" ref="stock.view_location_form" />
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='removal_strategy_id']" position="after">
+        <field name="exclude_from_immediately_usable_qty" />
+      </xpath>
+    </field>
+  </record>
+  <record model="ir.ui.view" id="stock_location_search_view">
+    <field
+            name="name"
+        >stock.location.search (in alc_stock_available_immediately)</field>
+    <field name="model">stock.location</field>
+    <field name="inherit_id" ref="stock.view_location_search" />
+    <field name="arch" type="xml">
+      <filter name="inactive" position="after">
+        <filter
+                    string="Excluded from immediately usable quantities"
+                    name="exclude_from_immediately_usable_qty"
+                    domain="[('exclude_from_immediately_usable_qty','=',True)]"
+                />
+      </filter>
+    </field>
+  </record>
+</odoo>
