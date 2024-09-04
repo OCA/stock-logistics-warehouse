@@ -3,7 +3,7 @@
 
 {
     "name": "Exclude locations from immediately usable quantity",
-    "version": "14.0.1.0.0",
+    "version": "14.0.1.0.1",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "author": "ACSONE SA/NV,Odoo Community Association (OCA)",
     "license": "AGPL-3",
