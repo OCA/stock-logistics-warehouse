@@ -18,31 +18,17 @@ class StockInventory(models.Model):
     def _get_quants(self, locations):
         res = super(StockInventory, self)._get_quants(locations)
         if self.create_non_stocked:
-            if self.product_selection == "all":
-                product_ids = self.env["product.product"].search(
-                    [
-                        ("has_quants", "=", False),
-                        ("active", "=", True),
-                        ("type", "=", "product"),
-                    ]
-                )
-                new_quants = self.create_zero_quants(product_ids)
-                res |= new_quants
-            elif self.product_selection in ["manual", "one"]:
-                product_ids = self.product_ids.filtered(lambda x: not x.has_quants)
-                new_quants = self.create_zero_quants(product_ids)
-                res |= new_quants
+            self._check_responsible_of_inventory()
+            # If the option selected is all, this domain will be applied
+            domain = [
+                ("has_quants", "=", False),
+                ("active", "=", True),
+                ("type", "=", "product"),
+            ]
+            if self.product_selection in ["manual", "one"]:
+                domain.append(("id", "in", self.product_ids.ids))
             elif self.product_selection == "category":
-                product_ids = self.env["product.product"].search(
-                    [
-                        ("has_quants", "=", False),
-                        ("active", "=", True),
-                        ("type", "=", "product"),
-                        ("categ_id", "=", self.category_id.id),
-                    ]
-                )
-                new_quants = self.create_zero_quants(product_ids)
-                res |= new_quants
+                domain.append(("categ_id", "=", self.category_id.id))
             elif self.product_selection == "domain":
                 domain = self.product_domain
                 domain = (
@@ -52,38 +38,48 @@ class StockInventory(models.Model):
                     + domain[-1:]
                 )
                 domain = ast.literal_eval(domain)
-                product_ids = self.env["product.product"].search(domain)
-                new_quants = self.create_zero_quants(product_ids)
-                res |= new_quants
+            new_quants = self.create_zero_quants(domain)
+            res |= new_quants
         return res
 
-    def create_zero_quants(self, products):
-        new_quants = self.env["stock.quant"]
+    def create_zero_quants(self, domain):
+        products = self.env["product.product"].search_read(
+            domain, ["id", "tracking", "lot_ids"]
+        )
+        values = []
         for product in products:
             for location in self.location_ids:
                 # If the product is tracked by lot, we create a quant for each lot
                 # If the product is not tracked, we create a single quant
                 # If the product is tracked but has no lots, we don't create any quant
-                if product.tracking == "lot" and product.lot_ids:
+                if product["tracking"] in ["lot", "serial"] and product.lot_ids:
                     for lot in product.lot_ids:
-                        new_quants |= self.env["stock.quant"].create(
+                        values.append(
                             {
-                                "product_id": product.id,
+                                "product_id": product["id"],
                                 "location_id": location.id,
                                 "quantity": 0.0,
                                 "lot_id": lot.id,
-                                "user_id": self.env.uid,
                                 "last_count_date": fields.Datetime.now(),
                             }
                         )
-                elif product.tracking == "none":
-                    new_quants |= self.env["stock.quant"].create(
+                elif product["tracking"] == "none":
+                    values.append(
                         {
-                            "product_id": product.id,
+                            "product_id": product["id"],
                             "location_id": location.id,
                             "quantity": 0.0,
-                            "user_id": self.env.uid,
                             "last_count_date": fields.Datetime.now(),
                         }
                     )
+        new_quants = self.env["stock.quant"].create(values)
         return new_quants
+
+    # This method is designed to assing a responsible
+    # user to the inventory if it is not assigned
+    # this is necessary to avoid _unlink_zero_quants()
+    # method to remove quants created by this module
+    def _check_responsible_of_inventory(self):
+        for record in self:
+            if not record.responsible_id:
+                record.responsible_id = self.env.user
