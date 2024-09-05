@@ -52,14 +52,14 @@ class StockInventory(models.Model):
                 # If the product is tracked by lot, we create a quant for each lot
                 # If the product is not tracked, we create a single quant
                 # If the product is tracked but has no lots, we don't create any quant
-                if product["tracking"] in ["lot", "serial"] and product.lot_ids:
-                    for lot in product.lot_ids:
+                if product["tracking"] in ["lot", "serial"] and product["lot_ids"]:
+                    for lot in product["lot_ids"]:
                         values.append(
                             {
                                 "product_id": product["id"],
                                 "location_id": location.id,
                                 "quantity": 0.0,
-                                "lot_id": lot.id,
+                                "lot_id": lot,
                                 "last_count_date": fields.Datetime.now(),
                             }
                         )
