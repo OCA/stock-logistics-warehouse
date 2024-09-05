@@ -1,0 +1,42 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_picking_show_linked
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2024-03-19 15:37+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
+
+#. module: stock_picking_show_linked
+#: model:ir.model.fields,field_description:stock_picking_show_linked.field_stock_picking__dest_picking_count
+msgid "Dest Picking Count"
+msgstr "Conteggio destinazioni prelievo"
+
+#. module: stock_picking_show_linked
+#: model_terms:ir.ui.view,arch_db:stock_picking_show_linked.stock_picking_show_linked_form_inherit
+msgid "Dest. Transfers"
+msgstr "Destinazione trasferimento"
+
+#. module: stock_picking_show_linked
+#: model:ir.model.fields,field_description:stock_picking_show_linked.field_stock_picking__origin_picking_count
+msgid "Origin Picking Count"
+msgstr "Conteggio origini prelievo"
+
+#. module: stock_picking_show_linked
+#: model_terms:ir.ui.view,arch_db:stock_picking_show_linked.stock_picking_show_linked_form_inherit
+msgid "Origin Transfers"
+msgstr "Origine trasferimenti"
+
+#. module: stock_picking_show_linked
+#: model:ir.model,name:stock_picking_show_linked.model_stock_picking
+msgid "Transfer"
+msgstr "Trasferimento"
