@@ -1,17 +1,18 @@
 # Copyright 2024 Ivan Perez <iperez@coninpe.es>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo.tests import common
+from odoo.tests.common import TransactionCase
 
 
-class TestComputeHasQuants(common.TransactionCase):
-    def setUp(self):
-        super(TestComputeHasQuants, self).setUp()
-        self.product_template = self.env["product.template"].create(
+class TestComputeHasQuants(TransactionCase):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.product_template = cls.env["product.template"].create(
             {
                 "name": "Test Product",
                 "type": "product",
-                "categ_id": self.env.ref("product.product_category_all").id,
+                "categ_id": cls.env.ref("product.product_category_all").id,
             }
         )
 

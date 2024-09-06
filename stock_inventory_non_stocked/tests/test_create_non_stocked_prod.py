@@ -1,25 +1,26 @@
 # Copyright 2024 Ivan Perez <iperez@coninpe.es>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo.tests import common
+from odoo.tests.common import TransactionCase
 
 
-class TestCreateNonStockedProd(common.TransactionCase):
-    def setUp(self):
-        super(TestCreateNonStockedProd, self).setUp()
-        self.stock_inventory = self.env["stock.inventory"].create(
+class TestCreateNonStockedProd(TransactionCase):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.stock_inventory = cls.env["stock.inventory"].create(
             {
                 "name": "Test Inventory",
                 "location_ids": [
-                    (6, 0, [self.env.ref("stock.stock_location_stock").id])
+                    (6, 0, [cls.env.ref("stock.stock_location_stock").id])
                 ],
             }
         )
-        self.product_template = self.env["product.template"].create(
+        cls.product_template = cls.env["product.template"].create(
             {
                 "name": "Test Product",
                 "type": "product",
-                "categ_id": self.env.ref("product.product_category_all").id,
+                "categ_id": cls.env.ref("product.product_category_all").id,
             }
         )
 

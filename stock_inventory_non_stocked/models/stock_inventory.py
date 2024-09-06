@@ -3,7 +3,7 @@
 
 import ast
 
-from odoo import fields, models
+from odoo import fields, models, osv
 
 
 class StockInventory(models.Model):
@@ -18,7 +18,7 @@ class StockInventory(models.Model):
     def _get_quants(self, locations):
         res = super(StockInventory, self)._get_quants(locations)
         if self.create_non_stocked:
-            self._check_responsible_of_inventory()
+            self._assign_responsible_of_inventory()
             # If the option selected is all, this domain will be applied
             domain = [
                 ("has_quants", "=", False),
@@ -26,18 +26,25 @@ class StockInventory(models.Model):
                 ("type", "=", "product"),
             ]
             if self.product_selection in ["manual", "one"]:
-                domain.append(("id", "in", self.product_ids.ids))
-            elif self.product_selection == "category":
-                domain.append(("categ_id", "=", self.category_id.id))
-            elif self.product_selection == "domain":
-                domain = self.product_domain
-                domain = (
-                    domain[:-1]
-                    + """,('has_quants', '=', False), ("type", "=", "product"),
-                     ("active", "=", True)"""
-                    + domain[-1:]
+                domain = osv.expression.AND(
+                    [domain, [("id", "in", self.product_ids.ids)]]
                 )
-                domain = ast.literal_eval(domain)
+            elif self.product_selection == "category":
+                domain = osv.expression.AND(
+                    [domain, [("categ_id", "=", self.category_id.id)]]
+                )
+            elif self.product_selection == "domain":
+                domain = ast.literal_eval(self.product_domain)
+                domain = osv.expression.AND(
+                    [
+                        domain,
+                        [
+                            ("has_quants", "=", False),
+                            ("type", "=", "product"),
+                            ("active", "=", True),
+                        ],
+                    ]
+                )
             new_quants = self.create_zero_quants(domain)
             res |= new_quants
         return res
@@ -79,7 +86,7 @@ class StockInventory(models.Model):
     # user to the inventory if it is not assigned
     # this is necessary to avoid _unlink_zero_quants()
     # method to remove quants created by this module
-    def _check_responsible_of_inventory(self):
+    def _assign_responsible_of_inventory(self):
         for record in self:
             if not record.responsible_id:
                 record.responsible_id = self.env.user
