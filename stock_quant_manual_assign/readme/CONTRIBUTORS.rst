@@ -15,3 +15,7 @@
 * `Shine IT <https://www.openerp.cn>`_:
 
   * Tony Gu <tony@openerp.cn>
+
+* `Quartile <https://www.quartile.co>`_:
+
+  * Yoshi Tashiro
