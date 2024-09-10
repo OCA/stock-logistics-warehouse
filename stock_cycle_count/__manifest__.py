@@ -24,6 +24,7 @@
         "reports/stock_location_accuracy_report.xml",
         "reports/stock_cycle_count_report.xml",
         "security/ir.model.access.csv",
+        "security/security.xml",
     ],
     "license": "AGPL-3",
     "installable": True,
