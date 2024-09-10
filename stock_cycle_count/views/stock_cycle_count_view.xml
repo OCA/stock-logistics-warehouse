@@ -18,6 +18,7 @@
                 <field name="responsible_id" />
                 <field name="date_deadline" />
                 <field name="state" />
+                <field name="company_id" optional="hide" />
             </tree>
         </field>
     </record>
