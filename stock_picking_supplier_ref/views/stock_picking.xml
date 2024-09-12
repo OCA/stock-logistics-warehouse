@@ -9,7 +9,7 @@
             <field name="origin" position="after">
                 <field
                     name="supplier_reference"
-                    attrs="{'invisible': [('picking_type_code', '!=', 'incoming')]}"
+                    invisible="picking_type_code != 'incoming'"
                 />
             </field>
         </field>
