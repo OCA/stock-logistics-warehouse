@@ -6,7 +6,7 @@ from odoo import fields, models
 
 class StockRoute(models.Model):
 
-    _inherit = "stock.route"
+    _inherit = "stock.location.route"
 
     is_mto = fields.Boolean(
         help="Is a MTO (Make to Order) route. Check this if you want to identify"
