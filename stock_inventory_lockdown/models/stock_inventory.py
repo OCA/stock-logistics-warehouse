@@ -11,7 +11,6 @@ class StockInventory(models.Model):
 
     @api.model
     def _get_locations_open_inventories(self, locations_ids=None):
-        """IDs of locations in open exhaustive inventories, with children"""
         inventory_domain = [("state", "=", "in_progress")]
         if locations_ids:
             inventory_domain.append(("location_ids", "child_of", locations_ids))
@@ -20,7 +19,6 @@ class StockInventory(models.Model):
             # Early exit if no match found
             return []
         location_ids = inventories.mapped("location_ids")
-
         # Extend to the children Locations
         location_domain = [
             "|",
