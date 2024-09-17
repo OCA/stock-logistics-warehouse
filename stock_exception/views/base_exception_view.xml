@@ -1,0 +1,24 @@
+<odoo>
+    <record id="view_exception_rule_form_inherit" model="ir.ui.view">
+        <field name="name">exception.rule.form.inherit</field>
+        <field name="model">exception.rule</field>
+        <field name="inherit_id" ref="base_exception.view_exception_rule_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page
+                    name="method"
+                    string="Method"
+                    attrs="{'invisible': [('exception_type','!=','by_method')], 'required': [('exception_type','=','by_method')]}"
+                >
+                    <group>
+                        <field
+                            name="method"
+                            widget="selection"
+                            options="{'model': 'ir.model.methods'}"
+                        />
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
