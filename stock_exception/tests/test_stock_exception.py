@@ -21,7 +21,7 @@ class TestStockException(TransactionCase):
         cls.product_1 = cls.product_model.create(
             {
                 "name": "Test Product 1",
-                "type": "product",
+                "type": "consu",
                 "default_code": "PROD1",
                 "uom_id": cls.uom_unit.id,
             }
@@ -76,7 +76,7 @@ class TestStockException(TransactionCase):
         self.assertTrue(self.picking.ignore_exception)
         self.assertFalse(self.picking.exceptions_summary)
         self.picking.action_confirm()
-        self.assertEqual(self.picking.state, "confirmed")
+        self.assertEqual(self.picking.state, "assigned")
 
     def test02_confirm_picking_fail_by_domain(self):
         self.exception_method = self.env["exception.rule"].create(
@@ -110,4 +110,4 @@ class TestStockException(TransactionCase):
     def test_confirm_picking(self):
         self.assertEqual(self.picking.state, "draft")
         self.picking.action_confirm()
-        self.assertEqual(self.picking.state, "confirmed")
+        self.assertEqual(self.picking.state, "assigned")
