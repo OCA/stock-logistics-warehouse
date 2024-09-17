@@ -6,13 +6,10 @@ from odoo.exceptions import ValidationError
 
 
 class StockLocation(models.Model):
-    """Refuse changes during exhaustive Inventories"""
-
     _inherit = "stock.location"
 
     @api.constrains("location_id")
     def _check_inventory_location_id(self):
-        """Error if an inventory is being conducted here"""
         vals = set(self.ids) | set(self.mapped("location_id").ids)
         location_inventory_open_ids = self.env[
             "stock.inventory"
@@ -21,7 +18,6 @@ class StockLocation(models.Model):
             raise ValidationError(_("An inventory is being conducted at this location"))
 
     def unlink(self):
-        """Refuse unlink if an inventory is being conducted"""
         location_inventory_open_ids = (
             self.env["stock.inventory"].sudo()._get_locations_open_inventories(self.ids)
         )
