@@ -4,7 +4,7 @@
 {
     "name": "Stock Exception",
     "summary": "Custom exceptions on stock picking",
-    "version": "16.0.1.0.0",
+    "version": "16.0.1.1.0",
     "category": "Generic Modules/Warehouse Management",
     "author": "Ecosoft, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
@@ -15,6 +15,7 @@
         "data/stock_exception_data.xml",
         "wizard/stock_exception_confirm_view.xml",
         "views/stock_view.xml",
+        "views/base_exception_view.xml",
     ],
     "installable": True,
 }
