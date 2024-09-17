@@ -3,7 +3,7 @@
         <field name="name">Stock Exception Rules</field>
         <field name="res_model">exception.rule</field>
         <field name="view_mode">tree,form</field>
-        <field name="view_id" ref="base_exception.view_exception_rule_tree" />
+        <field name="view_id" ref="base_exception.view_exception_rule_list" />
         <field
             name="domain"
         >[('model', 'in', ['stock.picking', 'stock.move', 'stock.move.line'])]</field>
