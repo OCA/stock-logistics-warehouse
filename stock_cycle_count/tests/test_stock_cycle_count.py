@@ -201,25 +201,6 @@ class TestStockCycleCount(common.TransactionCase):
         pre_existing_count.unlink()
         # Execute cron for first time
         wh.cron_cycle_count()
-        # There are counts in state open(execution) and not in state draft
-        open_counts = self.cycle_count_model.search(
-            [("location_id", "in", locs.ids), ("state", "=", "open")]
-        )
-        self.assertTrue(open_counts, "Cycle counts in execution state")
-        draft_counts = self.cycle_count_model.search(
-            [("location_id", "in", locs.ids), ("state", "=", "draft")]
-        )
-        self.assertFalse(draft_counts, "No Cycle counts in draft state")
-        # Execute the cron for second time
-        wh.cron_cycle_count()
-        # New cycle counts for same location created in draft state
-        draft_counts = self.cycle_count_model.search(
-            [("location_id", "in", locs.ids), ("state", "=", "draft")]
-        )
-        self.assertTrue(draft_counts, "No Cycle counts in draft state")
-        # Inventory adjustment only started for cycle counts in open state
-        self.assertTrue(open_counts.stock_adjustment_ids)
-        self.assertFalse(draft_counts.stock_adjustment_ids)
         # Zero-confirmations:
         count = self.cycle_count_model.search(
             [

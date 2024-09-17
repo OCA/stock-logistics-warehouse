@@ -150,20 +150,6 @@ class StockWarehouse(models.Model):
         try:
             whs = self.search([])
             whs.action_compute_cycle_count_rules()
-            today = fields.Date.today()
-            cycle_counts = self.env["stock.cycle.count"].search(
-                [("date_deadline", "<=", today), ("state", "=", "draft")]
-            )
-            for cycle_count in cycle_counts:
-                open_cycle_counts = self.env["stock.cycle.count"].search(
-                    [
-                        ("location_id", "=", cycle_count.location_id.id),
-                        ("state", "=", "open"),
-                    ]
-                )
-                if open_cycle_counts:
-                    continue
-                cycle_count.action_create_inventory_adjustment()
         except Exception as e:
             _logger.info("Error while running stock_cycle_count cron job: %s", str(e))
             raise

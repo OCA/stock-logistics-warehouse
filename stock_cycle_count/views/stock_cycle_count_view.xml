@@ -11,6 +11,7 @@
                 decoration-muted="state == 'cancelled'"
                 decoration-info="state == 'draft'"
                 multi_edit="1"
+                default_order="date_deadline asc"
             >
                 <field name="name" />
                 <field name="location_id" />
@@ -126,6 +127,7 @@
                     domain="[('state','=', 'cancelled')]"
                     help="Cycle Counts Cancelled"
                 />
+                <separator />
                 <filter
                     name="assigned_to_user"
                     string="Assigned to me"
@@ -169,7 +171,7 @@
         <field name="view_mode">tree,form</field>
         <field
             name="context"
-        >{'search_default_planned':1,'search_default_execution':1,'search_default_date_deadline':1}</field>
+        >{'search_default_planned':1,'search_default_execution':1}</field>
     </record>
 
     <menuitem
