@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 15.0\n"
+"Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -12,6 +12,14 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: stock_change_qty_reason
+#: model_terms:ir.ui.view,arch_db:stock_change_qty_reason.view_preset_reason
+msgid ""
+"<span class=\"o_form_label\">\n"
+"                                Active\n"
+"                            </span>"
+msgstr ""
 
 #. module: stock_change_qty_reason
 #: model:ir.model.fields,field_description:stock_change_qty_reason.field_stock_quant_reason__active
@@ -63,11 +71,6 @@ msgid "Inventory Adjustment"
 msgstr ""
 
 #. module: stock_change_qty_reason
-#: model:ir.model.fields,field_description:stock_change_qty_reason.field_stock_quant_reason____last_update
-msgid "Last Modified on"
-msgstr ""
-
-#. module: stock_change_qty_reason
 #: model:ir.model.fields,field_description:stock_change_qty_reason.field_stock_quant_reason__write_uid
 msgid "Last Updated by"
 msgstr ""
@@ -112,8 +115,8 @@ msgstr ""
 #. module: stock_change_qty_reason
 #: model:ir.model.fields,field_description:stock_change_qty_reason.field_stock_move_line__reason
 #: model:ir.model.fields,field_description:stock_change_qty_reason.field_stock_quant__reason
-#: model_terms:ir.ui.view,arch_db:stock_change_qty_reason.preset_reason_view_move_line_tree
-#: model_terms:ir.ui.view,arch_db:stock_change_qty_reason.reason_stock_inventory_line_tree_reason_id
+#: model_terms:ir.ui.view,arch_db:stock_change_qty_reason.reason_view_move_line_tree
+#: model_terms:ir.ui.view,arch_db:stock_change_qty_reason.reason_view_stock_quant_tree_inventory_editable
 msgid "Reason"
 msgstr ""
 
