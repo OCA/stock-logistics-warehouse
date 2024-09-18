@@ -26,20 +26,11 @@ class StockMoveLine(models.Model):
             ]._get_locations_open_inventories(
                 [move_line.location_dest_id.id, move_line.location_id.id]
             )
-            reserved_origin_loc = move_line.location_id
-            dest_loc = move_line.location_dest_id
-            if (
-                locked_location_ids
-                and not any(
-                    [
-                        move_line.location_dest_id.usage == "inventory",
-                        move_line.location_id.usage == "inventory",
-                    ]
-                )
-                and (
-                    reserved_origin_loc in locked_location_ids
-                    or dest_loc in locked_location_ids
-                )
+            if locked_location_ids and not any(
+                [
+                    move_line.location_dest_id.usage == "inventory",
+                    move_line.location_id.usage == "inventory",
+                ]
             ):
                 location_names = locked_location_ids.mapped("complete_name")
                 raise ValidationError(
@@ -47,7 +38,7 @@ class StockMoveLine(models.Model):
                         "Inventory adjusment underway at "
                         "the following location(s):\n- %s\n"
                         "Moving products to or from these locations is "
-                        "not allowed until the inventory check is complete."
+                        "not allowed until the inventory adjustment is complete."
                     )
                     % "\n - ".join(location_names)
                 )
