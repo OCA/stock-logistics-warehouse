@@ -44,7 +44,7 @@ addon | version | maintainers | summary
 [stock_available](stock_available/) | 13.0.1.0.2 |  | Stock available to promise
 [stock_available_immediately](stock_available_immediately/) | 13.0.1.0.0 |  | Ignore planned receptions in quantity available to promise
 [stock_available_mrp](stock_available_mrp/) | 13.0.2.0.0 |  | Consider the production potential is available to promise
-[stock_available_unreserved](stock_available_unreserved/) | 13.0.1.0.1 | [![LoisRForgeFlow](https://github.com/LoisRForgeFlow.png?size=30px)](https://github.com/LoisRForgeFlow) | Quantity of stock available for immediate use
+[stock_available_unreserved](stock_available_unreserved/) | 13.0.1.0.2 | [![LoisRForgeFlow](https://github.com/LoisRForgeFlow.png?size=30px)](https://github.com/LoisRForgeFlow) | Quantity of stock available for immediate use
 [stock_change_qty_reason](stock_change_qty_reason/) | 13.0.2.0.0 |  | Stock Quantity Change Reason
 [stock_cubiscan](stock_cubiscan/) | 13.0.1.1.1 |  | Implement inteface with Cubiscan devices for packaging
 [stock_cycle_count](stock_cycle_count/) | 13.0.1.2.1 | [![LoisRForgeFlow](https://github.com/LoisRForgeFlow.png?size=30px)](https://github.com/LoisRForgeFlow) | Adds the capability to schedule cycle counts in a warehouse through different rules defined by the user.
