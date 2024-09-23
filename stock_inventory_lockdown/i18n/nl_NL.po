@@ -20,14 +20,6 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: stock_inventory_lockdown
-#: code:addons/stock_inventory_lockdown/models/stock_move.py:0
-#, python-format
-msgid ""
-"An inventory is being conducted at the following location(s):\n"
-" - %s"
-msgstr ""
-
-#. module: stock_inventory_lockdown
 #: code:addons/stock_inventory_lockdown/models/stock_location.py:0
 #, python-format
 msgid "An inventory is being conducted at this location"
@@ -35,7 +27,7 @@ msgstr ""
 
 #. module: stock_inventory_lockdown
 #: model:ir.model,name:stock_inventory_lockdown.model_stock_inventory
-msgid "Inventory"
+msgid "Inventory Adjustment Group"
 msgstr ""
 
 #. module: stock_inventory_lockdown
@@ -44,6 +36,19 @@ msgid "Inventory Locations"
 msgstr ""
 
 #. module: stock_inventory_lockdown
-#: model:ir.model,name:stock_inventory_lockdown.model_stock_move
-msgid "Stock Move"
-msgstr "Voorraadmutatie"
+#: code:addons/stock_inventory_lockdown/models/stock_move_line.py:0
+#, python-format
+msgid ""
+"Inventory adjusment underway at the following location(s):\n"
+"- %s\n"
+"Moving products to or from these locations is not allowed until the "
+"inventory adjustment is complete."
+msgstr ""
+
+#. module: stock_inventory_lockdown
+#: model:ir.model,name:stock_inventory_lockdown.model_stock_move_line
+msgid "Product Moves (Stock Move Line)"
+msgstr ""
+
+#~ msgid "Stock Move"
+#~ msgstr "Voorraadmutatie"

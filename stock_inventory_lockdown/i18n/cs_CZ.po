@@ -20,14 +20,6 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 #. module: stock_inventory_lockdown
-#: code:addons/stock_inventory_lockdown/models/stock_move.py:0
-#, fuzzy, python-format
-msgid ""
-"An inventory is being conducted at the following location(s):\n"
-" - %s"
-msgstr "Inventář se provádí na následujících místech: %s"
-
-#. module: stock_inventory_lockdown
 #: code:addons/stock_inventory_lockdown/models/stock_location.py:0
 #, python-format
 msgid "An inventory is being conducted at this location"
@@ -35,8 +27,8 @@ msgstr "Na tomto místě se provádí inventář"
 
 #. module: stock_inventory_lockdown
 #: model:ir.model,name:stock_inventory_lockdown.model_stock_inventory
-msgid "Inventory"
-msgstr "Inventář"
+msgid "Inventory Adjustment Group"
+msgstr ""
 
 #. module: stock_inventory_lockdown
 #: model:ir.model,name:stock_inventory_lockdown.model_stock_location
@@ -44,6 +36,28 @@ msgid "Inventory Locations"
 msgstr "Umístění inventáře"
 
 #. module: stock_inventory_lockdown
-#: model:ir.model,name:stock_inventory_lockdown.model_stock_move
-msgid "Stock Move"
-msgstr "Přesunout zásoby"
+#: code:addons/stock_inventory_lockdown/models/stock_move_line.py:0
+#, python-format
+msgid ""
+"Inventory adjusment underway at the following location(s):\n"
+"- %s\n"
+"Moving products to or from these locations is not allowed until the "
+"inventory adjustment is complete."
+msgstr ""
+
+#. module: stock_inventory_lockdown
+#: model:ir.model,name:stock_inventory_lockdown.model_stock_move_line
+msgid "Product Moves (Stock Move Line)"
+msgstr ""
+
+#, fuzzy, python-format
+#~ msgid ""
+#~ "An inventory is being conducted at the following location(s):\n"
+#~ " - %s"
+#~ msgstr "Inventář se provádí na následujících místech: %s"
+
+#~ msgid "Inventory"
+#~ msgstr "Inventář"
+
+#~ msgid "Stock Move"
+#~ msgstr "Přesunout zásoby"

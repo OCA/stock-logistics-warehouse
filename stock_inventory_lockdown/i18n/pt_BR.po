@@ -21,16 +21,6 @@ msgstr ""
 "X-Generator: Weblate 3.8\n"
 
 #. module: stock_inventory_lockdown
-#: code:addons/stock_inventory_lockdown/models/stock_move.py:0
-#, fuzzy, python-format
-msgid ""
-"An inventory is being conducted at the following location(s):\n"
-" - %s"
-msgstr ""
-"Um inventário está sendo realizado nos seguintes locais:\n"
-"%s"
-
-#. module: stock_inventory_lockdown
 #: code:addons/stock_inventory_lockdown/models/stock_location.py:0
 #, python-format
 msgid "An inventory is being conducted at this location"
@@ -38,8 +28,8 @@ msgstr "Um inventário está sendo realizado neste local"
 
 #. module: stock_inventory_lockdown
 #: model:ir.model,name:stock_inventory_lockdown.model_stock_inventory
-msgid "Inventory"
-msgstr "Inventário"
+msgid "Inventory Adjustment Group"
+msgstr ""
 
 #. module: stock_inventory_lockdown
 #: model:ir.model,name:stock_inventory_lockdown.model_stock_location
@@ -47,6 +37,30 @@ msgid "Inventory Locations"
 msgstr "localização do inventário"
 
 #. module: stock_inventory_lockdown
-#: model:ir.model,name:stock_inventory_lockdown.model_stock_move
-msgid "Stock Move"
-msgstr "Movimentação de estoque"
+#: code:addons/stock_inventory_lockdown/models/stock_move_line.py:0
+#, python-format
+msgid ""
+"Inventory adjusment underway at the following location(s):\n"
+"- %s\n"
+"Moving products to or from these locations is not allowed until the "
+"inventory adjustment is complete."
+msgstr ""
+
+#. module: stock_inventory_lockdown
+#: model:ir.model,name:stock_inventory_lockdown.model_stock_move_line
+msgid "Product Moves (Stock Move Line)"
+msgstr ""
+
+#, fuzzy, python-format
+#~ msgid ""
+#~ "An inventory is being conducted at the following location(s):\n"
+#~ " - %s"
+#~ msgstr ""
+#~ "Um inventário está sendo realizado nos seguintes locais:\n"
+#~ "%s"
+
+#~ msgid "Inventory"
+#~ msgstr "Inventário"
+
+#~ msgid "Stock Move"
+#~ msgstr "Movimentação de estoque"
