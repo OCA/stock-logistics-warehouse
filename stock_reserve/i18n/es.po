@@ -94,9 +94,19 @@ msgstr ""
 "Un servicio es un producto no material."
 
 #. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__account_move_ids
+msgid "Account Move"
+msgstr "Movimiento de cuenta"
+
+#. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__returned_move_ids
 msgid "All returned moves"
 msgstr "Todas las devoluciones"
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__analytic_account_line_ids
+msgid "Analytic Account Line"
+msgstr "Línea de cuenta analítica"
 
 #. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation__procure_method
@@ -712,6 +722,11 @@ msgid "Stock Rule"
 msgstr "Regla de Inventario"
 
 #. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__stock_valuation_layer_ids
+msgid "Stock Valuation Layer"
+msgstr "Nivel de valoración de existencias"
+
+#. module: stock_reserve
 #: model:ir.actions.server,name:stock_reserve.ir_cron_reserve_waiting_confirmed_ir_actions_server
 msgid "Stock reservation: Assign waiting/confirmed reserve moves"
 msgstr ""
@@ -767,6 +782,15 @@ msgid "Transfer"
 msgstr "Transferencia"
 
 #. module: stock_reserve
+#: model:ir.model.fields,help:stock_reserve.field_stock_reservation__to_refund
+msgid ""
+"Trigger a decrease of the delivered/received quantity in the associated Sale "
+"Order/Purchase Order"
+msgstr ""
+"Activar una disminución de la cantidad entregada/recibida en el pedido de "
+"compra/venta asociado"
+
+#. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__picking_code
 msgid "Type of Operation"
 msgstr "Tipo de operación"
@@ -780,6 +804,11 @@ msgstr "Precio unidad"
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__product_uom
 msgid "UoM"
 msgstr "UDM (Unidad De Medida)"
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__to_refund
+msgid "Update quantities on SO/PO"
+msgstr "Actualizar las cantidades en SO/PO"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__date_validity
@@ -841,9 +870,6 @@ msgstr ""
 #~ "'Disponible'.\n"
 #~ "* Hecho: Cuando se procesa el envío, el estado es 'Hecho'."
 
-#~ msgid "Account Move"
-#~ msgstr "Movimiento de cuenta"
-
 #~ msgid ""
 #~ "All the stock moves having a chained destination move sharing the same "
 #~ "picking as the actual move's destination move"
@@ -854,9 +880,6 @@ msgstr ""
 
 #~ msgid "Amount of packages demanded."
 #~ msgstr "Cantidad de paquetes demandados."
-
-#~ msgid "Analytic Account Line"
-#~ msgstr "Línea de cuenta analítica"
 
 #~ msgid ""
 #~ "Available to Promise quantity minus quantities promised  to moves with "
@@ -943,9 +966,6 @@ msgstr ""
 #~ msgid "Scrap"
 #~ msgstr "Desechar"
 
-#~ msgid "Stock Valuation Layer"
-#~ msgstr "Nivel de valoración de existencias"
-
 #~ msgid ""
 #~ "This is the quantity of products from an inventory point of view. For "
 #~ "moves in the state 'done', this is the quantity of products that were "
@@ -962,18 +982,8 @@ msgstr ""
 #~ "asignados, afecta la reserva de producto, y debe ser realizado con "
 #~ "cuidado."
 
-#~ msgid ""
-#~ "Trigger a decrease of the delivered/received quantity in the associated "
-#~ "Sale Order/Purchase Order"
-#~ msgstr ""
-#~ "Activar una disminución de la cantidad entregada/recibida en el pedido de "
-#~ "compra/venta asociado"
-
 #~ msgid "Unrelease Allowed"
 #~ msgstr "Desbloqueo permitido"
-
-#~ msgid "Update quantities on SO/PO"
-#~ msgstr "Actualizar las cantidades en SO/PO"
 
 #~ msgid "Whether this move is a part of stock_location moves"
 #~ msgstr ""
