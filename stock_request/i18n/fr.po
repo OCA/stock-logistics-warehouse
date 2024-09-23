@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-03-02 03:44+0000\n"
-"PO-Revision-Date: 2024-09-23 21:19+0000\n"
+"PO-Revision-Date: 2024-09-23 21:32+0000\n"
 "Last-Translator: Julie LeBrun <julie.lebrun@numigi.com>\n"
 "Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
 "Language: fr\n"
@@ -137,7 +137,7 @@ msgstr "Société"
 #: code:addons/stock_request/models/stock_request.py:199
 #, python-format
 msgid "Company must be equal to the order"
-msgstr "La société doit être égale à l'ordre"
+msgstr "La société doit être la même que sur l'ordre"
 
 #. module: stock_request
 #: model:ir.model,name:stock_request.model_res_config_settings
@@ -235,7 +235,7 @@ msgstr "Date prévue"
 #: code:addons/stock_request/models/stock_request.py:206
 #, python-format
 msgid "Expected date must be equal to the order"
-msgstr "La date prévue doit être égale à l'ordre"
+msgstr "La date prévue doit être la même que sur l'ordre"
 
 #. module: stock_request
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_order_search
@@ -372,7 +372,7 @@ msgstr "Emplacement"
 #: code:addons/stock_request/models/stock_request.py:182
 #, python-format
 msgid "Location must be equal to the order"
-msgstr "L'emplacement doit être égal à l'ordre"
+msgstr "L'emplacement doit être le même que sur l'ordre"
 
 #. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__message_main_attachment_id
@@ -486,7 +486,7 @@ msgstr "Nombre de messages non lus"
 #: code:addons/stock_request/models/stock_request_order.py:265
 #, python-format
 msgid "Only orders on draft state can be unlinked"
-msgstr "Seules les commandes à l'état brouillon peuvent être dissociées"
+msgstr "Seules les ordres à l'état brouillon peuvent être dissociées"
 
 #. module: stock_request
 #: code:addons/stock_request/models/stock_request.py:353
@@ -546,7 +546,7 @@ msgstr "Groupe d'approvisionnement"
 #: code:addons/stock_request/models/stock_request.py:192
 #, python-format
 msgid "Procurement group must be equal to the order"
-msgstr "Le groupe d'approvisionnement doit être égal à l'ordre"
+msgstr "Le groupe d'approvisionnement doit être le même que sur l'ordre"
 
 #. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__product_id
@@ -688,7 +688,7 @@ msgstr "Demandé par"
 #: code:addons/stock_request/models/stock_request.py:168
 #, python-format
 msgid "Requested by must be equal to the order"
-msgstr "Demandé par doit être égal à la commande"
+msgstr "Demandé par doit être le même que sur l'ordre"
 
 #. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__activity_user_id
