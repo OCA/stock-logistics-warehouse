@@ -31,7 +31,7 @@ msgstr ""
 
 #. module: account_move_line_stock_info
 #: model_terms:ir.ui.view,arch_db:account_move_line_stock_info.view_move_form
-#: model_terms:ir.ui.view,arch_db:account_move_line_stock_info.view_picking_form
+#: model_terms:ir.ui.view,arch_db:account_move_line_stock_info.view_stock_move_operations
 msgid "Journal Items"
 msgstr "Transaktioner"
 

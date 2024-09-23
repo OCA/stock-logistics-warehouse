@@ -6,7 +6,7 @@ from odoo.tests.common import TransactionCase
 
 class TestAccountMoveLineStockInfo(TransactionCase):
     def setUp(self):
-        super(TestAccountMoveLineStockInfo, self).setUp()
+        super().setUp()
         self.product_model = self.env["product.product"]
         self.product_ctg_model = self.env["product.category"]
         self.account_model = self.env["account.account"]
@@ -140,7 +140,8 @@ class TestAccountMoveLineStockInfo(TransactionCase):
             self.picking_type_in, self.location_supplier, self.location_stock
         )
         picking_in.action_confirm()
-        picking_in.move_ids.quantity_done = 1
+        picking_in.move_ids.quantity = 1
+        picking_in.move_ids.picked = True
         picking_in._action_done()
 
         account_move_line = False
@@ -153,7 +154,8 @@ class TestAccountMoveLineStockInfo(TransactionCase):
             self.picking_type_out, self.location_supplier, self.location_stock
         )
         picking_out.action_confirm()
-        picking_out.move_ids.quantity_done = 1
+        picking_out.move_ids.quantity = 1
+        picking_out.move_ids.picked = True
         picking_out._action_done()
 
         for move in picking_out.move_ids:
