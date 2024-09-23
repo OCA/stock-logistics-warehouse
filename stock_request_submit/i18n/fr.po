@@ -6,31 +6,33 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2024-09-23 21:26+0000\n"
+"Last-Translator: Julie LeBrun <julie.lebrun@numigi.com>\n"
 "Language-Team: none\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 5.6.2\n"
 
 #. module: stock_request_submit
 #: model:ir.model.fields,field_description:stock_request_submit.field_stock_request__route_id
 msgid "Route"
-msgstr ""
+msgstr "Route"
 
 #. module: stock_request_submit
 #: model:ir.model,name:stock_request_submit.model_stock_request
 msgid "Stock Request"
-msgstr ""
+msgstr "Demande de stock"
 
 #. module: stock_request_submit
 #: model:ir.model,name:stock_request_submit.model_stock_request_order
 msgid "Stock Request Order"
-msgstr ""
+msgstr "Ordre de demande de stock"
 
 #. module: stock_request_submit
 #: model_terms:ir.ui.view,arch_db:stock_request_submit.stock_request_order_form
 #: model_terms:ir.ui.view,arch_db:stock_request_submit.view_stock_request_form
 msgid "Submit"
-msgstr ""
+msgstr "Soumettre"
