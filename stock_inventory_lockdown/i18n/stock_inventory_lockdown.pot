@@ -1,0 +1,65 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_inventory_lockdown
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_inventory_lockdown
+#: code:addons/stock_inventory_lockdown/models/stock_move.py:0
+#, python-format
+msgid ""
+"An inventory is being conducted at the following location(s):\n"
+" - %s"
+msgstr ""
+
+#. module: stock_inventory_lockdown
+#: code:addons/stock_inventory_lockdown/models/stock_location.py:0
+#: code:addons/stock_inventory_lockdown/models/stock_location.py:0
+#, python-format
+msgid "An inventory is being conducted at this location"
+msgstr ""
+
+#. module: stock_inventory_lockdown
+#: model:ir.model.fields,field_description:stock_inventory_lockdown.field_stock_inventory__display_name
+#: model:ir.model.fields,field_description:stock_inventory_lockdown.field_stock_location__display_name
+#: model:ir.model.fields,field_description:stock_inventory_lockdown.field_stock_move__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: stock_inventory_lockdown
+#: model:ir.model.fields,field_description:stock_inventory_lockdown.field_stock_inventory__id
+#: model:ir.model.fields,field_description:stock_inventory_lockdown.field_stock_location__id
+#: model:ir.model.fields,field_description:stock_inventory_lockdown.field_stock_move__id
+msgid "ID"
+msgstr ""
+
+#. module: stock_inventory_lockdown
+#: model:ir.model,name:stock_inventory_lockdown.model_stock_inventory
+msgid "Inventory"
+msgstr ""
+
+#. module: stock_inventory_lockdown
+#: model:ir.model,name:stock_inventory_lockdown.model_stock_location
+msgid "Inventory Locations"
+msgstr ""
+
+#. module: stock_inventory_lockdown
+#: model:ir.model.fields,field_description:stock_inventory_lockdown.field_stock_inventory____last_update
+#: model:ir.model.fields,field_description:stock_inventory_lockdown.field_stock_location____last_update
+#: model:ir.model.fields,field_description:stock_inventory_lockdown.field_stock_move____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: stock_inventory_lockdown
+#: model:ir.model,name:stock_inventory_lockdown.model_stock_move
+msgid "Stock Move"
+msgstr ""
