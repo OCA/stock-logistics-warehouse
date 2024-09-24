@@ -4,7 +4,7 @@
 {
     "name": "Stock Request Purchase",
     "summary": "Internal request for stock",
-    "version": "14.0.1.2.0",
+    "version": "14.0.1.2.1",
     "license": "LGPL-3",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "author": "ForgeFlow, Odoo Community Association (OCA)",

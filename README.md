@@ -110,7 +110,7 @@ addon | version | maintainers | summary
 [stock_request_mrp](stock_request_mrp/) | 14.0.1.2.0 |  | Manufacturing request for stock
 [stock_request_partner](stock_request_partner/) | 14.0.1.0.1 |  | Allow to define partner in Stock Request
 [stock_request_picking_type](stock_request_picking_type/) | 14.0.1.1.0 | [![max3903](https://github.com/max3903.png?size=30px)](https://github.com/max3903) | Add Stock Requests to the Inventory App
-[stock_request_purchase](stock_request_purchase/) | 14.0.1.2.0 |  | Internal request for stock
+[stock_request_purchase](stock_request_purchase/) | 14.0.1.2.1 |  | Internal request for stock
 [stock_request_sequence_option](stock_request_sequence_option/) | 14.0.1.0.0 | [![ps-tubtim](https://github.com/ps-tubtim.png?size=30px)](https://github.com/ps-tubtim) | Manage sequence options for stock request
 [stock_request_submit](stock_request_submit/) | 14.0.1.3.0 |  | Add submit state on Stock Requests
 [stock_request_tier_validation](stock_request_tier_validation/) | 14.0.1.0.1 |  | Extends the functionality of Stock Requests to support a tier validation process.
