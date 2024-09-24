@@ -1,6 +1,6 @@
 # Copyright 2024 ACSONE SA/NV
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
-from odoo import api, fields, models
+from odoo import fields, models
 
 
 class StockPackageType(models.Model):
@@ -14,18 +14,17 @@ class StockPackageType(models.Model):
         index="btree_not_null",
     )
 
-    @api.depends("category_id", "category_id.code")
-    def _compute_display_name(self):
-        res = super()._compute_display_name()
-        for package_type in self:
-            if package_type.category_id:
-                package_type.display_name = " ".join(
-                    [
-                        package_type.display_name,
-                        str("(" + package_type.category_id.code + ")"),
-                    ]
+    def name_get(self):
+        result = []
+        for rec in self:
+            name = rec.name
+            if rec.category_id:
+                name = "{name} ({category})".format(
+                    name=rec.name, category=rec.category_id.code
                 )
-        return res
+            result.append((rec.id, name))
+
+        return result
 
     @property
     def _rec_names_search(self):

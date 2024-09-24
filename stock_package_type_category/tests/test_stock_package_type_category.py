@@ -41,4 +41,4 @@ class TestPackageCategory(BaseCommon):
 
         package_search = self.env["stock.package.type"].name_search("TEST")
 
-        self.assertEqual([(package_type.id, package_type.name)], package_search)
+        self.assertEqual([(package_type.id, package_type.display_name)], package_search)
