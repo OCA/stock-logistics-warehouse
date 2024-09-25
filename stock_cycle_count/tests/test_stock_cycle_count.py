@@ -415,14 +415,14 @@ class TestStockCycleCount(common.TransactionCase):
             {
                 "product_id": self.product1.id,
                 "location_id": loc.id,
-                "quantity": 0.0,
+                "quantity": 15.0,
             }
         )
         quant2 = self.quant_model.create(
             {
                 "product_id": self.product2.id,
                 "location_id": loc.id,
-                "quantity": 0.0,
+                "quantity": 10.0,
             }
         )
         # Create adjustment for specific location
@@ -440,22 +440,26 @@ class TestStockCycleCount(common.TransactionCase):
         # Make the count of the stock
         quant1.update(
             {
-                "inventory_quantity": 5,
+                "inventory_quantity": 0,
             }
         )
         quant2.update(
             {
-                "inventory_quantity": 10,
+                "inventory_quantity": 0,
             }
         )
         # Apply the changes
         quant1._apply_inventory()
         quant2._apply_inventory()
         # Check that line_accuracy is calculated properly
-        sml = self.env["stock.move.line"].search(
-            [("location_id", "=", loc.id), ("product_id", "=", self.product1.id)]
+        move_1 = adjustment.stock_move_ids.filtered(
+            lambda c: c.product_id == self.product1
         )
-        self.assertEqual(sml.line_accuracy, 0)
+        move_2 = adjustment.stock_move_ids.filtered(
+            lambda c: c.product_id == self.product1
+        )
+        self.assertEqual(move_1.line_accuracy, 0)
+        self.assertEqual(move_2.line_accuracy, 0)
         # Set Inventory Adjustment to Done
         adjustment.action_state_to_done()
         # Check that accuracy is correctly calculated
