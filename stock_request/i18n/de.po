@@ -952,7 +952,13 @@ msgid "Stock Request name must be unique"
 msgstr "Bezeichner der Anforderung muss eindeutig sein"
 
 #. module: stock_request
-#: code:addons/stock_request/models/stock_request_abstract.py:0
+#: code:addons/stock_request/models/stock_request.py:0
+#, python-format
+msgid "Stock Request product quantity cannot be negative."
+msgstr ""
+
+#. module: stock_request
+#: code:addons/stock_request/models/stock_request.py:0
 #, python-format
 msgid "Stock Request product quantity has to be strictly positive."
 msgstr "Bestandsanforderungs-Produktmenge muss streng positiv sein."
