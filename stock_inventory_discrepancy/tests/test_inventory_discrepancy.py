@@ -10,6 +10,10 @@ from odoo.tests.common import TransactionCase, tagged
 class TestInventoryDiscrepancy(TransactionCase):
     def setUp(self):
         super().setUp()
+        # Enable the configuration using ir.config_parameter
+        self.env["ir.config_parameter"].sudo().set_param(
+            "stock_inventory_discrepancy.inventory_discrepancy_enable", "1"
+        )
         self.obj_location = self.env["stock.location"]
         self.obj_product = self.env["product.product"]
         self.obj_warehouse = self.env["stock.warehouse"]
