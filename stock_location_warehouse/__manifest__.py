@@ -11,6 +11,6 @@
     "depends": ["stock"],
     "data": ["views/stock_location.xml"],
     "installable": True,
-    "development_status": "Alpha",
+    "development_status": "Beta",
     "license": "LGPL-3",
 }
