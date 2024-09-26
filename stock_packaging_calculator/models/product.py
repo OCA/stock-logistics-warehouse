@@ -113,20 +113,30 @@ class Product(models.Model):
         prepare_values = self.env.context.get(
             "_packaging_values_handler", self._prepare_qty_by_packaging_values
         )
+        uom_rounding = self.uom_id.rounding
         for pkg in pkg_by_qty:
             # Boost perf: no need to deduce the qty_per_pkg if the pkg_qty is 1
-            if float_compare(pkg.qty, 1, precision_digits=self.uom_id.rounding) == 0:
-                qty_per_pkg = int(qty)
-                qty = 0.0
+            if float_compare(pkg.qty, 1, precision_rounding=uom_rounding) == 0:
+                # If qty is an integer, use int value, else round it
+                qty_diff = float_compare(
+                    qty - int(qty), 0.0, precision_rounding=uom_rounding
+                )
+                qty_per_pkg = (
+                    int(qty)
+                    if qty_diff == 0
+                    else float_round(qty, precision_rounding=uom_rounding)
+                )
+                qty = 0
             else:
                 qty_per_pkg, qty = self._qty_by_pkg(pkg.qty, qty)
+
                 # To handle fractional quantities (eg: 0.5 Kg)
                 if pkg.is_unit and not float_is_zero(
-                    qty, precision_rounding=self.uom_id.rounding
+                    qty, precision_rounding=uom_rounding
                 ):
                     # `is_unit` package always be the last package by the sorting
                     # it has the same uom with the product, just sum the quantity
-                    qty_per_pkg += float_round(qty, precision_rounding=self.uom_id.rounding)
+                    qty_per_pkg += float_round(qty, precision_rounding=uom_rounding)
                     qty = 0
 
             if qty_per_pkg:
@@ -147,7 +157,7 @@ class Product(models.Model):
         """Calculate qty needed for given package qty."""
         qty_per_pkg = 0
         while (
-            float_compare(qty - pkg_qty, 0.0, precision_digits=self.uom_id.rounding)
+            float_compare(qty - pkg_qty, 0.0, precision_rounding=self.uom_id.rounding)
             >= 0.0
         ):
             qty -= pkg_qty
