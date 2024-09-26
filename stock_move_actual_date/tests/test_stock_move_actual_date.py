@@ -25,11 +25,11 @@ class TestStockMoveActualDate(TransactionCase):
                 "name": "Test Product",
                 "type": "product",
                 "categ_id": product_category.id,
+                "standard_price": 100.0,
             }
         )
         cls.supplier_location = cls.env.ref("stock.stock_location_suppliers")
         cls.stock_location = cls.env.ref("stock.stock_location_stock")
-        cls.env.user.tz = "Asia/Tokyo"
 
     def create_picking(self, actual_date=False):
         receipt = self.env["stock.picking"].create(
@@ -84,59 +84,40 @@ class TestStockMoveActualDate(TransactionCase):
     def test_stock_move_actual_date(self):
         receipt, move = self.create_picking(date(2024, 9, 1))
         self.assertEqual(move.actual_date, date(2024, 9, 1))
-        self.assertEqual(
-            move.stock_valuation_layer_ids.account_move_id.date, date(2024, 9, 1)
-        )
-        # Update actual_date after done
+        self.assertEqual(move.account_move_ids.date, date(2024, 9, 1))
         receipt.actual_date = date(2024, 8, 1)
         self.assertEqual(move.actual_date, date(2024, 8, 1))
-        self.assertEqual(
-            move.stock_valuation_layer_ids.account_move_id.date, date(2024, 8, 1)
-        )
-        # Create scrap
+        self.assertEqual(move.account_move_ids.date, date(2024, 8, 1))
         scrap = self.create_scrap(receipt, date(2024, 9, 10))
         self.assertEqual(scrap.move_id.actual_date, date(2024, 9, 10))
-        self.assertEqual(
-            scrap.move_id.stock_valuation_layer_ids.account_move_id.date,
-            date(2024, 9, 10),
-        )
-        # Update actual_date after done
+        self.assertEqual(scrap.move_id.account_move_ids.date, date(2024, 9, 10))
         scrap.actual_date = date(2024, 8, 11)
         self.assertEqual(scrap.move_id.actual_date, date(2024, 8, 11))
-        self.assertEqual(
-            scrap.move_id.stock_valuation_layer_ids.account_move_id.date,
-            date(2024, 8, 11),
-        )
+        self.assertEqual(scrap.move_id.account_move_ids.date, date(2024, 8, 11))
 
-        # Test inventory adjustment with actual date
-        inventory_quant = self.env["stock.quant"].search(
-            [
-                ("location_id", "=", self.stock_location.id),
-                ("product_id", "=", self.product_1.id),
-            ]
+    def test_inventory_adjustment_actual_date(self):
+        quant = self.env["stock.quant"].create(
+            {
+                "location_id": self.stock_location.id,
+                "product_id": self.product_1.id,
+                "inventory_quantity": 10,
+                "accounting_date": date(2024, 7, 1),
+            }
         )
-        inventory_quant.inventory_quantity = 20.0
-        inventory_quant.accounting_date = date(2024, 7, 1)
-        inventory_quant.action_apply_inventory()
+        quant.action_apply_inventory()
         move = self.env["stock.move"].search(
             [("product_id", "=", self.product_1.id), ("is_inventory", "=", True)],
             limit=1,
         )
         self.assertEqual(move.actual_date, date(2024, 7, 1))
-        self.assertEqual(
-            move.stock_valuation_layer_ids.account_move_id.date, date(2024, 7, 1)
-        )
+        self.assertEqual(move.account_move_ids.date, date(2024, 7, 1))
 
     @freeze_time("2024-09-20 23:00:00")
     def test_stock_move_without_actual_date_from_picking_or_scrap(self):
+        self.env.user.tz = "Asia/Tokyo"
         receipt, move = self.create_picking()
         self.assertEqual(move.actual_date, date(2024, 9, 21))
-        self.assertEqual(
-            move.stock_valuation_layer_ids.account_move_id.date, date(2024, 9, 21)
-        )
+        self.assertEqual(move.account_move_ids.date, date(2024, 9, 21))
         scrap = self.create_scrap(receipt)
         self.assertEqual(scrap.move_id.actual_date, date(2024, 9, 21))
-        self.assertEqual(
-            scrap.move_id.stock_valuation_layer_ids.account_move_id.date,
-            date(2024, 9, 21),
-        )
+        self.assertEqual(scrap.move_id.account_move_ids.date, date(2024, 9, 21))
