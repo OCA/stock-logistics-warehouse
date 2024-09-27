@@ -62,12 +62,12 @@ addon | version | maintainers | summary
 [stock_quant_manual_assign](stock_quant_manual_assign/) | 15.0.1.2.1 |  | Stock - Manual Quant Assignment
 [stock_quant_reservation_info](stock_quant_reservation_info/) | 15.0.1.0.1 |  | Allows to see the reserved info of Products
 [stock_quant_reservation_info_mrp](stock_quant_reservation_info_mrp/) | 15.0.1.0.0 |  | Allows to see the manufacturing order related to the reserved info of Products
-[stock_request](stock_request/) | 15.0.1.8.1 |  | Internal request for stock
+[stock_request](stock_request/) | 15.0.1.8.2 |  | Internal request for stock
 [stock_request_analytic](stock_request_analytic/) | 15.0.1.1.0 |  | Internal request for stock
 [stock_request_bom](stock_request_bom/) | 15.0.1.0.0 |  | Stock Request with BOM Integration
 [stock_request_kanban](stock_request_kanban/) | 15.0.1.1.2 |  | Adds a stock request order, and takes stock requests as lines
 [stock_request_mrp](stock_request_mrp/) | 15.0.1.3.0 |  | Manufacturing request for stock
-[stock_request_purchase](stock_request_purchase/) | 15.0.1.2.0 |  | Internal request for stock
+[stock_request_purchase](stock_request_purchase/) | 15.0.1.2.1 |  | Internal request for stock
 [stock_request_separate_picking](stock_request_separate_picking/) | 15.0.1.0.0 |  | Separate one picking per one stock request
 [stock_request_submit](stock_request_submit/) | 15.0.1.0.0 |  | Add submit state on Stock Requests
 [stock_request_tier_validation](stock_request_tier_validation/) | 15.0.1.0.0 |  | Extends the functionality of Stock Requests to support a tier validation process.
