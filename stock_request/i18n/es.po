@@ -509,7 +509,6 @@ msgstr "Nombre"
 
 #. module: stock_request
 #: model:ir.model.constraint,message:stock_request.constraint_stock_request_abstract_name_uniq
-#: model:ir.model.constraint,message:stock_request.constraint_stock_request_kanban_name_uniq
 msgid "Name must be unique"
 msgstr "El nombre debe ser único"
 
@@ -906,7 +905,14 @@ msgid "Stock Request name must be unique"
 msgstr "El nombre de la solicitud debe ser único"
 
 #. module: stock_request
-#: code:addons/stock_request/models/stock_request_abstract.py:0
+#: code:addons/stock_request/models/stock_request.py:0
+#, python-format
+msgid "Stock Request product quantity cannot be negative."
+msgstr ""
+"La cantidad de producto de la solicitud de stock no puede ser negativa."
+
+#. module: stock_request
+#: code:addons/stock_request/models/stock_request.py:0
 #, python-format
 msgid "Stock Request product quantity has to be strictly positive."
 msgstr ""
