@@ -218,6 +218,77 @@ class TestStockRequestPurchase(common.TransactionCase):
         stock_request.action_cancel()
         self.assertEqual(stock_request.purchase_ids.state, "cancel")
 
+    def test_unlink_purchase_order_line(self):
+        """
+        Test that when a purchase order line is unlinked,
+        the related stock requests are cancelled
+        """
+        expected_date = fields.Datetime.now()
+        product2 = self._create_product("P2", "product2", False)
+        vals = {
+            "company_id": self.main_company.id,
+            "warehouse_id": self.warehouse.id,
+            "location_id": self.warehouse.lot_stock_id.id,
+            "expected_date": expected_date,
+            "stock_request_ids": [
+                (
+                    0,
+                    0,
+                    {
+                        "product_id": self.product.id,
+                        "product_uom_id": self.product.uom_id.id,
+                        "product_uom_qty": 10.0,
+                        "company_id": self.main_company.id,
+                        "warehouse_id": self.warehouse.id,
+                        "location_id": self.warehouse.lot_stock_id.id,
+                        "expected_date": expected_date,
+                    },
+                ),
+                (
+                    0,
+                    0,
+                    {
+                        "product_id": product2.id,
+                        "product_uom_id": product2.uom_id.id,
+                        "product_uom_qty": 20.0,
+                        "company_id": self.main_company.id,
+                        "warehouse_id": self.warehouse.id,
+                        "location_id": self.warehouse.lot_stock_id.id,
+                        "expected_date": expected_date,
+                    },
+                ),
+            ],
+        }
+
+        order = (
+            self.env["stock.request.order"]
+            .with_user(self.stock_request_user)
+            .create(vals)
+        )
+
+        order.action_confirm()
+        self.assertEqual(order.state, "open")
+        self.assertEqual(len(order.purchase_ids), 1)
+        purchase = order.purchase_ids[0]
+        purchase_line1 = purchase.order_line.filtered(
+            lambda x: x.product_id == self.product
+        )
+        purchase_line2 = purchase.order_line.filtered(
+            lambda x: x.product_id == product2
+        )
+        stock_request1 = order.stock_request_ids.filtered(
+            lambda x: x.product_id == self.product
+        )
+        stock_request2 = order.stock_request_ids.filtered(
+            lambda x: x.product_id == product2
+        )
+        purchase_line1.sudo().unlink()
+        self.assertEqual(stock_request1.state, "cancel")
+        self.assertEqual(order.state, "open")
+        purchase_line2.sudo().unlink()
+        self.assertEqual(stock_request2.state, "cancel")
+        self.assertEqual(order.state, "cancel")
+
     def test_view_actions(self):
         expected_date = fields.Datetime.now()
         vals = {
