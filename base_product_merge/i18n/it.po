@@ -33,9 +33,13 @@ msgstr "Creato il"
 
 #. module: base_product_merge
 #: model:ir.model.fields,field_description:base_product_merge.field_base_product_merge__dst_product_id
-#: model:ir.model.fields,field_description:base_product_merge.field_base_product_merge__dst_product_tmpl_id
 msgid "Destination product"
 msgstr "Prodotto destinazione"
+
+#. module: base_product_merge
+#: model:ir.model.fields,field_description:base_product_merge.field_base_product_merge__dst_product_tmpl_id
+msgid "Destination product template"
+msgstr ""
 
 #. module: base_product_merge
 #: model:ir.model.fields,field_description:base_product_merge.field_base_product_merge__display_name
@@ -102,8 +106,12 @@ msgid "Product"
 msgstr "Prodotto"
 
 #. module: base_product_merge
-#: model:ir.model.fields,field_description:base_product_merge.field_base_product_merge__product_ids
 #: model:ir.model.fields,field_description:base_product_merge.field_base_product_merge__product_tmpl_ids
+msgid "Products Template to merge"
+msgstr ""
+
+#. module: base_product_merge
+#: model:ir.model.fields,field_description:base_product_merge.field_base_product_merge__product_ids
 msgid "Products to merge"
 msgstr "Prodotti da unire"
 
@@ -127,7 +135,8 @@ msgstr "Modello"
 msgid ""
 "The selected products will be merged together. All\n"
 "                        documents linking to one of these products will be\n"
-"                        redirected to the aggregated product. You can remove\n"
+"                        redirected to the aggregated product. You can "
+"remove\n"
 "                        products from this list to avoid merging them."
 msgstr ""
 "I prodotti selezionati verrano uniti insieme. Tutti\n"
@@ -139,7 +148,6 @@ msgstr ""
 
 #. module: base_product_merge
 #. odoo-python
-#: code:addons/base_product_merge/wizard/base_product_merge.py:0
 #: code:addons/base_product_merge/wizard/base_product_merge.py:0
 #, python-format
 msgid "You cannot merge product to it self."
