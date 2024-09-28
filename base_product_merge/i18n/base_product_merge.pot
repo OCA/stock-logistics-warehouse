@@ -30,8 +30,12 @@ msgstr ""
 
 #. module: base_product_merge
 #: model:ir.model.fields,field_description:base_product_merge.field_base_product_merge__dst_product_id
-#: model:ir.model.fields,field_description:base_product_merge.field_base_product_merge__dst_product_tmpl_id
 msgid "Destination product"
+msgstr ""
+
+#. module: base_product_merge
+#: model:ir.model.fields,field_description:base_product_merge.field_base_product_merge__dst_product_tmpl_id
+msgid "Destination product template"
 msgstr ""
 
 #. module: base_product_merge
@@ -99,8 +103,12 @@ msgid "Product"
 msgstr ""
 
 #. module: base_product_merge
-#: model:ir.model.fields,field_description:base_product_merge.field_base_product_merge__product_ids
 #: model:ir.model.fields,field_description:base_product_merge.field_base_product_merge__product_tmpl_ids
+msgid "Products Template to merge"
+msgstr ""
+
+#. module: base_product_merge
+#: model:ir.model.fields,field_description:base_product_merge.field_base_product_merge__product_ids
 msgid "Products to merge"
 msgstr ""
 
