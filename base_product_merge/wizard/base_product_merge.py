@@ -42,14 +42,14 @@ class BaseProductMerge(models.Model):
         [("product.product", "Product"), ("product.template", "Template")]
     )
     dst_product_tmpl_id = fields.Many2one(
-        "product.template", string="Destination product"
+        "product.template", string="Destination product template"
     )
     product_tmpl_ids = fields.Many2many(
         "product.template",
         "product_tmpl_rel",
         "product_tmpl_merge_id",
         "product_tmpl_id",
-        string="Products to merge",
+        string="Products Template to merge",
     )
     merge_method = fields.Selection([("sql", "SQL"), ("orm", "ORM")], default="sql")
 
