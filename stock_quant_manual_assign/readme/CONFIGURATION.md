@@ -1,0 +1,1 @@
+To configure this module, you only need to install it. No extra configuration needed.
