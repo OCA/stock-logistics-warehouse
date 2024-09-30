@@ -105,8 +105,14 @@
                                                     name="lot_id"
                                                     groups="stock.group_production_lot"
                                                 />
-                                                <field name="origin_location_id" />
-                                                <field name="destination_location_id" />
+                                                <field
+                                                    name="origin_location_id"
+                                                    force_save="1"
+                                                />
+                                                <field
+                                                    name="destination_location_id"
+                                                    force_save="1"
+                                                />
                                             </div>
                                             <div class="o_kanban_record_bottom">
                                                 <div class="oe_kanban_bottom_right">
