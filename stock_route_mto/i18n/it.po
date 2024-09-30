@@ -29,8 +29,8 @@ msgstr "È MTO"
 #. module: stock_route_mto
 #: model:ir.model.fields,help:stock_route_mto.field_stock_route__is_mto
 msgid ""
-"Is a MTO (Make to Order) route. Check this if you want to identifythis route"
-" as an MTO one."
+"Is a MTO (Make to Order) route. Check this if you want to identifythis route "
+"as an MTO one."
 msgstr ""
 "È una rotta MTO (produrre su ordine). Selezionare se si vuole identificare "
 "il percorso come un MTO."
