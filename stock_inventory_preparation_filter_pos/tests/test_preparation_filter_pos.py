@@ -69,12 +69,12 @@ class TestStockInventoryPreparationFilterPos(common.TransactionCase):
         inventory = self.env["stock.inventory"].create(
             {
                 "name": "Test POS filter",
-                "filter": "pos_categories",
+                "product_selection": "pos_categories",
                 "pos_categ_ids": [(6, 0, self.pos_categ1.ids)],
             }
         )
-        inventory.action_start()
+        inventory.action_state_to_in_progress()
         # We make sure that the products of children categs are also included
         self.assertEqual(len(inventory.product_ids), 3)
-        self.assertEqual(len(inventory.line_ids), 3)
-        inventory.action_cancel_draft()
+        self.assertEqual(len(inventory.stock_quant_ids), 3)
+        inventory.action_state_to_draft()
