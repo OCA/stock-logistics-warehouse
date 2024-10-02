@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 Akretion
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record model="ir.ui.view" id="view_stock_quant_tree">
+        <field name="name">stock.quant.tree (in stock_quant_product_packaging)</field>
+        <field name="model">stock.quant</field>
+        <field name="inherit_id" ref="stock.view_stock_quant_tree" />
+        <field name="arch" type="xml">
+            <field name="quantity" position="after">
+                <field name="packaging_info_str" />
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_stock_quant_tree_inventory_editable">
+        <field name="name">stock.quant.tree (in stock_quant_product_packaging)</field>
+        <field name="model">stock.quant</field>
+        <field name="inherit_id" ref="stock.view_stock_quant_tree_inventory_editable" />
+        <field name="arch" type="xml">
+            <field name="quantity" position="after">
+                <field name="packaging_info_str" />
+            </field>
+        </field>
+    </record>
+
+</odoo>
