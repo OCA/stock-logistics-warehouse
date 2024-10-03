@@ -1,0 +1,101 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_location_zone
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2023-11-21 13:33+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
+
+#. module: stock_location_zone
+#: model:ir.model.fields.selection,name:stock_location_zone.selection__stock_location__location_kind__area
+msgid "Area"
+msgstr "Area"
+
+#. module: stock_location_zone
+#: model_terms:ir.ui.view,arch_db:stock_location_zone.view_location_search
+msgid "Area location"
+msgstr "Ubicazione area"
+
+#. module: stock_location_zone
+#: model:ir.model.fields.selection,name:stock_location_zone.selection__stock_location__location_kind__bin
+msgid "Bin"
+msgstr "Contenitore"
+
+#. module: stock_location_zone
+#: model_terms:ir.ui.view,arch_db:stock_location_zone.view_location_search
+msgid "Group By"
+msgstr "Raggruppa per"
+
+#. module: stock_location_zone
+#: model:ir.model.fields,help:stock_location_zone.field_stock_location__location_kind
+msgid ""
+"Group location according to their kinds: * Zone: locations that are flagged "
+"as being zones * Area: locations with children that are part of a zone * "
+"Bin: locations without children that are part of a zone * Stock: internal "
+"locations whose parent is a view * Other: any other location"
+msgstr ""
+"Raggruppa ubicazioni in accordo dei loro tipi: * Zona: uticazioni marcate "
+"come zone * Area: ubicazioni con figli che sono parte di una zona * "
+"Contenitore: ubicazioni senza figli che sono parte di una zona * Magazzino: "
+"ubicazioni interne il cui padre è una vista * Altro: altre ubicazioni"
+
+#. module: stock_location_zone
+#: model:ir.model,name:stock_location_zone.model_stock_location
+msgid "Inventory Locations"
+msgstr "Ubicazioni di inventario"
+
+#. module: stock_location_zone
+#: model:ir.model.fields,field_description:stock_location_zone.field_stock_location__is_zone
+msgid "Is a Zone Location?"
+msgstr "È una ubicazione zona?"
+
+#. module: stock_location_zone
+#: model:ir.model.fields,field_description:stock_location_zone.field_stock_location__area_location_id
+msgid "Location Area"
+msgstr "Area ubicazione"
+
+#. module: stock_location_zone
+#: model:ir.model.fields,field_description:stock_location_zone.field_stock_location__location_kind
+#: model_terms:ir.ui.view,arch_db:stock_location_zone.view_location_search
+msgid "Location Kind"
+msgstr "Tipo ubicazione"
+
+#. module: stock_location_zone
+#: model:ir.model.fields,field_description:stock_location_zone.field_stock_location__zone_location_id
+msgid "Location Zone"
+msgstr "Zona ubicazione"
+
+#. module: stock_location_zone
+#: model:ir.model.fields.selection,name:stock_location_zone.selection__stock_location__location_kind__stock
+msgid "Main Stock"
+msgstr "Magazzino principale"
+
+#. module: stock_location_zone
+#: model:ir.model.fields,help:stock_location_zone.field_stock_location__is_zone
+msgid "Mark to define this location as a zone"
+msgstr "Selezionare per definire questa ubicazione come zona"
+
+#. module: stock_location_zone
+#: model:ir.model.fields.selection,name:stock_location_zone.selection__stock_location__location_kind__other
+msgid "Other"
+msgstr "Altro"
+
+#. module: stock_location_zone
+#: model:ir.model.fields.selection,name:stock_location_zone.selection__stock_location__location_kind__zone
+msgid "Zone"
+msgstr "Zona"
+
+#. module: stock_location_zone
+#: model_terms:ir.ui.view,arch_db:stock_location_zone.view_location_search
+msgid "Zone location"
+msgstr "Ubicazione zona"
