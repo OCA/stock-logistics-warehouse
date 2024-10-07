@@ -37,6 +37,7 @@ addon | version | maintainers | summary
 [stock_available_immediately_exclude_location](stock_available_immediately_exclude_location/) | 14.0.1.0.1 |  | Exclude locations from immediately usable quantity
 [stock_available_mrp](stock_available_mrp/) | 14.0.1.0.6 |  | Consider the production potential is available to promise
 [stock_available_portal](stock_available_portal/) | 14.0.1.0.0 | [![geomer198](https://github.com/geomer198.png?size=30px)](https://github.com/geomer198) [![CetmixGitDrone](https://github.com/CetmixGitDrone.png?size=30px)](https://github.com/CetmixGitDrone) | Show product quantity available to promise in portal
+[stock_available_stock_mts_mto_rule](stock_available_stock_mts_mto_rule/) | 14.0.1.0.0 |  | Stock Avaiable Stock Mts Mto Rule
 [stock_available_unreserved](stock_available_unreserved/) | 14.0.1.2.0 | [![LoisRForgeFlow](https://github.com/LoisRForgeFlow.png?size=30px)](https://github.com/LoisRForgeFlow) | Quantity of stock available for immediate use
 [stock_change_qty_reason](stock_change_qty_reason/) | 14.0.1.0.2 |  | Stock Quantity Change Reason
 [stock_cycle_count](stock_cycle_count/) | 14.0.1.4.3 | [![LoisRForgeFlow](https://github.com/LoisRForgeFlow.png?size=30px)](https://github.com/LoisRForgeFlow) | Adds the capability to schedule cycle counts in a warehouse through different rules defined by the user.
