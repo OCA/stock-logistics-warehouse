@@ -1,0 +1,95 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_location_package_restriction
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#. module: stock_location_package_restriction
+#: model:ir.model.fields,help:stock_location_package_restriction.field_stock_location__package_restriction
+msgid ""
+"\n"
+"            Control if the location can contain products not in a package.\n"
+"\n"
+"            Options:\n"
+"              * False (not set): Not mandatory, the location can contain products\n"
+"                not part of a package\n"
+"              * Mandatory and unique: The location cannot have products not\n"
+"                part of a package and you cannot have more than 1 package on\n"
+"                the location\n"
+"              * Mandatory and not unique:  The location cannot have products\n"
+"                not part of a package and you may have store multiple packages\n"
+"                on the location\n"
+"        "
+msgstr ""
+
+#. module: stock_location_package_restriction
+#: code:addons/stock_location_package_restriction/models/stock_move.py:0
+#, python-format
+msgid ""
+"A package is mandatory on the location {location}. You cannot move the "
+"product {product} without a package."
+msgstr ""
+
+#. module: stock_location_package_restriction
+#: model:ir.model.fields,field_description:stock_location_package_restriction.field_stock_location__display_name
+#: model:ir.model.fields,field_description:stock_location_package_restriction.field_stock_move__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: stock_location_package_restriction
+#: model:ir.model.fields,field_description:stock_location_package_restriction.field_stock_location__id
+#: model:ir.model.fields,field_description:stock_location_package_restriction.field_stock_move__id
+msgid "ID"
+msgstr ""
+
+#. module: stock_location_package_restriction
+#: model:ir.model,name:stock_location_package_restriction.model_stock_location
+msgid "Inventory Locations"
+msgstr ""
+
+#. module: stock_location_package_restriction
+#: model:ir.model.fields,field_description:stock_location_package_restriction.field_stock_location____last_update
+#: model:ir.model.fields,field_description:stock_location_package_restriction.field_stock_move____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: stock_location_package_restriction
+#: code:addons/stock_location_package_restriction/models/stock_move.py:0
+#, python-format
+msgid ""
+"Only one package is allowed on the location {location}.You cannot add the "
+"{package}, there is already {existing_packages}."
+msgstr ""
+
+#. module: stock_location_package_restriction
+#: code:addons/stock_location_package_restriction/models/stock_move.py:0
+#, python-format
+msgid ""
+"Only one package is allowed on the location {location}.You cannot move "
+"multiple packages to it:{packages}"
+msgstr ""
+
+#. module: stock_location_package_restriction
+#: model:ir.model.fields,field_description:stock_location_package_restriction.field_stock_location__package_restriction
+msgid "Package Restriction"
+msgstr ""
+
+#. module: stock_location_package_restriction
+#: model_terms:ir.ui.view,arch_db:stock_location_package_restriction.stock_location_form_view
+msgid "Restrictions"
+msgstr ""
+
+#. module: stock_location_package_restriction
+#: model:ir.model,name:stock_location_package_restriction.model_stock_move
+msgid "Stock Move"
+msgstr ""
