@@ -45,7 +45,7 @@ class StockRule(models.Model):
         precision = self.env["decimal.precision"].precision_get(
             "Product Unit of Measure"
         )
-        src_location_id = self.mts_rule_id.location_src_id.id
+        src_location_id = self.location_src_id.id
         product_location = product.with_context(location=src_location_id)
         virtual_available = self._get_available_quantity_mts_mto_rule(product_location)
         qty_available = product.uom_id._compute_quantity(virtual_available, product_uom)
