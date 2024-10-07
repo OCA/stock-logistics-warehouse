@@ -1,0 +1,247 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_reserve_rule
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_reserve_rule
+#: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule__active
+msgid "Active"
+msgstr ""
+
+#. module: stock_reserve_rule
+#: model_terms:ir.actions.act_window,help:stock_reserve_rule.action_stock_reserve_rule
+msgid "Add a Reservation Rule"
+msgstr ""
+
+#. module: stock_reserve_rule
+#: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule_removal__removal_strategy
+msgid "Advanced Removal Strategy"
+msgstr ""
+
+#. module: stock_reserve_rule
+#: model:ir.model.fields,help:stock_reserve_rule.field_stock_reserve_rule__picking_type_ids
+msgid "Apply this rule only if the operation type of the move is the same."
+msgstr ""
+
+#. module: stock_reserve_rule
+#: model_terms:ir.ui.view,arch_db:stock_reserve_rule.view_stock_reserve_rule_form
+#: model_terms:ir.ui.view,arch_db:stock_reserve_rule.view_stock_reserve_rule_search
+msgid "Archived"
+msgstr ""
+
+#. module: stock_reserve_rule
+#: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule__company_id
+msgid "Company"
+msgstr ""
+
+#. module: stock_reserve_rule
+#: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule__create_uid
+#: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule_removal__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: stock_reserve_rule
+#: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule__create_date
+#: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule_removal__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: stock_reserve_rule
+#: model:ir.model.fields.selection,name:stock_reserve_rule.selection__stock_reserve_rule_removal__removal_strategy__default
+msgid "Default Removal Strategy"
+msgstr ""
+
+#. module: stock_reserve_rule
+#: model:ir.model.fields,help:stock_reserve_rule.field_stock_reserve_rule_removal__removal_strategy
+msgid ""
+"Defines if and how goods are taken from locations.Default: take the first ones with the configured Removal Strategy(FIFO, FEFO, ...).\n"
+"Empty Bins: take goods from a location only if the bin is empty afterwards.\n"
+"Full Packaging: take goods from a location only if the location quantity matches a packaging quantity (do not open boxes)."
+msgstr ""
+
+#. module: stock_reserve_rule
+#: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule__name
+#: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule_removal__name
+msgid "Description"
+msgstr ""
+
+#. module: stock_reserve_rule
+#: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule__display_name
+#: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule_removal__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: stock_reserve_rule
+#: model:ir.model.fields,help:stock_reserve_rule.field_stock_reserve_rule__rule_domain
+msgid ""
+"Domain based on Stock Moves, to define if the rule is applicable or not."
+msgstr ""
+
+#. module: stock_reserve_rule
+#: model:ir.model.fields.selection,name:stock_reserve_rule.selection__stock_reserve_rule_removal__removal_strategy__empty_bin
+msgid "Empty Bins"
+msgstr ""
+
+#. module: stock_reserve_rule
+#: model:ir.model.fields,help:stock_reserve_rule.field_stock_reserve_rule_removal__quant_domain
+msgid ""
+"Filter Quants allowed to be reserved for this location and sub-locations."
+msgstr ""
+
+#. module: stock_reserve_rule
+#: model:ir.model.fields.selection,name:stock_reserve_rule.selection__stock_reserve_rule_removal__removal_strategy__packaging
+msgid "Full Packaging"
+msgstr ""
+
+#. module: stock_reserve_rule
+#: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule__id
+#: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule_removal__id
+msgid "ID"
+msgstr ""
+
+#. module: stock_reserve_rule
+#: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule____last_update
+#: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule_removal____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: stock_reserve_rule
+#: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule__write_uid
+#: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule_removal__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: stock_reserve_rule
+#: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule__write_date
+#: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule_removal__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: stock_reserve_rule
+#: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule__location_id
+#: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule_removal__location_id
+msgid "Location"
+msgstr ""
+
+#. module: stock_reserve_rule
+#: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule__picking_type_ids
+msgid "Operation Types"
+msgstr ""
+
+#. module: stock_reserve_rule
+#: model:ir.model.fields,help:stock_reserve_rule.field_stock_reserve_rule_removal__packaging_type_ids
+msgid ""
+"Optional packaging when using 'Full Packaging'.\n"
+"Only the quantities matching one of the packaging are removed.\n"
+"When empty, any packaging can be removed."
+msgstr ""
+
+#. module: stock_reserve_rule
+#: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule_removal__packaging_type_ids
+msgid "Packaging Type"
+msgstr ""
+
+#. module: stock_reserve_rule
+#: model:ir.model,name:stock_reserve_rule.model_stock_picking_type
+msgid "Picking Type"
+msgstr ""
+
+#. module: stock_reserve_rule
+#: model:ir.model,name:stock_reserve_rule.model_stock_quant
+msgid "Quants"
+msgstr ""
+
+#. module: stock_reserve_rule
+#: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule_removal__quant_domain
+msgid "Quants Domain"
+msgstr ""
+
+#. module: stock_reserve_rule
+#: model_terms:ir.ui.view,arch_db:stock_reserve_rule.view_stock_reserve_rule_form
+msgid "Removal Rule"
+msgstr ""
+
+#. module: stock_reserve_rule
+#: model_terms:ir.ui.view,arch_db:stock_reserve_rule.view_stock_reserve_rule_form
+msgid "Removal Rules"
+msgstr ""
+
+#. module: stock_reserve_rule
+#: code:addons/stock_reserve_rule/models/stock_reserve_rule.py:0
+#, python-format
+msgid ""
+"Removal rule '{}' location has to be a child of the rule location '{}'."
+msgstr ""
+
+#. module: stock_reserve_rule
+#: model_terms:ir.ui.view,arch_db:stock_reserve_rule.view_stock_reserve_rule_form
+#: model_terms:ir.ui.view,arch_db:stock_reserve_rule.view_stock_reserve_rule_search
+msgid "Reservation Rule"
+msgstr ""
+
+#. module: stock_reserve_rule
+#: model:ir.actions.act_window,name:stock_reserve_rule.action_stock_reserve_rule
+#: model:ir.ui.menu,name:stock_reserve_rule.menu_stock_reserve_rule
+msgid "Reservation Rules"
+msgstr ""
+
+#. module: stock_reserve_rule
+#: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_picking_type__reserve_rule_ids
+msgid "Reserve Rule"
+msgstr ""
+
+#. module: stock_reserve_rule
+#: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule_removal__rule_id
+msgid "Rule"
+msgstr ""
+
+#. module: stock_reserve_rule
+#: model_terms:ir.ui.view,arch_db:stock_reserve_rule.view_stock_reserve_rule_form
+msgid "Rule Applicability"
+msgstr ""
+
+#. module: stock_reserve_rule
+#: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule__rule_domain
+msgid "Rule Domain"
+msgstr ""
+
+#. module: stock_reserve_rule
+#: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule__rule_removal_ids
+msgid "Rule Removal"
+msgstr ""
+
+#. module: stock_reserve_rule
+#: model:ir.model.fields,help:stock_reserve_rule.field_stock_reserve_rule__location_id
+msgid "Rule applied only in this location and sub-locations."
+msgstr ""
+
+#. module: stock_reserve_rule
+#: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule__sequence
+#: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule_removal__sequence
+msgid "Sequence"
+msgstr ""
+
+#. module: stock_reserve_rule
+#: model:ir.model,name:stock_reserve_rule.model_stock_move
+msgid "Stock Move"
+msgstr ""
+
+#. module: stock_reserve_rule
+#: model:ir.model,name:stock_reserve_rule.model_stock_reserve_rule
+msgid "Stock Reservation Rule"
+msgstr ""
+
+#. module: stock_reserve_rule
+#: model:ir.model,name:stock_reserve_rule.model_stock_reserve_rule_removal
+msgid "Stock Reservation Rule Removal"
+msgstr ""
