@@ -15,33 +15,6 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: stock_warehouse_relationship
-#: model:ir.model.fields,field_description:stock_warehouse_relationship.field_stock_move__display_name
-#: model:ir.model.fields,field_description:stock_warehouse_relationship.field_stock_move_line__display_name
-#: model:ir.model.fields,field_description:stock_warehouse_relationship.field_stock_picking__display_name
-#: model:ir.model.fields,field_description:stock_warehouse_relationship.field_stock_quant__display_name
-#: model:ir.model.fields,field_description:stock_warehouse_relationship.field_stock_quant_package__display_name
-msgid "Display Name"
-msgstr "Nom affiché"
-
-#. module: stock_warehouse_relationship
-#: model:ir.model.fields,field_description:stock_warehouse_relationship.field_stock_move__id
-#: model:ir.model.fields,field_description:stock_warehouse_relationship.field_stock_move_line__id
-#: model:ir.model.fields,field_description:stock_warehouse_relationship.field_stock_picking__id
-#: model:ir.model.fields,field_description:stock_warehouse_relationship.field_stock_quant__id
-#: model:ir.model.fields,field_description:stock_warehouse_relationship.field_stock_quant_package__id
-msgid "ID"
-msgstr ""
-
-#. module: stock_warehouse_relationship
-#: model:ir.model.fields,field_description:stock_warehouse_relationship.field_stock_move____last_update
-#: model:ir.model.fields,field_description:stock_warehouse_relationship.field_stock_move_line____last_update
-#: model:ir.model.fields,field_description:stock_warehouse_relationship.field_stock_picking____last_update
-#: model:ir.model.fields,field_description:stock_warehouse_relationship.field_stock_quant____last_update
-#: model:ir.model.fields,field_description:stock_warehouse_relationship.field_stock_quant_package____last_update
-msgid "Last Modified on"
-msgstr "Dernière modification le"
-
-#. module: stock_warehouse_relationship
 #: model:ir.model,name:stock_warehouse_relationship.model_stock_quant_package
 msgid "Packages"
 msgstr "Colis"
@@ -62,16 +35,6 @@ msgid "Stock Move"
 msgstr "Mouvement de stock"
 
 #. module: stock_warehouse_relationship
-#: model:ir.model.fields,help:stock_warehouse_relationship.field_stock_move__warehouse_id
-#: model:ir.model.fields,help:stock_warehouse_relationship.field_stock_move_line__warehouse_id
-msgid ""
-"Technical field depicting the warehouse to consider for the route selection "
-"on the next procurement (if any)."
-msgstr ""
-"Champ technique décrivant l'entrepôt à prendre en compte pour le choix de la "
-"route du prochain approvisionnement (s'il y en a un)."
-
-#. module: stock_warehouse_relationship
 #: model:ir.model,name:stock_warehouse_relationship.model_stock_picking
 msgid "Transfer"
 msgstr "Transfert"
@@ -82,5 +45,28 @@ msgstr "Transfert"
 #: model:ir.model.fields,field_description:stock_warehouse_relationship.field_stock_picking__warehouse_id
 #: model:ir.model.fields,field_description:stock_warehouse_relationship.field_stock_quant__warehouse_id
 #: model:ir.model.fields,field_description:stock_warehouse_relationship.field_stock_quant_package__warehouse_id
+#: model:ir.model.fields,field_description:stock_warehouse_relationship.field_stock_reservation__warehouse_id
 msgid "Warehouse"
 msgstr "Entrepôt"
+
+#. module: stock_warehouse_relationship
+#: model:ir.model.fields,help:stock_warehouse_relationship.field_stock_move__warehouse_id
+#: model:ir.model.fields,help:stock_warehouse_relationship.field_stock_move_line__warehouse_id
+#: model:ir.model.fields,help:stock_warehouse_relationship.field_stock_reservation__warehouse_id
+msgid ""
+"the warehouse to consider for the route selection on the next procurement "
+"(if any)."
+msgstr ""
+
+#~ msgid "Display Name"
+#~ msgstr "Nom affiché"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Dernière modification le"
+
+#~ msgid ""
+#~ "Technical field depicting the warehouse to consider for the route "
+#~ "selection on the next procurement (if any)."
+#~ msgstr ""
+#~ "Champ technique décrivant l'entrepôt à prendre en compte pour le choix de "
+#~ "la route du prochain approvisionnement (s'il y en a un)."
