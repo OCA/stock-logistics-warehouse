@@ -33,7 +33,7 @@ msgid "Done"
 msgstr ""
 
 #. module: stock_secondary_unit
-#: model:ir.model,name:stock_secondary_unit.model_product_product
+#: model:ir.model,name:stock_secondary_unit.model_product_template
 msgid "Product"
 msgstr "产品"
 
@@ -43,9 +43,9 @@ msgid "Product Moves (Stock Move Line)"
 msgstr "产品移动（库存移动行）"
 
 #. module: stock_secondary_unit
-#: model:ir.model,name:stock_secondary_unit.model_product_template
-msgid "Product Template"
-msgstr "产品模板"
+#: model:ir.model,name:stock_secondary_unit.model_product_product
+msgid "Product Variant"
+msgstr ""
 
 #. module: stock_secondary_unit
 #: model:ir.model.fields,field_description:stock_secondary_unit.field_product_product__secondary_unit_qty_available
@@ -98,6 +98,9 @@ msgid ""
 "this quantity on assigned moves affects the product reservation, and should "
 "be done with care."
 msgstr ""
+
+#~ msgid "Product Template"
+#~ msgstr "产品模板"
 
 #~ msgid "Stock Product Secondary Unit"
 #~ msgstr "库存产品辅助单位"

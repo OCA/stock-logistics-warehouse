@@ -33,7 +33,7 @@ msgid "Done"
 msgstr "Evasa"
 
 #. module: stock_secondary_unit
-#: model:ir.model,name:stock_secondary_unit.model_product_product
+#: model:ir.model,name:stock_secondary_unit.model_product_template
 msgid "Product"
 msgstr "Prodotto"
 
@@ -43,9 +43,9 @@ msgid "Product Moves (Stock Move Line)"
 msgstr "Movimenti prodotto (riga movimento di magazzino)"
 
 #. module: stock_secondary_unit
-#: model:ir.model,name:stock_secondary_unit.model_product_template
-msgid "Product Template"
-msgstr "Modello prodotto"
+#: model:ir.model,name:stock_secondary_unit.model_product_product
+msgid "Product Variant"
+msgstr ""
 
 #. module: stock_secondary_unit
 #: model:ir.model.fields,field_description:stock_secondary_unit.field_product_product__secondary_unit_qty_available
@@ -104,3 +104,6 @@ msgstr ""
 "prodotto pianificata per essere movimentata. Ridurre la quantità non genera "
 "un ordine residuo. Modificare questa quantità nei movimenti assegnati incide "
 "sulla prenotazione del prodotto e deve essere eseguita con attenzione."
+
+#~ msgid "Product Template"
+#~ msgstr "Modello prodotto"
