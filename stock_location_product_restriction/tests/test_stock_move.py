@@ -289,3 +289,37 @@ class TestStockMove(TransactionCase):
         )
         with self.assertRaises(ValidationError):
             self._process_picking(picking)
+
+    def test_06(self):
+        """
+        Data:
+            location_1 with product_1 but with product restriction = 'same'
+            a picking with one move: product_2 -> location_1
+        Test case:
+            # set the location dest only on the move line and the parent on the
+            # move
+            Process the picking
+        Expected result:
+            ValidationError
+        """
+
+        self.assertEqual(
+            self.product_1,
+            self._get_products_in_location(self.location_1),
+        )
+        self.location_1.specific_product_restriction = "same"
+        self.location_1.invalidate_recordset()
+        parent_location = self.location_1.location_id
+        picking = self._create_and_assign_picking(
+            [
+                ShortMoveInfo(
+                    product=self.product_2,
+                    location_dest=parent_location,
+                    qty=2,
+                ),
+            ],
+            location_dest=parent_location,
+        )
+        picking.move_line_ids.location_dest_id = self.location_1
+        with self.assertRaises(ValidationError):
+            self._process_picking(picking)
