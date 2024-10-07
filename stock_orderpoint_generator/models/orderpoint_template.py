@@ -7,6 +7,7 @@
 from statistics import mean, median_high
 
 from odoo import api, fields, models
+from odoo.tools.safe_eval import safe_eval
 
 
 class OrderpointTemplate(models.Model):
@@ -80,6 +81,32 @@ class OrderpointTemplate(models.Model):
         "scheduled action for every product in this list.",
     )
     auto_last_generation = fields.Datetime(string="Last Automatic Generation")
+    trigger = fields.Selection(
+        selection=[
+            ("auto", "Auto"),
+            ("manual", "Manual"),
+        ],
+        string="Trigger",
+        default="auto",
+        required=True,
+        help="Select trigger",
+    )
+    route_id = fields.Many2one(
+        string="Preferred Route",
+        help="Choose router that you need",
+        comodel_name="stock.location.route",
+        domain=[],
+    )
+
+    visible_product_domain = fields.Boolean(
+        default=lambda self: self.get_use_product_domain_state(),
+    )
+
+    domain = fields.Char(
+        string="Product domain",
+        help="Domain to filter products for which the reordering rules will be "
+        "created. If empty, all products will be used.",
+    )
 
     def _template_fields_to_discard(self):
         """In order to create every orderpoint we should pop this template
@@ -96,6 +123,8 @@ class OrderpointTemplate(models.Model):
             "auto_max_date_end",
             "auto_max_qty_criteria",
             "auto_max_qty",
+            "visible_product_domain",
+            "domain",
         ]
 
     def _disable_old_instances(self, products):
@@ -188,6 +217,7 @@ class OrderpointTemplate(models.Model):
         self._create_instances(products)
 
     def create_auto_orderpoints(self):
+        use_product_domain = self.get_use_product_domain_state()
         for template in self:
             if not template.auto_generate:
                 continue
@@ -196,8 +226,28 @@ class OrderpointTemplate(models.Model):
                 or template.write_date > template.auto_last_generation
             ):
                 template.auto_last_generation = fields.Datetime.now()
-                template.create_orderpoints(template.auto_product_ids)
+                auto_product_ids = self.browse()
+                if use_product_domain and template.domain:
+                    auto_product_ids = self.env["product.product"].search(
+                        safe_eval(template.domain or "[]")
+                    )
+                elif not use_product_domain:
+                    auto_product_ids = template.auto_product_ids
+                if auto_product_ids:
+                    template.create_orderpoints(auto_product_ids)
 
     @api.model
     def _cron_create_auto_orderpoints(self):
         self.search([("auto_generate", "=", True)]).create_auto_orderpoints()
+
+    @api.model
+    def get_use_product_domain_state(self):
+        """
+        This method retrieves the value of a configuration parameter that determines
+        whether a product domain should be used.
+        """
+        return (
+            self.env["ir.config_parameter"]
+            .sudo()
+            .get_param("stock_orderpoint_generator.use_product_domain", False)
+        )

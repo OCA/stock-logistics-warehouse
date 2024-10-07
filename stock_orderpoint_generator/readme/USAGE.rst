@@ -25,3 +25,24 @@ Lastly, you can promptly create Reordering Rules for a product or a product
 template using the "Reordering Rules Generator". Note that it will replace all
 the existing rules for the product. You will usually not want to use this
 feature on products that have Automatic Reordering Rules Templates.
+
+
+Fields "Trigger" and "Preferred Route"
+
+If Preferred rule set in template is not available for product, do not add it on automatic generation. 
+Once "Automatic Generation" is enabled, let's display a flag "Use product domain in Reordering Rule Templates" in stock configuration : 
+
+- if setting is disabled (standard), behavior remains current one
+- if flag is enabled:
+
+in all "reordering rule template" records the "Product" table is not displayed and emptied
+
+a "Product domain" field is visible
+
+Rules are created only for products in domain for that "Reordering Rule Template"
+
+With this feature, user does not need to select products one by one, 
+but can apply a domain of products for which a rule should be created automatically.
+
+
+
