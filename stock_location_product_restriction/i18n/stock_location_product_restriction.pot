@@ -49,6 +49,11 @@ msgid "Product Restriction"
 msgstr ""
 
 #. module: stock_location_product_restriction
+#: model:ir.model,name:stock_location_product_restriction.model_stock_quant
+msgid "Quants"
+msgstr ""
+
+#. module: stock_location_product_restriction
 #: model:ir.model.fields,field_description:stock_location_product_restriction.field_stock_location__restriction_violation_message
 msgid "Restriction Violation Message"
 msgstr ""
@@ -64,17 +69,12 @@ msgid "Specific Product Restriction"
 msgstr ""
 
 #. module: stock_location_product_restriction
-#: model:ir.model,name:stock_location_product_restriction.model_stock_move
-msgid "Stock Move"
-msgstr ""
-
-#. module: stock_location_product_restriction
 #. odoo-python
-#: code:addons/stock_location_product_restriction/models/stock_move.py:0
+#: code:addons/stock_location_product_restriction/models/stock_quant.py:0
 #, python-format
 msgid ""
 "The location {location} can only contain items of the same product. You plan"
-" to move different products to this location. ({products})"
+" to put different products into this location. ({products})"
 msgstr ""
 
 #. module: stock_location_product_restriction
@@ -93,10 +93,10 @@ msgstr ""
 
 #. module: stock_location_product_restriction
 #. odoo-python
-#: code:addons/stock_location_product_restriction/models/stock_move.py:0
+#: code:addons/stock_location_product_restriction/models/stock_quant.py:0
 #, python-format
 msgid ""
-"You plan to move the product {product} to the location {location} but the "
+"You plan to add the product {product} into the location {location} but the "
 "location must only contain items of same product and already contains items "
 "of other product(s) ({existing_products})."
 msgstr ""
