@@ -69,6 +69,7 @@ setuptools.setup(
         'odoo-addon-stock_valuation_layer_total_value>=16.0dev,<16.1dev',
         'odoo-addon-stock_vlm_mgmt>=16.0dev,<16.1dev',
         'odoo-addon-stock_warehouse_calendar>=16.0dev,<16.1dev',
+        'odoo-addon-stock_warehouse_relationship>=16.0dev,<16.1dev',
     ],
     classifiers=[
         'Programming Language :: Python',
