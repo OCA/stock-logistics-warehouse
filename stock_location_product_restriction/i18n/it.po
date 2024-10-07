@@ -56,6 +56,11 @@ msgid "Product Restriction"
 msgstr "Restrizione prodotto"
 
 #. module: stock_location_product_restriction
+#: model:ir.model,name:stock_location_product_restriction.model_stock_quant
+msgid "Quants"
+msgstr ""
+
+#. module: stock_location_product_restriction
 #: model:ir.model.fields,field_description:stock_location_product_restriction.field_stock_location__restriction_violation_message
 msgid "Restriction Violation Message"
 msgstr "Messaggio violazione restrizione"
@@ -71,20 +76,13 @@ msgid "Specific Product Restriction"
 msgstr "Restrizione prodotto specifica"
 
 #. module: stock_location_product_restriction
-#: model:ir.model,name:stock_location_product_restriction.model_stock_move
-msgid "Stock Move"
-msgstr "Movimento di magazzino"
-
-#. module: stock_location_product_restriction
 #. odoo-python
-#: code:addons/stock_location_product_restriction/models/stock_move.py:0
+#: code:addons/stock_location_product_restriction/models/stock_quant.py:0
 #, python-format
 msgid ""
-"The location {location} can only contain items of the same product. You plan"
-" to move different products to this location. ({products})"
+"The location {location} can only contain items of the same product. You plan "
+"to put different products into this location. ({products})"
 msgstr ""
-"L'ubicazione {location} può contenere solo elementi dello stesso prodotto. "
-"Pianificare di spostare i prodotti diversi di questa ubicazione. ({products})"
 
 #. module: stock_location_product_restriction
 #. odoo-python
@@ -104,13 +102,32 @@ msgstr "Con violazione restrizione"
 
 #. module: stock_location_product_restriction
 #. odoo-python
-#: code:addons/stock_location_product_restriction/models/stock_move.py:0
+#: code:addons/stock_location_product_restriction/models/stock_quant.py:0
 #, python-format
 msgid ""
-"You plan to move the product {product} to the location {location} but the "
+"You plan to add the product {product} into the location {location} but the "
 "location must only contain items of same product and already contains items "
 "of other product(s) ({existing_products})."
 msgstr ""
-"Si è pianificato lo spostamento del prodotto {product} nell'ubicazione "
-"{location} ma l'ubicazione deve contenere solo elementi dello stesso "
-"prodotto e contiene già elementi di altri prodotti ({existing_products})."
+
+#~ msgid "Stock Move"
+#~ msgstr "Movimento di magazzino"
+
+#, python-format
+#~ msgid ""
+#~ "The location {location} can only contain items of the same product. You "
+#~ "plan to move different products to this location. ({products})"
+#~ msgstr ""
+#~ "L'ubicazione {location} può contenere solo elementi dello stesso "
+#~ "prodotto. Pianificare di spostare i prodotti diversi di questa "
+#~ "ubicazione. ({products})"
+
+#, python-format
+#~ msgid ""
+#~ "You plan to move the product {product} to the location {location} but the "
+#~ "location must only contain items of same product and already contains "
+#~ "items of other product(s) ({existing_products})."
+#~ msgstr ""
+#~ "Si è pianificato lo spostamento del prodotto {product} nell'ubicazione "
+#~ "{location} ma l'ubicazione deve contenere solo elementi dello stesso "
+#~ "prodotto e contiene già elementi di altri prodotti ({existing_products})."

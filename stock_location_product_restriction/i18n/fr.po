@@ -56,6 +56,11 @@ msgid "Product Restriction"
 msgstr ""
 
 #. module: stock_location_product_restriction
+#: model:ir.model,name:stock_location_product_restriction.model_stock_quant
+msgid "Quants"
+msgstr ""
+
+#. module: stock_location_product_restriction
 #: model:ir.model.fields,field_description:stock_location_product_restriction.field_stock_location__restriction_violation_message
 msgid "Restriction Violation Message"
 msgstr ""
@@ -71,18 +76,14 @@ msgid "Specific Product Restriction"
 msgstr ""
 
 #. module: stock_location_product_restriction
-#: model:ir.model,name:stock_location_product_restriction.model_stock_move
-msgid "Stock Move"
-msgstr "Mouvement de stock"
-
-#. module: stock_location_product_restriction
 #. odoo-python
-#: code:addons/stock_location_product_restriction/models/stock_move.py:0
+#: code:addons/stock_location_product_restriction/models/stock_quant.py:0
 #, python-format
 msgid ""
 "The location {location} can only contain items of the same product. You plan "
 "to put different products into this location. ({products})"
-msgstr "L'emplacement {location} ne peut contenir que des articles identiques. Vous "
+msgstr ""
+"L'emplacement {location} ne peut contenir que des articles identiques. Vous "
 "essayer de mettre d'autres articles dans cet emplacement. ({products}) "
 
 #. module: stock_location_product_restriction
@@ -101,16 +102,19 @@ msgstr "Ne respecte pas les règles"
 
 #. module: stock_location_product_restriction
 #. odoo-python
-#: code:addons/stock_location_product_restriction/models/stock_move.py:0
+#: code:addons/stock_location_product_restriction/models/stock_quant.py:0
 #, python-format
 msgid ""
 "You plan to add the product {product} into the location {location} but the "
 "location must only contain items of same product and already contains items "
 "of other product(s) ({existing_products})."
-msgstr "Vous essayer d'ajouter le produit {product} dans l'emplacemet {location} mais l'"
-"emplacement ne peut contenir que des articles identiques et contient déja "
-"d'autes articles ({existing_products})"
+msgstr ""
+"Vous essayer d'ajouter le produit {product} dans l'emplacemet {location} "
+"mais l'emplacement ne peut contenir que des articles identiques et contient "
+"déja d'autes articles ({existing_products})"
 
+#~ msgid "Stock Move"
+#~ msgstr "Mouvement de stock"
 
 #~ msgid "Has restriction violation"
 #~ msgstr "Ne respecte pas les règles"
