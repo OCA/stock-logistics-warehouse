@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 - TODAY, Wesley Oliveira <wesley.oliveira@escodoo.com.br>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field
+            name="name"
+        >res.config.settings.view.form.inherit.stock (in stock_available_exclude_location)</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="30" />
+        <field name="inherit_id" ref="stock.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <div id="manage_product_packaging" position="after">
+                <div
+                    class="col-12 col-lg-6 o_setting_box"
+                    id="stock_excluded_location_ids_setting"
+                >
+                    <div class="o_setting_right_pane">
+                        <span
+                            class="o_form_label"
+                        >Excluded Locations for Availability</span>
+                        <div class="text-muted">
+                            Define the locations that will be excluded from product availability.
+                        </div>
+                        <div class="row col-12">
+                            <field
+                                name="stock_excluded_location_ids"
+                                widget="many2many_tags"
+                                domain="[('company_id', '=', company_id)]"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </field>
+    </record>
+
+</odoo>
