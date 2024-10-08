@@ -172,7 +172,7 @@ class StockCycleCountRule(models.Model):
                 .search(
                     [
                         ("location_ids", "in", [loc.id]),
-                        ("state", "in", ["confirm", "done", "draft"]),
+                        ("state", "in", ["in_progress", "done", "draft"]),
                     ],
                     order="date desc",
                     limit=1,
