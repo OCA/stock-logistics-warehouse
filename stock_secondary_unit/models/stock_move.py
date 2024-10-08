@@ -36,6 +36,26 @@ class StockMove(models.Model):
             vals["secondary_uom_id"] = self.secondary_uom_id.id
         return vals
 
+    def _merge_moves_fields(self):
+        """Set the last secondary uom qty when merge positive stock move"""
+        res = super()._merge_moves_fields()
+        if self.env.context.get("avoid_accumulate_secondary_uom_qty", False):
+            res["secondary_uom_qty"] = self[-1:].secondary_uom_qty
+        return res
+
+    def _merge_moves(self, merge_into=False):
+        """Set the last secondary uom qty when merge negative stock move"""
+        if (
+            not self.env.context.get("avoid_accumulate_secondary_uom_qty", False)
+            or sum(self.mapped("product_uom_qty")) >= 0.0
+        ):
+            return super()._merge_moves(merge_into=merge_into)
+        secondary_uom_qty = self[-1:].secondary_uom_qty
+        res = super()._merge_moves(merge_into=merge_into)
+        # Use _write to avoid recompute product_uom_qty
+        res._write({"secondary_uom_qty": secondary_uom_qty})
+        return res
+
 
 class StockMoveLine(models.Model):
     _inherit = ["stock.move.line", "product.secondary.unit.mixin"]

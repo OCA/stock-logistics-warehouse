@@ -23,8 +23,9 @@
                                 '&amp;', ('product_tmpl_id.product_variant_ids', 'in', [product_id]),
                                          ('product_id', '=', False)]"
                     options="{'no_create': True}"
-                    attrs="{'column_invisible': [('parent.immediate_transfer', '=', True)], 'readonly': ['|', ('is_initial_demand_editable', '=', False), '&amp;', '&amp;', ('show_operations', '=', True), ('is_locked', '=', True), ('is_initial_demand_editable', '=', False)]}"
-                    optional="show"
+                    attrs="{'column_invisible': [('parent.immediate_transfer', '=', True)],
+                            'readonly': ['|', ('is_initial_demand_editable', '=', False), '&amp;', '&amp;', ('show_operations', '=', True), ('is_locked', '=', True), ('is_initial_demand_editable', '=', False)],
+                            'required': [('secondary_uom_qty', '!=', 0.0)]}"
                 />
             </xpath>
             <xpath
@@ -41,7 +42,7 @@
                                 '&amp;', ('product_tmpl_id.product_variant_ids', 'in', [product_id]),
                                          ('product_id', '=', False)]"
                     options="{'no_create': True}"
-                    attrs="{'invisible': [('parent.immediate_transfer', '=', True)], 'readonly': [('is_initial_demand_editable', '=', False)]}"
+                    attrs="{'invisible': [('parent.immediate_transfer', '=', True)], 'readonly': [('is_initial_demand_editable', '=', False)], 'required': [('secondary_uom_qty', '!=', 0.0)]}"
                 />
             </xpath>
         </field>

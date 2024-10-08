@@ -20,7 +20,7 @@
                     domain="['|', ('product_id', '=', product_id),
                                 '&amp;', ('product_tmpl_id.product_variant_ids', 'in', [product_id]),
                                          ('product_id', '=', False)]"
-                    attrs="{'readonly': [('state', '!=', 'draft'), ('id', '!=', False)]}"
+                    attrs="{'readonly': [('state', '!=', 'draft'), ('id', '!=', False)], 'required': [('secondary_uom_qty', '!=', 0.0)]}"
                     options="{'no_create': True}"
                     optional="show"
                 />
@@ -48,7 +48,7 @@
                     domain="['|', ('product_id', '=', product_id),
                                 '&amp;', ('product_tmpl_id.product_variant_ids', 'in', [product_id]),
                                          ('product_id', '=', False)]"
-                    attrs="{'readonly': [('state', '!=', 'draft'), ('id', '!=', False)]}"
+                    attrs="{'readonly': [('state', '!=', 'draft'), ('id', '!=', False)], 'required': [('secondary_uom_qty', '!=', 0.0)]}"
                     options="{'no_create': True}"
                     optional="show"
                 />
