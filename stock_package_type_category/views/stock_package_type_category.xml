@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="stock_package_type_category_form_view">
+        <field
+            name="name"
+        >stock.package.type.category.form (in stock_package_type_category)</field>
+        <field name="model">stock.package.type.category</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name" />
+                        <field name="code" />
+                        <field name="color" widget="color_picker" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="stock_package_type_category_search_view">
+        <field
+            name="name"
+        >stock.package.type.category.search (in stock_package_type_category)</field>
+        <field name="model">stock.package.type.category</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="code" />
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="stock_package_type_category_tree_view">
+        <field
+            name="name"
+        >stock.package.type.category.tree (in stock_package_type_category)</field>
+        <field name="model">stock.package.type.category</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="color" widget="color_picker" />
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="stock_package_type_category_act_window">
+        <field name="name">Package Type Categories</field>
+        <field name="res_model">stock.package.type.category</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record model="ir.ui.menu" id="stock_package_type_category_menu">
+        <field name="name">Package Type Categories</field>
+        <field name="parent_id" ref="stock.menu_delivery" />
+        <field name="action" ref="stock_package_type_category_act_window" />
+        <field name="sequence" eval="51" />
+        <field name="groups_id" eval="[(4, ref('stock.group_tracking_lot'))]" />
+    </record>
+
+</odoo>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="stock_package_type_form_view">
+        <field
+            name="name"
+        >stock.package.type.form (in stock_package_type_category)</field>
+        <field name="model">stock.package.type</field>
+        <field name="inherit_id" ref="stock.stock_package_type_form" />
+        <field name="arch" type="xml">
+            <group name="delivery" position="before">
+                <group name="category">
+                    <field name="category_id" />
+                </group>
+            </group>
+
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="stock_package_type_tree_view">
+        <field
+            name="name"
+        >stock.package.type.tree (in stock_package_type_category)</field>
+        <field name="model">stock.package.type</field>
+        <field name="inherit_id" ref="stock.stock_package_type_tree" />
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="category_id" optional="hide" />
+            </field>
+        </field>
+    </record>
+
+</odoo>
