@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 14.0\n"
+"Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -38,13 +38,11 @@ msgid ""
 msgstr ""
 
 #. module: product_route_profile
-#: model:ir.model.fields,field_description:product_route_profile.field_product_template__display_name
 #: model:ir.model.fields,field_description:product_route_profile.field_route_profile__display_name
 msgid "Display Name"
 msgstr ""
 
 #. module: product_route_profile
-#: model:ir.model.fields,field_description:product_route_profile.field_product_template__id
 #: model:ir.model.fields,field_description:product_route_profile.field_route_profile__id
 msgid "ID"
 msgstr ""
@@ -55,12 +53,6 @@ msgstr ""
 msgid ""
 "If defined, the priority route profile will be used and will replace the "
 "route profile, only for this company."
-msgstr ""
-
-#. module: product_route_profile
-#: model:ir.model.fields,field_description:product_route_profile.field_product_template____last_update
-#: model:ir.model.fields,field_description:product_route_profile.field_route_profile____last_update
-msgid "Last Modified on"
 msgstr ""
 
 #. module: product_route_profile
@@ -86,7 +78,7 @@ msgstr ""
 
 #. module: product_route_profile
 #: model:ir.model,name:product_route_profile.model_product_template
-msgid "Product Template"
+msgid "Product"
 msgstr ""
 
 #. module: product_route_profile
