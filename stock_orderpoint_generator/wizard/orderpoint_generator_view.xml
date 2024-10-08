@@ -24,20 +24,18 @@
             </form>
         </field>
     </record>
-    <act_window
-        name="Reordering Rules Generator"
-        res_model="stock.warehouse.orderpoint.generator"
-        binding_model="product.product"
-        view_mode="form"
-        target="new"
-        id="act_create_product_conf"
-    />
-    <act_window
-        name="Reordering Rules Generator"
-        res_model="stock.warehouse.orderpoint.generator"
-        binding_model="product.template"
-        view_mode="form"
-        target="new"
-        id="act_create_product_template_conf"
-    />
+    <record id="act_create_product_conf" model="ir.actions.act_window">
+        <field name="name">Reordering Rules Generator</field>
+        <field name="res_model">stock.warehouse.orderpoint.generator</field>
+        <field name="binding_model_id" ref="product.model_product_product" />
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+    <record id="act_create_product_template_conf" model="ir.actions.act_window">
+        <field name="name">Reordering Rules Generator</field>
+        <field name="res_model">stock.warehouse.orderpoint.generator</field>
+        <field name="binding_model_id" ref="product.model_product_template" />
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
 </odoo>
