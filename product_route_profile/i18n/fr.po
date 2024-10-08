@@ -44,13 +44,11 @@ msgstr ""
 "routes sur l'article: acheter, fabriquer, réapprovisionner sur commande, etc."
 
 #. module: product_route_profile
-#: model:ir.model.fields,field_description:product_route_profile.field_product_template__display_name
 #: model:ir.model.fields,field_description:product_route_profile.field_route_profile__display_name
 msgid "Display Name"
 msgstr "Nom"
 
 #. module: product_route_profile
-#: model:ir.model.fields,field_description:product_route_profile.field_product_template__id
 #: model:ir.model.fields,field_description:product_route_profile.field_route_profile__id
 msgid "ID"
 msgstr ""
@@ -62,12 +60,6 @@ msgid ""
 "If defined, the priority route profile will be used and will replace the "
 "route profile, only for this company."
 msgstr ""
-
-#. module: product_route_profile
-#: model:ir.model.fields,field_description:product_route_profile.field_product_template____last_update
-#: model:ir.model.fields,field_description:product_route_profile.field_route_profile____last_update
-msgid "Last Modified on"
-msgstr "Dernière modification le"
 
 #. module: product_route_profile
 #: model:ir.model.fields,field_description:product_route_profile.field_route_profile__write_uid
@@ -92,8 +84,8 @@ msgstr "Profil de Routes Prioritaires"
 
 #. module: product_route_profile
 #: model:ir.model,name:product_route_profile.model_product_template
-msgid "Product Template"
-msgstr "Modèle de produit"
+msgid "Product"
+msgstr ""
 
 #. module: product_route_profile
 #: model:ir.model,name:product_route_profile.model_route_profile
@@ -121,10 +113,16 @@ msgstr "Profils de Routes"
 msgid ""
 "You can define here the routes profiles that run through\n"
 "                your warehouses and that define the flows of your products.\n"
-"                A route profile can be set on each product as \"Route Profile"
-"\" or \"Priority Route Profile\" (company dependent)."
+"                A route profile can be set on each product as \"Route "
+"Profile\" or \"Priority Route Profile\" (company dependent)."
 msgstr ""
 "Vous pouvez définir ici les routes qui régissent les mouvements de vos "
 "produits dans vos entrepôts. \n"
 "Un profil de route peut être défini pour chaque produit en tant que \"Profil "
 "de Routes\" ou \"Profil de Routes Prioritaires\" (société dépendant)."
+
+#~ msgid "Last Modified on"
+#~ msgstr "Dernière modification le"
+
+#~ msgid "Product Template"
+#~ msgstr "Modèle de produit"
