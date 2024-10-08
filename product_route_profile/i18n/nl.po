@@ -44,13 +44,11 @@ msgstr ""
 "aangevuld, enz."
 
 #. module: product_route_profile
-#: model:ir.model.fields,field_description:product_route_profile.field_product_template__display_name
 #: model:ir.model.fields,field_description:product_route_profile.field_route_profile__display_name
 msgid "Display Name"
 msgstr "Weergavenaam"
 
 #. module: product_route_profile
-#: model:ir.model.fields,field_description:product_route_profile.field_product_template__id
 #: model:ir.model.fields,field_description:product_route_profile.field_route_profile__id
 msgid "ID"
 msgstr "ID"
@@ -64,12 +62,6 @@ msgid ""
 msgstr ""
 "Indien gedefinieerd, wordt het prioritaire routeprofiel gebruikt en vervangt "
 "het het routeprofiel, enkel voor dit bedrijf."
-
-#. module: product_route_profile
-#: model:ir.model.fields,field_description:product_route_profile.field_product_template____last_update
-#: model:ir.model.fields,field_description:product_route_profile.field_route_profile____last_update
-msgid "Last Modified on"
-msgstr "Laatst bijgewerkt op"
 
 #. module: product_route_profile
 #: model:ir.model.fields,field_description:product_route_profile.field_route_profile__write_uid
@@ -94,8 +86,8 @@ msgstr "Prioriteit Roue Profiel"
 
 #. module: product_route_profile
 #: model:ir.model,name:product_route_profile.model_product_template
-msgid "Product Template"
-msgstr "Productsjabloon"
+msgid "Product"
+msgstr ""
 
 #. module: product_route_profile
 #: model:ir.model,name:product_route_profile.model_route_profile
@@ -123,8 +115,8 @@ msgstr "Route Profielen"
 msgid ""
 "You can define here the routes profiles that run through\n"
 "                your warehouses and that define the flows of your products.\n"
-"                A route profile can be set on each product as \"Route Profile"
-"\" or \"Priority Route Profile\" (company dependent)."
+"                A route profile can be set on each product as \"Route "
+"Profile\" or \"Priority Route Profile\" (company dependent)."
 msgstr ""
 "U kunt hier de routeprofielen definiëren die door\n"
 "                uw magazijnen lopen en die de stromen van uw producten "
@@ -132,3 +124,9 @@ msgstr ""
 "                Een routeprofiel kan voor elk product worden ingesteld als "
 "\"Routeprofiel\" of \"Prioriteit routeprofiel\" (afhankelijk van het "
 "bedrijf)."
+
+#~ msgid "Last Modified on"
+#~ msgstr "Laatst bijgewerkt op"
+
+#~ msgid "Product Template"
+#~ msgstr "Productsjabloon"
