@@ -1,11 +1,11 @@
 # Copyright 2024 Quartile (https://www.quartile.co)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from openupgradelib import openupgrade
+from odoo.tools.sql import column_exists
 
 
 def pre_init_hook(cr):
-    if not openupgrade.column_exists(cr, "stock_move", "actual_date"):
+    if not column_exists(cr, "stock_move", "actual_date"):
         cr.execute(
             """
             ALTER TABLE stock_move
