@@ -1,0 +1,48 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_account_change_qty_reason
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_account_change_qty_reason
+#: model:ir.model.fields,field_description:stock_account_change_qty_reason.field_stock_inventory_line_reason__account_reason_input_id
+msgid "Input Account for Stock Valuation"
+msgstr ""
+
+#. module: stock_account_change_qty_reason
+#: model:ir.model.fields,field_description:stock_account_change_qty_reason.field_stock_inventory_line_reason__account_reason_output_id
+msgid "Output Account for Stock Valuation"
+msgstr ""
+
+#. module: stock_account_change_qty_reason
+#: model:ir.model,name:stock_account_change_qty_reason.model_stock_inventory_line_reason
+msgid "Stock Inventory Line Reason"
+msgstr ""
+
+#. module: stock_account_change_qty_reason
+#: model:ir.model,name:stock_account_change_qty_reason.model_stock_move
+msgid "Stock Move"
+msgstr ""
+
+#. module: stock_account_change_qty_reason
+#: model:ir.model.fields,help:stock_account_change_qty_reason.field_stock_inventory_line_reason__account_reason_output_id
+msgid ""
+"When set, it will be used as offsetting account when products are issued "
+"from the company."
+msgstr ""
+
+#. module: stock_account_change_qty_reason
+#: model:ir.model.fields,help:stock_account_change_qty_reason.field_stock_inventory_line_reason__account_reason_input_id
+msgid ""
+"When set, it will be used as offsetting account when products are received "
+"into the company."
+msgstr ""
