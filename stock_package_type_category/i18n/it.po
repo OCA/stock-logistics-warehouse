@@ -1,0 +1,106 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_package_type_category
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#. module: stock_package_type_category
+#: model:ir.model.fields,field_description:stock_package_type_category.field_stock_package_type__category_id
+msgid "Category"
+msgstr ""
+
+#. module: stock_package_type_category
+#: model:ir.model.fields,field_description:stock_package_type_category.field_stock_package_type_category__code
+msgid "Code"
+msgstr ""
+
+#. module: stock_package_type_category
+#: model:ir.model.fields,field_description:stock_package_type_category.field_stock_package_type_category__color
+msgid "Color"
+msgstr ""
+
+#. module: stock_package_type_category
+#: model:ir.model.fields,field_description:stock_package_type_category.field_stock_package_type_category__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: stock_package_type_category
+#: model:ir.model.fields,field_description:stock_package_type_category.field_stock_package_type_category__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: stock_package_type_category
+#: model:stock.package.type.category,name:stock_package_type_category.stock_package_type_category_desk
+msgid "Desks"
+msgstr ""
+
+#. module: stock_package_type_category
+#: model:ir.model.fields,field_description:stock_package_type_category.field_stock_package_type_category__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: stock_package_type_category
+#: model:ir.model.fields,field_description:stock_package_type_category.field_stock_package_type_category__id
+msgid "ID"
+msgstr ""
+
+#. module: stock_package_type_category
+#: model:ir.model.fields,field_description:stock_package_type_category.field_stock_package_type_category____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: stock_package_type_category
+#: model:ir.model.fields,field_description:stock_package_type_category.field_stock_package_type_category__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: stock_package_type_category
+#: model:ir.model.fields,field_description:stock_package_type_category.field_stock_package_type_category__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: stock_package_type_category
+#: model:ir.model.fields,field_description:stock_package_type_category.field_stock_package_type_category__name
+msgid "Name"
+msgstr ""
+
+#. module: stock_package_type_category
+#: model:ir.actions.act_window,name:stock_package_type_category.stock_package_type_category_act_window
+#: model:ir.ui.menu,name:stock_package_type_category.stock_package_type_category_menu
+msgid "Package Type Categories"
+msgstr ""
+
+#. module: stock_package_type_category
+#: model:stock.package.type.category,name:stock_package_type_category.stock_package_type_category_parts
+msgid "Spare Parts"
+msgstr ""
+
+#. module: stock_package_type_category
+#: model:ir.model,name:stock_package_type_category.model_stock_package_type_category
+msgid "Stock Package Type Category"
+msgstr ""
+
+#. module: stock_package_type_category
+#: model:ir.model,name:stock_package_type_category.model_stock_package_type
+msgid "Stock package type"
+msgstr ""
+
+#. module: stock_package_type_category
+#: model:ir.model.constraint,message:stock_package_type_category.constraint_stock_package_type_category_code_unique
+msgid "The package type category code should be unique"
+msgstr ""
+
+#. module: stock_package_type_category
+#: model:ir.model.fields,help:stock_package_type_category.field_stock_package_type__category_id
+msgid "This is the category this package type belongs to"
+msgstr ""
