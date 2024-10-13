@@ -12,7 +12,7 @@ class ProcurementGroup(models.Model):
         # Store the reorder source Procurement Groups
         # To be used for reference and link navigation
         # Also updates the Origin field of the PO
-        Forecast = self.env["report.stock.report_product_product_replenishment"]
+        Forecast = self.env["report.stock.report_product_product_replenishment"].sudo()
         new_procurements = []
         for procurement in procurements:
             ForecastWH = Forecast
