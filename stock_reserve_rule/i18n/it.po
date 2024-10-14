@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-08-22 11:06+0000\n"
+"PO-Revision-Date: 2024-10-14 18:06+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -137,7 +137,7 @@ msgstr "Intero imballaggio"
 #: model:product.product,name:stock_reserve_rule.product_funky_socks
 #: model:product.template,name:stock_reserve_rule.product_funky_socks_product_template
 msgid "Funky Socks"
-msgstr "Calzetti mattacchioni"
+msgstr "Calzini mattacchioni"
 
 #. module: stock_reserve_rule
 #: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_move__id
