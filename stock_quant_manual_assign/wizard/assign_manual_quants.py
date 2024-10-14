@@ -57,6 +57,8 @@ class AssignManualQuants(models.TransientModel):
     )
 
     def assign_quants(self):
+        if self.move_qty < 0.0:
+            raise ValidationError(_("Assigned more items than required"))
         move = self.move_id
         move._do_unreserve()
         for line in self.quants_lines:
@@ -172,30 +174,38 @@ class AssignManualQuantsLines(models.TransientModel):
     )
     # This is not correctly shown as related or computed, so we make it regular
     on_hand = fields.Float(
-        readonly=True,
         string="On Hand",
         digits="Product Unit of Measure",
     )
-    reserved = fields.Float(
-        string="Others Reserved", digits="Product Unit of Measure", readonly=True
-    )
+    reserved = fields.Float(string="Others Reserved", digits="Product Unit of Measure")
+    # If main field is set to readonly, they reset to 0.0 after a ValidationError
+    # But they still need to be readonly so we solve it in this way
+    on_hand_view = fields.Float(related="on_hand", readonly=True)
+    reserved_view = fields.Float(related="reserved", readonly=True)
     selected = fields.Boolean(string="Select")
+    hijack = fields.Boolean(string="Hijack")
     qty = fields.Float(string="QTY", digits="Product Unit of Measure")
+    qty_had_hijack = fields.Boolean()
 
-    @api.onchange("selected")
+    @api.onchange("selected", "hijack")
     def _onchange_selected(self):
         for record in self:
             if not record.selected:
                 record.qty = 0
-            elif not record.qty:
+                record.hijack = False
+                record.qty_had_hijack = False
+            elif not (record.qty and record.qty_had_hijack == record.hijack):
                 # This takes current "snapshot" situation, so that we don't
                 # have to compute each time if current reserved quantity is
                 # for this current move. If other operations change available
                 # quantity on quant, a constraint would be raised later on
                 # validation.
-                quant_qty = record.on_hand - record.reserved
-                remaining_qty = record.assign_wizard.move_qty
-                record.qty = min(quant_qty, remaining_qty)
+                quant_qty = record.on_hand
+                if not record.hijack:
+                    # We ignore already reserved items, unless we're hijacking
+                    quant_qty -= record.reserved
+                record.qty = quant_qty
+                record.qty_had_hijack = record.hijack
 
     @api.constrains("qty")
     def _check_qty(self):
@@ -212,6 +222,9 @@ class AssignManualQuantsLines(models.TransientModel):
             reserved = quant.reserved_quantity - sum(
                 move_lines.mapped("product_uom_qty")
             )
+            if record.hijack:
+                # when hijacking, we disregard existing reservations
+                reserved = 0
             if (
                 float_compare(
                     record.qty,
@@ -229,6 +242,32 @@ class AssignManualQuantsLines(models.TransientModel):
                     )
                 )
 
+    def _unreserve_other(self):
+        self.ensure_one()
+        # This function can only be used when hijacking
+        assert self.hijack
+        precision_digits = self.env["decimal.precision"].precision_get(
+            "Product Unit of Measure"
+        )
+        reserved = self.quant_id.reserved_quantity
+        move_lines = (
+            self.env["stock.move.line"]
+            .search(self.quant_id.action_view_stock_moves()["domain"])
+            .filtered(lambda l: l.state == "assigned")
+        )
+        move_lines_total = sum(ml.product_uom_qty for ml in move_lines)
+        if (
+            float_compare(reserved, move_lines_total, precision_digits=precision_digits)
+            == 0
+        ):
+            move_lines.unlink()
+        else:
+            raise ValidationError(
+                _("Cannot hijack: found {} reserved ones but expected {}").format(
+                    len(move_lines), reserved
+                )
+            )
+
     def _assign_quant_line(self):
         self.ensure_one()
         quant = self.env["stock.quant"]
@@ -236,6 +275,8 @@ class AssignManualQuantsLines(models.TransientModel):
             "Product Unit of Measure"
         )
         move = self.assign_wizard.move_id
+        if self.hijack:
+            self._unreserve_other()
         if float_compare(self.qty, 0.0, precision_digits=precision_digits) > 0:
             available_quantity = quant._get_available_quantity(
                 move.product_id,
