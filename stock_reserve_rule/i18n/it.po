@@ -6,61 +6,65 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2024-10-14 18:06+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.6.2\n"
 
 #. module: stock_reserve_rule
 #: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule__active
 msgid "Active"
-msgstr ""
+msgstr "Attiva"
 
 #. module: stock_reserve_rule
 #: model_terms:ir.actions.act_window,help:stock_reserve_rule.action_stock_reserve_rule
 msgid "Add a Reservation Rule"
-msgstr ""
+msgstr "Aggiungi una regola di prenotazione"
 
 #. module: stock_reserve_rule
 #: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule_removal__removal_strategy
 msgid "Advanced Removal Strategy"
-msgstr ""
+msgstr "Strategia di rimozione avanzata"
 
 #. module: stock_reserve_rule
 #: model:ir.model.fields,help:stock_reserve_rule.field_stock_reserve_rule__picking_type_ids
 msgid "Apply this rule only if the operation type of the move is the same."
 msgstr ""
+"Applica questa regola solo se il tipo di operazione del movimento è lo "
+"stesso."
 
 #. module: stock_reserve_rule
 #: model_terms:ir.ui.view,arch_db:stock_reserve_rule.view_stock_reserve_rule_form
 #: model_terms:ir.ui.view,arch_db:stock_reserve_rule.view_stock_reserve_rule_search
 msgid "Archived"
-msgstr ""
+msgstr "In archivio"
 
 #. module: stock_reserve_rule
 #: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule__company_id
 msgid "Company"
-msgstr ""
+msgstr "Azienda"
 
 #. module: stock_reserve_rule
 #: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule__create_uid
 #: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule_removal__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Creato da"
 
 #. module: stock_reserve_rule
 #: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule__create_date
 #: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule_removal__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Creato il"
 
 #. module: stock_reserve_rule
 #: model:ir.model.fields.selection,name:stock_reserve_rule.selection__stock_reserve_rule_removal__removal_strategy__default
 msgid "Default Removal Strategy"
-msgstr ""
+msgstr "Strategia di rimozione predefinita"
 
 #. module: stock_reserve_rule
 #: model:ir.model.fields,help:stock_reserve_rule.field_stock_reserve_rule_removal__removal_strategy
@@ -69,115 +73,126 @@ msgid ""
 "Empty Bins: take goods from a location only if the bin is empty afterwards.\n"
 "Full Packaging: take goods from a location only if the location quantity matches a packaging quantity (do not open boxes)."
 msgstr ""
+"Definisce se e come la merce è prelevata dalle ubicazioni. Predefinito: "
+"preleva seguendo la strategia di rimozione configurata (FIFO, FEFO, ...).\n"
+"Svuota le casse: preleva la merce da un'ubicazione solo se la cassa è vuota "
+"a fine operazione.\n"
+"Intero imballaggio: preleva la merce da un'ubicazione solo se la quantità "
+"dell'ubicazione corrisponde alla quantità di un imballaggio (non aprire le "
+"scatole)."
 
 #. module: stock_reserve_rule
 #: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule__name
 #: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule_removal__name
 msgid "Description"
-msgstr ""
+msgstr "Descrizione"
 
 #. module: stock_reserve_rule
 #: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule__display_name
 #: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule_removal__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nome visualizzato"
 
 #. module: stock_reserve_rule
 #: model:ir.model.fields,help:stock_reserve_rule.field_stock_reserve_rule__rule_domain
 msgid ""
 "Domain based on Stock Moves, to define if the rule is applicable or not."
 msgstr ""
+"Dominio basato sui movimenti di magazzino, per definire se la regola è "
+"applicabile o meno."
 
 #. module: stock_reserve_rule
 #: model:ir.model.fields.selection,name:stock_reserve_rule.selection__stock_reserve_rule_removal__removal_strategy__empty_bin
 msgid "Empty Bins"
-msgstr ""
+msgstr "Cesti vuoti"
 
 #. module: stock_reserve_rule
 #: model:ir.model.fields,help:stock_reserve_rule.field_stock_reserve_rule_removal__quant_domain
 msgid ""
 "Filter Quants allowed to be reserved for this location and sub-locations."
 msgstr ""
+"Filtra quanti che possono essere prenotati per questa ubicazione e "
+"ubicazioni figlie."
 
 #. module: stock_reserve_rule
 #: model:ir.model.fields.selection,name:stock_reserve_rule.selection__stock_reserve_rule_removal__removal_strategy__packaging
 msgid "Full Packaging"
-msgstr ""
+msgstr "Intero imballaggio"
 
 #. module: stock_reserve_rule
 #: model:product.template,name:stock_reserve_rule.product_funky_socks_product_template
 msgid "Funky Socks"
-msgstr ""
+msgstr "Calzini mattacchioni"
 
 #. module: stock_reserve_rule
 #: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule__id
 #: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule_removal__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: stock_reserve_rule
 #: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule____last_update
 #: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule_removal____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Ultima modifica il"
 
 #. module: stock_reserve_rule
 #: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule__write_uid
 #: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule_removal__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Ultimo aggiornamento di"
 
 #. module: stock_reserve_rule
 #: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule__write_date
 #: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule_removal__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Ultimo aggiornamento il"
 
 #. module: stock_reserve_rule
 #: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule__location_id
 #: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule_removal__location_id
 msgid "Location"
-msgstr ""
+msgstr "Ubicazione"
 
 #. module: stock_reserve_rule
 #: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule__picking_type_ids
 msgid "Operation Types"
-msgstr ""
+msgstr "TIpi di operazione"
 
 #. module: stock_reserve_rule
 #: model:ir.model.fields,help:stock_reserve_rule.field_stock_reserve_rule_removal__packaging_level_ids
 msgid "Optional packaging level when using 'Full Packaging'.\n"
-msgstr ""
+msgstr "Livello imballaggio opzionale quando si usa 'Imballaggio completo'.\n"
 
 #. module: stock_reserve_rule
 #: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule_removal__packaging_level_ids
 msgid "Packaging Level"
-msgstr ""
+msgstr "Livello inballaggio"
 
 #. module: stock_reserve_rule
 #: model:ir.model,name:stock_reserve_rule.model_stock_picking_type
 msgid "Picking Type"
-msgstr ""
+msgstr "Tipo prelievo"
 
 #. module: stock_reserve_rule
 #: model:ir.model,name:stock_reserve_rule.model_stock_quant
 msgid "Quants"
-msgstr ""
+msgstr "Quanti"
 
 #. module: stock_reserve_rule
 #: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule_removal__quant_domain
 msgid "Quants Domain"
-msgstr ""
+msgstr "Dominio quanti"
 
 #. module: stock_reserve_rule
 #: model_terms:ir.ui.view,arch_db:stock_reserve_rule.view_stock_reserve_rule_form
 msgid "Removal Rule"
-msgstr ""
+msgstr "Regola di rimozione"
 
 #. module: stock_reserve_rule
 #: model_terms:ir.ui.view,arch_db:stock_reserve_rule.view_stock_reserve_rule_form
 msgid "Removal Rules"
-msgstr ""
+msgstr "Regole di rimozione"
 
 #. module: stock_reserve_rule
 #. odoo-python
@@ -187,66 +202,68 @@ msgid ""
 "Removal rule '%(removal_name)s' location has to be a child of the rule "
 "location '%(child_rule)s'."
 msgstr ""
+"L'ubicazione della regola di rimozione '%(removal_name)s' deve essere figlia "
+"dell'ubicazione della regola '%(child_rule)s'."
 
 #. module: stock_reserve_rule
 #: model_terms:ir.ui.view,arch_db:stock_reserve_rule.view_stock_reserve_rule_form
 #: model_terms:ir.ui.view,arch_db:stock_reserve_rule.view_stock_reserve_rule_search
 msgid "Reservation Rule"
-msgstr ""
+msgstr "Regola prenotazione"
 
 #. module: stock_reserve_rule
 #: model:ir.actions.act_window,name:stock_reserve_rule.action_stock_reserve_rule
 #: model:ir.ui.menu,name:stock_reserve_rule.menu_stock_reserve_rule
 msgid "Reservation Rules"
-msgstr ""
+msgstr "Regole prenotazione"
 
 #. module: stock_reserve_rule
 #: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_picking_type__reserve_rule_ids
 msgid "Reserve Rule"
-msgstr ""
+msgstr "Regola di prenotazione"
 
 #. module: stock_reserve_rule
 #: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule_removal__rule_id
 msgid "Rule"
-msgstr ""
+msgstr "Regola"
 
 #. module: stock_reserve_rule
 #: model_terms:ir.ui.view,arch_db:stock_reserve_rule.view_stock_reserve_rule_form
 msgid "Rule Applicability"
-msgstr ""
+msgstr "Applicabilità regola"
 
 #. module: stock_reserve_rule
 #: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule__rule_domain
 msgid "Rule Domain"
-msgstr ""
+msgstr "Dominio regola"
 
 #. module: stock_reserve_rule
 #: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule__rule_removal_ids
 msgid "Rule Removal"
-msgstr ""
+msgstr "Rimozione regola"
 
 #. module: stock_reserve_rule
 #: model:ir.model.fields,help:stock_reserve_rule.field_stock_reserve_rule__location_id
 msgid "Rule applied only in this location and sub-locations."
-msgstr ""
+msgstr "Regola applicata solo in questa ubicazione e figlie."
 
 #. module: stock_reserve_rule
 #: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule__sequence
 #: model:ir.model.fields,field_description:stock_reserve_rule.field_stock_reserve_rule_removal__sequence
 msgid "Sequence"
-msgstr ""
+msgstr "Sequenza"
 
 #. module: stock_reserve_rule
 #: model:ir.model,name:stock_reserve_rule.model_stock_move
 msgid "Stock Move"
-msgstr ""
+msgstr "Movimento di magazzino"
 
 #. module: stock_reserve_rule
 #: model:ir.model,name:stock_reserve_rule.model_stock_reserve_rule
 msgid "Stock Reservation Rule"
-msgstr ""
+msgstr "Regola prenotazione magazzino"
 
 #. module: stock_reserve_rule
 #: model:ir.model,name:stock_reserve_rule.model_stock_reserve_rule_removal
 msgid "Stock Reservation Rule Removal"
-msgstr ""
+msgstr "Regola rimozione prenotazione magazzino"
