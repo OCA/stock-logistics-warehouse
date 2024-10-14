@@ -7,6 +7,14 @@
         <field name="model">stock.location</field>
         <field name="inherit_id" ref="stock.view_location_form" />
         <field name="arch" type="xml">
+            <div name="button_box" position="after">
+                <field name="has_package_restriction_violation" invisible="1" />
+                <div
+                    class="alert alert-danger"
+                    role="alert"
+                    attrs="{'invisible': [('has_package_restriction_violation','=',False)]}"
+                ><field name="package_restriction_violation_message" /></div>
+            </div>
             <xpath expr="//group[last()]">
                 <group name="restrictions" string="Restrictions">
                     <field name="package_restriction" />
@@ -14,15 +22,34 @@
             </xpath>
         </field>
     </record>
+
+    <record model="ir.ui.view" id="stock_location_search_view">
+        <field
+            name="name"
+        >stock.location.search (in stock_location_package_restriction)</field>
+        <field name="model">stock.location</field>
+        <field name="inherit_id" ref="stock.view_location_search" />
+        <field name="arch" type="xml">
+            <filter name="inactive" position="after">
+                <filter
+                    string="With package restriction violation"
+                    name="has_package_restriction_violation"
+                    domain="[('has_package_restriction_violation','=',True)]"
+                />
+            </filter>
+        </field>
+    </record>
+
     <record model="ir.ui.view" id="stock_location_tree_view">
         <field
             name="name"
-        >stock.location.tree (in stock_location_unique_product)</field>
+        >stock.location.tree (in stock_location_package_restriction)</field>
         <field name="model">stock.location</field>
         <field name="inherit_id" ref="stock.view_location_tree2" />
         <field name="arch" type="xml">
             <field name="company_id" position="before">
-                <field name="package_restriction" />
+                <field name="has_package_restriction_violation" />
+                <field name="package_restriction" optional="hide" />
             </field>
         </field>
     </record>
