@@ -17,9 +17,10 @@ class TestStockValuationStandard(TestStockValuationStandard):
     def setUp(self):
         super(TestStockValuationStandard, self).setUp()
 
-    @freeze_time("2022-12-02 23:00:00", tz_offset=9)
+    @freeze_time("2022-12-02 23:00:00")
     def test_svl_accounting_date_real_time(self):
-        self.product1.product_tmpl_id.categ_id.property_valuation = "real_time"
+        self.product1.categ_id.property_valuation = "real_time"
+        self.env.user.tz = "Asia/Tokyo"
         self._make_in_move(self.product1, 10)
         valuation_layer = self.product1.stock_valuation_layer_ids
         self.assertEqual(valuation_layer.accounting_date, date(2022, 12, 3))
