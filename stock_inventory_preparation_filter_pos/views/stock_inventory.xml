@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  Copyright 2021 Akretion France (http://www.akretion.com/)
+  @author: Alexis de Lattre <alexis.delattre@akretion.com>
+  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+
+    <record id="view_inventory_form" model="ir.ui.view">
+        <field name="model">stock.inventory</field>
+        <field
+            name="inherit_id"
+            ref="stock_inventory_preparation_filter.view_inventory_group_form"
+        />
+        <field name="arch" type="xml">
+            <field name="owner_id" position="after">
+                <field
+                    name="pos_categ_ids"
+                    widget="many2many_tags"
+                    atts="{'invisible': [('product_selection', '!=', 'pos_categories')]}"
+                />
+            </field>
+
+            <field name="product_ids" position="attributes">
+                <attribute name="attrs" operation="update">
+                    {'invisible': [('product_selection', 'in', ['all', 'category', 'one', 'domain',
+                    'pos_categories'])]}
+                </attribute>
+            </field>
+        </field>
+    </record>
+
+</odoo>
