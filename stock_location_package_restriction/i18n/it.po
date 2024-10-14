@@ -6,13 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2024-10-14 09:19+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.6.2\n"
 
 #. module: stock_location_package_restriction
 #: model:ir.model.fields,help:stock_location_package_restriction.field_stock_location__package_restriction
@@ -36,6 +38,26 @@ msgid ""
 "                on the location\n"
 "        "
 msgstr ""
+"\n"
+"            Controlla se l'ubicazione può contenere prodotti non in un collo."
+"\n"
+"\n"
+"            Opzioni:\n"
+"              * Falso (non impostato): nessuna restrizione, l'ubicazione può "
+"contenere prodotti\n"
+"                con e senza collo\n"
+"              * Vietato: l'ubicazione non può avere prodotti che fanno parte "
+"di un collo\n"
+"              * Obbligatorio e univoco: l'ubicazione non può avere prodotti "
+"che\n"
+"                fanno parte di un collo e non puoi avere più di un collo \n"
+"                nell'ubicazione\n"
+"              * Obbligatorio e non univoco: l'ubicazione non può avere "
+"prodotti\n"
+"                che non fanno parte di un collo e si possono archiviare più "
+"colli\n"
+"                 nell'ubicazione\n"
+"        "
 
 #. module: stock_location_package_restriction
 #. odoo-python
@@ -45,6 +67,8 @@ msgid ""
 "A package is mandatory on the location {location}.\n"
 "You cannot move the product(s) {product} without a package."
 msgstr ""
+"È obbligatorio un collo nell'ubicazione {location}.\n"
+"Non si può muovere il prodotto(i) {product} senza collo."
 
 #. module: stock_location_package_restriction
 #. odoo-python
@@ -54,43 +78,45 @@ msgid ""
 "A package is not allowed on the location {location}.You cannot move the "
 "product(s) {product} with a package."
 msgstr ""
+"Non è consentito l'uso del collo nell'ubicazione {location}. Non si può "
+"muovere il prodotto (i) {product} con il collo."
 
 #. module: stock_location_package_restriction
 #: model:ir.model.fields,field_description:stock_location_package_restriction.field_stock_location__has_package_restriction_violation
 msgid "Has Package Restriction Violation"
-msgstr ""
+msgstr "Ha una violazione della restrizione colli"
 
 #. module: stock_location_package_restriction
 #: model:ir.model,name:stock_location_package_restriction.model_stock_location
 msgid "Inventory Locations"
-msgstr ""
+msgstr "Ubicazioni di inventario"
 
 #. module: stock_location_package_restriction
 #. odoo-python
 #: code:addons/stock_location_package_restriction/models/stock_location.py:0
 #, python-format
 msgid "Only one package is allowed on the location {location}."
-msgstr ""
+msgstr "È consentito solo un collo nell'ubicazione {location}."
 
 #. module: stock_location_package_restriction
 #: model:ir.model.fields,field_description:stock_location_package_restriction.field_stock_location__package_restriction
 msgid "Package Restriction"
-msgstr ""
+msgstr "Restrizione colli"
 
 #. module: stock_location_package_restriction
 #: model:ir.model.fields,field_description:stock_location_package_restriction.field_stock_location__package_restriction_violation_message
 msgid "Package Restriction Violation Message"
-msgstr ""
+msgstr "Messaggio violazione restrizione colli"
 
 #. module: stock_location_package_restriction
 #: model_terms:ir.ui.view,arch_db:stock_location_package_restriction.stock_location_form_view
 msgid "Restrictions"
-msgstr ""
+msgstr "Restrizioni"
 
 #. module: stock_location_package_restriction
 #: model:ir.model,name:stock_location_package_restriction.model_stock_move
 msgid "Stock Move"
-msgstr ""
+msgstr "Movimento di magazzino"
 
 #. module: stock_location_package_restriction
 #. odoo-python
@@ -100,6 +126,8 @@ msgid ""
 "This location should only contain a single package but it contains the "
 "package(s): {packages}"
 msgstr ""
+"L'ubicazione può contenere solo un singolo collo ma contiene i colli: "
+"{packages}"
 
 #. module: stock_location_package_restriction
 #. odoo-python
@@ -109,6 +137,8 @@ msgid ""
 "This location should only contain items in a package but it contains the "
 "items of product(s): {products}"
 msgstr ""
+"Questa ubicazione può contenere solo oggetti in un collo ma contiene "
+"elementi del prodotto (i): {products}"
 
 #. module: stock_location_package_restriction
 #. odoo-python
@@ -118,8 +148,10 @@ msgid ""
 "This location should only contain items without package but it contains the "
 "package(s): {packages}"
 msgstr ""
+"Questa ubicazione può contenere solo elementi senza collo ma contiene il "
+"collo(i): {packages}"
 
 #. module: stock_location_package_restriction
 #: model_terms:ir.ui.view,arch_db:stock_location_package_restriction.stock_location_search_view
 msgid "With package restriction violation"
-msgstr ""
+msgstr "Con violazione restrizione colli"
