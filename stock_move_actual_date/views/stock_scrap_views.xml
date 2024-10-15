@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="stock_scrap_search_view" model="ir.ui.view">
+        <field name="name">stock.scrap.search</field>
+        <field name="model">stock.scrap</field>
+        <field name="inherit_id" ref="stock.stock_scrap_search_view" />
+        <field name="arch" type="xml">
+            <field name="create_date" position="after">
+                <filter
+                    name="actual_date"
+                    date="actual_date"
+                    default_period="this_month"
+                />
+            </field>
+            <filter name="transfer" position="after">
+                <filter
+                    string="Actual Date"
+                    name="by_actual_date"
+                    domain="[]"
+                    context="{'group_by': 'actual_date'}"
+                />
+            </filter>
+        </field>
+    </record>
+    <record id="stock_scrap_tree_view" model="ir.ui.view">
+        <field name="name">stock.scrap.tree</field>
+        <field name="model">stock.scrap</field>
+        <field name="inherit_id" ref="stock.stock_scrap_tree_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='date_done']" position="after">
+                <field name="actual_date" optional="show" />
+            </xpath>
+        </field>
+    </record>
+    <record id="stock_scrap_form_view" model="ir.ui.view">
+        <field name="name">stock.scrap.form</field>
+        <field name="model">stock.scrap</field>
+        <field name="inherit_id" ref="stock.stock_scrap_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='date_done']" position="before">
+                <field name="is_editable_actual_date" invisible="1" />
+                <field
+                    name="actual_date"
+                    attrs="{'readonly': [('is_editable_actual_date', '=', False)]}"
+                />
+            </xpath>
+        </field>
+    </record>
+    <record id="stock_scrap_view_form2_mrp_inherit_mrp" model="ir.ui.view">
+        <field name="name">stock.scrap.view.form2.inherit.mrp</field>
+        <field name="model">stock.scrap</field>
+        <field name="inherit_id" ref="stock.stock_scrap_form_view2" />
+        <field name="arch" type="xml">
+            <field name="location_id" position="before">
+                <field name="actual_date" />
+            </field>
+        </field>
+    </record>
+</odoo>

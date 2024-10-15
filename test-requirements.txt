@@ -1,0 +1,1 @@
+odoo-addon-stock_inventory_discrepancy @ git+https://github.com/OCA/stock-logistics-warehouse@refs/pull/1966/head#subdirectory=setup/stock_inventory_discrepancy
