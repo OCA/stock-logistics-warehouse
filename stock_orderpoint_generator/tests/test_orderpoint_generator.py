@@ -1,6 +1,7 @@
 # Copyright 2016 Cyril Gaudin (Camptocamp)
 # Copyright 2019 David Vidal - Tecnativa
 # Copyright 2020 Víctor Martínez - Tecnativa
+# Copyright 2024 Florian Mounier - Akretion (http://www.akretion.com).
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from odoo import models
 from odoo.exceptions import UserError
@@ -267,6 +268,46 @@ class TestOrderpointGenerator(SavepointCase):
                 "date": "2019-01-01 05:00:00",
             }
         )
+        cls.uom_unit = cls.env.ref("uom.product_uom_unit")
+        route_test = (
+            cls.env["stock.location.route"].create({"name": "Stock to Test"}).id
+        )
+        cls.env["stock.rule"].create(
+            {
+                "name": "Stock to Test",
+                "action": "pull_push",
+                "procure_method": "make_to_stock",
+                "location_id": cls.wh1.lot_stock_id.id,
+                "location_src_id": cls.env.ref("stock.stock_location_suppliers").id,
+                "route_id": route_test,
+                "picking_type_id": cls.wh1.in_type_id.id,
+                "warehouse_id": cls.wh1.id,
+                "group_propagation_option": "none",
+                "active": True,
+            }
+        )
+        cls.productA = cls.env["product.product"].create(
+            {
+                "name": "Product A",
+                "type": "product",
+                "route_ids": [(6, 0, [route_test])],
+            }
+        )
+        cls.productB = cls.env["product.product"].create(
+            {
+                "name": "Product B",
+                "type": "product",
+                "route_ids": [(6, 0, [route_test])],
+            }
+        )
+        cls.productC = cls.env["product.product"].create(
+            {
+                "name": "Product C",
+                "type": "product",
+                "route_ids": [(6, 0, [route_test])],
+            }
+        )
+        cls.partner = cls.env["res.partner"].create({"name": "Partner"})
 
     def check_orderpoint(self, products, template, fields_dict):
         orderpoints = self.orderpoint_model.search(
@@ -407,3 +448,119 @@ class TestOrderpointGenerator(SavepointCase):
         )
         self.assertEqual(orderpoints[0].product_min_qty, 100)
         self.assertEqual(orderpoints[1].product_min_qty, 1043)
+
+    def test_stock_orderpoint_template_orderpoint_creation(self):
+        warehouse = self.wh1
+
+        template = self.env["stock.warehouse.orderpoint.template"].create(
+            {
+                "location_id": warehouse.lot_stock_id.id,
+                "product_min_qty": 0.0,
+                "product_max_qty": 15.0,
+                "auto_add_product": True,
+                "warehouse_id": warehouse.id,
+            }
+        )
+        self.assertFalse(
+            self.env["stock.warehouse.orderpoint"].search(
+                [("product_id", "=", self.productA.id)]
+            )
+        )
+
+        picking = self.env["stock.picking"].create(
+            {
+                "partner_id": self.partner.id,
+                "picking_type_id": warehouse.out_type_id.id,
+                "location_id": warehouse.lot_stock_id.id,
+                "location_dest_id": self.ref("stock.stock_location_customers"),
+                "move_lines": [
+                    (
+                        0,
+                        0,
+                        {
+                            "name": "Delivery",
+                            "product_id": self.productA.id,
+                            "product_uom": self.uom_unit.id,
+                            "product_uom_qty": 12.0,
+                        },
+                    )
+                ],
+            }
+        )
+        picking.action_confirm()
+
+        orderpoint = self.env["stock.warehouse.orderpoint"].search(
+            [("product_id", "=", self.productA.id)]
+        )
+
+        self.assertTrue(orderpoint)
+        self.assertEqual(orderpoint.orderpoint_template_id, template)
+        self.assertEqual(orderpoint.product_min_qty, 0.0)
+        self.assertEqual(orderpoint.product_max_qty, 15.0)
+        self.assertEqual(orderpoint.warehouse_id, warehouse)
+        self.assertEqual(orderpoint.location_id, warehouse.lot_stock_id)
+        self.assertEqual(orderpoint.company_id, warehouse.company_id)
+        self.assertEqual(orderpoint.trigger, "auto")
+
+        receipt_move = self.env["stock.move"].search(
+            [
+                ("product_id", "=", self.productA.id),
+                ("location_id", "=", self.env.ref("stock.stock_location_suppliers").id),
+            ]
+        )
+        self.assertTrue(receipt_move)
+        self.assertEqual(receipt_move.product_uom_qty, 27.0)
+
+    def test_stock_orderpoint_template_orderpoint_priority(self):
+        warehouse = self.wh1
+
+        self.env["stock.warehouse.orderpoint"].create(
+            {
+                "product_id": self.productA.id,
+                "location_id": warehouse.lot_stock_id.id,
+                "product_min_qty": 0.0,
+                "product_max_qty": 5.0,
+                "warehouse_id": warehouse.id,
+            }
+        )
+
+        self.env["stock.warehouse.orderpoint.template"].create(
+            {
+                "location_id": warehouse.lot_stock_id.id,
+                "product_min_qty": 0.0,
+                "product_max_qty": 15.0,
+                "auto_add_product": True,
+                "warehouse_id": warehouse.id,
+            }
+        )
+
+        picking = self.env["stock.picking"].create(
+            {
+                "partner_id": self.partner.id,
+                "picking_type_id": warehouse.out_type_id.id,
+                "location_id": warehouse.lot_stock_id.id,
+                "location_dest_id": self.ref("stock.stock_location_customers"),
+                "move_lines": [
+                    (
+                        0,
+                        0,
+                        {
+                            "name": "Delivery",
+                            "product_id": self.productA.id,
+                            "product_uom": self.uom_unit.id,
+                            "product_uom_qty": 12.0,
+                        },
+                    )
+                ],
+            }
+        )
+        picking.action_confirm()
+
+        receipt_move = self.env["stock.move"].search(
+            [
+                ("product_id", "=", self.productA.id),
+                ("location_id", "=", self.env.ref("stock.stock_location_suppliers").id),
+            ]
+        )
+        self.assertTrue(receipt_move)
+        self.assertEqual(receipt_move.product_uom_qty, 17.0)

@@ -80,6 +80,13 @@ class OrderpointTemplate(models.Model):
         "scheduled action for every product in this list.",
     )
     auto_last_generation = fields.Datetime(string="Last Automatic Generation")
+    auto_add_product = fields.Boolean(
+        string="Add Products Automatically",
+        help="When checked, at picking validation, the system will look for templates "
+        "that match the product and location of the picking. "
+        "If there is no orderpoint but a template is found, it will add the product to "
+        "the template and create the orderpoint.",
+    )
 
     def _template_fields_to_discard(self):
         """In order to create every orderpoint we should pop this template
@@ -96,12 +103,17 @@ class OrderpointTemplate(models.Model):
             "auto_max_date_end",
             "auto_max_qty_criteria",
             "auto_max_qty",
+            "auto_add_product",
+            "qty_to_order",
         ]
 
     def _disable_old_instances(self, products):
         """Clean old instance by setting those inactives"""
         orderpoints = self.env["stock.warehouse.orderpoint"].search(
-            [("product_id", "in", products.ids)]
+            [
+                ("product_id", "in", products.ids),
+                ("orderpoint_template_id", "=", self.id),
+            ]
         )
         orderpoints.write({"active": False})
 
@@ -168,6 +180,7 @@ class OrderpointTemplate(models.Model):
                 )
             vals_list = []
             for data in record.copy_data():
+                data["orderpoint_template_id"] = record.id
                 for discard_field in self._template_fields_to_discard():
                     data.pop(discard_field)
                 for product_id in product_ids:

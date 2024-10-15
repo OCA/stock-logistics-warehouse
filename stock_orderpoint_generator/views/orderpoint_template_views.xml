@@ -20,6 +20,7 @@
                 <field name="auto_min_qty" />
                 <field name="auto_max_qty" />
                 <field name="auto_generate" />
+                <field name="auto_add_product" />
             </tree>
         </field>
     </record>
@@ -104,6 +105,7 @@
                         <group string="Misc">
                             <field name="active" />
                             <field name="auto_generate" />
+                            <field name="auto_add_product" />
                         </group>
                         <group
                             name="auto_minimum"
