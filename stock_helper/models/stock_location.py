@@ -55,7 +55,7 @@ class StockLocation(models.Model):
             .search([])
             .sorted(lambda w: w.view_location_id.parent_path, reverse=True)
         )
-        res = defaultdict(self.env["stock.warehouse"])
+        res = defaultdict(lambda: self.env["stock.warehouse"])
         for location in self.filtered("parent_path"):
             for warehouse in warehouses:
                 if location.parent_path.startswith(
