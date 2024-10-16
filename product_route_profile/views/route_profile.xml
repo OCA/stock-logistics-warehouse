@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright (C) 2022 Akretion (<http://www.akretion.com>).
+     @author Kévin Roche <kevin.roche@akretion.com>
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="route_profile_tree" model="ir.ui.view">
+        <field name="name">route.profile.tree</field>
+        <field name="model">route.profile</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="route_ids" widget="many2many_tags" />
+            </tree>
+        </field>
+    </record>
+    <record id="route_profile_form" model="ir.ui.view">
+        <field name="name">route.profile.form</field>
+        <field name="model">route.profile</field>
+        <field name="arch" type="xml">
+            <form>
+                <group string="Routes Profiles">
+                    <field name="name" />
+                    <field name="route_ids" widget="many2many_checkboxes" />
+                </group>
+            </form>
+        </field>
+    </record>
+    <record id="action_route_profile_form" model="ir.actions.act_window">
+        <field name="name">Routes Profiles</field>
+        <field name="res_model">route.profile</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="route_profile_tree" />
+        <field name="help" type="html">
+            <p>
+                You can define here the routes profiles that run through
+                your warehouses and that define the flows of your products.
+                A route profile can be set on each product as "Route Profile" or "Priority Route Profile" (company dependent).
+            </p>
+        </field>
+    </record>
+    <menuitem
+        id="menu_route_profile_config"
+        action="action_route_profile_form"
+        name="Routes Profiles"
+        parent="stock.menu_warehouse_config"
+        sequence="4"
+        groups="stock.group_adv_location"
+    />
+</odoo>
