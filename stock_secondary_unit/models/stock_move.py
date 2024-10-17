@@ -50,12 +50,13 @@ class StockMoveLine(models.Model):
         store=True, readonly=False, compute="_compute_qty_done", precompute=True
     )
 
-    @api.model
-    def create(self, vals):
-        move = self.env["stock.move"].browse(vals.get("move_id", False))
-        if move.secondary_uom_id:
-            vals["secondary_uom_id"] = move.secondary_uom_id.id
-        return super().create(vals)
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            move = self.env["stock.move"].browse(vals.get("move_id", False))
+            if move.secondary_uom_id:
+                vals["secondary_uom_id"] = move.secondary_uom_id.id
+        return super().create(vals_list)
 
     @api.depends("secondary_uom_id", "secondary_uom_qty")
     def _compute_qty_done(self):
