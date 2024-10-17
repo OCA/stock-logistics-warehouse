@@ -39,13 +39,25 @@ class StockPicking(models.Model):
 
     def action_confirm(self):
         for rec in self:
-            if rec.detect_exceptions() and not rec.ignore_exception:
+            exception = self.env["exception.rule"].search(
+                [("model", "=", "stock.picking"), ("method", "=", "action_confirm")]
+            )
+            if exception and not rec.ignore_exception:
+                rec.exception_ids = [(4, exception.id)]
+                return rec._popup_exceptions()
+            elif rec.detect_exceptions() and not rec.ignore_exception:
                 return rec._popup_exceptions()
         return super().action_confirm()
 
     def button_validate(self):
         for rec in self:
-            if rec.detect_exceptions() and not rec.ignore_exception:
+            exception = self.env["exception.rule"].search(
+                [("model", "=", "stock.picking"), ("method", "=", "button_validate")]
+            )
+            if exception and not rec.ignore_exception:
+                rec.exception_ids = [(4, exception.id)]
+                return rec._popup_exceptions()
+            elif rec.detect_exceptions() and not rec.ignore_exception:
                 return rec._popup_exceptions()
         return super().button_validate()
 

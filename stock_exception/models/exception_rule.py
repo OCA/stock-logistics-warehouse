@@ -15,3 +15,10 @@ class ExceptionRule(models.Model):
         ],
         ondelete={"stock.picking": "cascade", "stock.move": "cascade"},
     )
+    method = fields.Selection(
+        selection_add=[
+            ("button_validate", "Validation"),
+            ("action_confirm", "Confirmation"),
+        ],
+        readonly=False,
+    )
