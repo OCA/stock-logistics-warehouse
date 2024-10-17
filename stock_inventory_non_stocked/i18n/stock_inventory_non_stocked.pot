@@ -1,0 +1,53 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_inventory_non_stocked
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-05-06 08:05+0000\n"
+"PO-Revision-Date: 2024-05-06 08:05+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_inventory_non_stocked
+#: model:ir.model.fields,field_description:stock_inventory_non_stocked.field_stock_inventory__create_non_stocked
+msgid "Create non stocked products"
+msgstr ""
+
+#. module: stock_inventory_non_stocked
+#: model:ir.model.fields,field_description:stock_inventory_non_stocked.field_product_product__has_quants
+msgid "Has Quants"
+msgstr ""
+
+#. module: stock_inventory_non_stocked
+#: model:ir.model.fields,help:stock_inventory_non_stocked.field_stock_inventory__create_non_stocked
+msgid ""
+"If you select this option, a new quant with zero quantity will be created "
+"for products without any stock and any quants"
+msgstr ""
+
+#. module: stock_inventory_non_stocked
+#: model:ir.model,name:stock_inventory_non_stocked.model_stock_inventory
+msgid "Inventory Adjustment Group"
+msgstr ""
+
+#. module: stock_inventory_non_stocked
+#: model:ir.model.fields,field_description:stock_inventory_non_stocked.field_product_product__lot_ids
+msgid "Lots"
+msgstr ""
+
+#. module: stock_inventory_non_stocked
+#: model:ir.model,name:stock_inventory_non_stocked.model_product_product
+msgid "Product Variant"
+msgstr ""
+
+#. module: stock_inventory_non_stocked
+#: model:ir.model,name:stock_inventory_non_stocked.model_stock_quant
+msgid "Quants"
+msgstr ""
