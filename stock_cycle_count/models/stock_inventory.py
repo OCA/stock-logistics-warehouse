@@ -29,25 +29,31 @@ class StockInventory(models.Model):
     )
     inventory_accuracy = fields.Float(
         string="Accuracy",
-        compute="_compute_inventory_accuracy",
         digits=(3, 2),
         store=True,
         group_operator="avg",
+        default=False,
+    )
+    responsible_id = fields.Many2one(
+        states={"draft": [("readonly", False)], "in_progress": [("readonly", False)]},
+        tracking=True,
     )
 
-    @api.depends("state", "stock_quant_ids")
-    def _compute_inventory_accuracy(self):
-        for inv in self:
-            theoretical = sum(inv.stock_quant_ids.mapped(lambda x: abs(x.quantity)))
-            abs_discrepancy = sum(
-                inv.stock_quant_ids.mapped(lambda x: abs(x.inventory_diff_quantity))
-            )
-            if theoretical:
-                inv.inventory_accuracy = max(
-                    PERCENT * (theoretical - abs_discrepancy) / theoretical, 0.0
-                )
-            if not inv.stock_quant_ids and inv.state == "done":
-                inv.inventory_accuracy = PERCENT
+    def write(self, vals):
+        result = super().write(vals)
+        if "responsible_id" in vals:
+            if not self.env.context.get("no_propagate"):
+                if (
+                    self.cycle_count_id
+                    and self.cycle_count_id.responsible_id.id != vals["responsible_id"]
+                ):
+                    self.cycle_count_id.with_context(no_propagate=True).write(
+                        {"responsible_id": vals["responsible_id"]}
+                    )
+            for quant in self.mapped("stock_quant_ids"):
+                if quant.user_id.id != vals["responsible_id"]:
+                    quant.write({"user_id": vals["responsible_id"]})
+        return result
 
     def _update_cycle_state(self):
         for inv in self:
@@ -60,6 +66,26 @@ class StockInventory(models.Model):
             ("state", "=", "draft"),
             ("location_id", "in", self.location_ids.ids),
         ]
+
+    def _calculate_inventory_accuracy(self):
+        for inv in self:
+            accuracy = 100
+            sum_line_accuracy = 0
+            sum_theoretical_qty = 0
+            if inv.stock_move_ids:
+                for line in inv.stock_move_ids:
+                    sum_line_accuracy += line.theoretical_qty * line.line_accuracy
+                    sum_theoretical_qty += line.theoretical_qty
+                if sum_theoretical_qty != 0:
+                    accuracy = (sum_line_accuracy / sum_theoretical_qty) * 100
+                else:
+                    accuracy = 0
+            inv.update(
+                {
+                    "inventory_accuracy": accuracy,
+                }
+            )
+        return False
 
     def _link_to_planned_cycle_count(self):
         self.ensure_one()
@@ -85,11 +111,13 @@ class StockInventory(models.Model):
 
     def action_state_to_done(self):
         res = super().action_state_to_done()
+        self._calculate_inventory_accuracy()
         self._update_cycle_state()
         return res
 
     def action_force_done(self):
         res = super().action_force_done()
+        self._calculate_inventory_accuracy()
         self._update_cycle_state()
         return res
 
@@ -144,3 +172,15 @@ class StockInventory(models.Model):
                         message=msg,
                     )
                 )
+
+    def action_state_to_in_progress(self):
+        res = super().action_state_to_in_progress()
+        self.prefill_counted_quantity = (
+            self.company_id.inventory_adjustment_counted_quantities
+        )
+        if self.prefill_counted_quantity == "zero":
+            self.stock_quant_ids.write({"inventory_quantity": 0})
+        elif self.prefill_counted_quantity == "counted":
+            for quant in self.stock_quant_ids:
+                quant.write({"inventory_quantity": quant.quantity})
+        return res

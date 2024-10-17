@@ -8,7 +8,6 @@
         <field name="inherit_id" ref="stock_inventory.view_inventory_group_tree" />
         <field name="arch" type="xml">
             <field name="name" position="after">
-                <field name="location_ids" />
                 <field name="cycle_count_id" />
                 <field name="inventory_accuracy" />
             </field>
