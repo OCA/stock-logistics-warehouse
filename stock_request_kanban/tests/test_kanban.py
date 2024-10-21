@@ -89,7 +89,6 @@ class TestKanban(TestBaseKanban):
         kanban.product_uom_qty = 1
         kanban = kanban.create(kanban._convert_to_write(kanban._cache))
         self.assertTrue(kanban.company_id)
-        self.assertIn(self.route, kanban.route_ids)
 
     def test_order_barcodes(self):
         kanban_1 = self.env["stock.request.kanban"].create(

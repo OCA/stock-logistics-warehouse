@@ -139,13 +139,6 @@ class StockRequestOrder(models.Model):
         string="Stock requests", compute="_compute_stock_request_count", readonly=True
     )
 
-    route_ids = fields.Many2many(
-        "stock.location.route",
-        string="Routes",
-        compute="_compute_route_ids",
-        readonly=True,
-    )
-
     route_id = fields.Many2one(
         "stock.location.route",
         compute="_compute_route_id",
@@ -154,43 +147,12 @@ class StockRequestOrder(models.Model):
         states={"draft": [("readonly", False)]},
         store=True,
         help="The route related to a stock request order",
-        domain="[('id', 'in', route_ids)]",
+        domain=[("product_selectable", "=", True)],
     )
 
     _sql_constraints = [
         ("name_uniq", "unique(name, company_id)", "Stock Request name must be unique")
     ]
-
-    @api.depends("warehouse_id", "location_id", "stock_request_ids")
-    def _compute_route_ids(self):
-        route_obj = self.env["stock.location.route"]
-        routes = route_obj.search(
-            [("warehouse_ids", "in", self.mapped("warehouse_id").ids)]
-        )
-        routes_by_warehouse = {}
-        for route in routes:
-            for warehouse in route.warehouse_ids:
-                routes_by_warehouse.setdefault(
-                    warehouse.id, self.env["stock.location.route"]
-                )
-                routes_by_warehouse[warehouse.id] |= route
-        for record in self:
-            routes = route_obj
-            if record.warehouse_id and routes_by_warehouse.get(record.warehouse_id.id):
-                routes |= routes_by_warehouse[record.warehouse_id.id]
-            parents = record.get_parents().ids
-            filtered_routes = routes.filtered(
-                lambda r: any(p.location_id.id in parents for p in r.rule_ids)
-            )
-            if record.stock_request_ids:
-                all_routes = record.stock_request_ids.mapped("route_ids")
-                common_routes = all_routes
-                for line in record.stock_request_ids:
-                    common_routes &= line.route_ids
-                final_routes = filtered_routes | common_routes
-                record.route_ids = [(6, 0, final_routes.ids)]
-            else:
-                record.route_ids = [(6, 0, filtered_routes.ids)]
 
     def get_parents(self):
         location = self.location_id
