@@ -341,7 +341,6 @@ class StockRequest(models.Model):
             "warehouse_id": self.warehouse_id,
             "stock_request_allocation_ids": self.id,
             "group_id": group_id or self.procurement_group_id.id or False,
-            "route_ids": self.route_id,
             "stock_request_id": self.id,
         }
 

@@ -132,7 +132,6 @@
                                         options="{'no_create': True}"
                                         groups="stock.group_stock_multi_locations"
                                     />
-                                    <field name="route_ids" invisible="1" />
                                     <field name="product_uom_qty" />
                                     <field name="qty_in_progress" />
                                     <field name="qty_done" />
