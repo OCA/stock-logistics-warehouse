@@ -182,7 +182,6 @@
                                 options="{'no_create': True}"
                                 groups="stock.group_stock_multi_locations"
                             />
-                            <field name="route_ids" invisible="1" />
                             <field
                                 name="procurement_group_id"
                                 groups="stock.group_adv_location"

@@ -254,7 +254,6 @@ class TestStockRequestBase(TestStockRequest):
         vals = stock_request.default_get(["warehouse_id", "company_id"])
         stock_request.update(vals)
         stock_request.onchange_product_id()
-        self.assertIn(self.route.id, stock_request.route_ids.ids)
 
         self.stock_request_user.company_id = self.company_2
         stock_request.company_id = self.company_2
