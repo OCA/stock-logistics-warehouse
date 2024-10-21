@@ -29,3 +29,9 @@ msgstr "Chequear al Confirmar"
 #: model:ir.model.fields,field_description:stock_exception.field_exception_rule__check_on_validate
 msgid "Check On Validate"
 msgstr "Chequear al Validar"
+
+#. module: stock_exception
+#: model:ir.actions.act_window,name:stock_exception.action_stock_test_tree
+#: model:ir.ui.menu,name:stock_exception.menu_stock_test
+msgid "Stock Exception Rules"
+msgstr "Reglas de Excepción de Stock"
