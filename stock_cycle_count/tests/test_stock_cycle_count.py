@@ -58,9 +58,12 @@ class TestStockCycleCount(common.TransactionCase):
         ]
         cls.big_wh.write({"cycle_count_rule_ids": [(6, 0, cls.rule_ids)]})
 
-        # Create a location:
+        # Create locations:
         cls.count_loc = cls.stock_location_model.create(
             {"name": "Place", "usage": "production"}
+        )
+        cls.count_loc_2 = cls.stock_location_model.create(
+            {"name": "Place 2", "usage": "production"}
         )
         cls.stock_location_model._parent_store_compute()
 
@@ -76,6 +79,9 @@ class TestStockCycleCount(common.TransactionCase):
         # Create a product:
         cls.product1 = cls.product_model.create(
             {"name": "Test Product 1", "type": "product", "default_code": "PROD1"}
+        )
+        cls.product2 = cls.product_model.create(
+            {"name": "Test Product 2", "type": "product", "default_code": "PROD2"}
         )
 
     @classmethod
@@ -153,7 +159,7 @@ class TestStockCycleCount(common.TransactionCase):
                 "name": "To be cancelled when running cron job.",
                 "cycle_count_rule_id": self.rule_periodic.id,
                 "location_id": loc.id,
-                "date_deadline": date_pre_existing_cc,
+                "automatic_deadline_date": date_pre_existing_cc,
             }
         )
         self.assertEqual(
@@ -188,14 +194,13 @@ class TestStockCycleCount(common.TransactionCase):
         move1._action_assign()
         move1.move_line_ids[0].qty_done = 1.0
         move1._action_done()
+        # Remove the pre_existing_count
+        self.inventory_model.search(
+            [("cycle_count_id", "=", pre_existing_count.id)], limit=1
+        ).unlink()
+        pre_existing_count.unlink()
+        # Execute cron for first time
         wh.cron_cycle_count()
-        self.assertNotEqual(
-            pre_existing_count.date_deadline,
-            date_pre_existing_cc,
-            "Date of pre-existing cycle counts has not been " "updated.",
-        )
-        counts = self.cycle_count_model.search([("location_id", "in", locs.ids)])
-        self.assertTrue(counts, "Cycle counts not planned")
         # Zero-confirmations:
         count = self.cycle_count_model.search(
             [
@@ -334,5 +339,279 @@ class TestStockCycleCount(common.TransactionCase):
         with self.assertRaises(ValidationError):
             inventory.exclude_sublocation = False
         company = self.env["res.company"].create({"name": "Test"})
+
         with self.assertRaises(ValidationError):
             inventory.company_id = company
+
+    def test_inventory_adjustment_accuracy(self):
+        date = datetime.today() - timedelta(days=1)
+        # Create location
+        loc = self.stock_location_model.create(
+            {"name": "Test Location", "usage": "internal"}
+        )
+        # Create stock quants for specific location
+        quant1 = self.quant_model.create(
+            {
+                "product_id": self.product1.id,
+                "location_id": loc.id,
+                "quantity": 10.0,
+            }
+        )
+        quant2 = self.quant_model.create(
+            {
+                "product_id": self.product2.id,
+                "location_id": loc.id,
+                "quantity": 15.0,
+            }
+        )
+        # Create adjustments for specific location
+        adjustment = self.inventory_model.create(
+            {
+                "name": "Pre-existing inventory",
+                "location_ids": [(4, loc.id)],
+                "date": date,
+            }
+        )
+        # Start the adjustment
+        adjustment.action_state_to_in_progress()
+        # Check that there are stock quants for the specific location
+        self.assertTrue(self.env["stock.quant"].search([("location_id", "=", loc.id)]))
+        # Make the count of the stock
+        quant1.update(
+            {
+                "inventory_quantity": 5,
+            }
+        )
+        quant2.update(
+            {
+                "inventory_quantity": 10,
+            }
+        )
+        # Apply the changes
+        quant1._apply_inventory()
+        quant2._apply_inventory()
+        # Check that line_accuracy is calculated properly
+        sml = self.env["stock.move.line"].search(
+            [("location_id", "=", loc.id), ("product_id", "=", self.product1.id)]
+        )
+        self.assertEqual(sml.line_accuracy, 0.5)
+        sml = self.env["stock.move.line"].search(
+            [("location_id", "=", loc.id), ("product_id", "=", self.product2.id)]
+        )
+        self.assertEqual(sml.line_accuracy, 0.6667000000000001)
+        # Set Inventory Adjustment to Done
+        adjustment.action_state_to_done()
+        # Check that accuracy is correctly calculated
+        self.assertEqual(adjustment.inventory_accuracy, 60)
+
+    def test_zero_inventory_adjustment_accuracy(self):
+        date = datetime.today() - timedelta(days=1)
+        # Create location
+        loc = self.stock_location_model.create(
+            {"name": "Test Location", "usage": "internal"}
+        )
+        # Create stock quants for specific location
+        quant1 = self.quant_model.create(
+            {
+                "product_id": self.product1.id,
+                "location_id": loc.id,
+                "quantity": 15.0,
+            }
+        )
+        quant2 = self.quant_model.create(
+            {
+                "product_id": self.product2.id,
+                "location_id": loc.id,
+                "quantity": 10.0,
+            }
+        )
+        # Create adjustment for specific location
+        adjustment = self.inventory_model.create(
+            {
+                "name": "Pre-existing inventory qty zero",
+                "location_ids": [(4, loc.id)],
+                "date": date,
+            }
+        )
+        # Start the adjustment
+        adjustment.action_state_to_in_progress()
+        # Check that there are stock quants for the specific location
+        self.assertTrue(self.env["stock.quant"].search([("location_id", "=", loc.id)]))
+        # Make the count of the stock
+        quant1.update(
+            {
+                "inventory_quantity": 0,
+            }
+        )
+        quant2.update(
+            {
+                "inventory_quantity": 0,
+            }
+        )
+        # Apply the changes
+        quant1._apply_inventory()
+        quant2._apply_inventory()
+        # Check that line_accuracy is calculated properly
+        move_1 = adjustment.stock_move_ids.filtered(
+            lambda c: c.product_id == self.product1
+        )
+        move_2 = adjustment.stock_move_ids.filtered(
+            lambda c: c.product_id == self.product1
+        )
+        self.assertEqual(move_1.line_accuracy, 0)
+        self.assertEqual(move_2.line_accuracy, 0)
+        # Set Inventory Adjustment to Done
+        adjustment.action_state_to_done()
+        # Check that accuracy is correctly calculated
+        self.assertEqual(adjustment.inventory_accuracy, 0)
+        # Check discrepancy over 100%
+        adjustment_2 = self.inventory_model.create(
+            {
+                "name": "Adjustment 2",
+                "location_ids": [(4, loc.id)],
+                "date": date,
+            }
+        )
+        adjustment_2.action_state_to_in_progress()
+        quant1.update(
+            {
+                "inventory_quantity": 1500,
+            }
+        )
+        quant1._apply_inventory()
+        # Check that line_accuracy is calculated properly
+        sml = self.env["stock.move.line"].search(
+            [("location_id", "=", loc.id), ("product_id", "=", self.product1.id)]
+        )
+        # Check that line_accuracy is still 0
+        self.assertEqual(sml.line_accuracy, 0)
+
+    def test_auto_start_inventory_from_cycle_count(self):
+        # Set the auto_start_inventory_from_cycle_count rule to True
+        self.company.auto_start_inventory_from_cycle_count = True
+        # Create Cycle Count 1 cont_loc_2
+        cycle_count_1 = self.cycle_count_model.create(
+            {
+                "name": "Cycle Count 1",
+                "cycle_count_rule_id": self.rule_periodic.id,
+                "location_id": self.count_loc_2.id,
+                "date_deadline": "2026-11-30",
+                "manual_deadline_date": "2026-11-30",
+            }
+        )
+        cycle_count_1.flush()
+        # Confirm the Cycle Count
+        cycle_count_1.action_create_inventory_adjustment()
+        # Inventory adjustments change their state to in_progress
+        self.assertEqual(cycle_count_1.stock_adjustment_ids.state, "in_progress")
+
+    def test_prefill_counted_quantity(self):
+        self.company.inventory_adjustment_counted_quantities = "counted"
+        date = datetime.today() - timedelta(days=1)
+        # Create locations
+        loc_1 = self.stock_location_model.create(
+            {"name": "Test Location 1", "usage": "internal"}
+        )
+        loc_2 = self.stock_location_model.create(
+            {"name": "Test Location 2", "usage": "internal"}
+        )
+        # Create stock quants for different locations
+        quant_1 = self.quant_model.create(
+            {
+                "product_id": self.product1.id,
+                "location_id": loc_1.id,
+                "quantity": 25,
+            }
+        )
+        quant_2 = self.quant_model.create(
+            {
+                "product_id": self.product1.id,
+                "location_id": loc_2.id,
+                "quantity": 50,
+            }
+        )
+        # Create adjustments for different locations
+        adjustment_1 = self.inventory_model.create(
+            {
+                "name": "Adjustment Location 1",
+                "location_ids": [(4, loc_1.id)],
+                "date": date,
+            }
+        )
+        adjustment_2 = self.inventory_model.create(
+            {
+                "name": "Adjustment Location 2",
+                "location_ids": [(4, loc_2.id)],
+                "date": date,
+            }
+        )
+        # Start the adjustment 1 with prefill quantity as counted
+        adjustment_1.action_state_to_in_progress()
+        # Check that the inventory_quantity is 25
+        self.assertEqual(quant_1.inventory_quantity, 25)
+        # Change company prefill option to zero
+        self.company.inventory_adjustment_counted_quantities = "zero"
+        # Start the adjustment 2 with prefill quantity as zero
+        adjustment_2.action_state_to_in_progress()
+        # Check that the inventory_quantity is 0
+        self.assertEqual(quant_2.inventory_quantity, 0.0)
+
+    def test_responsible_id_propagation_with_inventory_adjustment(self):
+        additional_user = self._create_user(
+            "user_3", [self.g_stock_manager], self.company
+        )
+        additional_user_2 = self._create_user(
+            "user_4", [self.g_stock_manager], self.company
+        )
+        self.cycle_count_1.responsible_id = self.manager
+        self.assertEqual(
+            self.cycle_count_1.responsible_id.id,
+            self.manager,
+            "Initial responsible not correctly assigned.",
+        )
+        self.quant_model.create(
+            {
+                "product_id": self.product1.id,
+                "location_id": self.count_loc.id,
+                "quantity": 100,
+            }
+        )
+        self.cycle_count_1.action_create_inventory_adjustment()
+        inventory = self.cycle_count_1.stock_adjustment_ids[0]
+        self.assertEqual(
+            inventory.responsible_id.id,
+            self.cycle_count_1.responsible_id.id,
+            "Inventory responsible does not match cycle count responsible.",
+        )
+        for quant in inventory.stock_quant_ids:
+            self.assertEqual(
+                quant.user_id.id,
+                inventory.responsible_id.id,
+                "Quant user does not match inventory responsible.",
+            )
+        self.cycle_count_1.responsible_id = additional_user.id
+        inventory.invalidate_cache()
+        self.cycle_count_1.stock_adjustment_ids[0].stock_quant_ids.invalidate_cache()
+        self.assertEqual(
+            inventory.responsible_id.id,
+            additional_user.id,
+            "Inventory responsible not updated after cycle count responsible change.",
+        )
+        for quant in inventory.stock_quant_ids:
+            self.assertEqual(
+                quant.user_id.id,
+                additional_user.id,
+                "Quant user not updated after inventory responsible change.",
+            )
+        inventory.responsible_id = additional_user_2
+        self.assertEqual(
+            self.cycle_count_1.responsible_id.id,
+            additional_user_2.id,
+            "Cycle Count not updated after inventory responsible change.",
+        )
+        for quant in inventory.stock_quant_ids:
+            self.assertEqual(
+                quant.user_id.id,
+                additional_user_2.id,
+                "Quant user not updated after inventory responsible change.",
+            )

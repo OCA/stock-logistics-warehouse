@@ -10,6 +10,8 @@
             <tree
                 decoration-muted="state == 'cancelled'"
                 decoration-info="state == 'draft'"
+                multi_edit="1"
+                default_order="date_deadline asc"
             >
                 <field name="name" />
                 <field name="location_id" />
@@ -17,6 +19,7 @@
                 <field name="responsible_id" />
                 <field name="date_deadline" />
                 <field name="state" />
+                <field name="company_id" optional="hide" />
             </tree>
         </field>
     </record>
@@ -124,6 +127,7 @@
                     domain="[('state','=', 'cancelled')]"
                     help="Cycle Counts Cancelled"
                 />
+                <separator />
                 <filter
                     name="assigned_to_user"
                     string="Assigned to me"
@@ -149,6 +153,12 @@
                         name="responsible"
                         domain="[]"
                         context="{'group_by':'responsible_id'}"
+                    />
+                    <filter
+                        string="Required Date"
+                        name="date_deadline"
+                        domain="[]"
+                        context="{'group_by': 'date_deadline:day'}"
                     />
                 </group>
             </search>
