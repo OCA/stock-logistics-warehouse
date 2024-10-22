@@ -26,6 +26,11 @@ msgid "Action Needed"
 msgstr "需要的操作"
 
 #. module: stock_inventory_verification_request
+#: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_quant__allow_svr_creation
+msgid "Allow SVR Creation"
+msgstr ""
+
+#. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__responsible_id
 msgid "Assigned to"
 msgstr "分配给"
@@ -41,8 +46,8 @@ msgid "Attachment Count"
 msgstr "附件数量"
 
 #. module: stock_inventory_verification_request
+#: model:ir.model.fields.selection,name:stock_inventory_verification_request.selection__stock_slot_verification_request__state__cancelled
 #: model_terms:ir.ui.view,arch_db:stock_inventory_verification_request.stock_slot_verification_request_search_view
-#: selection:stock.slot.verification.request,state:0
 msgid "Cancelled"
 msgstr "已取消"
 
@@ -97,14 +102,19 @@ msgid "Followers"
 msgstr "关注者"
 
 #. module: stock_inventory_verification_request
-#: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__message_channel_ids
-msgid "Followers (Channels)"
-msgstr "关注者(频道)"
-
-#. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__message_partner_ids
 msgid "Followers (Partners)"
 msgstr "关注者(业务伙伴)"
+
+#. module: stock_inventory_verification_request
+#: model_terms:ir.ui.view,arch_db:stock_inventory_verification_request.view_stock_quant_tree
+msgid "Generate a slot verification request for this line"
+msgstr ""
+
+#. module: stock_inventory_verification_request
+#: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__has_message
+msgid "Has Message"
+msgstr ""
 
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__id
@@ -112,12 +122,8 @@ msgid "ID"
 msgstr "ID"
 
 #. module: stock_inventory_verification_request
-#: model:ir.model.fields,help:stock_inventory_verification_request.field_stock_slot_verification_request__message_unread
-msgid "If checked new messages require your attention."
-msgstr ".如果勾选此项，将会收到新消息提醒。"
-
-#. module: stock_inventory_verification_request
 #: model:ir.model.fields,help:stock_inventory_verification_request.field_stock_slot_verification_request__message_needaction
+#: model:ir.model.fields,help:stock_inventory_verification_request.field_stock_slot_verification_request__message_unread
 msgid "If checked, new messages require your attention."
 msgstr "如果勾选此项，将会收到新消息提醒。"
 
@@ -127,8 +133,8 @@ msgid "If checked, some messages have a delivery error."
 msgstr "如果勾选此项， 某些信息将会产生传递错误。"
 
 #. module: stock_inventory_verification_request
+#: model:ir.model.fields.selection,name:stock_inventory_verification_request.selection__stock_slot_verification_request__state__open
 #: model_terms:ir.ui.view,arch_db:stock_inventory_verification_request.stock_slot_verification_request_search_view
-#: selection:stock.slot.verification.request,state:0
 msgid "In Progress"
 msgstr "进行中"
 
@@ -138,29 +144,14 @@ msgid "Inv. Adj. Created"
 msgstr ""
 
 #. module: stock_inventory_verification_request
-#: model_terms:ir.ui.view,arch_db:stock_inventory_verification_request.stock_slot_verification_request_form_view
-msgid "Inv. Adj. Lines Involved"
-msgstr "涉及的库存调整行"
-
-#. module: stock_inventory_verification_request
-#: model:ir.model,name:stock_inventory_verification_request.model_stock_inventory
-msgid "Inventory"
-msgstr "库存"
-
-#. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__inventory_id
 msgid "Inventory Adjustment"
 msgstr "库存调整"
 
 #. module: stock_inventory_verification_request
-#: model_terms:ir.ui.view,arch_db:stock_inventory_verification_request.view_inventory_line_form
-msgid "Inventory Adjustment Line"
-msgstr "库存调整行"
-
-#. module: stock_inventory_verification_request
-#: model_terms:ir.ui.view,arch_db:stock_inventory_verification_request.stock_slot_verification_request_form_view
-msgid "Inventory Adjustment Lines related to the given location and product."
-msgstr "与给定位置和产品相关的库存调整行。"
+#: model:ir.model,name:stock_inventory_verification_request.model_stock_inventory
+msgid "Inventory Adjustment Group"
+msgstr ""
 
 #. module: stock_inventory_verification_request
 #: model_terms:ir.ui.view,arch_db:stock_inventory_verification_request.stock_slot_verification_request_form_view
@@ -168,34 +159,27 @@ msgid "Inventory Adjustments created from this SVR."
 msgstr ""
 
 #. module: stock_inventory_verification_request
-#: model:ir.model,name:stock_inventory_verification_request.model_stock_inventory_line
-#: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__inventory_line_id
-#: model_terms:ir.ui.view,arch_db:stock_inventory_verification_request.view_inventory_line_form
-msgid "Inventory Line"
-msgstr "库存行"
-
-#. module: stock_inventory_verification_request
 #: model:ir.model,name:stock_inventory_verification_request.model_stock_location
 msgid "Inventory Locations"
 msgstr ""
 
 #. module: stock_inventory_verification_request
-#: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__involved_inv_line_count
-msgid "Involved Inv Line Count"
-msgstr "涉及的库存行数"
+#: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__involved_quant_ids
+msgid "Involved Inventory Quants"
+msgstr ""
 
 #. module: stock_inventory_verification_request
-#: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__involved_inv_line_ids
-msgid "Involved Inventory Lines"
-msgstr "涉及的库存行"
+#: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__involved_move_line_count
+msgid "Involved Move Line Count"
+msgstr ""
 
 #. module: stock_inventory_verification_request
-#: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__involved_move_count
-msgid "Involved Move Count"
-msgstr "涉及的移动数"
+#: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__involved_quant_count
+msgid "Involved Quant Count"
+msgstr ""
 
 #. module: stock_inventory_verification_request
-#: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__involved_move_ids
+#: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__involved_move_line_ids
 msgid "Involved Stock Moves"
 msgstr "涉及的库存移动"
 
@@ -223,6 +207,11 @@ msgstr "最后更新时间"
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__location_id
 msgid "Location"
 msgstr "位置"
+
+#. module: stock_inventory_verification_request
+#: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__lot_id
+msgid "Lot"
+msgstr ""
 
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__message_main_attachment_id
@@ -266,8 +255,8 @@ msgstr "操作次数"
 
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__message_has_error_counter
-msgid "Number of error"
-msgstr "错误数"
+msgid "Number of errors"
+msgstr ""
 
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,help:stock_inventory_verification_request.field_stock_slot_verification_request__message_needaction_counter
@@ -285,9 +274,9 @@ msgid "Number of unread messages"
 msgstr "未读消息的数量"
 
 #. module: stock_inventory_verification_request
-#: model:ir.actions.act_window,name:stock_inventory_verification_request.action_inv_adj_line_tree
-msgid "Open Inventory Adjustment Lines"
-msgstr "打开库存调整行"
+#: model:ir.actions.act_window,name:stock_inventory_verification_request.action_quant_line_tree
+msgid "Open Stock Lines"
+msgstr ""
 
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__product_id
@@ -295,34 +284,36 @@ msgid "Product"
 msgstr "产品"
 
 #. module: stock_inventory_verification_request
-#: model_terms:ir.ui.view,arch_db:stock_inventory_verification_request.view_inventory_form
-msgid "Request Verification"
-msgstr "要求验证"
+#: model:ir.model,name:stock_inventory_verification_request.model_stock_quant
+msgid "Quants"
+msgstr ""
 
 #. module: stock_inventory_verification_request
-#: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_inventory__requested_verification
+#: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_quant__requested_verification
 msgid "Requested Verification?"
 msgstr "要求验证？"
 
 #. module: stock_inventory_verification_request
+#: model_terms:ir.ui.view,arch_db:stock_inventory_verification_request.view_stock_quant_tree
+msgid "SVR"
+msgstr ""
+
+#. module: stock_inventory_verification_request
 #: model:ir.model,name:stock_inventory_verification_request.model_stock_slot_verification_request
-#: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_inventory_line__slot_verification_ids
+#: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_quant__slot_verification_ids
 #: model:ir.ui.menu,name:stock_inventory_verification_request.menu_slot_verification_request
 #: model_terms:ir.ui.view,arch_db:stock_inventory_verification_request.stock_slot_verification_request_form_view
-#: model_terms:ir.ui.view,arch_db:stock_inventory_verification_request.view_inventory_form
 #: model_terms:ir.ui.view,arch_db:stock_inventory_verification_request.view_location_form
 msgid "Slot Verification Request"
 msgstr "插槽验证请求"
 
 #. module: stock_inventory_verification_request
-#: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_inventory__slot_verification_ids
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_location__slot_verification_ids
-#: model_terms:ir.ui.view,arch_db:stock_inventory_verification_request.view_inventory_form
 msgid "Slot Verification Requests"
 msgstr "插槽验证请求"
 
 #. module: stock_inventory_verification_request
-#: selection:stock.slot.verification.request,state:0
+#: model:ir.model.fields.selection,name:stock_inventory_verification_request.selection__stock_slot_verification_request__state__done
 msgid "Solved"
 msgstr "已解决"
 
@@ -337,6 +328,11 @@ msgid "Status"
 msgstr "状态"
 
 #. module: stock_inventory_verification_request
+#: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__quant_id
+msgid "Stock Line"
+msgstr ""
+
+#. module: stock_inventory_verification_request
 #: model_terms:ir.ui.view,arch_db:stock_inventory_verification_request.stock_slot_verification_request_form_view
 msgid "Stock Moves Involved"
 msgstr "涉及的库存移动"
@@ -347,12 +343,19 @@ msgid "Stock Moves related to the given location and product."
 msgstr "与给定位置和产品相关的库存移动。"
 
 #. module: stock_inventory_verification_request
-#: model:ir.actions.act_window,name:stock_inventory_verification_request.action_slot_verification_request
 #: model_terms:ir.ui.view,arch_db:stock_inventory_verification_request.stock_slot_verification_request_form_view
-#: model_terms:ir.ui.view,arch_db:stock_inventory_verification_request.stock_slot_verification_request_search_view
-#: model_terms:ir.ui.view,arch_db:stock_inventory_verification_request.stock_slot_verification_request_tree_view
+msgid "Stock Reviewed"
+msgstr ""
+
+#. module: stock_inventory_verification_request
+#: model:ir.actions.act_window,name:stock_inventory_verification_request.action_slot_verification_request
 msgid "Stock Slot Verification Request"
 msgstr "库位验证请求"
+
+#. module: stock_inventory_verification_request
+#: model_terms:ir.ui.view,arch_db:stock_inventory_verification_request.stock_slot_verification_request_form_view
+msgid "Stock related to the given location and product."
+msgstr ""
 
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,help:stock_inventory_verification_request.field_stock_slot_verification_request__created_inventory_ids
@@ -375,8 +378,8 @@ msgid "Unread Messages Counter"
 msgstr "未读消息计数器"
 
 #. module: stock_inventory_verification_request
+#: model:ir.model.fields.selection,name:stock_inventory_verification_request.selection__stock_slot_verification_request__state__wait
 #: model_terms:ir.ui.view,arch_db:stock_inventory_verification_request.stock_slot_verification_request_search_view
-#: selection:stock.slot.verification.request,state:0
 msgid "Waiting Actions"
 msgstr "等待动作"
 
@@ -389,6 +392,46 @@ msgstr "网站消息"
 #: model:ir.model.fields,help:stock_inventory_verification_request.field_stock_slot_verification_request__website_message_ids
 msgid "Website communication history"
 msgstr "网站沟通记录"
+
+#~ msgid "Followers (Channels)"
+#~ msgstr "关注者(频道)"
+
+#~ msgid "If checked new messages require your attention."
+#~ msgstr ".如果勾选此项，将会收到新消息提醒。"
+
+#~ msgid "Inv. Adj. Lines Involved"
+#~ msgstr "涉及的库存调整行"
+
+#~ msgid "Inventory"
+#~ msgstr "库存"
+
+#~ msgid "Inventory Adjustment Line"
+#~ msgstr "库存调整行"
+
+#~ msgid ""
+#~ "Inventory Adjustment Lines related to the given location and product."
+#~ msgstr "与给定位置和产品相关的库存调整行。"
+
+#~ msgid "Inventory Line"
+#~ msgstr "库存行"
+
+#~ msgid "Involved Inv Line Count"
+#~ msgstr "涉及的库存行数"
+
+#~ msgid "Involved Inventory Lines"
+#~ msgstr "涉及的库存行"
+
+#~ msgid "Involved Move Count"
+#~ msgstr "涉及的移动数"
+
+#~ msgid "Number of error"
+#~ msgstr "错误数"
+
+#~ msgid "Open Inventory Adjustment Lines"
+#~ msgstr "打开库存调整行"
+
+#~ msgid "Request Verification"
+#~ msgstr "要求验证"
 
 #~ msgid "stock.slot.verification.request"
 #~ msgstr "stock.slot.verification.request"
