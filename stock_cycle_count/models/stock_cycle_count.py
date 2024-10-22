@@ -84,17 +84,6 @@ class StockCycleCount(models.Model):
         readonly=True,
     )
 
-    def write(self, vals):
-        result = super().write(vals)
-        if "responsible_id" in vals and not self.env.context.get("no_propagate"):
-            stock_inventory_records = self.mapped("stock_adjustment_ids")
-            for record in stock_inventory_records:
-                if record.responsible_id.id != vals["responsible_id"]:
-                    record.with_context(no_propagate=True).write(
-                        {"responsible_id": vals["responsible_id"]}
-                    )
-        return result
-
     @api.depends("stock_adjustment_ids")
     def _compute_inventory_adj_count(self):
         for rec in self:
