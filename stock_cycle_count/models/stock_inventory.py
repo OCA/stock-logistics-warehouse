@@ -35,9 +35,26 @@ class StockInventory(models.Model):
         default=False,
     )
     responsible_id = fields.Many2one(
-        states={"draft": [("readonly", False)], "in_progress": [("readonly", False)]},
         tracking=True,
+        compute="_compute_responsible_id",
+        inverse="_inverse_responsible_id",
+        store=True,
+        readonly=False,
     )
+
+    @api.depends("cycle_count_id.responsible_id")
+    def _compute_responsible_id(self):
+        for inv in self:
+            if inv.cycle_count_id:
+                inv.responsible_id = inv.cycle_count_id.responsible_id
+                inv.stock_quant_ids.write(
+                    {"user_id": inv.cycle_count_id.responsible_id}
+                )
+
+    def _inverse_responsible_id(self):
+        for inv in self:
+            if inv.cycle_count_id and inv.responsible_id:
+                inv.cycle_count_id.responsible_id = inv.responsible_id
 
     def write(self, vals):
         result = super().write(vals)
