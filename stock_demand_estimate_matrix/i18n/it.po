@@ -121,13 +121,6 @@ msgid "ID"
 msgstr "ID"
 
 #. module: stock_demand_estimate_matrix
-#: model:ir.model.fields,field_description:stock_demand_estimate_matrix.field_stock_demand_estimate_sheet____last_update
-#: model:ir.model.fields,field_description:stock_demand_estimate_matrix.field_stock_demand_estimate_sheet_line____last_update
-#: model:ir.model.fields,field_description:stock_demand_estimate_matrix.field_stock_demand_estimate_wizard____last_update
-msgid "Last Modified on"
-msgstr "Ultima modifica il"
-
-#. module: stock_demand_estimate_matrix
 #: model:ir.model.fields,field_description:stock_demand_estimate_matrix.field_stock_demand_estimate_sheet__write_uid
 #: model:ir.model.fields,field_description:stock_demand_estimate_matrix.field_stock_demand_estimate_sheet_line__write_uid
 #: model:ir.model.fields,field_description:stock_demand_estimate_matrix.field_stock_demand_estimate_wizard__write_uid
@@ -256,3 +249,6 @@ msgstr "Bisogna selezionare almeno un prodotto."
 #: model_terms:ir.ui.view,arch_db:stock_demand_estimate_matrix.stock_demand_estimate_sheet_view_form
 msgid "to"
 msgstr "a"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Ultima modifica il"
