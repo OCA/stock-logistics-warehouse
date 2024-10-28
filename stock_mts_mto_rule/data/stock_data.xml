@@ -7,5 +7,6 @@
         <field name="name">Make To Order + Make To Stock</field>
         <field name="sequence">5</field>
         <field name="product_selectable" eval="True" />
+        <field name="company_id" />
     </record>
 </odoo>
