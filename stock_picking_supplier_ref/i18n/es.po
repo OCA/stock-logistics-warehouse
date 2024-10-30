@@ -18,21 +18,6 @@ msgstr ""
 "X-Generator: Weblate 4.17\n"
 
 #. module: stock_picking_supplier_ref
-#: model:ir.model.fields,field_description:stock_picking_supplier_ref.field_stock_picking__display_name
-msgid "Display Name"
-msgstr "Nombre mostrado"
-
-#. module: stock_picking_supplier_ref
-#: model:ir.model.fields,field_description:stock_picking_supplier_ref.field_stock_picking__id
-msgid "ID"
-msgstr "ID (Identificación)"
-
-#. module: stock_picking_supplier_ref
-#: model:ir.model.fields,field_description:stock_picking_supplier_ref.field_stock_picking____last_update
-msgid "Last Modified on"
-msgstr "Última modificación el"
-
-#. module: stock_picking_supplier_ref
 #: model:ir.model.fields,field_description:stock_picking_supplier_ref.field_stock_picking__supplier_reference
 msgid "Supplier Reference Available in PO"
 msgstr "Referencia proveedor disponible en el PO"
@@ -40,9 +25,20 @@ msgstr "Referencia proveedor disponible en el PO"
 #. module: stock_picking_supplier_ref
 #: model:ir.model.fields,help:stock_picking_supplier_ref.field_stock_picking__supplier_reference
 msgid "This field adds the supplier reference added in related purchase order"
-msgstr "Este campo añade la referencia del proveedor añadida en el pedido de compra relacionada"
+msgstr ""
+"Este campo añade la referencia del proveedor añadida en el pedido de compra "
+"relacionada"
 
 #. module: stock_picking_supplier_ref
 #: model:ir.model,name:stock_picking_supplier_ref.model_stock_picking
 msgid "Transfer"
 msgstr "Albarán"
+
+#~ msgid "Display Name"
+#~ msgstr "Nombre mostrado"
+
+#~ msgid "ID"
+#~ msgstr "ID (Identificación)"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Última modificación el"
