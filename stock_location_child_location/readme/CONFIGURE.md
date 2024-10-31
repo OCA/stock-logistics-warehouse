@@ -1,0 +1,1 @@
+- Storage Locations should be activated (Inventory > Configuration > Settings > Warehouse > Storage Locations)
