@@ -3,6 +3,7 @@
 
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
+from odoo.tools import float_is_zero, float_round
 
 
 class PurchaseOrderLine(models.Model):
@@ -28,20 +29,36 @@ class PurchaseOrderLine(models.Model):
         return res
 
     def _prepare_stock_moves(self, picking):
+        """We define the allocation_ids with the corresponding quantity."""
         res = super()._prepare_stock_moves(picking)
-
+        if not self.stock_request_ids:
+            return res
+        precision = self.env["decimal.precision"].precision_get(
+            "Product Unit of Measure"
+        )
+        requests_qty = sum(self.stock_request_ids.mapped("product_qty"))
+        moves_qty = sum(re["product_uom_qty"] for re in res)
+        diff_qty = moves_qty - requests_qty
         for re in res:
-            re["allocation_ids"] = [
-                (
-                    0,
-                    0,
-                    {
-                        "stock_request_id": request.id,
-                        "requested_product_uom_qty": request.product_qty,
-                    },
+            allocations_data = []
+            for request in self.stock_request_ids:
+                qty = request.product_qty
+                # Only add the extra (proportional) quantity if there is pending qty
+                if not float_is_zero(diff_qty, precision_digits=precision):
+                    extra_qty = diff_qty * (request.product_qty / requests_qty)
+                    extra_qty = float_round(extra_qty, precision_digits=precision)
+                    qty += extra_qty
+                allocations_data.append(
+                    (
+                        0,
+                        0,
+                        {
+                            "stock_request_id": request.id,
+                            "requested_product_uom_qty": qty,
+                        },
+                    )
                 )
-                for request in self.stock_request_ids
-            ]
+            re["allocation_ids"] = allocations_data
         return res
 
     @api.model

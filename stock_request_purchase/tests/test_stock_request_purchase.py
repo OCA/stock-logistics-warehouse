@@ -201,6 +201,167 @@ class TestStockRequestPurchase(common.TransactionCase):
         self.assertEqual(stock_request_2.qty_in_progress, 0.0)
         self.assertEqual(stock_request_2.qty_done, stock_request_2.product_uom_qty)
 
+    def test_create_request_03(self):
+        expected_date = fields.Datetime.now()
+        vals = {
+            "company_id": self.main_company.id,
+            "warehouse_id": self.warehouse.id,
+            "location_id": self.warehouse.lot_stock_id.id,
+            "expected_date": expected_date,
+            "stock_request_ids": [
+                (
+                    0,
+                    0,
+                    {
+                        "product_id": self.product.id,
+                        "product_uom_id": self.product.uom_id.id,
+                        "product_uom_qty": 8.0,
+                        "company_id": self.main_company.id,
+                        "warehouse_id": self.warehouse.id,
+                        "location_id": self.warehouse.lot_stock_id.id,
+                        "expected_date": expected_date,
+                    },
+                ),
+                (
+                    0,
+                    0,
+                    {
+                        "product_id": self.product.id,
+                        "product_uom_id": self.product.uom_id.id,
+                        "product_uom_qty": 4.0,
+                        "company_id": self.main_company.id,
+                        "warehouse_id": self.warehouse.id,
+                        "location_id": self.warehouse.lot_stock_id.id,
+                        "expected_date": expected_date,
+                    },
+                ),
+                (
+                    0,
+                    0,
+                    {
+                        "product_id": self.product.id,
+                        "product_uom_id": self.product.uom_id.id,
+                        "product_uom_qty": 2.0,
+                        "company_id": self.main_company.id,
+                        "warehouse_id": self.warehouse.id,
+                        "location_id": self.warehouse.lot_stock_id.id,
+                        "expected_date": expected_date,
+                    },
+                ),
+            ],
+        }
+        order = (
+            self.env["stock.request.order"]
+            .with_user(self.stock_request_user)
+            .create(vals)
+        )
+        order.action_confirm()
+        self.assertEqual(order.state, "open")
+        self.assertEqual(len(order.purchase_ids), 1)
+        request_1 = order.stock_request_ids.filtered(lambda x: x.product_uom_qty == 8)
+        request_2 = order.stock_request_ids.filtered(lambda x: x.product_uom_qty == 4)
+        request_3 = order.stock_request_ids.filtered(lambda x: x.product_uom_qty == 2)
+        purchase = order.purchase_ids.sudo()
+        purchase_line = purchase.order_line
+        self.assertEqual(purchase_line.product_qty, 14)
+        purchase.button_confirm()
+        self.assertEqual(len(request_1.allocation_ids), 1)
+        self.assertEqual(request_1.qty_in_progress, 8)
+        self.assertEqual(len(request_2.allocation_ids), 1)
+        self.assertEqual(request_2.qty_in_progress, 4)
+        self.assertEqual(len(request_3.allocation_ids), 1)
+        self.assertEqual(request_3.qty_in_progress, 2)
+        purchase_line.write({"product_qty": 28})
+        self.assertEqual(len(request_1.allocation_ids), 2)
+        self.assertEqual(request_1.qty_in_progress, 16)
+        self.assertEqual(len(request_2.allocation_ids), 2)
+        self.assertEqual(request_2.qty_in_progress, 8)
+        self.assertEqual(len(request_3.allocation_ids), 2)
+        self.assertEqual(request_3.qty_in_progress, 4)
+        picking = purchase.picking_ids
+        picking.move_line_ids.qty_done = 28
+        picking.button_validate()
+        self.assertEqual(request_1.qty_in_progress, 0)
+        self.assertEqual(request_1.qty_done, 16)
+        self.assertEqual(request_1.state, "done")
+        self.assertEqual(request_2.qty_in_progress, 0)
+        self.assertEqual(request_2.qty_done, 8)
+        self.assertEqual(request_2.state, "done")
+        self.assertEqual(request_3.qty_in_progress, 0)
+        self.assertEqual(request_3.qty_done, 4)
+        self.assertEqual(request_3.state, "done")
+        self.assertEqual(order.state, "done")
+
+    def test_create_request_04(self):
+        expected_date = fields.Datetime.now()
+        vals = {
+            "company_id": self.main_company.id,
+            "warehouse_id": self.warehouse.id,
+            "location_id": self.warehouse.lot_stock_id.id,
+            "expected_date": expected_date,
+            "stock_request_ids": [
+                (
+                    0,
+                    0,
+                    {
+                        "product_id": self.product.id,
+                        "product_uom_id": self.product.uom_id.id,
+                        "product_uom_qty": 7.0,
+                        "company_id": self.main_company.id,
+                        "warehouse_id": self.warehouse.id,
+                        "location_id": self.warehouse.lot_stock_id.id,
+                        "expected_date": expected_date,
+                    },
+                ),
+                (
+                    0,
+                    0,
+                    {
+                        "product_id": self.product.id,
+                        "product_uom_id": self.product.uom_id.id,
+                        "product_uom_qty": 5.0,
+                        "company_id": self.main_company.id,
+                        "warehouse_id": self.warehouse.id,
+                        "location_id": self.warehouse.lot_stock_id.id,
+                        "expected_date": expected_date,
+                    },
+                ),
+            ],
+        }
+        order = (
+            self.env["stock.request.order"]
+            .with_user(self.stock_request_user)
+            .create(vals)
+        )
+        order.action_confirm()
+        self.assertEqual(order.state, "open")
+        self.assertEqual(len(order.purchase_ids), 1)
+        request_1 = order.stock_request_ids.filtered(lambda x: x.product_uom_qty == 7)
+        request_2 = order.stock_request_ids.filtered(lambda x: x.product_uom_qty == 5)
+        purchase = order.purchase_ids.sudo()
+        purchase_line = purchase.order_line
+        self.assertEqual(purchase_line.product_qty, 12)
+        purchase.button_confirm()
+        self.assertEqual(len(request_1.allocation_ids), 1)
+        self.assertEqual(request_1.qty_in_progress, 7)
+        self.assertEqual(len(request_2.allocation_ids), 1)
+        self.assertEqual(request_2.qty_in_progress, 5)
+        purchase_line.write({"product_qty": 13})
+        self.assertEqual(len(request_1.allocation_ids), 2)
+        self.assertEqual(request_1.qty_in_progress, 7.58)
+        self.assertEqual(len(request_2.allocation_ids), 2)
+        self.assertEqual(request_2.qty_in_progress, 5.42)
+        picking = purchase.picking_ids
+        picking.move_line_ids.qty_done = 13
+        picking.button_validate()
+        self.assertEqual(request_1.qty_in_progress, 0)
+        self.assertEqual(request_1.qty_done, 7.58)
+        self.assertEqual(request_1.state, "done")
+        self.assertEqual(request_2.qty_in_progress, 0)
+        self.assertEqual(request_2.qty_done, 5.42)
+        self.assertEqual(request_2.state, "done")
+        self.assertEqual(order.state, "done")
+
     def test_create_request_cancel_purchase(self):
         vals = {
             "product_id": self.product.id,
@@ -217,6 +378,54 @@ class TestStockRequestPurchase(common.TransactionCase):
         self.assertEqual(stock_request.purchase_ids.state, "draft")
         stock_request.action_cancel()
         self.assertEqual(stock_request.purchase_ids.state, "cancel")
+
+    def test_update_purchase_order_line_qty(self):
+        expected_date = fields.Datetime.now()
+        vals = {
+            "company_id": self.main_company.id,
+            "warehouse_id": self.warehouse.id,
+            "location_id": self.warehouse.lot_stock_id.id,
+            "expected_date": expected_date,
+            "stock_request_ids": [
+                (
+                    0,
+                    0,
+                    {
+                        "product_id": self.product.id,
+                        "product_uom_id": self.product.uom_id.id,
+                        "product_uom_qty": 10.0,
+                        "company_id": self.main_company.id,
+                        "warehouse_id": self.warehouse.id,
+                        "location_id": self.warehouse.lot_stock_id.id,
+                        "expected_date": expected_date,
+                    },
+                ),
+            ],
+        }
+        order = (
+            self.env["stock.request.order"]
+            .with_user(self.stock_request_user)
+            .create(vals)
+        )
+        order.action_confirm()
+        self.assertEqual(order.state, "open")
+        self.assertEqual(len(order.purchase_ids), 1)
+        request = order.stock_request_ids
+        purchase = order.purchase_ids.sudo()
+        purchase_line = purchase.order_line
+        self.assertEqual(purchase_line.product_qty, 10)
+        purchase.button_confirm()
+        self.assertEqual(len(request.allocation_ids), 1)
+        self.assertEqual(request.qty_in_progress, 10)
+        purchase_line.write({"product_qty": 12})
+        self.assertEqual(len(request.allocation_ids), 2)
+        self.assertEqual(request.qty_in_progress, 12)
+        picking = purchase.picking_ids
+        picking.move_line_ids.qty_done = 12
+        picking.button_validate()
+        self.assertEqual(request.qty_in_progress, 0)
+        self.assertEqual(request.qty_done, 12)
+        self.assertEqual(request.state, "done")
 
     def test_unlink_purchase_order_line(self):
         """
