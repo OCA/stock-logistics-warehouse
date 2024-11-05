@@ -8,6 +8,7 @@
     "license": "AGPL-3",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "author": "ForgeFlow, Odoo Community Association (OCA)",
+    "maintainers": ["AaronHForgeFlow"],
     "category": "Analytic",
     "depends": ["stock_request", "stock_analytic"],
     "data": [
