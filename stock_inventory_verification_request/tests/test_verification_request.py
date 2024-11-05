@@ -76,7 +76,7 @@ class TestStockVerificationRequest(common.TransactionCase):
             }
         ).action_apply_inventory()
 
-    def test_svr_creation(self):
+    def test_01_svr_creation(self):
         """Tests the creation of Slot Verification Requests."""
         inventory = self.obj_inventory.create(
             {
@@ -104,7 +104,7 @@ class TestStockVerificationRequest(common.TransactionCase):
         for quant in inventory.stock_quant_ids:
             quant.action_open_svr()
 
-    def test_svr_workflow(self):
+    def test_02_svr_workflow(self):
         """Tests workflow of Slot Verification Request."""
         test_svr = self.env["stock.slot.verification.request"].create(
             {
@@ -135,7 +135,7 @@ class TestStockVerificationRequest(common.TransactionCase):
             "Slot Verification Request not marked as cancelled.",
         )
 
-    def test_view_methods(self):
+    def test_03_view_methods(self):
         """Tests the methods used to handle de UI."""
         test_svr = self.env["stock.slot.verification.request"].create(
             {
@@ -152,7 +152,7 @@ class TestStockVerificationRequest(common.TransactionCase):
         test_svr.action_view_move_lines()
         test_svr.action_view_quants()
 
-    def test_svr_full_workflow(self):
+    def test_04_svr_full_workflow(self):
         test_svr = self.env["stock.slot.verification.request"].create(
             {
                 "location_id": self.test_loc.id,
@@ -182,7 +182,7 @@ class TestStockVerificationRequest(common.TransactionCase):
             "Slot Verification Request not marked as cancelled.",
         )
 
-    def test_user_permissions_on_svr(self):
+    def test_05_user_permissions_on_svr(self):
         """Tests that users without the correct permissions cannot change SVR state."""
         test_svr = self.env["stock.slot.verification.request"].create(
             {
@@ -197,17 +197,69 @@ class TestStockVerificationRequest(common.TransactionCase):
         with self.assertRaises(AccessError):
             test_svr.with_user(self.user).action_solved()
 
+    def test_06_action_view_methods(self):
+        """Tests the view methods in Slot Verification Request."""
+        svr = self.obj_svr.create(
+            {
+                "location_id": self.test_loc.id,
+                "state": "wait",
+                "product_id": self.product1.id,
+            }
+        )
+        svr.action_view_move_lines()
+        svr.action_view_quants()
+        svr.action_create_inventory_adjustment()
+        svr.action_view_inventories()
 
-def test_action_view_methods(self):
-    """Tests the view methods in Slot Verification Request."""
-    svr = self.obj_svr.create(
-        {
-            "location_id": self.test_loc.id,
-            "state": "wait",
-            "product_id": self.product1.id,
-        }
-    )
-    svr.action_view_move_lines()
-    svr.action_view_quants()
-    svr.action_create_inventory_adjustment()
-    svr.action_view_inventories()
+    def test_07_involved_move_lines_compute(self):
+        move = self.obj_move.create(
+            {
+                "name": "Test Move",
+                "product_id": self.product1.id,
+                "product_uom_qty": 10,
+                "product_uom": self.product1.uom_id.id,
+                "location_id": self.test_loc.id,
+                "location_dest_id": self.test_loc.id,
+            }
+        )
+        move._action_confirm()
+        move._action_assign()
+        move_line = move.move_line_ids[0]
+        test_svr = self.obj_svr.create(
+            {
+                "location_id": self.test_loc.id,
+                "state": "wait",
+                "product_id": self.product1.id,
+            }
+        )
+        test_svr.action_confirm()
+        self.assertEqual(
+            test_svr.state, "open", "Slot Verification Request not confirmed properly."
+        )
+        self.assertIn(
+            move_line,
+            test_svr.involved_move_line_ids,
+            "Move line not found in involved_move_line_ids",
+        )
+
+    def test_08_involved_quants_compute(self):
+        self.quant3 = self.env["stock.quant"].create(
+            {
+                "location_id": self.test_loc.id,
+                "product_id": self.product1.id,
+                "quantity": 20.0,
+            }
+        )
+        test_svr = self.obj_svr.create(
+            {
+                "location_id": self.test_loc.id,
+                "state": "wait",
+                "product_id": self.product1.id,
+            }
+        )
+        test_svr.action_confirm()
+        self.assertIn(
+            self.quant3,
+            test_svr.involved_quant_ids,
+            "Quant3 not found in involved_quant_ids",
+        )

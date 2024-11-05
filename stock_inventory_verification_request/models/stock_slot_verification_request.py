@@ -100,6 +100,8 @@ class SlotVerificationRequest(models.Model):
         column1="slot_verification_request_id",
         column2="move_line_id",
         string="Involved Stock Moves",
+        compute="_compute_involved_move_lines",
+        store=False,
     )
     involved_move_line_count = fields.Integer(
         compute="_compute_involved_move_line_count"
@@ -110,6 +112,8 @@ class SlotVerificationRequest(models.Model):
         column1="slot_verification_request_id",
         column2="quant_id",
         string="Involved Inventory Quants",
+        compute="_compute_involved_quants",
+        store=False,
     )
     involved_quant_count = fields.Integer(compute="_compute_involved_quant_count")
     created_inventory_ids = fields.One2many(
@@ -119,6 +123,29 @@ class SlotVerificationRequest(models.Model):
         help="These inventory adjustment were created from this SVR.",
     )
     created_inventory_count = fields.Integer(compute="_compute_created_inventory_count")
+
+    @api.depends("location_id", "product_id", "lot_id", "state")
+    def _compute_involved_move_lines(self):
+        for rec in self:
+            # Only compute when state is 'open' to prevent irrelevant data accumulation.
+            # No need to accumulate movements for a 'solved' or 'cancelled'
+            # SVR a lot of time after resolution.
+            if rec.state == "open":
+                rec.involved_move_line_ids = self.env["stock.move.line"].search(
+                    rec._get_involved_move_lines_domain()
+                )
+            else:
+                rec.involved_move_line_ids = self.env["stock.move.line"]
+
+    @api.depends("location_id", "product_id", "lot_id", "state")
+    def _compute_involved_quants(self):
+        for rec in self:
+            if rec.state == "open":
+                rec.involved_quant_ids = self.env["stock.quant"].search(
+                    rec._get_involved_quants_domain()
+                )
+            else:
+                rec.involved_quant_ids = self.env["stock.quant"]
 
     def _get_involved_move_lines_domain(self):
         domain = [
@@ -140,24 +167,8 @@ class SlotVerificationRequest(models.Model):
             domain.append(("lot_id", "=", self.lot_id.id))
         return domain
 
-    def _get_involved_quants_and_locations(self):
-        involved_move_lines = self.env["stock.move.line"].search(
-            self._get_involved_move_lines_domain()
-        )
-        involved_quants = self.env["stock.quant"].search(
-            self._get_involved_quants_domain()
-        )
-        return involved_move_lines, involved_quants
-
     def action_confirm(self):
         self.write({"state": "open"})
-        for rec in self:
-            (
-                involved_moves_lines,
-                involved_quants,
-            ) = rec._get_involved_quants_and_locations()
-            rec.involved_move_line_ids = involved_moves_lines
-            rec.involved_quant_ids = involved_quants
         return True
 
     def action_cancel(self):
