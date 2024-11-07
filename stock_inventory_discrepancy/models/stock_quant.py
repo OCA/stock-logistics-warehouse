@@ -73,6 +73,23 @@ class StockQuant(models.Model):
                 rec.discrepancy_percent > rec.discrepancy_threshold
             )
 
+    def user_has_groups(self, groups):
+        # Most inventory adjustment operations are limited to users having
+        # the Inventory Manager group.
+        # OVERRIDE: Hijack the check to replace it with our own group.
+        if groups == "stock.group_stock_manager" and self.env.context.get(
+            "_stock_inventory_discrepancy"
+        ):
+            groups = "stock_inventory_discrepancy.group_stock_inventory_validation"
+        return super().user_has_groups(groups)
+
+    def _apply_inventory(self):
+        if self.user_has_groups(
+            "stock_inventory_discrepancy.group_stock_inventory_validation"
+        ):
+            self = self.with_context(_stock_inventory_discrepancy=True)
+        return super()._apply_inventory()
+
     def action_apply_inventory(self):
         if self.env.context.get("skip_exceeded_discrepancy", False):
             return super().action_apply_inventory()

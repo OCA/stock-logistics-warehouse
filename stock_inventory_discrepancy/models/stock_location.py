@@ -21,6 +21,17 @@ class StockLocation(models.Model):
     )
 
     def write(self, values):
+        # OVERRIDE: Allow the inventory user to set the last inventory date.
+        # https://github.com/odoo/odoo/blob/534220ee/addons/stock/models/stock_quant.py#L775
+        if (
+            self.env.context.get("_stock_inventory_discrepancy")
+            and len(values) == 1
+            and "last_inventory_date" in values
+            and self.user_has_groups(
+                "stock_inventory_discrepancy.group_stock_inventory_validation"
+            )
+        ):
+            self = self.sudo()
         res = super().write(values)
         # Set the discrepancy threshold for all child locations
         if values.get("discrepancy_threshold", False):
