@@ -45,3 +45,18 @@ class StockLocation(models.Model):
                 loc.children_ids = [Command.set(children)]
             else:
                 loc.children_ids = [Command.clear()]
+
+    def action_show_children_locations(self):
+        """
+        Display all children locations of the current one
+        """
+        self.ensure_one()
+        action = self.env["ir.actions.act_window"]._for_xml_id(
+            "stock.action_location_form"
+        )
+        action.update(
+            {
+                "domain": [("id", "in", self.children_ids.ids)],
+            }
+        )
+        return action

@@ -12,4 +12,5 @@
     "application": False,
     "installable": True,
     "depends": ["stock"],
+    "data": ["views/stock_location.xml"],
 }
