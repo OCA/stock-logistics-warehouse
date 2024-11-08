@@ -64,6 +64,9 @@ class TestStockLocationChildren(TransactionCase):
         self.assertFalse(self.stock_shelf_2_refrigerator.child_ids)
         self.assertEqual(self.stock_shelf_2.child_ids, self.stock_shelf_2_refrigerator)
         self.assertEqual(self.stock_shelf_2.child_ids, self.stock_shelf_2.children_ids)
+        self.assertNotIn(
+            self.stock_shelf_2_refrigerator.children_ids, refrigerator_drawer
+        )
         self.assertEqual(
             self.test_location.children_ids,
             self.stock_shelf_1 | self.stock_shelf_2 | self.stock_shelf_2_refrigerator,
