@@ -1,13 +1,12 @@
 # Copyright 2020 Camptocamp SA
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl)
-from odoo.tests.common import TransactionCase
+from odoo.addons.base.tests.common import BaseCommon
 
 
-class TestStockLocationChildren(TransactionCase):
+class TestStockLocationChildren(BaseCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
         ref = cls.env.ref
         cls.stock_input = ref("stock.stock_location_company")
         cls.stock_location = ref("stock.stock_location_stock")
@@ -70,4 +69,12 @@ class TestStockLocationChildren(TransactionCase):
         self.assertEqual(
             self.test_location.children_ids,
             self.stock_shelf_1 | self.stock_shelf_2 | self.stock_shelf_2_refrigerator,
+        )
+
+    def test_action(self):
+        # Check the action to view all children
+        action = self.stock_shelf_2.action_show_children_locations()
+        self.assertDictContainsSubset(
+            {"domain": [("id", "in", self.stock_shelf_2.children_ids.ids)]},
+            action,
         )
