@@ -17,9 +17,9 @@
                 />
                 <field
                     name="secondary_uom_id"
-                    domain="['|', ('product_id', '=', product_id),
+                    domain="product_id and ['|', ('product_id', '=', product_id),
                                 '&amp;', ('product_tmpl_id.product_variant_ids', 'in', [product_id]),
-                                         ('product_id', '=', False)]"
+                                         ('product_id', '=', False)] or [(0, '=', 1)]"
                     attrs="{'readonly': [('state', '!=', 'draft'), ('id', '!=', False)]}"
                     options="{'no_create': True}"
                     groups="uom.group_uom"
@@ -46,9 +46,9 @@
                 />
                 <field
                     name="secondary_uom_id"
-                    domain="['|', ('product_id', '=', product_id),
+                    domain="product_id and ['|', ('product_id', '=', product_id),
                                 '&amp;', ('product_tmpl_id.product_variant_ids', 'in', [product_id]),
-                                         ('product_id', '=', False)]"
+                                         ('product_id', '=', False)] or [(0, '=', 1)]"
                     attrs="{'readonly': [('state', '!=', 'draft'), ('id', '!=', False)]}"
                     options="{'no_create': True}"
                     groups="uom.group_uom"
