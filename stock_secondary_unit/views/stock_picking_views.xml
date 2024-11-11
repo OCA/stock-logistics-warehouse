@@ -19,9 +19,9 @@
                 />
                 <field
                     name="secondary_uom_id"
-                    domain="['|', ('product_id', '=', product_id),
+                    domain="product_id and ['|', ('product_id', '=', product_id),
                                 '&amp;', ('product_tmpl_id.product_variant_ids', 'in', [product_id]),
-                                         ('product_id', '=', False)]"
+                                         ('product_id', '=', False)] or [(0, '=', 1)]"
                     options="{'no_create': True}"
                     attrs="{'column_invisible': [('parent.immediate_transfer', '=', True)], 'readonly': ['|', ('is_initial_demand_editable', '=', False), '&amp;', '&amp;', ('show_operations', '=', True), ('is_locked', '=', True), ('is_initial_demand_editable', '=', False)]}"
                     groups="uom.group_uom"
@@ -39,9 +39,9 @@
                 />
                 <field
                     name="secondary_uom_id"
-                    domain="['|', ('product_id', '=', product_id),
+                    domain="product_id and ['|', ('product_id', '=', product_id),
                                 '&amp;', ('product_tmpl_id.product_variant_ids', 'in', [product_id]),
-                                         ('product_id', '=', False)]"
+                                         ('product_id', '=', False)] or [(0, '=', 1)]"
                     options="{'no_create': True}"
                     attrs="{'invisible': [('parent.immediate_transfer', '=', True)], 'readonly': [('is_initial_demand_editable', '=', False)]}"
                     groups="uom.group_uom"
