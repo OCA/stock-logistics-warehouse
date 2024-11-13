@@ -28,5 +28,8 @@ msgstr "Magatzem"
 
 #. module: stock_warehouse_calendar
 #: model:ir.model.fields,field_description:stock_warehouse_calendar.field_stock_warehouse__calendar_id
-msgid "Working Hours"
-msgstr "Hores de treball"
+msgid "Working Schedules"
+msgstr ""
+
+#~ msgid "Working Hours"
+#~ msgstr "Hores de treball"

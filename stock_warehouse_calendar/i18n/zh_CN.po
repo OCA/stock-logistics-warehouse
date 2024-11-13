@@ -28,5 +28,8 @@ msgstr "仓库"
 
 #. module: stock_warehouse_calendar
 #: model:ir.model.fields,field_description:stock_warehouse_calendar.field_stock_warehouse__calendar_id
-msgid "Working Hours"
-msgstr "工作时间"
+msgid "Working Schedules"
+msgstr ""
+
+#~ msgid "Working Hours"
+#~ msgstr "工作时间"
