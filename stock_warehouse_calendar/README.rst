@@ -17,24 +17,24 @@ Stock Warehouse Calendar
     :target: http://www.gnu.org/licenses/lgpl-3.0-standalone.html
     :alt: License: LGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fstock--logistics--warehouse-lightgray.png?logo=github
-    :target: https://github.com/OCA/stock-logistics-warehouse/tree/17.0/stock_warehouse_calendar
+    :target: https://github.com/OCA/stock-logistics-warehouse/tree/18.0/stock_warehouse_calendar
     :alt: OCA/stock-logistics-warehouse
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/stock-logistics-warehouse-17-0/stock-logistics-warehouse-17-0-stock_warehouse_calendar
+    :target: https://translation.odoo-community.org/projects/stock-logistics-warehouse-18-0/stock-logistics-warehouse-18-0-stock_warehouse_calendar
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/stock-logistics-warehouse&target_branch=17.0
+    :target: https://runboat.odoo-community.org/builds?repo=OCA/stock-logistics-warehouse&target_branch=18.0
     :alt: Try me on Runboat
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-This module adds a Calendar to the Warehouse. This calendar can then
+This module adds a Calendar to the Warehouse. This calendar can then be
 used as the basis of the proper computation of start/end dates based on
 lead times in this and other modules.
 
-In this module, the calendar considered in the computation of start date
-of stock moves and pickings created from procurements, where the lead
-time is used.
+In this module, the calendar is used to compute the start dates of stock
+moves and pickings generated from procurements, taking lead times into
+account.
 
 **Table of contents**
 
@@ -45,26 +45,35 @@ Configuration
 =============
 
 -  Go to *Settings* and activate the developer mode.
--  Go to *Settings > Technical > Resource > Working Time* and define
-   your resource calendar.
+-  Go to *Settings > Technical > Resource > Working Schedules* and
+   define your Working Time. |Working Schedules|
 -  Go to *Inventory > Configuration > Warehouse Management > Warehouses*
-   and assign the Resource Calendar.
+   and assign the Working Schedule. |Warehouse Management|
 -  Go to *Inventory > Configuration > Settings* and in *Warehouse* mark
-   'Multi-Step Routes option'.
+   'Multi-Step Routes option'. |Multi-Step Routes option|
 -  Go to *Inventory > Configuration > Warehouse Management > Routes* and
-   set up the proper delays in the stock rules where 'action' is 'Move
-   From Another Location'.
+   set up the proper delays in the stock rules where 'action' is 'Pull
+   and Push' or 'Pull'. |Set up the proper delays|
+
+.. |Working Schedules| image:: https://raw.githubusercontent.com/OCA/stock-logistics-warehouse/18.0/stock_warehouse_calendar/static/description/working_schedules.gif
+.. |Warehouse Management| image:: https://raw.githubusercontent.com/OCA/stock-logistics-warehouse/18.0/stock_warehouse_calendar/static/description/warehouse_management.gif
+.. |Multi-Step Routes option| image:: https://raw.githubusercontent.com/OCA/stock-logistics-warehouse/18.0/stock_warehouse_calendar/static/description/multi_step.gif
+.. |Set up the proper delays| image:: https://raw.githubusercontent.com/OCA/stock-logistics-warehouse/18.0/stock_warehouse_calendar/static/description/delay.gif
 
 Usage
 =====
 
-When a picking is created out of a procurement evaluation (from an
-orderpoint, MTO,...) the calendar is considered in the computation of
-the expected date of the picking and moves. For example, if it takes 1
-day to execute a stock transfer from another warehouse and it is Monday,
-the picking to resupply will be created with expected start date on the
-previous Friday, if the warehouse operates under a Mo-Fri working
-calendar.
+When a picking is generated from a procurement evaluation (e.g., from an
+orderpoint or MTO), the warehouse calendar is used to calculate the
+expected dates for the picking and its associated stock moves.
+
+For instance, if a stock transfer from another warehouse requires 1 day
+to complete and the product is needed on a Monday, the system will
+determine that the transfer must begin on the previous Friday. This
+ensures the product arrives on time, considering the warehouse operates
+under a Monday-to-Friday working calendar. Without the calendar
+adjustment, the system might incorrectly plan the transfer to start on
+Sunday, a non-working day, which could lead to delays.
 
 Bug Tracker
 ===========
@@ -72,7 +81,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/stock-logistics-warehouse/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/stock-logistics-warehouse/issues/new?body=module:%20stock_warehouse_calendar%0Aversion:%2017.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/stock-logistics-warehouse/issues/new?body=module:%20stock_warehouse_calendar%0Aversion:%2018.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -112,6 +121,6 @@ Current `maintainer <https://odoo-community.org/page/maintainer-role>`__:
 
 |maintainer-JordiBForgeFlow| 
 
-This module is part of the `OCA/stock-logistics-warehouse <https://github.com/OCA/stock-logistics-warehouse/tree/17.0/stock_warehouse_calendar>`_ project on GitHub.
+This module is part of the `OCA/stock-logistics-warehouse <https://github.com/OCA/stock-logistics-warehouse/tree/18.0/stock_warehouse_calendar>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.
