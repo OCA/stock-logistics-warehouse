@@ -9,7 +9,6 @@ class StockPicking(models.Model):
     _inherit = "stock.picking"
 
     accounting_date = fields.Date(
-        states={"done": [("readonly", True)], "cancel": [("readonly", True)]},
         help="Accounting date for stock valuation journal entry.",
     )
     show_accounting_date = fields.Boolean(compute="_compute_show_accounting_date")
