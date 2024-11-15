@@ -31,10 +31,6 @@ class StockQuant(models.Model):
                     ("location_dest_id", "=", rec.location_id.id),
                 ],
                 order="create_date asc",
-            ).filtered(
-                lambda x: not x.company_id.id
-                or not rec.company_id.id
-                or rec.company_id.id == x.company_id.id
             )
             move = moves[len(moves) - 1]
             move.write(
