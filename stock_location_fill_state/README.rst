@@ -44,7 +44,7 @@ being filled ones (some movements are planned to fill in the location).
 Use Cases / Context
 ===================
 
-Stock logistic managers need to know the void stock locations in order
+Stock logistic managers need to know the empty stock locations in order
 to measure the capacity of the warehouse and be able to reorganize it if
 it does not fit the current replenishment coverage.
 
@@ -53,7 +53,8 @@ Usage
 
 - Go to Inventory > Configuration > Warehouse Management > Locations
 - In the list of locations, enable the column visibility 'Fill State'
-- You can filter the locations per 'Empty' or 'Filled' property.
+- You can filter the locations per 'Empty', 'Filled', 'Being Filled' or
+  'Being Emptied' property.
 
 Bug Tracker
 ===========
@@ -72,6 +73,7 @@ Authors
 -------
 
 * ACSONE SA/NV
+* BCIM
 
 Contributors
 ------------
@@ -94,10 +96,13 @@ promote its widespread use.
 .. |maintainer-rousseldenis| image:: https://github.com/rousseldenis.png?size=40px
     :target: https://github.com/rousseldenis
     :alt: rousseldenis
+.. |maintainer-jbaudoux| image:: https://github.com/jbaudoux.png?size=40px
+    :target: https://github.com/jbaudoux
+    :alt: jbaudoux
 
-Current `maintainer <https://odoo-community.org/page/maintainer-role>`__:
+Current `maintainers <https://odoo-community.org/page/maintainer-role>`__:
 
-|maintainer-rousseldenis| 
+|maintainer-rousseldenis| |maintainer-jbaudoux| 
 
 This module is part of the `OCA/stock-logistics-warehouse <https://github.com/OCA/stock-logistics-warehouse/tree/16.0/stock_location_fill_state>`_ project on GitHub.
 

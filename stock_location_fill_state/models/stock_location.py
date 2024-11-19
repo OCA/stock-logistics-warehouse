@@ -3,6 +3,7 @@
 from collections import defaultdict
 
 from odoo import api, fields, models
+from odoo.osv.expression import AND
 
 from odoo.addons.stock_location_pending_move.models.stock_location import (
     PENDING_MOVE_DOMAIN,
@@ -44,8 +45,9 @@ class StockLocation(models.Model):
         location_domain = [("location_id", "in", self.ids)]
         out_qty_by_location = {}
         qty_by_location = {}
+        domain = AND([PENDING_MOVE_DOMAIN, location_domain])
         for group in self.env["stock.move.line"].read_group(
-            PENDING_MOVE_DOMAIN + location_domain,
+            domain,
             fields=["qty_done:sum"],
             groupby=["location_id"],
         ):
