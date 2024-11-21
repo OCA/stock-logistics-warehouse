@@ -74,6 +74,7 @@ class StockWarehouse(models.Model):
             "location_id": cycle_count_proposed["location"].id,
             "cycle_count_rule_id": cycle_count_proposed["rule_type"].id,
             "state": "draft",
+            "company_id": cycle_count_proposed["company_id"].id,
         }
 
     def action_compute_cycle_count_rules(self):
