@@ -160,6 +160,7 @@ class StockCycleCountRule(models.Model):
             "date": fields.Datetime.from_string(date),
             "location": location,
             "rule_type": self,
+            "company_id": location.company_id,
         }
         return cycle_count
 
