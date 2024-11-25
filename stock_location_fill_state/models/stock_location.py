@@ -34,6 +34,22 @@ class StockLocation(models.Model):
         """,
     )
 
+    def _get_locations_for_fill_state(self):
+        """
+        Filter the locations to compute the fill state
+        as some contain too much quants to be efficient (customers).
+        """
+        return self.filtered(
+            lambda location: location.usage not in ["customer", "supplier"]
+        )
+
+    def _get_quant_fill_state_domain(self):
+        """
+        This will help building the domain to retrieve quants
+        to compute the fill state of their locations.
+        """
+        return [("location_id", "in", self.ids)]
+
     @api.depends(
         "quant_ids.quantity",
         "pending_out_move_line_ids.qty_done",
@@ -42,7 +58,8 @@ class StockLocation(models.Model):
     )
     def _compute_fill_state(self):
         """ """
-        location_domain = [("location_id", "in", self.ids)]
+        locations_to_compute = self._get_locations_for_fill_state()
+        location_domain = locations_to_compute._get_quant_fill_state_domain()
         out_qty_by_location = {}
         qty_by_location = {}
         domain = AND([PENDING_MOVE_DOMAIN, location_domain])
