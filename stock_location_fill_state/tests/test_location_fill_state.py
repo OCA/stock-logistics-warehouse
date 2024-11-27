@@ -27,6 +27,13 @@ class TestLocationFillState(BaseCommon):
                 "location_id": cls.stock.id,
             }
         )
+        cls.stock_2 = cls.env["stock.location"].create(
+            {
+                "name": "Stock 2",
+                "location_id": cls.stock.id,
+                "exclude_from_fill_state_computation": True,
+            }
+        )
 
     def test_location_fill_state(self):
         # Check the multi call
@@ -93,8 +100,8 @@ class TestLocationFillState(BaseCommon):
             self.stock_1.fill_state,
         )
 
-        # Check that the customers location is being filled or empty
-        self.assertIn(self.customers.fill_state, ["empty", "being_filled"])
+        # Check that the customers location is not computed
+        self.assertFalse(self.customers.fill_state)
         self.env["stock.quant"].with_context(inventory_mode=True).create(
             {
                 "product_id": self.product.id,
@@ -110,4 +117,17 @@ class TestLocationFillState(BaseCommon):
             move.quantity_done = move.product_uom_qty
         moves._action_done()
 
-        self.assertEqual("empty", self.customers.fill_state)
+        self.assertFalse(self.customers.fill_state)
+
+    def test_exclude(self):
+        # Check the locations that are set to not compute
+        # the fill state get the False value.
+        self.assertFalse(self.stock_2.fill_state)
+        self.env["stock.quant"].with_context(inventory_mode=True).create(
+            {
+                "product_id": self.product.id,
+                "location_id": self.stock_2.id,
+                "inventory_quantity": 10.0,
+            }
+        )._apply_inventory()
+        self.assertFalse(self.stock_2.fill_state)

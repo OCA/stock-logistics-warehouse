@@ -14,6 +14,10 @@ class StockLocation(models.Model):
 
     _inherit = "stock.location"
 
+    exclude_from_fill_state_computation = fields.Boolean(
+        help="Don't compute the fill state for this location. Checking this on"
+        "intensively used locations can improve performances."
+    )
     fill_state = fields.Selection(
         selection=[
             ("empty", "Empty"),
@@ -37,10 +41,12 @@ class StockLocation(models.Model):
     def _get_locations_for_fill_state(self):
         """
         Filter the locations to compute the fill state
-        as some contain too much quants to be efficient (customers).
+        as some contain too much quants to be efficient (customers/suppliers).
+        Filter explicitly excluded locations too.
         """
         return self.filtered(
-            lambda location: location.usage not in ["customer", "supplier"]
+            lambda location: not location.exclude_from_fill_state_computation
+            and location.usage not in ["customer", "supplier"]
         )
 
     def _get_quant_fill_state_domain(self):
@@ -76,7 +82,8 @@ class StockLocation(models.Model):
             location_id = group["location_id"][0]
             qty_by_location[location_id] = group["quantity"]
         records_by_state = defaultdict(lambda: self.browse())
-        for rec in self:
+        # As field is stored, we can exclude records from compute loop
+        for rec in locations_to_compute:
             qty_in_location = qty_by_location.get(rec.id, 0.0)
             out_by_location = out_qty_by_location.get(rec.id, 0.0)
             if qty_in_location > 0.0:

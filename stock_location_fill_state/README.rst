@@ -62,6 +62,10 @@ Usage
   filled in with 'filled' for performances reasons as too much products
   quantities (aka quants) can exist in those locations.
 
+- Some locations can be excluded too from the computation. Go to the
+  desired location and check the 'Exclude From Fill State Computation'
+  box.
+
 Bug Tracker
 ===========
 

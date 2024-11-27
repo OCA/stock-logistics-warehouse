@@ -20,6 +20,12 @@
                     />
                 </h2>
             </xpath>
+            <field name="usage" position="after">
+                <field
+                    name="exclude_from_fill_state_computation"
+                    attrs="{'invisible': [('usage', 'in', ['customer', 'supplier'])]}"
+                />
+            </field>
         </field>
     </record>
 
