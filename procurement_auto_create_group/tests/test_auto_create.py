@@ -108,6 +108,13 @@ class TestProcurementAutoCreateGroup(TransactionCase):
                 "route_ids": [(6, 0, [push_route_auto.id])],
             }
         )
+        cls.prod_auto_push_2 = cls.product_obj.create(
+            {
+                "name": "Test Product 5",
+                "type": "product",
+                "route_ids": [(6, 0, [push_route_auto.id])],
+            }
+        )
         cls.prod_no_auto_push = cls.product_obj.create(
             {
                 "name": "Test Product 4",
@@ -167,6 +174,24 @@ class TestProcurementAutoCreateGroup(TransactionCase):
         picking.action_confirm()
         picking.move_ids.write({"quantity_done": 1.0})
         picking.button_validate()
+
+    def _add_move_to_picking(self, picking, product):
+        move = self.move_obj.create(
+            {
+                "name": "Test move",
+                "product_id": product.id,
+                "date_deadline": "2099-06-01 18:00:00",
+                "date": "2099-06-01 18:00:00",
+                "product_uom": product.uom_id.id,
+                "product_uom_qty": 1.0,
+                "location_id": self.supplier_location.id,
+                "location_dest_id": self.location.id,
+                "picking_id": picking.id,
+            }
+        )
+        picking.action_confirm()
+        move.write({"quantity_done": 1.0})
+        picking._action_done()
 
     def test_01_pull_push_no_auto_create_group(self):
         """Test auto creation of group."""
@@ -245,3 +270,46 @@ class TestProcurementAutoCreateGroup(TransactionCase):
         )
         self.assertTrue(move)
         self.assertTrue(move.group_id, "Procurement Group not assigned.")
+
+    def test_06_auto_create_same_procurement_group_per_picking(self):
+        """Test auto creation of group for same procurement group per picking."""
+        first_move = self.move_obj.search(
+            [
+                ("product_id", "=", self.prod_auto_push.id),
+                ("location_dest_id", "=", self.loc_components.id),
+            ]
+        )
+        self.assertFalse(first_move)
+
+        picking = self.picking_obj.create(
+            {
+                "picking_type_id": self.env.ref("stock.picking_type_in").id,
+                "location_id": self.supplier_location.id,
+                "location_dest_id": self.location.id,
+                "move_ids": [],
+            }
+        )
+
+        self._add_move_to_picking(picking, self.prod_auto_push)
+        second_move = self.move_obj.search(
+            [
+                ("product_id", "=", self.prod_auto_push.id),
+                ("location_dest_id", "=", self.loc_components.id),
+            ]
+        )
+        self.assertTrue(second_move)
+        self.assertTrue(second_move.group_id, "Procurement Group not assigned.")
+
+        self._add_move_to_picking(picking, self.prod_auto_push_2)
+        third_move = self.move_obj.search(
+            [
+                ("product_id", "=", self.prod_auto_push_2.id),
+                ("location_dest_id", "=", self.loc_components.id),
+            ]
+        )
+        self.assertTrue(third_move)
+        self.assertEqual(
+            third_move.move_dest_ids.group_id,
+            second_move.move_dest_ids.group_id,
+            "Procurement Group should be the same for the same picking.",
+        )

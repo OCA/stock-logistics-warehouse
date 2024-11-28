@@ -23,7 +23,12 @@ class StockRule(models.Model):
     def _push_prepare_move_copy_values(self, move_to_copy, new_date):
         new_move_vals = super()._push_prepare_move_copy_values(move_to_copy, new_date)
         if self.auto_create_group:
-            group = self._get_auto_procurement_group(move_to_copy.product_id)
+            # Get the same procurement group as the original move if it exists
+            # so that the new move is part of the same group as the original move
+            group = move_to_copy.picking_id.group_id
+            if not group:
+                group = self._get_auto_procurement_group(move_to_copy.product_id)
+                move_to_copy.picking_id.move_ids.write({"group_id": group.id})
             new_move_vals["group_id"] = group.id
         return new_move_vals
 
