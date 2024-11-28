@@ -1,0 +1,2 @@
+- Denis Roussel <denis.roussel@acsone.eu>
+- Jacques-Étienne Baudoux <je@bcim.be>
