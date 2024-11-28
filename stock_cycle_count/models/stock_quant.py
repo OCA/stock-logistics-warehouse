@@ -29,7 +29,8 @@ class StockQuant(models.Model):
                     "|",
                     ("location_id", "=", rec.location_id.id),
                     ("location_dest_id", "=", rec.location_id.id),
-                ],
+                ]
+                + ([("company_id", "=", rec.company_id.id)] if rec.company_id else []),
                 order="create_date asc",
             )
             move = moves[len(moves) - 1]
