@@ -1,7 +1,8 @@
 # Copyright 2024 ACSONE SA/NV
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
-
 from odoo import api, models
+
+from odoo.addons.queue_job.job import identity_exact
 
 
 class StockQuant(models.Model):
@@ -23,4 +24,6 @@ class StockQuant(models.Model):
 
     @api.model
     def _run_quant_tasks_deferred(self):
-        self.with_delay(description="Executing Quant Tasks")._quant_tasks_deferred()
+        self.with_delay(
+            description="Executing Quant Tasks", identity_key=identity_exact
+        )._quant_tasks_deferred()
