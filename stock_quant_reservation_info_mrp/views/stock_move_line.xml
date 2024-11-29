@@ -15,7 +15,7 @@
                     class="btn btn-link text-info"
                     icon="fa-arrow-right"
                     title="Related MO"
-                    attrs="{'invisible': [('production_id', '=', False)]}"
+                    invisible="not production_id"
                 />
             </button>
         </field>
@@ -30,7 +30,7 @@
                 <field
                     name="production_id"
                     string="Manufacturing Order"
-                    attrs="{'invisible': [('production_id', '=', False)]}"
+                    invisible="not production_id"
                     readonly="1"
                 />
             </field>
