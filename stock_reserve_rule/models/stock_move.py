@@ -11,8 +11,8 @@ class StockMove(models.Model):
     def _update_reserved_quantity(
         self,
         need,
-        available_quantity,
         location_id,
+        quant_ids=None,
         lot_id=None,
         package_id=None,
         owner_id=None,
@@ -23,12 +23,12 @@ class StockMove(models.Model):
             # chained moves must take what was reserved by the previous move
             return super()._update_reserved_quantity(
                 need,
-                available_quantity,
-                location_id=location_id,
-                lot_id=lot_id,
-                package_id=package_id,
-                owner_id=owner_id,
-                strict=strict,
+                location_id,
+                quant_ids=None,
+                lot_id=None,
+                package_id=None,
+                owner_id=None,
+                strict=True,
             )
         rules = self.env["stock.reserve.rule"]._rules_for_location(location_id)
 
@@ -124,10 +124,10 @@ class StockMove(models.Model):
         # excluded by 'rule._is_rule_applicable'
         return super()._update_reserved_quantity(
             need,
-            available_quantity,
-            location_id=location_id,
-            lot_id=lot_id,
-            package_id=package_id,
-            owner_id=owner_id,
-            strict=strict,
+            location_id,
+            quant_ids=None,
+            lot_id=None,
+            package_id=None,
+            owner_id=None,
+            strict=True,
         )

@@ -12,7 +12,7 @@
                         name="web_ribbon"
                         title="Archived"
                         bg_color="bg-danger"
-                        attrs="{'invisible': [('active', '=', True)]}"
+                        invisible="active"
                     />
                     <label for="name" class="oe_edit_only" />
                     <h1>
@@ -60,7 +60,7 @@
                                     <field
                                         name="packaging_level_ids"
                                         widget="many2many_tags"
-                                        attrs="{'invisible': [('removal_strategy', '!=', 'packaging')]}"
+                                        invisible="removal_strategy != 'packaging'"
                                     />
                                     <field
                                         name="quant_domain"
@@ -75,6 +75,7 @@
             </form>
         </field>
     </record>
+
     <record id="view_stock_reserve_rule_search" model="ir.ui.view">
         <field name="name">stock.reserve.rule.search</field>
         <field name="model">stock.reserve.rule</field>

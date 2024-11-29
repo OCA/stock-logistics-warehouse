@@ -26,8 +26,7 @@ Scenario:
 
 - Activate Storage Locations and Multi-Warehouses
 - You can open Inventory \> Configuration \> Stock Reservation Rules to
-  activate and see the rules (by default in demo, the rules are created
-  inactive)
+  see the rules
 - Open Transfer: Outgoing shipment (reservation rules demo 1)
 - Check availability: it has 150 units, as it will not empty Zone A, it
   will not take products there, it should take 100 in B and 50 in C

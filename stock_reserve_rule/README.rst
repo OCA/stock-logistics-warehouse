@@ -44,30 +44,30 @@ The advanced removal strategies are applied on top of the default one
 
 The included advanced removal strategies are:
 
-- Default Removal Strategy: apply the default configured one (fifo,
-  fefo, ...)
-- Empty Bins: goods are removed from a bin only if the bin will be empty
-  after the removal (favor largest bins first to minimize the number of
-  operations, then apply the default removal strategy for equal
-  quantities).
-- Full Packaging: tries to remove full packaging (configured on the
-  products) first, by largest to smallest package or based on a
-  pre-selected package (default removal strategy is then applied for
-  equal quantities).
+-  Default Removal Strategy: apply the default configured one (fifo,
+   fefo, ...)
+-  Empty Bins: goods are removed from a bin only if the bin will be
+   empty after the removal (favor largest bins first to minimize the
+   number of operations, then apply the default removal strategy for
+   equal quantities).
+-  Full Packaging: tries to remove full packaging (configured on the
+   products) first, by largest to smallest package or based on a
+   pre-selected package (default removal strategy is then applied for
+   equal quantities).
 
 Examples of scenario:
 
 rules:
 
-- location A: no filter, no advanced removal strategy
-- location B: no filter, Empty Bins
-- location C: no filter, no advanced removal strategy
+-  location A: no filter, no advanced removal strategy
+-  location B: no filter, Empty Bins
+-  location C: no filter, no advanced removal strategy
 
 result:
 
-- take what is available in location A
-- then take in location B if available, only if bin(s) are emptied
-- then take what is available in location C
+-  take what is available in location A
+-  then take in location B if available, only if bin(s) are emptied
+-  then take what is available in location C
 
 The module is meant to be extensible, with a core mechanism on which new
 rules and advanced removal strategies can be added.
@@ -87,16 +87,20 @@ Creation of a rule:
 
 Properties that define where the rule will be applied:
 
-- Location: Define where the rule will look for goods (a parent of the
-  move's source location).
-- Rule Domain: The rule is used only if the Stock Move matches the
-  domain.
+-  Location: Define where the rule will look for goods (a parent of the
+   move's source location).
+-  Fallback Location: Define where the goods are reserved if none of the
+   removal rule could reserve the goods. If left empty, the goods are
+   reserved in the move's source location / sub-locations.
+-  Rule Domain: The rule is used only if the Stock Move matches the
+   domain.
 
 Removal rules for the locations:
 
-- Quants Domain: this domain includes/excludes quants based on a domain.
-- Advanced Removal Strategy: the strategy that will be used for this
-  location and sub-location when the rule is used.
+-  Quants Domain: this domain includes/excludes quants based on a
+   domain.
+-  Advanced Removal Strategy: the strategy that will be used for this
+   location and sub-location when the rule is used.
 
 The sequences have to be sorted in the view list to define the
 reservation priorities.
@@ -113,37 +117,36 @@ A product: Funky Socks
 
 3 Locations:
 
-- Stock / Zone A / Bin A1: 200 Funky socks
-- Stock / Zone B / Bin B1: 100 Funky socks
-- Stock / Zone C / Bin C1: 100 Funky socks
+-  Stock / Zone A / Bin A1: 200 Funky socks
+-  Stock / Zone B / Bin B1: 100 Funky socks
+-  Stock / Zone C / Bin C1: 100 Funky socks
 
 3 Reservation Rules, in the following order
 
-- Zone A must have full quantities
-- Zone B
-- Zone C
+-  Zone A must have full quantities
+-  Zone B
+-  Zone C
 
 2 Delivery Orders:
 
-- Origin: Outgoing shipment (reservation rules demo 1)
-- Origin: Outgoing shipment (reservation rules demo 2)
+-  Origin: Outgoing shipment (reservation rules demo 1)
+-  Origin: Outgoing shipment (reservation rules demo 2)
 
 Scenario:
 
-- Activate Storage Locations and Multi-Warehouses
-- You can open Inventory > Configuration > Stock Reservation Rules to
-  activate and see the rules (by default in demo, the rules are created
-  inactive)
-- Open Transfer: Outgoing shipment (reservation rules demo 1)
-- Check availability: it has 150 units, as it will not empty Zone A, it
-  will not take products there, it should take 100 in B and 50 in C
-  (following the rules order)
-- Unreserve this transfer (to test the second case)
-- Open Transfer: Outgoing shipment (reservation rules demo 2)
-- Check availability: it has 250 units, it can empty Zone A, it will
-  take 200 in Bin A1 and 50 in Bin B1.
-- If you want to explore further, you can add a custom domain to exclude
-  rules (for instance, a product category will not use Zone B).
+-  Activate Storage Locations and Multi-Warehouses
+-  You can open Inventory > Configuration > Stock Reservation Rules to
+   see the rules
+-  Open Transfer: Outgoing shipment (reservation rules demo 1)
+-  Check availability: it has 150 units, as it will not empty Zone A, it
+   will not take products there, it should take 100 in B and 50 in C
+   (following the rules order)
+-  Unreserve this transfer (to test the second case)
+-  Open Transfer: Outgoing shipment (reservation rules demo 2)
+-  Check availability: it has 250 units, it can empty Zone A, it will
+   take 200 in Bin A1 and 50 in Bin B1.
+-  If you want to explore further, you can add a custom domain to
+   exclude rules (for instance, a product category will not use Zone B).
 
 Bug Tracker
 ===========
@@ -166,9 +169,7 @@ Authors
 Contributors
 ------------
 
-- Guewen Baconnier <guewen.baconnier@camptocamp.com>
-- Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
-- Denis Roussel <denis.roussel@acsone.eu>
+-  Guewen Baconnier <guewen.baconnier@camptocamp.com>
 
 Maintainers
 -----------
