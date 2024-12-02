@@ -80,16 +80,14 @@ class TestStockLocationLockdown(TransactionCase):
                         "product_id": self.product.id,
                         "product_uom_id": self.product.uom_id.id,
                         "quantity": self.product.qty_available + 1,
-                        "location_id": self.supplier_location.id,
-                        "location_dest_id": self.new_stock_location.id,
+                        "location_id": self.new_stock_location.id,
+                        "location_dest_id": self.customer_location.id,
                     },
                 )
             ],
         }
-        stock_move = self.env["stock.move"].create(move_vals)
-
         with self.assertRaises(ValidationError):
-            stock_move._action_done()
+            self.env["stock.move"].create(move_vals)
 
     def test_block_location_with_quants(self):
         """
