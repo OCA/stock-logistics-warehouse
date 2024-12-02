@@ -2,7 +2,6 @@
 <!-- Copyright 2017 Akretion
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <record id="view_stock_location_block_entrance" model="ir.ui.view">
         <field name="model">stock.location</field>
         <field name="inherit_id" ref="stock.view_location_form" />
@@ -12,5 +11,4 @@
             </field>
         </field>
     </record>
-
 </odoo>
