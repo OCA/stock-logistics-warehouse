@@ -1,10 +1,10 @@
 <?xml version="1.0" ?>
 <odoo>
-    <record id="stock_demand_estimate_view_tree" model="ir.ui.view">
-        <field name="name">stock.demand.estimate.tree</field>
+    <record id="stock_demand_estimate_view_list" model="ir.ui.view">
+        <field name="name">stock.demand.estimate.list</field>
         <field name="model">stock.demand.estimate</field>
         <field name="arch" type="xml">
-            <tree decoration-muted="active == False">
+            <list decoration-muted="active == False">
                 <field name="date_from" string="Date From" />
                 <field name="date_to" string="Date To" />
                 <field name="product_id" />
@@ -14,7 +14,7 @@
                 <field name="product_qty" />
                 <field name="daily_qty" />
                 <field name="active" invisible="1" />
-            </tree>
+            </list>
         </field>
     </record>
     <record id="stock_demand_estimate_view_form" model="ir.ui.view">
@@ -128,7 +128,7 @@
         <field name="name">Stock Demand Estimates</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">stock.demand.estimate</field>
-        <field name="view_mode">tree,form,pivot,graph</field>
+        <field name="view_mode">list,form,pivot,graph</field>
         <field name="search_view_id" ref="stock_demand_estimate_view_search" />
         <field name="context">{"search_default_not_expired": 1}</field>
     </record>
