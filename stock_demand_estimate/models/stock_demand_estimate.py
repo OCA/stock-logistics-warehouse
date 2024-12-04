@@ -96,9 +96,7 @@ class StockDemandEstimate(models.Model):
     def name_get(self):
         res = []
         for rec in self:
-            name = "{} - {}: {} - {}".format(
-                rec.date_from, rec.date_to, rec.product_id.name, rec.location_id.name
-            )
+            name = f"{rec.date_from} - {rec.date_to}: {rec.product_id.name} - {rec.location_id.name}"
             res.append((rec.id, name))
         return res
 
