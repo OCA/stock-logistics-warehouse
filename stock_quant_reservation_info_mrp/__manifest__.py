@@ -4,7 +4,8 @@
 
 {
     "name": "Stock Move Reservation Info MRP",
-    "summary": "Allows to see the manufacturing order related to the reserved info of Products",
+    "summary": "Allows to see the manufacturing order "
+    "related to the reserved info of Products",
     "version": "16.0.1.0.0",
     "author": "ForgeFlow, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
