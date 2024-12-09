@@ -21,6 +21,7 @@ msgstr ""
 "X-Generator: Weblate 3.8\n"
 
 #. module: stock_cycle_count
+#. odoo-python
 #: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:0
 #, python-format
 msgid "(No description provided.)"
@@ -30,8 +31,8 @@ msgstr "（未提供描述。）"
 #: model_terms:ir.ui.view,arch_db:stock_cycle_count.res_config_settings_view_form_cycle_adjustment
 msgid ""
 "<span class=\"fa fa-lg fa-building-o\" title=\"Values set here are company-"
-"specific.\" aria-label=\"Values set here are company-specific.\" groups="
-"\"base.group_multi_company\" role=\"img\"/>"
+"specific.\" aria-label=\"Values set here are company-specific.\" "
+"groups=\"base.group_multi_company\" role=\"img\"/>"
 msgstr ""
 
 #. module: stock_cycle_count
@@ -56,6 +57,7 @@ msgstr "可接受的库存数量差异阈值"
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_inventory__inventory_accuracy
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_move_line__line_accuracy
 #: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_location_accuracy
 msgid "Accuracy"
 msgstr "准确性"
@@ -89,6 +91,7 @@ msgid ""
 msgstr ""
 
 #. module: stock_cycle_count
+#. odoo-python
 #: code:addons/stock_cycle_count/models/stock_inventory.py:0
 #, python-format
 msgid "An adjustment linked to a cycle count should exclude the sublocations."
@@ -106,6 +109,7 @@ msgstr "在以下方面应用此规则："
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__responsible_id
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_inventory__responsible_id
 #: model_terms:ir.ui.view,arch_db:stock_cycle_count.report_cyclecount
 #: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_form_view
 #: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_search_view
@@ -126,6 +130,11 @@ msgstr "附件数量"
 #: model:ir.model.fields,field_description:stock_cycle_count.field_res_company__auto_start_inventory_from_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_res_config_settings__auto_start_inventory_from_cycle_count
 msgid "Auto Start Inventory Adjustment from Cycle Count"
+msgstr ""
+
+#. module: stock_cycle_count
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__automatic_deadline_date
+msgid "Automatic Required Date"
 msgstr ""
 
 #. module: stock_cycle_count
@@ -175,6 +184,11 @@ msgid "Counted Quantities"
 msgstr ""
 
 #. module: stock_cycle_count
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_move_line__counted_qty
+msgid "Counted Quantity"
+msgstr ""
+
+#. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule__periodic_qty_per_period
 msgid "Counts per period"
 msgstr "每个期间的计数"
@@ -218,7 +232,6 @@ msgstr "周期盘点准确性"
 #. module: stock_cycle_count
 #: model:ir.actions.server,name:stock_cycle_count.ir_cron_compute_cycle_count_action_ir_actions_server
 #: model:ir.cron,cron_name:stock_cycle_count.ir_cron_compute_cycle_count_action
-#: model:ir.cron,name:stock_cycle_count.ir_cron_compute_cycle_count_action
 msgid "Cycle Count Planner Computation"
 msgstr "周期盘点计划器计算"
 
@@ -351,6 +364,7 @@ msgid "Done"
 msgstr "完成"
 
 #. module: stock_cycle_count
+#. odoo-python
 #: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:0
 #, python-format
 msgid ""
@@ -359,12 +373,14 @@ msgid ""
 msgstr "确保在给定时间段内至少运行定义数量的计数。"
 
 #. module: stock_cycle_count
+#. odoo-python
 #: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:0
 #, python-format
 msgid "Error found determining the frequency of periodic cycle count rule. %s"
 msgstr "发现错误，确定周期性周期盘点规则的频率。%s"
 
 #. module: stock_cycle_count
+#. odoo-python
 #: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:0
 #, python-format
 msgid "Error found when comparing turnover with the rule threshold. %s"
@@ -409,7 +425,6 @@ msgstr "ID"
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,help:stock_cycle_count.field_stock_cycle_count__message_needaction
-#: model:ir.model.fields,help:stock_cycle_count.field_stock_cycle_count__message_unread
 msgid "If checked, new messages require your attention."
 msgstr "如果勾选此项，将会收到新消息提醒。"
 
@@ -539,6 +554,11 @@ msgid "Main Attachment"
 msgstr "附件"
 
 #. module: stock_cycle_count
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__manual_deadline_date
+msgid "Manual Required Date"
+msgstr ""
+
+#. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__message_has_error
 msgid "Message Delivery error"
 msgstr "消息递送错误"
@@ -549,6 +569,7 @@ msgid "Messages"
 msgstr "消息"
 
 #. module: stock_cycle_count
+#. odoo-python
 #: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:0
 #, python-format
 msgid "Minimum Accuracy"
@@ -588,8 +609,8 @@ msgstr "用于计算位置准确性的最新库存数量"
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,help:stock_cycle_count.field_stock_cycle_count__message_needaction_counter
-msgid "Number of messages which requires an action"
-msgstr "需要操作消息数量"
+msgid "Number of messages requiring action"
+msgstr ""
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,help:stock_cycle_count.field_stock_cycle_count__message_has_error_counter
@@ -597,11 +618,7 @@ msgid "Number of messages with delivery error"
 msgstr "传递错误的消息数量"
 
 #. module: stock_cycle_count
-#: model:ir.model.fields,help:stock_cycle_count.field_stock_cycle_count__message_unread_counter
-msgid "Number of unread messages"
-msgstr "未读消息的数量"
-
-#. module: stock_cycle_count
+#. odoo-python
 #: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:0
 #, python-format
 msgid ""
@@ -616,6 +633,7 @@ msgid "Period in days"
 msgstr "天数"
 
 #. module: stock_cycle_count
+#. odoo-python
 #: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:0
 #, python-format
 msgid "Periodic"
@@ -628,8 +646,19 @@ msgid "Planned"
 msgstr "计划"
 
 #. module: stock_cycle_count
+#: model:ir.model,name:stock_cycle_count.model_stock_move_line
+msgid "Product Moves (Stock Move Line)"
+msgstr ""
+
+#. module: stock_cycle_count
+#: model:ir.model,name:stock_cycle_count.model_stock_quant
+msgid "Quants"
+msgstr ""
+
+#. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__date_deadline
 #: model_terms:ir.ui.view,arch_db:stock_cycle_count.report_cyclecount
+#: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_search_view
 msgid "Required Date"
 msgstr "要求日期"
 
@@ -639,6 +668,7 @@ msgid "Rule Description"
 msgstr "规则说明"
 
 #. module: stock_cycle_count
+#. odoo-python
 #: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:0
 #, python-format
 msgid ""
@@ -647,6 +677,7 @@ msgid ""
 msgstr "每当位置的准确性低于给定阈值时，计划一次计数。"
 
 #. module: stock_cycle_count
+#. odoo-python
 #: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:0
 #, python-format
 msgid ""
@@ -673,6 +704,11 @@ msgstr "选定的仓库"
 #. module: stock_cycle_count
 #: model_terms:ir.ui.view,arch_db:stock_cycle_count.res_config_settings_view_form_cycle_adjustment
 msgid "Sets default counted quanities in Inventory Adjustments"
+msgstr ""
+
+#. module: stock_cycle_count
+#: model:ir.model.fields,help:stock_cycle_count.field_stock_inventory__responsible_id
+msgid "Specific responsible of Inventory Adjustment."
 msgstr ""
 
 #. module: stock_cycle_count
@@ -713,20 +749,23 @@ msgid "Stock Move"
 msgstr "库存移动"
 
 #. module: stock_cycle_count
+#. odoo-python
 #: code:addons/stock_cycle_count/models/stock_inventory.py:0
 #, python-format
 msgid ""
 "The Inventory Adjustment is inconsistent with the Cycle Count:\n"
-"%s"
+"%(message)s"
 msgstr ""
 
 #. module: stock_cycle_count
+#. odoo-python
 #: code:addons/stock_cycle_count/models/stock_inventory.py:0
 #, python-format
 msgid "The adjustment should be done for all products in the location."
 msgstr ""
 
 #. module: stock_cycle_count
+#. odoo-python
 #: code:addons/stock_cycle_count/models/stock_inventory.py:0
 #, python-format
 msgid ""
@@ -735,9 +774,15 @@ msgid ""
 msgstr ""
 
 #. module: stock_cycle_count
+#. odoo-python
 #: code:addons/stock_cycle_count/models/stock_inventory.py:0
 #, python-format
 msgid "The location in the inventory does not match with the cycle count."
+msgstr ""
+
+#. module: stock_cycle_count
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_move_line__theoretical_qty
+msgid "Theoretical Quantity"
 msgstr ""
 
 #. module: stock_cycle_count
@@ -751,16 +796,7 @@ msgid "Type of rule"
 msgstr "规则类型"
 
 #. module: stock_cycle_count
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__message_unread
-msgid "Unread Messages"
-msgstr "未读消息"
-
-#. module: stock_cycle_count
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__message_unread_counter
-msgid "Unread Messages Counter"
-msgstr "未读消息计数器"
-
-#. module: stock_cycle_count
+#. odoo-python
 #: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:0
 #, python-format
 msgid "Value Turnover"
@@ -797,36 +833,42 @@ msgstr ""
 "的所有子元素。"
 
 #. module: stock_cycle_count
+#. odoo-python
 #: code:addons/stock_cycle_count/models/stock_cycle_count.py:0
 #, python-format
 msgid "You can only confirm cycle counts in state 'Planned'."
 msgstr "您只能在“已计划”状态下确认周期盘点。"
 
 #. module: stock_cycle_count
+#. odoo-python
 #: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:0
 #, python-format
 msgid "You can only have one zero confirmation rule per warehouse."
 msgstr "每个仓库只能有一个零确认规则。"
 
 #. module: stock_cycle_count
+#. odoo-python
 #: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:0
 #, python-format
 msgid "You cannot define a negative or null number of counts per period."
 msgstr "您不能定义每个期间的计数为负数或空数。"
 
 #. module: stock_cycle_count
+#. odoo-python
 #: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:0
 #, python-format
 msgid "You cannot define a negative period."
 msgstr "您不能定义一个负数期。"
 
 #. module: stock_cycle_count
+#. odoo-python
 #: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:0
 #, python-format
 msgid "Zero Confirmation"
 msgstr "零确认"
 
 #. module: stock_cycle_count
+#. odoo-python
 #: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:0
 #, python-format
 msgid "Zero confirmation rules can only have one warehouse assigned."
@@ -842,6 +884,18 @@ msgstr "适用区域"
 #: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_rule_form_view
 msgid "cycle counts test:"
 msgstr "周期盘点测试："
+
+#~ msgid "Number of messages which requires an action"
+#~ msgstr "需要操作消息数量"
+
+#~ msgid "Number of unread messages"
+#~ msgstr "未读消息的数量"
+
+#~ msgid "Unread Messages"
+#~ msgstr "未读消息"
+
+#~ msgid "Unread Messages Counter"
+#~ msgstr "未读消息计数器"
 
 #~ msgid "Followers (Channels)"
 #~ msgstr "关注者(频道)"
