@@ -20,6 +20,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: stock_cycle_count
+#. odoo-python
 #: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:0
 #, python-format
 msgid "(No description provided.)"
@@ -29,8 +30,8 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:stock_cycle_count.res_config_settings_view_form_cycle_adjustment
 msgid ""
 "<span class=\"fa fa-lg fa-building-o\" title=\"Values set here are company-"
-"specific.\" aria-label=\"Values set here are company-specific.\" groups="
-"\"base.group_multi_company\" role=\"img\"/>"
+"specific.\" aria-label=\"Values set here are company-specific.\" "
+"groups=\"base.group_multi_company\" role=\"img\"/>"
 msgstr ""
 
 #. module: stock_cycle_count
@@ -55,6 +56,7 @@ msgstr ""
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_inventory__inventory_accuracy
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_move_line__line_accuracy
 #: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_location_accuracy
 msgid "Accuracy"
 msgstr ""
@@ -88,6 +90,7 @@ msgid ""
 msgstr ""
 
 #. module: stock_cycle_count
+#. odoo-python
 #: code:addons/stock_cycle_count/models/stock_inventory.py:0
 #, python-format
 msgid "An adjustment linked to a cycle count should exclude the sublocations."
@@ -105,6 +108,7 @@ msgstr ""
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__responsible_id
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_inventory__responsible_id
 #: model_terms:ir.ui.view,arch_db:stock_cycle_count.report_cyclecount
 #: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_form_view
 #: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_search_view
@@ -125,6 +129,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_cycle_count.field_res_company__auto_start_inventory_from_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_res_config_settings__auto_start_inventory_from_cycle_count
 msgid "Auto Start Inventory Adjustment from Cycle Count"
+msgstr ""
+
+#. module: stock_cycle_count
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__automatic_deadline_date
+msgid "Automatic Required Date"
 msgstr ""
 
 #. module: stock_cycle_count
@@ -174,6 +183,11 @@ msgid "Counted Quantities"
 msgstr ""
 
 #. module: stock_cycle_count
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_move_line__counted_qty
+msgid "Counted Quantity"
+msgstr ""
+
+#. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule__periodic_qty_per_period
 msgid "Counts per period"
 msgstr ""
@@ -217,7 +231,6 @@ msgstr ""
 #. module: stock_cycle_count
 #: model:ir.actions.server,name:stock_cycle_count.ir_cron_compute_cycle_count_action_ir_actions_server
 #: model:ir.cron,cron_name:stock_cycle_count.ir_cron_compute_cycle_count_action
-#: model:ir.cron,name:stock_cycle_count.ir_cron_compute_cycle_count_action
 msgid "Cycle Count Planner Computation"
 msgstr ""
 
@@ -348,6 +361,7 @@ msgid "Done"
 msgstr ""
 
 #. module: stock_cycle_count
+#. odoo-python
 #: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:0
 #, python-format
 msgid ""
@@ -356,12 +370,14 @@ msgid ""
 msgstr ""
 
 #. module: stock_cycle_count
+#. odoo-python
 #: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:0
 #, python-format
 msgid "Error found determining the frequency of periodic cycle count rule. %s"
 msgstr ""
 
 #. module: stock_cycle_count
+#. odoo-python
 #: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:0
 #, python-format
 msgid "Error found when comparing turnover with the rule threshold. %s"
@@ -407,7 +423,6 @@ msgstr "ID"
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,help:stock_cycle_count.field_stock_cycle_count__message_needaction
-#: model:ir.model.fields,help:stock_cycle_count.field_stock_cycle_count__message_unread
 #, fuzzy
 msgid "If checked, new messages require your attention."
 msgstr "Si marcado la nueva mensaje requiere atencion"
@@ -537,6 +552,11 @@ msgid "Main Attachment"
 msgstr ""
 
 #. module: stock_cycle_count
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__manual_deadline_date
+msgid "Manual Required Date"
+msgstr ""
+
+#. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__message_has_error
 msgid "Message Delivery error"
 msgstr ""
@@ -547,6 +567,7 @@ msgid "Messages"
 msgstr "Mensajes"
 
 #. module: stock_cycle_count
+#. odoo-python
 #: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:0
 #, python-format
 msgid "Minimum Accuracy"
@@ -585,7 +606,7 @@ msgstr ""
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,help:stock_cycle_count.field_stock_cycle_count__message_needaction_counter
-msgid "Number of messages which requires an action"
+msgid "Number of messages requiring action"
 msgstr ""
 
 #. module: stock_cycle_count
@@ -594,12 +615,7 @@ msgid "Number of messages with delivery error"
 msgstr ""
 
 #. module: stock_cycle_count
-#: model:ir.model.fields,help:stock_cycle_count.field_stock_cycle_count__message_unread_counter
-#, fuzzy
-msgid "Number of unread messages"
-msgstr "Mensajes sin leer"
-
-#. module: stock_cycle_count
+#. odoo-python
 #: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:0
 #, python-format
 msgid ""
@@ -613,6 +629,7 @@ msgid "Period in days"
 msgstr ""
 
 #. module: stock_cycle_count
+#. odoo-python
 #: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:0
 #, python-format
 msgid "Periodic"
@@ -625,8 +642,19 @@ msgid "Planned"
 msgstr ""
 
 #. module: stock_cycle_count
+#: model:ir.model,name:stock_cycle_count.model_stock_move_line
+msgid "Product Moves (Stock Move Line)"
+msgstr ""
+
+#. module: stock_cycle_count
+#: model:ir.model,name:stock_cycle_count.model_stock_quant
+msgid "Quants"
+msgstr ""
+
+#. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__date_deadline
 #: model_terms:ir.ui.view,arch_db:stock_cycle_count.report_cyclecount
+#: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_search_view
 msgid "Required Date"
 msgstr ""
 
@@ -636,6 +664,7 @@ msgid "Rule Description"
 msgstr ""
 
 #. module: stock_cycle_count
+#. odoo-python
 #: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:0
 #, python-format
 msgid ""
@@ -644,6 +673,7 @@ msgid ""
 msgstr ""
 
 #. module: stock_cycle_count
+#. odoo-python
 #: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:0
 #, python-format
 msgid ""
@@ -669,6 +699,11 @@ msgstr ""
 #. module: stock_cycle_count
 #: model_terms:ir.ui.view,arch_db:stock_cycle_count.res_config_settings_view_form_cycle_adjustment
 msgid "Sets default counted quanities in Inventory Adjustments"
+msgstr ""
+
+#. module: stock_cycle_count
+#: model:ir.model.fields,help:stock_cycle_count.field_stock_inventory__responsible_id
+msgid "Specific responsible of Inventory Adjustment."
 msgstr ""
 
 #. module: stock_cycle_count
@@ -709,20 +744,23 @@ msgid "Stock Move"
 msgstr ""
 
 #. module: stock_cycle_count
+#. odoo-python
 #: code:addons/stock_cycle_count/models/stock_inventory.py:0
 #, python-format
 msgid ""
 "The Inventory Adjustment is inconsistent with the Cycle Count:\n"
-"%s"
+"%(message)s"
 msgstr ""
 
 #. module: stock_cycle_count
+#. odoo-python
 #: code:addons/stock_cycle_count/models/stock_inventory.py:0
 #, python-format
 msgid "The adjustment should be done for all products in the location."
 msgstr ""
 
 #. module: stock_cycle_count
+#. odoo-python
 #: code:addons/stock_cycle_count/models/stock_inventory.py:0
 #, python-format
 msgid ""
@@ -731,9 +769,15 @@ msgid ""
 msgstr ""
 
 #. module: stock_cycle_count
+#. odoo-python
 #: code:addons/stock_cycle_count/models/stock_inventory.py:0
 #, python-format
 msgid "The location in the inventory does not match with the cycle count."
+msgstr ""
+
+#. module: stock_cycle_count
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_move_line__theoretical_qty
+msgid "Theoretical Quantity"
 msgstr ""
 
 #. module: stock_cycle_count
@@ -747,17 +791,7 @@ msgid "Type of rule"
 msgstr ""
 
 #. module: stock_cycle_count
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__message_unread
-msgid "Unread Messages"
-msgstr "Mensajes sin leer"
-
-#. module: stock_cycle_count
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__message_unread_counter
-#, fuzzy
-msgid "Unread Messages Counter"
-msgstr "Mensajes sin leer"
-
-#. module: stock_cycle_count
+#. odoo-python
 #: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:0
 #, python-format
 msgid "Value Turnover"
@@ -793,36 +827,42 @@ msgid ""
 msgstr ""
 
 #. module: stock_cycle_count
+#. odoo-python
 #: code:addons/stock_cycle_count/models/stock_cycle_count.py:0
 #, python-format
 msgid "You can only confirm cycle counts in state 'Planned'."
 msgstr ""
 
 #. module: stock_cycle_count
+#. odoo-python
 #: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:0
 #, python-format
 msgid "You can only have one zero confirmation rule per warehouse."
 msgstr ""
 
 #. module: stock_cycle_count
+#. odoo-python
 #: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:0
 #, python-format
 msgid "You cannot define a negative or null number of counts per period."
 msgstr ""
 
 #. module: stock_cycle_count
+#. odoo-python
 #: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:0
 #, python-format
 msgid "You cannot define a negative period."
 msgstr ""
 
 #. module: stock_cycle_count
+#. odoo-python
 #: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:0
 #, python-format
 msgid "Zero Confirmation"
 msgstr ""
 
 #. module: stock_cycle_count
+#. odoo-python
 #: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:0
 #, python-format
 msgid "Zero confirmation rules can only have one warehouse assigned."
@@ -838,6 +878,17 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_rule_form_view
 msgid "cycle counts test:"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Number of unread messages"
+#~ msgstr "Mensajes sin leer"
+
+#~ msgid "Unread Messages"
+#~ msgstr "Mensajes sin leer"
+
+#, fuzzy
+#~ msgid "Unread Messages Counter"
+#~ msgstr "Mensajes sin leer"
 
 #, fuzzy
 #~ msgid "Followers (Channels)"
