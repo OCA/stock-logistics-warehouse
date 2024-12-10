@@ -8,47 +8,48 @@ from odoo.addons.stock.tests.common import TestStockCommon
 
 
 class StockInventoryLocationTest(TestStockCommon):
-    def setUp(self):
-        super(StockInventoryLocationTest, self).setUp()
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
         # Make a new location with a parent and a child.
-        self.new_parent_location = self.env["stock.location"].create(
+        cls.new_parent_location = cls.env["stock.location"].create(
             {"name": "Test parent location", "usage": "internal"}
         )
-        self.new_location = self.env["stock.location"].create(
+        cls.new_location = cls.env["stock.location"].create(
             {
                 "name": "Test location",
                 "usage": "internal",
-                "location_id": self.new_parent_location.id,
+                "location_id": cls.new_parent_location.id,
             }
         )
-        self.new_sublocation = self.env["stock.location"].create(
+        cls.new_sublocation = cls.env["stock.location"].create(
             {
                 "name": "Test sublocation",
                 "usage": "internal",
-                "location_id": self.new_location.id,
+                "location_id": cls.new_location.id,
             }
         )
         # Input goods
-        self.env["stock.quant"].create(
+        cls.env["stock.quant"].create(
             {
-                "location_id": self.new_location.id,
-                "product_id": self.productA.id,
+                "location_id": cls.new_location.id,
+                "product_id": cls.productA.id,
                 "quantity": 10.0,
             }
         )
-        self.env["stock.quant"].create(
+        cls.env["stock.quant"].create(
             {
-                "location_id": self.new_parent_location.id,
-                "product_id": self.productB.id,
+                "location_id": cls.new_parent_location.id,
+                "product_id": cls.productB.id,
                 "quantity": 5.0,
             }
         )
         # Prepare an inventory
-        self.inventory = self.env["stock.inventory"].create(
-            {"name": "Lock down location", "location_ids": [(4, self.new_location.id)]}
+        cls.inventory = cls.env["stock.inventory"].create(
+            {"name": "Lock down location", "location_ids": [(4, cls.new_location.id)]}
         )
-        self.inventory.action_state_to_in_progress()
-        self.assertTrue(self.inventory.stock_quant_ids, "The inventory is empty.")
+        cls.inventory.action_state_to_in_progress()
+        cls.assertTrue(cls.inventory.stock_quant_ids, "The inventory is empty.")
 
     def create_stock_move(self, product, origin_id=False, dest_id=False):
         return self.env["stock.move"].create(
@@ -117,10 +118,6 @@ class StockInventoryLocationTest(TestStockCommon):
         inventory_subloc.action_state_to_in_progress()
 
         self.assertTrue(inventory_subloc.stock_quant_ids)
-
-        # for line in inventory_subloc.stock_quant_ids:
-        #     line._apply_inventory()
-
         self.assertEqual(
             line.product_id.with_context(location=line.location_id.id).qty_available,
             22.0,
@@ -164,3 +161,11 @@ class StockInventoryLocationTest(TestStockCommon):
             move2._action_assign()
             move2.move_line_ids[0].qty_done = 10.0
             move2._action_done()
+
+    def test_unlink(self):
+        """We can't unlink a location if an inventory is in progress."""
+        inventory = self.env["stock.inventory"].search(
+            [("state", "=", "in_progress")], limit=1
+        )
+        with self.assertRaises(ValidationError):
+            inventory.location_ids.unlink()

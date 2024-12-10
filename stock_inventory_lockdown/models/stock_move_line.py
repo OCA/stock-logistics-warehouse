@@ -35,10 +35,10 @@ class StockMoveLine(models.Model):
                 location_names = locked_location_ids.mapped("complete_name")
                 raise ValidationError(
                     _(
-                        "Inventory adjusment underway at "
-                        "the following location(s):\n- %s\n"
-                        "Moving products to or from these locations is "
-                        "not allowed until the inventory adjustment is complete."
+                        "Inventory adjustment underway at the following "
+                        "location(s):\n- %(locations)s\n Moving products to "
+                        "or from these locations is not allowed until the "
+                        "inventory adjustment is complete.",
+                        locations="\n - ".join(location_names),
                     )
-                    % "\n - ".join(location_names)
                 )
