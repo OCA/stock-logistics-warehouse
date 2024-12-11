@@ -9,7 +9,6 @@
     "category": "Warehouse Management",
     "depends": [
         "stock",
-        "web_domain_field",
     ],
     "data": [
         "views/stock_move_view.xml",
