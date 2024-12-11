@@ -1,12 +1,10 @@
-import json
-
 from odoo import api, fields, models
 
 
 class StockMove(models.Model):
     _inherit = "stock.move"
 
-    package_domain = fields.Char(
+    package_domain = fields.Binary(
         compute="_compute_package_domain",
         readonly=True,
         store=False,
@@ -20,15 +18,7 @@ class StockMove(models.Model):
     def _package_domain(self):
         self.ensure_one()
         to_return = (
-            [
-                (
-                    "id",
-                    "in",
-                    self.env["stock.quant.package"]
-                    .search([("quant_ids.product_id", "=", self.product_id.id)])
-                    .ids,
-                )
-            ]
+            [("quant_ids.product_id", "=", self.product_id.id)]
             if self.product_id
             else []
         )
@@ -43,8 +33,7 @@ class StockMove(models.Model):
             self.write({"package_domain": "[]"})
             return
         for sm in self:
-            domain = sm._package_domain()
-            sm.package_domain = json.dumps(domain)
+            sm.package_domain = sm._package_domain()
 
     @api.onchange("load_products_from_package_id")
     def _onchange_load_products_from_package_id(self):
@@ -63,6 +52,7 @@ class StockMove(models.Model):
             "package_id": self.load_products_from_package_id.id,
             "location_id": self.location_id.id,
             "location_dest_id": self.location_dest_id.id,
+            "company_id": self.company_id.id,
         }
         data_list = []
         for quant in product_quants:
