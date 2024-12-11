@@ -1,7 +1,8 @@
-from odoo.tests.common import SavepointCase
+from odoo.tests.common import TransactionCase, tagged
 
 
-class TestStockPackageAutoload(SavepointCase):
+@tagged("post_install", "-at_install")
+class TestStockPackageAutoload(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -9,7 +10,7 @@ class TestStockPackageAutoload(SavepointCase):
         cls.StockMove = cls.env["stock.move"]
         cls.StockMoveLine = cls.env["stock.move.line"]
         cls.StockPicking = cls.env["stock.picking"]
-        cls.StockProductionLot = cls.env["stock.production.lot"]
+        cls.StockProductionLot = cls.env["stock.lot"]
         cls.StockQuantPackage = cls.env["stock.quant.package"]
 
         cls.company = cls.env.company
@@ -70,10 +71,11 @@ class TestStockPackageAutoload(SavepointCase):
                         0,
                         {
                             "product_id": self.product.id,
-                            "product_uom_qty": 3,
+                            "reserved_uom_qty": 3,
                             "product_uom_id": self.uom_unit.id,
                             "location_id": self.location.id,
                             "location_dest_id": self.location_dest.id,
+                            "company_id": self.env.company.id,
                         },
                     )
                 ],
