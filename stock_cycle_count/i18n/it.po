@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-06-10 05:35+0000\n"
-"PO-Revision-Date: 2024-08-01 15:58+0000\n"
+"PO-Revision-Date: 2024-12-11 09:37+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -141,7 +141,7 @@ msgstr "Avvio automatico rettifiche inventario da inventario a rotazione"
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__automatic_deadline_date
 msgid "Automatic Required Date"
-msgstr ""
+msgstr "Data richiesta automaticamente"
 
 #. module: stock_cycle_count
 #: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_form_view
@@ -192,7 +192,7 @@ msgstr "Quantità contate"
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_move_line__counted_qty
 msgid "Counted Quantity"
-msgstr ""
+msgstr "Quantità contata"
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule__periodic_qty_per_period
@@ -575,7 +575,7 @@ msgstr "Allegato principale"
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__manual_deadline_date
 msgid "Manual Required Date"
-msgstr ""
+msgstr "Data richiesta manualmente"
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__message_has_error
@@ -630,7 +630,7 @@ msgstr ""
 #. module: stock_cycle_count
 #: model:ir.model.fields,help:stock_cycle_count.field_stock_cycle_count__message_needaction_counter
 msgid "Number of messages requiring action"
-msgstr ""
+msgstr "Numero di messaggi che richiedono un'azione"
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,help:stock_cycle_count.field_stock_cycle_count__message_has_error_counter
@@ -669,12 +669,12 @@ msgstr "Pianificato"
 #. module: stock_cycle_count
 #: model:ir.model,name:stock_cycle_count.model_stock_move_line
 msgid "Product Moves (Stock Move Line)"
-msgstr ""
+msgstr "Movimenti prodotto (riga movimento di magazzino)"
 
 #. module: stock_cycle_count
 #: model:ir.model,name:stock_cycle_count.model_stock_quant
 msgid "Quants"
-msgstr ""
+msgstr "Quanti"
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__date_deadline
@@ -734,7 +734,7 @@ msgstr "Imposta le quantità contate predefinite nelle rettifiche di inventario"
 #. module: stock_cycle_count
 #: model:ir.model.fields,help:stock_cycle_count.field_stock_inventory__responsible_id
 msgid "Specific responsible of Inventory Adjustment."
-msgstr ""
+msgstr "Responsabile specifico rettifiche di magazzino."
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__state
@@ -781,6 +781,8 @@ msgid ""
 "The Inventory Adjustment is inconsistent with the Cycle Count:\n"
 "%(message)s"
 msgstr ""
+"La rettifica di inventario non è consistente l'inventario a rotazione:\n"
+"%(message)s"
 
 #. module: stock_cycle_count
 #. odoo-python
@@ -813,7 +815,7 @@ msgstr ""
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_move_line__theoretical_qty
 msgid "Theoretical Quantity"
-msgstr ""
+msgstr "Quantità teorica"
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule__turnover_inventory_value_threshold
