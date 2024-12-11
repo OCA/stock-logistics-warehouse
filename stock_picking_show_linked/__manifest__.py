@@ -1,4 +1,5 @@
 # Copyright 2022 ForgeFlow S.L. (https://www.forgeflow.com)
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html)
 {
     "name": "Stock Picking Show Linked",
     "summary": """
@@ -6,7 +7,7 @@
        (in the case of chained routes) through a button
        in the parent picking view.
     """,
-    "version": "17.0.1.0.0",
+    "version": "18.0.1.0.0",
     "author": "ForgeFlow, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "category": "Warehouse Management",
