@@ -9,14 +9,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-11-30 03:53+0000\n"
-"PO-Revision-Date: 2017-11-30 03:53+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"PO-Revision-Date: 2024-12-14 11:06+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.6.2\n"
 
 #. module: stock_inventory_lockdown
 #: code:addons/stock_inventory_lockdown/models/stock_move.py:0
@@ -25,12 +26,14 @@ msgid ""
 "An inventory is being conducted at the following location(s):\n"
 " - %s"
 msgstr ""
+"Un inventario è in corso nelle seguenti ubicazioni:\n"
+" - %s"
 
 #. module: stock_inventory_lockdown
 #: code:addons/stock_inventory_lockdown/models/stock_location.py:0
 #, python-format
 msgid "An inventory is being conducted at this location"
-msgstr ""
+msgstr "Un inventario è in corso in questa ubicazione"
 
 #. module: stock_inventory_lockdown
 #: model:ir.model,name:stock_inventory_lockdown.model_stock_inventory
@@ -40,7 +43,7 @@ msgstr "Inventario"
 #. module: stock_inventory_lockdown
 #: model:ir.model,name:stock_inventory_lockdown.model_stock_location
 msgid "Inventory Locations"
-msgstr ""
+msgstr "Ubicazioni di inventario"
 
 #. module: stock_inventory_lockdown
 #: model:ir.model,name:stock_inventory_lockdown.model_stock_move
