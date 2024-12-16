@@ -80,7 +80,7 @@ class TestAccountMoveLineStockInfo(TransactionCase):
                 "name": name,
                 "code": code,
                 "account_type": acc_type,
-                "company_id": company.id,
+                "company_ids": [(6, 0, company.ids)],
             }
         )
         return account
@@ -100,7 +100,8 @@ class TestAccountMoveLineStockInfo(TransactionCase):
             {
                 "name": "test_product",
                 "categ_id": product_ctg.id,
-                "type": "product",
+                "type": "consu",
+                "is_storable": True,
                 "standard_price": 1.0,
                 "list_price": 1.0,
             }

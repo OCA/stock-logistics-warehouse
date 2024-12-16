@@ -28,7 +28,7 @@
         <field name="model">account.move</field>
         <field name="inherit_id" ref="account.view_move_form" />
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='line_ids']/tree" position="inside">
+            <xpath expr="//field[@name='line_ids']/list" position="inside">
                 <field
                     name="stock_move_id"
                     groups="stock.group_stock_user"
