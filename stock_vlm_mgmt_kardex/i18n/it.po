@@ -1,0 +1,30 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_vlm_mgmt_kardex
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#. module: stock_vlm_mgmt_kardex
+#: model:ir.model,name:stock_vlm_mgmt_kardex.model_stock_location
+msgid "Inventory Locations"
+msgstr ""
+
+#. module: stock_vlm_mgmt_kardex
+#: model:ir.model.fields.selection,name:stock_vlm_mgmt_kardex.selection__stock_location__vlm_vendor__kardex
+msgid "Kardex"
+msgstr ""
+
+#. module: stock_vlm_mgmt_kardex
+#: model:ir.model.fields,field_description:stock_vlm_mgmt_kardex.field_stock_location__vlm_vendor
+msgid "Vlm Vendor"
+msgstr ""
