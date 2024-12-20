@@ -202,7 +202,7 @@ class AssignManualQuantsLines(models.TransientModel):
         for record in self.filtered("qty"):
             quant = record.quant_id
             move_lines = record.assign_wizard.move_id.move_line_ids.filtered(
-                lambda ml: (
+                lambda ml, quant=quant: (
                     ml.location_id == quant.location_id and ml.lot_id == quant.lot_id
                 )
             )
