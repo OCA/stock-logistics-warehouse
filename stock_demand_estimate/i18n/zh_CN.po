@@ -57,13 +57,13 @@ msgstr ""
 
 #. module: stock_demand_estimate
 #: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_form
-#: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_tree
+#: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_list
 msgid "Date From"
 msgstr "起始日期"
 
 #. module: stock_demand_estimate
 #: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_form
-#: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_tree
+#: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_list
 msgid "Date To"
 msgstr "结束日期"
 
@@ -191,7 +191,6 @@ msgstr "库存需求估算"
 #. module: stock_demand_estimate
 #. odoo-python
 #: code:addons/stock_demand_estimate/models/stock_demand_estimate.py:0
-#, python-format
 msgid ""
 "The requested operation cannot be processed because of a programming error "
 "setting the `product_qty` field instead of the `product_uom_qty`."
