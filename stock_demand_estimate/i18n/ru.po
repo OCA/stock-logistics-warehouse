@@ -16,9 +16,9 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
-"%100>=11 && n%100<=14)? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
+"(n%100>=11 && n%100<=14)? 2 : 3);\n"
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__active
@@ -57,13 +57,13 @@ msgstr ""
 
 #. module: stock_demand_estimate
 #: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_form
-#: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_tree
+#: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_list
 msgid "Date From"
 msgstr ""
 
 #. module: stock_demand_estimate
 #: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_form
-#: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_tree
+#: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_list
 msgid "Date To"
 msgstr ""
 
@@ -189,7 +189,6 @@ msgstr ""
 #. module: stock_demand_estimate
 #. odoo-python
 #: code:addons/stock_demand_estimate/models/stock_demand_estimate.py:0
-#, python-format
 msgid ""
 "The requested operation cannot be processed because of a programming error "
 "setting the `product_qty` field instead of the `product_uom_qty`."
