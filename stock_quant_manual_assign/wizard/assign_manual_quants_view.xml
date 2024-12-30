@@ -8,7 +8,7 @@
                 <field name='quants_lines' colspan="4">
                     <tree editable="top" delete="0" create="0">
                         <field name="lot_id" groups="stock.group_production_lot" />
-                        <field name="quant_id" invisible="1" />
+                        <field name="quant_id" column_invisible="1" />
                         <field name="package_id" groups="stock.group_tracking_lot" />
                         <field name="owner_id" groups="stock.group_tracking_owner" />
                         <field name="location_id" />
@@ -19,17 +19,13 @@
                             widget="boolean_toggle"
                             options="{'autosave': False}"
                         />
-                        <field
-                            name="qty"
-                            attrs="{'readonly':[('selected', '=', False)]}"
-                            sum="qty"
-                        />
+                        <field name="qty" readonly="selected == False" sum="qty" />
                     </tree>
                 </field>
                 <group col='4' colspan="4">
                     <field name="move_qty" colspan="2" readonly="1" />
-                    <field name="lines_qty" invisible="1" />
-                    <field name="move_id" invisible="1" />
+                    <field name="lines_qty" column_invisible="1" />
+                    <field name="move_id" column_invisible="1" />
                 </group>
                 <footer>
                     <button

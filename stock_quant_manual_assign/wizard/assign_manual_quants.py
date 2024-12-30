@@ -118,7 +118,7 @@ class AssignManualQuants(models.TransientModel):
                 and ml.package_id == quant.package_id
             )
         )
-        line["qty"] = sum(move_lines.mapped("reserved_uom_qty"))
+        line["qty"] = sum(move_lines.mapped("quantity_product_uom"))
         line["selected"] = bool(line["qty"])
         line["reserved"] = quant.reserved_quantity - line["qty"]
         return line
@@ -207,7 +207,7 @@ class AssignManualQuantsLines(models.TransientModel):
                 )
             )
             reserved = quant.reserved_quantity - sum(
-                move_lines.mapped("reserved_uom_qty")
+                move_lines.mapped("quantity_product_uom")
             )
             if (
                 float_compare(
