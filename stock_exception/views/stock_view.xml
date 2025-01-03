@@ -1,9 +1,9 @@
 <odoo>
-    <record id="action_stock_test_tree" model="ir.actions.act_window">
+    <record id="action_stock_test_list" model="ir.actions.act_window">
         <field name="name">Stock Exception Rules</field>
         <field name="res_model">exception.rule</field>
-        <field name="view_mode">tree,form</field>
-        <field name="view_id" ref="base_exception.view_exception_rule_tree" />
+        <field name="view_mode">list,form</field>
+        <field name="view_id" ref="base_exception.view_exception_rule_list" />
         <field
             name="domain"
         >[('model', 'in', ['stock.picking', 'stock.move', 'stock.move.line'])]</field>
@@ -12,7 +12,7 @@
         >{'active_test': False, 'default_model' : 'stock.picking'}</field>
     </record>
     <menuitem
-        action="action_stock_test_tree"
+        action="action_stock_test_list"
         id="menu_stock_test"
         parent="stock.menu_stock_config_settings"
     />
