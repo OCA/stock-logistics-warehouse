@@ -7,10 +7,10 @@
         <field name="model">stock.move.line</field>
         <field name="inherit_id" ref="stock.view_stock_move_line_operation_tree" />
         <field name="arch" type="xml">
-            <field name="reserved_uom_qty" position="before">
+            <field name="quantity" position="before">
                 <field
                     name="secondary_uom_qty"
-                    attrs="{'readonly': [('state', 'in', ('done', 'cancel')), ('is_locked', '=', True)]}"
+                    readonly="state in ['done', 'cancel'] and is_locked"
                     force_save="1"
                     groups="uom.group_uom"
                     optional="show"
@@ -20,7 +20,7 @@
                     domain="product_id and ['|', ('product_id', '=', product_id),
                                 '&amp;', ('product_tmpl_id.product_variant_ids', 'in', [product_id]),
                                          ('product_id', '=', False)] or [(0, '=', 1)]"
-                    attrs="{'readonly': [('state', '!=', 'draft'), ('id', '!=', False)]}"
+                    readonly="state != 'draft' and id"
                     options="{'no_create': True}"
                     groups="uom.group_uom"
                     optional="show"
@@ -36,10 +36,10 @@
             ref="stock.view_stock_move_line_detailed_operation_tree"
         />
         <field name="arch" type="xml">
-            <field name="reserved_uom_qty" position="before">
+            <field name="quantity" position="before">
                 <field
                     name="secondary_uom_qty"
-                    attrs="{'readonly': [('state', 'in', ('done', 'cancel')), ('is_locked', '=', True)]}"
+                    readonly="state in ['done', 'cancel'] and is_locked"
                     force_save="1"
                     groups="uom.group_uom"
                     optional="show"
@@ -49,12 +49,36 @@
                     domain="product_id and ['|', ('product_id', '=', product_id),
                                 '&amp;', ('product_tmpl_id.product_variant_ids', 'in', [product_id]),
                                          ('product_id', '=', False)] or [(0, '=', 1)]"
-                    attrs="{'readonly': [('state', '!=', 'draft'), ('id', '!=', False)]}"
+                    readonly="state != 'draft' and id"
                     options="{'no_create': True}"
                     groups="uom.group_uom"
                     optional="show"
                 />
             </field>
+        </field>
+    </record>
+    <record id="view_stock_move_operations" model="ir.ui.view">
+        <field name="name">stock.move.operations.form.inherit</field>
+        <field name="model">stock.move</field>
+        <field name="inherit_id" ref="stock.view_stock_move_operations" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='product_id']" position="after">
+                <field name="is_initial_demand_editable" invisible="1" />
+                <field
+                    name="secondary_uom_qty"
+                    readonly="not is_initial_demand_editable"
+                    groups="uom.group_uom"
+                />
+                <field
+                    name="secondary_uom_id"
+                    domain="product_id and ['|', ('product_id', '=', product_id),
+                                '&amp;', ('product_tmpl_id.product_variant_ids', 'in', [product_id]),
+                                         ('product_id', '=', False)] or [(0, '=', 1)]"
+                    options="{'no_create': True}"
+                    readonly="not is_initial_demand_editable"
+                    groups="uom.group_uom"
+                />
+            </xpath>
         </field>
     </record>
 </odoo>
