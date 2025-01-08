@@ -24,11 +24,14 @@
             ref="stock.product_template_form_view_procurement_button"
         />
         <field name="arch" type="xml">
-            <xpath expr="//button[@name='action_open_quants']" position="after">
+            <xpath
+                expr="//button[@name='action_view_stock_move_lines']"
+                position="before"
+            >
                 <button
                     type="object"
-                    name="action_open_quants"
-                    attrs="{'invisible':[('type', '!=', 'product')]}"
+                    name="action_update_quantity_on_hand"
+                    invisible="type != 'product'"
                     class="oe_stat_button"
                     icon="fa-building-o"
                     groups="stock.group_stock_user"
@@ -53,11 +56,14 @@
         <field name="model">product.product</field>
         <field name="inherit_id" ref="stock.product_form_view_procurement_button" />
         <field name="arch" type="xml">
-            <xpath expr="//button[@name='action_open_quants']" position="after">
+            <xpath
+                expr="//button[@name='action_update_quantity_on_hand']"
+                position="after"
+            >
                 <button
                     type="object"
-                    name="action_open_quants"
-                    attrs="{'invisible':[('type', '!=', 'product')]}"
+                    name="action_update_quantity_on_hand"
+                    invisible="type != 'product'"
                     class="oe_stat_button"
                     icon="fa-building-o"
                     groups="stock.group_stock_user"

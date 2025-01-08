@@ -28,11 +28,6 @@ msgid "Demand"
 msgstr ""
 
 #. module: stock_secondary_unit
-#: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_move_line__qty_done
-msgid "Done"
-msgstr ""
-
-#. module: stock_secondary_unit
 #: model:ir.model,name:stock_secondary_unit.model_product_template
 msgid "Product"
 msgstr "产品"
@@ -45,6 +40,11 @@ msgstr "产品移动（库存移动行）"
 #. module: stock_secondary_unit
 #: model:ir.model,name:stock_secondary_unit.model_product_product
 msgid "Product Variant"
+msgstr ""
+
+#. module: stock_secondary_unit
+#: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_move_line__qty_done
+msgid "Qty Done"
 msgstr ""
 
 #. module: stock_secondary_unit
@@ -91,12 +91,9 @@ msgstr ""
 #: model:ir.model.fields,help:stock_secondary_unit.field_stock_move__product_uom_qty
 #: model:ir.model.fields,help:stock_secondary_unit.field_stock_reservation__product_uom_qty
 msgid ""
-"This is the quantity of products from an inventory point of view. For moves "
-"in the state 'done', this is the quantity of products that were actually "
-"moved. For other moves, this is the quantity of product that is planned to "
-"be moved. Lowering this quantity does not generate a backorder. Changing "
-"this quantity on assigned moves affects the product reservation, and should "
-"be done with care."
+"This is the quantity of product that is planned to be moved.Lowering this "
+"quantity does not generate a backorder.Changing this quantity on assigned "
+"moves affects the product reservation, and should be done with care."
 msgstr ""
 
 #~ msgid "Product Template"
