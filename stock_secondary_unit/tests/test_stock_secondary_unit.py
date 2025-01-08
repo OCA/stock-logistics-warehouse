@@ -179,19 +179,18 @@ class TestProductSecondaryUnit(TransactionCase):
 
         picking = picking_form.save()
         picking.action_confirm()
-        with Form(picking) as picking_form:
-            # Test detail operations
-            with picking_form.move_line_ids_without_package.new() as move:
-                move.product_id = product
-                move.secondary_uom_qty = 1
-                move.secondary_uom_id = product.product_tmpl_id.secondary_uom_ids[0]
-                self.assertEqual(move.qty_done, 0.5)
-                move.secondary_uom_qty = 2
-                self.assertEqual(move.qty_done, 1)
-                move.secondary_uom_id = product.product_tmpl_id.secondary_uom_ids[1]
-                self.assertEqual(move.qty_done, 1.8)
-                move.qty_done = 5
-                self.assertAlmostEqual(move.secondary_uom_qty, 5.56, 2)
+        stock_move_line = picking.move_line_ids_without_package
+        stock_move_line.product_id = product
+        stock_move_line.product_uom_id = stock_move_line.product_id.uom_id.id
+        stock_move_line.secondary_uom_qty = 1
+        stock_move_line.secondary_uom_id = product.product_tmpl_id.secondary_uom_ids[0]
+        self.assertEqual(stock_move_line.qty_done, 0.5)
+        stock_move_line.secondary_uom_qty = 2
+        self.assertEqual(stock_move_line.qty_done, 1)
+        stock_move_line.secondary_uom_id = product.product_tmpl_id.secondary_uom_ids[1]
+        self.assertEqual(stock_move_line.qty_done, 1.8)
+        stock_move_line.qty_done = 5
+        self.assertAlmostEqual(stock_move_line.secondary_uom_qty, 5.56, 2)
 
     def test_secondary_unit_merge_move_diff_uom(self):
         product = self.product_template.product_variant_ids[0]

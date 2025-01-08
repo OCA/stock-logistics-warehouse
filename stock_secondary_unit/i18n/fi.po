@@ -28,11 +28,6 @@ msgid "Demand"
 msgstr ""
 
 #. module: stock_secondary_unit
-#: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_move_line__qty_done
-msgid "Done"
-msgstr "Valmis"
-
-#. module: stock_secondary_unit
 #: model:ir.model,name:stock_secondary_unit.model_product_template
 msgid "Product"
 msgstr "Tuote"
@@ -45,6 +40,11 @@ msgstr "Tuotteiden siirrot (Stock Move Line)"
 #. module: stock_secondary_unit
 #: model:ir.model,name:stock_secondary_unit.model_product_product
 msgid "Product Variant"
+msgstr ""
+
+#. module: stock_secondary_unit
+#: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_move_line__qty_done
+msgid "Qty Done"
 msgstr ""
 
 #. module: stock_secondary_unit
@@ -91,19 +91,28 @@ msgstr ""
 #: model:ir.model.fields,help:stock_secondary_unit.field_stock_move__product_uom_qty
 #: model:ir.model.fields,help:stock_secondary_unit.field_stock_reservation__product_uom_qty
 msgid ""
-"This is the quantity of products from an inventory point of view. For moves "
-"in the state 'done', this is the quantity of products that were actually "
-"moved. For other moves, this is the quantity of product that is planned to "
-"be moved. Lowering this quantity does not generate a backorder. Changing "
-"this quantity on assigned moves affects the product reservation, and should "
-"be done with care."
+"This is the quantity of product that is planned to be moved.Lowering this "
+"quantity does not generate a backorder.Changing this quantity on assigned "
+"moves affects the product reservation, and should be done with care."
 msgstr ""
-"Tämä on tuotteiden määrä varaston näkymästä. \"Valmiissa tilassa\" "
-"tapahtuvien siirtojen osalta tämä on tosiasiallisesti siirrettyjen "
-"tuotteiden määrä. Muita siirtoja varten tämä on tuotteen määrä, joka on "
-"tarkoitus siirtää. Tämän määrän alentaminen ei synny takaisinkytkentää. "
-"Tämän määrän muuttaminen määrättyihin liikkeisiin vaikuttaa tuotteen "
-"varaamiseen, ja se on tehtävä huolellisesti."
+
+#~ msgid "Done"
+#~ msgstr "Valmis"
+
+#~ msgid ""
+#~ "This is the quantity of products from an inventory point of view. For "
+#~ "moves in the state 'done', this is the quantity of products that were "
+#~ "actually moved. For other moves, this is the quantity of product that is "
+#~ "planned to be moved. Lowering this quantity does not generate a "
+#~ "backorder. Changing this quantity on assigned moves affects the product "
+#~ "reservation, and should be done with care."
+#~ msgstr ""
+#~ "Tämä on tuotteiden määrä varaston näkymästä. \"Valmiissa tilassa\" "
+#~ "tapahtuvien siirtojen osalta tämä on tosiasiallisesti siirrettyjen "
+#~ "tuotteiden määrä. Muita siirtoja varten tämä on tuotteen määrä, joka on "
+#~ "tarkoitus siirtää. Tämän määrän alentaminen ei synny takaisinkytkentää. "
+#~ "Tämän määrän muuttaminen määrättyihin liikkeisiin vaikuttaa tuotteen "
+#~ "varaamiseen, ja se on tehtävä huolellisesti."
 
 #~ msgid "Product Template"
 #~ msgstr "Tuotemalli"
