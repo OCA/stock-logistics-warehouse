@@ -90,3 +90,44 @@ class StockQuant(models.Model):
             )
             return action
         return super().action_apply_inventory()
+
+    def user_has_groups(self, groups):
+        # - Allow specific group to validate inventory
+        # - Allow validate on pending status
+        ret = super().user_has_groups(groups)
+        if not (
+            self.env.context.get("from_apply_inventory")
+            and groups == "stock.group_stock_manager"
+        ):
+            return ret
+        if (
+            not ret
+            and not super().user_has_groups(
+                "stock_inventory_discrepancy.group_stock_inventory_validation"
+            )
+            and not super().user_has_groups(
+                "stock_inventory_discrepancy.group_stock_inventory_validation_always"
+            )
+        ):
+            raise UserError(
+                _("Only a stock manager can validate an inventory adjustment.")
+            )
+        else:
+            return True
+
+    def _apply_inventory(self):
+        if (
+            not self.user_has_groups("stock.group_stock_manager")
+            and not self.user_has_groups(
+                "stock_inventory_discrepancy.group_stock_inventory_validation"
+            )
+            and not self.user_has_groups(
+                "stock_inventory_discrepancy.group_stock_inventory_validation_always"
+            )
+        ):
+            raise UserError(
+                _("Only a stock manager can validate an inventory adjustment.")
+            )
+        # Allow to write last_inventory_date on stock.location
+        self = self.sudo().with_context(from_apply_inventory=True)
+        return super()._apply_inventory()
