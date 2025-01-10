@@ -21,7 +21,6 @@
         "wizards/confirm_discrepancy_wiz.xml",
     ],
     "license": "AGPL-3",
-    "post_load": "post_load_hook",
     "installable": True,
     "application": False,
 }
