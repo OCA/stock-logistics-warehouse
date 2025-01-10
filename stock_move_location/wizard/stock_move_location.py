@@ -285,6 +285,10 @@ class StockMoveLocationWizard(models.TransientModel):
             picking = self._create_picking()
         else:
             picking = self.picking_id
+        # Prevent putaway rules to be excuted when we don't need to
+        picking = picking.with_context(
+            avoid_putaway_rules=not self.apply_putaway_strategy
+        )
         self._create_moves(picking)
         if not self.env.context.get("planned"):
             moves_to_reassign = self._unreserve_moves()
