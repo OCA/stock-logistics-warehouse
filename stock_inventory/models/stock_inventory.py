@@ -127,7 +127,6 @@ class InventoryAdjustmentsGroup(models.Model):
     responsible_id = fields.Many2one(
         comodel_name="res.users",
         string="Assigned to",
-        states={"draft": [("readonly", False)]},
         readonly=True,
         help="Specific responsible of Inventory Adjustment.",
     )
