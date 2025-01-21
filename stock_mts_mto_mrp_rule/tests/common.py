@@ -1,14 +1,14 @@
-from odoo.tests import SavepointCase
+from odoo.tests.common import TransactionCase
 
 
-class TestCommon(SavepointCase):
+class TestCommon(TransactionCase):
     @classmethod
     def setUpClass(cls):
-        super(TestCommon, cls).setUpClass()
+        super().setUpClass()
 
         Product = cls.env["product.product"]
         ProcurementGroup = cls.env["procurement.group"]
-        StockLocationRoute = cls.env["stock.location.route"]
+        StockLocationRoute = cls.env["stock.route"]
         StockRule = cls.env["stock.rule"]
         StockQuant = cls.env["stock.quant"]
 
@@ -16,9 +16,9 @@ class TestCommon(SavepointCase):
 
         route_mto_mts = cls.env.ref("stock_mts_mto_rule.route_mto_mts")
 
-        location_stock_id = cls.env.ref("stock.stock_location_stock").id
+        cls.location_stock = cls.env.ref("stock.stock_location_stock")
 
-        dummy_route = StockLocationRoute.create(
+        cls.dummy_route = StockLocationRoute.create(
             {
                 "name": "dummy route",
                 "warehouse_selectable": True,
@@ -26,7 +26,7 @@ class TestCommon(SavepointCase):
         )
 
         cls.warehouse.write(
-            {"route_ids": [(4, dummy_route.id)], "mto_mts_management": True}
+            {"route_ids": [(4, cls.dummy_route.id)], "mto_mts_management": True}
         )
 
         cls.product = Product.create(
@@ -38,22 +38,23 @@ class TestCommon(SavepointCase):
         )
 
         cls.group = ProcurementGroup.create({"name": "test"})
+        cls.location_src_id = cls.env.ref("stock.stock_location_suppliers").id
         cls.dummy_rule = StockRule.create(
             {
                 "name": "dummy rule",
-                "location_id": location_stock_id,
-                "location_src_id": cls.env.ref("stock.stock_location_suppliers").id,
+                "location_dest_id": cls.location_stock.id,
+                "location_src_id": cls.location_src_id,
                 "action": "pull",
                 "warehouse_id": cls.warehouse.id,
-                "picking_type_id": cls.env.ref("stock.picking_type_out").id,
-                "route_id": dummy_route.id,
+                "picking_type_id": cls.env.ref("stock.picking_type_in").id,
+                "route_id": cls.dummy_route.id,
             }
         )
 
         cls.quant = StockQuant.create(
             {
                 "owner_id": cls.env.ref("base.main_partner").id,
-                "location_id": location_stock_id,
+                "location_id": cls.location_stock.id,
                 "product_id": cls.product.id,
                 "quantity": 3,
             }
