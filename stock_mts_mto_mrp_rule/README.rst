@@ -28,13 +28,62 @@ Stock MTS+MTO MRP Rule
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-This module adds an implementation for using the procure method that is
-set in rule (MTS/MTO).
+This module enhances the procurement management for Manufacturing Order
+(MRP) components when stock is partial. It extends the functionality of
+the base stock_mts_mto_rule module to automatically split a component's
+stock move into two: one Make to Stock (MTS) for the available quantity
+and another Make to Order (MTO) for the missing quantity.
 
 **Table of contents**
 
 .. contents::
    :local:
+
+Use Cases / Context
+===================
+
+In standard Odoo, when a manufacturing order is confirmed and a
+component only has partial stock, the system reserves the available
+quantity, but the stock move remains a single requirement. This can lead
+to ambiguity in purchasing and procurement management, as a clear and
+separate purchase requirement for the missing quantity is not
+automatically created. The purchasing planner must manually analyze
+these cases to determine what quantity needs to be acquired.
+
+- **Clarity in Purchasing**: Automatically generates purchase
+  requirements (MTO) only for the exact missing quantity, eliminating
+  the need for manual calculations.
+- **Improved Traceability**: Allows for clear and separate tracking of
+  stock that is already available and stock that is pending arrival.
+- **Process Automation**: Optimizes the workflow between the warehouse,
+  production, and purchasing.
+
+Configuration
+=============
+
+To activate this functionality, a **Route** must be configured in the
+product that contains a **Procurement Rule** (``stock.rule``) with the
+action set to **"Split Procurement."**
+
+The module ensures that when this rule is found and there is partial
+stock for an MRP component, the splitting logic is automatically
+executed.
+
+Usage
+=====
+
+This module introduces an automatic and transparent solution to this
+problem. Upon confirming a component's move for a manufacturing order
+with only partial stock, the module splits the original move as follows:
+
+- **Make to Stock (MTS) Move**: A move is created for the quantity that
+  is available in the warehouse. This move is set to **"Assigned"**
+  status, ready to be consumed by the manufacturing order.
+- **Make to Order (MTO) Move**: A second, entirely new move is created
+  for the missing quantity. This move is set to **"Confirmed"** status
+  or "Waiting Availability," generating a clear and traceable purchase
+  requirement (or a new manufacturing order if it's a sub-assembly) for
+  the purchasing team.
 
 Bug Tracker
 ===========
@@ -57,8 +106,11 @@ Authors
 Contributors
 ------------
 
--  Ooops404 <https://ooops404.com>
--  Cetmix <https://cetmix.com>
+- Ooops404 <https://ooops404.com>
+- Cetmix <https://cetmix.com>
+- `Studio73 <https://studio73.es>`__
+
+  - Eugenio Micó <eugenio@studio73.es>
 
 Maintainers
 -----------
