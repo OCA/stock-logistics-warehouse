@@ -260,9 +260,9 @@ class StockMoveLocationWizard(models.TransientModel):
         """
         moves_to_reassign = self.env["stock.move"]
         lines_to_ckeck_reverve = self.stock_move_location_line_ids.filtered(
-            lambda l: (
-                l.move_quantity > l.max_quantity
-                and not l.origin_location_id.should_bypass_reservation()
+            lambda line: (
+                line.move_quantity > line.max_quantity
+                and not line.origin_location_id.should_bypass_reservation()
             )
         )
         for line in lines_to_ckeck_reverve:
@@ -328,12 +328,7 @@ class StockMoveLocationWizard(models.TransientModel):
 
     def _get_stock_move_location_lines_values(self):
         product_obj = self.env["product.product"]
-        quant_obj = self.env["stock.quant"]
-        lot_obj = self.env["stock.lot"]
         product_data = []
-        exclude_reserved_qty = self.env.context.get(
-            "only_reserved_qty", self.exclude_reserved_qty
-        )
         for group in self._get_group_quants():
             product = product_obj.browse(group["product_id"][0]).exists()
             # Apply the putaway strategy
