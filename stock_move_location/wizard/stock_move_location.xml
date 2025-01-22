@@ -10,7 +10,10 @@
             <form>
                 <sheet>
                     <div class="oe_button_box" name="button_box" />
-                    <group name="options">
+                    <div>
+                        <label for="edit_locations">
+                            Edit Locations
+                        </label>
                         <field name="edit_locations" widget="boolean_toggle" />
                     </div>
                     <div>
@@ -40,8 +43,6 @@
                             readonly="destination_location_disable"
                         />
                         <field name="company_id" invisible="1" />
-                    </group>
-                    <group name="filters">
                     </group>
                     <group name="lines">
                         <field
