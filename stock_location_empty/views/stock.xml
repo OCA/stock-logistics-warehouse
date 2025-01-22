@@ -5,12 +5,12 @@
         <field name="model">stock.location</field>
         <field name="priority" eval="2" />
         <field name="arch" type="xml">
-            <tree decoration-info="usage=='view'" decoration-danger="usage=='internal'">
+            <list decoration-info="usage=='view'" decoration-danger="usage=='internal'">
                 <field name="display_name" />
                 <field name="usage" />
                 <field name="company_id" groups="base.group_multi_company" />
                 <field name="stock_amount" />
-            </tree>
+            </list>
         </field>
     </record>
 
