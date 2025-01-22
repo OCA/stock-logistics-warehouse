@@ -17,7 +17,7 @@
             <field name="code" position="after">
                 <field name="show_move_onhand" />
             </field>
-            <xpath expr="//div[hasclass('o_kanban_primary_left')]" position="inside">
+            <button name="get_action_picking_tree_ready" position="after">
                 <div t-if="record.show_move_onhand.raw_value">
                     <button
                         name="action_move_location"
@@ -28,7 +28,7 @@
                         Move On Hand
                     </button>
                 </div>
-            </xpath>
+            </button>
         </field>
     </record>
 </odoo>

@@ -4,7 +4,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 
 
-from odoo import api, fields, models
+from odoo import Command, api, fields, models
 from odoo.fields import first
 from odoo.osv import expression
 
@@ -162,11 +162,6 @@ class StockMoveLocationWizard(models.TransientModel):
                     )
         return res
 
-    @api.onchange("destination_location_id")
-    def _onchange_destination_location_id(self):
-        for line in self.stock_move_location_line_ids:
-            line.destination_location_id = self.destination_location_id
-
     def _clear_lines(self):
         self.stock_move_location_line_ids = False
 
@@ -227,19 +222,9 @@ class StockMoveLocationWizard(models.TransientModel):
         lines.create_move_lines(picking, move)
         if self.env.context.get("planned"):
             for line in lines:
-                quants = self.env["stock.quant"]._gather(
-                    line.product_id,
-                    line.origin_location_id,
-                    lot_id=line.lot_id,
-                    package_id=line.package_id,
-                    owner_id=line.owner_id,
-                    strict=False,
-                    qty=line.move_quantity,
-                )
                 move._update_reserved_quantity(
                     line.move_quantity,
                     line.origin_location_id,
-                    quant_ids=quants,
                     lot_id=line.lot_id,
                     package_id=line.package_id,
                     owner_id=line.owner_id,
@@ -248,6 +233,7 @@ class StockMoveLocationWizard(models.TransientModel):
             # Force the state to be assigned, instead of _action_assign,
             # to avoid discarding the selected move_location_line.
             move.state = "assigned"
+            move.move_line_ids.filtered(lambda ml: not ml.quantity).unlink()
             move.move_line_ids.write({"state": "assigned"})
         return move
 
@@ -320,7 +306,7 @@ class StockMoveLocationWizard(models.TransientModel):
                 "quantity:sum",
                 "reserved_quantity:sum",
             ],
-            groupby=["product_id", "lot_id", "package_id", "owner_id"],
+            groupby=["id", "product_id", "lot_id", "package_id", "owner_id"],
             orderby="id",
             lazy=False,
         )
@@ -374,8 +360,8 @@ class StockMoveLocationWizard(models.TransientModel):
             not self.env.context.get("origin_location_disable")
             and self.origin_location_id
         ):
-            lines = [[5, 0, 0]] + [
-                [0, 0, line_vals]
+            lines = [Command.clear()] + [
+                Command.create(line_vals)
                 for line_vals in self._get_stock_move_location_lines_values()
                 if line_vals.get("max_quantity", 0.0) > 0.0
             ]

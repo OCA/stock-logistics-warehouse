@@ -31,7 +31,6 @@ class StockPicking(models.Model):
                 }
             )
         )
-        move_wizard._onchange_destination_location_id()
         move_wizard.action_move_location()
         return True
 
