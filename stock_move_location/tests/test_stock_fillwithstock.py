@@ -2,63 +2,58 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 
-import odoo.tests.common as common
+from odoo.addons.base.tests.common import BaseCommon
 
 
-class TestFillwithStock(common.TransactionCase):
-    def setUp(self):
-        super().setUp()
-        self.env = self.env(
-            context=dict(
-                self.env.context,
-                tracking_disable=True,
-            )
-        )
+class TestFillwithStock(BaseCommon):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
 
-        self.stock_location = self.env.ref("stock.stock_location_stock")
-        self.pack_location = self.env.ref("stock.location_pack_zone")
+        cls.stock_location = cls.env.ref("stock.stock_location_stock")
+        cls.pack_location = cls.env.ref("stock.location_pack_zone")
 
-        self.shelf1_location = self.env["stock.location"].create(
+        cls.shelf1_location = cls.env["stock.location"].create(
             {
                 "name": "Test location",
                 "usage": "internal",
-                "location_id": self.stock_location.id,
+                "location_id": cls.stock_location.id,
             }
         )
 
-        self.product1 = self.env["product.product"].create(
+        cls.product1 = cls.env["product.product"].create(
             {
                 "name": "Product A",
-                "type": "product",
+                "is_storable": True,
             }
         )
-        self.product2 = self.env["product.product"].create(
+        cls.product2 = cls.env["product.product"].create(
             {
                 "name": "Product B",
-                "type": "product",
+                "is_storable": True,
             }
         )
 
-        self.env["stock.quant"].create(
+        cls.env["stock.quant"].create(
             {
-                "product_id": self.product1.id,
-                "location_id": self.shelf1_location.id,
+                "product_id": cls.product1.id,
+                "location_id": cls.shelf1_location.id,
                 "quantity": 5.0,
                 "reserved_quantity": 0.0,
             }
         )
-        self.env["stock.quant"].create(
+        cls.env["stock.quant"].create(
             {
-                "product_id": self.product1.id,
-                "location_id": self.shelf1_location.id,
+                "product_id": cls.product1.id,
+                "location_id": cls.shelf1_location.id,
                 "quantity": 10.0,
                 "reserved_quantity": 5.0,
             }
         )
-        self.env["stock.quant"].create(
+        cls.env["stock.quant"].create(
             {
-                "product_id": self.product2.id,
-                "location_id": self.shelf1_location.id,
+                "product_id": cls.product2.id,
+                "location_id": cls.shelf1_location.id,
                 "quantity": 5.0,
                 "reserved_quantity": 0.0,
             }
@@ -80,7 +75,7 @@ class TestFillwithStock(common.TransactionCase):
             picking_stock_pack.move_ids.filtered(
                 lambda m: m.product_id == self.product1
             ).product_uom_qty,
-            10.0,
+            15.0,
         )
         self.assertEqual(
             picking_stock_pack.move_ids.filtered(
