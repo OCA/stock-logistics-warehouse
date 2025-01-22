@@ -14,3 +14,4 @@
 - Quartile \<<https://www.quartile.co>\>
   - Aung Ko Ko Lin
 - Laurent Mignon \<<laurent.mignon@acsone.eu>\>
+- Maksym Yankin \<<maksym.yankin@camptocamp.com>\>
