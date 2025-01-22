@@ -16,13 +16,11 @@ class StockLocation(models.Model):
         if operator not in ("=", "!=", "<", "<=", ">", ">="):
             return []
         query = sql.SQL(
-            """
+            f"""
             SELECT loc.id FROM stock_location loc
             LEFT OUTER JOIN stock_quant quant ON loc.id = quant.location_id
             GROUP BY loc.id
-            HAVING coalesce(sum(quantity), 0) {operator} %(value)s;""".format(
-                operator=operator
-            )
+            HAVING coalesce(sum(quantity), 0) {operator} %(value)s;"""
         )
 
         self.env.cr.execute(query, {"value": value})
