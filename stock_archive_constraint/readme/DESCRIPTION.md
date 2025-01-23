@@ -1,3 +1,1 @@
-Allows to block archiving products with associated stock.quant or
-stock.move. Allows to block archiving locations with associated
-stock.quant or stock.move.
+Prevents archiving products or storage locations that have existing inventory or related transactions.
