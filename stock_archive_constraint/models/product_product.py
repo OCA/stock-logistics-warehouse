@@ -1,7 +1,7 @@
 # Copyright 2020 Tecnativa - Víctor Martínez
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import _, api, models
+from odoo import api, models
 from odoo.exceptions import ValidationError
 from odoo.tools import config
 
@@ -28,7 +28,7 @@ class ProductProduct(models.Model):
         )
         if res:
             raise ValidationError(
-                _(
+                self.env._(
                     "It is not possible to archive product "
                     "'%(display_name)s' which has "
                     "associated stock quantities."
@@ -49,7 +49,7 @@ class ProductProduct(models.Model):
         )
         if res:
             raise ValidationError(
-                _(
+                self.env._(
                     "It is not possible to archive product "
                     "'%(display_name)s' which has "
                     "associated picking lines."
@@ -70,7 +70,7 @@ class ProductProduct(models.Model):
         )
         if res:
             raise ValidationError(
-                _(
+                self.env._(
                     "It is not possible to archive product "
                     "'%(display_name)s' which has "
                     "associated stock reservations."

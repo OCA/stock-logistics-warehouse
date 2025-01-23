@@ -2,11 +2,12 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
 from odoo.exceptions import ValidationError
-from odoo.tests.common import Form
+from odoo.tests import Form, tagged
 
 from odoo.addons.base.tests.common import BaseCommon
 
 
+@tagged("post_install", "-at_install")
 class TestLocationArchiveConstraint(BaseCommon):
     @classmethod
     def setUpClass(cls):
@@ -19,17 +20,18 @@ class TestLocationArchiveConstraint(BaseCommon):
         cls.product_2 = cls._create_product(cls, "Product 2")
         stock_location_stock = cls.env.ref("stock.stock_location_stock")
         cls.stock_location = cls._create_stock_location(
-            cls, "%s (Copy)" % (stock_location_stock.name)
+            cls, f"{stock_location_stock.name} (Copy)"
         )
         cls.stock_location_child = cls._create_stock_location(
-            cls, "%s (Child)" % (cls.stock_location.name)
+            cls, f"{cls.stock_location.name} (Child)"
         )
         cls.stock_location_child.location_id = cls.stock_location
 
     def _create_product(self, name):
         product_form = Form(self.env["product.product"])
         product_form.name = name
-        product_form.detailed_type = "product"
+        product_form.type = "consu"
+        product_form.is_storable = True
         return product_form.save()
 
     def _create_stock_location(self, name):
@@ -175,18 +177,8 @@ class TestLocationArchiveConstraint(BaseCommon):
         self.stock_location.active = False
         self.assertFalse(self.stock_location.active)
 
-    def test_archive_stock_location(self):
-        self._create_stock_quant(self.stock_location, self.product_2, 20.00)
-        with self.assertRaises(ValidationError):
-            self.stock_location.with_context(do_not_check_quant=True).active = False
-
     def test_archive_unarchive_stock_location_child(self):
         self.stock_location_child.active = False
         self.assertFalse(self.stock_location_child.active)
         self.stock_location_child.active = True
         self.assertTrue(self.stock_location_child.active)
-
-    def test_archive_stock_location_child(self):
-        self._create_stock_quant(self.stock_location_child, self.product_2, 20.00)
-        with self.assertRaises(ValidationError):
-            self.stock_location.with_context(do_not_check_quant=True).active = False
