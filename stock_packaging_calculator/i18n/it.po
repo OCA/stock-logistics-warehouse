@@ -1,0 +1,42 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_packaging_calculator
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2024-04-19 07:37+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
+
+#. module: stock_packaging_calculator
+#: model:ir.model.fields,field_description:stock_packaging_calculator.field_product_product__packaging_contained_mapping
+msgid "Packaging Contained Mapping"
+msgstr "Mappatura contenuto confezione"
+
+#. module: stock_packaging_calculator
+#: model:ir.model,name:stock_packaging_calculator.model_product_qty_by_packaging_mixin
+msgid "Product Qty By Packaging (Mixin)"
+msgstr "Q.tà prodotto per confezione (mixin)"
+
+#. module: stock_packaging_calculator
+#: model:ir.model,name:stock_packaging_calculator.model_product_product
+msgid "Product Variant"
+msgstr "Variante prodotto"
+
+#. module: stock_packaging_calculator
+#: model:ir.model.fields,field_description:stock_packaging_calculator.field_product_qty_by_packaging_mixin__product_qty_by_packaging_display
+msgid "Qty by packaging"
+msgstr "Q.tà per confezione"
+
+#. module: stock_packaging_calculator
+#: model:ir.model.fields,help:stock_packaging_calculator.field_product_product__packaging_contained_mapping
+msgid "Technical field to store contained packaging. "
+msgstr "Campo tecnico per salvare la confezione contenuta. "

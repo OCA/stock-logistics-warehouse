@@ -1,0 +1,217 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * stock_demand_estimate
+#
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2018
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-01-16 14:35+0000\n"
+"PO-Revision-Date: 2018-01-16 14:35+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2018\n"
+"Language-Team: Persian (https://www.transifex.com/oca/teams/23907/fa/)\n"
+"Language: fa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. module: stock_demand_estimate
+#: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__active
+msgid "Active"
+msgstr ""
+
+#. module: stock_demand_estimate
+#: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_search
+msgid "All (Active/Inactive)"
+msgstr ""
+
+#. module: stock_demand_estimate
+#: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_form
+msgid "Archived"
+msgstr ""
+
+#. module: stock_demand_estimate
+#: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__company_id
+msgid "Company"
+msgstr ""
+
+#. module: stock_demand_estimate
+#: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__create_uid
+msgid "Created by"
+msgstr "ایجاد شده توسط"
+
+#. module: stock_demand_estimate
+#: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__create_date
+msgid "Created on"
+msgstr "ایجاد شده در"
+
+#. module: stock_demand_estimate
+#: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_search
+msgid "Date (From)"
+msgstr ""
+
+#. module: stock_demand_estimate
+#: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_form
+#: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_list
+msgid "Date From"
+msgstr ""
+
+#. module: stock_demand_estimate
+#: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_form
+#: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_list
+msgid "Date To"
+msgstr ""
+
+#. module: stock_demand_estimate
+#: model:ir.ui.menu,name:stock_demand_estimate.stock_demand_planning_menu
+msgid "Demand Planning"
+msgstr ""
+
+#. module: stock_demand_estimate
+#: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__display_name
+msgid "Display Name"
+msgstr "نام نمایشی"
+
+#. module: stock_demand_estimate
+#: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__manual_duration
+#: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_form
+msgid "Duration"
+msgstr ""
+
+#. module: stock_demand_estimate
+#: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__duration
+msgid "Duration (computed))"
+msgstr ""
+
+#. module: stock_demand_estimate
+#: model:ir.model.fields,help:stock_demand_estimate.field_stock_demand_estimate__manual_duration
+msgid "Duration (in days)"
+msgstr ""
+
+#. module: stock_demand_estimate
+#: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_search
+msgid "Expired"
+msgstr ""
+
+#. module: stock_demand_estimate
+#: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__manual_date_from
+msgid "From"
+msgstr ""
+
+#. module: stock_demand_estimate
+#: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__date_from
+msgid "From (computed)"
+msgstr ""
+
+#. module: stock_demand_estimate
+#: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_search
+msgid "Group By"
+msgstr ""
+
+#. module: stock_demand_estimate
+#: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__id
+msgid "ID"
+msgstr "شناسه"
+
+#. module: stock_demand_estimate
+#: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__write_uid
+msgid "Last Updated by"
+msgstr "آخرین به روز رسانی توسط"
+
+#. module: stock_demand_estimate
+#: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__write_date
+msgid "Last Updated on"
+msgstr "آخرین به روز رسانی در"
+
+#. module: stock_demand_estimate
+#: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__location_id
+#: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_search
+msgid "Location"
+msgstr ""
+
+#. module: stock_demand_estimate
+#: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_search
+msgid "Not Expired"
+msgstr ""
+
+#. module: stock_demand_estimate
+#: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__product_id
+#: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_search
+msgid "Product"
+msgstr ""
+
+#. module: stock_demand_estimate
+#: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__product_uom_qty
+msgid "Quantity"
+msgstr ""
+
+#. module: stock_demand_estimate
+#: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__product_qty
+msgid "Quantity (Product UoM)"
+msgstr ""
+
+#. module: stock_demand_estimate
+#: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__daily_qty
+msgid "Quantity / Day"
+msgstr ""
+
+#. module: stock_demand_estimate
+#: model:ir.model.fields,help:stock_demand_estimate.field_stock_demand_estimate__product_qty
+msgid "Quantity in the default UoM of the product"
+msgstr ""
+
+#. module: stock_demand_estimate
+#: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_search
+msgid "Search Stock Demand Estimates"
+msgstr ""
+
+#. module: stock_demand_estimate
+#: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_pivot
+msgid "Stock Demand Estimate"
+msgstr ""
+
+#. module: stock_demand_estimate
+#: model:ir.model,name:stock_demand_estimate.model_stock_demand_estimate
+msgid "Stock Demand Estimate Line"
+msgstr ""
+
+#. module: stock_demand_estimate
+#: model:ir.actions.act_window,name:stock_demand_estimate.stock_demand_estimate_action
+#: model:ir.ui.menu,name:stock_demand_estimate.stock_demand_estimate_menu
+msgid "Stock Demand Estimates"
+msgstr ""
+
+#. module: stock_demand_estimate
+#. odoo-python
+#: code:addons/stock_demand_estimate/models/stock_demand_estimate.py:0
+msgid ""
+"The requested operation cannot be processed because of a programming error "
+"setting the `product_qty` field instead of the `product_uom_qty`."
+msgstr ""
+
+#. module: stock_demand_estimate
+#: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__manual_date_to
+msgid "To"
+msgstr ""
+
+#. module: stock_demand_estimate
+#: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__date_to
+msgid "To (computed)"
+msgstr ""
+
+#. module: stock_demand_estimate
+#: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__product_uom
+msgid "Unit of measure"
+msgstr ""
+
+#~ msgid "Last Modified on"
+#~ msgstr "تاریخ آخرین به‌روزرسانی"
+
+#~ msgid "Cancel"
+#~ msgstr "لغو"
+
+#~ msgid "or"
+#~ msgstr "یا"
