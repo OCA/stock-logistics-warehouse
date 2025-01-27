@@ -30,11 +30,6 @@ msgid "Assign Manual Quants Lines"
 msgstr "手動在庫明細割当"
 
 #. module: stock_quant_manual_assign
-#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_stock_picking_type__auto_fill_qty_done
-msgid "Auto-fill Quantity Done"
-msgstr "完了数量割当自動化"
-
-#. module: stock_quant_manual_assign
 #: model_terms:ir.ui.view,arch_db:stock_quant_manual_assign.assign_manual_quants_form_view
 msgid "Cancel"
 msgstr "キャンセル"
@@ -67,12 +62,6 @@ msgstr "表示名"
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines__id
 msgid "ID"
 msgstr "ID"
-
-#. module: stock_quant_manual_assign
-#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants____last_update
-#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines____last_update
-msgid "Last Modified on"
-msgstr "最終更新日"
 
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants__write_uid
@@ -133,11 +122,6 @@ msgid "Package"
 msgstr "パッケージ"
 
 #. module: stock_quant_manual_assign
-#: model:ir.model,name:stock_quant_manual_assign.model_stock_picking_type
-msgid "Picking Type"
-msgstr "ピッキングタイプ"
-
-#. module: stock_quant_manual_assign
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines__qty
 msgid "QTY"
 msgstr "数量"
@@ -175,14 +159,6 @@ msgid "Select"
 msgstr "選択"
 
 #. module: stock_quant_manual_assign
-#: model:ir.model.fields,help:stock_quant_manual_assign.field_stock_picking_type__auto_fill_qty_done
-msgid ""
-"Select this in case done quantity of the stock move line should be auto-"
-"filled when quants are manually assigned."
-msgstr "在庫が手動で割当てられた時に在庫移動明細の完了数量を自動で割当したい場合はこ"
-"ちらを選択してください。"
-
-#. module: stock_quant_manual_assign
 #. odoo-python
 #: code:addons/stock_quant_manual_assign/wizard/assign_manual_quants.py:0
 #, python-format
@@ -209,6 +185,22 @@ msgstr "こちらは在庫のオーナーとなります"
 #: model_terms:ir.ui.view,arch_db:stock_quant_manual_assign.assign_manual_quants_form_view
 msgid "qty"
 msgstr "数量"
+
+#~ msgid "Auto-fill Quantity Done"
+#~ msgstr "完了数量割当自動化"
+
+#~ msgid "Last Modified on"
+#~ msgstr "最終更新日"
+
+#~ msgid "Picking Type"
+#~ msgstr "ピッキングタイプ"
+
+#~ msgid ""
+#~ "Select this in case done quantity of the stock move line should be auto-"
+#~ "filled when quants are manually assigned."
+#~ msgstr ""
+#~ "在庫が手動で割当てられた時に在庫移動明細の完了数量を自動で割当したい場合は"
+#~ "こちらを選択してください。"
 
 #~ msgid "Name"
 #~ msgstr "名称"

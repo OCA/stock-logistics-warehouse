@@ -12,8 +12,8 @@ msgstr ""
 "PO-Revision-Date: 2024-05-22 02:57+0000\n"
 "Last-Translator: Rodrigo Macedo <sottomaiormacedotec@users.noreply."
 "translation.odoo-community.org>\n"
-"Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/teams/"
-"23907/pt_BR/)\n"
+"Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/"
+"teams/23907/pt_BR/)\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -30,11 +30,6 @@ msgstr "Atribuir quantidades manualmente"
 #: model:ir.model,name:stock_quant_manual_assign.model_assign_manual_quants_lines
 msgid "Assign Manual Quants Lines"
 msgstr "Atribuir manualmente quantas linhas"
-
-#. module: stock_quant_manual_assign
-#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_stock_picking_type__auto_fill_qty_done
-msgid "Auto-fill Quantity Done"
-msgstr "Recarregar automaticamente a quantidade realizada"
 
 #. module: stock_quant_manual_assign
 #: model_terms:ir.ui.view,arch_db:stock_quant_manual_assign.assign_manual_quants_form_view
@@ -69,12 +64,6 @@ msgstr "Display Name"
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines__id
 msgid "ID"
 msgstr "ID"
-
-#. module: stock_quant_manual_assign
-#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants____last_update
-#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines____last_update
-msgid "Last Modified on"
-msgstr "Last Modified on"
 
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants__write_uid
@@ -135,11 +124,6 @@ msgid "Package"
 msgstr "Package"
 
 #. module: stock_quant_manual_assign
-#: model:ir.model,name:stock_quant_manual_assign.model_stock_picking_type
-msgid "Picking Type"
-msgstr "Tipo de seleção"
-
-#. module: stock_quant_manual_assign
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines__qty
 msgid "QTY"
 msgstr "QTD"
@@ -177,16 +161,6 @@ msgid "Select"
 msgstr "Selecione"
 
 #. module: stock_quant_manual_assign
-#: model:ir.model.fields,help:stock_quant_manual_assign.field_stock_picking_type__auto_fill_qty_done
-msgid ""
-"Select this in case done quantity of the stock move line should be auto-"
-"filled when quants are manually assigned."
-msgstr ""
-"Selecione esta opção caso a quantidade concluída da linha de movimentação de "
-"estoque deva ser preenchida automaticamente quando os quantos forem "
-"atribuídos manualmente."
-
-#. module: stock_quant_manual_assign
 #. odoo-python
 #: code:addons/stock_quant_manual_assign/wizard/assign_manual_quants.py:0
 #, python-format
@@ -213,6 +187,23 @@ msgstr "Este é o dono do quant"
 #: model_terms:ir.ui.view,arch_db:stock_quant_manual_assign.assign_manual_quants_form_view
 msgid "qty"
 msgstr "qtd"
+
+#~ msgid "Auto-fill Quantity Done"
+#~ msgstr "Recarregar automaticamente a quantidade realizada"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Last Modified on"
+
+#~ msgid "Picking Type"
+#~ msgstr "Tipo de seleção"
+
+#~ msgid ""
+#~ "Select this in case done quantity of the stock move line should be auto-"
+#~ "filled when quants are manually assigned."
+#~ msgstr ""
+#~ "Selecione esta opção caso a quantidade concluída da linha de movimentação "
+#~ "de estoque deva ser preenchida automaticamente quando os quantos forem "
+#~ "atribuídos manualmente."
 
 #~ msgid "Name"
 #~ msgstr "Nome"

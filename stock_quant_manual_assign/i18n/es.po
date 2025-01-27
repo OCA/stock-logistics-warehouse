@@ -30,11 +30,6 @@ msgid "Assign Manual Quants Lines"
 msgstr "Asignación manual de líneas de cantidades"
 
 #. module: stock_quant_manual_assign
-#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_stock_picking_type__auto_fill_qty_done
-msgid "Auto-fill Quantity Done"
-msgstr "Rellenar automáticamente la cantidad realizada"
-
-#. module: stock_quant_manual_assign
 #: model_terms:ir.ui.view,arch_db:stock_quant_manual_assign.assign_manual_quants_form_view
 msgid "Cancel"
 msgstr "Cancelar"
@@ -67,12 +62,6 @@ msgstr "Nombre a mostrar"
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines__id
 msgid "ID"
 msgstr "ID"
-
-#. module: stock_quant_manual_assign
-#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants____last_update
-#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines____last_update
-msgid "Last Modified on"
-msgstr "Última actualización por"
 
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants__write_uid
@@ -133,11 +122,6 @@ msgid "Package"
 msgstr "Paquete"
 
 #. module: stock_quant_manual_assign
-#: model:ir.model,name:stock_quant_manual_assign.model_stock_picking_type
-msgid "Picking Type"
-msgstr "Tipo de recogida"
-
-#. module: stock_quant_manual_assign
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines__qty
 msgid "QTY"
 msgstr "Ctd."
@@ -175,16 +159,6 @@ msgid "Select"
 msgstr "Seleccionar"
 
 #. module: stock_quant_manual_assign
-#: model:ir.model.fields,help:stock_quant_manual_assign.field_stock_picking_type__auto_fill_qty_done
-msgid ""
-"Select this in case done quantity of the stock move line should be auto-"
-"filled when quants are manually assigned."
-msgstr ""
-"Seleccione esto en caso de que la cantidad realizada de la línea de "
-"movimiento de existencias deba completarse automáticamente cuando se asignen "
-"cantidades de forma manual."
-
-#. module: stock_quant_manual_assign
 #. odoo-python
 #: code:addons/stock_quant_manual_assign/wizard/assign_manual_quants.py:0
 #, python-format
@@ -211,6 +185,23 @@ msgstr "Éste es el propietario de la cantidad"
 #: model_terms:ir.ui.view,arch_db:stock_quant_manual_assign.assign_manual_quants_form_view
 msgid "qty"
 msgstr "ctd."
+
+#~ msgid "Auto-fill Quantity Done"
+#~ msgstr "Rellenar automáticamente la cantidad realizada"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Última actualización por"
+
+#~ msgid "Picking Type"
+#~ msgstr "Tipo de recogida"
+
+#~ msgid ""
+#~ "Select this in case done quantity of the stock move line should be auto-"
+#~ "filled when quants are manually assigned."
+#~ msgstr ""
+#~ "Seleccione esto en caso de que la cantidad realizada de la línea de "
+#~ "movimiento de existencias deba completarse automáticamente cuando se "
+#~ "asignen cantidades de forma manual."
 
 #~ msgid "assign.manual.quants"
 #~ msgstr "assign.manual.quants"

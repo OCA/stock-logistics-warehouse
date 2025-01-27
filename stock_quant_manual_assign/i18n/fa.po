@@ -29,11 +29,6 @@ msgid "Assign Manual Quants Lines"
 msgstr ""
 
 #. module: stock_quant_manual_assign
-#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_stock_picking_type__auto_fill_qty_done
-msgid "Auto-fill Quantity Done"
-msgstr ""
-
-#. module: stock_quant_manual_assign
 #: model_terms:ir.ui.view,arch_db:stock_quant_manual_assign.assign_manual_quants_form_view
 msgid "Cancel"
 msgstr "لغو"
@@ -66,12 +61,6 @@ msgstr "نام نمایشی"
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines__id
 msgid "ID"
 msgstr "شناسه"
-
-#. module: stock_quant_manual_assign
-#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants____last_update
-#: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines____last_update
-msgid "Last Modified on"
-msgstr "تاریخ آخرین به‌روزرسانی"
 
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants__write_uid
@@ -132,11 +121,6 @@ msgid "Package"
 msgstr ""
 
 #. module: stock_quant_manual_assign
-#: model:ir.model,name:stock_quant_manual_assign.model_stock_picking_type
-msgid "Picking Type"
-msgstr ""
-
-#. module: stock_quant_manual_assign
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines__qty
 msgid "QTY"
 msgstr ""
@@ -174,13 +158,6 @@ msgid "Select"
 msgstr ""
 
 #. module: stock_quant_manual_assign
-#: model:ir.model.fields,help:stock_quant_manual_assign.field_stock_picking_type__auto_fill_qty_done
-msgid ""
-"Select this in case done quantity of the stock move line should be auto-"
-"filled when quants are manually assigned."
-msgstr ""
-
-#. module: stock_quant_manual_assign
 #. odoo-python
 #: code:addons/stock_quant_manual_assign/wizard/assign_manual_quants.py:0
 #, python-format
@@ -204,6 +181,9 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:stock_quant_manual_assign.assign_manual_quants_form_view
 msgid "qty"
 msgstr ""
+
+#~ msgid "Last Modified on"
+#~ msgstr "تاریخ آخرین به‌روزرسانی"
 
 #~ msgid "Name"
 #~ msgstr "نام"
