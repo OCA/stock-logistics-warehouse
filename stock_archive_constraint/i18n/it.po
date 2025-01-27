@@ -22,8 +22,8 @@ msgid "Inventory Locations"
 msgstr "Ubicazioni di inventario"
 
 #. module: stock_archive_constraint
+#. odoo-python
 #: code:addons/stock_archive_constraint/models/stock_location.py:0
-#, python-format
 msgid ""
 "It is not possible to archive location '%(display_name)s' which has "
 "associated picking lines."
@@ -32,18 +32,8 @@ msgstr ""
 "righe di prelievo."
 
 #. module: stock_archive_constraint
+#. odoo-python
 #: code:addons/stock_archive_constraint/models/stock_location.py:0
-#, python-format
-msgid ""
-"It is not possible to archive location '%(display_name)s' which has "
-"associated stock quantities."
-msgstr ""
-"Non è possibile archiviare l'ubicazione '%(display_name)s' che è associata a "
-"giacenze di magazzino."
-
-#. module: stock_archive_constraint
-#: code:addons/stock_archive_constraint/models/stock_location.py:0
-#, python-format
 msgid ""
 "It is not possible to archive location '%(display_name)s' which has "
 "associated stock reservations."
@@ -52,8 +42,8 @@ msgstr ""
 "prenotazioni di magazzino."
 
 #. module: stock_archive_constraint
+#. odoo-python
 #: code:addons/stock_archive_constraint/models/product_product.py:0
-#, python-format
 msgid ""
 "It is not possible to archive product '%(display_name)s' which has "
 "associated picking lines."
@@ -62,8 +52,8 @@ msgstr ""
 "righe di prelievo."
 
 #. module: stock_archive_constraint
+#. odoo-python
 #: code:addons/stock_archive_constraint/models/product_product.py:0
-#, python-format
 msgid ""
 "It is not possible to archive product '%(display_name)s' which has "
 "associated stock quantities."
@@ -72,8 +62,8 @@ msgstr ""
 "giacenze di magazzino."
 
 #. module: stock_archive_constraint
+#. odoo-python
 #: code:addons/stock_archive_constraint/models/product_product.py:0
-#, python-format
 msgid ""
 "It is not possible to archive product '%(display_name)s' which has "
 "associated stock reservations."
@@ -83,5 +73,16 @@ msgstr ""
 
 #. module: stock_archive_constraint
 #: model:ir.model,name:stock_archive_constraint.model_product_product
-msgid "Product"
-msgstr "Prodotto"
+msgid "Product Variant"
+msgstr ""
+
+#, python-format
+#~ msgid ""
+#~ "It is not possible to archive location '%(display_name)s' which has "
+#~ "associated stock quantities."
+#~ msgstr ""
+#~ "Non è possibile archiviare l'ubicazione '%(display_name)s' che è "
+#~ "associata a giacenze di magazzino."
+
+#~ msgid "Product"
+#~ msgstr "Prodotto"
