@@ -1,5 +1,4 @@
 <odoo>
-
     <record id="view_inventory_group_form" model="ir.ui.view">
         <field name="name">stock.inventory.form.view</field>
         <field name="model">stock.inventory</field>
@@ -72,13 +71,15 @@
                         </button>
                     </div>
                     <div class="oe_title" name="title">
-                    <label for="name" class="oe_edit_only" />
-                    <h1><field
+                        <label for="name" class="oe_edit_only" />
+                        <h1>
+                            <field
                                 name="name"
                                 placeholder="e.g. Annual inventory"
                                 readonly="state != 'draft'"
-                            /></h1>
-                </div>
+                            />
+                        </h1>
+                    </div>
                     <group>
                         <group>
                             <field
@@ -137,8 +138,8 @@
                     </group>
                 </sheet>
                 <div class="oe_chatter">
-                  <field name="message_follower_ids" widget="mail_followers" />
-                  <field name="message_ids" widget="mail_thread" />
+                    <field name="message_follower_ids" widget="mail_followers" />
+                    <field name="message_ids" widget="mail_thread" />
                 </div>
             </form>
         </field>
