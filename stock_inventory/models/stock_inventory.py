@@ -172,8 +172,8 @@ class InventoryAdjustmentsGroup(models.Model):
             ]
             count_pending_to_review = len(quants_pending_to_review)
             rec.count_stock_quants = len(quants)
-            rec.count_stock_quants_string = "{} / {}".format(
-                count_pending_to_review, rec.count_stock_quants
+            rec.count_stock_quants_string = (
+                f"{count_pending_to_review} / {rec.count_stock_quants}"
             )
 
     @api.depends("stock_move_ids")
