@@ -1,4 +1,4 @@
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError, ValidationError
 from odoo.osv import expression
 
@@ -290,13 +290,13 @@ class InventoryAdjustmentsGroup(models.Model):
         if self.product_ids:
             search_filter.append(("product_id", "in", self.product_ids.ids))
             error_field = "product_id"
-            error_message = _(
+            error_message = self.env._(
                 "There are active adjustments for the requested products: %(names)s. "
                 "Blocking adjustments: %(blocking_names)s"
             )
         else:
             error_field = "location_id"
-            error_message = _(
+            error_message = self.env._(
                 "There's already an Adjustment in Process "
                 "using one requested Location: %(names)s. "
                 "Blocking adjustments: %(blocking_names)s"
@@ -381,7 +381,7 @@ class InventoryAdjustmentsGroup(models.Model):
         for rec in self:
             if not rec.action_state_to_cancel_allowed:
                 raise UserError(
-                    _(
+                    self.env._(
                         "You can't cancel this inventory %(display_name)s.",
                         display_name=rec.display_name,
                     )
@@ -446,7 +446,7 @@ class InventoryAdjustmentsGroup(models.Model):
                         i in inventory.location_ids.ids for i in rec.location_ids.ids
                     ):
                         raise ValidationError(
-                            _(
+                            self.env._(
                                 "Cannot have more than one in-progress inventory "
                                 "adjustment affecting the same location or product "
                                 "at the same time."
@@ -459,14 +459,14 @@ class InventoryAdjustmentsGroup(models.Model):
             if len(rec.product_ids) > 1:
                 if rec.product_selection == "one":
                     raise ValidationError(
-                        _(
+                        self.env._(
                             "When 'Product Selection: One Product' is selected"
                             " you are only able to add one product."
                         )
                     )
                 elif rec.product_selection == "lot":
                     raise ValidationError(
-                        _(
+                        self.env._(
                             "When 'Product Selection: Lot Serial Number' is selected"
                             " you are only able to add one product."
                         )

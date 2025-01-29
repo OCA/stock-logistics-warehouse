@@ -19,7 +19,6 @@
                         invisible="state in ('draft', 'done') or count_stock_moves != 0"
                         string="Back to Draft"
                     />
-                    <field name="action_state_to_cancel_allowed" invisible="1" />
                     <button
                         type="object"
                         name="action_state_to_cancel"
@@ -54,7 +53,6 @@
                                 widget="statinfo"
                                 readonly="1"
                             />
-                            <field invisible="True" name="count_stock_quants" />
                         </button>
                         <button
                             type="object"
@@ -137,10 +135,7 @@
                         </group>
                     </group>
                 </sheet>
-                <div class="oe_chatter">
-                    <field name="message_follower_ids" widget="mail_followers" />
-                    <field name="message_ids" widget="mail_thread" />
-                </div>
+                <chatter />
             </form>
         </field>
     </record>
@@ -150,7 +145,7 @@
         <field name="model">stock.inventory</field>
         <field name="priority">1000</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="name" />
                 <field name="product_selection" optional="hide" />
                 <field name="location_ids" widget="many2many_tags" optional="hide" />
@@ -164,7 +159,7 @@
                 />
                 <field name="date" />
                 <field name="company_id" optional="hide" />
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -188,7 +183,7 @@
     <record id="action_view_inventory_group_form" model="ir.actions.act_window">
         <field name="name">Inventory Adjustment Group</field>
         <field name="res_model">stock.inventory</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
         <field name="view_id" ref="view_inventory_group_tree" />
     </record>
 

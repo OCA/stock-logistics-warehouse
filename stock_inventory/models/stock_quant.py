@@ -1,4 +1,4 @@
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 
 
 class StockQuant(models.Model):
@@ -39,7 +39,7 @@ class StockQuant(models.Model):
                 or rec.company_id.id == x.company_id.id
             )
             if len(moves) == 0:
-                raise ValueError(_("No move lines have been created"))
+                raise ValueError(self.env._("No move lines have been created"))
             move = moves[len(moves) - 1]
             adjustment.stock_move_ids |= move
             reference = move.reference

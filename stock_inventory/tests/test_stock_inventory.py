@@ -2,10 +2,11 @@
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
 from odoo.exceptions import UserError, ValidationError
-from odoo.tests.common import TransactionCase
+
+from odoo.addons.base.tests.common import BaseCommon
 
 
-class TestStockInventory(TransactionCase):
+class TestStockInventory(BaseCommon):
     def setUp(self):
         super().setUp()
         self.env.company.stock_inventory_auto_complete = False
@@ -17,14 +18,16 @@ class TestStockInventory(TransactionCase):
         self.product = self.env["product.product"].create(
             {
                 "name": "Product 1 test",
-                "type": "product",
+                "type": "consu",
+                "is_storable": True,
                 "tracking": "lot",
             }
         )
         self.product2 = self.env["product.product"].create(
             {
                 "name": "Product 1 test",
-                "type": "product",
+                "type": "consu",
+                "is_storable": True,
                 "categ_id": self.product_categ.id,
             }
         )
