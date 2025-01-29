@@ -11,7 +11,7 @@
                     string="Common destination moves"
                     readonly="1"
                 >
-                    <tree>
+                    <list>
                         <field name="picking_id" />
                         <field name="product_id" />
                         <field name="location_id" />
@@ -19,7 +19,7 @@
                         <field name="product_uom_qty" />
                         <field name="product_uom" />
                         <field name="state" />
-                    </tree>
+                    </list>
                 </field>
             </group>
         </field>

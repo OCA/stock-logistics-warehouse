@@ -22,10 +22,10 @@ class TestCommonMoveDest(TransactionCase):
         cls.pick_type = cls.warehouse.pick_type_id
 
         cls.product_1 = cls.env["product.product"].create(
-            {"name": "Product 1", "type": "product"}
+            {"name": "Product 1", "is_storable": True}
         )
         cls.product_2 = cls.env["product.product"].create(
-            {"name": "Product 2", "type": "product"}
+            {"name": "Product 2", "is_storable": True}
         )
 
         cls.procurement_group_1 = cls.env["procurement.group"].create(
