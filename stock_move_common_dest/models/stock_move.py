@@ -5,7 +5,6 @@ from odoo.osv.expression import FALSE_DOMAIN
 
 
 class StockMove(models.Model):
-
     _inherit = "stock.move"
 
     common_dest_move_ids = fields.Many2many(
