@@ -27,11 +27,6 @@ msgid "Customer Locations"
 msgstr "Kundenlagerorte"
 
 #. module: stock_location_empty
-#: model:ir.model.fields,field_description:stock_location_empty.field_stock_location__display_name
-msgid "Display Name"
-msgstr "Anzeigename"
-
-#. module: stock_location_empty
 #: model_terms:ir.ui.view,arch_db:stock_location_empty.view_location_search_empty_2
 #: model_terms:ir.ui.view,arch_db:stock_location_empty.view_location_search_inherit
 msgid "Empty"
@@ -43,11 +38,6 @@ msgstr "Leere Lagerorte"
 #: model_terms:ir.ui.view,arch_db:stock_location_empty.view_location_search_inherit
 msgid "Empty stock"
 msgstr "Leere Lagerorte"
-
-#. module: stock_location_empty
-#: model:ir.model.fields,field_description:stock_location_empty.field_stock_location__id
-msgid "ID"
-msgstr "ID"
 
 #. module: stock_location_empty
 #: model_terms:ir.ui.view,arch_db:stock_location_empty.view_location_search_empty_2
@@ -63,11 +53,6 @@ msgstr "Interne Lagerorte"
 #: model:ir.model,name:stock_location_empty.model_stock_location
 msgid "Inventory Locations"
 msgstr "Bestandslagerorte"
-
-#. module: stock_location_empty
-#: model:ir.model.fields,field_description:stock_location_empty.field_stock_location____last_update
-msgid "Last Modified on"
-msgstr "Zuletzt geändert am"
 
 #. module: stock_location_empty
 #: model:ir.actions.act_window,name:stock_location_empty.action_stock_location_empty
@@ -98,6 +83,15 @@ msgstr "Lieferant"
 #: model_terms:ir.ui.view,arch_db:stock_location_empty.view_location_search_empty_2
 msgid "Vendor Locations"
 msgstr "Lieferantenlagerorte"
+
+#~ msgid "Display Name"
+#~ msgstr "Anzeigename"
+
+#~ msgid "ID"
+#~ msgstr "ID"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Zuletzt geändert am"
 
 #~ msgid "Stock Location"
 #~ msgstr "Lagerort"
