@@ -60,7 +60,13 @@ class TestStockPutawayRule(common.TransactionCase):
     def test_apply_putaway(self):
         # Create one strategy line for product template and other with a
         # specific variant
-        location = self.env.ref("stock.stock_location_shop0")
+        location = self.env["stock.location"].create(
+            {
+                "name": "shelf1",
+                "usage": "internal",
+                "location_id": self.env.ref("stock.stock_location_stock").id,
+            }
+        )
         location1 = location.copy(
             {"name": "Location test 1", "location_id": location.id}
         )

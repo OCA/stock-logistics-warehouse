@@ -7,19 +7,15 @@
         <field name="inherit_id" ref="stock.stock_putaway_list" />
         <field name="arch" type="xml">
             <field name="product_id" position="attributes">
-                <attribute
-                    name="attrs"
-                >{'readonly': ['|',('category_id', '!=', False), ('product_tmpl_id', '!=', False)]}</attribute>
+                <attribute name="readonly">category_id or product_tmpl_id</attribute>
             </field>
             <field name="category_id" position="attributes">
-                <attribute
-                    name="attrs"
-                >{'readonly': ['|', ('product_id', '!=', False), ('product_tmpl_id', '!=', False)]}</attribute>
+                <attribute name="readonly">product_id or product_tmpl_id</attribute>
             </field>
             <field name="product_id" position="before">
                 <field
                     name="product_tmpl_id"
-                    attrs="{'readonly': [('category_id', '!=', False)]}"
+                    readonly="category_id"
                     options="{'no_create': True, 'no_open': True}"
                     force_save="1"
                 />

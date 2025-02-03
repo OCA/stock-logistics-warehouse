@@ -11,6 +11,9 @@ class StockPutawayRule(models.Model):
     product_tmpl_id = fields.Many2one(
         comodel_name="product.template",
         compute="_compute_product_tmpl_id",
+        domain="[('id', '=', context.get('active_id', False))] "
+        "if context.get('active_model') == 'product.template' "
+        "else [('type', '!=', 'service')]",
         store=True,
         readonly=False,
         ondelete="cascade",
