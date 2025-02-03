@@ -6,7 +6,7 @@
         <field name="arch" type="xml">
             <form>
                 <field name='quants_lines' colspan="4">
-                    <tree editable="top" delete="0" create="0">
+                    <list editable="top" delete="0" create="0">
                         <field name="lot_id" groups="stock.group_production_lot" />
                         <field name="quant_id" column_invisible="1" />
                         <field name="package_id" groups="stock.group_tracking_lot" />
@@ -20,7 +20,7 @@
                             options="{'autosave': False}"
                         />
                         <field name="qty" readonly="selected == False" sum="qty" />
-                    </tree>
+                    </list>
                 </field>
                 <group col='4' colspan="4">
                     <field name="move_qty" colspan="2" readonly="1" />
