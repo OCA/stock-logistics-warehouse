@@ -1,0 +1,101 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_inventory_justification
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+
+#. module: stock_inventory_justification
+#: model:ir.model.fields,field_description:stock_inventory_justification.field_stock_inventory_justification__active
+msgid "Active"
+msgstr ""
+
+#. module: stock_inventory_justification
+#: model:ir.model.fields,field_description:stock_inventory_justification.field_stock_inventory_justification__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: stock_inventory_justification
+#: model:ir.model.fields,field_description:stock_inventory_justification.field_stock_inventory_justification__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: stock_inventory_justification
+#: model:ir.model.fields,field_description:stock_inventory_justification.field_stock_inventory_justification__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: stock_inventory_justification
+#: model:ir.model.fields,field_description:stock_inventory_justification.field_stock_inventory_justification__id
+msgid "ID"
+msgstr ""
+
+#. module: stock_inventory_justification
+#: model:ir.model,name:stock_inventory_justification.model_stock_inventory_justification
+msgid "Inventory justification"
+msgstr ""
+
+#. module: stock_inventory_justification
+#: model:ir.actions.act_window,name:stock_inventory_justification.stock_inventory_justification_act_window
+#: model:ir.model.fields,help:stock_inventory_justification.field_stock_move__inventory_justification_ids
+#: model:ir.model.fields,help:stock_inventory_justification.field_stock_move_line__inventory_justification_ids
+#: model:ir.model.fields,help:stock_inventory_justification.field_stock_quant__inventory_justification_ids
+#: model:ir.ui.menu,name:stock_inventory_justification.silog_stock_inventory_justification_menu
+msgid "Inventory justifications"
+msgstr ""
+
+#. module: stock_inventory_justification
+#: model:ir.model.fields,field_description:stock_inventory_justification.field_stock_move__inventory_justification_ids
+#: model:ir.model.fields,field_description:stock_inventory_justification.field_stock_move_line__inventory_justification_ids
+#: model:ir.model.fields,field_description:stock_inventory_justification.field_stock_quant__inventory_justification_ids
+msgid "Justifications"
+msgstr ""
+
+#. module: stock_inventory_justification
+#: model:ir.model.fields,field_description:stock_inventory_justification.field_stock_inventory_justification____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: stock_inventory_justification
+#: model:ir.model.fields,field_description:stock_inventory_justification.field_stock_inventory_justification__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: stock_inventory_justification
+#: model:ir.model.fields,field_description:stock_inventory_justification.field_stock_inventory_justification__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: stock_inventory_justification
+#: model:ir.model.fields,field_description:stock_inventory_justification.field_stock_inventory_justification__name
+msgid "Name"
+msgstr ""
+
+#. module: stock_inventory_justification
+#: model:ir.model,name:stock_inventory_justification.model_stock_move_line
+msgid "Product Moves (Stock Move Line)"
+msgstr ""
+
+#. module: stock_inventory_justification
+#: model:ir.model,name:stock_inventory_justification.model_stock_quant
+msgid "Quants"
+msgstr ""
+
+#. module: stock_inventory_justification
+#: model:ir.model,name:stock_inventory_justification.model_stock_move
+msgid "Stock Move"
+msgstr ""
+
+#. module: stock_inventory_justification
+#: model:ir.model.constraint,message:stock_inventory_justification.constraint_stock_inventory_justification_unique_name
+msgid "This stock inventory justification already exists."
+msgstr ""
