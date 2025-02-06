@@ -163,3 +163,50 @@ class TestPut(VerticalLiftCase):
         operation.button_release()
         self.assertEqual(operation.state, "scan_source")
         self.assertFalse(operation.current_move_line_id)
+
+    def test_put_package_with_multiple_move_lines(self):
+        """Check moving a package linked to multiple move lines.
+
+        Even when scanning a package, the module moves one move line at a time
+        And not the whole package.
+        If the package is spread on multiple move lines an exception is raised.
+
+        The module will try to merge the move lines.
+
+        """
+        pick = self.picking_in
+        # split the move in 2 move lines
+        line1 = pick.move_line_ids
+        # Add two quants in a package
+        pack = self.env["stock.quant.package"].create({"name": "test"})
+        # Update the available stock necessary for the move
+        self._update_qty_in_location(pick.location_id, line1.product_id, 14, pack)
+        # The stock for the 2nd move line must be on a different quant
+        self.env["stock.quant"].create(
+            {
+                "product_id": line1.product_id.id,
+                "location_id": pick.location_id.id,
+                "quantity": 1,
+                "package_id": pack.id,
+            }
+        )
+        # Split the move line to have 2
+        line2 = line1.copy({"product_uom_qty": 1, "picking_id": pick.id})
+        line1.with_context(bypass_reservation_update=True).product_uom_qty = 14
+        line1.package_id = pack
+        line2.package_id = pack
+
+        # Do the full put workflow
+        operation = self._open_screen("put")
+        line = operation._find_move_line(pack.name)
+        operation.current_move_line_id = line
+        operation.current_move_line_id.location_dest_id = self.location_1a_x1y1
+        operation.state = "save"
+        operation.button_save()
+        self.assertEqual(line1.state, "done")
+        # Check the lines quantity has been merged
+        self.assertEqual(line1.qty_done, 15)
+        # Check there is no more move lines to do for the pack
+        line_left = operation._find_move_line(pack.name)
+        self.assertFalse(line_left)
+        self.assertEqual(pick.state, "done")

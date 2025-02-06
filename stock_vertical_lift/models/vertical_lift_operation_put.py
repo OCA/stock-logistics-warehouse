@@ -123,11 +123,45 @@ class VerticalLiftOperationPut(models.Model):
         if product:
             return self._find_move_line_for_product(product)
 
+    def _check_move_lines_to_merge(self, lines):
+        check_fields = ["product_id", "lot_id", "product_uom_id"]
+        for field in check_fields:
+            values = lines.mapped(field)
+            if len(values) > 1:
+                return False
+            if len(values) == 1 and lines.filtered(
+                lambda line, field=field: not line[field]
+            ):
+                return False
+        return True
+
     def _find_move_line_for_package(self, package):
         domain = AND(
             [self._domain_move_lines_to_do_all(), [("package_id", "in", package.ids)]]
         )
-        return self.env["stock.move.line"].search(domain, limit=1)
+        lines = self.env["stock.move.line"].search(domain)
+        if len(lines) > 1:
+            # Multiple move lines in the same package,
+            # they need to be merged if possible
+            # Or Odoo will raise an exception
+            # because the move is done one line at at time
+            picking = fields.first(lines.picking_id)
+            if picking._check_move_lines_map_quant_package(package):
+                # Fist merge all lines in the same move
+                move = lines.move_id._merge_moves()
+                if len(move) == 1 and len(move.move_line_ids) > 1:
+                    # Now we have one move, let's merge the move lines together
+                    lines = move.move_line_ids
+                    line_keep = fields.first(lines)
+                    if self._check_move_lines_to_merge(lines):
+                        values = {
+                            "product_uom_qty": sum(lines.mapped("product_uom_qty")),
+                        }
+                        line_keep.write(values)
+                        other_lines = lines - line_keep
+                        other_lines.unlink()
+                    lines = line_keep
+        return fields.first(lines)
 
     def _find_move_line_for_lot(self, lot):
         domain = AND(
