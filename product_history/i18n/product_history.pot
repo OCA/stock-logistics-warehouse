@@ -6,12 +6,24 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-02-07 09:52+0000\n"
+"PO-Revision-Date: 2025-02-07 09:52+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: product_history
+#: model:ir.model.fields,field_description:product_history.field_product_product__average_consumption
+msgid "Average Consumption"
+msgstr ""
+
+#. module: product_history
+#: model:ir.model.fields,field_description:product_history.field_product_product__displayed_average_consumption
+msgid "Average Consumption (Range)"
+msgstr ""
 
 #. module: product_history
 #: model:ir.actions.server,name:product_history.ir_cron_product_stock_history_day_ir_actions_server
@@ -102,12 +114,6 @@ msgid "ID"
 msgstr ""
 
 #. module: product_history
-#: model_terms:ir.ui.view,arch_db:product_history.view_product_history_tree
-#: model_terms:ir.ui.view,arch_db:product_history.view_template_history_form
-msgid "Ignore"
-msgstr ""
-
-#. module: product_history
 #: model:ir.model.fields,field_description:product_history.field_product_history__ignored
 msgid "Ignored"
 msgstr ""
@@ -181,6 +187,11 @@ msgid "Number of History periods"
 msgstr ""
 
 #. module: product_history
+#: model:ir.model.fields,field_description:product_history.field_product_product__nb_days
+msgid "Number of days for the calculation"
+msgstr ""
+
+#. module: product_history
 #: model:ir.model.fields,field_description:product_history.field_res_config_settings__default_number_of_periods
 #: model:ir.model.fields,help:product_history.field_product_product__number_of_periods
 #: model:ir.model.fields,help:product_history.field_product_product__number_of_periods_real
@@ -234,12 +245,6 @@ msgid "Purchases"
 msgstr ""
 
 #. module: product_history
-#: model_terms:ir.ui.view,arch_db:product_history.view_product_history_tree
-#: model_terms:ir.ui.view,arch_db:product_history.view_template_history_form
-msgid "Reactivate"
-msgstr ""
-
-#. module: product_history
 #: model:ir.actions.server,name:product_history.ir_cron_recompute_last_6weeks_product_history_ir_actions_server
 #: model:ir.cron,cron_name:product_history.ir_cron_recompute_last_6weeks_product_history
 #: model:ir.cron,name:product_history.ir_cron_recompute_last_6weeks_product_history
@@ -257,6 +262,11 @@ msgid "Template"
 msgstr ""
 
 #. module: product_history
+#: model:ir.model.fields,help:product_history.field_product_product__nb_days
+msgid "The calculation will be done according to Calculation Range field or since the first stock move of the product if it's more recent"
+msgstr ""
+
+#. module: product_history
 #: model:ir.model.fields,help:product_history.field_res_config_settings__default_number_of_periods
 msgid "This field is used if the selected method is based on Product History"
 msgstr ""
@@ -268,19 +278,22 @@ msgstr ""
 
 #. module: product_history
 #: model_terms:ir.ui.view,arch_db:product_history.view_product_history_tree
-#: model_terms:ir.ui.view,arch_db:product_history.view_template_history_form
 msgid "This history line is active. Click this button to ignore it."
 msgstr ""
 
 #. module: product_history
 #: model_terms:ir.ui.view,arch_db:product_history.view_product_history_tree
-#: model_terms:ir.ui.view,arch_db:product_history.view_template_history_form
-msgid "This history line is not active. Click this button to reactivate it."
+msgid "This history line is active. Click this button to reactivate it."
 msgstr ""
 
 #. module: product_history
 #: model:ir.model.fields,field_description:product_history.field_product_history__to_date
 msgid "To Date"
+msgstr ""
+
+#. module: product_history
+#: model:ir.model.fields,field_description:product_history.field_product_product__total_consumption
+msgid "Total Consumption"
 msgstr ""
 
 #. module: product_history
@@ -294,4 +307,3 @@ msgstr ""
 #: selection:res.config.settings,default_history_range:0
 msgid "Week"
 msgstr ""
-
