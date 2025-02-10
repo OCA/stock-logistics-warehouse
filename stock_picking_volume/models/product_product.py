@@ -22,6 +22,8 @@ class ProductProduct(models.Model):
         and the method product_qty_by_packaging on the product provided by the
         module stock_packaging_calculator)
         """
+        if not self:
+            return 0.0
         self.ensure_one()
         qty = from_uom and from_uom._compute_quantity(qty, self.uom_id) or qty
         return qty * self.volume
