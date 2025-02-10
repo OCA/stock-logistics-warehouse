@@ -2,7 +2,6 @@
 <!-- Copyright 2023 ACSONE SA/NV
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <record model="ir.ui.view" id="stock_picking_form_view">
         <field name="name">stock.picking.form (in stock_picking_volume)</field>
         <field name="model">stock.picking</field>
@@ -24,5 +23,4 @@
             </xpath>
         </field>
     </record>
-
 </odoo>
