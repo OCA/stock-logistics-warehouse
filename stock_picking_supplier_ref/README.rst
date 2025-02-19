@@ -74,6 +74,10 @@ Contributors
 
      - Carlos Reyes <carlos@studio73.es>
 
+- `Heliconia Solutions Pvt. Ltd. <https://www.heliconia.io>`__
+
+  - Bhavesh Heliconia
+
 Maintainers
 -----------
 
