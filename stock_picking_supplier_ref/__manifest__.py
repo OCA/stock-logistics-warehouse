@@ -6,7 +6,7 @@
     "version": "17.0.1.0.0",
     "category": "Stock",
     "author": "Trey, Odoo Community Association (OCA)",
-    "website": "https://github.com/OCA/stock-logistics-workflow",
+    "website": "https://github.com/OCA/stock-logistics-warehouse",
     "license": "AGPL-3",
     "summary": """
         Adds a supplier reference field inside supplier's pickings and
