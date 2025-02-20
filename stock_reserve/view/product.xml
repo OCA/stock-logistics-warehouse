@@ -10,7 +10,7 @@
                     class="oe_inline oe_stat_button"
                     name="action_view_reservations"
                     type="object"
-                    invisible="type != 'product'"
+                    invisible="not is_storable"
                     icon="fa-lock"
                 >
                     <field
@@ -32,7 +32,7 @@
                     class="oe_inline oe_stat_button"
                     name="action_view_reservations"
                     type="object"
-                    invisible="type != 'product'"
+                    invisible="not is_storable"
                     icon="fa-lock"
                 >
                     <field

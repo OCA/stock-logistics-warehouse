@@ -5,15 +5,22 @@ from odoo.tests import Form, common
 
 
 class TestStockReserve(common.TransactionCase):
-    def setUp(self):
-        super().setUp()
+    @classmethod
+    def setUpClass(self):
+        super().setUpClass()
+        self.env["res.config.settings"].create(
+            {
+                "group_stock_multi_locations": True,
+            }
+        ).set_values()
         warehouse_form = Form(self.env["stock.warehouse"])
         warehouse_form.name = "Test warehouse"
         warehouse_form.code = "TEST"
         self.warehouse = warehouse_form.save()
         product_form = Form(self.env["product.product"])
         product_form.name = "Test Product"
-        product_form.detailed_type = "product"
+        product_form.type = "consu"
+        product_form.is_storable = True
         self.product = product_form.save()
         self.env["stock.quant"].create(
             {

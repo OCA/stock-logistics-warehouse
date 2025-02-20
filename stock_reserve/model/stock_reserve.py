@@ -100,7 +100,7 @@ class StockReservation(models.Model):
         """
         try:
             location = self.env.ref(ref, raise_if_not_found=True)
-            location.check_access_rule("read")
+            location.check_access("read")
             location_id = location.id
         except (UserError, ValueError):
             location_id = False

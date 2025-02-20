@@ -41,7 +41,10 @@
                     <group>
                         <group name="main_grp" string="Details">
                             <field name="company_id" invisible="1" />
-                            <field name="product_id" />
+                            <field
+                                name="product_id"
+                                domain="[('is_storable', '=', True)]"
+                            />
                             <label for="product_uom_qty" />
                             <div>
                                 <field name="product_uom_qty" class="oe_inline" />
@@ -81,7 +84,7 @@
         <field name="name">stock.reservation.tree</field>
         <field name="model">stock.reservation</field>
         <field name="arch" type="xml">
-            <tree
+            <list
                 decoration-primary="state == 'draft'"
                 decoration-muted="state == 'cancel'"
             >
@@ -108,7 +111,7 @@
                     class="oe_highlight"
                     invisible="state not in ['assigned','confirmed','partially_available','done']"
                 />
-            </tree>
+            </list>
         </field>
     </record>
     <record id="view_stock_reservation_search" model="ir.ui.view">

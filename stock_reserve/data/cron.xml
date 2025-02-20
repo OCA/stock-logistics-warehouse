@@ -8,8 +8,6 @@
         <field name="user_id" ref="base.user_root" />
         <field name="interval_number">1</field>
         <field name="interval_type">days</field>
-        <field name="numbercall">-1</field>
-        <field name="doall" eval="False" />
         <field name="state">code</field>
         <field name="code">model.assign_waiting_confirmed_reserve_moves()</field>
     </record>
@@ -21,8 +19,6 @@
         <field name="user_id" ref="base.user_root" />
         <field name="interval_number">1</field>
         <field name="interval_type">days</field>
-        <field name="numbercall">-1</field>
-        <field name="doall" eval="False" />
         <field name="state">code</field>
         <field name="code">model.release_validity_exceeded()</field>
     </record>
