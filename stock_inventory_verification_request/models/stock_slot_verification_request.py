@@ -1,4 +1,4 @@
-# Copyright 2017-20 ForgeFlow S.L.
+# Copyright 2017-25 ForgeFlow S.L.
 #   (http://www.forgeflow.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
@@ -86,6 +86,8 @@ class SlotVerificationRequest(models.Model):
         states={"wait": [("readonly", False)]},
         tracking=True,
     )
+    product_name = fields.Char("Product", related="product_id.name", store=True)
+    product_default_code = fields.Char(related="product_id.default_code", store=True)
     lot_id = fields.Many2one(
         comodel_name="stock.production.lot",
         string="Lot",
@@ -120,16 +122,19 @@ class SlotVerificationRequest(models.Model):
         comodel_name="stock.inventory",
         string="Created Inventories",
         inverse_name="solving_slot_verification_request_id",
-        help="These inventory adjustment were created from this SVR.",
+        help="These inventory adjustments were created from this SVR.",
     )
     created_inventory_count = fields.Integer(compute="_compute_created_inventory_count")
+    processed_by = fields.Many2one(
+        "res.users",
+        readonly=True,
+        copy=False,
+        help="User who has solved or cancelled the request.",
+    )
 
     @api.depends("location_id", "product_id", "lot_id", "state")
     def _compute_involved_move_lines(self):
         for rec in self:
-            # Only compute when state is 'open' to prevent irrelevant data accumulation.
-            # No need to accumulate movements for a 'solved' or 'cancelled'
-            # SVR a lot of time after resolution.
             if rec.state == "open":
                 rec.involved_move_line_ids = self.env["stock.move.line"].search(
                     rec._get_involved_move_lines_domain()
@@ -172,22 +177,33 @@ class SlotVerificationRequest(models.Model):
         return True
 
     def action_cancel(self):
-        self.write({"state": "cancelled"})
+        self.write(
+            {
+                "state": "cancelled",
+                "processed_by": self.env.uid,
+            }
+        )
         if self.quant_id:
             self.quant_id.requested_verification = False
         return True
 
     def action_solved(self):
-        self.write({"state": "done"})
+        self.write(
+            {
+                "state": "done",
+                "processed_by": self.env.uid,
+            }
+        )
         if self.quant_id:
             self.quant_id.requested_verification = False
         return True
 
     def action_view_move_lines(self):
-        action = self.env.ref("stock.stock_move_line_action")
-        result = action.read()[0]
-        result["context"] = {}
+        action = self.env.ref(
+            "stock_inventory_verification_request.action_move_lines_svr"
+        ).read()[0]
         moves_ids = self.mapped("involved_move_line_ids").ids
+        result = action
         result["domain"] = [("id", "in", moves_ids)]
         return result
 
@@ -223,7 +239,6 @@ class SlotVerificationRequest(models.Model):
         )
         action = self.env.ref("stock_inventory.action_view_inventory_group_form")
         result = action.read()[0]
-
         res = self.env.ref("stock_inventory.view_inventory_group_form", False)
         result["views"] = [(res and res.id or False, "form")]
         result["res_id"] = inventory.id
