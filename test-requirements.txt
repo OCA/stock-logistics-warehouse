@@ -1,1 +1,2 @@
 odoo_test_helper
+odoo-addon-base_multi_image @ git+https://github.com/OCA/server-tools.git@refs/pull/2807/head#subdirectory=base_multi_image
