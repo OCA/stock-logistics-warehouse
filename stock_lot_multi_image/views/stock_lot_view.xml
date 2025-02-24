@@ -12,7 +12,7 @@
                     widget="image"
                     options="{'preview_image': 'image_1920', 'size': [88, 88]}"
                     class="oe_avatar"
-                    attrs="{'invisible': [('image_1920', '=', False)]}"
+                    invisible="not image_1920"
                 />
             </xpath>
             <xpath expr="/form/sheet/notebook" position="inside">
