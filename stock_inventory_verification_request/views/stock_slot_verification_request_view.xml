@@ -9,13 +9,16 @@
         <field name="arch" type="xml">
             <list default_order="id desc">
                 <field name="name" />
+                <field name="product_id" column_invisible="True" />
+                <field name="product_default_code" />
+                <field name="product_name" />
                 <field name="location_id" />
-                <field name="product_id" />
                 <field name="lot_id" groups="stock.group_production_lot" />
-                <field name="create_uid" readonly="1" />
+                <field name="create_uid" readonly="1" invisible="1" />
                 <field name="create_date" readonly="1" />
                 <field name="responsible_id" />
-                <field name="inventory_id" />
+                <field name="inventory_id" optional="hide" />
+                <field name="processed_by" />
                 <field name="state" />
                 <field name="company_id" groups="base.group_multi_company" />
             </list>
@@ -90,9 +93,9 @@
                             <field
                                 name="involved_move_line_count"
                                 widget="statinfo"
-                                string="Stock Moves Involved"
-                                help="Stock Moves related to the given location and product."
+                                help="Product Moves related to the given location and Product/lot."
                                 modifiers="{'readonly': true}"
+                                string="Product Moves Involved"
                             />
                         </button>
                         <button
@@ -129,11 +132,12 @@
                                 name="company_id"
                                 groups="base.group_multi_company"
                             />
-                            <field name="create_uid" readonly="1" />
                             <field name="create_date" readonly="1" />
+                            <field name="create_uid" readonly="1" invisible="1" />
                             <field name="responsible_id" />
                             <field name="inventory_id" />
-                            <field name="quant_id" />
+                            <field name="processed_by" readonly="1" />
+                            <field name="quant_id" invisible="1" />
                         </group>
                         <group>
                             <field name="notes" />
