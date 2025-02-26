@@ -185,7 +185,7 @@ class AssignManualQuantsLines(models.TransientModel):
             # validation.
             quant_qty = self.on_hand - self.reserved
             remaining_qty = self.assign_wizard.move_qty
-            self.qty = min(quant_qty, remaining_qty)
+            self.qty = max(0, min(quant_qty, remaining_qty))
 
     @api.constrains("qty")
     def _check_qty(self):
