@@ -34,20 +34,22 @@ class StockMove(models.Model):
         distinct_fields += ["secondary_uom_id"]
         return distinct_fields
 
-    def _prepare_extra_move_vals(self, qty):
-        vals = super()._prepare_extra_move_vals(qty)
-        if self.secondary_uom_id:
-            vals["secondary_uom_id"] = self.secondary_uom_id.id
-        return vals
+    def _recompute_state(self):
+        # Override when creating backorder
+        # to update secondary unit quantities
+        res = super()._recompute_state()
+        for move in self:
+            move.onchange_product_uom_for_secondary()
+        return res
 
 
 class StockMoveLine(models.Model):
     _inherit = ["stock.move.line", "product.secondary.unit.mixin"]
     _name = "stock.move.line"
-    _secondary_unit_fields = {"qty_field": "qty_done", "uom_field": "product_uom_id"}
+    _secondary_unit_fields = {"qty_field": "quantity", "uom_field": "product_uom_id"}
 
-    qty_done = fields.Float(
-        store=True, readonly=False, compute="_compute_qty_done", precompute=True
+    quantity = fields.Float(
+        store=True, readonly=False, compute="_compute_quantity", precompute=True
     )
 
     @api.model_create_multi
@@ -59,5 +61,18 @@ class StockMoveLine(models.Model):
         return super().create(vals_list)
 
     @api.depends("secondary_uom_id", "secondary_uom_qty")
-    def _compute_qty_done(self):
+    def _compute_quantity(self):
         self._compute_helper_target_field_qty()
+
+    def _get_aggregated_product_quantities(self, **kwargs):
+        aggregated_move_lines = super()._get_aggregated_product_quantities(**kwargs)
+        for move_line in self:
+            line_key = self._get_aggregated_properties(move_line=move_line)["line_key"]
+            aggregated_move_lines[line_key]["secondary_uom_qty"] = (
+                move_line.secondary_uom_qty
+            )
+            aggregated_move_lines[line_key]["secondary_uom_id"] = (
+                move_line.secondary_uom_id
+            )
+
+        return aggregated_move_lines

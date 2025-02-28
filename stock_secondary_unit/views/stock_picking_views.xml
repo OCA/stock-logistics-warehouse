@@ -8,10 +8,10 @@
         <field name="inherit_id" ref="stock.view_picking_form" />
         <field name="arch" type="xml">
             <xpath
-                expr="//field[@name='move_ids_without_package']/tree/field[@name='product_uom_qty']"
+                expr="//field[@name='move_ids_without_package']/list/field[@name='product_uom_qty']"
                 position="before"
             >
-                <field name="show_operations" invisible="1" />
+                <field name="show_operations" column_invisible="1" />
                 <field
                     name="secondary_uom_qty"
                     readonly="(not is_initial_demand_editable) or (show_operations and is_locked and not is_initial_demand_editable)"
