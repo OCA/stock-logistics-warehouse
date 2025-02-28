@@ -1,16 +1,16 @@
 # Copyright 2018 Tecnativa - Sergio Teruel
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
-from odoo.tests import Form, TransactionCase, tagged
+from odoo import Command
+from odoo.tests import Form, tagged
 
-from odoo.addons.base.tests.common import DISABLED_MAIL_CONTEXT
+from odoo.addons.base.tests.common import BaseCommon
 
 
 @tagged("-at_install", "post_install")
-class TestProductSecondaryUnit(TransactionCase):
+class TestProductSecondaryUnit(BaseCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.env = cls.env(context=dict(cls.env.context, **DISABLED_MAIL_CONTEXT))
         # Active multiple units of measure security group for user
         cls.env.user.groups_id = [(4, cls.env.ref("uom.group_uom").id)]
         cls.StockPicking = cls.env["stock.picking"]
@@ -38,11 +38,10 @@ class TestProductSecondaryUnit(TransactionCase):
                 "name": "test",
                 "uom_id": cls.product_uom_kg.id,
                 "uom_po_id": cls.product_uom_kg.id,
-                "type": "product",
+                "type": "consu",
+                "is_storable": True,
                 "secondary_uom_ids": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "code": "A",
                             "name": "unit-500",
@@ -50,9 +49,7 @@ class TestProductSecondaryUnit(TransactionCase):
                             "factor": 0.5,
                         },
                     ),
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "code": "B",
                             "name": "unit-900",
@@ -60,9 +57,7 @@ class TestProductSecondaryUnit(TransactionCase):
                             "factor": 0.9,
                         },
                     ),
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "code": "C",
                             "name": "box 10",
@@ -72,9 +67,7 @@ class TestProductSecondaryUnit(TransactionCase):
                     ),
                 ],
                 "attribute_line_ids": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "attribute_id": cls.attribute_color.id,
                             "value_ids": [
@@ -149,7 +142,7 @@ class TestProductSecondaryUnit(TransactionCase):
             delivery_order.move_line_ids.mapped("secondary_uom_qty")
         )
         self.assertEqual(uom_qty, 20.0)
-        self.assertEqual(secondary_uom_qty, 0.0)
+        self.assertEqual(secondary_uom_qty, 40.0)
 
     def test_picking_secondary_unit(self):
         product = self.product_template.product_variant_ids[0]
@@ -184,12 +177,12 @@ class TestProductSecondaryUnit(TransactionCase):
         stock_move_line.product_uom_id = stock_move_line.product_id.uom_id.id
         stock_move_line.secondary_uom_qty = 1
         stock_move_line.secondary_uom_id = product.product_tmpl_id.secondary_uom_ids[0]
-        self.assertEqual(stock_move_line.qty_done, 0.5)
+        self.assertEqual(stock_move_line.quantity, 0.5)
         stock_move_line.secondary_uom_qty = 2
-        self.assertEqual(stock_move_line.qty_done, 1)
+        self.assertEqual(stock_move_line.quantity, 1)
         stock_move_line.secondary_uom_id = product.product_tmpl_id.secondary_uom_ids[1]
-        self.assertEqual(stock_move_line.qty_done, 1.8)
-        stock_move_line.qty_done = 5
+        self.assertEqual(stock_move_line.quantity, 1.8)
+        stock_move_line.quantity = 5
         self.assertAlmostEqual(stock_move_line.secondary_uom_qty, 5.56, 2)
 
     def test_secondary_unit_merge_move_diff_uom(self):
