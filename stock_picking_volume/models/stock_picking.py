@@ -9,10 +9,8 @@ class StockPicking(models.Model):
 
     volume = fields.Float(
         compute="_compute_volume",
-        readonly=False,
         store=True,
         compute_sudo=True,
-        states={"done": [("readonly", True)], "cancel": [("readonly", True)]},
     )
     volume_uom_name = fields.Char(
         string="Volume unit of measure label", compute="_compute_volume_uom_name"

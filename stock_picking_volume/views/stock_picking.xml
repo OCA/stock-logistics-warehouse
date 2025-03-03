@@ -17,6 +17,7 @@
                             nolabel="1"
                             class="oe_inline"
                             style="margin-left:5px"
+                            readonly="state in ['done', 'cancel']"
                         />
                     </div>
                 </group>
