@@ -4,10 +4,10 @@
 from odoo.tests import common
 
 
-class TestStockPickingMTO(common.SavepointCase):
+class TestStockPickingMTO(common.TransactionCase):
     @classmethod
     def setUpClass(cls):
-        super(TestStockPickingMTO, cls).setUpClass()
+        super().setUpClass()
         cls.mto_route = cls.env.ref("stock.route_warehouse0_mto")
         cls.product = cls.env["product.product"].create(
             {
