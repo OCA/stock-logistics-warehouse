@@ -9,7 +9,7 @@
                 <button
                     name="action_reserved_moves"
                     type="object"
-                    attrs="{'invisible': [('reserved_quantity', '=', 0)]}"
+                    invisible="reserved_quantity == 0"
                     class="btn btn-link text-info"
                     icon="fa-info-circle"
                     title="Reserved Moves"
@@ -28,7 +28,7 @@
                 <button
                     name="action_reserved_moves"
                     type="object"
-                    attrs="{'invisible': [('reserved_quantity', '=', 0)]}"
+                    invisible="reserved_quantity == 0"
                     class="btn btn-link text-info"
                     icon="fa-info-circle"
                     title="Reserved Moves"

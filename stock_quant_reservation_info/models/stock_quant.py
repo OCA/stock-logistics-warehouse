@@ -28,7 +28,7 @@ class StockQuant(models.Model):
             "context": {},
             "domain": [
                 ("product_id", "=", self.product_id.id),
-                ("reserved_uom_qty", ">", 0),
+                ("quantity_product_uom", ">", 0),
                 ("location_id", "=", self.location_id.id),
                 ("lot_id", "=", self.lot_id.id),
                 ("owner_id", "=", self.owner_id.id),

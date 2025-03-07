@@ -3,7 +3,7 @@
         <field name="name">stock.move.line.tree.reserved.info</field>
         <field name="model">stock.move.line</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="move_id" />
                 <field name="picking_id" />
                 <button
@@ -12,11 +12,11 @@
                     class="btn btn-link text-info"
                     icon="fa-arrow-right"
                     title="Related Document"
-                    attrs="{'invisible': [('picking_id', '=', False)]}"
+                    invisible="not picking_id"
                 />
                 <field name="origin" />
-                <field name="reserved_uom_qty" />
-            </tree>
+                <field name="quantity_product_uom" />
+            </list>
         </field>
     </record>
 </odoo>
