@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-02-03 10:06+0000\n"
+"PO-Revision-Date: 2025-03-07 00:25+0000\n"
 "Last-Translator: Arnaud LAYEC <arnaudlayec@gmail.com>\n"
 "Language-Team: none\n"
 "Language: fr\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.6.2\n"
+"X-Generator: Weblate 5.10.2\n"
 
 #. module: stock_inventory_justification
 #: model:ir.model.fields,field_description:stock_inventory_justification.field_stock_inventory_justification__active
@@ -60,7 +60,7 @@ msgstr "Justifications d'inventaire"
 #: model:ir.model.fields,field_description:stock_inventory_justification.field_stock_move_line__inventory_justification_ids
 #: model:ir.model.fields,field_description:stock_inventory_justification.field_stock_quant__inventory_justification_ids
 msgid "Justifications"
-msgstr "Justifications"
+msgstr "Justificatifs"
 
 #. module: stock_inventory_justification
 #: model:ir.model.fields,field_description:stock_inventory_justification.field_stock_inventory_justification____last_update
