@@ -1,14 +1,13 @@
 # Copyright 2020-2021 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo.tests import TransactionCase
+from odoo.addons.base.tests.common import BaseCommon
 
 
-class StockMoveAutoAssignCase(TransactionCase):
+class StockMoveAutoAssignCase(BaseCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
 
         cls.wh = cls.env.ref("stock.warehouse0")
         cls.out_type = cls.wh.out_type_id
@@ -21,7 +20,7 @@ class StockMoveAutoAssignCase(TransactionCase):
         cls.shelf2_loc = cls.env.ref("stock.stock_location_14")
 
         cls.product = cls.env["product.product"].create(
-            {"name": "Product", "type": "product"}
+            {"name": "Product", "type": "consu", "is_storable": True}
         )
 
     def _create_move(

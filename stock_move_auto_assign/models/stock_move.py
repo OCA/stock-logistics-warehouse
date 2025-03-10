@@ -3,7 +3,7 @@
 
 from collections import defaultdict
 
-from odoo import _, models
+from odoo import models
 from odoo.tools import float_compare
 
 from odoo.addons.queue_job.job import identity_exact
@@ -20,9 +20,7 @@ class StockMove(models.Model):
     def _action_cancel(self):
         moves_with_reservation_to_cancel = self.filtered(
             lambda m: m.state not in ("done", "cancel")
-            and float_compare(
-                m.reserved_availability, 0, precision_rounding=m.product_uom.rounding
-            )
+            and float_compare(m.quantity, 0, precision_rounding=m.product_uom.rounding)
             > 0
         )
         res = super()._action_cancel()
@@ -44,10 +42,10 @@ class StockMove(models.Model):
             if move.move_dest_ids:
                 continue
             product = move.product_id
-            if product.type != "product":
+            if not (product.type == "consu" and product.is_storable):
                 continue
             locations = move.mapped(location_field).filtered(
-                lambda l: l.usage == "internal"
+                lambda loc: loc.usage == "internal"
             )
             product_locs[product.id].update(locations.ids)
 
@@ -70,7 +68,7 @@ class StockMove(models.Model):
         job_options = job_options.copy()
         job_options.setdefault(
             "description",
-            _(
+            self.env._(
                 'Try reserving "%(product)s" for quantities added in: %(locations)s',
                 product=product.display_name,
                 locations=", ".join(locations.mapped("name")),

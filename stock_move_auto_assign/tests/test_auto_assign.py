@@ -23,10 +23,15 @@ class TestStockMoveAutoAssign(StockMoveAutoAssignCase):
         """A move done enqueue a new job to assign other moves"""
         move = self._create_move(self.product, self.in_type, qty=100)
         move._action_assign()
-        move.move_line_ids.qty_done = 50
+        move.move_line_ids.quantity = 50
+        move.move_line_ids.picked = True
         move.move_line_ids.location_dest_id = self.shelf1_loc.id
         move.move_line_ids.copy(
-            default={"qty_done": 50, "location_dest_id": self.shelf2_loc.id}
+            default={
+                "quantity": 50,
+                "picked": True,
+                "location_dest_id": self.shelf2_loc.id,
+            }
         )
         with trap_jobs() as trap:
             move._action_done()
@@ -73,7 +78,8 @@ class TestStockMoveAutoAssign(StockMoveAutoAssignCase):
         self.product.type = "service"
         move = self._create_move(self.product, self.in_type, qty=1)
         move._action_assign()
-        move.move_line_ids.qty_done = 1
+        move.move_line_ids.quantity = 1
+        move.move_line_ids.picked = True
         move.move_line_ids.location_dest_id = self.shelf1_loc.id
         with trap_jobs() as trap:
             move._action_done()
@@ -87,7 +93,8 @@ class TestStockMoveAutoAssign(StockMoveAutoAssignCase):
         )
         move = self._create_move(self.product, self.in_type, qty=1, move_dest=move_out)
         move._action_assign()
-        move.move_line_ids.qty_done = 1
+        move.move_line_ids.quantity = 1
+        move.move_line_ids.picked = True
         move.move_line_ids.location_dest_id = self.shelf1_loc.id
         with trap_jobs() as trap:
             move._action_done()
@@ -99,7 +106,8 @@ class TestStockMoveAutoAssign(StockMoveAutoAssignCase):
         move = self._create_move(self.product, self.out_type, qty=1)
         self._update_qty_in_location(self.shelf1_loc, self.product, 1)
         move._action_assign()
-        move.move_line_ids.qty_done = 1
+        move.move_line_ids.quantity = 1
+        move.move_line_ids.picked = True
         move.move_line_ids.location_dest_id = self.customer_loc
         with trap_jobs() as trap:
             move._action_done()
