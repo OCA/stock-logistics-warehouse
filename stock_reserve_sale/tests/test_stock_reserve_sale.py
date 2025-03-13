@@ -12,6 +12,9 @@ class TestStockReserveSale(BaseCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+        cls.env["res.config.settings"].create(
+            {"group_stock_multi_locations": True}
+        ).set_values()
         partner_form = Form(cls.env["res.partner"])
         partner_form.name = "Test partner"
         partner_form.country_id = cls.env.ref("base.es")
