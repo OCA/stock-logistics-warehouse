@@ -82,7 +82,7 @@ class SaleOrder(models.Model):
             old_product = old_vals["product_id"].display_name
             new_product = ProductProduct.browse(new_vals["product_id"]).display_name
             body += _("<div>     <b>Product</b>: ")
-            body += "{} → {}</div>".format(old_product, new_product)
+            body += f"{old_product} → {new_product}</div>"
         if "product_uom_qty" in new_vals:
             if "product_id" not in new_vals:
                 body += _("<div>     <b>Product</b>: %s") % (
@@ -90,7 +90,8 @@ class SaleOrder(models.Model):
                 )
             body += _("<div>     <b>Product qty.</b>: ")
             body += "{} → {}</div>".format(
-                old_vals["product_uom_qty"], float(new_vals["product_uom_qty"]),
+                old_vals["product_uom_qty"],
+                float(new_vals["product_uom_qty"]),
             )
         body += "<br/>"
         return body
@@ -112,10 +113,10 @@ class SaleOrderLine(models.Model):
     _inherit = "sale.order.line"
 
     def _get_line_rule(self):
-        """ Get applicable rule for this product
+        """Get applicable rule for this product
 
         Reproduce get suitable rule from procurement
-        to predict source location """
+        to predict source location"""
         StockRule = self.env["stock.rule"]
         product = self.product_id
         product_route_ids = [
@@ -145,7 +146,7 @@ class SaleOrderLine(models.Model):
         return False
 
     def _get_procure_method(self):
-        """ Get procure_method depending on product routes """
+        """Get procure_method depending on product routes"""
         rule = self._get_line_rule()
         if rule:
             return rule.procure_method
