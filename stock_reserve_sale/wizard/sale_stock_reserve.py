@@ -29,7 +29,7 @@ class SaleStockReserve(models.TransientModel):
             lines = model.browse(self.env.context["active_ids"])
 
         try:
-            owners = {l.stock_owner_id for l in lines}
+            owners = {x.stock_owner_id for x in lines}
         except AttributeError:
             return self.env["res.partner"]
             # module sale_owner_stock_sourcing not installed, fine

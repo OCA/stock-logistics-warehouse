@@ -1,7 +1,7 @@
 # Copyright 2013 Camptocamp SA - Guewen Baconnier
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 from odoo import api, fields, models
-from odoo.exceptions import UserError, except_orm
+from odoo.exceptions import UserError
 from odoo.tools.translate import _
 
 _LINE_KEYS = ["product_id", "product_uom_qty"]
@@ -30,14 +30,12 @@ class SaleOrder(models.Model):
     has_stock_reservation = fields.Boolean(
         compute="_compute_stock_reservation",
         readonly=True,
-        multi="stock_reservation",
         store=True,
         string="Has Stock Reservations",
     )
     is_stock_reservable = fields.Boolean(
         compute="_compute_stock_reservation",
         readonly=True,
-        multi="stock_reservation",
         store=True,
         string="Can Have Stock Reservations",
     )
@@ -199,8 +197,7 @@ class SaleOrderLine(models.Model):
             for line in self:
                 if not line.reservation_ids:
                     continue
-                raise except_orm(
-                    _("Error"),
+                raise UserError(
                     _(
                         "You cannot change the product or unit of measure "
                         "of lines with a stock reservation. "
@@ -214,8 +211,7 @@ class SaleOrderLine(models.Model):
                 if not line.reservation_ids:
                     continue
                 if len(line.reservation_ids) > 1:
-                    raise except_orm(
-                        _("Error"),
+                    raise UserError(
                         _(
                             "Several stock reservations are linked with the "
                             "line. Impossible to adjust their quantity. "
@@ -237,10 +233,10 @@ class SaleOrderLine(models.Model):
             if line.reservation_ids:
                 raise UserError(
                     _(
-                        'Sale order line "[%s] %s" has a related reservation.\n'
+                        f'Sale order line "[{line.order_id.name}]'
+                        f' {line.name}" has a related reservation.\n'
                         "Please unreserve this line before "
                         "delete the line"
                     )
-                    % (line.order_id.name, line.name)
                 )
         return super().unlink()
