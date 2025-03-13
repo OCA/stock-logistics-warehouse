@@ -1,1 +1,2 @@
 odoo_test_helper
+odoo-addon-stock_reserve @ git+https://github.com/OCA/stock-logistics-reservation.git@refs/pull/2/head#subdirectory=stock_reserve
