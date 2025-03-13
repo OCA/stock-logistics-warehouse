@@ -21,11 +21,11 @@
                 </group>
                 <footer>
                     <button
-                        string="Reserve"
-                        name="button_reserve"
-                        type="object"
-                        class="oe_highlight"
-                    />
+                    string="Reserve"
+                    name="button_reserve"
+                    type="object"
+                    class="oe_highlight"
+                />
                     or
                     <button special="cancel" class="oe_link" string="Cancel" />
                 </footer>

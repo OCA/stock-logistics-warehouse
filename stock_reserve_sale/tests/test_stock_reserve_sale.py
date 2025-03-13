@@ -51,9 +51,9 @@ class TestStockReserveSale(common.SavepointCase):
             )
         ).save()
         wiz.button_reserve()
-        self.assertEquals(self.product_1.virtual_available, 7)
+        self.assertEqual(self.product_1.virtual_available, 7)
         so.order_line.release_stock_reservation()
-        self.assertEquals(self.product_1.virtual_available, 10)
+        self.assertEqual(self.product_1.virtual_available, 10)
 
     def test_reserve_02_all_form_reserve_release(self):
         sale_order_form = Form(self.env["sale.order"])
@@ -71,11 +71,11 @@ class TestStockReserveSale(common.SavepointCase):
             )
         ).save()
         wiz.button_reserve()
-        self.assertEquals(self.product_1.virtual_available, 7)
-        self.assertEquals(self.product_2.virtual_available, 5)
+        self.assertEqual(self.product_1.virtual_available, 7)
+        self.assertEqual(self.product_2.virtual_available, 5)
         so.release_all_stock_reservation()
-        self.assertEquals(self.product_1.virtual_available, 10)
-        self.assertEquals(self.product_2.virtual_available, 10)
+        self.assertEqual(self.product_1.virtual_available, 10)
+        self.assertEqual(self.product_2.virtual_available, 10)
 
     def test_reserve_03_confirm_order_release(self):
         sale_order_form = Form(self.env["sale.order"])
@@ -90,13 +90,13 @@ class TestStockReserveSale(common.SavepointCase):
             )
         ).save()
         wiz.button_reserve()
-        self.assertEquals(self.product_1.virtual_available, 7)
+        self.assertEqual(self.product_1.virtual_available, 7)
         so.action_confirm()
         cancelled_reservation = self.env["stock.reservation"].search(
             [("product_id", "=", self.product_1.id), ("state", "=", "cancel")]
         )
-        self.assertEquals(len(cancelled_reservation), 1)
-        self.assertEquals(self.product_1.virtual_available, 7)
+        self.assertEqual(len(cancelled_reservation), 1)
+        self.assertEqual(self.product_1.virtual_available, 7)
 
     def test_reserve_04_cancel_order_release(self):
         sale_order_form = Form(self.env["sale.order"])
@@ -111,13 +111,13 @@ class TestStockReserveSale(common.SavepointCase):
             )
         ).save()
         wiz.button_reserve()
-        self.assertEquals(self.product_1.virtual_available, 7)
+        self.assertEqual(self.product_1.virtual_available, 7)
         so.action_cancel()
         cancelled_reservation = self.env["stock.reservation"].search(
             [("product_id", "=", self.product_1.id), ("state", "=", "cancel")]
         )
-        self.assertEquals(len(cancelled_reservation), 1)
-        self.assertEquals(self.product_1.virtual_available, 10)
+        self.assertEqual(len(cancelled_reservation), 1)
+        self.assertEqual(self.product_1.virtual_available, 10)
 
     def test_reserve_05_unlink_order(self):
         sale_order_form = Form(self.env["sale.order"])
