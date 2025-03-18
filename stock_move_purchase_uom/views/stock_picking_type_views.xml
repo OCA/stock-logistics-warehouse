@@ -7,6 +7,10 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='show_reserved']" position="after">
                 <field name="use_purchase_uom" />
+                <field
+                    name="purchase_uom_rounding_method"
+                    attrs="{'invisible': [('use_purchase_uom', '=', False)], 'required': [('use_purchase_uom', '=', True)]}"
+                />
             </xpath>
         </field>
     </record>

@@ -44,3 +44,12 @@ class TestCommon(TransactionCase):
                 "product_uom": cls.cm_uom.id,
             }
         )
+        cls.stock_picking_type_2 = cls.env["stock.picking.type"].create(
+            {
+                "name": "Internal transfer 2",
+                "code": "internal",
+                "sequence_code": "INT",
+                "use_purchase_uom": True,
+                "show_operations": True,
+            }
+        )
