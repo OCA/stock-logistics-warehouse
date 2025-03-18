@@ -26,7 +26,7 @@ class ConfirmDiscrepancyWiz(models.TransientModel):
 
     def button_apply(self):
         self.ensure_one()
-        if not self.user_has_groups(
+        if not self.env.user.has_group(
             "stock_inventory_discrepancy.group_stock_inventory_validation_always"
         ):
             raise UserError(
