@@ -1,5 +1,5 @@
 # Copyright 2017 Sylvain Van Hoof <svh@sylvainvh.be>
-# Copyright 2018-2019 Jacques-Etienne Baudoux (BCIM sprl) <je@bcim.be>
+# Copyright 2018 Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
 # Copyright 2019 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
@@ -81,13 +81,17 @@ class StockLocation(models.Model):
     )
     def _compute_location_kind(self):
         for location in self:
-            if location.zone_location_id and not location.area_location_id:
+            if location == location.zone_location_id:
                 location.location_kind = "zone"
                 continue
 
             parent = location.location_id
-            if location.usage == "internal" and parent.usage == "view":
+            if (
                 # Internal locations whose parent is view are main stocks
+                location.usage in ("internal", "view")
+                and not location.zone_location_id
+                and parent.usage == "view"
+            ):
                 location.location_kind = "stock"
             elif (
                 # Internal locations having a zone and no children are bins
@@ -98,12 +102,12 @@ class StockLocation(models.Model):
             ):
                 location.location_kind = "bin"
             elif (
-                location.usage == "internal"
+                # Internal locations having a zone and children are areas
+                location.usage in ("internal", "view")
                 and location.zone_location_id
                 and location.area_location_id
                 and location.child_ids
             ):
-                # Internal locations having a zone and children are areas
                 location.location_kind = "area"
             else:
                 # All the rest are other locations

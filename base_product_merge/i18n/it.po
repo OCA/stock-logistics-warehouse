@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-08-12 08:58+0000\n"
+"PO-Revision-Date: 2024-10-03 10:06+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -39,7 +39,7 @@ msgstr "Prodotto destinazione"
 #. module: base_product_merge
 #: model:ir.model.fields,field_description:base_product_merge.field_base_product_merge__dst_product_tmpl_id
 msgid "Destination product template"
-msgstr ""
+msgstr "Modello prodotto destinazione"
 
 #. module: base_product_merge
 #: model:ir.model.fields,field_description:base_product_merge.field_base_product_merge__display_name
@@ -108,7 +108,7 @@ msgstr "Prodotto"
 #. module: base_product_merge
 #: model:ir.model.fields,field_description:base_product_merge.field_base_product_merge__product_tmpl_ids
 msgid "Products Template to merge"
-msgstr ""
+msgstr "Modello prodotti da unire"
 
 #. module: base_product_merge
 #: model:ir.model.fields,field_description:base_product_merge.field_base_product_merge__product_ids

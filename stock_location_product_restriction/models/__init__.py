@@ -1,1 +1,1 @@
-from . import stock_location, stock_move
+from . import stock_location, stock_quant

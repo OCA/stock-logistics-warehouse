@@ -1,7 +1,6 @@
 # Copyright 2020 ACSONE SA/NV
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
-
-from odoo.tests.common import TransactionCase
+from odoo.tests.common import Form, TransactionCase
 
 
 class TestStockLocation(TransactionCase):
@@ -39,7 +38,7 @@ class TestStockLocation(TransactionCase):
 
         # quants
         StockQuant = cls.env["stock.quant"]
-        StockQuant.create(
+        cls.quant_1_lvl_1_1_1 = StockQuant.create(
             {
                 "product_id": cls.product_1.id,
                 "location_id": cls.loc_lvl_1_1_1.id,
@@ -47,7 +46,7 @@ class TestStockLocation(TransactionCase):
                 "owner_id": cls.env.user.id,
             }
         )
-        StockQuant.create(
+        cls.quant_2_lvl_1_1_1 = StockQuant.create(
             {
                 "product_id": cls.product_2.id,
                 "location_id": cls.loc_lvl_1_1_1.id,
@@ -55,7 +54,7 @@ class TestStockLocation(TransactionCase):
                 "owner_id": cls.env.user.id,
             }
         )
-        StockQuant.create(
+        cls.quant_1_lvl_1_1_2 = StockQuant.create(
             {
                 "product_id": cls.product_1.id,
                 "location_id": cls.loc_lvl_1_1_2.id,
@@ -63,7 +62,7 @@ class TestStockLocation(TransactionCase):
                 "owner_id": cls.env.user.id,
             }
         )
-        StockQuant.create(
+        cls.quant_2_lvl_1_1_2 = StockQuant.create(
             {
                 "product_id": cls.product_2.id,
                 "location_id": cls.loc_lvl_1_1_2.id,
@@ -258,3 +257,29 @@ class TestStockLocation(TransactionCase):
         self.loc_lvl_1_1_1.flush_recordset()
         self.assertTrue(self.loc_lvl_1_1_1.has_restriction_violation)
         self.assertTrue(self.loc_lvl_1_1_1.restriction_violation_message)
+
+    def test_05(self):
+        # Check location creation
+        with Form(self.StockLocation) as location_form:
+            location_form.name = "Test"
+
+    def test_zero_quant(self):
+        """
+          Data:
+            * Location level_1_1_1 with 2 different products no restriction
+        Test Case:
+            1. Check restriction message
+            2. Change product 1 quant to 0.0
+            3. Set restriction 'same' on location level_1_1_1
+            4. Check restriction message
+        Expected result:
+            1. No restriction message
+        """
+        self.loc_lvl_1_1_1.product_restriction = "any"
+        self.assertFalse(self.loc_lvl_1_1_1.has_restriction_violation)
+        self.assertFalse(self.loc_lvl_1_1_1.restriction_violation_message)
+        self.quant_1_lvl_1_1_1.inventory_quantity = 0.0
+        self.quant_1_lvl_1_1_1._apply_inventory()
+        self.loc_lvl_1_1_1.product_restriction = "same"
+        self.assertFalse(self.loc_lvl_1_1_1.has_restriction_violation)
+        self.assertFalse(self.loc_lvl_1_1_1.restriction_violation_message)

@@ -3,7 +3,7 @@
 {
     "name": "Stock Valuation Layer Accounting Date",
     "category": "Stock",
-    "version": "16.0.1.0.0",
+    "version": "16.0.1.0.2",
     "author": "Quartile Limited, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "license": "AGPL-3",

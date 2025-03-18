@@ -1,0 +1,56 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_quant_safe_inventory
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+
+#. module: stock_quant_safe_inventory
+#: model:ir.model,name:stock_quant_safe_inventory.model_res_company
+msgid "Companies"
+msgstr ""
+
+#. module: stock_quant_safe_inventory
+#: model:ir.model,name:stock_quant_safe_inventory.model_res_config_settings
+msgid "Config Settings"
+msgstr ""
+
+#. module: stock_quant_safe_inventory
+#: model:ir.model.fields,help:stock_quant_safe_inventory.field_res_company__stock_quant_no_inventory_if_being_picked
+#: model:ir.model.fields,help:stock_quant_safe_inventory.field_res_config_settings__stock_quant_no_inventory_if_being_picked
+#: model_terms:ir.ui.view,arch_db:stock_quant_safe_inventory.res_config_settings_view_form
+msgid ""
+"If checked, the system will prevent inventory of stock quants if some "
+"quantities are currently being picked for the same product, location, lot "
+"and package."
+msgstr ""
+
+#. module: stock_quant_safe_inventory
+#: model:ir.model,name:stock_quant_safe_inventory.model_stock_quant
+msgid "Quants"
+msgstr ""
+
+#. module: stock_quant_safe_inventory
+#: model:ir.model.fields,field_description:stock_quant_safe_inventory.field_res_company__stock_quant_no_inventory_if_being_picked
+#: model:ir.model.fields,field_description:stock_quant_safe_inventory.field_res_config_settings__stock_quant_no_inventory_if_being_picked
+#: model_terms:ir.ui.view,arch_db:stock_quant_safe_inventory.res_config_settings_view_form
+msgid "Stock quant no inventory if being picked"
+msgstr ""
+
+#. module: stock_quant_safe_inventory
+#. odoo-python
+#: code:addons/stock_quant_safe_inventory/models/stock_quant.py:0
+#, python-format
+msgid ""
+"You cannot update the quantity of a quant that is currently being picked.\n"
+" %(details)s"
+msgstr ""

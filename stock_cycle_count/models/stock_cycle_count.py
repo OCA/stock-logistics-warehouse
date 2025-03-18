@@ -1,9 +1,12 @@
 # Copyright 2017-18 ForgeFlow S.L.
 #   (http://www.forgeflow.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
+import logging
 
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
+
+_logger = logging.getLogger(__name__)
 
 
 class StockCycleCount(models.Model):
@@ -24,11 +27,26 @@ class StockCycleCount(models.Model):
         comodel_name="res.users",
         string="Assigned to",
         readonly=True,
-        states={"draft": [("readonly", False)]},
+        states={"draft": [("readonly", False)], "open": [("readonly", False)]},
         tracking=True,
     )
     date_deadline = fields.Date(
         string="Required Date",
+        readonly=True,
+        states={"draft": [("readonly", False)]},
+        tracking=True,
+        compute="_compute_date_deadline",
+        inverse="_inverse_date_deadline",
+        store=True,
+    )
+    automatic_deadline_date = fields.Date(
+        string="Automatic Required Date",
+        readonly=True,
+        states={"draft": [("readonly", False)]},
+        tracking=True,
+    )
+    manual_deadline_date = fields.Date(
+        string="Manual Required Date",
         readonly=True,
         states={"draft": [("readonly", False)]},
         tracking=True,
@@ -99,15 +117,10 @@ class StockCycleCount(models.Model):
             data = rec._prepare_inventory_adjustment()
             inv = self.env["stock.inventory"].create(data)
             if rec.company_id.auto_start_inventory_from_cycle_count:
-                inv.prefill_counted_quantity = (
-                    rec.company_id.inventory_adjustment_counted_quantities
-                )
-                inv.action_state_to_in_progress()
-                if inv.prefill_counted_quantity == "zero":
-                    inv.stock_quant_ids.write({"inventory_quantity": 0})
-                else:
-                    for quant in inv.stock_quant_ids:
-                        quant.write({"inventory_quantity": quant.quantity})
+                try:
+                    inv.action_state_to_in_progress()
+                except Exception as e:
+                    _logger.info("Error when beginning an adjustment: %s", str(e))
         self.write({"state": "open"})
         return True
 
@@ -124,3 +137,15 @@ class StockCycleCount(models.Model):
             action["views"] = [(res and res.id or False, "form")]
             action["res_id"] = adjustment_ids and adjustment_ids[0] or False
         return action
+
+    @api.depends("automatic_deadline_date", "manual_deadline_date")
+    def _compute_date_deadline(self):
+        for rec in self:
+            if rec.manual_deadline_date:
+                rec.date_deadline = rec.manual_deadline_date
+            else:
+                rec.date_deadline = rec.automatic_deadline_date
+
+    def _inverse_date_deadline(self):
+        for rec in self:
+            rec.manual_deadline_date = rec.date_deadline

@@ -1,0 +1,59 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_inventory_quantity_history
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_inventory_quantity_history
+#: model:ir.model.fields,field_description:stock_inventory_quantity_history.field_stock_move_line__inventory_real_qty
+msgid "Inventory Real Qty"
+msgstr ""
+
+#. module: stock_inventory_quantity_history
+#: model:ir.model.fields,field_description:stock_inventory_quantity_history.field_stock_move_line__inventory_theoretical_qty
+msgid "Inventory Theoretical Qty"
+msgstr ""
+
+#. module: stock_inventory_quantity_history
+#: model:ir.model,name:stock_inventory_quantity_history.model_stock_move_line
+msgid "Product Moves (Stock Move Line)"
+msgstr ""
+
+#. module: stock_inventory_quantity_history
+#: model:ir.model,name:stock_inventory_quantity_history.model_stock_quant
+msgid "Quants"
+msgstr ""
+
+#. module: stock_inventory_quantity_history
+#: model_terms:ir.ui.view,arch_db:stock_inventory_quantity_history.stock_move_line_form
+msgid "Real Quantity"
+msgstr ""
+
+#. module: stock_inventory_quantity_history
+#: model:ir.model.fields,help:stock_inventory_quantity_history.field_stock_move_line__inventory_real_qty
+msgid "Real Quantity at the time of the inventory"
+msgstr ""
+
+#. module: stock_inventory_quantity_history
+#: model_terms:ir.ui.view,arch_db:stock_inventory_quantity_history.stock_move_line_form
+msgid "Theoretical Quantity"
+msgstr ""
+
+#. module: stock_inventory_quantity_history
+#: model:ir.model.fields,help:stock_inventory_quantity_history.field_stock_move_line__inventory_theoretical_qty
+msgid "Theoretical Quantity right before the inventory"
+msgstr ""
+
+#. module: stock_inventory_quantity_history
+#: model_terms:ir.ui.view,arch_db:stock_inventory_quantity_history.stock_move_line_form
+msgid "Unit of Measure"
+msgstr ""

@@ -25,4 +25,16 @@
         </field>
     </record>
 
+    <record model="ir.ui.view" id="stock_picking_tree_view">
+        <field name="name">stock.picking.tree (in stock_picking_volume)</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.vpicktree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='origin']" position="after">
+                <field name="volume" optional="hide" />
+                <field name="volume_uom_name" nolabel="1" optional="hide" />
+            </xpath>
+        </field>
+    </record>
+
 </odoo>

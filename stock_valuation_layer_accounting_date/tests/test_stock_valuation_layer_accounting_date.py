@@ -5,6 +5,7 @@ from datetime import date
 
 from freezegun import freeze_time
 
+from odoo import fields
 from odoo.tests import tagged
 
 from odoo.addons.stock_account.tests.test_stockvaluationlayer import (
@@ -17,9 +18,10 @@ class TestStockValuationStandard(TestStockValuationStandard):
     def setUp(self):
         super(TestStockValuationStandard, self).setUp()
 
-    @freeze_time("2022-12-02 23:00:00", tz_offset=9)
+    @freeze_time("2022-12-02 23:00:00")
     def test_svl_accounting_date_real_time(self):
-        self.product1.product_tmpl_id.categ_id.property_valuation = "real_time"
+        self.product1.categ_id.property_valuation = "real_time"
+        self.env.user.tz = "Asia/Tokyo"
         self._make_in_move(self.product1, 10)
         valuation_layer = self.product1.stock_valuation_layer_ids
         self.assertEqual(valuation_layer.accounting_date, date(2022, 12, 3))
@@ -33,9 +35,10 @@ class TestStockValuationStandard(TestStockValuationStandard):
     def test_svl_accounting_date_manual_periodic(self):
         # Not using freeze_time() in this test since it cannot be applied to create_date
         # without a hack.
-        self.product1.product_tmpl_id.categ_id.property_valuation = "manual_periodic"
+        self.product1.categ_id.property_valuation = "manual_periodic"
         self._make_in_move(self.product1, 10)
         valuation_layer = self.product1.stock_valuation_layer_ids
         self.assertEqual(
-            valuation_layer.accounting_date, valuation_layer.create_date.date()
+            valuation_layer.accounting_date,
+            fields.Date.context_today(valuation_layer, valuation_layer.create_date),
         )

@@ -1,6 +1,6 @@
-Adds the capability to show the discrepancy of every line in an inventory and
-to block the inventory validation (setting it as 'Pending to Approve') when the
-discrepancy is greater than an user defined threshold.
+This module adds the capability to show discrepancies for each line in an inventory and 
+to block inventory validation (setting it as 'Pending to Approve') when the discrepancy
+exceeds a user-defined threshold. This is configurable per company through the settings.
 
 Only new group "Validate All inventory Adjustments" will be able to force the
 validation of those blocked inventories. By default, Stock manager will belong

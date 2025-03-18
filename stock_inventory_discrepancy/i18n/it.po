@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-18 04:05+0000\n"
-"PO-Revision-Date: 2024-08-29 12:06+0000\n"
+"PO-Revision-Date: 2024-12-14 11:06+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -26,9 +26,30 @@ msgid "Apply"
 msgstr "Applica"
 
 #. module: stock_inventory_discrepancy
+#: model:ir.model.fields,help:stock_inventory_discrepancy.field_res_company__inventory_discrepancy_enable
+#: model:ir.model.fields,help:stock_inventory_discrepancy.field_res_config_settings__inventory_discrepancy_enable
+#: model_terms:ir.ui.view,arch_db:stock_inventory_discrepancy.view_stock_config_settings
+msgid ""
+"Block validation of the inventory adjustment if discrepancy exceeds the "
+"threshold."
+msgstr ""
+"Bloccare la convalida della rettifica dell'inventario se la discrepanza "
+"supera la soglia."
+
+#. module: stock_inventory_discrepancy
 #: model_terms:ir.ui.view,arch_db:stock_inventory_discrepancy.confirm_discrepancy_wizard
 msgid "Cancel"
 msgstr "Annulla"
+
+#. module: stock_inventory_discrepancy
+#: model:ir.model,name:stock_inventory_discrepancy.model_res_company
+msgid "Companies"
+msgstr "Aziende"
+
+#. module: stock_inventory_discrepancy
+#: model:ir.model,name:stock_inventory_discrepancy.model_res_config_settings
+msgid "Config Settings"
+msgstr "Impostazioni configurazione"
 
 #. module: stock_inventory_discrepancy
 #: model:ir.model,name:stock_inventory_discrepancy.model_confirm_discrepancy_wiz
@@ -79,6 +100,12 @@ msgstr "Ha una discrepanza eccessiva"
 #: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_confirm_discrepancy_wiz__id
 msgid "ID"
 msgstr "ID"
+
+#. module: stock_inventory_discrepancy
+#: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_res_company__inventory_discrepancy_enable
+#: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_res_config_settings__inventory_discrepancy_enable
+msgid "Inventory Discrepancy Control"
+msgstr "Controllo discrepanze inventario"
 
 #. module: stock_inventory_discrepancy
 #: model:ir.model,name:stock_inventory_discrepancy.model_stock_location

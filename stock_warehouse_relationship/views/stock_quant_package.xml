@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="quant_package_search_view" model="ir.ui.view">
+        <field name="model">stock.quant.package</field>
+        <field name="inherit_id" ref="stock.quant_package_search_view" />
+        <field name="arch" type="xml">
+            <field name="location_id" position="after">
+                <field name="warehouse_id" />
+            </field>
+        </field>
+    </record>
+
+</odoo>

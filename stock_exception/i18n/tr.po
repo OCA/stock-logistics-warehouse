@@ -1,0 +1,169 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_exception
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2025-02-20 10:06+0000\n"
+"Last-Translator: İsmail Çağan Yılmaz <ismail.cagan.yilmaz@gmail.com>\n"
+"Language-Team: none\n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.6.2\n"
+
+#. module: stock_exception
+#: model_terms:ir.ui.view,arch_db:stock_exception.view_picking_form
+msgid "<strong>There are exceptions blocking this stock picking:</strong>"
+msgstr "<strong>Bu stok sevkiyatını engelleyen hatalar var:</strong>"
+
+#. module: stock_exception
+#: model:ir.model.fields,field_description:stock_exception.field_exception_rule__model
+msgid "Apply on"
+msgstr "Şuna uygula"
+
+#. module: stock_exception
+#: model_terms:ir.ui.view,arch_db:stock_exception.view_picking_internal_search
+msgid "Blocked in Draft"
+msgstr "Taslakta Engellendi"
+
+#. module: stock_exception
+#: model_terms:ir.ui.view,arch_db:stock_exception.view_picking_form
+msgid ""
+"Click here to be able to confirm this stock picking regardless of the "
+"exceptions."
+msgstr ""
+"Hatalara bakılmaksızın bu stok sevkiyatını onaylayabilmek için burayı "
+"tıklayın."
+
+#. module: stock_exception
+#: model:ir.model.fields,field_description:stock_exception.field_stock_exception_confirm__create_uid
+msgid "Created by"
+msgstr "Tarafından oluşturuldu"
+
+#. module: stock_exception
+#: model:ir.model.fields,field_description:stock_exception.field_stock_exception_confirm__create_date
+msgid "Created on"
+msgstr "Tarihinde oluşturuldu"
+
+#. module: stock_exception
+#: model:exception.rule,name:stock_exception.sm_excep_product_uom_qty_check
+msgid "Demand Quantity not positive"
+msgstr "Talep Miktarı pozitif değil"
+
+#. module: stock_exception
+#: model:exception.rule,description:stock_exception.sm_excep_product_uom_qty_check
+msgid "Demand quantity must be positive"
+msgstr "Talep miktarı pozitif olmak zorunda"
+
+#. module: stock_exception
+#: model:ir.model.fields,field_description:stock_exception.field_stock_exception_confirm__display_name
+msgid "Display Name"
+msgstr "Görünür Isim"
+
+#. module: stock_exception
+#: model:ir.model,name:stock_exception.model_exception_rule
+msgid "Exception Rule"
+msgstr "Hata Kuralı"
+
+#. module: stock_exception
+#: model:ir.model.fields,field_description:stock_exception.field_stock_picking__exception_ids
+msgid "Exceptions"
+msgstr "Hatalar"
+
+#. module: stock_exception
+#: model:ir.model.fields,field_description:stock_exception.field_stock_picking__exceptions_summary
+msgid "Exceptions Summary"
+msgstr "Hata Özeti"
+
+#. module: stock_exception
+#: model:ir.model.fields,field_description:stock_exception.field_stock_exception_confirm__exception_ids
+msgid "Exceptions to resolve"
+msgstr "Çözülmesi gereken hatalar"
+
+#. module: stock_exception
+#: model:ir.model.fields,field_description:stock_exception.field_stock_exception_confirm__id
+msgid "ID"
+msgstr "ID"
+
+#. module: stock_exception
+#: model:ir.model.fields,field_description:stock_exception.field_stock_exception_confirm__ignore
+#: model:ir.model.fields,field_description:stock_exception.field_stock_move__ignore_exception
+#: model:ir.model.fields,field_description:stock_exception.field_stock_picking__ignore_exception
+#: model_terms:ir.ui.view,arch_db:stock_exception.view_picking_form
+msgid "Ignore Exceptions"
+msgstr "Hataları Yoksay"
+
+#. module: stock_exception
+#: model:ir.model.fields,field_description:stock_exception.field_stock_exception_confirm____last_update
+msgid "Last Modified on"
+msgstr "Son Değiştirilme tarihi"
+
+#. module: stock_exception
+#: model:ir.model.fields,field_description:stock_exception.field_stock_exception_confirm__write_uid
+msgid "Last Updated by"
+msgstr "Son Güncelleyen"
+
+#. module: stock_exception
+#: model:ir.model.fields,field_description:stock_exception.field_stock_exception_confirm__write_date
+msgid "Last Updated on"
+msgstr "Son Güncelleme tarihi"
+
+#. module: stock_exception
+#: model:ir.model.fields,field_description:stock_exception.field_stock_picking__main_exception_id
+msgid "Main Exception"
+msgstr "Ana Hata"
+
+#. module: stock_exception
+#: model:exception.rule,description:stock_exception.sp_excep_no_partner
+#: model:exception.rule,name:stock_exception.sp_excep_no_partner
+msgid "No Partner"
+msgstr "Iş Ortağı Yok"
+
+#. module: stock_exception
+#: model:ir.actions.act_window,name:stock_exception.action_stock_exception_confirm
+msgid "Outstanding exceptions to manage"
+msgstr "Yönetilmesi gereken olağanüstü hatalar"
+
+#. module: stock_exception
+#: model:ir.model.fields,field_description:stock_exception.field_exception_rule__picking_ids
+msgid "Pickings"
+msgstr "Sevkiyatlar"
+
+#. module: stock_exception
+#: model:ir.actions.act_window,name:stock_exception.action_stock_test_tree
+#: model:ir.ui.menu,name:stock_exception.menu_stock_test
+msgid "Stock Exception Rules"
+msgstr "Stok Hata Kuralları"
+
+#. module: stock_exception
+#: model:ir.model,name:stock_exception.model_stock_move
+#: model:ir.model.fields.selection,name:stock_exception.selection__exception_rule__model__stock_move
+msgid "Stock Move"
+msgstr "Stok Hareketi"
+
+#. module: stock_exception
+#: model:ir.model.fields,field_description:stock_exception.field_stock_exception_confirm__related_model_id
+#: model:ir.model.fields.selection,name:stock_exception.selection__exception_rule__model__stock_picking
+msgid "Stock Picking"
+msgstr "Stok Sevkiyatı"
+
+#. module: stock_exception
+#: model:ir.model,name:stock_exception.model_stock_exception_confirm
+msgid "Stock exception wizard"
+msgstr "Stok hata sihirbazı"
+
+#. module: stock_exception
+#: model:ir.actions.server,name:stock_exception.ir_cron_test_stock_picking_except_ir_actions_server
+#: model:ir.cron,cron_name:stock_exception.ir_cron_test_stock_picking_except
+msgid "Stock: Test Draft Pickings Exception"
+msgstr "Stok: Taslak Sevkiyat Hatasını Test Et"
+
+#. module: stock_exception
+#: model:ir.model,name:stock_exception.model_stock_picking
+msgid "Transfer"
+msgstr "Transfer"

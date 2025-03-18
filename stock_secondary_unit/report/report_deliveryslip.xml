@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2018 Tecnativa - Sergio Teruel
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <template
+        id="report_delivery_document"
+        inherit_id="stock.report_delivery_document"
+        priority="8"
+    >
+        <xpath
+            expr='//table[@t-if="o.state!=&apos;done&apos;"]/thead/tr/th'
+            position="after"
+        >
+            <th>
+                <strong>Secondary Qty</strong>
+            </th>
+        </xpath>
+        <xpath expr="//span[@t-field='move.product_id']/.." position="after">
+            <td>
+                <span t-field="move.secondary_uom_qty" />
+                <span t-field="move.secondary_uom_id.name" />
+            </td>
+        </xpath>
+        <xpath
+            expr='//table[@t-if="o.move_line_ids and o.state==&apos;done&apos;"]/thead/tr/th'
+            position="after"
+        >
+            <th>
+                <strong>Secondary Qty</strong>
+            </th>
+        </xpath>
+    </template>
+    <template
+        id="stock_report_delivery_has_serial_move_line"
+        inherit_id="stock.stock_report_delivery_has_serial_move_line"
+    >
+        <xpath expr="//span[@t-field='move_line.product_id']/.." position="after">
+            <td>
+                <span t-field="move_line.secondary_uom_qty" />
+                <span t-field="move_line.secondary_uom_id" />
+            </td>
+        </xpath>
+    </template>
+</odoo>

@@ -70,10 +70,11 @@ class StockWarehouse(models.Model):
     @api.model
     def _prepare_cycle_count(self, cycle_count_proposed):
         return {
-            "date_deadline": cycle_count_proposed["date"],
+            "automatic_deadline_date": cycle_count_proposed["date"],
             "location_id": cycle_count_proposed["location"].id,
             "cycle_count_rule_id": cycle_count_proposed["rule_type"].id,
             "state": "draft",
+            "company_id": cycle_count_proposed["company_id"].id,
         }
 
     def action_compute_cycle_count_rules(self):
@@ -106,12 +107,17 @@ class StockWarehouse(models.Model):
             cycle_count_proposed = next(
                 filter(lambda x: x["date"] == earliest_date, proposed_for_loc)
             )
-            self._handle_existing_cycle_counts(loc, cycle_count_proposed)
+            existing_cycle_counts = self._handle_existing_cycle_counts(
+                loc, cycle_count_proposed
+            )
             delta = (
                 fields.Datetime.from_string(cycle_count_proposed["date"])
                 - datetime.today()
             )
-            if delta.days < self.cycle_count_planning_horizon:
+            if (
+                not existing_cycle_counts
+                and delta.days < self.cycle_count_planning_horizon
+            ):
                 cc_vals = self._prepare_cycle_count(cycle_count_proposed)
                 cc_vals_list.append(cc_vals)
         return cc_vals_list
@@ -133,10 +139,11 @@ class StockWarehouse(models.Model):
                 )
                 cc_to_update.write(
                     {
-                        "date_deadline": cycle_count_proposed_date,
+                        "automatic_deadline_date": cycle_count_proposed_date,
                         "cycle_count_rule_id": cycle_count_proposed["rule_type"].id,
                     }
                 )
+        return existing_cycle_counts
 
     @api.model
     def cron_cycle_count(self):

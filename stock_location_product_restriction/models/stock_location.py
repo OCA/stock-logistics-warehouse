@@ -70,7 +70,25 @@ class StockLocation(models.Model):
     @api.depends("product_restriction")
     def _compute_restriction_violation(self):
         records = self
+        self.env["stock.quant"].flush_model(
+            [
+                "product_id",
+                "location_id",
+                "quantity",
+                "reserved_quantity",
+                "available_quantity",
+                "inventory_quantity",
+            ]
+        )
+        self.flush_model(
+            [
+                "product_restriction",
+            ]
+        )
         ProductProduct = self.env["product.product"]
+        precision_digits = max(
+            6, self.sudo().env.ref("product.decimal_product_uom").digits * 2
+        )
         SQL = """
            SELECT
                stock_quant.location_id,
@@ -82,12 +100,26 @@ class StockLocation(models.Model):
                stock_quant.location_id in %s
                and stock_location.id = stock_quant.location_id
                and stock_location.product_restriction = 'same'
+               /* Mimic the _unlink_zero_quant() query in Odoo */
+                AND (NOT (round(quantity::numeric, %s) = 0 OR quantity IS NULL)
+                OR NOT round(reserved_quantity::numeric, %s) = 0
+                OR NOT (round(inventory_quantity::numeric, %s) = 0
+                        OR inventory_quantity IS NULL))
            GROUP BY
                stock_quant.location_id
             HAVING count(distinct(product_id)) > 1
        """
-        self.env.cr.execute(SQL, (tuple(records.ids),))
-        product_ids_by_location_id = dict(self.env.cr.fetchall())
+        # Browse only real record ids
+        ids = tuple(
+            [record.id for record in records if not isinstance(record.id, fields.NewId)]
+        )
+        if not ids:
+            product_ids_by_location_id = dict()
+        else:
+            self.env.cr.execute(
+                SQL, (ids, precision_digits, precision_digits, precision_digits)
+            )
+            product_ids_by_location_id = dict(self.env.cr.fetchall())
         for record in self:
             record_id = record.id
             has_restriction_violation = False
@@ -98,17 +130,36 @@ class StockLocation(models.Model):
                 has_restriction_violation = True
                 restriction_violation_message = _(
                     "This location should only contain items of the same "
-                    "product but it contains items of products {products}"
-                ).format(products=" | ".join(products.mapped("name")))
+                    "product but it contains items of products %(products)s",
+                    products=" | ".join(products.mapped("name")),
+                )
             record.has_restriction_violation = has_restriction_violation
             record.restriction_violation_message = restriction_violation_message
 
     def _search_has_restriction_violation(self, operator, value):
+        precision_digits = max(
+            6, self.sudo().env.ref("product.decimal_product_uom").digits * 2
+        )
         search_has_violation = (
             # has_restriction_violation != False
             (operator in NEGATIVE_TERM_OPERATORS and not value)
             # has_restriction_violation = True
             or (operator not in NEGATIVE_TERM_OPERATORS and value)
+        )
+        self.env["stock.quant"].flush_model(
+            [
+                "product_id",
+                "location_id",
+                "quantity",
+                "reserved_quantity",
+                "available_quantity",
+                "inventory_quantity",
+            ]
+        )
+        self.flush_model(
+            [
+                "product_restriction",
+            ]
         )
         SQL = """
             SELECT
@@ -119,11 +170,23 @@ class StockLocation(models.Model):
             WHERE
                stock_location.id = stock_quant.location_id
                and stock_location.product_restriction = 'same'
+               /* Mimic the _unlink_zero_quant() query in Odoo */
+                AND (NOT (round(quantity::numeric, %s) = 0 OR quantity IS NULL)
+                OR NOT round(reserved_quantity::numeric, %s) = 0
+                OR NOT (round(inventory_quantity::numeric, %s) = 0
+                        OR inventory_quantity IS NULL))
             GROUP BY
                stock_quant.location_id
             HAVING count(distinct(product_id)) > 1
         """
-        self.env.cr.execute(SQL)
+        self.env.cr.execute(
+            SQL,
+            (
+                precision_digits,
+                precision_digits,
+                precision_digits,
+            ),
+        )
         violation_ids = [r[0] for r in self.env.cr.fetchall()]
         if search_has_violation:
             op = "in"
