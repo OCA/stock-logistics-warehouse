@@ -16,11 +16,11 @@ def post_load_hook():
         # START HOOK: - Allow specific group to validate inventory
         #             - Allow validate on pending status
         if (
-            not self.user_has_groups("stock.group_stock_manager")
-            and not self.user_has_groups(
+            not self.env.user.has_group("stock.group_stock_manager")
+            and not self.env.user.has_group(
                 "stock_inventory_discrepancy.group_stock_inventory_validation"
             )
-            and not self.user_has_groups(
+            and not self.env.user.has_group(
                 "stock_inventory_discrepancy.group_stock_inventory_validation_always"
             )
         ):

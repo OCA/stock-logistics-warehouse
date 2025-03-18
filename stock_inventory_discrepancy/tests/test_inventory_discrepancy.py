@@ -3,90 +3,82 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 from odoo.exceptions import UserError
-from odoo.tests.common import TransactionCase, tagged
+from odoo.tests.common import new_test_user, tagged
+
+from odoo.addons.base.tests.common import BaseCommon
 
 
 @tagged("post_install", "-at_install")
-class TestInventoryDiscrepancy(TransactionCase):
-    def setUp(self):
-        super().setUp()
-        self.obj_location = self.env["stock.location"]
-        self.obj_product = self.env["product.product"]
-        self.obj_warehouse = self.env["stock.warehouse"]
-        self.obj_quant = self.env["stock.quant"]
+class TestInventoryDiscrepancy(BaseCommon):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.obj_location = cls.env["stock.location"]
+        cls.obj_product = cls.env["product.product"]
+        cls.obj_warehouse = cls.env["stock.warehouse"]
+        cls.obj_quant = cls.env["stock.quant"].with_context(inventory_mode=False)
 
-        self.product1 = self.obj_product.create(
-            {"name": "Test Product 1", "type": "product", "default_code": "PROD1"}
+        cls.product1 = cls.obj_product.create(
+            {
+                "name": "Test Product 1",
+                "type": "consu",
+                "is_storable": True,
+                "default_code": "PROD1",
+            }
         )
-        self.product2 = self.obj_product.create(
-            {"name": "Test Product 2", "type": "product", "default_code": "PROD2"}
+        cls.product2 = cls.obj_product.create(
+            {
+                "name": "Test Product 2",
+                "type": "consu",
+                "is_storable": True,
+                "default_code": "PROD2",
+            }
         )
-        self.test_loc = self.obj_location.create(
+        cls.test_loc = cls.obj_location.create(
             {"name": "Test Location", "usage": "internal", "discrepancy_threshold": 10}
         )
-        self.test_wh = self.obj_warehouse.create(
+        cls.test_wh = cls.obj_warehouse.create(
             {"name": "Test WH", "code": "T", "discrepancy_threshold": 20}
         )
-        self.obj_location._parent_store_compute()
+        cls.obj_location._parent_store_compute()
 
         # Create Stock manager able to force validation on inventories.
-        group_stock_man = self.env.ref("stock.group_stock_manager")
-        group_inventory_all = self.env.ref(
-            "stock_inventory_discrepancy.group_stock_inventory_validation_always"
+        cls.manager = new_test_user(
+            cls.env,
+            "manager",
+            groups="stock.group_stock_manager"
+            ",stock_inventory_discrepancy.group_stock_inventory_validation_always",
         )
-        group_employee = self.env.ref("base.group_user")
-
-        self.manager = self.env["res.users"].create(
-            {
-                "name": "Test Manager",
-                "login": "manager",
-                "email": "test.manager@example.com",
-                "groups_id": [(6, 0, [group_stock_man.id, group_inventory_all.id])],
-            }
-        )
-        group_stock_user = self.env.ref("stock.group_stock_user")
-        group_inventory = self.env.ref(
-            "stock_inventory_discrepancy.group_stock_inventory_validation"
-        )
-        self.user = self.env["res.users"].create(
-            {
-                "name": "Test User",
-                "login": "user",
-                "email": "test.user@example.com",
-                "groups_id": [(6, 0, [group_stock_user.id, group_inventory.id])],
-            }
+        cls.user = new_test_user(
+            cls.env,
+            "user",
+            groups="stock.group_stock_user"
+            ",stock_inventory_discrepancy.group_stock_inventory_validation",
         )
 
-        self.user_2 = self.env["res.users"].create(
-            {
-                "name": "Test User 2",
-                "login": "user_2",
-                "email": "test2.user@example.com",
-                "groups_id": [(6, 0, [group_stock_user.id, group_inventory_all.id])],
-            }
+        cls.user_2 = new_test_user(
+            cls.env,
+            "user_2",
+            groups="stock.group_stock_user"
+            ",stock_inventory_discrepancy.group_stock_inventory_validation_always",
         )
-
-        self.no_user = self.env["res.users"].create(
-            {
-                "name": "No User",
-                "login": "no_user",
-                "email": "test.no_user@example.com",
-                "groups_id": [(6, 0, [group_employee.id])],
-            }
+        cls.no_user = new_test_user(
+            cls.env,
+            "no_user",
+            groups="base.group_user",
         )
-
-        self.quant_line1 = self.obj_quant.with_context(inventory_mode=False).create(
+        cls.quant_line1 = cls.obj_quant.create(
             {
-                "product_id": self.product1.id,
+                "product_id": cls.product1.id,
                 "quantity": 2.0,
-                "location_id": self.test_loc.id,
+                "location_id": cls.test_loc.id,
             }
         )
-        self.quant_line2 = self.obj_quant.with_context(inventory_mode=False).create(
+        cls.quant_line2 = cls.obj_quant.create(
             {
-                "product_id": self.product2.id,
+                "product_id": cls.product2.id,
                 "quantity": 4.0,
-                "location_id": self.test_loc.id,
+                "location_id": cls.test_loc.id,
             }
         )
 
@@ -168,7 +160,7 @@ class TestInventoryDiscrepancy(TransactionCase):
 
     def test_warehouse_threshold(self):
         """Tests the behaviour if the threshold is set on the WH."""
-        quant_other_loc = self.obj_quant.with_context(inventory_mode=False).create(
+        quant_other_loc = self.obj_quant.create(
             {
                 "product_id": self.product1.id,
                 "inventory_quantity": 3.0,
