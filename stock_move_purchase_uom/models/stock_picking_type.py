@@ -10,3 +10,9 @@ class PickingType(models.Model):
         help="Use the product purchase UoM instead of the default UoM "
         "for the moves belonging to this operation type"
     )
+    purchase_uom_rounding_method = fields.Selection(
+        selection=[("HALF-UP", "Closest"), ("UP", "Up")],
+        default="HALF-UP",
+        help="The tie-breaking rule used for float rounding operations when using the "
+        "Purchase UoM",
+    )
