@@ -1,0 +1,1 @@
+odoo-addon-stock-move-actual-date @ git+https://github.com/OCA/stock-logistics-warehouse@refs/pull/1711/head#subdirectory=setup/stock_move_actual_date
