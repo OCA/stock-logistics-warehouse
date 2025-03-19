@@ -8,9 +8,9 @@
                 <group name="dates">
                     <label for="date_start" string="Period" />
                     <div><field name="date_start" class="oe_inline" /> to <field
-                            name="date_end"
-                            class="oe_inline"
-                        /></div>
+                        name="date_end"
+                        class="oe_inline"
+                    /></div>
                 </group>
                 <group>
                     <group name="attributes" colspan="2">
@@ -89,12 +89,12 @@
         </field>
     </record>
     <record id="stock_demand_estimate_wizard_action" model="ir.actions.act_window">
-            <field name="name">Create Stock Demand Estimates</field>
-            <field name="res_model">stock.demand.estimate.wizard</field>
-            <field name="view_mode">form</field>
-            <field name="target">new</field>
-            <field name="binding_model_id" ref="model_stock_demand_estimate_sheet" />
-        </record>
+        <field name="name">Create Stock Demand Estimates</field>
+        <field name="res_model">stock.demand.estimate.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="model_stock_demand_estimate_sheet" />
+    </record>
     <menuitem
         id="stock_demand_estimate_wizard_menu"
         parent="stock_demand_estimate.stock_demand_planning_menu"

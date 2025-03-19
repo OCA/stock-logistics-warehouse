@@ -30,10 +30,10 @@ class StockDemandEstimate(models.Model):
         date_range_records = self.filtered(lambda r: r.date_range_id)
         res = super(StockDemandEstimate, self - date_range_records).name_get()
         for rec in date_range_records:
-            name = "{} - {} - {}".format(
-                rec.date_range_id.name,
-                rec.product_id.name,
-                rec.location_id.name,
+            name = (
+                f"{rec.date_range_id.name} - "
+                f"{rec.product_id.name} - "
+                f"{rec.location_id.name}"
             )
             res.append((rec.id, name))
         return res

@@ -218,10 +218,8 @@ class TestStockDemandEstimate(TransactionCase):
                 "product_uom_qty": 100.0,
             }
         )
-        estimate_name = "{} - {} - {}".format(
-            date_range.name,
-            self.product_1.name,
-            self.location.name,
+        estimate_name = (
+            f"{date_range.name} - {self.product_1.name} - {self.location.name}"
         )
         estimate_name_get = estimate.name_get()
         self.assertEqual(estimate_name_get, [(estimate.id, estimate_name)])
