@@ -154,7 +154,7 @@ class StockDemandEstimateSheet(models.TransientModel):
             "name": _("Stock Demand Estimates"),
             "src_model": "stock.demand.estimate.wizard",
             "view_type": "form",
-            "view_mode": "tree",
+            "view_mode": "list",
             "res_model": "stock.demand.estimate",
             "type": "ir.actions.act_window",
         }

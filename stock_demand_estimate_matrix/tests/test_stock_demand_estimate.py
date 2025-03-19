@@ -52,7 +52,7 @@ class TestStockDemandEstimate(TransactionCase):
 
         # Create a product:
         cls.product_1 = cls.product_model.create(
-            {"name": "Test Product 1", "type": "product", "default_code": "PROD1"}
+            {"name": "Test Product 1", "is_storable": True, "default_code": "PROD1"}
         )
         # Create a location:
         cls.location = cls.stock_location_model.create(
@@ -221,8 +221,7 @@ class TestStockDemandEstimate(TransactionCase):
         estimate_name = (
             f"{date_range.name} - {self.product_1.name} - {self.location.name}"
         )
-        estimate_name_get = estimate.name_get()
-        self.assertEqual(estimate_name_get, [(estimate.id, estimate_name)])
+        self.assertEqual(estimate.display_name, estimate_name)
 
     def test_05_onchange_date_range_type_id(self):
         company = self.env["res.company"].create({"name": "Test Company"})
@@ -334,7 +333,7 @@ class TestStockDemandEstimate(TransactionCase):
                 "name": "Stock Demand Estimates",
                 "src_model": "stock.demand.estimate.wizard",
                 "view_type": "form",
-                "view_mode": "tree",
+                "view_mode": "list",
                 "res_model": "stock.demand.estimate",
                 "type": "ir.actions.act_window",
             },

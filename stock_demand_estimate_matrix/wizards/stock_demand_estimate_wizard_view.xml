@@ -30,11 +30,11 @@
                             x_axis_clickable="0"
                             y_axis_clickable="0"
                         >
-                            <tree>
+                            <list>
                                 <field name="value_x" />
                                 <field name="value_y" />
                                 <field name="product_uom_qty" />
-                            </tree>
+                            </list>
                         </field>
                     </page>
                 </notebook>

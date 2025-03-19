@@ -1,20 +1,20 @@
 <?xml version="1.0" ?>
 <odoo>
-    <record id="stock_demand_estimate_view_tree" model="ir.ui.view">
+    <record id="stock_demand_estimate_view_list" model="ir.ui.view">
         <field name="name">stock.demand.estimate.tree</field>
         <field name="model">stock.demand.estimate</field>
         <field
             name="inherit_id"
-            ref="stock_demand_estimate.stock_demand_estimate_view_tree"
+            ref="stock_demand_estimate.stock_demand_estimate_view_list"
         />
         <field name="arch" type="xml">
             <field name="date_from" position="before">
                 <field name="date_range_id" />
             </field>
-            <tree position="attributes">
+            <list position="attributes">
                 <attribute name="edit">1</attribute>
                 <attribute name="editable">bottom</attribute>
-            </tree>
+            </list>
         </field>
     </record>
     <record id="stock_demand_estimate_view_pivot" model="ir.ui.view">
