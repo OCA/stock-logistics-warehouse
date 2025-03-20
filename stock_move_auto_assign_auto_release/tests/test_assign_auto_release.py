@@ -193,8 +193,8 @@ class TestAssignAutoRelease(PromiseReleaseCommonCase):
         )
         with trap_jobs() as trap:
             self._receive_product(self.product1, 100)
-            shipping.invalidate_cache()
-            shipping.move_ids.invalidate_cache()
+            shipping.invalidate_recordset()
+            shipping.move_ids.invalidate_recordset()
             trap.perform_enqueued_jobs()
             job = self._get_job_for_method(
                 trap.enqueued_jobs, shipping.auto_release_available_to_promise
@@ -202,8 +202,8 @@ class TestAssignAutoRelease(PromiseReleaseCommonCase):
             self.assertFalse(job)
         with trap_jobs() as trap:
             self._receive_product(self.product2, 100)
-            shipping.invalidate_cache()
-            shipping.move_ids.invalidate_cache()
+            shipping.invalidate_recordset()
+            shipping.move_ids.invalidate_recordset()
             trap.perform_enqueued_jobs()
             job = self._get_job_for_method(
                 trap.enqueued_jobs, shipping.auto_release_available_to_promise
