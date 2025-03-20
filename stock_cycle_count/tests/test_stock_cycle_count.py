@@ -499,7 +499,7 @@ class TestStockCycleCount(common.TransactionCase):
                 "manual_deadline_date": "2026-11-30",
             }
         )
-        cycle_count_1.flush()
+        cycle_count_1.flush_recordset()
         # Confirm the Cycle Count
         cycle_count_1.action_create_inventory_adjustment()
         # Inventory adjustments change their state to in_progress
