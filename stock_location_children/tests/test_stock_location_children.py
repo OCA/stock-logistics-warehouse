@@ -74,7 +74,5 @@ class TestStockLocationChildren(BaseCommon):
     def test_action(self):
         # Check the action to view all children
         action = self.stock_shelf_2.action_show_children_locations()
-        self.assertDictContainsSubset(
-            {"domain": [("id", "in", self.stock_shelf_2.children_ids.ids)]},
-            action,
-        )
+        expected = {"domain": [("id", "in", self.stock_shelf_2.children_ids.ids)]}
+        self.assertLessEqual(expected.items(), action.items())
