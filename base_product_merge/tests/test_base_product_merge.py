@@ -35,3 +35,31 @@ class TestBaseProductMerge(TransactionCase):
         self.assertEqual(len(self.product_model.search([])), total_products + 2)
         # check product_3 exists
         self.assertTrue(product_3.exists())
+
+    def test_product_merge_with_inactive(self):
+        # take current product count
+        total_products = len(self.product_model.search([]))
+        # create products
+        product_active = self.product_model.create({"name": "test product 1"})
+        product_inactive = self.product_model.create({"name": "test product 2"})
+        product_inactive.active = False
+
+        # check product count before merge
+        self.assertEqual(
+            len(self.product_model.with_context(active_test=False).search([])),
+            total_products + 2,
+        )
+
+        # merge product_2 and product_4 with product_1
+        product_merge = self.base_product_merge_model.with_context(
+            active_ids=[product_active.id, product_inactive.id],
+            active_model="product.product",
+        ).create({})
+        product_merge.dst_product_id = product_active
+        product_merge.action_merge()
+
+        # check product count after merge
+        self.assertEqual(
+            len(self.product_model.with_context(active_test=False).search([])),
+            total_products + 1,
+        )
