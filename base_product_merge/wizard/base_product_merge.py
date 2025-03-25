@@ -37,6 +37,7 @@ class BaseProductMerge(models.Model):
         "product_merge_id",
         "product_id",
         string="Products to merge",
+        context={"active_test": False},
     )
     ptype = fields.Selection(
         [("product.product", "Product"), ("product.template", "Template")]
@@ -50,6 +51,7 @@ class BaseProductMerge(models.Model):
         "product_tmpl_merge_id",
         "product_tmpl_id",
         string="Products Template to merge",
+        context={"active_test": False},
     )
     merge_method = fields.Selection([("sql", "SQL"), ("orm", "ORM")], default="sql")
 
