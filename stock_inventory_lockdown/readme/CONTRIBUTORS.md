@@ -6,3 +6,5 @@
 - Jordi Ballester (ForgeFlow) \<<jordi.ballester@forgeflow.com>\>
 - Michael Allen \<<mallen@opensourceintegrators.com>\>
 - Bhavesh Odedra \<<bodedra@opensourceintegrators.com>\>
+- [Trobz](https://trobz.com):
+  - Tuan Nguyen \<<tuanna@trobz.com>\>

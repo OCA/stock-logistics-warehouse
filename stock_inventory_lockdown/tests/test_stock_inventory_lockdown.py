@@ -132,15 +132,18 @@ class StockInventoryLocationTest(TestStockCommon):
         move1._action_confirm()
         with self.assertRaises(ValidationError):
             move1._action_assign()
-            move1.move_line_ids[0].qty_done = 10.0
+            move1.move_line_ids[0].quantity = 10.0
+            move1.picked = True
             move1._action_done()
+
         move2 = self.create_stock_move(
             self.productA, dest_id=self.inventory.location_ids.id
         )
         with self.assertRaises(ValidationError):
             move2._action_confirm()
             move2._action_assign()
-            move2.move_line_ids[0].qty_done = 10.0
+            move2.move_line_ids[0].quantity = 10.0
+            move2.picked = True
             move2._action_done()
 
     def test_move_reserved_quants(self):
@@ -152,14 +155,16 @@ class StockInventoryLocationTest(TestStockCommon):
         move1 = self.create_stock_move(self.productB, self.new_parent_location.id)
         move1._action_confirm()
         move1._action_assign()
-        move1.move_line_ids[0].qty_done = 10.0
+        move1.move_line_ids[0].quantity = 10.0
+        move1.picked = True
         move1._action_done()
         self.assertEqual(move1.state, "done", "Move has not been completed")
         move2 = self.create_stock_move(self.productA, self.new_parent_location.id)
         move2._action_confirm()
         with self.assertRaises(ValidationError):
             move2._action_assign()
-            move2.move_line_ids[0].qty_done = 10.0
+            move2.move_line_ids[0].quantity = 10.0
+            move2.picked = True
             move2._action_done()
 
     def test_unlink(self):

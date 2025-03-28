@@ -3,7 +3,7 @@
 #   (http://www.forgeflow.com)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import _, api, models
+from odoo import api, models
 from odoo.exceptions import ValidationError
 
 
@@ -34,7 +34,7 @@ class StockMoveLine(models.Model):
             ):
                 location_names = locked_location_ids.mapped("complete_name")
                 raise ValidationError(
-                    _(
+                    self.env._(
                         "Inventory adjustment underway at the following "
                         "location(s):\n- %(locations)s\n Moving products to "
                         "or from these locations is not allowed until the "
