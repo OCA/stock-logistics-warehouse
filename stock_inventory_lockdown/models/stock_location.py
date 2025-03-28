@@ -23,4 +23,4 @@ class StockLocation(models.Model):
         )
         if location_inventory_open_ids:
             raise ValidationError(_("An inventory is being conducted at this location"))
-        return super(StockLocation, self).unlink()
+        return super().unlink()
