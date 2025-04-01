@@ -12,7 +12,7 @@
                     icon="fa-tags"
                     title="Manual Quants"
                     options='{"warn": true}'
-                    attrs="{'invisible':['|',('picking_code','=','incoming'),('state','not in',('confirmed','assigned','partially_available'))]}"
+                    invisible="picking_code == 'incoming' or state not in ('confirmed', 'assigned', 'partially_available')"
                 />
             </button>
         </field>
