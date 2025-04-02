@@ -142,6 +142,131 @@ class TestStockRequest(common.TransactionCase):
         )
 
 
+class TestStockRequestConstraintsOnWrite(TestStockRequest):
+    def setUp(self):
+        super().setUp()
+        expected_date = fields.Datetime.now()
+        self.stock_order = self.request_order.with_user(self.stock_request_user).create(
+            {
+                "company_id": self.main_company.id,
+                "warehouse_id": self.warehouse.id,
+                "location_id": self.warehouse.lot_stock_id.id,
+                "expected_date": expected_date,
+                "stock_request_ids": [
+                    (
+                        0,
+                        0,
+                        {
+                            "product_id": self.product.id,
+                            "product_uom_id": self.product.uom_id.id,
+                            "product_uom_qty": 5.0,
+                            "company_id": self.main_company.id,
+                            "warehouse_id": self.warehouse.id,
+                            "location_id": self.warehouse.lot_stock_id.id,
+                            "expected_date": expected_date,
+                        },
+                    ),
+                    (
+                        0,
+                        0,
+                        {
+                            "product_id": self.product.id,
+                            "product_uom_id": self.product.uom_id.id,
+                            "product_uom_qty": 2.0,
+                            "company_id": self.main_company.id,
+                            "warehouse_id": self.warehouse.id,
+                            "location_id": self.warehouse.lot_stock_id.id,
+                            "expected_date": expected_date,
+                        },
+                    ),
+                ],
+            }
+        )
+
+    def test_stock_request_order_validations_01(self):
+        """Testing the check order warehouse id with recordset
+
+        The mismatch between company and warehouse raise before
+        """
+        self.stock_order.stock_request_ids.check_order_warehouse_id()
+
+    def test_stock_request_order_validations_02(self):
+        """Testing the check order location id with recordset
+
+        The mismatch between company and warehouse/location
+        raise before
+        """
+        self.stock_order.stock_request_ids.check_order_location()
+
+    def test_stock_request_order_validations_03(self):
+        """Testing the discrepancy in requested_by between
+        stock request and order"""
+        with self.assertRaisesRegex(
+            exceptions.ValidationError, "Requested by must be equal to the order"
+        ):
+            self.stock_order.stock_request_ids.write(
+                {
+                    "requested_by": self.stock_request_manager.id,
+                }
+            )
+
+    def test_stock_request_order_validations_04(self):
+        """Testing the discrepancy in procurement_group_id between
+        stock request and order"""
+        procurement_group = self.env["procurement.group"].create(
+            {"name": "Procurement"}
+        )
+        with self.assertRaisesRegex(
+            exceptions.ValidationError, "Procurement group must be equal to the order"
+        ):
+            self.stock_order.stock_request_ids.write(
+                {
+                    "procurement_group_id": procurement_group.id,
+                }
+            )
+
+    def test_stock_request_order_validations_05(self):
+        """Testing the discrepancy in company between
+        stock request and order"""
+        with self.assertRaisesRegex(
+            exceptions.ValidationError, "Company must be equal to the order"
+        ):
+            self.stock_order.stock_request_ids.write(
+                {
+                    "company_id": self.company_2.id,
+                    "warehouse_id": self.wh2.id,
+                    "location_id": self.wh2.lot_stock_id.id,
+                }
+            )
+
+    def test_stock_request_expected_date_use_stock_order_expected_date_06(self):
+        """Testing stock request expected date from stock request order
+        expected date"""
+        child_expected_date = "2015-01-01"
+
+        with self.assertRaisesRegex(
+            exceptions.ValidationError, "Expected date must be equal to the order"
+        ):
+            self.stock_order.stock_request_ids.write(
+                {
+                    "expected_date": child_expected_date,
+                }
+            )
+
+    def test_stock_request_order_validations_07(self):
+        """Testing the discrepancy in picking policy between
+        stock request and order"""
+        with self.assertRaisesRegex(
+            exceptions.ValidationError,
+            "The picking policy must be equal to the order",
+        ):
+            self.stock_order.stock_request_ids.write(
+                {
+                    "picking_policy": "one",
+                }
+            )
+
+
 class TestStockRequestBase(TestStockRequest):
     def setUp(self):
         super().setUp()

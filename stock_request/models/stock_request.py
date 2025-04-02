@@ -233,41 +233,70 @@ class StockRequest(models.Model):
 
     @api.constrains("order_id", "requested_by")
     def check_order_requested_by(self):
-        if self.order_id and self.order_id.requested_by != self.requested_by:
-            raise ValidationError(_("Requested by must be equal to the order"))
+        for stock_request in self:
+            if (
+                stock_request.order_id
+                and stock_request.order_id.requested_by != stock_request.requested_by
+            ):
+                raise ValidationError(_("Requested by must be equal to the order"))
 
     @api.constrains("order_id", "warehouse_id")
     def check_order_warehouse_id(self):
-        if self.order_id and self.order_id.warehouse_id != self.warehouse_id:
-            raise ValidationError(_("Warehouse must be equal to the order"))
+        for stock_request in self:
+            if (
+                stock_request.order_id
+                and stock_request.order_id.warehouse_id != stock_request.warehouse_id
+            ):
+                raise ValidationError(_("Warehouse must be equal to the order"))
 
     @api.constrains("order_id", "location_id")
     def check_order_location(self):
-        if self.order_id and self.order_id.location_id != self.location_id:
-            raise ValidationError(_("Location must be equal to the order"))
+        for stock_request in self:
+            if (
+                stock_request.order_id
+                and stock_request.order_id.location_id != stock_request.location_id
+            ):
+                raise ValidationError(_("Location must be equal to the order"))
 
     @api.constrains("order_id", "procurement_group_id")
     def check_order_procurement_group(self):
-        if (
-            self.order_id
-            and self.order_id.procurement_group_id != self.procurement_group_id
-        ):
-            raise ValidationError(_("Procurement group must be equal to the order"))
+        for stock_request in self:
+            if (
+                stock_request.order_id
+                and stock_request.order_id.procurement_group_id
+                != stock_request.procurement_group_id
+            ):
+                raise ValidationError(_("Procurement group must be equal to the order"))
 
     @api.constrains("order_id", "company_id")
     def check_order_company(self):
-        if self.order_id and self.order_id.company_id != self.company_id:
-            raise ValidationError(_("Company must be equal to the order"))
+        for stock_request in self:
+            if (
+                stock_request.order_id
+                and stock_request.order_id.company_id != stock_request.company_id
+            ):
+                raise ValidationError(_("Company must be equal to the order"))
 
     @api.constrains("order_id", "expected_date")
     def check_order_expected_date(self):
-        if self.order_id and self.order_id.expected_date != self.expected_date:
-            raise ValidationError(_("Expected date must be equal to the order"))
+        for stock_request in self:
+            if (
+                stock_request.order_id
+                and stock_request.order_id.expected_date != stock_request.expected_date
+            ):
+                raise ValidationError(_("Expected date must be equal to the order"))
 
     @api.constrains("order_id", "picking_policy")
     def check_order_picking_policy(self):
-        if self.order_id and self.order_id.picking_policy != self.picking_policy:
-            raise ValidationError(_("The picking policy must be equal to the order"))
+        for stock_request in self:
+            if (
+                stock_request.order_id
+                and stock_request.order_id.picking_policy
+                != stock_request.picking_policy
+            ):
+                raise ValidationError(
+                    _("The picking policy must be equal to the order")
+                )
 
     def _action_confirm(self):
         self._action_launch_procurement_rule()
