@@ -40,6 +40,9 @@ class StockRequest(models.Model):
     requested_by = fields.Many2one(
         "res.users",
         "Requested by",
+        compute="_compute_requested_by",
+        store=True,
+        readonly=False,
         required=True,
         tracking=True,
         default=lambda s: s._get_default_requested_by(),
@@ -48,6 +51,8 @@ class StockRequest(models.Model):
         "Expected Date",
         index=True,
         default=_get_expected_date,
+        compute="_compute_expected_date",
+        store=True,
         required=True,
         readonly=True,
         states={"draft": [("readonly", False)]},
@@ -59,6 +64,8 @@ class StockRequest(models.Model):
             ("one", "Receive all products at once"),
         ],
         string="Shipping Policy",
+        compute="_compute_picking_policy",
+        store=True,
         required=True,
         readonly=True,
         states={"draft": [("readonly", False)]},
@@ -112,10 +119,16 @@ class StockRequest(models.Model):
     )
     order_id = fields.Many2one("stock.request.order", readonly=True)
     warehouse_id = fields.Many2one(
-        states={"draft": [("readonly", False)]}, readonly=True
+        states={"draft": [("readonly", False)]},
+        readonly=True,
+        compute="_compute_warehouse_id",
+        store=True,
     )
     location_id = fields.Many2one(
-        states={"draft": [("readonly", False)]}, readonly=True
+        states={"draft": [("readonly", False)]},
+        readonly=True,
+        compute="_compute_location_id",
+        store=True,
     )
     product_id = fields.Many2one(states={"draft": [("readonly", False)]}, readonly=True)
     product_uom_id = fields.Many2one(
@@ -125,9 +138,17 @@ class StockRequest(models.Model):
         states={"draft": [("readonly", False)]}, readonly=True
     )
     procurement_group_id = fields.Many2one(
-        states={"draft": [("readonly", False)]}, readonly=True
+        states={"draft": [("readonly", False)]},
+        readonly=True,
+        compute="_compute_procurement_group_id",
+        store=True,
     )
-    company_id = fields.Many2one(states={"draft": [("readonly", False)]}, readonly=True)
+    company_id = fields.Many2one(
+        states={"draft": [("readonly", False)]},
+        readonly=True,
+        compute="_compute_company_id",
+        store=True,
+    )
     route_id = fields.Many2one(states={"draft": [("readonly", False)]}, readonly=True)
     rule_ids = fields.Many2many(
         "stock.rule", string="Rules used", compute="_compute_rules"
@@ -148,6 +169,62 @@ class StockRequest(models.Model):
                 raise ValidationError(
                     _("Stock Request product quantity cannot be negative.")
                 )
+
+    @api.depends("order_id.warehouse_id")
+    def _compute_warehouse_id(self):
+        for request in self:
+            if request.order_id.warehouse_id:
+                request.warehouse_id = request.order_id.warehouse_id
+            else:
+                request.warehouse_id = request.warehouse_id
+
+    @api.depends("order_id.location_id")
+    def _compute_location_id(self):
+        for request in self:
+            if request.order_id.location_id:
+                request.location_id = request.order_id.location_id
+            else:
+                request.location_id = request.location_id
+
+    @api.depends("order_id.requested_by")
+    def _compute_requested_by(self):
+        for request in self:
+            if request.order_id.requested_by:
+                request.requested_by = request.order_id.requested_by
+            else:
+                request.requested_by = request.requested_by
+
+    @api.depends("order_id.expected_date")
+    def _compute_expected_date(self):
+        for request in self:
+            if request.order_id.expected_date:
+                request.expected_date = request.order_id.expected_date
+            else:
+                request.expected_date = request.expected_date
+
+    @api.depends("order_id.picking_policy")
+    def _compute_picking_policy(self):
+        for request in self:
+            if request.order_id.picking_policy:
+                request.picking_policy = request.order_id.picking_policy
+            else:
+                request.picking_policy = request.picking_policy
+
+    @api.depends("order_id.procurement_group_id")
+    def _compute_procurement_group_id(self):
+        for request in self:
+            if request.order_id.procurement_group_id:
+                request.procurement_group_id = request.order_id.procurement_group_id
+            else:
+                request.procurement_group_id = request.procurement_group_id
+
+    @api.depends("order_id.company_id")
+    def _compute_company_id(self):
+        for request in self:
+            if request.order_id.company_id:
+                request.company_id = request.order_id.company_id
+            else:
+                request.company_id = request.company_id
 
     @api.depends(
         "route_id",

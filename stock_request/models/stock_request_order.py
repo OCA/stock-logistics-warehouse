@@ -175,26 +175,12 @@ class StockRequestOrder(models.Model):
         for record in self:
             record.stock_request_count = len(record.stock_request_ids)
 
-    @api.onchange("requested_by")
-    def onchange_requested_by(self):
-        self.change_childs()
-
-    @api.onchange("expected_date")
-    def onchange_expected_date(self):
-        self.change_childs()
-
-    @api.onchange("picking_policy")
-    def onchange_picking_policy(self):
-        self.change_childs()
-
     @api.onchange("location_id")
     def onchange_location_id(self):
         if self.location_id:
             loc_wh = self.location_id.get_warehouse()
             if loc_wh and self.warehouse_id != loc_wh:
                 self.warehouse_id = loc_wh
-                self.with_context(no_change_childs=True).onchange_warehouse_id()
-        self.change_childs()
 
     @api.onchange("warehouse_id")
     def onchange_warehouse_id(self):
@@ -203,15 +189,8 @@ class StockRequestOrder(models.Model):
             loc_wh = self.location_id.get_warehouse()
             if self.warehouse_id != loc_wh:
                 self.location_id = self.warehouse_id.lot_stock_id
-                self.with_context(no_change_childs=True).onchange_location_id()
             if self.warehouse_id.company_id != self.company_id:
                 self.company_id = self.warehouse_id.company_id
-                self.with_context(no_change_childs=True).onchange_company_id()
-        self.change_childs()
-
-    @api.onchange("procurement_group_id")
-    def onchange_procurement_group_id(self):
-        self.change_childs()
 
     @api.onchange("company_id")
     def onchange_company_id(self):
@@ -221,19 +200,7 @@ class StockRequestOrder(models.Model):
             self.warehouse_id = self.env["stock.warehouse"].search(
                 [("company_id", "=", self.company_id.id)], limit=1
             )
-            self.with_context(no_change_childs=True).onchange_warehouse_id()
-        self.change_childs()
-
-    def change_childs(self):
-        if not self._context.get("no_change_childs", False):
-            for line in self.stock_request_ids:
-                line.warehouse_id = self.warehouse_id
-                line.location_id = self.location_id
-                line.company_id = self.company_id
-                line.picking_policy = self.picking_policy
-                line.expected_date = self.expected_date
-                line.requested_by = self.requested_by
-                line.procurement_group_id = self.procurement_group_id
+            self.onchange_warehouse_id()
 
     def action_confirm(self):
         if not self.stock_request_ids:

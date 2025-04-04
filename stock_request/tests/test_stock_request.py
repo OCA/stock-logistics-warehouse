@@ -346,27 +346,21 @@ class TestStockRequestBase(TestStockRequest):
 
         procurement_group = self.env["procurement.group"].create({"name": "TEST"})
         order.procurement_group_id = procurement_group
-        order.onchange_procurement_group_id()
         self.assertEqual(
             order.procurement_group_id, order.stock_request_ids.procurement_group_id
         )
 
         order.procurement_group_id = procurement_group
-        order.onchange_procurement_group_id()
         self.assertEqual(
             order.procurement_group_id, order.stock_request_ids.procurement_group_id
         )
         order.picking_policy = "one"
-
-        order.onchange_picking_policy()
         self.assertEqual(order.picking_policy, order.stock_request_ids.picking_policy)
 
         order.expected_date = datetime.now()
-        order.onchange_expected_date()
         self.assertEqual(order.expected_date, order.stock_request_ids.expected_date)
 
         order.requested_by = self.stock_request_manager
-        order.onchange_requested_by()
         self.assertEqual(order.requested_by, order.stock_request_ids.requested_by)
 
     def test_onchanges(self):
@@ -438,66 +432,6 @@ class TestStockRequestBase(TestStockRequest):
         with self.assertRaises(exceptions.ValidationError):
             request_order.save()
 
-    def test_stock_request_order_validations_01(self):
-        """Testing the discrepancy in warehouse_id between
-        stock request and order"""
-        expected_date = fields.Datetime.now()
-        vals = {
-            "company_id": self.main_company.id,
-            "warehouse_id": self.wh2.id,
-            "location_id": self.warehouse.lot_stock_id.id,
-            "expected_date": expected_date,
-            "stock_request_ids": [
-                (
-                    0,
-                    0,
-                    {
-                        "product_id": self.product.id,
-                        "product_uom_id": self.product.uom_id.id,
-                        "product_uom_qty": 5.0,
-                        "company_id": self.main_company.id,
-                        "warehouse_id": self.warehouse.id,
-                        "location_id": self.warehouse.lot_stock_id.id,
-                        "expected_date": expected_date,
-                    },
-                )
-            ],
-        }
-        with self.assertRaisesRegexp(
-            exceptions.ValidationError, r"Warehouse must be equal to the order"
-        ):
-            self.request_order.with_user(self.stock_request_user).create(vals)
-
-    def test_stock_request_order_validations_02(self):
-        """Testing the discrepancy in location_id between
-        stock request and order"""
-        expected_date = fields.Datetime.now()
-        vals = {
-            "company_id": self.main_company.id,
-            "warehouse_id": self.warehouse.id,
-            "location_id": self.wh2.lot_stock_id.id,
-            "expected_date": expected_date,
-            "stock_request_ids": [
-                (
-                    0,
-                    0,
-                    {
-                        "product_id": self.product.id,
-                        "product_uom_id": self.product.uom_id.id,
-                        "product_uom_qty": 5.0,
-                        "company_id": self.main_company.id,
-                        "warehouse_id": self.warehouse.id,
-                        "location_id": self.warehouse.lot_stock_id.id,
-                        "expected_date": expected_date,
-                    },
-                )
-            ],
-        }
-        with self.assertRaisesRegex(
-            exceptions.ValidationError, "Location must be equal to the order"
-        ):
-            self.request_order.with_user(self.stock_request_user).create(vals)
-
     def test_stock_request_order_validations_03(self):
         """Testing the discrepancy in requested_by between
         stock request and order"""
@@ -527,101 +461,6 @@ class TestStockRequestBase(TestStockRequest):
         }
         with self.assertRaisesRegex(
             exceptions.ValidationError, "Requested by must be equal to the order"
-        ):
-            self.request_order.with_user(self.stock_request_user).create(vals)
-
-    def test_stock_request_order_validations_04(self):
-        """Testing the discrepancy in procurement_group_id between
-        stock request and order"""
-        procurement_group = self.env["procurement.group"].create(
-            {"name": "Procurement"}
-        )
-        expected_date = fields.Datetime.now()
-        vals = {
-            "company_id": self.main_company.id,
-            "warehouse_id": self.warehouse.id,
-            "location_id": self.warehouse.lot_stock_id.id,
-            "procurement_group_id": procurement_group.id,
-            "expected_date": expected_date,
-            "stock_request_ids": [
-                (
-                    0,
-                    0,
-                    {
-                        "product_id": self.product.id,
-                        "product_uom_id": self.product.uom_id.id,
-                        "product_uom_qty": 5.0,
-                        "company_id": self.main_company.id,
-                        "warehouse_id": self.warehouse.id,
-                        "location_id": self.warehouse.lot_stock_id.id,
-                        "expected_date": expected_date,
-                    },
-                )
-            ],
-        }
-        with self.assertRaisesRegex(
-            exceptions.ValidationError, "Procurement group must be equal to the order"
-        ):
-            self.request_order.with_user(self.stock_request_user).create(vals)
-
-    def test_stock_request_order_validations_05(self):
-        """Testing the discrepancy in company between
-        stock request and order"""
-        expected_date = fields.Datetime.now()
-        vals = {
-            "company_id": self.company_2.id,
-            "warehouse_id": self.wh2.id,
-            "location_id": self.wh2.lot_stock_id.id,
-            "expected_date": expected_date,
-            "stock_request_ids": [
-                (
-                    0,
-                    0,
-                    {
-                        "product_id": self.product.id,
-                        "product_uom_id": self.product.uom_id.id,
-                        "product_uom_qty": 5.0,
-                        "company_id": self.main_company.id,
-                        "warehouse_id": self.warehouse.id,
-                        "location_id": self.warehouse.lot_stock_id.id,
-                        "expected_date": expected_date,
-                    },
-                )
-            ],
-        }
-        with self.assertRaisesRegex(
-            exceptions.ValidationError, "Company must be equal to the order"
-        ):
-            self.request_order.with_user(self.stock_request_user).create(vals)
-
-    def test_stock_request_order_validations_location_from_another_company(self):
-        """Testing the discrepancy in company between
-        stock request and order"""
-        expected_date = fields.Datetime.now()
-        vals = {
-            "company_id": self.company_2.id,
-            "warehouse_id": self.wh2.id,
-            "location_id": self.wh2.lot_stock_id.id,
-            "expected_date": expected_date,
-            "stock_request_ids": [
-                (
-                    0,
-                    0,
-                    {
-                        "product_id": self.product.id,
-                        "product_uom_id": self.product.uom_id.id,
-                        "product_uom_qty": 5.0,
-                        "company_id": self.company_2.id,
-                        "warehouse_id": self.warehouse.id,
-                        "location_id": self.warehouse.lot_stock_id.id,
-                        "expected_date": expected_date,
-                    },
-                )
-            ],
-        }
-        with self.assertRaisesRegex(
-            exceptions.ValidationError,
-            r"You have entered a location that is assigned to another company\.",
         ):
             self.request_order.with_user(self.stock_request_user).create(vals)
 
@@ -693,38 +532,6 @@ class TestStockRequestBase(TestStockRequest):
             )
         )
         self.assertEqual(stock_request.expected_date, expected_date)
-
-    def test_stock_request_order_validations_07(self):
-        """Testing the discrepancy in picking policy between
-        stock request and order"""
-        expected_date = fields.Datetime.now()
-        vals = {
-            "company_id": self.main_company.id,
-            "warehouse_id": self.warehouse.id,
-            "location_id": self.warehouse.lot_stock_id.id,
-            "picking_policy": "one",
-            "expected_date": expected_date,
-            "stock_request_ids": [
-                (
-                    0,
-                    0,
-                    {
-                        "product_id": self.product.id,
-                        "product_uom_id": self.product.uom_id.id,
-                        "product_uom_qty": 5.0,
-                        "company_id": self.main_company.id,
-                        "warehouse_id": self.warehouse.id,
-                        "location_id": self.warehouse.lot_stock_id.id,
-                        "expected_date": expected_date,
-                    },
-                )
-            ],
-        }
-        with self.assertRaisesRegex(
-            exceptions.ValidationError,
-            "The picking policy must be equal to the order",
-        ):
-            self.request_order.with_user(self.stock_request_user).create(vals)
 
     def test_stock_request_order_available_stock_01(self):
         self.main_company.stock_request_check_available_first = True
@@ -1585,6 +1392,13 @@ class TestStockRequestOrderState(TestStockRequest):
         self.request_b = self.order.stock_request_ids.filtered(
             lambda x: x.product_id == self.product_b
         )
+
+    def test_stock_request_requested_by(self):
+        self.order.requested_by = self.stock_request_user
+        stock_requests = self.order.stock_request_ids
+        self.assertEqual(stock_requests.requested_by, self.stock_request_user)
+        stock_requests.order_id = False
+        self.assertEqual(stock_requests.requested_by, self.stock_request_user)
 
     def test_stock_request_order_state_01(self):
         """Request A: Done + Request B: Done = Done."""

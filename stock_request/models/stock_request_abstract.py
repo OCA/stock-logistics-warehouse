@@ -228,7 +228,7 @@ class StockRequest(models.AbstractModel):
             loc_wh = self.location_id.get_warehouse()
             if loc_wh and self.warehouse_id != loc_wh:
                 self.warehouse_id = loc_wh
-                self.with_context(no_change_childs=True).onchange_warehouse_id()
+                self.onchange_warehouse_id()
 
     @api.onchange("company_id")
     def onchange_company_id(self):
