@@ -161,3 +161,23 @@ class TestStockQuantManualAssign(TransactionCase):
             sum(line.qty for line in wizard.quants_lines),
             self.move.quantity,
         )
+
+    def test_quant_assign_get_discrepancies(self):
+        self.move._action_assign()
+        # There should be no move lines to unlink and no quant lines to assign
+        # if there is no discrepancy between move lines and quant lines
+        wizard = self._create_wizard()
+        self.assertEqual(
+            len(wizard.quants_lines.ids),
+            3,
+            "Three quants created, three quants got by default",
+        )
+        move_lines_to_unlink, quant_lines_to_assign = wizard._get_discrepancies()
+        self.assertFalse(move_lines_to_unlink)
+        self.assertFalse(quant_lines_to_assign)
+        # There should be a move line to unlink
+        # and a quant line to assisgn (due to qty discrepancy)
+        wizard.quants_lines[2].write({"selected": True, "qty": 50.0})
+        move_lines_to_unlink, quant_lines_to_assign = wizard._get_discrepancies()
+        self.assertEqual(move_lines_to_unlink, self.move.move_line_ids[2])
+        self.assertEqual(quant_lines_to_assign, wizard.quants_lines[2])

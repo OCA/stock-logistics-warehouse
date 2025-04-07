@@ -29,7 +29,7 @@ Stock - Manual Quant Assignment
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
 This module allows you to make stock reservations manually in a
-transfer, changing the selection that Odoo automatically made.This
+transfer, changing the selection that Odoo automatically made. This
 functionality is essential for detailed and specific control over
 inventory transfers, ensuring that the correct products are moved
 between precise locations within the warehouse.
@@ -49,10 +49,10 @@ numbers. This level of control ensures that inventory management is
 accurate and compliant with quality and traceability requirements. This
 module is useful when some of the following cases occur:
 
-- You work with multiple locations and you want to indicate from which
-  specific location you want to reserve the product.
-- You are working with lot or serial numbers and want to indicate a
-  specific tracking number for the reservation.
+-  You work with multiple locations and you want to indicate from which
+   specific location you want to reserve the product.
+-  You are working with lot or serial numbers and want to indicate a
+   specific tracking number for the reservation.
 
 APPROACH: The module addresses this need by providing a tool that allows
 the selection and assignment of specific quants directly from each
@@ -85,17 +85,18 @@ This will show us a wizard like the following:
 
 In the form we can see the following information:
 
-- Lot: The lot/serial number of the products we have on hand. If the
-  selected product does not have traceability, it will appear empty.
-- Location: Shows the current location in which the product is in stock.
-- On Hand: Quantity on hand in each location and the corresponding
-  lot/serial numbers.
-- Other Reserved: Quantity already reserved for another picking.
-- Select: If checked, it allows us to indicate that we are going to
-  reserve products from that specific lot and location.
-- Qty: Quantity to be reserved for the current picking.
-- Remaining qty (located at the bottom left): Indicates the quantity
-  that could not be reserved due to a lack of available stock.
+-  Lot: The lot/serial number of the products we have on hand. If the
+   selected product does not have traceability, it will appear empty.
+-  Location: Shows the current location in which the product is in
+   stock.
+-  On Hand: Quantity on hand in each location and the corresponding
+   lot/serial numbers.
+-  Other Reserved: Quantity already reserved for another picking.
+-  Select: If checked, it allows us to indicate that we are going to
+   reserve products from that specific lot and location.
+-  Qty: Quantity to be reserved for the current picking.
+-  Remaining qty (located at the bottom left): Indicates the quantity
+   that could not be reserved due to a lack of available stock.
 
 2. Modify the quantity column and check the Select column, in order to
    define the locations and lot/serial numbers that we need to transfer.
@@ -137,31 +138,31 @@ Authors
 Contributors
 ------------
 
-- Mikel Arregi mikelarregi@avanzosc.es
+-  Mikel Arregi mikelarregi@avanzosc.es
 
-- Ana Juaristi anajuaristi@avanzosc.es
+-  Ana Juaristi anajuaristi@avanzosc.es
 
-- Oihane Crucelaegui oihanecrucelaegi@avanzosc.es
+-  Oihane Crucelaegui oihanecrucelaegi@avanzosc.es
 
-- Fanha Giang fanha99@hotmail.com
+-  Fanha Giang fanha99@hotmail.com
 
-- ``Tecnativa <https://www.tecnativa.com>``\ \_:
+-  ``Tecnativa <https://www.tecnativa.com>``\ \_:
 
-  - Pedro M. Baeza pedro.baeza@tecnativa.com
-  - Vicent Cubells vicent.cubells@tecnativa.com
+   -  Pedro M. Baeza pedro.baeza@tecnativa.com
+   -  Vicent Cubells vicent.cubells@tecnativa.com
 
-- ``ForgeFlow <https://www.forgeflow.com>``\ \_:
+-  ``ForgeFlow <https://www.forgeflow.com>``\ \_:
 
-  - Jordi Ballester jordi.ballester@forgeflow.com
-  - Lois Rilo lois.rilo@forgeflow.com
+   -  Jordi Ballester jordi.ballester@forgeflow.com
+   -  Lois Rilo lois.rilo@forgeflow.com
 
-- ``Shine IT <https://www.openerp.cn>``\ \_:
+-  ``Shine IT <https://www.openerp.cn>``\ \_:
 
-  - Tony Gu tony@openerp.cn
+   -  Tony Gu tony@openerp.cn
 
-- ``Quartile <https://www.quartile.co>``\ \_:
+-  ``Quartile <https://www.quartile.co>``\ \_:
 
-  - Yoshi Tashiro
+   -  Yoshi Tashiro
 
 Maintainers
 -----------
