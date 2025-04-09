@@ -57,19 +57,42 @@ class StockMove(models.Model):
             domain = [("id", "not in", self.search(domain).ids)]
         return domain
 
-    def _enqueue_auto_assign(self, product, locations, **job_options):
-        job = super()._enqueue_auto_assign(product, locations, **job_options)
+    def _filter_auto_releaseable_locations(self, locations):
+        all_warehouses = self.env["stock.warehouse"].search(
+            [("view_location_id", "parent_of", locations.ids)]
+        )
+        wh_parent_paths = all_warehouses.view_location_id.mapped("parent_path")
+        return locations.filtered(
+            lambda loc: any(
+                loc.parent_path.startswith(wh_parent_path)
+                for wh_parent_path in wh_parent_paths
+            )
+        )
+
+    @api.model
+    def _enqueue_auto_assign_auto_release(self, product, locations, **job_options):
+        auto_releaseable_locations = self._filter_auto_releaseable_locations(locations)
+        if not auto_releaseable_locations:
+            return None
         job_options = job_options.copy()
         job_options.setdefault(
             "description",
             _(
                 'Try releasing "%(product)s" for quantities added in: %(locations)s',
                 product=product.display_name,
-                locations=", ".join(locations.mapped("name")),
+                locations=", ".join(auto_releaseable_locations.mapped("name")),
             ),
         )
         job_options.setdefault("identity_key", identity_exact)
         delayable = product.delayable(**job_options)
-        release_job = delayable.pickings_auto_release()
-        job.on_done(release_job)
+        return delayable.pickings_auto_release()
+
+    @api.model
+    def _enqueue_auto_assign(self, product, locations, **job_options):
+        release_job = self._enqueue_auto_assign_auto_release(
+            product, locations, **job_options
+        )
+        job = super()._enqueue_auto_assign(product, locations, **job_options)
+        if release_job:
+            job.on_done(release_job)
         return job
