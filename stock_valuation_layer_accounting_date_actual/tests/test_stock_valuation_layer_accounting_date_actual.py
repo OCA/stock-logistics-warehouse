@@ -3,6 +3,7 @@
 
 from datetime import date
 
+from odoo import Command
 from odoo.tests.common import TransactionCase
 
 
@@ -33,17 +34,20 @@ class TestStockValuationLayer(TransactionCase):
                 "location_id": self.env.ref("stock.stock_location_suppliers").id,
                 "location_dest_id": self.stock_location.id,
                 "actual_date": date(2025, 3, 10),
-            }
-        )
-        move = self.env["stock.move"].create(
-            {
-                "name": "Test Move",
-                "product_id": self.product.id,
-                "product_uom_qty": 10,
-                "product_uom": self.product.uom_id.id,
-                "picking_id": picking.id,
-                "location_id": self.env.ref("stock.stock_location_suppliers").id,
-                "location_dest_id": self.stock_location.id,
+                "move_ids": [
+                    Command.create(
+                        {
+                            "name": "Test Move",
+                            "product_id": self.product.id,
+                            "product_uom_qty": 10,
+                            "product_uom": self.product.uom_id.id,
+                            "location_id": self.env.ref(
+                                "stock.stock_location_suppliers"
+                            ).id,
+                            "location_dest_id": self.stock_location.id,
+                        }
+                    )
+                ],
             }
         )
         picking.action_confirm()
@@ -51,7 +55,7 @@ class TestStockValuationLayer(TransactionCase):
         for move_line in picking.move_line_ids:
             move_line.qty_done = 10
         picking.button_validate()
-        svl = move.stock_valuation_layer_ids
+        svl = picking.move_ids.stock_valuation_layer_ids
         self.assertTrue(svl, "SVL should be created for the product.")
         self.assertFalse(
             svl.account_move_id, "SVL should not have a related account move."
