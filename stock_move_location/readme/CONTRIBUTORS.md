@@ -7,6 +7,7 @@
 - Tecnativa \<tecnativa.com\>
   - Sergio Teruel
   - João Marques
+  - Carlos Roca
 - Jacques-Etienne Baudoux \<<je@bcim.be>\>
 - Iryna Vyshnevska \<<i.vyshnevska@mobilunity.com>\>
 - Alexei Rivera \<<arivera@archeti.com>\>
