@@ -67,6 +67,11 @@
                                     groups="uom.group_uom"
                                 />
                                 <field
+                                    name="product_uom_id"
+                                    string="UoM"
+                                    column_invisible="1"
+                                />
+                                <field
                                     name="origin_location_id"
                                     readonly="1"
                                     force_save="1"
