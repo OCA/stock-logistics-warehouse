@@ -124,7 +124,7 @@ class TestWarehouseRelationship(TransactionCase):
     def test_stock_quant_warehouse_id(self):
         pickings = self.stock_picking_wh_1 | self.stock_picking_wh_2
         pickings.action_assign()
-        pickings.move_ids.write({"quantity_done": 5})
+        pickings.move_ids.write({"quantity": 5})
         pickings.button_validate()
 
         self.assertEqual(
