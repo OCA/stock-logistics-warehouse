@@ -191,8 +191,8 @@ class TestPut(VerticalLiftCase):
             }
         )
         # Split the move line to have 2
-        line2 = line1.copy({"product_uom_qty": 1, "picking_id": pick.id})
-        line1.with_context(bypass_reservation_update=True).product_uom_qty = 14
+        line2 = line1.copy({"quantity": 1, "picking_id": pick.id})
+        line1.with_context(bypass_reservation_update=True).quantity = 14
         line1.package_id = pack
         line2.package_id = pack
 
@@ -205,7 +205,8 @@ class TestPut(VerticalLiftCase):
         operation.button_save()
         self.assertEqual(line1.state, "done")
         # Check the lines quantity has been merged
-        self.assertEqual(line1.qty_done, 15)
+        self.assertEqual(line1.quantity, 15)
+        self.assertTrue(line1.picked)
         # Check there is no more move lines to do for the pack
         line_left = operation._find_move_line(pack.name)
         self.assertFalse(line_left)

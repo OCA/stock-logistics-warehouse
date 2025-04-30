@@ -155,7 +155,7 @@ class VerticalLiftOperationPut(models.Model):
                     line_keep = fields.first(lines)
                     if self._check_move_lines_to_merge(lines):
                         values = {
-                            "product_uom_qty": sum(lines.mapped("product_uom_qty")),
+                            "quantity": sum(lines.mapped("quantity")),
                         }
                         line_keep.write(values)
                         other_lines = lines - line_keep
