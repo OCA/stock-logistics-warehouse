@@ -2,8 +2,11 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import exceptions
+from odoo.tools import mute_logger
 
 from .common import VerticalLiftCase
+
+SHUTTLE_LOGGER = "odoo.addons.stock_vertical_lift.models.vertical_lift_shuttle"
 
 
 class TestVerticalLiftLocation(VerticalLiftCase):
@@ -27,6 +30,7 @@ class TestVerticalLiftLocation(VerticalLiftCase):
             all(location.vertical_lift_kind == "cell" for location in cells)
         )
 
+    @mute_logger(SHUTTLE_LOGGER)
     def test_fetch_vertical_lift_tray(self):
         shuttles = self.vertical_lift_loc.child_ids
         trays = shuttles.mapped("child_ids")

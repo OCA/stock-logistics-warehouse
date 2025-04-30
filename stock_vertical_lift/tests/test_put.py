@@ -2,9 +2,12 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import logging
 
+from odoo.tools import mute_logger
+
 from .common import VerticalLiftCase
 
 _logger = logging.getLogger(__name__)
+SHUTTLE_LOGGER = "odoo.addons.stock_vertical_lift.models.vertical_lift_shuttle"
 
 
 class TestPut(VerticalLiftCase):
@@ -18,6 +21,7 @@ class TestPut(VerticalLiftCase):
         cls.in_move_line = cls.picking_in.move_line_ids
         cls.in_move_line.location_dest_id = cls.shuttle.location_id
 
+    @mute_logger(SHUTTLE_LOGGER)
     def test_put_action_open_screen(self):
         self.shuttle.switch_put()
         action = self.shuttle.action_open_screen()
@@ -26,6 +30,7 @@ class TestPut(VerticalLiftCase):
         self.assertEqual(action["res_model"], "vertical.lift.operation.put")
         self.assertEqual(action["res_id"], operation.id)
 
+    @mute_logger(SHUTTLE_LOGGER)
     def test_switch_put(self):
         self.shuttle.switch_put()
         self.assertEqual(self.shuttle.mode, "put")
@@ -34,6 +39,7 @@ class TestPut(VerticalLiftCase):
             self.env["stock.move.line"].browse(),
         )
 
+    @mute_logger(SHUTTLE_LOGGER, "odoo.models.unlink")
     def test_put_count_move_lines(self):
         # If stock_picking_cancel_confirm is installed, we need to explicitly
         # confirm the cancellation.
@@ -71,12 +77,14 @@ class TestPut(VerticalLiftCase):
         self.assertEqual(operation2.number_of_ops, 0)
         self.assertEqual(operation2.number_of_ops_all, 3)
 
+    @mute_logger(SHUTTLE_LOGGER)
     def test_transition_start(self):
         operation = self._open_screen("put")
         # we begin with an empty screen, user has to scan a package, product,
         # or lot
         self.assertEqual(operation.state, "scan_source")
 
+    @mute_logger(SHUTTLE_LOGGER)
     def test_transition_scan_source_to_scan_tray_type(self):
         operation = self._open_screen("put")
         self.assertEqual(operation.state, "scan_source")
@@ -88,6 +96,7 @@ class TestPut(VerticalLiftCase):
         self.assertEqual(operation.state, "scan_tray_type")
         self.assertEqual(operation.current_move_line_id, self.in_move_line)
 
+    @mute_logger(SHUTTLE_LOGGER)
     def test_transition_scan_tray_type_to_save(self):
         operation = self._open_screen("put")
         # assume we already scanned the product
@@ -103,6 +112,7 @@ class TestPut(VerticalLiftCase):
             self.in_move_line.location_dest_id in self.location_1a.child_ids
         )
 
+    @mute_logger(SHUTTLE_LOGGER)
     def test_change_tray_type_on_save(self):
         operation = self._open_screen("put")
         move_line = self.in_move_line
@@ -123,6 +133,7 @@ class TestPut(VerticalLiftCase):
         # a cell has been set in the other tray
         self.assertTrue(move_line.location_dest_id in self.location_1b.child_ids)
 
+    @mute_logger(SHUTTLE_LOGGER)
     def test_transition_scan_tray_type_no_empty_cell(self):
         operation = self._open_screen("put")
         # assume we already scanned the product
@@ -139,6 +150,7 @@ class TestPut(VerticalLiftCase):
         # destination not changed
         self.assertEqual(self.in_move_line.location_dest_id, self.shuttle.location_id)
 
+    @mute_logger(SHUTTLE_LOGGER)
     def test_transition_save(self):
         operation = self._open_screen("put")
         # first steps of the workflow are done
@@ -150,6 +162,7 @@ class TestPut(VerticalLiftCase):
         self.assertEqual(self.in_move_line.state, "done")
         self.assertEqual(self.in_move_line.quantity, qty_to_process)
 
+    @mute_logger(SHUTTLE_LOGGER)
     def test_transition_button_release(self):
         operation = self._open_screen("put")
         move_line = self.in_move_line
@@ -164,6 +177,7 @@ class TestPut(VerticalLiftCase):
         self.assertEqual(operation.state, "scan_source")
         self.assertFalse(operation.current_move_line_id)
 
+    @mute_logger(SHUTTLE_LOGGER, "odoo.models.unlink")
     def test_put_package_with_multiple_move_lines(self):
         """Check moving a package linked to multiple move lines.
 

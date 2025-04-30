@@ -8,8 +8,11 @@ from odoo.tools import mute_logger
 
 from .common import VerticalLiftCase
 
+SHUTTLE_LOGGER = "odoo.addons.stock_vertical_lift.models.vertical_lift_shuttle"
+
 
 class TestLiftCommand(VerticalLiftCase):
+    @mute_logger(SHUTTLE_LOGGER)
     def test_lift_commands(self):
         self.shuttle.switch_inventory()
         command_id = self.shuttle.command_ids[0]
@@ -26,7 +29,10 @@ class TestLiftCommand(VerticalLiftCase):
             }
         )
 
-    @mute_logger("odoo.addons.stock_vertical_lift.models.vertical_lift_command")
+    @mute_logger(
+        "odoo.addons.stock_vertical_lift.models.vertical_lift_command",
+        "odoo.models.unlink",
+    )
     def test_lift_commands_autovacuum(self):
         command_obj = self.env["vertical.lift.command"]
         param_obj = self.env["ir.config_parameter"].sudo()
