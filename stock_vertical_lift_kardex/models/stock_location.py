@@ -22,12 +22,13 @@ class StockLocation(models.Model):
             x, y = cell_location.tray_cell_center_position()
             if x == 0 and y == 0:
                 raise exceptions.UserError(
-                    _(
-                        "Cell location %s has no position. "
-                        "Check if the dimensions of tray %s "
-                        "are properly set in the tray type."
+                    self.env._(
+                        "Cell location %(loc)s has no position. "
+                        "Check if the dimensions of tray %(tray)s "
+                        "are properly set in the tray type.",
+                        loc=cell_location.display_name,
+                        tray=self.name,
                     )
-                    % (cell_location.display_name, self.name)
                 )
             x, y = int(x), int(y)
         else:

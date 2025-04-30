@@ -127,7 +127,6 @@ class ReconnectingTCPClientProtocol(asyncio.Protocol):
 
 
 class KardexClientProtocol(ReconnectingTCPClientProtocol):
-
     max_delay = 15
     initial_delay = 0.5
     factor = 1.7182818284590451
@@ -183,15 +182,15 @@ class KardexClientProtocol(ReconnectingTCPClientProtocol):
                 _logger.info("notify odoo: %s", msg)
                 self._loop.create_task(self.notify_odoo(msg))
 
-    def connection_lost(self, exc):
+    def connection_lost(self, exc):  # pylint: disable=missing-return
         _logger.error("Kardex client: connection lost: %s", exc)
         super().connection_lost(exc)
 
-    def connection_failed(self, exc):
+    def connection_failed(self, exc):  # pylint: disable=missing-return
         _logger.error("Kardex client: failed to open connection: %s", exc)
         super().connection_failed(exc)
 
-    def stop_trying(self):
+    def stop_trying(self):  # pylint: disable=missing-return
         super().stop_trying()
         self._loop.stop()
 

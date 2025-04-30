@@ -98,7 +98,7 @@ if __name__ == "__main__":
         lambda: KardexClientProtocol(loop, queue), "localhost", 9600
     )
     transport, client = loop.run_until_complete(coro)
-    print("%r" % transport)
+    print(f"{transport}")
     loop.create_task(client.keepalive())
     loop.create_task(client.process_queue())
     _logger.info("run loop")
