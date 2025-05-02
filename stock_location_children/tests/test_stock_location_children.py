@@ -1,5 +1,7 @@
 # Copyright 2020 Camptocamp SA
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl)
+from odoo.tools.safe_eval import safe_eval
+
 from odoo.addons.base.tests.common import BaseCommon
 
 
@@ -73,6 +75,11 @@ class TestStockLocationChildren(BaseCommon):
 
     def test_action(self):
         # Check the action to view all children
-        action = self.stock_shelf_2.action_show_children_locations()
+        action = self.stock_shelf_2.with_context(
+            active_id=self.stock_shelf_2.id
+        ).action_show_children_locations()
         expected = {"domain": [("id", "in", self.stock_shelf_2.children_ids.ids)]}
         self.assertLessEqual(expected.items(), action.items())
+        context = safe_eval(action["context"])
+        self.assertIn("default_location_id", context)
+        self.assertEqual(self.stock_shelf_2.id, context["default_location_id"])

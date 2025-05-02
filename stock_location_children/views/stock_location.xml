@@ -15,7 +15,6 @@
                     name="action_show_children_locations"
                     type="object"
                     groups="stock.group_stock_multi_locations"
-                    context="{'default_location_id': active_id}"
                 />
             </div>
         </field>

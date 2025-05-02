@@ -4,6 +4,7 @@ import operator
 
 from odoo import api, fields, models
 from odoo.fields import Command
+from odoo.tools.safe_eval import safe_eval
 
 
 class StockLocation(models.Model):
@@ -59,4 +60,11 @@ class StockLocation(models.Model):
                 "domain": [("id", "in", self.children_ids.ids)],
             }
         )
+        active_id = self.env.context.get("active_id")
+        if "context" in action:
+            context = safe_eval(action["context"])
+            context.update({"default_location_id": active_id})
+            action["context"] = str(context)
+        else:
+            action["context"] = str(dict(default_location_id=active_id))
         return action
