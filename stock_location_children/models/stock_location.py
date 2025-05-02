@@ -7,7 +7,6 @@ from odoo.fields import Command
 
 
 class StockLocation(models.Model):
-
     _inherit = "stock.location"
 
     children_ids = fields.Many2many(
@@ -23,7 +22,6 @@ class StockLocation(models.Model):
 
     @api.depends("child_ids", "children_ids.child_ids")
     def _compute_children_ids(self):
-
         query = """SELECT sub.id, ARRAY_AGG(sl2.id) AS children
             FROM stock_location sl2,
             (
@@ -38,7 +36,9 @@ class StockLocation(models.Model):
         self.flush_model(["location_id", "child_ids"])
         self.env.cr.execute(query, (tuple(self.ids),))
         rows = self.env.cr.dictfetchall()
-        result_by_location = dict(zip(map(operator.itemgetter("id"), rows), rows))
+        result_by_location = dict(
+            zip(map(operator.itemgetter("id"), rows), rows, strict=False)
+        )
         for loc in self:
             children = result_by_location.get(loc.id, {}).get("children")
             if children:

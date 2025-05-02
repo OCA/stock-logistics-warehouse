@@ -2,7 +2,6 @@
 <!-- Copyright 2024 ACSONE SA/NV
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <record model="ir.ui.view" id="stock_location_form_view">
         <field name="model">stock.location</field>
         <field name="inherit_id" ref="stock.view_location_form" />
@@ -19,8 +18,6 @@
                     context="{'default_location_id': active_id}"
                 />
             </div>
-
         </field>
     </record>
-
 </odoo>
