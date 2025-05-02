@@ -10,7 +10,7 @@
                 <div class="o_row" name="base_volume">
                     <field name="volume" />
                     <span>
-                        <field name="volume_uom_name"/>
+                        <field name="volume_uom_name" />
                     </span>
                 </div>
             </div>

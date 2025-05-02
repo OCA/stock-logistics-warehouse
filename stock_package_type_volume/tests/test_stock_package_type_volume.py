@@ -7,7 +7,7 @@ from odoo.tests.common import TransactionCase
 class TestStockPackageTypeVolume(TransactionCase):
     def setUp(self):
         super().setUp()
-        self.package_type = self.env['stock.package.type'].new()
+        self.package_type = self.env["stock.package.type"].new()
 
     def test_01(self):
         # By default length is in mm and volume in cubic meter
