@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-03-10 19:26+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"PO-Revision-Date: 2025-05-06 09:24+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.10.2\n"
+"X-Generator: Weblate 5.10.4\n"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__count_stock_quants
@@ -54,7 +54,7 @@ msgstr "Conteggio allegati"
 #. module: stock_inventory
 #: model_terms:ir.ui.view,arch_db:stock_inventory.view_inventory_group_form
 msgid "Back to Draft"
-msgstr "Ritorna a bozza"
+msgstr "Reimposta a bozza"
 
 #. module: stock_inventory
 #: model_terms:ir.ui.view,arch_db:stock_inventory.view_inventory_group_form
