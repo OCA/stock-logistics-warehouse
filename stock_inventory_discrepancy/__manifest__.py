@@ -14,6 +14,7 @@
     "data": [
         "security/stock_inventory_discrepancy_security.xml",
         "security/ir.model.access.csv",
+        "views/res_config_settings_view.xml",
         "views/stock_quant_view.xml",
         "views/stock_warehouse_view.xml",
         "views/stock_location_view.xml",

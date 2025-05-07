@@ -24,9 +24,9 @@
                     name="discrepancy_percent"
                     invisible="not inventory_quantity_set or not quantity"
                     decoration-bf="inventory_quantity_set and has_over_discrepancy"
-                    optional="show"
+                    optional="hide"
                 />
-                <field name="discrepancy_threshold" optional="show" />
+                <field name="discrepancy_threshold" optional="hide" />
                 <field name="has_over_discrepancy" column_invisible="True" />
             </field>
             <xpath expr="//tree" position="attributes">
