@@ -2,7 +2,6 @@
 <!-- Copyright 2022 ACSONE SA/NV
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <record model="ir.ui.view" id="stock_route_form_view">
         <field name="name">stock.route.form (in stock_route_mto)</field>
         <field name="model">stock.route</field>
@@ -22,7 +21,6 @@
             <filter name="inactive" position="after">
                 <filter name="is_mto" string="MTO" domain="[('is_mto', '=', True)]" />
             </filter>
-
         </field>
     </record>
 
@@ -36,5 +34,4 @@
             </field>
         </field>
     </record>
-
 </odoo>
