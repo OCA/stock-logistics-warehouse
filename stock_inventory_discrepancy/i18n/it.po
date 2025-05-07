@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-18 04:05+0000\n"
-"PO-Revision-Date: 2024-08-29 10:06+0000\n"
+"PO-Revision-Date: 2025-10-27 09:04+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.6.2\n"
+"X-Generator: Weblate 5.10.4\n"
 
 #. module: stock_inventory_discrepancy
 #: model_terms:ir.ui.view,arch_db:stock_inventory_discrepancy.confirm_discrepancy_wizard
@@ -26,9 +26,30 @@ msgid "Apply"
 msgstr "Applica"
 
 #. module: stock_inventory_discrepancy
+#: model:ir.model.fields,help:stock_inventory_discrepancy.field_res_company__inventory_discrepancy_enable
+#: model:ir.model.fields,help:stock_inventory_discrepancy.field_res_config_settings__inventory_discrepancy_enable
+#: model_terms:ir.ui.view,arch_db:stock_inventory_discrepancy.view_stock_config_settings
+msgid ""
+"Block validation of the inventory adjustment if discrepancy exceeds the "
+"threshold."
+msgstr ""
+"Bloccare la convalida della rettifica dell'inventario se la discrepanza "
+"supera la soglia."
+
+#. module: stock_inventory_discrepancy
 #: model_terms:ir.ui.view,arch_db:stock_inventory_discrepancy.confirm_discrepancy_wizard
 msgid "Cancel"
 msgstr "Annulla"
+
+#. module: stock_inventory_discrepancy
+#: model:ir.model,name:stock_inventory_discrepancy.model_res_company
+msgid "Companies"
+msgstr "Aziende"
+
+#. module: stock_inventory_discrepancy
+#: model:ir.model,name:stock_inventory_discrepancy.model_res_config_settings
+msgid "Config Settings"
+msgstr "Impostazioni configurazione"
 
 #. module: stock_inventory_discrepancy
 #: model:ir.model,name:stock_inventory_discrepancy.model_confirm_discrepancy_wiz
@@ -81,6 +102,17 @@ msgid "ID"
 msgstr "ID"
 
 #. module: stock_inventory_discrepancy
+#: model_terms:ir.ui.view,arch_db:stock_inventory_discrepancy.view_location_form
+msgid "Inventory Discrepancy"
+msgstr "Differenza inventariale"
+
+#. module: stock_inventory_discrepancy
+#: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_res_company__inventory_discrepancy_enable
+#: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_res_config_settings__inventory_discrepancy_enable
+msgid "Inventory Discrepancy Control"
+msgstr "Controllo differenze inventario"
+
+#. module: stock_inventory_discrepancy
 #: model:ir.model,name:stock_inventory_discrepancy.model_stock_location
 msgid "Inventory Locations"
 msgstr "Ubicazioni di inventario"
@@ -125,8 +157,7 @@ msgstr ""
 
 #. module: stock_inventory_discrepancy
 #. odoo-python
-#: code:addons/stock_inventory_discrepancy/hooks.py:0
-#, python-format
+#: code:addons/stock_inventory_discrepancy/models/stock_quant.py:0
 msgid "Only a stock manager can validate an inventory adjustment."
 msgstr ""
 "Solo un responsabile di magazzino può convalidare una rettifica di "
@@ -170,7 +201,6 @@ msgstr ""
 #. module: stock_inventory_discrepancy
 #. odoo-python
 #: code:addons/stock_inventory_discrepancy/models/stock_quant.py:0
-#, python-format
 msgid "This operator is not supported"
 msgstr "Questo operatore non è supportato"
 
@@ -192,7 +222,6 @@ msgstr "Valida le rettifiche di inventario per soglia superata"
 #. module: stock_inventory_discrepancy
 #. odoo-python
 #: code:addons/stock_inventory_discrepancy/models/stock_quant.py:0
-#, python-format
 msgid "Value should be True or False (not %s)"
 msgstr "Il valore deve essere True o False (non %s)"
 
@@ -204,7 +233,6 @@ msgstr "Magazzino"
 #. module: stock_inventory_discrepancy
 #. odoo-python
 #: code:addons/stock_inventory_discrepancy/wizards/confirm_discrepancy_wiz.py:0
-#, python-format
 msgid ""
 "You cannot apply inventory adjustments if there are products that exceed the "
 "discrepancy threshold. Only users with rights to apply them can proceed."
