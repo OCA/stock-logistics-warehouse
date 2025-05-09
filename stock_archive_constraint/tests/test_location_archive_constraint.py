@@ -24,8 +24,9 @@ class TestLocationArchiveConstraint(SavepointCase):
     def _create_product(self, name):
         product_form = Form(self.env["product.product"])
         product_form.name = name
-        product_form.type = "product"
-        return product_form.save()
+        product = product_form.save()
+        product.type = "product"
+        return product
 
     def _create_stock_location(self, name):
         stock_location_form = Form(self.env["stock.location"])
@@ -44,13 +45,15 @@ class TestLocationArchiveConstraint(SavepointCase):
         )
 
     def _create_stock_move(self, location_id, location_dest_id, product_id, qty):
-        stock_move_form = Form(self.env["stock.move"])
-        stock_move_form.name = product_id.display_name
-        stock_move_form.location_id = location_id
-        stock_move_form.location_dest_id = location_dest_id
-        stock_move_form.product_id = product_id
-        stock_move_form.product_uom_qty = qty
-        stock_move = stock_move_form.save()
+        stock_move = self.env["stock.move"].create(
+            {
+                "name": product_id.display_name,
+                "location_id": location_id.id,
+                "location_dest_id": location_dest_id.id,
+                "product_id": product_id.id,
+                "product_uom_qty": qty,
+            }
+        )
         stock_move._action_done()
 
     def _create_stock_move_line(self, location_id, location_dest_id, product_id, qty):
@@ -60,7 +63,6 @@ class TestLocationArchiveConstraint(SavepointCase):
                 "location_id": location_id.id,
                 "location_dest_id": location_dest_id.id,
                 "product_id": product_id.id,
-                "product_uom_qty": qty,
                 "product_uom_id": product_id.uom_id.id,
                 "qty_done": qty,
                 "state": "done",
