@@ -48,7 +48,6 @@ def post_load_hook():
                             quant.company_id
                         ).property_stock_inventory,
                         quant.location_id,
-                        package_dest_id=quant.package_id,
                     )
                 )
             else:
@@ -59,7 +58,7 @@ def post_load_hook():
                         quant.product_id.with_company(
                             quant.company_id
                         ).property_stock_inventory,
-                        package_id=quant.package_id,
+                        out=True,
                     )
                 )
         moves = (
