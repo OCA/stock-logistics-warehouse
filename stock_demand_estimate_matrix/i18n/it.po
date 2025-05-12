@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-01-27 12:06+0000\n"
+"PO-Revision-Date: 2025-05-12 09:24+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.6.2\n"
+"X-Generator: Weblate 5.10.4\n"
 
 #. module: stock_demand_estimate_matrix
 #: model_terms:ir.ui.view,arch_db:stock_demand_estimate_matrix.demand_estimate_wizard_view_form
@@ -62,7 +62,7 @@ msgstr "Tipo intervallo data"
 #. module: stock_demand_estimate_matrix
 #: model:ir.ui.menu,name:stock_demand_estimate_matrix.date_range_menu
 msgid "Date Ranges"
-msgstr "Intervalli data"
+msgstr "Intervalli date"
 
 #. module: stock_demand_estimate_matrix
 #: model:ir.model.fields,field_description:stock_demand_estimate_matrix.field_stock_demand_estimate_wizard__date_end
