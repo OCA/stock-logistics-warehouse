@@ -22,7 +22,9 @@ class StockMoveLocationWizardLine(models.TransientModel):
         string="Origin Location", comodel_name="stock.location"
     )
     destination_location_id = fields.Many2one(
-        string="Destination Location", comodel_name="stock.location"
+        string="Destination Location",
+        comodel_name="stock.location",
+        compute="_compute_destination_location_id",
     )
     product_uom_id = fields.Many2one(
         string="Product Unit of Measure", comodel_name="uom.uom"
@@ -135,3 +137,10 @@ class StockMoveLocationWizardLine(models.TransientModel):
             self._compare(available_qty, self.move_quantity, rounding) == -1
         )
         return available_qty if available_qty_lt_move_qty else self.move_quantity
+
+    @api.depends("move_location_wizard_id.destination_location_id")
+    def _compute_destination_location_id(self):
+        for record in self:
+            record.destination_location_id = (
+                record.move_location_wizard_id.destination_location_id
+            )

@@ -11,7 +11,6 @@ class StockPicking(models.Model):
 
     def button_fillwithstock(self):
         # check source location has no children, i.e. we scanned a bin
-
         self.ensure_one()
         self._validate_picking()
         context = {
@@ -31,7 +30,6 @@ class StockPicking(models.Model):
                 }
             )
         )
-        move_wizard._onchange_destination_location_id()
         move_wizard.action_move_location()
         return True
 

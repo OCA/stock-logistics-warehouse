@@ -2,16 +2,18 @@
 # Copyright 2018 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 
-from odoo.tests import Form, common
+from odoo.tests import Form
+
+from odoo.addons.base.tests.common import BaseCommon
 
 
-class TestsCommon(common.TransactionCase):
+class TestsCommon(BaseCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
+
         cls.location_obj = cls.env["stock.location"]
-        product_obj = cls.env["product.product"]
+        cls.product_obj = cls.env["product.product"]
         cls.wizard_obj = cls.env["wiz.stock.move.location"]
         cls.quant_obj = cls.env["stock.quant"]
         cls.company = cls.env.ref("base.main_company")
@@ -43,13 +45,13 @@ class TestsCommon(common.TransactionCase):
             }
         )
         cls.uom_unit = cls.env.ref("uom.product_uom_unit")
-        cls.product_no_lots = product_obj.create(
+        cls.product_no_lots = cls.product_obj.create(
             {"name": "Pineapple", "type": "product", "tracking": "none"}
         )
-        cls.product_lots = product_obj.create(
+        cls.product_lots = cls.product_obj.create(
             {"name": "Apple", "type": "product", "tracking": "lot"}
         )
-        cls.product_package = product_obj.create(
+        cls.product_package = cls.product_obj.create(
             {"name": "Orange", "type": "product", "tracking": "lot"}
         )
         cls.lot1 = cls.env["stock.lot"].create(
@@ -73,7 +75,7 @@ class TestsCommon(common.TransactionCase):
                 "company_id": cls.company.id,
             }
         )
-        cls.product_package = product_obj.create(
+        cls.product_package = cls.product_obj.create(
             {"name": "Orange", "type": "product", "tracking": "lot"}
         )
         cls.lot4 = cls.env["stock.lot"].create(

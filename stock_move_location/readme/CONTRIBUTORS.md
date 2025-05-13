@@ -8,6 +8,7 @@
   - Sergio Teruel
   - João Marques
   - Carlos Roca
+  - David Bañón
 - Jacques-Etienne Baudoux \<<je@bcim.be>\>
 - Iryna Vyshnevska \<<i.vyshnevska@mobilunity.com>\>
 - Alexei Rivera \<<arivera@archeti.com>\>
