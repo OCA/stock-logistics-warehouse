@@ -26,9 +26,9 @@
         >stock.inventory.justification.tree (in stock_inventory_justification)</field>
         <field name="model">stock.inventory.justification</field>
         <field name="arch" type="xml">
-            <tree editable="top">
+            <list editable="top">
                 <field name="name" />
-            </tree>
+            </list>
         </field>
     </record>
     <!--SEARCH view-->
@@ -47,7 +47,7 @@
     <record model="ir.actions.act_window" id="stock_inventory_justification_act_window">
         <field name="name">Inventory justifications</field>
         <field name="res_model">stock.inventory.justification</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
         <field name="domain">[]</field>
         <field name="context">{}</field>
     </record>
