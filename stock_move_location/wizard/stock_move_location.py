@@ -113,6 +113,7 @@ class StockMoveLocationWizard(models.TransientModel):
                         "product_id": quant.product_id.id,
                         "move_quantity": quant.quantity,
                         "max_quantity": quant.quantity,
+                        "reserved_quantity": quant.reserved_quantity,
                         "origin_location_id": quant.location_id.id,
                         "lot_id": quant.lot_id.id,
                         "package_id": quant.package_id.id,
