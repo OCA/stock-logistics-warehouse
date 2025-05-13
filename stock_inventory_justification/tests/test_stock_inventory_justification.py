@@ -1,7 +1,7 @@
 # Copyright 2024 ACSONE SA/NV
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo.addons.stock.tests.common2 import TestStockCommon
+from odoo.addons.stock.tests.common import TestStockCommon
 
 
 class TestStockInventoryJustification(TestStockCommon):
@@ -22,7 +22,7 @@ class TestStockInventoryJustification(TestStockCommon):
             {"name": "Justification 02"}
         )
         # Products
-        cls.product_1.type = "product"
+        cls.product_1.is_storable = True
 
     def test_01(self):
         """

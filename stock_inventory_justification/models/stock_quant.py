@@ -21,9 +21,16 @@ class StockQuant(models.Model):
         action["context"]["show_inventory_justifications"] = True
         return action
 
-    def _get_inventory_move_values(self, qty, location_id, location_dest_id, out=False):
+    def _get_inventory_move_values(
+        self,
+        qty,
+        location_id,
+        location_dest_id,
+        package_id=False,
+        package_dest_id=False,
+    ):
         res = super()._get_inventory_move_values(
-            qty, location_id, location_dest_id, out
+            qty, location_id, location_dest_id, package_id, package_dest_id
         )
         res["inventory_justification_ids"] = [
             (6, 0, self.inventory_justification_ids.ids)
