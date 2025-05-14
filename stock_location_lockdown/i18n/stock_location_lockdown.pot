@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 17.0\n"
+"Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -19,6 +19,14 @@ msgid "Block Stock Entrance"
 msgstr ""
 
 #. module: stock_location_lockdown
+#: model:ir.model.fields,help:stock_location_lockdown.field_stock_location__block_stock_entrance
+msgid ""
+"If this box is checked, putting stock on this location won't be allowed. Use"
+" this to temporarily block stock movements or to enforce restrictions in "
+"both physical and virtual locations."
+msgstr ""
+
+#. module: stock_location_lockdown
 #: model:ir.model,name:stock_location_lockdown.model_stock_location
 msgid "Inventory Locations"
 msgstr ""
@@ -26,7 +34,6 @@ msgstr ""
 #. module: stock_location_lockdown
 #. odoo-python
 #: code:addons/stock_location_lockdown/models/stock_location.py:0
-#, python-format
 msgid ""
 "It is impossible to prohibit this location from                    receiving"
 " products as it already contains some."
@@ -40,15 +47,7 @@ msgstr ""
 #. module: stock_location_lockdown
 #. odoo-python
 #: code:addons/stock_location_lockdown/models/stock_quant.py:0
-#, python-format
 msgid ""
 "The location %(location)s is blocked and can not be used for moving the "
 "product %(product)s"
-msgstr ""
-
-#. module: stock_location_lockdown
-#: model:ir.model.fields,help:stock_location_lockdown.field_stock_location__block_stock_entrance
-msgid ""
-"if this box is checked, putting stock on this location won't be allowed. "
-"Usually used for a virtual location that has childrens."
 msgstr ""
