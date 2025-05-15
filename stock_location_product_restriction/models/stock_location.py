@@ -80,11 +80,7 @@ class StockLocation(models.Model):
                 "inventory_quantity",
             ]
         )
-        self.flush_model(
-            [
-                "product_restriction",
-            ]
-        )
+        self.flush_model(["product_restriction", "fill_state"])
         ProductProduct = self.env["product.product"]
         precision_digits = max(
             6, self.sudo().env.ref("product.decimal_product_uom").digits * 2
@@ -100,6 +96,7 @@ class StockLocation(models.Model):
                stock_quant.location_id in %s
                and stock_location.id = stock_quant.location_id
                and stock_location.product_restriction = 'same'
+               and stock_location.fill_state <> 'being_emptied'
                /* Mimic the _unlink_zero_quant() query in Odoo */
                 AND (NOT (round(quantity::numeric, %s) = 0 OR quantity IS NULL)
                 OR NOT round(reserved_quantity::numeric, %s) = 0
@@ -156,11 +153,7 @@ class StockLocation(models.Model):
                 "inventory_quantity",
             ]
         )
-        self.flush_model(
-            [
-                "product_restriction",
-            ]
-        )
+        self.flush_model(["product_restriction", "fill_state"])
         SQL = """
             SELECT
                 stock_quant.location_id
@@ -170,6 +163,7 @@ class StockLocation(models.Model):
             WHERE
                stock_location.id = stock_quant.location_id
                and stock_location.product_restriction = 'same'
+               and stock_location.fill_state <> 'being_emptied'
                /* Mimic the _unlink_zero_quant() query in Odoo */
                 AND (NOT (round(quantity::numeric, %s) = 0 OR quantity IS NULL)
                 OR NOT round(reserved_quantity::numeric, %s) = 0

@@ -56,21 +56,29 @@ class StockQuant(models.Model):
                 "inventory_quantity",
             ]
         )
+        self.env["stock.location"].flush_model(
+            [
+                "fill_state",
+            ]
+        )
         SQL = """
             SELECT
-                location_id,
+                stock_quant.location_id,
                 array_agg(distinct(product_id))
             FROM
-                stock_quant
+                stock_quant,
+                stock_location
             WHERE
-                location_id in %s
+                stock_quant.location_id in %s
+                and stock_quant.location_id = stock_location.id
+                and stock_location.fill_state <> 'being_emptied'
             /* Mimic the _unlink_zero_quant() query in Odoo */
             AND (NOT (round(quantity::numeric, %s) = 0 OR quantity IS NULL)
             OR NOT round(reserved_quantity::numeric, %s) = 0
             OR NOT (round(inventory_quantity::numeric, %s) = 0
                     OR inventory_quantity IS NULL))
             GROUP BY
-                location_id
+                stock_quant.location_id
         """
         self.env.cr.execute(
             SQL,
