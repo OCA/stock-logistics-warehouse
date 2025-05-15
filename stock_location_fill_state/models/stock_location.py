@@ -86,16 +86,17 @@ class StockLocation(models.Model):
         for rec in locations_to_compute:
             qty_in_location = qty_by_location.get(rec.id, 0.0)
             out_by_location = out_qty_by_location.get(rec.id, 0.0)
-            if qty_in_location > 0.0:
-                records_by_state["filled"] |= rec
-            if qty_in_location <= 0.0:
-                records_by_state["empty"] |= rec
             if out_by_location and (qty_in_location - out_by_location <= 0):
                 records_by_state["being_emptied"] |= rec
-            if (qty_in_location <= 0) and (
+            elif (qty_in_location <= 0) and (
                 rec.pending_in_move_ids or rec.pending_in_move_line_ids
             ):
                 records_by_state["being_filled"] |= rec
+            elif qty_in_location > 0.0:
+                records_by_state["filled"] |= rec
+            else:
+                records_by_state["empty"] |= rec
+
         for state, records in records_by_state.items():
             # Don't update if value is already set
             records.filtered(
