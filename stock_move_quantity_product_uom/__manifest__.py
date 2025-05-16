@@ -12,4 +12,6 @@
     "website": "https://github.com/OCA/stock-logistics-workflow",
     "depends": ["stock"],
     "installable": True,
+    "pre_init_hook": "pre_init_quantity_product_uom",
+    "post_init_hook": "post_init_quantity_product_uom",
 }
