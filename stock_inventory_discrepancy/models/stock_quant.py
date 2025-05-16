@@ -1,6 +1,7 @@
 # Copyright 2023 Tecnativa - Ernesto Tejeda
+# Copyright 2025 Moduon Team
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError
 
 
@@ -29,13 +30,15 @@ class StockQuant(models.Model):
 
     def _search_has_over_discrepancy(self, operator, value):
         if operator not in ["=", "!="]:
-            raise UserError(_("This operator is not supported"))
+            raise UserError(self.env._("This operator is not supported"))
         if value == "True":
             value = True
         elif value == "False":
             value = False
         if not isinstance(value, bool):
-            raise UserError(_("Value should be True or False (not %s)") % value)
+            raise UserError(
+                self.env._("Value should be True or False (not %s)") % value
+            )
         ids = []
         for quant in self.search([]):
             has_over_discrepancy = (
@@ -78,8 +81,21 @@ class StockQuant(models.Model):
             return super().action_apply_inventory()
         if not self.env.company.inventory_discrepancy_enable:
             return super().action_apply_inventory()
+        if not self.env.user.has_group(
+            "stock_inventory_discrepancy.group_stock_inventory_validation"
+        ):
+            raise UserError(self.env._("You cannot validate an inventory adjustment."))
         over_discrepancy = self.filtered(lambda r: r.has_over_discrepancy)
         if over_discrepancy:
+            if not self.env.user.has_group(
+                "stock_inventory_discrepancy.group_stock_inventory_validation_always"
+            ):
+                raise UserError(
+                    self.env._(
+                        "You cannot validate an inventory adjustment "
+                        "because exceedes discrepancy threshold."
+                    )
+                )
             action = self.env["ir.actions.act_window"]._for_xml_id(
                 "stock_inventory_discrepancy.confirm_discrepancy_action"
             )
@@ -90,44 +106,3 @@ class StockQuant(models.Model):
             )
             return action
         return super().action_apply_inventory()
-
-    def user_has_groups(self, groups):
-        # - Allow specific group to validate inventory
-        # - Allow validate on pending status
-        ret = super().user_has_groups(groups)
-        if not (
-            self.env.context.get("from_apply_inventory")
-            and groups == "stock.group_stock_manager"
-        ):
-            return ret
-        if (
-            not ret
-            and not super().user_has_groups(
-                "stock_inventory_discrepancy.group_stock_inventory_validation"
-            )
-            and not super().user_has_groups(
-                "stock_inventory_discrepancy.group_stock_inventory_validation_always"
-            )
-        ):
-            raise UserError(
-                _("Only a stock manager can validate an inventory adjustment.")
-            )
-        else:
-            return True
-
-    def _apply_inventory(self):
-        if (
-            not self.user_has_groups("stock.group_stock_manager")
-            and not self.user_has_groups(
-                "stock_inventory_discrepancy.group_stock_inventory_validation"
-            )
-            and not self.user_has_groups(
-                "stock_inventory_discrepancy.group_stock_inventory_validation_always"
-            )
-        ):
-            raise UserError(
-                _("Only a stock manager can validate an inventory adjustment.")
-            )
-        # Allow to write last_inventory_date on stock.location
-        self = self.sudo().with_context(from_apply_inventory=True)
-        return super()._apply_inventory()

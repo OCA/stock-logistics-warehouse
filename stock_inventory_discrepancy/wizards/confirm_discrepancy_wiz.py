@@ -1,7 +1,7 @@
 # Copyright 2023 Tecnativa - Ernesto Tejeda
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import Command, _, fields, models
+from odoo import Command, fields, models
 from odoo.exceptions import UserError
 
 
@@ -30,7 +30,7 @@ class ConfirmDiscrepancyWiz(models.TransientModel):
             "stock_inventory_discrepancy.group_stock_inventory_validation_always"
         ):
             raise UserError(
-                _(
+                self.env._(
                     "You cannot apply inventory adjustments "
                     "if there are products that exceed the discrepancy threshold. "
                     "Only users with rights to apply them can proceed."
