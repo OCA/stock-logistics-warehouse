@@ -8,7 +8,7 @@ class StockPackageType(models.Model):
     _inherit = "stock.package.type"
 
     volume = fields.Float(
-        digits=(8, 4),
+        digits='Volume',
         compute="_compute_volume",
         readonly=True,
         help="The Packaging volume",
