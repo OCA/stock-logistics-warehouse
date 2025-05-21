@@ -2,32 +2,36 @@
 # @author: Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
 from datetime import date, datetime, timedelta
 
-from odoo.tests.common import Form, SavepointCase
+from odoo.addons.base.tests.common import BaseCommon
 
 
-class TestOrderpointNoHorizon(SavepointCase):
+class TestOrderpointNoHorizon(BaseCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
         cls.uom_unit = cls.env.ref("uom.product_uom_unit")
         cls.product = cls.env["product.product"].create(
-            {"name": "Test Orderpoint No Horizon", "type": "product"}
+            {"name": "Test Orderpoint No Horizon", "is_storable": True}
         )
 
     def test_reordering_rule_no_horizon(self):
         warehouse = self.env["stock.warehouse"].search([], limit=1)
-        orderpoint_form = Form(self.env["stock.warehouse.orderpoint"])
-        orderpoint_form.product_id = self.product
-        orderpoint_form.location_id = warehouse.lot_stock_id
-        orderpoint_form.product_min_qty = 0.0
-        orderpoint_form.product_max_qty = 5.0
-        orderpoint = orderpoint_form.save()
+        orderpoint = self.env["stock.warehouse.orderpoint"].create(
+            {
+                "name": __name__,
+                "warehouse_id": warehouse.id,
+                "location_id": warehouse.lot_stock_id.id,
+                "product_id": self.product.id,
+                "product_min_qty": 0.0,
+                "product_max_qty": 5.0,
+            }
+        )
 
         # get auto-created pull rule from when warehouse is created
         rule = self.env["stock.rule"].search(
             [
                 ("route_id", "=", warehouse.reception_route_id.id),
-                ("location_id", "=", warehouse.lot_stock_id.id),
+                ("location_dest_id", "=", warehouse.lot_stock_id.id),
                 (
                     "location_src_id",
                     "=",
@@ -71,6 +75,6 @@ class TestOrderpointNoHorizon(SavepointCase):
 
         # Postpone the reception
         receipt_move.date += timedelta(days=20)
-        orderpoint.invalidate_cache(["qty_forecast"])
+        orderpoint.invalidate_recordset(["qty_forecast"])
         # Check this has no impact no the forecasted quantity
         self.assertEqual(orderpoint.qty_forecast, orderpoint.product_max_qty)
