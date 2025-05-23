@@ -90,28 +90,28 @@ class TestProcurementAutoCreateGroup(TransactionCase):
         cls.prod_auto_pull_push = cls.product_obj.create(
             {
                 "name": "Test Product 1",
-                "type": "product",
+                "is_storable": True,
                 "route_ids": [(6, 0, [pull_push_route_auto.id])],
             }
         )
         cls.prod_no_auto_pull_push = cls.product_obj.create(
             {
                 "name": "Test Product 2",
-                "type": "product",
+                "is_storable": True,
                 "route_ids": [(6, 0, [pull_push_route_no_auto.id])],
             }
         )
         cls.prod_auto_push = cls.product_obj.create(
             {
                 "name": "Test Product 3",
-                "type": "product",
+                "is_storable": True,
                 "route_ids": [(6, 0, [push_route_auto.id])],
             }
         )
         cls.prod_no_auto_push = cls.product_obj.create(
             {
                 "name": "Test Product 4",
-                "type": "product",
+                "is_storable": True,
                 "route_ids": [(6, 0, [push_route_no_auto.id])],
             }
         )
