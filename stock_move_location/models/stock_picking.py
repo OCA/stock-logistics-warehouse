@@ -1,4 +1,4 @@
-# Copyright Jacques-Etienne Baudoux 2016 Camptocamp
+# Copyright 2016 Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
 # Copyright Iryna Vyshnevska 2020 Camptocamp
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 
@@ -19,6 +19,7 @@ class StockPicking(models.Model):
             "active_model": "stock.quant",
             "planned": True,
         }
+        # FIXME: this action should not bypass the call to action_assign !!!
         move_wizard = (
             self.env["wiz.stock.move.location"]
             .with_context(**context)
@@ -28,6 +29,7 @@ class StockPicking(models.Model):
                     "origin_location_id": self.location_id.id,
                     "picking_type_id": self.picking_type_id.id,
                     "picking_id": self.id,
+                    "apply_putaway_strategy": True,
                 }
             )
         )
