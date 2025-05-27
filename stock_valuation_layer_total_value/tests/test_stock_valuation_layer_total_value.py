@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 from odoo.tests import tagged
 
-from odoo.addons.stock_account.tests.test_anglo_saxon_valuation_reconciliation_common import (
+from odoo.addons.stock_account.tests.test_anglo_saxon_valuation_reconciliation_common import (  # noqa: E501
     ValuationReconciliationTestCommon,
 )
 
@@ -12,26 +12,10 @@ class TestValuationLayerTotalValue(ValuationReconciliationTestCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.stock_account_product_categ = cls.env["product.category"].create(
-            {
-                "name": "Test category",
-                "property_valuation": "real_time",
-                "property_cost_method": "fifo",
-                "property_stock_valuation_account_id": cls.company_data[
-                    "default_account_stock_valuation"
-                ].id,
-                "property_stock_account_input_categ_id": cls.company_data[
-                    "default_account_stock_in"
-                ].id,
-                "property_stock_account_output_categ_id": cls.company_data[
-                    "default_account_stock_out"
-                ].id,
-            }
-        )
         cls.product1 = cls.env["product.product"].create(
             {
                 "name": "product1",
-                "type": "product",
+                "is_storable": True,
                 "categ_id": cls.stock_account_product_categ.id,
             }
         )
@@ -41,7 +25,7 @@ class TestValuationLayerTotalValue(ValuationReconciliationTestCommon):
         unit_cost = unit_cost or product.standard_price
         in_move = self.env["stock.move"].create(
             {
-                "name": "in %s units @ %s per unit" % (str(quantity), str(unit_cost)),
+                "name": f"in {quantity} units @ {unit_cost} per unit",
                 "product_id": product.id,
                 "location_id": self.env.ref("stock.stock_location_suppliers").id,
                 "location_dest_id": self.company_data[
@@ -66,7 +50,8 @@ class TestValuationLayerTotalValue(ValuationReconciliationTestCommon):
 
         in_move._action_confirm()
         in_move._action_assign()
-        in_move.move_line_ids.qty_done = quantity
+        in_move.move_line_ids.quantity = quantity
+        in_move.picked = True
         in_move._action_done()
 
         return in_move.with_context(svl=True)

@@ -9,7 +9,7 @@ class StockValuationLayer(models.Model):
     total_value_with_additional_costs = fields.Float(
         string="Total value (with additional costs)",
         compute="_compute_original_layer_values",
-        help="This is the sum of the total value's layer and total value of child layers",
+        help="This is the sum of the total value's layer and total value of child layers",  # noqa: E501
         store=True,
     )
     unit_price_with_extra_cost = fields.Float(
@@ -22,14 +22,10 @@ class StockValuationLayer(models.Model):
     @api.depends("stock_valuation_layer_ids")
     def _compute_original_layer_values(self):
         for rec in self:
-            if len(rec.stock_valuation_layer_ids):
-                children_value = sum(rec.stock_valuation_layer_ids.mapped("value"))
-                total_value = rec.value + children_value
-                new_unit_price = (
-                    (total_value / rec.quantity) if rec.quantity else rec.unit_cost
-                )
-            else:
-                total_value = rec.value
-                new_unit_price = rec.unit_cost
+            children = rec.stock_valuation_layer_ids
+            children_value = sum(children.mapped("value")) if children else 0.0
+            total_value = rec.value + children_value
             rec.total_value_with_additional_costs = total_value
-            rec.unit_price_with_extra_cost = new_unit_price
+            rec.unit_price_with_extra_cost = (
+                total_value / rec.quantity if rec.quantity else rec.unit_cost
+            )
