@@ -9,3 +9,8 @@ ACSONE):
 - Nice to have: add a magic button on locations that with context
   creates a new picking of that type with the origin location already
   filled in.
+
+Note from Jacques-Etienne Baudoux (BCIM)
+- The fill with stock action on stock.picking should not create manually the
+  move lines but instead call `action_assign()`. There are many modules hooking
+  `action_assign` that are not called due to this.
