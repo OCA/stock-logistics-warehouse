@@ -483,7 +483,7 @@ class TestStockCycleCount(common.TransactionCase):
         sml = self.env["stock.move.line"].search(
             [("location_id", "=", loc.id), ("product_id", "=", self.product1.id)]
         )
-        # Check that line_accuracy is still 0
+        # Check that line_accuracy is still 0.
         self.assertEqual(sml.line_accuracy, 0)
 
     def test_auto_start_inventory_from_cycle_count(self):
