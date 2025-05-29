@@ -11,9 +11,6 @@
                     invisible="group_propagation_option != 'propagate'"
                 />
             </field>
-            <field name="auto" position="after">
-                <field name="auto_create_group" invisible="action != 'push'" />
-            </field>
         </field>
     </record>
 </odoo>
