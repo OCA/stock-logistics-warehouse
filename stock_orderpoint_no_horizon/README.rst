@@ -65,7 +65,7 @@ Authors
 Contributors
 ------------
 
--  Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
+- Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
 
 Maintainers
 -----------
