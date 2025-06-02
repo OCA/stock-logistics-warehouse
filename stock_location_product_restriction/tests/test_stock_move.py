@@ -398,6 +398,42 @@ class TestStockMove(TransactionCase):
 
         self._change_product_qty(self.product_2, self.location_1, 10)
 
+    def test_filling_move_with_outgoing_move(self):
+        """
+        Data:
+            location_1 with same product restriction
+            location_1 with 50 product_1
+        Test case:
+            Create a move that empty the location
+            Add qty of product_2 into location_1
+        Expected result:
+            ValidationError
+        """
+        self.assertEqual(
+            self.product_1, self._get_products_in_location(self.location_1)
+        )
+        self.location_1.specific_product_restriction = "same"
+        move = self._create_outgoing_move()
+        move.move_line_ids.qty_done = 50.0
+        self.location_1.flush_recordset()
+
+        in_move = self.env["stock.move"].create(
+            {
+                "name": "Filling in move Product 2",
+                "location_id": self.env.ref("stock.stock_location_customers").id,
+                "location_dest_id": self.location_1.id,
+                "product_id": self.product_2.id,
+                "product_uom": self.product_2.uom_id.id,
+                "product_uom_qty": 10.0,
+            }
+        )
+        in_move._action_confirm()
+        in_move.quantity_done = 10.0
+        self.env["stock.quant"].invalidate_recordset(
+            ["being_emptied_before_done_location_ids"]
+        )
+        in_move._action_done()
+
     def test_change_quants_location(self):
         """
         Data:
