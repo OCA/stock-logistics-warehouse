@@ -10,7 +10,7 @@ from odoo.tests import common
 
 class TestStockWarehouseOrderpoint(common.TransactionCase):
     def setUp(self):
-        super(TestStockWarehouseOrderpoint, self).setUp()
+        super().setUp()
 
         # Refs
         self.group_stock_manager = self.env.ref("stock.group_stock_manager")

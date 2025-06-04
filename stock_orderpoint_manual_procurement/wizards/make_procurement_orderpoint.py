@@ -37,13 +37,13 @@ class MakeProcurementOrderpoint(models.TransientModel):
             view_id = self.env.ref(
                 "stock_orderpoint_manual_procurement.view_make_procure_without_security"
             ).id  # noqa
-        return super(MakeProcurementOrderpoint, self).fields_view_get(
+        return super().fields_view_get(
             view_id=view_id, view_type=view_type, toolbar=toolbar, submenu=submenu
         )
 
     @api.model
     def default_get(self, fields):
-        res = super(MakeProcurementOrderpoint, self).default_get(fields)
+        res = super().default_get(fields)
         orderpoint_obj = self.env["stock.warehouse.orderpoint"]
         orderpoint_ids = self.env.context["active_ids"] or []
         active_model = self.env.context["active_model"]
