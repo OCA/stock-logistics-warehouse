@@ -5,12 +5,13 @@
 from datetime import timedelta
 
 from odoo import fields
-from odoo.tests import common
+from odoo.tests.common import TransactionCase
 
 
-class TestStockWarehouseOrderpoint(common.TransactionCase):
-    def setUp(self):
-        super().setUp()
+class TestStockWarehouseOrderpoint(TransactionCase):
+    @classmethod
+    def setUpClass(self):
+        super().setUpClass()
 
         # Refs
         self.group_stock_manager = self.env.ref("stock.group_stock_manager")
@@ -48,7 +49,7 @@ class TestStockWarehouseOrderpoint(common.TransactionCase):
         # Create vendor and supplier info
         test_seller = self.env["res.partner"].create({"name": "Test seller"})
         self.vendor = self.env["product.supplierinfo"].create(
-            {"name": test_seller.id, "price": 8.0}
+            {"partner_id": test_seller.id, "price": 8.0}
         )
 
         # Create Product category and Product
@@ -62,10 +63,11 @@ class TestStockWarehouseOrderpoint(common.TransactionCase):
         # Create Reordering Rule
         self.reorder = self.create_orderpoint()
 
+    @classmethod
     def _create_user(self, login, groups, company):
         """Create a user."""
         group_ids = [group.id for group in groups]
-        user = self.user_model.with_context({"no_reset_password": True}).create(
+        user = self.user_model.with_context(no_reset_password=True).create(
             {
                 "name": "Test User",
                 "login": login,
@@ -78,24 +80,27 @@ class TestStockWarehouseOrderpoint(common.TransactionCase):
         )
         return user
 
+    @classmethod
     def _create_product_category(self):
         """Create a Product Category."""
         product_ctg = self.product_ctg_model.create({"name": "test_product_ctg"})
         return product_ctg
 
+    @classmethod
     def _create_product(self):
         """Create a Product."""
         product = self.product_model.create(
             {
                 "name": "Test Product",
                 "categ_id": self.product_ctg.id,
-                "type": "product",
+                "is_storable": True,
                 "uom_id": self.product_uom.id,
                 "variant_seller_ids": [(6, 0, [self.vendor.id])],
             }
         )
         return product
 
+    @classmethod
     def _update_product_qty(self, product, quantity):
         """Update Product quantity."""
         change_product_qty = self.stock_change_model.create(
@@ -108,6 +113,7 @@ class TestStockWarehouseOrderpoint(common.TransactionCase):
         change_product_qty.change_product_qty()
         return change_product_qty
 
+    @classmethod
     def create_orderpoint(self):
         """Create a Reordering Rule"""
         reorder = self.reordering_rule_model.with_user(self.user).create(
@@ -123,14 +129,13 @@ class TestStockWarehouseOrderpoint(common.TransactionCase):
 
     def create_orderpoint_procurement(self, manual_date=None):
         """Make Procurement from Reordering Rule"""
-        context = {
-            "active_model": "stock.warehouse.orderpoint",
-            "active_ids": self.reorder.ids,
-            "active_id": self.reorder.id,
-        }
         wizard = (
             self.make_procurement_orderpoint_model.with_user(self.user)
-            .with_context(context)
+            .with_context(
+                active_model="stock.warehouse.orderpoint",
+                active_ids=self.reorder.ids,
+                active_id=self.reorder.id,
+            )
             .create({})
         )
         if manual_date:

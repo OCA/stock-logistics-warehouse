@@ -5,3 +5,4 @@
 - Joan Sisquella Andrés \<<joan.sisquella@forgeflow.com>\>
 - [Trobz](https://trobz.com):
   - Dung Tran \<<dungtd@trobz.com>\>
+- Henry Backman \<<henry.backman@camptocamp.com>\>

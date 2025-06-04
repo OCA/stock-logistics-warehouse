@@ -85,10 +85,12 @@ Contributors
 
    -  Dung Tran <dungtd@trobz.com>
 
+-  Henry Backman <henry.backman@camptocamp.com>
+
 Other credits
 -------------
 
-The migration of this module from 13.0 to 14.0 was financially supported
+The migration of this module from 14.0 to 18.0 was financially supported
 by Camptocamp
 
 Maintainers
