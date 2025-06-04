@@ -24,7 +24,13 @@ class TestStockQuantityChangeReason(TransactionCase):
 
     def _create_product(self, name):
         return self.product_product_model.create(
-            {"name": name, "categ_id": self.category.id, "type": "product"}
+            {
+                "name": name,
+                "categ_id": self.category.id,
+                "type": "consu",
+                "is_storable": True,
+                "tracking": "none",
+            }
         )
 
     def _product_change_qty(self, product, location, new_qty):
