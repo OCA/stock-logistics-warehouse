@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<odoo>
+    <record id="view_picking_form" model="ir.ui.view">
+        <field name="name">stock.picking.form reset quantity</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form" />
+        <field name="arch" type="xml">
+            <field name="package_level_ids" position="after">
+                <button
+                    class="btn-secondary float-end mx-2"
+                    name="action_reset_quantity"
+                    type="object"
+                    string="Reset Quantities"
+                    invisible="state in ('draft', 'done', 'cancel')"
+                    data-hotkey="shift+r"
+                />
+            </field>
+        </field>
+    </record>
+</odoo>
