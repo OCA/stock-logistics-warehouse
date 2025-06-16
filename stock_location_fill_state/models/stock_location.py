@@ -86,9 +86,13 @@ class StockLocation(models.Model):
         for rec in locations_to_compute:
             qty_in_location = qty_by_location.get(rec.id, 0.0)
             out_by_location = out_qty_by_location.get(rec.id, 0.0)
-            if out_by_location and (qty_in_location - out_by_location <= 0):
+            if (
+                out_by_location
+                and (qty_in_location - out_by_location <= 0)
+                and not (rec.pending_in_move_ids or rec.pending_in_move_line_ids)
+            ):
                 records_by_state["being_emptied"] |= rec
-            elif (qty_in_location <= 0) and (
+            elif (qty_in_location - out_by_location <= 0) and (
                 rec.pending_in_move_ids or rec.pending_in_move_line_ids
             ):
                 records_by_state["being_filled"] |= rec

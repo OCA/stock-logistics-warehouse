@@ -119,6 +119,95 @@ class TestLocationFillState(BaseCommon):
 
         self.assertFalse(self.customers.fill_state)
 
+    def test_location_fill_state_being_emptied_being_filled(self):
+        # Check the multi call
+        (self.stock_1 | self.stock).mapped("fill_state")
+        self.assertEqual("filled", self.stock.fill_state)
+        self.assertEqual("empty", self.stock_1.fill_state)
+        stock = self.stock.search([("fill_state", "=", "empty")])
+        self.assertIn(
+            self.stock_1.id,
+            stock.ids,
+        )
+        self.assertNotIn(
+            self.stock.id,
+            stock.ids,
+        )
+        # Search with the is_void == True domain
+        stock = self.stock.search([("fill_state", "=", "filled")])
+        self.assertNotIn(
+            self.stock_1.id,
+            stock.ids,
+        )
+        self.assertIn(
+            self.stock.id,
+            stock.ids,
+        )
+
+        # Add a movement to fill in Stock 1
+        move = self.env["stock.move"].create(
+            {
+                "name": "Product",
+                "product_uom_qty": "1.0",
+                "location_id": self.suppliers.id,
+                "location_dest_id": self.stock_1.id,
+                "product_id": self.product.id,
+            }
+        )
+        move._action_confirm()
+        move._action_assign()
+        self.assertEqual(
+            "being_filled",
+            self.stock_1.fill_state,
+        )
+        move.quantity_done = 1.0
+        move._action_done()
+        self.assertEqual(
+            "filled",
+            self.stock_1.fill_state,
+        )
+        # Add a movement to empty Stock 1
+        move = self.env["stock.move"].create(
+            {
+                "name": "Product",
+                "product_uom_qty": "1.0",
+                "location_id": self.stock_1.id,
+                "location_dest_id": self.env.ref("stock.stock_location_customers").id,
+                "product_id": self.product.id,
+            }
+        )
+        move._action_confirm()
+        move._action_assign()
+        move.quantity_done = 1.0
+        self.assertEqual(
+            "being_emptied",
+            self.stock_1.fill_state,
+        )
+
+        # Add a move that is filling the location
+        move = self.env["stock.move"].create(
+            {
+                "name": "Product",
+                "product_uom_qty": "1.0",
+                "location_id": self.suppliers.id,
+                "location_dest_id": self.stock.id,
+                "product_id": self.product.id,
+            }
+        )
+        move._action_confirm()
+        move._action_assign()
+        self.assertEqual(
+            "being_emptied",
+            self.stock_1.fill_state,
+        )
+
+        # Change the final destination
+        move.move_line_ids.location_dest_id = self.stock_1
+        self.assertEqual(
+            "being_filled",
+            self.stock_1.fill_state,
+        )
+
     def test_exclude(self):
         # Check the locations that are set to not compute
         # the fill state get the False value.
