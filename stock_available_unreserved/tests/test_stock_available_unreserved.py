@@ -3,10 +3,10 @@
 # Copyright 2019 JARSA Sistemas S.A. de C.V.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
-from odoo.tests.common import SavepointCase
+from odoo.tests.common import TransactionCase
 
 
-class TestStockLogisticsWarehouse(SavepointCase):
+class TestStockLogisticsWarehouse(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -44,7 +44,12 @@ class TestStockLogisticsWarehouse(SavepointCase):
 
         # Create product template
         cls.templateAB = cls.templateObj.create(
-            {"name": "templAB", "uom_id": cls.uom_unit.id, "type": "product"}
+            {
+                "name": "templAB",
+                "uom_id": cls.uom_unit.id,
+                "type": "consu",
+                "is_storable": True,
+            }
         )
 
         # Create product A and B
@@ -78,7 +83,7 @@ class TestStockLogisticsWarehouse(SavepointCase):
                 "picking_type_id": cls.env.ref("stock.picking_type_in").id,
                 "location_id": cls.supplier_location.id,
                 "location_dest_id": cls.stock_location.id,
-                "move_lines": [
+                "move_ids": [
                     (
                         0,
                         0,
@@ -87,7 +92,7 @@ class TestStockLogisticsWarehouse(SavepointCase):
                             "product_id": cls.productA.id,
                             "product_uom": cls.productA.uom_id.id,
                             "product_uom_qty": 2,
-                            "quantity_done": 2,
+                            "quantity": 2,
                             "location_id": cls.supplier_location.id,
                             "location_dest_id": cls.stock_location.id,
                         },
@@ -101,7 +106,7 @@ class TestStockLogisticsWarehouse(SavepointCase):
                 "picking_type_id": cls.env.ref("stock.picking_type_in").id,
                 "location_id": cls.supplier_location.id,
                 "location_dest_id": cls.stock_location.id,
-                "move_lines": [
+                "move_ids": [
                     (
                         0,
                         0,
@@ -110,7 +115,7 @@ class TestStockLogisticsWarehouse(SavepointCase):
                             "product_id": cls.productB.id,
                             "product_uom": cls.productB.uom_id.id,
                             "product_uom_qty": 3,
-                            "quantity_done": 3,
+                            "quantity": 3,
                             "location_id": cls.supplier_location.id,
                             "location_dest_id": cls.stock_location.id,
                         },
@@ -123,7 +128,7 @@ class TestStockLogisticsWarehouse(SavepointCase):
                 "picking_type_id": cls.env.ref("stock.picking_type_out").id,
                 "location_id": cls.stock_location.id,
                 "location_dest_id": cls.customer_location.id,
-                "move_lines": [
+                "move_ids": [
                     (
                         0,
                         0,
@@ -132,6 +137,7 @@ class TestStockLogisticsWarehouse(SavepointCase):
                             "product_id": cls.productB.id,
                             "product_uom": cls.productB.uom_id.id,
                             "product_uom_qty": 2,
+                            "quantity": 0,
                             "location_id": cls.stock_location.id,
                             "location_dest_id": cls.customer_location.id,
                         },
@@ -141,7 +147,7 @@ class TestStockLogisticsWarehouse(SavepointCase):
         )
 
     def compare_qty_available_not_res(self, product, value):
-        product.invalidate_cache()
+        product.invalidate_model()
         self.assertEqual(product.qty_available_not_res, value)
 
     def test_01_stock_levels(self):
@@ -172,9 +178,11 @@ class TestStockLogisticsWarehouse(SavepointCase):
         self.compare_qty_available_not_res(self.productB, 3)
         self.compare_qty_available_not_res(self.templateAB, 5)
 
+        # since odoo 15.0, the `reservation_method` default value is `at_confirm`, that
+        # means that the quantity is reserved at the picking's confirmation
         self.pickingOutA.action_confirm()
-        self.compare_qty_available_not_res(self.productB, 3)
-        self.compare_qty_available_not_res(self.templateAB, 5)
+        self.compare_qty_available_not_res(self.productB, 1)
+        self.compare_qty_available_not_res(self.templateAB, 3)
 
         self.pickingOutA.action_assign()
         self.compare_qty_available_not_res(self.productB, 1)

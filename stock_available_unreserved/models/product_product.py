@@ -41,12 +41,10 @@ class ProductProduct(models.Model):
         :type quants: dict
         """
         product_sums = {}
-        for quant in quants:
+        for product_id, _location_id, quantity, reserved_quantity in quants:
             # create a dictionary with the total value per products
-            product_sums.setdefault(quant["product_id"][0], 0.0)
-            product_sums[quant["product_id"][0]] += (
-                quant["quantity"] - quant["reserved_quantity"]
-            )
+            product_sums.setdefault(product_id.id, 0.0)
+            product_sums[product_id.id] += quantity - reserved_quantity
         for product in self.with_context(prefetch_fields=False, lang=""):
             available_not_res = float_round(
                 product_sums.get(product.id, 0.0),
@@ -61,11 +59,10 @@ class ProductProduct(models.Model):
         quants = (
             self.env["stock.quant"]
             .with_context(lang=False)
-            .read_group(
+            ._read_group(
                 domain_quant,
-                ["product_id", "location_id", "quantity", "reserved_quantity"],
                 ["product_id", "location_id"],
-                lazy=False,
+                ["quantity:sum", "reserved_quantity:sum"],
             )
         )
 
@@ -84,7 +81,7 @@ class ProductProduct(models.Model):
     def _search_quantity_unreserved(self, operator, value):
         if operator not in OPERATORS:
             raise UserError(_("Invalid domain operator %s") % operator)
-        if not isinstance(value, (float, int)):
+        if not isinstance(value, float | int):
             raise UserError(_("Invalid domain right operand %s") % value)
 
         ids = []
