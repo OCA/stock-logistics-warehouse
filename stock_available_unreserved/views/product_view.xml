@@ -38,8 +38,8 @@
                 <div
                     t-if="record.show_on_hand_qty_status_button.raw_value"
                 >Unreserved: <field name="qty_available_not_res" /> <field
-                        name="uom_id"
-                    /></div>
+                    name="uom_id"
+                /></div>
             </xpath>
         </field>
     </record>

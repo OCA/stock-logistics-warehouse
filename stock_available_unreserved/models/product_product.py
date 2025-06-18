@@ -55,7 +55,6 @@ class ProductProduct(models.Model):
             result[product.id] = {"qty_available_not_res": available_not_res}
 
     def _compute_product_available_not_res_dict(self):
-
         res = {}
 
         domain_quant = self._prepare_domain_available_not_reserved()
