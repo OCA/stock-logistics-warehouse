@@ -52,6 +52,11 @@ msgid "Attachment Count"
 msgstr ""
 
 #. module: stock_inventory
+#: model_terms:ir.ui.view,arch_db:stock_inventory.res_config_settings_view_form
+msgid "Auto Complete Inventory Adjustment"
+msgstr ""
+
+#. module: stock_inventory
 #: model_terms:ir.ui.view,arch_db:stock_inventory.view_inventory_group_form
 msgid "Back to Draft"
 msgstr "Devolver a borrador"
@@ -74,7 +79,6 @@ msgstr ""
 #. module: stock_inventory
 #. odoo-python
 #: code:addons/stock_inventory/models/stock_inventory.py:0
-#, python-format
 msgid ""
 "Cannot have more than one in-progress inventory adjustment affecting the "
 "same location or product at the same time."
@@ -262,7 +266,6 @@ msgstr ""
 #. module: stock_inventory
 #. odoo-python
 #: code:addons/stock_inventory/models/stock_quant.py:0
-#, python-format
 msgid "No move lines have been created"
 msgstr "No se han creado líneas de movimiento"
 
@@ -377,7 +380,6 @@ msgstr "Líneas de movimiento de existencias"
 #. module: stock_inventory
 #. odoo-python
 #: code:addons/stock_inventory/models/stock_inventory.py:0
-#, python-format
 msgid ""
 "There are active adjustments for the requested products: %(names)s. Blocking "
 "adjustments: %(blocking_names)s"
@@ -386,7 +388,6 @@ msgstr ""
 #. module: stock_inventory
 #. odoo-python
 #: code:addons/stock_inventory/models/stock_inventory.py:0
-#, python-format
 msgid ""
 "There's already an Adjustment in Process using one requested Location: "
 "%(names)s. Blocking adjustments: %(blocking_names)s"
@@ -416,7 +417,6 @@ msgstr ""
 #. module: stock_inventory
 #. odoo-python
 #: code:addons/stock_inventory/models/stock_inventory.py:0
-#, python-format
 msgid ""
 "When 'Product Selection: Lot Serial Number' is selected you are only able to "
 "add one product."
@@ -427,7 +427,6 @@ msgstr ""
 #. module: stock_inventory
 #. odoo-python
 #: code:addons/stock_inventory/models/stock_inventory.py:0
-#, python-format
 msgid ""
 "When 'Product Selection: One Product' is selected you are only able to add "
 "one product."
@@ -438,7 +437,6 @@ msgstr ""
 #. module: stock_inventory
 #. odoo-python
 #: code:addons/stock_inventory/models/stock_inventory.py:0
-#, python-format
 msgid "You can't cancel this inventory %(display_name)s."
 msgstr ""
 

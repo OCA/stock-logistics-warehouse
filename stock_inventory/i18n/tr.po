@@ -164,7 +164,6 @@ msgstr ""
 
 #. module: stock_inventory
 #: model:ir.model.fields,help:stock_inventory.field_stock_inventory__message_has_error
-#: model:ir.model.fields,help:stock_inventory.field_stock_inventory__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr ""
 
@@ -336,11 +335,6 @@ msgid "Quants"
 msgstr ""
 
 #. module: stock_inventory
-#: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__message_has_sms_error
-msgid "SMS Delivery error"
-msgstr ""
-
-#. module: stock_inventory
 #: model_terms:ir.ui.view,arch_db:stock_inventory.view_inventory_group_form
 msgid "Set to Done"
 msgstr ""
@@ -385,8 +379,8 @@ msgstr ""
 #. odoo-python
 #: code:addons/stock_inventory/models/stock_inventory.py:0
 msgid ""
-"There are active adjustments for the requested products: %(names)s. Blocking"
-" adjustments: %(blocking_names)s"
+"There are active adjustments for the requested products: %(names)s. Blocking "
+"adjustments: %(blocking_names)s"
 msgstr ""
 
 #. module: stock_inventory
@@ -422,8 +416,8 @@ msgstr ""
 #. odoo-python
 #: code:addons/stock_inventory/models/stock_inventory.py:0
 msgid ""
-"When 'Product Selection: Lot Serial Number' is selected you are only able to"
-" add one product."
+"When 'Product Selection: Lot Serial Number' is selected you are only able to "
+"add one product."
 msgstr ""
 
 #. module: stock_inventory
