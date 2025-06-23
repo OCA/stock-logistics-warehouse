@@ -9,7 +9,6 @@ from odoo.addons.queue_job.job import identity_exact
 
 
 class StockPicking(models.Model):
-
     _inherit = "stock.picking"
 
     is_auto_release_allowed = fields.Boolean(

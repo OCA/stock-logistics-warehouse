@@ -6,7 +6,6 @@ from odoo import models
 
 
 class ProductProduct(models.Model):
-
     _inherit = "product.product"
 
     def _moves_auto_release_domain(self):
