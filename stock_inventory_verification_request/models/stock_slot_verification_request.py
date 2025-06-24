@@ -1,5 +1,6 @@
 # Copyright 2017-20 ForgeFlow S.L.
 #   (http://www.forgeflow.com)
+# Copyright 2025 OERP Canada <https://www.oerp.ca>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 from odoo import api, fields, models
@@ -10,19 +11,17 @@ class SlotVerificationRequest(models.Model):
     _inherit = "mail.thread"
     _description = "Slot Verification Request"
 
-    @api.model
-    def _default_company(self):
-        company_id = self.env["res.company"]._company_default_get(self._name)
-        return company_id
-
-    @api.model
-    def create(self, vals):
-        if not vals.get("name") or vals.get("name") == "/":
-            vals["name"] = (
-                self.env["ir.sequence"].next_by_code("stock.slot.verification.request")
-                or "/"
-            )
-        return super(SlotVerificationRequest, self).create(vals)
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            if not vals.get("name") or vals.get("name") == "/":
+                vals["name"] = (
+                    self.env["ir.sequence"].next_by_code(
+                        "stock.slot.verification.request"
+                    )
+                    or "/"
+                )
+        return super().create(vals_list)
 
     def _compute_involved_move_line_count(self):
         for rec in self:
@@ -40,7 +39,6 @@ class SlotVerificationRequest(models.Model):
         default="/",
         required=True,
         readonly=True,
-        states={"wait": [("readonly", False)]},
     )
     inventory_id = fields.Many2one(
         comodel_name="stock.inventory", string="Inventory Adjustment", readonly=True
@@ -53,14 +51,13 @@ class SlotVerificationRequest(models.Model):
         string="Location",
         required=True,
         readonly=True,
-        states={"wait": [("readonly", False)]},
         tracking=True,
     )
     company_id = fields.Many2one(
         comodel_name="res.company",
         string="Company",
         required=True,
-        default=_default_company,
+        default=lambda self: self.env.company,
         readonly=True,
     )
     state = fields.Selection(
@@ -83,14 +80,12 @@ class SlotVerificationRequest(models.Model):
         comodel_name="product.product",
         string="Product",
         readonly=True,
-        states={"wait": [("readonly", False)]},
         tracking=True,
     )
     lot_id = fields.Many2one(
-        comodel_name="stock.production.lot",
+        comodel_name="stock.lot",
         string="Lot",
         readonly=True,
-        states={"wait": [("readonly", False)]},
         tracking=True,
     )
     notes = fields.Text()
@@ -208,7 +203,7 @@ class SlotVerificationRequest(models.Model):
             .sudo()
             .create(
                 {
-                    "name": "Inventory Adjustment from %s" % self.name,
+                    "name": f"Inventory Adjustment from {self.name}",
                     "product_selection": "one" if self.product_id else "all",
                     "location_ids": [(6, 0, [self.location_id.id])]
                     if self.location_id
