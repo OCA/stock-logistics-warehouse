@@ -65,12 +65,6 @@ Simone Orsi <simone.orsi@camptocamp.com> Sébastien Alix
 <sebastien.alix@camptocamp.com> `Trobz <https://trobz.com>`__: \* Nguyen
 Hoang Hiep <hiepnh@trobz.com>
 
-Other credits
--------------
-
-The migration of this module from 13.0 to 14.0 was financially supported
-by Camptocamp
-
 Maintainers
 -----------
 

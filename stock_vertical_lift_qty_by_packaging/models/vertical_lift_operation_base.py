@@ -11,7 +11,7 @@ class VerticalLiftOperationTransfer(models.AbstractModel):
         compute="_compute_product_qty_by_packaging_display"
     )
 
-    @api.depends("current_move_line_id.product_qty")
+    @api.depends("current_move_line_id.quantity_product_uom")
     def _compute_product_qty_by_packaging_display(self):
         # Seems the ctx key is not propagated on a related field
         # nor from the field definition, nor from the field declaration in the view.

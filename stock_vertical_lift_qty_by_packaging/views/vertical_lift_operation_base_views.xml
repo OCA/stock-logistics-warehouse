@@ -12,7 +12,7 @@
             <xpath expr="//field[@name='product_uom_id']" position="attributes">
                 <attribute name="invisible">1</attribute>
             </xpath>
-            <xpath expr="//field[@name='product_uom_qty']" position="attributes">
+            <xpath expr="//div[@name='qty_div']" position="attributes">
                 <attribute name="invisible">1</attribute>
             </xpath>
             <xpath expr="//field[@name='product_uom_id']" position="after">
