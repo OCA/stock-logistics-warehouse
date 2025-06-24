@@ -159,19 +159,21 @@
                                 <field name="product_packagings" />
                             </div>
                             <field name="lot_id" />
-                            <label for="quantity" string="Quantity" class="ml32" />
-                            <div colspan="2" class="ml32">
-                                <h1 class="bg-primary o_shuttle_highlight">
-                                    <field
-                                        name="quantity"
-                                        class="oe_inline text-white"
-                                    />
-                                    <field
-                                        name="product_uom_id"
-                                        options="{'no_open': True}"
-                                        class="oe_inline ml8 text-white"
-                                    />
-                                </h1>
+                            <div name="qty_div">
+                                <label for="quantity" string="Quantity" class="ml32" />
+                                <div colspan="2" class="ml32">
+                                    <h1 class="bg-primary o_shuttle_highlight">
+                                        <field
+                                            name="quantity"
+                                            class="oe_inline text-white"
+                                        />
+                                        <field
+                                            name="product_uom_id"
+                                            options="{'no_open': True}"
+                                            class="oe_inline ml8 text-white"
+                                        />
+                                    </h1>
+                                </div>
                             </div>
                         </group>
                     </div>
