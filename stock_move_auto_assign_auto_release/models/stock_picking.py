@@ -2,7 +2,7 @@
 # Copyright 2024 Michael Tietz (MT Software) <mtietz@mt-software.de>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.osv.expression import NEGATIVE_TERM_OPERATORS
 
 from odoo.addons.queue_job.job import identity_exact
@@ -54,7 +54,7 @@ class StockPicking(models.Model):
         for picking in self:
             picking.with_delay(
                 identity_key=identity_exact,
-                description=_(
+                description=self.env._(
                     "Auto release available to promise %(name)s", name=picking.name
                 ),
             ).auto_release_available_to_promise()

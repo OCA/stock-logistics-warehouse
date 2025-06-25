@@ -79,7 +79,7 @@ class TestAssignAutoRelease(PromiseReleaseCommonCase):
         qty = qty or 100
         move = self._create_move(product or self.product1, self.in_type, qty=qty)
         move._action_assign()
-        move.move_line_ids.qty_done = qty
+        move.move_line_ids.picked = True
         move.move_line_ids.location_dest_id = self.loc_bin1.id
         move._action_done()
 

@@ -2,7 +2,7 @@
 # Copyright 2024 Michael Tietz (MT Software) <mtietz@mt-software.de>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.osv.expression import NEGATIVE_TERM_OPERATORS
 
 from odoo.addons.queue_job.job import identity_exact
@@ -76,7 +76,7 @@ class StockMove(models.Model):
         job_options = job_options.copy()
         job_options.setdefault(
             "description",
-            _(
+            self.env._(
                 'Try releasing "%(product)s" for quantities added in: %(locations)s',
                 product=product.display_name,
                 locations=", ".join(auto_releaseable_locations.mapped("name")),
