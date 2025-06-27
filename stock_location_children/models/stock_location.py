@@ -36,7 +36,9 @@ class StockLocation(models.Model):
         self.flush_model(["location_id", "child_ids"])
         self.env.cr.execute(query, (tuple(self.ids),))
         rows = self.env.cr.dictfetchall()
-        result_by_location = dict(zip(map(operator.itemgetter("id"), rows), rows))
+        result_by_location = dict(
+            zip(map(operator.itemgetter("id"), rows), rows, strict=True)
+        )
         for loc in self:
             children = result_by_location.get(loc.id, {}).get("children")
             if children:
