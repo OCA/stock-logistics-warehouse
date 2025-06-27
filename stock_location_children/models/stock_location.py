@@ -7,7 +7,6 @@ from odoo.fields import Command
 
 
 class StockLocation(models.Model):
-
     _inherit = "stock.location"
 
     children_ids = fields.Many2many(
@@ -23,7 +22,6 @@ class StockLocation(models.Model):
 
     @api.depends("child_ids", "children_ids.child_ids")
     def _compute_children_ids(self):
-
         query = """SELECT sub.id, ARRAY_AGG(sl2.id) AS children
             FROM stock_location sl2,
             (
