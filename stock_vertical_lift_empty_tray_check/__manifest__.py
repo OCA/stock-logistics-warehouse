@@ -3,7 +3,7 @@
 {
     "name": "Vertical Lift Empty Tray Check",
     "summary": "Checks if the tray is actually empty.",
-    "version": "14.0.1.0.2",
+    "version": "18.0.1.0.0",
     "category": "Stock",
     "author": "Camptocamp, Odoo Community Association (OCA)",
     "license": "AGPL-3",

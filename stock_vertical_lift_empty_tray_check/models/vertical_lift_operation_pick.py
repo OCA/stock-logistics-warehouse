@@ -1,7 +1,7 @@
 # Copyright 2019 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, models
+from odoo import models
 from odoo.tools import float_is_zero
 
 
@@ -34,7 +34,7 @@ class VerticalLiftOperationPick(models.Model):
             {"vertical_lift_operation_pick_id": self.id}
         )
         return {
-            "name": _("Is the tray empty?"),
+            "name": self.env._("Is the tray empty?"),
             "type": "ir.actions.act_window",
             "view_mode": "form",
             "target": "new",
