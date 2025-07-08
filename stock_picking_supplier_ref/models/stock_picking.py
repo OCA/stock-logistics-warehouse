@@ -8,6 +8,8 @@ class StockPicking(models.Model):
     _inherit = "stock.picking"
 
     supplier_reference = fields.Char(
-        string="Supplier Reference Available in PO",
-        help="This field adds the supplier reference added in related purchase order",
+        string="Supplier Delivery Reference",
+        help="Enter the supplier's delivery note or shipment reference related "
+        "to this receipt. This does not sync automatically with the supplier "
+        "reference in the purchase order.",
     )
