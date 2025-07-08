@@ -75,6 +75,9 @@ under a Monday-to-Friday working calendar. Without the calendar
 adjustment, the system might incorrectly plan the transfer to start on
 Sunday, a non-working day, which could lead to delays.
 
+It also works for push rules, it will apply the delay defined in the
+rule respecting the warehouse calendar to schedule the move.
+
 Bug Tracker
 ===========
 
