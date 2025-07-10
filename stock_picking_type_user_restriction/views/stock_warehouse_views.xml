@@ -6,6 +6,6 @@
     >
         <attribute
             name="groups"
-            >stock_picking_type_user_restriction.group_assigned_picking_types_user</attribute>
+        >stock_picking_type_user_restriction.group_assigned_picking_types_user</attribute>
     </record>
 </odoo>
