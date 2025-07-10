@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<odoo>
-    <record id="stock.act_stock_warehouse_2_stock_warehouse_orderpoint" model="ir.actions.act_window">
-        <field name="groups_id" eval="[(4, ref('group_assigned_picking_types_user'))]"/>
-    </record>
-</odoo>
