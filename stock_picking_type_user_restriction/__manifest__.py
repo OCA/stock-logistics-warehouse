@@ -3,7 +3,7 @@
 {
     "name": "Stock picking type - Restrict users",
     "summary": "Restrict some users to see and use only certain picking types",
-    "version": "12.0.1.0.0",
+    "version": "17.0.1.0.0",
     "development_status": "Beta",
     "category": "Warehouse",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
