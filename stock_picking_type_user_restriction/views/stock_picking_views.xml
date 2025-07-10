@@ -23,9 +23,8 @@
         </field>
     </record>
     <record id="stock.all_picking" model="ir.ui.menu">
-        <field
-            name="groups_id"
-            eval="[(4, ref('group_assigned_picking_types_user'))]"
-        />
+        <attribute
+            name="groups"
+            >stock_picking_type_user_restriction.group_assigned_picking_types_user</attribute>
     </record>
 </odoo>
