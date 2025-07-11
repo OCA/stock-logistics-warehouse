@@ -10,6 +10,14 @@
                     name="groups"
                 >stock.group_stock_user,stock_picking_type_user_restriction.group_assigned_picking_types_user</attribute>
             </xpath>
+            <xpath
+                expr="//button[@name='action_reset_product_qty']"
+                position="attributes"
+            >
+                <attribute
+                    name="groups"
+                >stock.group_stock_user,stock_picking_type_user_restriction.group_assigned_picking_types_user</attribute>
+            </xpath>
         </field>
     </record>
 </odoo>

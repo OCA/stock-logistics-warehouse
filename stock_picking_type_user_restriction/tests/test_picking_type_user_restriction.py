@@ -41,40 +41,36 @@ class TestUserRestriction(SavepointCase):
         cls.picking_type_model = cls.env["stock.picking.type"]
 
     def test_access_picking_type(self):
-        # Search delivery orders with standard stock users
-        # It should be visible
-        pick_types = self.picking_type_model.with_user(self.stock_user.id).search(
+        # assigned_user_ids is not set: both users can read
+        pick_types = self.picking_type_model.sudo(self.stock_user.id).search(
             [("name", "=", "Delivery Orders")]
         )
         self.assertTrue(self.picking_type_out in pick_types)
-        # Search delivery orders with assigned stock users
-        # It should not be visible
-        pick_types = self.picking_type_model.with_user(
+        pick_types = self.picking_type_model.sudo(
             self.stock_user_assigned_type.id
         ).search([("name", "=", "Delivery Orders")])
-        self.assertFalse(self.picking_type_out in pick_types)
+        self.assertTrue(self.picking_type_out in pick_types)
 
-        # Assign delivery picking type to assigned user
         self.picking_type_out.assigned_user_ids = [
             (6, 0, [self.stock_user_assigned_type.id])
         ]
         # assigned_user_ids is set with stock_user_assigned_type: both users can read
-        pick_types = self.picking_type_model.with_user(self.stock_user.id).search(
+        pick_types = self.picking_type_model.sudo(self.stock_user.id).search(
             [("name", "=", "Delivery Orders")]
         )
         self.assertTrue(self.picking_type_out in pick_types)
-        pick_types = self.picking_type_model.with_user(
+        pick_types = self.picking_type_model.sudo(
             self.stock_user_assigned_type.id
         ).search([("name", "=", "Delivery Orders")])
         self.assertTrue(self.picking_type_out in pick_types)
 
         self.picking_type_out.assigned_user_ids = [(6, 0, [self.stock_user.id])]
         # assigned_user_ids is set with stock_user: only stock_user can read
-        pick_types = self.picking_type_model.with_user(self.stock_user.id).search(
+        pick_types = self.picking_type_model.sudo(self.stock_user.id).search(
             [("name", "=", "Delivery Orders")]
         )
         self.assertTrue(self.picking_type_out in pick_types)
-        pick_types = self.picking_type_model.with_user(
+        pick_types = self.picking_type_model.sudo(
             self.stock_user_assigned_type.id
         ).search([("name", "=", "Delivery Orders")])
         self.assertFalse(self.picking_type_out in pick_types)

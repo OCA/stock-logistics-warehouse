@@ -13,10 +13,9 @@
         </field>
     </record>
     <record model="ir.ui.view" id="stock.product_form_view_procurement_button">
-        <field
-            name="groups_id"
-            eval="[(4, ref('stock_picking_type_user_restriction.group_assigned_picking_types_user'))]"
-        />
+        <attribute
+            name="groups"
+        >stock_picking_type_user_restriction.group_assigned_picking_types_user</attribute>
     </record>
     <record model="ir.ui.view" id="product_form_view_procurement_button_assigned_users">
         <field name="name">product_form_view_procurement_button_assigned_users</field>
@@ -42,10 +41,9 @@
         </field>
     </record>
     <record model="ir.ui.view" id="stock.product_template_form_view_procurement_button">
-        <field
-            name="groups_id"
-            eval="[(4, ref('stock_picking_type_user_restriction.group_assigned_picking_types_user'))]"
-        />
+        <attribute
+            name="groups"
+        >stock_picking_type_user_restriction.group_assigned_picking_types_user</attribute>
     </record>
     <record
         model="ir.ui.view"
