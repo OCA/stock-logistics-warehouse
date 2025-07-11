@@ -12,6 +12,7 @@
             name="implied_ids"
             eval="[(4, ref('group_assigned_picking_types_user'))]"
         />
+        <field name="menu_access" eval="[(4, ref('stock.menu_stock_transfers'))]" />
     </record>
 <data noupdate="1">
     <record id="picking_type_assigned_users" model="ir.rule">
