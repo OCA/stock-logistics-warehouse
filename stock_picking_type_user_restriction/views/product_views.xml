@@ -12,11 +12,6 @@
             </xpath>
         </field>
     </record>
-    <record id="stock.product_form_view_procurement_button" model="ir.ui.view">
-        <attribute
-            name="groups"
-        >stock_picking_type_user_restriction.group_assigned_picking_types_user</attribute>
-    </record>
     <record model="ir.ui.view" id="product_form_view_procurement_button_assigned_users">
         <field name="name">product_form_view_procurement_button_assigned_users</field>
         <field name="model">product.product</field>
@@ -39,11 +34,6 @@
                 >stock.group_stock_user,stock_picking_type_user_restriction.group_assigned_picking_types_user</attribute>
             </xpath>
         </field>
-    </record>
-    <record model="ir.ui.view" id="stock.product_template_form_view_procurement_button">
-        <attribute
-            name="groups"
-        >stock_picking_type_user_restriction.group_assigned_picking_types_user</attribute>
     </record>
     <record
         model="ir.ui.view"
