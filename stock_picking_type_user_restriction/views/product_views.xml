@@ -13,9 +13,27 @@
         </field>
     </record>
     <record id="stock.product_form_view_procurement_button" model="ir.ui.view">
-        <attribute
-            name="groups"
-        >stock_picking_type_user_restriction.group_assigned_picking_types_user</attribute>
+        <field name="name">stock.product_form_view_procurement_button</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="stock.product_form_view_procurement_button" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//button[@name='%(stock.action_product_replenish)d']"
+                position="attributes"
+            >
+                <attribute
+                    name="groups"
+                >stock.group_stock_user,stock_picking_type_user_restriction.group_assigned_picking_types_user</attribute>
+            </xpath>
+            <xpath
+                expr="//button[@name='action_view_stock_move_lines']"
+                position="attributes"
+            >
+                <attribute
+                    name="groups"
+                >stock.group_stock_user,stock_picking_type_user_restriction.group_assigned_picking_types_user</attribute>
+            </xpath>
+        </field>
     </record>
     <record model="ir.ui.view" id="product_form_view_procurement_button_assigned_users">
         <field name="name">product_form_view_procurement_button_assigned_users</field>
@@ -41,17 +59,7 @@
         </field>
     </record>
     <record model="ir.ui.view" id="stock.product_template_form_view_procurement_button">
-        <attribute
-            name="groups"
-        >stock_picking_type_user_restriction.group_assigned_picking_types_user</attribute>
-    </record>
-    <record
-        model="ir.ui.view"
-        id="product_template_form_view_procurement_button_assigned_users"
-    >
-        <field
-            name="name"
-        >product_template_form_view_procurement_button_assigned_users</field>
+        <field name="name">stock.product_template_form_view_procurement_button</field>
         <field name="model">product.product</field>
         <field
             name="inherit_id"
