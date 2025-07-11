@@ -20,7 +20,6 @@
         "security/ir.model.access.csv",
         "views/stock_menu_views.xml",
         "views/product_views.xml",
-        "views/stock_inventory_views.xml",
         "views/stock_picking_views.xml",
     ],
     "external_dependencies": {"python": ["openupgradelib"]},
