@@ -96,7 +96,7 @@ class StockLocation(models.Model):
                stock_quant.location_id in %s
                and stock_location.id = stock_quant.location_id
                and stock_location.product_restriction = 'same'
-               and stock_location.fill_state <> 'being_emptied'
+               and stock_location.fill_state NOT IN ('being_filled', 'being_emptied')
                /* Mimic the _unlink_zero_quant() query in Odoo */
                 AND (NOT (round(quantity::numeric, %s) = 0 OR quantity IS NULL)
                 OR NOT round(reserved_quantity::numeric, %s) = 0
@@ -120,7 +120,7 @@ class StockLocation(models.Model):
         for record in self:
             record_id = record.id
             has_restriction_violation = False
-            restriction_violation_message = False
+            restriction_violation_message = ""
             product_ids = product_ids_by_location_id.get(record_id)
             if product_ids:
                 products = ProductProduct.browse(product_ids)
@@ -163,7 +163,7 @@ class StockLocation(models.Model):
             WHERE
                stock_location.id = stock_quant.location_id
                and stock_location.product_restriction = 'same'
-               and stock_location.fill_state <> 'being_emptied'
+               and stock_location.fill_state NOT IN ('being_filled', 'being_emptied')
                /* Mimic the _unlink_zero_quant() query in Odoo */
                 AND (NOT (round(quantity::numeric, %s) = 0 OR quantity IS NULL)
                 OR NOT round(reserved_quantity::numeric, %s) = 0

@@ -10,18 +10,18 @@ class StockQuant(models.Model):
 
     _inherit = "stock.quant"
 
-    being_emptied_before_done_location_ids = fields.One2many(
+    being_filled_before_done_location_ids = fields.One2many(
         comodel_name="stock.location",
-        compute="_compute_being_emptied_before_done_location_ids",
+        compute="_compute_being_filled_before_done_location_ids",
         help="Technical field to compute locations with their fill state"
-        "at 'Being Emptied' before they'll be filled with an incoming move.",
+        "at 'Being Filled' before they'll be filled with an incoming move.",
     )
 
-    @api.depends_context("being_emptied_locations_before_update")
+    @api.depends_context("being_filled_locations_before_update")
     @api.depends("location_id")
-    def _compute_being_emptied_before_done_location_ids(self):
-        self.being_emptied_before_done_location_ids = self.env["stock.location"].browse(
-            self.env.context.get("being_emptied_locations_before_update", [])
+    def _compute_being_filled_before_done_location_ids(self):
+        self.being_filled_before_done_location_ids = self.env["stock.location"].browse(
+            self.env.context.get("being_filled_locations_before_update", [])
         )
 
     @api.model
@@ -36,8 +36,8 @@ class StockQuant(models.Model):
         in_date=None,
     ):
         new_self = self.with_context(
-            being_emptied_locations_before_update=location_id.filtered(
-                lambda location: location.fill_state == "being_emptied"
+            being_filled_locations_before_update=location_id.filtered(
+                lambda location: location.fill_state == "being_filled"
             ).ids
         )
         return super(StockQuant, new_self)._update_available_quantity(
@@ -70,7 +70,7 @@ class StockQuant(models.Model):
         for quant in quants_to_check:
             product_ids_location_id[quant.location_id.id].add(quant.product_id.id)
         for location_id, product_ids in product_ids_location_id.items():
-            if location_id in self.being_emptied_before_done_location_ids.ids:
+            if location_id in self.being_filled_before_done_location_ids.ids:
                 continue
             if len(product_ids) > 1:
                 location = StockLocation.browse(location_id)
@@ -113,7 +113,7 @@ class StockQuant(models.Model):
             WHERE
                 stock_quant.location_id in %s
                 and stock_quant.location_id = stock_location.id
-                and stock_location.fill_state <> 'being_emptied'
+                and stock_location.fill_state NOT IN ('being_filled', 'being_emptied')
             /* Mimic the _unlink_zero_quant() query in Odoo */
             AND (NOT (round(quantity::numeric, %s) = 0 OR quantity IS NULL)
             OR NOT round(reserved_quantity::numeric, %s) = 0
@@ -137,7 +137,7 @@ class StockQuant(models.Model):
             location_id,
             existing_product_ids,
         ) in existing_product_ids_by_location_id.items():
-            if location_id in self.being_emptied_before_done_location_ids.ids:
+            if location_id in self.being_filled_before_done_location_ids.ids:
                 continue
             product_ids_to_add = product_ids_location_id[location_id]
             if set(existing_product_ids).symmetric_difference(product_ids_to_add):

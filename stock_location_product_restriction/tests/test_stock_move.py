@@ -430,7 +430,7 @@ class TestStockMove(TransactionCase):
         in_move._action_confirm()
         in_move.quantity_done = 10.0
         self.env["stock.quant"].invalidate_recordset(
-            ["being_emptied_before_done_location_ids"]
+            ["being_filled_before_done_location_ids"]
         )
         in_move._action_done()
 
