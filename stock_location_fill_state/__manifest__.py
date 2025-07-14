@@ -4,7 +4,7 @@
 {
     "name": "Stock Location Fill State",
     "summary": """This module allows to identify the fill state of stock locations""",
-    "version": "16.0.1.0.0",
+    "version": "16.0.1.0.1",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV, BCIM, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
