@@ -17,18 +17,28 @@ msgstr ""
 "X-Generator: Weblate 5.10.2\n"
 
 #. module: stock_picking_supplier_ref
-#: model:ir.model.fields,field_description:stock_picking_supplier_ref.field_stock_picking__supplier_reference
-msgid "Supplier Reference Available in PO"
-msgstr "Riferimento fornitore disponibile in OA"
+#: model:ir.model.fields,help:stock_picking_supplier_ref.field_stock_picking__supplier_reference
+msgid ""
+"Enter the supplier's delivery note or shipment reference related to this "
+"receipt. This does not sync automatically with the supplier reference in the "
+"purchase order."
+msgstr ""
 
 #. module: stock_picking_supplier_ref
-#: model:ir.model.fields,help:stock_picking_supplier_ref.field_stock_picking__supplier_reference
-msgid "This field adds the supplier reference added in related purchase order"
+#: model:ir.model.fields,field_description:stock_picking_supplier_ref.field_stock_picking__supplier_reference
+msgid "Supplier Delivery Reference"
 msgstr ""
-"Questo campo aggiunge il riferimento fornitore aggiunto nell0ordine di "
-"acquisto relativo"
 
 #. module: stock_picking_supplier_ref
 #: model:ir.model,name:stock_picking_supplier_ref.model_stock_picking
 msgid "Transfer"
 msgstr "Trasferimento"
+
+#~ msgid "Supplier Reference Available in PO"
+#~ msgstr "Riferimento fornitore disponibile in OA"
+
+#~ msgid ""
+#~ "This field adds the supplier reference added in related purchase order"
+#~ msgstr ""
+#~ "Questo campo aggiunge il riferimento fornitore aggiunto nell0ordine di "
+#~ "acquisto relativo"
