@@ -4,7 +4,7 @@
 {
     "name": "Stock picking type - Restrict users",
     "summary": "Restrict some users to see and use only certain picking types",
-    "version": "14.0.1.0.1",
+    "version": "14.0.1.0.2",
     "category": "Warehouse",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "author": "Xtendoo, TAKOBI, Odoo Community Association (OCA)",
