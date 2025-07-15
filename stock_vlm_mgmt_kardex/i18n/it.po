@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-12-18 13:06+0000\n"
+"PO-Revision-Date: 2025-07-15 15:53+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.6.2\n"
+"X-Generator: Weblate 5.10.4\n"
 
 #. module: stock_vlm_mgmt_kardex
 #: model:ir.model,name:stock_vlm_mgmt_kardex.model_stock_location
@@ -29,4 +29,4 @@ msgstr "Kardex"
 #. module: stock_vlm_mgmt_kardex
 #: model:ir.model.fields,field_description:stock_vlm_mgmt_kardex.field_stock_location__vlm_vendor
 msgid "Vlm Vendor"
-msgstr "Forintore VLM"
+msgstr "Fornitore VLM"
