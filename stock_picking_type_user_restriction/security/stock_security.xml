@@ -6,7 +6,10 @@
         <field
             name="comment"
         >The user will have access to her assigned operation types.</field>
-        <field name="menu_access" eval="[(4, ref('stock.menu_stock_transfers')), (4, ref('stock.int_picking')), (4, ref('stock.in_picking')), (4, ref('stock.out_picking'))]" />
+        <field
+            name="menu_access"
+            eval="[(4, ref('stock.menu_stock_transfers')), (4, ref('stock.int_picking')), (4, ref('stock.in_picking')), (4, ref('stock.out_picking'))]"
+        />
     </record>
 
     <record id="stock.group_stock_user" model="res.groups">
@@ -20,8 +23,8 @@
         <field name="name">Assigned picking types</field>
         <field ref="stock.model_stock_picking_type" name="model_id" />
         <field
-                name="domain_force"
-            >['|',('assigned_user_ids','in',user.id),('assigned_user_ids','=',False)]</field>
+            name="domain_force"
+        >['|',('assigned_user_ids','in',user.id),('assigned_user_ids','=',False)]</field>
         <field name="groups" eval="[(4, ref('group_assigned_picking_types_user'))]" />
     </record>
 
@@ -29,8 +32,8 @@
         <field name="name">Assigned pickings</field>
         <field ref="stock.model_stock_picking" name="model_id" />
         <field
-                name="domain_force"
-            >['|',('picking_type_id.assigned_user_ids','in',user.id),('picking_type_id.assigned_user_ids','=',False)]</field>
+            name="domain_force"
+        >['|',('picking_type_id.assigned_user_ids','in',user.id),('picking_type_id.assigned_user_ids','=',False)]</field>
         <field name="groups" eval="[(4, ref('group_assigned_picking_types_user'))]" />
     </record>
 
