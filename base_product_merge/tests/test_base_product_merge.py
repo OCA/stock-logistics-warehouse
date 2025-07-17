@@ -5,11 +5,10 @@ from odoo.tests.common import TransactionCase
 
 
 class TestBaseProductMerge(TransactionCase):
-    @classmethod
-    def setUpClass(cls):
-        super(TestBaseProductMerge, cls).setUpClass()
-        cls.product_model = cls.env["product.product"]
-        cls.base_product_merge_model = cls.env["base.product.merge"]
+    def setUp(self):
+        super(TestBaseProductMerge, self).setUp()
+        self.product_model = self.env["product.product"]
+        self.base_product_merge_model = self.env["base.product.merge"]
 
     def test_product_merge(self):
         # take current product count
