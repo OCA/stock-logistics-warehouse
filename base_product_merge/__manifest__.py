@@ -16,8 +16,6 @@
         "wizard/base_product_merge_view.xml",
     ],
     "installable": True,
-    "external_dependencies": {
-        "python": ["openupgradelib"],
-    },
+    "external_dependencies": {"python": ["openupgradelib"],},
     "maintainers": ["JasminSForgeFlow"],
 }
