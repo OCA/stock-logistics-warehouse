@@ -17,15 +17,22 @@ class StockMove(models.Model):
         string="Volume unit of measure label", compute="_compute_volume_uom_name"
     )
 
+    def _get_processible_quantity(self):
+        if self.state in ("partially_available", "assigned"):
+            return self.quantity
+        return self.product_uom_qty
+
     @api.depends("product_id", "product_uom_qty", "state", "quantity")
     def _compute_volume(self):
         for move in self:
-            qty = move.product_uom_qty
-            if move.state in ("partially_available", "assigned"):
-                qty = move.quantity
-            new_volume = move.product_id._get_volume_for_qty(qty, move.product_uom)
-            if move.volume != new_volume:
-                move.volume = new_volume
+            product = move.product_id
+            if product and product.type == "consu":
+                quantity = move._get_processible_quantity()
+                volume = product._get_volume_for_qty(quantity, move.product_uom)
+            else:
+                volume = 0
+            if move.volume != volume:
+                move.volume = volume
 
     def _compute_volume_uom_name(self):
         self.volume_uom_name = self.env[
