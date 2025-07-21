@@ -61,5 +61,6 @@ class StockWarehouse(models.Model):
         # Override to trigger the delivery route config update when
         # `delivery_pull` field is updated
         res = super()._get_routes_values()
-        res["delivery_route_id"]["depends"].append("delivery_pull")
+        if "delivery_route_id" in res:
+            res["delivery_route_id"]["depends"].append("delivery_pull")
         return res
