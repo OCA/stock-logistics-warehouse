@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-06 13:10+0000\n"
+"POT-Creation-Date: 2025-07-24 04:26+0000\n"
 "PO-Revision-Date: 2024-03-13 11:39+0000\n"
 "Last-Translator: MorganeGoujon <morgane@scalizer.fr>\n"
 "Language-Team: \n"
@@ -29,11 +29,12 @@ msgstr "Emplacements d'inventaire"
 
 #. module: stock_location_lockdown
 #. odoo-python
+#: code:addons/stock-logistics-warehouse/stock_location_lockdown/models/stock_location.py:0
 #: code:addons/stock_location_lockdown/models/stock_location.py:0
-#, python-format
+#, fuzzy, python-format
 msgid ""
-"It is impossible to prohibit this location from                    receiving "
-"products as it already contains some."
+"It is impossible to prohibit this location from receiving products as it "
+"already contains some."
 msgstr ""
 "Il est impossible d'empêcher cet emplacement de                     recevoir "
 "des produits car il en contient déjà."
@@ -45,6 +46,7 @@ msgstr "Quantités"
 
 #. module: stock_location_lockdown
 #. odoo-python
+#: code:addons/stock-logistics-warehouse/stock_location_lockdown/models/stock_quant.py:0
 #: code:addons/stock_location_lockdown/models/stock_quant.py:0
 #, python-format
 msgid ""

@@ -26,8 +26,8 @@ class StockLocation(models.Model):
             if self.mapped("quant_ids"):
                 raise UserError(
                     _(
-                        "It is impossible to prohibit this location from\
-                    receiving products as it already contains some."
+                        "It is impossible to prohibit this location from "
+                        "receiving products as it already contains some."
                     )
                 )
         return res
