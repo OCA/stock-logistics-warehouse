@@ -38,8 +38,7 @@
                         class="col-lg-6 col-lg-6 o_setting_box"
                         id="default_counted_quantities"
                     >
-                        <div class="o_setting_left_pane">
-                        </div>
+                        <div class="o_setting_left_pane" />
                         <div class="o_setting_right_pane">
                             <label
                                 for="inventory_adjustment_counted_quantities"

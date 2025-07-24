@@ -369,16 +369,17 @@ ul.auto-toc {
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !! source digest: sha256:b29972e88c34416dd9bf53bdf01ac2519602f9f23ab7fb34537441552051f730
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
-<p><a class="reference external image-reference" href="https://odoo-community.org/page/development-status"><img alt="Beta" src="https://img.shields.io/badge/maturity-Beta-yellow.png" /></a> <a class="reference external image-reference" href="http://www.gnu.org/licenses/agpl-3.0-standalone.html"><img alt="License: AGPL-3" src="https://img.shields.io/badge/licence-AGPL--3-blue.png" /></a> <a class="reference external image-reference" href="https://github.com/OCA/stock-logistics-warehouse/tree/16.0/stock_cycle_count"><img alt="OCA/stock-logistics-warehouse" src="https://img.shields.io/badge/github-OCA%2Fstock--logistics--warehouse-lightgray.png?logo=github" /></a> <a class="reference external image-reference" href="https://translation.odoo-community.org/projects/stock-logistics-warehouse-16-0/stock-logistics-warehouse-16-0-stock_cycle_count"><img alt="Translate me on Weblate" src="https://img.shields.io/badge/weblate-Translate%20me-F47D42.png" /></a> <a class="reference external image-reference" href="https://runboat.odoo-community.org/builds?repo=OCA/stock-logistics-warehouse&amp;target_branch=16.0"><img alt="Try me on Runboat" src="https://img.shields.io/badge/runboat-Try%20me-875A7B.png" /></a></p>
-<p>This module provides the capability to execute a cycle count strategy in a
-warehouse through different rules defined by the user. Cycle count is an
-alternative to full wall-to-wall physical inventories in which little
-portions (stock locations) of the stock are selected to count on a regular
-basis.</p>
-<p>The system propose locations in which to perform a inventory adjustment every
-day based on a set of rules defined for the warehouse. In addition the system
-can propose Zero-Confirmations which are simple and opportunistic counts to
-check whether a locations has actually became empty or not.</p>
+<p><a class="reference external image-reference" href="https://odoo-community.org/page/development-status"><img alt="Beta" src="https://img.shields.io/badge/maturity-Beta-yellow.png" /></a> <a class="reference external image-reference" href="http://www.gnu.org/licenses/agpl-3.0-standalone.html"><img alt="License: AGPL-3" src="https://img.shields.io/badge/licence-AGPL--3-blue.png" /></a> <a class="reference external image-reference" href="https://github.com/OCA/stock-logistics-warehouse/tree/18.0/stock_cycle_count"><img alt="OCA/stock-logistics-warehouse" src="https://img.shields.io/badge/github-OCA%2Fstock--logistics--warehouse-lightgray.png?logo=github" /></a> <a class="reference external image-reference" href="https://translation.odoo-community.org/projects/stock-logistics-warehouse-18-0/stock-logistics-warehouse-18-0-stock_cycle_count"><img alt="Translate me on Weblate" src="https://img.shields.io/badge/weblate-Translate%20me-F47D42.png" /></a> <a class="reference external image-reference" href="https://runboat.odoo-community.org/builds?repo=OCA/stock-logistics-warehouse&amp;target_branch=18.0"><img alt="Try me on Runboat" src="https://img.shields.io/badge/runboat-Try%20me-875A7B.png" /></a></p>
+<p>This module provides the capability to execute a cycle count strategy in
+a warehouse through different rules defined by the user. Cycle count is
+an alternative to full wall-to-wall physical inventories in which little
+portions (stock locations) of the stock are selected to count on a
+regular basis.</p>
+<p>The system propose locations in which to perform a inventory adjustment
+every day based on a set of rules defined for the warehouse. In addition
+the system can propose Zero-Confirmations which are simple and
+opportunistic counts to check whether a locations has actually became
+empty or not.</p>
 <p>With this strategy it is possible to:</p>
 <ul class="simple">
 <li>Remove the need to perform full physical inventories and to stop the
@@ -422,47 +423,49 @@ production in the warehouse.</li>
 <h2><a class="toc-backref" href="#toc-entry-2">Recommendations</a></h2>
 <p>It is highly recommended to use this module in conjunction with:</p>
 <ul class="simple">
-<li><tt class="docutils literal">stock_inventory_verification_request</tt>: Adds the capability to request Slot
-Verifications.</li>
+<li><tt class="docutils literal">stock_inventory_verification_request</tt>: Adds the capability to
+request Slot Verifications.</li>
 <li><tt class="docutils literal">stock_inventory_lockdown</tt>: Lock down locations during inventories.</li>
 </ul>
 </div>
 </div>
 <div class="section" id="configuration">
 <h1><a class="toc-backref" href="#toc-entry-3">Configuration</a></h1>
-<p>You can configure the rules to compute the cycle count, acting as follow:</p>
+<p>You can configure the rules to compute the cycle count, acting as
+follow:</p>
 <ol class="arabic simple">
 <li>Go to <em>Inventory &gt; Configuration &gt; Cycle Count Rules</em>.</li>
 <li>Create as much cycle count rules as you want.</li>
-<li>Assign the rules to the Warehouse or zones where you want to apply the rules
-in.</li>
-<li>Go to <em>Inventory &gt; Configuration &gt; Warehouse Management &gt; Warehouses</em> and
-set a <em>Cycle Count Planning Horizon</em> for each warehouse.</li>
+<li>Assign the rules to the Warehouse or zones where you want to apply
+the rules in.</li>
+<li>Go to <em>Inventory &gt; Configuration &gt; Warehouse Management &gt; Warehouses</em>
+and set a <em>Cycle Count Planning Horizon</em> for each warehouse.</li>
 </ol>
 </div>
 <div class="section" id="usage">
 <h1><a class="toc-backref" href="#toc-entry-4">Usage</a></h1>
-<p>Once you have some rules configured for your warehouses, you can proceed as
-is described below.</p>
+<p>Once you have some rules configured for your warehouses, you can proceed
+as is described below.</p>
 <ol class="arabic simple">
-<li>Go to <em>Inventory &gt; Configuration &gt; Warehouse Management &gt; Warehouses</em>.</li>
+<li>Go to <em>Inventory &gt; Configuration &gt; Warehouse Management &gt;
+Warehouses</em>.</li>
 <li>Select all the warehouses you want to compute the rules in.</li>
-<li>Click on “Action” and then in “Compute Cycle Count Rules”. (<strong>note</strong>: A
-cron job will do this for every warehouse daily.)</li>
+<li>Click on “Action” and then in “Compute Cycle Count Rules”. (<strong>note</strong>:
+A cron job will do this for every warehouse daily.)</li>
 <li>Go to <em>Operations &gt; Cycle Counts</em>.</li>
 <li>Select a planned Cycle Count and confirm it, this will create a draft
 Inventory Adjustment.</li>
-<li>In the right top corner of the form view you can access to the generated
-Inventory Adjustment.</li>
+<li>In the right top corner of the form view you can access to the
+generated Inventory Adjustment.</li>
 <li>Proceed with the Inventory Adjustment as usual.</li>
 </ol>
 </div>
 <div class="section" id="known-issues-roadmap">
 <h1><a class="toc-backref" href="#toc-entry-5">Known issues / Roadmap</a></h1>
 <ul class="simple">
-<li>Assess the possibility to refactor <cite>action_compute_cycle_count_rules</cite> method
-converting some of the searches to actual fields. E.g.
-<cite>inventory_history_ids</cite> for all the inventories done in a location.</li>
+<li>Assess the possibility to refactor action_compute_cycle_count_rules
+method converting some of the searches to actual fields. E.g.
+inventory_history_ids for all the inventories done in a location.</li>
 </ul>
 </div>
 <div class="section" id="changelog">
@@ -491,7 +494,7 @@ converting some of the searches to actual fields. E.g.
 <p>Bugs are tracked on <a class="reference external" href="https://github.com/OCA/stock-logistics-warehouse/issues">GitHub Issues</a>.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-<a class="reference external" href="https://github.com/OCA/stock-logistics-warehouse/issues/new?body=module:%20stock_cycle_count%0Aversion:%2016.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**">feedback</a>.</p>
+<a class="reference external" href="https://github.com/OCA/stock-logistics-warehouse/issues/new?body=module:%20stock_cycle_count%0Aversion:%2018.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**">feedback</a>.</p>
 <p>Do not contact contributors directly about support or help with technical issues.</p>
 </div>
 <div class="section" id="credits">
@@ -522,7 +525,7 @@ mission is to support the collaborative development of Odoo features and
 promote its widespread use.</p>
 <p>Current <a class="reference external" href="https://odoo-community.org/page/maintainer-role">maintainer</a>:</p>
 <p><a class="reference external image-reference" href="https://github.com/LoisRForgeFlow"><img alt="LoisRForgeFlow" src="https://github.com/LoisRForgeFlow.png?size=40px" /></a></p>
-<p>This module is part of the <a class="reference external" href="https://github.com/OCA/stock-logistics-warehouse/tree/16.0/stock_cycle_count">OCA/stock-logistics-warehouse</a> project on GitHub.</p>
+<p>This module is part of the <a class="reference external" href="https://github.com/OCA/stock-logistics-warehouse/tree/18.0/stock_cycle_count">OCA/stock-logistics-warehouse</a> project on GitHub.</p>
 <p>You are welcome to contribute. To learn how please visit <a class="reference external" href="https://odoo-community.org/page/Contribute">https://odoo-community.org/page/Contribute</a>.</p>
 </div>
 </div>

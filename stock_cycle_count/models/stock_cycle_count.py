@@ -95,7 +95,7 @@ class StockCycleCount(models.Model):
     def _prepare_inventory_adjustment(self):
         self.ensure_one()
         return {
-            "name": "INV/{}".format(self.name),
+            "name": f"INV/{self.name}",
             "cycle_count_id": self.id,
             "location_ids": [(4, self.location_id.id)],
             "exclude_sublocation": True,
