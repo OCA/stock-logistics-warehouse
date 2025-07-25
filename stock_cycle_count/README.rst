@@ -42,10 +42,10 @@ empty or not.
 
 With this strategy it is possible to:
 
--  Remove the need to perform full physical inventories and to stop the
-   production in the warehouse.
--  Measure the accuracy of the inventory records and improve it.
--  Correct inventory errors earlier and prevent them to become bigger.
+- Remove the need to perform full physical inventories and to stop the
+  production in the warehouse.
+- Measure the accuracy of the inventory records and improve it.
+- Correct inventory errors earlier and prevent them to become bigger.
 
 **Table of contents**
 
@@ -57,17 +57,17 @@ Installation
 
 To install this module, you need to:
 
--  Download this module to your addons path.
--  Install the module in your database.
+- Download this module to your addons path.
+- Install the module in your database.
 
 Recommendations
 ---------------
 
 It is highly recommended to use this module in conjunction with:
 
--  ``stock_inventory_verification_request``: Adds the capability to
-   request Slot Verifications.
--  ``stock_inventory_lockdown``: Lock down locations during inventories.
+- ``stock_inventory_verification_request``: Adds the capability to
+  request Slot Verifications.
+- ``stock_inventory_lockdown``: Lock down locations during inventories.
 
 Configuration
 =============
@@ -103,9 +103,9 @@ as is described below.
 Known issues / Roadmap
 ======================
 
--  Assess the possibility to refactor action_compute_cycle_count_rules
-   method converting some of the searches to actual fields. E.g.
-   inventory_history_ids for all the inventories done in a location.
+- Assess the possibility to refactor action_compute_cycle_count_rules
+  method converting some of the searches to actual fields. E.g.
+  inventory_history_ids for all the inventories done in a location.
 
 Changelog
 =========
@@ -113,17 +113,17 @@ Changelog
 13.0.1.0.0 (2020-02-05)
 -----------------------
 
--  [MIG] Migrated to v13.
+- [MIG] Migrated to v13.
 
 12.0.1.0.0 (2019-06-24)
 -----------------------
 
--  [MIG] Migrated to v12.
+- [MIG] Migrated to v12.
 
 11.0.1.0.0 (2018-09-19)
 -----------------------
 
--  [MIG] Migrated to v11. Start of history.
+- [MIG] Migrated to v11. Start of history.
 
 Bug Tracker
 ===========
@@ -146,10 +146,11 @@ Authors
 Contributors
 ------------
 
--  Lois Rilo <lois.rilo@forgeflow.com>
--  Jordi Ballester Alomar <jordi.ballester@forgeflow.com>
--  Bhavesh Odedra <bodedra@opensourceintegrators.com>
--  Jim Hoefnagels <jim.hoefnagels@dynapps.be>
+- Lois Rilo <lois.rilo@forgeflow.com>
+- Jordi Ballester Alomar <jordi.ballester@forgeflow.com>
+- Bhavesh Odedra <bodedra@opensourceintegrators.com>
+- Jim Hoefnagels <jim.hoefnagels@dynapps.be>
+- Do Anh Duy <duyda@trobz.com>
 
 Maintainers
 -----------

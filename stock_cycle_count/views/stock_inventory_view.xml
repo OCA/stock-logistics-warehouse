@@ -3,12 +3,12 @@
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
     <record id="view_inventory_tree" model="ir.ui.view">
-        <field name="name">Inventory tree view - cycle count extension</field>
+        <field name="name">Inventory list view - cycle count extension</field>
         <field name="model">stock.inventory</field>
         <field name="inherit_id" ref="stock_inventory.view_inventory_group_tree" />
         <field name="arch" type="xml">
             <field name="name" position="after">
-                <field name="cycle_count_id" />
+                <field name="cycle_count_id" readonly="1" />
                 <field name="inventory_accuracy" />
             </field>
         </field>
@@ -71,7 +71,7 @@
             ('state', '=', 'done')]</field>
         <field name="name">Accuracy Stats</field>
         <field name="res_model">stock.inventory</field>
-        <field name="view_mode">pivot,tree,form,graph</field>
+        <field name="view_mode">pivot,list,form,graph</field>
     </record>
     <menuitem
         id="menu_report_accuracy_stats"

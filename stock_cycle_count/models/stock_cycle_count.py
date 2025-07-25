@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 import logging
 
-from odoo import _, api, fields, models
+from odoo import Command, api, fields, models
 from odoo.exceptions import UserError
 
 _logger = logging.getLogger(__name__)
@@ -15,25 +15,19 @@ class StockCycleCount(models.Model):
     _inherit = "mail.thread"
     _order = "id desc"
 
-    name = fields.Char(readonly=True)
+    name = fields.Char()
     location_id = fields.Many2one(
         comodel_name="stock.location",
         string="Location",
         required=True,
-        readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     responsible_id = fields.Many2one(
         comodel_name="res.users",
         string="Assigned to",
-        readonly=True,
-        states={"draft": [("readonly", False)], "open": [("readonly", False)]},
         tracking=True,
     )
     date_deadline = fields.Date(
         string="Required Date",
-        readonly=True,
-        states={"draft": [("readonly", False)]},
         tracking=True,
         compute="_compute_date_deadline",
         inverse="_inverse_date_deadline",
@@ -41,22 +35,16 @@ class StockCycleCount(models.Model):
     )
     automatic_deadline_date = fields.Date(
         string="Automatic Required Date",
-        readonly=True,
-        states={"draft": [("readonly", False)]},
         tracking=True,
     )
     manual_deadline_date = fields.Date(
         string="Manual Required Date",
-        readonly=True,
-        states={"draft": [("readonly", False)]},
         tracking=True,
     )
     cycle_count_rule_id = fields.Many2one(
         comodel_name="stock.cycle.count.rule",
         string="Cycle count rule",
         required=True,
-        readonly=True,
-        states={"draft": [("readonly", False)]},
         tracking=True,
     )
     state = fields.Selection(
@@ -81,7 +69,6 @@ class StockCycleCount(models.Model):
         string="Company",
         required=True,
         default=lambda self: self.env.company,
-        readonly=True,
     )
 
     @api.depends("stock_adjustment_ids")
@@ -97,7 +84,7 @@ class StockCycleCount(models.Model):
         return {
             "name": f"INV/{self.name}",
             "cycle_count_id": self.id,
-            "location_ids": [(4, self.location_id.id)],
+            "location_ids": [Command.link(self.location_id.id)],
             "exclude_sublocation": True,
             "responsible_id": self.responsible_id.id,
         }
@@ -112,7 +99,9 @@ class StockCycleCount(models.Model):
 
     def action_create_inventory_adjustment(self):
         if any([state != "draft" for state in self.mapped("state")]):
-            raise UserError(_("You can only confirm cycle counts in state 'Planned'."))
+            raise UserError(
+                self.env._("You can only confirm cycle counts in state 'Planned'.")
+            )
         for rec in self:
             data = rec._prepare_inventory_adjustment()
             inv = self.env["stock.inventory"].create(data)

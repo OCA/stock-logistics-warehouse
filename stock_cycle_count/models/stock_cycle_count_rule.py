@@ -4,7 +4,7 @@
 
 from datetime import datetime, timedelta
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError, ValidationError
 
 
@@ -60,10 +60,10 @@ class StockCycleCountRule(models.Model):
     @api.model
     def _selection_rule_types(self):
         return [
-            ("periodic", _("Periodic")),
-            ("turnover", _("Value Turnover")),
-            ("accuracy", _("Minimum Accuracy")),
-            ("zero", _("Zero Confirmation")),
+            ("periodic", self.env._("Periodic")),
+            ("turnover", self.env._("Value Turnover")),
+            ("accuracy", self.env._("Minimum Accuracy")),
+            ("zero", self.env._("Zero Confirmation")),
         ]
 
     @api.constrains("rule_type", "warehouse_ids")
@@ -71,7 +71,7 @@ class StockCycleCountRule(models.Model):
         for rec in self:
             if rec.rule_type == "zero" and len(rec.warehouse_ids) > 1:
                 raise ValidationError(
-                    _(
+                    self.env._(
                         "Zero confirmation rules can only have one warehouse "
                         "assigned."
                     )
@@ -85,7 +85,7 @@ class StockCycleCountRule(models.Model):
                 )
                 if len(zero_rule) > 1:
                     raise ValidationError(
-                        _(
+                        self.env._(
                             "You can only have one zero confirmation rule per "
                             "warehouse."
                         )
@@ -94,46 +94,48 @@ class StockCycleCountRule(models.Model):
     @api.depends("rule_type")
     def _compute_rule_description(self):
         if self.rule_type == "periodic":
-            self.rule_description = _(
+            self.rule_description = self.env._(
                 "Ensures that at least a defined number "
                 "of counts in a given period will "
                 "be run."
             )
         elif self.rule_type == "turnover":
-            self.rule_description = _(
+            self.rule_description = self.env._(
                 "Schedules a count every time the total "
                 "turnover of a location exceeds the "
                 "threshold. This considers every "
                 "product going into/out of the location"
             )
         elif self.rule_type == "accuracy":
-            self.rule_description = _(
+            self.rule_description = self.env._(
                 "Schedules a count every time the "
                 "accuracy of a location goes under a "
                 "given threshold."
             )
         elif self.rule_type == "zero":
-            self.rule_description = _(
+            self.rule_description = self.env._(
                 "Perform an Inventory Adjustment every "
                 "time a location in the warehouse runs "
                 "out of stock in order to confirm it is "
                 "truly empty."
             )
         else:
-            self.rule_description = _("(No description provided.)")
+            self.rule_description = self.env._("(No description provided.)")
 
     @api.constrains("periodic_qty_per_period", "periodic_count_period")
     def _check_negative_periodic(self):
         for rec in self:
             if rec.periodic_qty_per_period < 1:
                 raise ValidationError(
-                    _(
+                    self.env._(
                         "You cannot define a negative or null number of counts "
                         "per period."
                     )
                 )
             if rec.periodic_count_period < 0:
-                raise ValidationError(_("You cannot define a negative period."))
+                raise ValidationError(
+                    self.env._("You cannot define a negative period.")
+                )
 
     @api.depends("location_ids")
     def _compute_warehouse_ids(self):
@@ -190,11 +192,11 @@ class StockCycleCountRule(models.Model):
                         next_date = datetime.today()
                 except AttributeError as e:
                     raise UserError(
-                        _(
+                        self.env._(
                             "Error found determining the frequency of periodic "
-                            "cycle count rule. %s"
+                            "cycle count rule. %s",
+                            str(e),
                         )
-                        % str(e)
                     ) from e
             else:
                 next_date = datetime.today()
@@ -251,11 +253,11 @@ class StockCycleCountRule(models.Model):
                             cycle_counts.append(cycle_count)
                     except AttributeError as e:
                         raise UserError(
-                            _(
+                            self.env._(
                                 "Error found when comparing turnover "
-                                "with the rule threshold. %s"
+                                "with the rule threshold. %s",
+                                str(e),
                             )
-                            % str(e)
                         ) from e
             else:
                 next_date = datetime.today()

@@ -9,7 +9,6 @@ class StockMoveLine(models.Model):
 
     line_accuracy = fields.Float(
         string="Accuracy",
-        store=True,
     )
-    theoretical_qty = fields.Float(string="Theoretical Quantity", store=True)
-    counted_qty = fields.Float(string="Counted Quantity", store=True)
+    theoretical_qty = fields.Float(string="Theoretical Quantity")
+    counted_qty = fields.Float(string="Counted Quantity")

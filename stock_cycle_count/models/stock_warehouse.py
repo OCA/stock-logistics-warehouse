@@ -48,14 +48,15 @@ class StockWarehouse(models.Model):
 
     @api.model
     def _search_cycle_count_locations(self, rule):
-        locations = self.env["stock.location"]
+        StockLocation = self.env["stock.location"]
+        locations = StockLocation
         if rule.apply_in == "warehouse":
-            locations = self.env["stock.location"].search(
+            locations = StockLocation.search(
                 self._get_cycle_count_locations_search_domain(self.view_location_id)
             )
         elif rule.apply_in == "location":
             for loc in rule.location_ids:
-                locations += self.env["stock.location"].search(
+                locations |= StockLocation.search(
                     self._get_cycle_count_locations_search_domain(loc)
                 )
         return locations

@@ -7,38 +7,38 @@ from odoo import models
 class StockQuant(models.Model):
     _inherit = "stock.quant"
 
+    # pylint: disable=W8110
     def _apply_inventory(self):
         accuracy_dict = {}
         theoretical_dict = {}
         counted_dict = {}
-        for rec in self:
-            if rec.discrepancy_percent > 100:
+        StockMoveLine = self.env["stock.move.line"]
+        for quant in self:
+            if quant.discrepancy_percent > 100:
                 line_accuracy = 0
             else:
-                line_accuracy = 1 - (rec.discrepancy_percent / 100)
-            accuracy_dict[rec.id] = line_accuracy
-            theoretical_dict[rec.id] = rec.quantity
-            counted_dict[rec.id] = rec.inventory_quantity
-        res = super()._apply_inventory()
-        for rec in self:
-            record_moves = self.env["stock.move.line"]
-            moves = record_moves.search(
-                [
-                    ("product_id", "=", rec.product_id.id),
-                    ("lot_id", "=", rec.lot_id.id),
-                    "|",
-                    ("location_id", "=", rec.location_id.id),
-                    ("location_dest_id", "=", rec.location_id.id),
-                ]
-                + ([("company_id", "=", rec.company_id.id)] if rec.company_id else []),
-                order="create_date asc",
-            )
-            move = moves[len(moves) - 1]
-            move.write(
-                {
-                    "line_accuracy": accuracy_dict[rec.id],
-                    "theoretical_qty": theoretical_dict[rec.id],
-                    "counted_qty": counted_dict[rec.id],
-                }
-            )
-        return res
+                line_accuracy = 1 - (quant.discrepancy_percent / 100)
+            accuracy_dict[quant.id] = line_accuracy
+            theoretical_dict[quant.id] = quant.quantity
+            counted_dict[quant.id] = quant.inventory_quantity
+        super()._apply_inventory()
+        for quant in self:
+            domain = [
+                ("product_id", "=", quant.product_id.id),
+                ("lot_id", "=", quant.lot_id.id),
+                "|",
+                ("location_id", "=", quant.location_id.id),
+                ("location_dest_id", "=", quant.location_id.id),
+            ]
+            if quant.company_id:
+                domain.append(("company_id", "=", quant.company_id.id))
+            move_lines = StockMoveLine.search(domain, order="create_date asc")
+            if move_lines:
+                last_move_line = move_lines[-1]
+                last_move_line.write(
+                    {
+                        "line_accuracy": accuracy_dict[quant.id],
+                        "theoretical_qty": theoretical_dict[quant.id],
+                        "counted_qty": counted_dict[quant.id],
+                    }
+                )

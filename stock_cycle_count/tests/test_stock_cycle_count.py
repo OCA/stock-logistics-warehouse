@@ -3,6 +3,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 from datetime import datetime, timedelta
 
+from odoo import Command
 from odoo.exceptions import AccessError, ValidationError
 from odoo.tests import common
 
@@ -56,7 +57,7 @@ class TestStockCycleCount(common.TransactionCase):
             cls.rule_accuracy.id,
             cls.zero_rule.id,
         ]
-        cls.big_wh.write({"cycle_count_rule_ids": [(6, 0, cls.rule_ids)]})
+        cls.big_wh.write({"cycle_count_rule_ids": [Command.set(cls.rule_ids)]})
 
         # Create locations:
         cls.count_loc = cls.stock_location_model.create(
@@ -78,10 +79,18 @@ class TestStockCycleCount(common.TransactionCase):
 
         # Create a product:
         cls.product1 = cls.product_model.create(
-            {"name": "Test Product 1", "type": "product", "default_code": "PROD1"}
+            {
+                "name": "Test Product 1",
+                "is_storable": True,
+                "default_code": "PROD1",
+            }
         )
         cls.product2 = cls.product_model.create(
-            {"name": "Test Product 2", "type": "product", "default_code": "PROD2"}
+            {
+                "name": "Test Product 2",
+                "is_storable": True,
+                "default_code": "PROD2",
+            }
         )
 
     @classmethod
@@ -93,8 +102,8 @@ class TestStockCycleCount(common.TransactionCase):
                 "login": login,
                 "email": "example@yourcompany.com",
                 "company_id": company.id,
-                "company_ids": [(4, company.id)],
-                "groups_id": [(6, 0, group_ids)],
+                "company_ids": [Command.link(company.id)],
+                "groups_id": [Command.set(group_ids)],
             }
         )
         return user
@@ -130,7 +139,7 @@ class TestStockCycleCount(common.TransactionCase):
                 "rule_type": "accuracy",
                 "accuracy_threshold": values[0],
                 "apply_in": "location",
-                "location_ids": [(6, 0, zone_ids)],
+                "location_ids": [Command.set(zone_ids)],
             }
         )
         return rule
@@ -153,7 +162,7 @@ class TestStockCycleCount(common.TransactionCase):
         counts = self.cycle_count_model.search([("location_id", "in", locs.ids)])
         self.assertFalse(counts, "Existing cycle counts before execute planner.")
         date_pre_existing_cc = datetime.today() + timedelta(days=30)
-        loc = locs.filtered(lambda l: l.usage != "view")[0]
+        loc = locs.filtered(lambda line: line.usage != "view")[0]
         pre_existing_count = self.cycle_count_model.create(
             {
                 "name": "To be cancelled when running cron job.",
@@ -169,7 +178,7 @@ class TestStockCycleCount(common.TransactionCase):
         self.inventory_model.create(
             {
                 "name": "Pre-existing inventory",
-                "location_ids": [(4, loc.id)],
+                "location_ids": [Command.link(loc.id)],
                 "date": date,
             }
         )
@@ -192,7 +201,9 @@ class TestStockCycleCount(common.TransactionCase):
         )
         move1._action_confirm()
         move1._action_assign()
-        move1.move_line_ids[0].qty_done = 1.0
+        for move_line in move1.move_line_ids:
+            move_line.quantity = 1
+        move1.picked = True
         move1._action_done()
         # Remove the pre_existing_count
         self.inventory_model.search(
@@ -221,7 +232,9 @@ class TestStockCycleCount(common.TransactionCase):
         )
         move2._action_confirm()
         move2._action_assign()
-        move2.move_line_ids[0].qty_done = 1.0
+        for move_line in move2.move_line_ids:
+            move_line.quantity = 1
+        move2.picked = True
         move2._action_done()
         count = self.cycle_count_model.search(
             [
@@ -294,9 +307,9 @@ class TestStockCycleCount(common.TransactionCase):
         """
         zero2 = self._create_stock_cycle_count_rule_zero(self.manager, "zero_rule_2")
         with self.assertRaises(ValidationError):
-            zero2.warehouse_ids = [(4, self.big_wh.id)]
+            zero2.warehouse_ids = [Command.link(self.big_wh.id)]
         with self.assertRaises(ValidationError):
-            self.zero_rule.warehouse_ids = [(4, self.small_wh.id)]
+            self.zero_rule.warehouse_ids = [Command.link(self.small_wh.id)]
 
     def test_auto_link_inventory_to_cycle_count_1(self):
         """Create an inventory that could fit a planned cycle count should
@@ -305,7 +318,7 @@ class TestStockCycleCount(common.TransactionCase):
         inventory = self.inventory_model.create(
             {
                 "name": "new inventory",
-                "location_ids": [(4, self.count_loc.id)],
+                "location_ids": [Command.link(self.count_loc.id)],
                 "exclude_sublocation": True,
             }
         )
@@ -316,7 +329,7 @@ class TestStockCycleCount(common.TransactionCase):
         """Test auto-link when exclude sublocation is no set."""
         self.assertEqual(self.cycle_count_1.state, "draft")
         inventory = self.inventory_model.create(
-            {"name": "new inventory", "location_ids": [(4, self.count_loc.id)]}
+            {"name": "new inventory", "location_ids": [Command.link(self.count_loc.id)]}
         )
         self.assertEqual(inventory.cycle_count_id, self.cycle_count_1)
         self.assertEqual(self.cycle_count_1.state, "open")
@@ -368,7 +381,7 @@ class TestStockCycleCount(common.TransactionCase):
         adjustment = self.inventory_model.create(
             {
                 "name": "Pre-existing inventory",
-                "location_ids": [(4, loc.id)],
+                "location_ids": [Command.link(loc.id)],
                 "date": date,
             }
         )
@@ -429,7 +442,7 @@ class TestStockCycleCount(common.TransactionCase):
         adjustment = self.inventory_model.create(
             {
                 "name": "Pre-existing inventory qty zero",
-                "location_ids": [(4, loc.id)],
+                "location_ids": [Command.link(loc.id)],
                 "date": date,
             }
         )
@@ -468,7 +481,7 @@ class TestStockCycleCount(common.TransactionCase):
         adjustment_2 = self.inventory_model.create(
             {
                 "name": "Adjustment 2",
-                "location_ids": [(4, loc.id)],
+                "location_ids": [Command.link(loc.id)],
                 "date": date,
             }
         )
@@ -534,14 +547,14 @@ class TestStockCycleCount(common.TransactionCase):
         adjustment_1 = self.inventory_model.create(
             {
                 "name": "Adjustment Location 1",
-                "location_ids": [(4, loc_1.id)],
+                "location_ids": [Command.link(loc_1.id)],
                 "date": date,
             }
         )
         adjustment_2 = self.inventory_model.create(
             {
                 "name": "Adjustment Location 2",
-                "location_ids": [(4, loc_2.id)],
+                "location_ids": [Command.link(loc_2.id)],
                 "date": date,
             }
         )

@@ -25,13 +25,12 @@ class StockInventory(models.Model):
         comodel_name="stock.cycle.count",
         string="Stock Cycle Count",
         ondelete="restrict",
-        readonly=True,
     )
     inventory_accuracy = fields.Float(
         string="Accuracy",
         digits=(3, 2),
         store=True,
-        group_operator="avg",
+        aggregator="avg",
         default=False,
     )
     responsible_id = fields.Many2one(
@@ -153,7 +152,7 @@ class StockInventory(models.Model):
             or len(self.location_ids) > 1
             or self.location_ids != self.cycle_count_id.location_id
         ):
-            return False, _(
+            return False, self.env._(
                 "The location in the inventory does not match with the cycle count."
             )
         if self.product_ids:
@@ -161,12 +160,12 @@ class StockInventory(models.Model):
                 "The adjustment should be done for all products in the location."
             )
         if self.company_id != self.cycle_count_id.company_id:
-            return False, _(
+            return False, self.env._(
                 "The company of the adjustment does not match with the "
                 "company in the cycle count."
             )
         if not self.exclude_sublocation:
-            return False, _(
+            return False, self.env._(
                 "An adjustment linked to a cycle count should exclude the sublocations."
             )
         return True, ""
@@ -183,7 +182,7 @@ class StockInventory(models.Model):
             is_consistent, msg = rec._is_consistent_with_cycle_count()
             if not is_consistent:
                 raise ValidationError(
-                    _(
+                    self.env._(
                         "The Inventory Adjustment is inconsistent "
                         "with the Cycle Count:\n%(message)s",
                         message=msg,
