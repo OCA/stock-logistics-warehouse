@@ -30,16 +30,19 @@
     <record id="view_inventory_filter" model="ir.ui.view">
         <field name="name">stock.inventory.filter - stock_cycle_count</field>
         <field name="model">stock.inventory</field>
+        <field name="inherit_id" ref="stock_inventory.stock_inventory_search_view" />
         <field name="arch" type="xml">
-            <search>
-                <field name="location_ids" />
+            <xpath
+                expr="//search/field[@name='products_under_review_ids']"
+                position="after"
+            >
                 <field name="responsible_id" />
                 <filter
                     string="My Adjustments"
                     name="my_adjustments"
                     domain="[('responsible_id', '=', uid)]"
                 />
-            </search>
+            </xpath>
         </field>
     </record>
     <record id="view_inventory_graph" model="ir.ui.view">
