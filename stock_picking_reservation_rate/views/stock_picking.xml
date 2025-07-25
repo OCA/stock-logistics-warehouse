@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record model="ir.ui.view" id="stock_picking_form_view">
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form" />
+        <field name="arch" type="xml">
+            <field name="products_availability" position="after">
+                <field name="reservation_rate" widget="progressbar_gradient" />
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="stock_picking_search_view">
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_internal_search" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//filter[@name='late_availability']/following-sibling::separator"
+                position="after"
+            >
+                <filter
+                    name="reservation_rate_0_50"
+                    string="Reservation Rate  0-50 %"
+                    help="Reservation rate between 0 and 50%"
+                    domain="[('reservation_rate', '&lt;=', 75.0)]"
+                />
+                <filter
+                    name="reservation_rate_50"
+                    string="Reservation Rate > 50%"
+                    help="Reservation rate over 50%"
+                    domain="[('reservation_rate', '>', 50.0)]"
+                />
+                <filter
+                    name="reservation_rate_75"
+                    string="Reservation Rate > 75%"
+                    help="Reservation rate over 75%"
+                    domain="[('reservation_rate', '>', 75.0)]"
+                />
+                <separator />
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="stock_picking_tree_view">
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.vpicktree" />
+        <field name="arch" type="xml">
+            <field name="state" position="after">
+                <field
+                    name="reservation_rate"
+                    widget="progressbar_gradient"
+                    optional="hide"
+                />
+            </field>
+        </field>
+    </record>
+</odoo>
