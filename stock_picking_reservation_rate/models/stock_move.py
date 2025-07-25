@@ -1,7 +1,6 @@
 # Copyright 2025 ACSONE SA/NV
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 from odoo import api, fields, models
-from odoo.tools import float_is_zero
 
 
 class StockMove(models.Model):
@@ -33,8 +32,4 @@ class StockMove(models.Model):
             else:
                 move.reservation_rate = move._get_reservation_rate()
         if zero_moves:
-            zero_moves.filtered(
-                lambda m: not float_is_zero(
-                    m.reservation_rate, precision_rounding=m.product_id.uom_id.rounding
-                )
-            ).reservation_rate = 0.0
+            zero_moves.filtered(lambda m: not m.reservation_rate).reservation_rate = 0.0

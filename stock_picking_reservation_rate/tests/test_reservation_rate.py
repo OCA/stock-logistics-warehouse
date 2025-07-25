@@ -53,3 +53,14 @@ class TestReservationRate(ReservationRateCommon):
 
         # Backorder
         self.assertEqual(0.0, pick_move_b.picking_id.backorder_ids.reservation_rate)
+
+    def test_picking_zero(self):
+        picking = self.env["stock.picking"].create(
+            {
+                "partner_id": self.partner.id,
+                "picking_type_id": self.warehouse.pick_type_id.id,
+                "location_id": self.stock.id,
+                "location_dest_id": self.out.id,
+            }
+        )
+        self.assertEqual(0.0, picking.reservation_rate)
