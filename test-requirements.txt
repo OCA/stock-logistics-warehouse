@@ -1,1 +1,5 @@
 odoo_test_helper
+
+odoo-addon-web-widget-progressbar-gradient @ git+https://github.com/OCA/web@refs/pull/3229/head#subdirectory=web_widget_progressbar_gradient
+odoo-addon-stock-picking-type-group @ git+https://github.com/OCA/stock-logistics-warehouse@refs/pull/2397/head#subdirectory=stock_picking_type_group
+odoo-addon-stock-picking-reservation-rate @ git+https://github.com/OCA/stock-logistics-warehouse@refs/pull/2393/head#subdirectory=stock_picking_reservation_rate
