@@ -37,12 +37,17 @@ msgstr ""
 
 #. module: stock_cycle_count
 #: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_location_accuracy
+msgid "<span>%</span>"
+msgstr ""
+
+#. module: stock_cycle_count
+#: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_location_accuracy
 msgid "<span>Location:</span>"
 msgstr ""
 
 #. module: stock_cycle_count
 #: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_location_accuracy
-msgid "<strong>Complete name:</strong>"
+msgid "<strong>Complete Name:</strong>"
 msgstr ""
 
 #. module: stock_cycle_count
@@ -539,7 +544,7 @@ msgid "Location"
 msgstr ""
 
 #. module: stock_cycle_count
-#: model:ir.model,name:stock_cycle_count.model_report_stock_location_accuracy
+#: model:ir.model,name:stock_cycle_count.model_report_stock_cycle_count_stock_location_accuracy
 msgid "Location Accuracy Report"
 msgstr ""
 
@@ -584,6 +589,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__name
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule__name
 msgid "Name"
+msgstr ""
+
+#. module: stock_cycle_count
+#: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_location_accuracy
+msgid "No inventory records found for this location."
 msgstr ""
 
 #. module: stock_cycle_count
