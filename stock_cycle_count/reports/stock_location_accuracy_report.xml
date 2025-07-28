@@ -13,40 +13,49 @@
                             <span>Location:</span>
                             <span t-field="doc.name" />
                         </h3>
-                        <div class="row mt32 mb32" id="informations">
-                            <div class="col-xs-6">
-                                <strong>Complete name:</strong>
-                                <p t-field="doc.complete_name" />
+                        <div class="row mt-4 mb-4" id="informations">
+                            <div class="col-auto col-6 mw-100 mb-2">
+                                <strong>Complete Name:</strong>
+                                <p class="m-0" t-field="doc.complete_name" />
                             </div>
-                            <div class="col-xs-3">
+                            <div class="col-auto col-3 mw-100 mb-2">
                                 <strong>Current Accuracy:</strong>
-                                <p t-field="doc.loc_accuracy" />
+                                <p class="m-0">
+                                    <span t-field="doc.loc_accuracy" /><span>%</span>
+                                </p>
                             </div>
                         </div>
-                        <table class="table table-condensed">
-                            <thead>
-                                <tr>
-                                    <th>Inventory</th>
-                                    <th class="text-right">Date</th>
-                                    <th class="text-right">Accuracy</th>
-                                </tr>
-                            </thead>
-                            <tbody class="sale_tbody">
-                                <t t-foreach="data[doc]" t-as="l">
+                        <t t-if="location_data.get(doc)">
+                            <table class="table table-condensed">
+                                <thead>
                                     <tr>
-                                        <td>
-                                            <span t-field="l.name" />
-                                        </td>
-                                        <td class="text-right">
-                                            <span t-field="l.date" />
-                                        </td>
-                                        <td class="text-right">
-                                            <span t-field="l.inventory_accuracy" />
-                                        </td>
+                                        <th class="text-start">Inventory</th>
+                                        <th class="text-start">Date</th>
+                                        <th class="text-end">Accuracy</th>
                                     </tr>
-                                </t>
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="location_data[doc]" t-as="l">
+                                        <tr>
+                                            <td>
+                                                <span t-field="l.name" />
+                                            </td>
+                                            <td>
+                                                <span t-field="l.date" />
+                                            </td>
+                                            <td class="text-end">
+                                                <span
+                                                    t-field="l.inventory_accuracy"
+                                                /><span>%</span>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </t>
+                        <t t-else="">
+                            <p>No inventory records found for this location.</p>
+                        </t>
                     </div>
                 </t>
             </t>
@@ -55,7 +64,9 @@
     <!-- Report action -->
     <record id="action_report_stock_location_accuracy" model="ir.actions.report">
         <field name="model">stock.location</field>
-        <field name="report_name">stock_location_accuracy</field>
+        <field name="report_name">stock_cycle_count.stock_location_accuracy</field>
+        <field name="report_file">stock_cycle_count.stock_location_accuracy</field>
+        <field name="binding_model_id" ref="stock.model_stock_location" />
         <field name="name">Accuracy Report</field>
         <field name="report_type">qweb-pdf</field>
         <field name="groups_id" eval="[(4, ref('stock.group_stock_user'))]" />
