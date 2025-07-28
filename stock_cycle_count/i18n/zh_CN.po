@@ -37,13 +37,18 @@ msgstr ""
 
 #. module: stock_cycle_count
 #: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_location_accuracy
+msgid "<span>%</span>"
+msgstr ""
+
+#. module: stock_cycle_count
+#: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_location_accuracy
 msgid "<span>Location:</span>"
 msgstr "<span>位置：</span>"
 
 #. module: stock_cycle_count
 #: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_location_accuracy
-msgid "<strong>Complete name:</strong>"
-msgstr "<strong>全名：</strong>"
+msgid "<strong>Complete Name:</strong>"
+msgstr ""
 
 #. module: stock_cycle_count
 #: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_location_accuracy
@@ -544,7 +549,7 @@ msgid "Location"
 msgstr "位置"
 
 #. module: stock_cycle_count
-#: model:ir.model,name:stock_cycle_count.model_report_stock_location_accuracy
+#: model:ir.model,name:stock_cycle_count.model_report_stock_cycle_count_stock_location_accuracy
 msgid "Location Accuracy Report"
 msgstr "位置准确性报告"
 
@@ -590,6 +595,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule__name
 msgid "Name"
 msgstr "名称"
+
+#. module: stock_cycle_count
+#: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_location_accuracy
+msgid "No inventory records found for this location."
+msgstr ""
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__message_needaction_counter
@@ -884,6 +894,9 @@ msgstr "适用区域"
 #: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_rule_form_view
 msgid "cycle counts test:"
 msgstr "周期盘点测试："
+
+#~ msgid "<strong>Complete name:</strong>"
+#~ msgstr "<strong>全名：</strong>"
 
 #~ msgid "Number of messages which requires an action"
 #~ msgstr "需要操作消息数量"
