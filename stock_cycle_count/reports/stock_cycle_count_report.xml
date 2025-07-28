@@ -9,11 +9,11 @@
                     <table class="table table-condensed">
                         <thead>
                             <tr>
-                                <th>Cycle Count #</th>
-                                <th>Location</th>
-                                <th>Required Date</th>
-                                <th>Assigned to</th>
-                                <th>Status</th>
+                                <th class="text-start">Cycle Count #</th>
+                                <th class="text-start">Location</th>
+                                <th class="text-start">Required Date</th>
+                                <th class="text-start">Assigned to</th>
+                                <th class="text-start">Status</th>
                             </tr>
                         </thead>
                         <tbody class="sale_tbody">
@@ -31,7 +31,7 @@
                                     <td>
                                         <span t-field="doc.responsible_id" />
                                     </td>
-                                    <td class="text-right">
+                                    <td>
                                         <span t-field="doc.state" />
                                     </td>
                                 </tr>
@@ -46,6 +46,8 @@
     <record id="action_report_stock_cycle_count" model="ir.actions.report">
         <field name="model">stock.cycle.count</field>
         <field name="report_name">stock_cycle_count.report_cyclecount</field>
+        <field name="report_file">stock_cycle_count.stock_location_accuracy</field>
+        <field name="binding_model_id" ref="model_stock_cycle_count" />
         <field name="name">Cycle Count</field>
         <field name="report_type">qweb-pdf</field>
         <field name="groups_id" eval="[(4, ref('stock.group_stock_user'))]" />
