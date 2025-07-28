@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="view_pickingtype_filter" model="ir.ui.view">
+        <field name="name">stock.picking.type.filter</field>
+        <field name="model">stock.picking.type</field>
+        <field name="inherit_id" ref="stock.view_pickingtype_filter" />
+        <field name="arch" type="xml">
+            <filter name="groupby_warehouse_id" position="after">
+                <filter
+                    string="Operation Type Group"
+                    name="groupby_picking_type_group_id"
+                    domain="[]"
+                    context="{'group_by': 'picking_type_group_id'}"
+                />
+            </filter>
+        </field>
+    </record>
+
+    <record id="view_picking_type_form" model="ir.ui.view">
+        <field name="name">Operation Types</field>
+        <field name="model">stock.picking.type</field>
+        <field name="inherit_id" ref="stock.view_picking_type_form" />
+        <field name="arch" type="xml">
+            <field name="code" position="after">
+                <field name="picking_type_group_id" />
+            </field>
+        </field>
+    </record>
+</odoo>

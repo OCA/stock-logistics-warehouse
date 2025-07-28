@@ -1,0 +1,2 @@
+- Go to Inventory > Configuration > Warehouse Management > Operation Types Groups
+- Define a new or modify existing one and add or remove operation types in it.
