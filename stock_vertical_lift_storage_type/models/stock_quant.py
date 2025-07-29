@@ -4,7 +4,6 @@ from odoo import models
 
 
 class StockQuant(models.Model):
-
     _inherit = "stock.quant"
 
     def _check_storage_type(self):
