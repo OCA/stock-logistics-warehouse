@@ -32,7 +32,7 @@ class StockQuant(models.Model):
                     ("location_id", "=", rec.location_id.id),
                     ("location_dest_id", "=", rec.location_id.id),
                 ],
-                order="create_date asc",
+                order="id asc",
             ).filtered(
                 lambda x, rec=rec: not x.company_id.id
                 or not rec.company_id.id
