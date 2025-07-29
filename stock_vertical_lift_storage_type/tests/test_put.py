@@ -1,6 +1,8 @@
 # Copyright 2020 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+from odoo import Command
+
 from odoo.addons.stock_vertical_lift.tests.common import VerticalLiftCase
 
 
@@ -13,15 +15,13 @@ class TestPut(VerticalLiftCase):
         cls.wh.int_type_id.active = True
 
         # used on the vertical lift top level
-        LocStorageType = cls.env["stock.location.storage.type"]
-        cls.location_storage_type_buffer = LocStorageType.create(
-            {"name": "VLift Buffer"}
-        )
-        cls.location_storage_type_small_8x = LocStorageType.create(
-            {"name": "Small 8x", "only_empty": True}
+        LocCategory = cls.env["stock.storage.category"]
+        cls.location_category_buffer = LocCategory.create({"name": "VLift Buffer"})
+        cls.location_category_small_8x = LocCategory.create(
+            {"name": "Small 8x", "allow_new_product": "empty"}
         )
 
-        PackageStorageType = cls.env["stock.package.storage.type"]
+        PackageType = cls.env["stock.package.type"]
         # package storage type used only to putaway a package temporarily in
         # the vertical lift view location before being put in a shuttle, which
         # will not be configured in any shuttle's locations, we'll use when
@@ -29,46 +29,61 @@ class TestPut(VerticalLiftCase):
         # know yet in which tray type: when the first putaway is done, the good
         # stays in the vertical lift view (above the shuttles), then, when the
         # user scans the package in a shuttle, they have to scan a tray type.
-        cls.package_storage_type_buffer = PackageStorageType.create(
+        cls.package_type_buffer = PackageType.create(
             {
                 "name": "VLift Box",
-                "location_storage_type_ids": [
-                    (4, cls.location_storage_type_buffer.id),
+                "storage_category_capacity_ids": [
+                    Command.create(
+                        {
+                            "storage_category_id": cls.location_category_buffer.id,
+                            "quantity": 1,
+                        }
+                    ),
                 ],
             }
         )
         # storage type used for Tray 1A, user won't have to scan a tray type
         # when this storage type is already set on the package
-        cls.package_storage_type_small_8x = PackageStorageType.create(
+        cls.package_type_small_8x = PackageType.create(
             {
                 "name": "Small 8x",
-                "location_storage_type_ids": [
-                    (4, cls.location_storage_type_small_8x.id),
-                    (4, cls.location_storage_type_buffer.id),
+                "storage_category_capacity_ids": [
+                    Command.create(
+                        {
+                            "storage_category_id": cls.location_category_buffer.id,
+                            "quantity": 1,
+                        }
+                    ),
+                    Command.create(
+                        {
+                            "storage_category_id": cls.location_category_small_8x.id,
+                            "quantity": 1,
+                        }
+                    ),
                 ],
             }
         )
 
         cls.location_shuttle1 = cls.shuttle.location_id
-        cls.vertical_lift_loc.location_storage_type_ids = (
-            cls.location_storage_type_buffer
-        )
+        cls.vertical_lift_loc.storage_category_id = cls.location_category_buffer
         cls.vertical_lift_loc.pack_putaway_strategy = "none"
-        cls.location_shuttle1.location_storage_type_ids = (
-            cls.location_storage_type_small_8x
-        )
+        cls.location_shuttle1.storage_category_id = cls.location_category_small_8x
         cls.location_shuttle1.pack_putaway_strategy = "ordered_locations"
+        # Set storage category on shuttle trays to have them synced on cells.
+        # Required to have the package type putaway strategy working.
+        trays = cls.location_shuttle1.child_ids
+        trays.tray_type_id.storage_category_id = cls.location_category_small_8x
 
         cls.env["stock.storage.location.sequence"].create(
             {
-                "package_storage_type_id": cls.package_storage_type_small_8x.id,
+                "package_type_id": cls.package_type_small_8x.id,
                 "sequence": 1,
                 "location_id": cls.vertical_lift_loc.id,
             }
         )
         cls.env["stock.storage.location.sequence"].create(
             {
-                "package_storage_type_id": cls.package_storage_type_small_8x.id,
+                "package_type_id": cls.package_type_small_8x.id,
                 "sequence": 2,
                 "location_id": cls.location_shuttle1.id,
             }
@@ -92,7 +107,7 @@ class TestPut(VerticalLiftCase):
                 "picking_type_id": cls.wh.int_type_id.id,
                 "location_id": cls.wh.wh_input_stock_loc_id.id,
                 "location_dest_id": dest_location.id,
-                "move_lines": [
+                "move_ids": [
                     (
                         0,
                         0,
@@ -111,7 +126,7 @@ class TestPut(VerticalLiftCase):
         )
 
     def test_storage_type_put_away(self):
-        self.package.package_storage_type_id = self.package_storage_type_small_8x
+        self.package.package_type_id = self.package_type_small_8x
         move_line = self.int_picking.move_line_ids
         self.assertEqual(move_line.location_dest_id, self.vertical_lift_loc)
         self.assertEqual(
@@ -142,7 +157,7 @@ class TestPut(VerticalLiftCase):
         # shuttle (although it may be used on the lift view location, so we can have an
         # initial putaway rule that puts the package in the lift view location first),
         # we have to ask to scan a tray type
-        self.package.package_storage_type_id = self.package_storage_type_buffer
+        self.package.package_type_id = self.package_type_buffer
         move_line = self.int_picking.move_line_ids
         self.assertEqual(move_line.location_dest_id, self.vertical_lift_loc)
         self.assertEqual(

@@ -7,23 +7,21 @@ from odoo import fields, models
 class StockLocationTrayType(models.Model):
     _inherit = "stock.location.tray.type"
 
-    location_storage_type_ids = fields.Many2many(
-        comodel_name="stock.location.storage.type",
-        help="Location storage types applied on the location using " "this tray type.",
+    storage_category_id = fields.Many2one(
+        comodel_name="stock.storage.category",
+        string="Storage Category",
     )
 
     def write(self, values):
         res = super().write(values)
-        if values.get("location_storage_type_ids"):
-            self._sync_location_storage_type_ids()
+        if values.get("storage_category_id"):
+            self._sync_storage_category_id()
         return res
 
-    def _sync_location_storage_type_ids(self):
+    def _sync_storage_category_id(self):
         for tray_type in self:
             tray_type.location_ids.with_context(_sync_tray_type=True).write(
                 {
-                    "location_storage_type_ids": [
-                        (6, 0, tray_type.location_storage_type_ids.ids)
-                    ]
+                    "storage_category_id": tray_type.storage_category_id.id,
                 }
             )

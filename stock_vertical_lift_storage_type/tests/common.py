@@ -15,13 +15,15 @@ class TrayTypeCommonCase(VerticalLiftCase):
         cls.location_2d = cls.env.ref(
             "stock_vertical_lift." "stock_location_vertical_lift_demo_tray_2d"
         )
-        LocStorageType = cls.env["stock.location.storage.type"]
-        cls.location_storage_type_buffer = LocStorageType.create(
-            {"name": "VLift Buffer"}
-        )
-        cls.location_storage_type_small_8x = LocStorageType.create(
-            {"name": "Small 8x", "only_empty": True}
-        )
-        cls.storage_types = (
-            cls.location_storage_type_small_8x | cls.location_storage_type_buffer
-        )
+        LocCategory = cls.env["stock.storage.category"]
+        cls.location_category_buffer = LocCategory.create({"name": "VLift Buffer"})
+        # LocStorageType = cls.env["stock.location.storage.type"]
+        # cls.location_storage_type_buffer = LocStorageType.create(
+        #     {"name": "VLift Buffer"}
+        # )
+        # cls.location_storage_type_small_8x = LocStorageType.create(
+        #     {"name": "Small 8x", "only_empty": True}
+        # )
+        # cls.storage_types = (
+        #     cls.location_storage_type_small_8x | cls.location_storage_type_buffer
+        # )

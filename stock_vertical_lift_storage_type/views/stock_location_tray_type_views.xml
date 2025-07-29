@@ -10,7 +10,7 @@
         <field name="arch" type="xml">
             <group name="size" position="after">
                 <group string="Put-Away" name="putaway">
-                    <field name="location_storage_type_ids" widget="many2many_tags" />
+                    <field name="storage_category_id" />
                 </group>
             </group>
         </field>

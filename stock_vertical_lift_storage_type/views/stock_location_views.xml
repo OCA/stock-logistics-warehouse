@@ -5,10 +5,10 @@
         <field name="model">stock.location</field>
         <field name="inherit_id" ref="stock_storage_type.view_location_form_inherit" />
         <field name="arch" type="xml">
-            <field name="location_storage_type_ids" position="attributes">
+            <field name="storage_category_id" position="attributes">
                 <attribute
-                    name="attrs"
-                >{"readonly": [("vertical_lift_kind", "in", ("tray", "cell"))]}</attribute>
+                    name="readonly"
+                >vertical_lift_kind in ('tray', 'cell')</attribute>
             </field>
         </field>
     </record>

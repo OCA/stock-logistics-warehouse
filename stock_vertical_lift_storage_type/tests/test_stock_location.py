@@ -13,9 +13,7 @@ class TestTrayTypeLocation(TrayTypeCommonCase):
         cls.tray_type = cls.env.ref(
             "stock_location_tray.stock_location_tray_type_small_8x"
         )
-        cls.tray_type.write(
-            {"location_storage_type_ids": [(6, 0, cls.storage_types.ids)]}
-        )
+        cls.tray_type.write({"storage_category_id": cls.location_category_buffer})
         cls.locations = cls.location_2a | cls.location_2b
 
     def test_location_create_sync(self):
@@ -35,13 +33,21 @@ class TestTrayTypeLocation(TrayTypeCommonCase):
                 },
             ]
         )
-        self.assertEqual(locations[0].location_storage_type_ids, self.storage_types)
-        self.assertEqual(locations[1].location_storage_type_ids, self.storage_types)
+        self.assertEqual(
+            locations[0].storage_category_id, self.location_category_buffer
+        )
+        self.assertEqual(
+            locations[1].storage_category_id, self.location_category_buffer
+        )
 
     def test_location_write_sync(self):
         self.locations.tray_type_id = self.tray_type
-        self.assertEqual(self.location_2a.location_storage_type_ids, self.storage_types)
-        self.assertEqual(self.location_2b.location_storage_type_ids, self.storage_types)
+        self.assertEqual(
+            self.location_2a.storage_category_id, self.location_category_buffer
+        )
+        self.assertEqual(
+            self.location_2b.storage_category_id, self.location_category_buffer
+        )
 
     def test_location_create_error(self):
         with self.assertRaisesRegex(exceptions.UserError, "Error creating.*"):
@@ -52,18 +58,14 @@ class TestTrayTypeLocation(TrayTypeCommonCase):
                         "location_id": self.shuttle.location_id.id,
                         "usage": "internal",
                         "tray_type_id": self.tray_type.id,
-                        "location_storage_type_ids": [
-                            (6, 0, self.location_storage_type_buffer.ids)
-                        ],
+                        "storage_category_id": self.location_category_buffer.id,
                     },
                     {
                         "name": "tray test 2",
                         "location_id": self.shuttle.location_id.id,
                         "usage": "internal",
                         "tray_type_id": self.tray_type.id,
-                        "location_storage_type_ids": [
-                            (6, 0, self.location_storage_type_buffer.ids)
-                        ],
+                        "storage_category_id": self.location_category_buffer.id,
                     },
                 ]
             )
@@ -73,9 +75,7 @@ class TestTrayTypeLocation(TrayTypeCommonCase):
             self.locations.write(
                 {
                     "tray_type_id": self.tray_type.id,
-                    "location_storage_type_ids": [
-                        (6, 0, self.location_storage_type_buffer.ids)
-                    ],
+                    "storage_category_id": self.location_category_buffer.id,
                 }
             )
 
@@ -83,8 +83,6 @@ class TestTrayTypeLocation(TrayTypeCommonCase):
         with self.assertRaisesRegex(exceptions.UserError, "Error updating.*"):
             self.locations.write(
                 {
-                    "location_storage_type_ids": [
-                        (6, 0, self.location_storage_type_buffer.ids)
-                    ],
+                    "storage_category_id": self.location_category_buffer.id,
                 }
             )

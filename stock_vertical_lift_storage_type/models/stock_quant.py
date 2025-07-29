@@ -14,4 +14,4 @@ class StockQuant(models.Model):
         self = self.filtered(
             lambda quant: quant.location_id.vertical_lift_kind != "cell"
         )
-        super()._check_storage_type()
+        return super()._check_storage_type()

@@ -3,13 +3,15 @@
 {
     "name": "Vertical Lift - Storage Type",
     "summary": "Compatibility layer for storage types on vertical lifts",
-    "version": "14.0.1.1.0",
+    "version": "18.0.1.0.0",
     "category": "Stock",
     "author": "Camptocamp, Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "depends": [
-        "stock_vertical_lift",  # OCA/stock-logistics-warehouse
-        "stock_storage_type",  # OCA/wms
+        # OCA/stock-logistics-warehouse
+        "stock_vertical_lift",
+        # OCA/stock-logistics-putaway
+        "stock_storage_type",
     ],
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "data": [

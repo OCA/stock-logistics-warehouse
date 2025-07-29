@@ -1,7 +1,7 @@
 # Copyright 2020 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, models
+from odoo import models
 
 
 class VerticalLiftOperationPut(models.Model):
@@ -9,10 +9,11 @@ class VerticalLiftOperationPut(models.Model):
 
     # In the base module, when a good is scanned for a put-away, the user must
     # then scan a tray type, which will be used to find an available cell of
-    # this type. When we use storage types (OCA/wms::stock_storage_type), we
-    # shouldn't need to scan a tray type if we already have a storage type,
-    # that could be used to find an available cell location for this type
-    # (applying all the possible restrictions from storage type).
+    # this type. When we use storage types
+    # (OCA/stock-logistics-putaway::stock_storage_type), we shouldn't need to
+    # scan a tray type if we already have a storage type, that could be used to
+    # find an available cell location for this type (applying all the possible
+    # restrictions from storage type).
 
     def _transitions(self):
         transitions = super()._transitions()
@@ -59,8 +60,8 @@ class VerticalLiftOperationPut(models.Model):
 
     def _has_storage_type_domain(self):
         move_line = self.current_move_line_id
-        package_storage_type = move_line.package_id.package_storage_type_id
-        # When a put-away is done based on the package's storage type and no
+        package_type = move_line.package_id.package_type_id
+        # When a put-away is done based on the package's type and no
         # destination is found, we can have 2 reasons:
         #
         # 1. No location is available according to the storage types rules,
@@ -80,9 +81,9 @@ class VerticalLiftOperationPut(models.Model):
             ("id", "!=", self.location_id.id),
             ("id", "child_of", self.location_id.id),
             (
-                "allowed_location_storage_type_ids",
+                "computed_storage_category_id.capacity_ids",
                 "in",
-                package_storage_type.location_storage_type_ids.ids,
+                package_type.storage_category_capacity_ids.ids,
             ),
         ]
 
@@ -100,8 +101,11 @@ class VerticalLiftOperationPut(models.Model):
         move_line = self.current_move_line_id
         # Trigger the put-away application to place it somewhere inside
         # the current shuttle's location.
-        new_destination = move_line.location_dest_id._get_pack_putaway_strategy(
-            self.location_id, move_line.package_id.quant_ids, move_line.product_id
+        new_destination = move_line.location_dest_id._get_package_type_putaway_strategy(
+            self.location_id,
+            move_line.package_id,
+            move_line.product_id,
+            move_line.quantity,
         )
         if new_destination and new_destination.vertical_lift_kind == "cell":
             move_line.location_dest_id = new_destination
@@ -114,10 +118,13 @@ class VerticalLiftOperationPut(models.Model):
 
     def _put_away_with_storage_type_failed(self):
         move_line = self.current_move_line_id
-        storage_type = move_line.package_id.package_storage_type_id
+        package_type = move_line.package_id.package_type_id
         self.env.user.notify_warning(
-            _("No free space found for storage type '{}' in shuttle '{}'").format(
-                storage_type.name, self.name
+            self.env._(
+                "No free space found for package type '%(package_type)s' "
+                "in shuttle '%(name)s'",
+                package_type=package_type.name,
+                name=self.name,
             ),
             params=self._get_user_notification_params(),
         )
