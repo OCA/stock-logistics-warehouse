@@ -1,1 +1,2 @@
 - Lois Rilo \<<lois.rilo@forgeflow.com>\>
+- Do Anh Duy \<<duyda@trobz.com>\>

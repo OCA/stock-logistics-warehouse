@@ -3,7 +3,7 @@
 
 import itertools
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError
 from odoo.tools import float_compare
 
@@ -13,8 +13,8 @@ class PullListWizard(models.TransientModel):
     _description = "Stock Pull List Wizard"
 
     @api.model
-    def default_get(self, fields):
-        res = super().default_get(fields)
+    def default_get(self, fields_list):
+        res = super().default_get(fields_list)
         company = self.env.user.company_id
         wh = self.env["stock.warehouse"].search(
             [("company_id", "=", company.id)], limit=1
@@ -147,7 +147,8 @@ class PullListWizard(models.TransientModel):
         incoming_dict = {}
         for supply in incoming_moves:
             move_for_date = demand_moves.filtered(
-                lambda m: m.product_id == supply.product_id and m.date >= supply.date
+                lambda m, supply=supply: m.product_id == supply.product_id
+                and m.date >= supply.date
             )
             if move_for_date:
                 date_selected = move_for_date[0].date if not force_date else force_date
@@ -179,13 +180,11 @@ class PullListWizard(models.TransientModel):
             "stock_pull_list.view_run_stock_pull_list_wizard_wizard_step_2"
         ).id
         res = {
-            "name": _("Pull List"),
-            "src_model": "stock.pull.list.wizard",
-            "view_type": "form",
+            "name": self.env._("Pull List"),
             "view_mode": "form",
             "view_id": view_id,
             "target": "new",
-            "res_model": "stock.pull.list.wizard",
+            "res_model": self._name,
             "res_id": self.id,
             "type": "ir.actions.act_window",
         }
@@ -263,7 +262,7 @@ class PullListWizard(models.TransientModel):
             group = pg_obj.create(self._prepare_proc_group_values())
             proc_groups.append(group.id)
             procurements = []
-            for line in lines.filtered(lambda l: l.selected):
+            for line in lines.filtered("selected"):
                 n += 1
                 if 0 < self.max_lines < n:
                     n = 0
@@ -277,8 +276,8 @@ class PullListWizard(models.TransientModel):
                         line.needed_qty,
                         line.product_id.uom_id,
                         line.location_id,
-                        "Pull List %s" % self.id,
-                        "Pull List %s" % self.id,
+                        f"Pull List {self.id}",
+                        f"Pull List {self.id}",
                         self.env.user.company_id,
                         values,
                     )
@@ -291,13 +290,11 @@ class PullListWizard(models.TransientModel):
             if errors:
                 raise UserError("\n".join(errors))
         res = {
-            "name": _("Generated Procurement Groups"),
-            "src_model": "stock.pull.list.wizard",
-            "view_type": "form",
-            "view_mode": "tree,form",
+            "name": self.env._("Generated Procurement Groups"),
+            "view_mode": "list,form",
             "res_model": "procurement.group",
             "type": "ir.actions.act_window",
-            "domain": str([("id", "in", proc_groups)]),
+            "domain": [("id", "in", proc_groups)],
         }
         return res
 
