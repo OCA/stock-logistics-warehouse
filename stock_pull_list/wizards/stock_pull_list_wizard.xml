@@ -33,11 +33,11 @@
                 </group>
                 <footer>
                     <button
-                        name="action_prepare"
-                        string="Prepare"
-                        type="object"
-                        class="oe_highlight"
-                    />
+                    name="action_prepare"
+                    string="Prepare"
+                    type="object"
+                    class="oe_highlight"
+                />
                     or
                     <button string="Cancel" class="oe_link" special="cancel" />
                 </footer>
@@ -101,11 +101,11 @@
                 </group>
                 <footer>
                     <button
-                        name="action_procure"
-                        string="Procure"
-                        type="object"
-                        class="oe_highlight"
-                    />
+                    name="action_procure"
+                    string="Procure"
+                    type="object"
+                    class="oe_highlight"
+                />
                     or
                     <button string="Cancel" class="oe_link" special="cancel" />
                 </footer>
