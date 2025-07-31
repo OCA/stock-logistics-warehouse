@@ -1,0 +1,2 @@
+- Fill in some putaway rules on product level
+- On product form, the first one is displayed on magic button level

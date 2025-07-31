@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 ACSONE SA/NV
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl). -->
+<odoo>
+    <record model="ir.ui.view" id="product_product_form_view">
+        <field name="model">product.product</field>
+        <field
+            name="inherit_id"
+            ref="stock.product_product_view_form_easy_inherit_stock"
+        />
+        <field name="arch" type="xml">
+            <button name="action_view_related_putaway_rules" position="inside">
+                <div class="o_stat_info">
+                    <field name="default_putaway_location_id" widget="statinfo" />
+                </div>
+            </button>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="product_form_view_procurement_button">
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="stock.product_form_view_procurement_button" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//button[@name='action_view_related_putaway_rules']//div[hasclass('o_stat_info')]//span[hasclass('o_stat_text')]"
+                position="after"
+            >
+                <span class="o_stat_text">
+                    <field
+                        name="default_putaway_location_id"
+                        nolabel="1"
+                        class="oe_inline"
+                    />
+                </span>
+            </xpath>
+        </field>
+    </record>
+</odoo>
