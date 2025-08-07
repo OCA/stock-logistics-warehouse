@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-05-06 12:24+0000\n"
+"PO-Revision-Date: 2025-08-07 14:25+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -451,6 +451,7 @@ msgstr ""
 #, python-format
 msgid "You can only delete inventory adjustments groups in draft state."
 msgstr ""
+"Si possono cancellare solo i gruppi di rettifica inventariale in stato bozza."
 
 #. module: stock_inventory
 #. odoo-python
