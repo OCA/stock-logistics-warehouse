@@ -447,6 +447,12 @@ msgstr ""
 #. module: stock_inventory
 #. odoo-python
 #: code:addons/stock_inventory/models/stock_inventory.py:0
+msgid "You can only delete inventory adjustments groups in draft state."
+msgstr ""
+
+#. module: stock_inventory
+#. odoo-python
+#: code:addons/stock_inventory/models/stock_inventory.py:0
 msgid "You can't cancel this inventory %(display_name)s."
 msgstr "Non si può annullare questo inventario %(display_name)s."
 
