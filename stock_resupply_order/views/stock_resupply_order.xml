@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+    Copyright 2025 Foodles (https://www.foodles.co/).
+    License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+    <data>
+        <record id="stock_resupply_order_tree_view" model="ir.ui.view">
+            <field name="name">stock.resupply.order.tree</field>
+            <field name="model">stock.resupply.order</field>
+            <field name="arch" type="xml">
+                <tree string="Resupply Order">
+                    <field name="location_id" />
+                    <field name="state" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="stock_resupply_order_view_form" model="ir.ui.view">
+            <field name="name">stock.resupply.order.form</field>
+            <field name="model">stock.resupply.order</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <field name="state" widget="statusbar" readonly="1" />
+                        <button
+                            name="action_run"
+                            string="Run"
+                            type="object"
+                            attrs="{'invisible': [('state', '!=', 'draft')] }"
+                        />
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button
+                                type="object"
+                                name="action_view_transfers"
+                                class="oe_stat_button"
+                                icon="fa-truck"
+                                attrs="{'invisible': [('state', '!=', 'done')] }"
+                            >
+                                <field
+                                    name="picking_count"
+                                    widget="statinfo"
+                                    string="Pickings"
+                                />
+                            </button>
+                        </div>
+                        <group name="stock_resupply_order_parameters_group">
+                            <field name="location_id" widget="many2one" />
+                        </group>
+
+                        <field name="stock_resupply_order_lines" widget="one2many">
+                            <tree default_order="product_id asc" editable="bottom">
+                                <field name="product_id" widget="many2one" />
+                                <field name="quantity" />
+                            </tree>
+                        </field>
+                    </sheet>
+
+                    <!-- Chatter -->
+                    <div class="oe_chatter">
+                        <field
+                            name="message_follower_ids"
+                            widget="mail_followers"
+                            groups="base.group_user"
+                        />
+                        <field name="message_ids" widget="mail_thread" />
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="stock_resupply_order_action_window">
+            <field name="name">Resupply Order</field>
+            <field name="res_model">stock.resupply.order</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help">No request found</field>
+        </record>
+    </data>
+</odoo>
