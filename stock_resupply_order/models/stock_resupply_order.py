@@ -78,10 +78,7 @@ class StockResupplyOrder(models.Model):
             return self.procurement_group_id
 
         self.procurement_group_id = self.env["procurement.group"].create(
-            {
-                "name": (f"Resupply Order {self.location_id.name}"),
-                "move_type": "one",
-            }
+            self._get_procurement_group_parameters()
         )
 
         quant_groups = self._get_existing_quants()
@@ -118,6 +115,7 @@ class StockResupplyOrder(models.Model):
 
         return self.procurement_group_id
 
+    @api.model
     def _get_available_quantity_for_product(
         self, quant_groups, stock_resupply_order_line
     ):
@@ -135,10 +133,25 @@ class StockResupplyOrder(models.Model):
         except StopIteration:
             return 0
 
+    def _get_procurement_group_parameters(self):
+        """
+        Values to pass to the procurement group constructor.
+        """
+
+        self.ensure_one()
+
+        return {
+            "name": (f"Resupply Order {self.location_id.name}"),
+            "move_type": "one",
+        }
+
     def _get_procurement_values(self):
         """
         Values to pass to the procurement once the order is run.
         """
+
+        self.ensure_one()
+
         return {
             "group_id": self.procurement_group_id,
         }
@@ -148,6 +161,8 @@ class StockResupplyOrder(models.Model):
         Get stock quants at the targeted location. Override if you need to
         apply specific constraints.
         """
+
+        self.ensure_one()
 
         return (
             self.env["stock.quant"]

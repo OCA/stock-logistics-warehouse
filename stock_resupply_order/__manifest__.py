@@ -1,4 +1,4 @@
-# Copyright 2024-2025 Foodles (https://www.foodles.co/).
+# Copyright 2025 Foodles (https://www.foodles.co/).
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 {
     "name": "Stock resupply order",
@@ -6,8 +6,8 @@
         A module that takes the existing stock in the destination
         location into account when creating procurements.
         """,
-    "category": "",
-    "version": "14.0.1.0.0",
+    "category": "Stock Management",
+    "version": "14.0.1.0.1",
     "author": "Foodles, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "license": "AGPL-3",

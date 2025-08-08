@@ -1,55 +1,50 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!--
-    Copyright 2024 Foodles (https://www.foodles.co/).
+    Copyright 2025 Foodles (https://www.foodles.co/).
     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 -->
 <odoo>
-    <data>
-        <record model="stock.location" id="location_stock_demo">
-            <field name="name">Stock</field>
-            <field name="usage">internal</field>
-        </record>
+    <record model="stock.location" id="location_stock_demo">
+        <field name="name">Stock</field>
+        <field name="usage">internal</field>
+    </record>
 
-        <record model="stock.location" id="location_dest_demo">
-            <field name="name">Destination location</field>
-            <field name="usage">internal</field>
-        </record>
+    <record model="stock.location" id="location_dest_demo">
+        <field name="name">Destination location</field>
+        <field name="usage">internal</field>
+    </record>
 
-        <record model="stock.picking.type" id="picking_type_demo">
-            <field name="name">Stock to Destination</field>
-            <field name="sequence_code">DEST-STOCK</field>
-            <field name="code">outgoing</field>
-            <field name="show_operations">True</field>
-            <field name="use_create_lots">False</field>
-            <field name="use_existing_lots">True</field>
-            <field name="warehouse_id" ref="stock.warehouse0" />
-            <field
-                name="default_location_src_id"
-                ref="stock_resupply_order.location_stock_demo"
-            />
-            <field
-                name="default_location_dest_id"
-                ref="stock_resupply_order.location_dest_demo"
-            />
-        </record>
+    <record model="stock.picking.type" id="picking_type_demo">
+        <field name="name">Stock to Destination</field>
+        <field name="sequence_code">DEST-STOCK</field>
+        <field name="code">outgoing</field>
+        <field name="show_operations">True</field>
+        <field name="use_create_lots">False</field>
+        <field name="use_existing_lots">True</field>
+        <field name="warehouse_id" ref="stock.warehouse0" />
+        <field
+            name="default_location_src_id"
+            ref="stock_resupply_order.location_stock_demo"
+        />
+        <field
+            name="default_location_dest_id"
+            ref="stock_resupply_order.location_dest_demo"
+        />
+    </record>
 
-        <record model="stock.location.route" id="route_demo">
-            <field name="name">stock resupply order</field>
-            <field name="product_categ_selectable">True</field>
-        </record>
+    <record model="stock.location.route" id="route_demo">
+        <field name="name">stock resupply order</field>
+        <field name="product_categ_selectable">True</field>
+    </record>
 
-        <record model="stock.rule" id="rule_demo">
-            <field name="name">Pull</field>
-            <field name="action">pull</field>
-            <field name="picking_type_id" ref="picking_type_demo" />
-            <field
-                name="location_src_id"
-                ref="stock_resupply_order.location_stock_demo"
-            />
-            <field name="location_id" ref="stock_resupply_order.location_dest_demo" />
-            <field name="procure_method">make_to_stock</field>
-            <field name="warehouse_id" ref="stock.warehouse0" />
-            <field name="route_id" ref="route_demo" />
-        </record>
-    </data>
+    <record model="stock.rule" id="rule_demo">
+        <field name="name">Pull</field>
+        <field name="action">pull</field>
+        <field name="picking_type_id" ref="picking_type_demo" />
+        <field name="location_src_id" ref="stock_resupply_order.location_stock_demo" />
+        <field name="location_id" ref="stock_resupply_order.location_dest_demo" />
+        <field name="procure_method">make_to_stock</field>
+        <field name="warehouse_id" ref="stock.warehouse0" />
+        <field name="route_id" ref="route_demo" />
+    </record>
 </odoo>

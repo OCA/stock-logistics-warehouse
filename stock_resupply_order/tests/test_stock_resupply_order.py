@@ -1,8 +1,6 @@
 from odoo.tests import tagged
 
-from .common import StockResupplyOrderBaseCase
-
-# TODO: add tests with reserved quantities
+from odoo.addons.stock_resupply_order.tests.common import StockResupplyOrderBaseCase
 
 
 @tagged("post_install", "-at_install")
