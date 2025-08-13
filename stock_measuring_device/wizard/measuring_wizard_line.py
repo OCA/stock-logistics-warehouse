@@ -36,9 +36,7 @@ class MeasuringWizardLine(models.TransientModel):
     @api.depends("packaging_length", "width", "height")
     def _compute_volume(self):
         for line in self:
-            line.volume = (
-                line.packaging_length * line.width * line.height
-            ) / 1000.0**3
+            line.volume = (line.packaging_length * line.width * line.height) / 1000.0**3
 
     def measuring_select_for_measure(self):
         """Current line has been selected for measurement

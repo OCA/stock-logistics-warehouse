@@ -40,10 +40,8 @@ class ProductPackaging(models.Model):
         )
         if len(packaging) > 1:
             warning_msg = _(
-                "Several packagings ({}) found to update by "
-                "device {}. Will update the first: {}".format(
-                    packaging, self.name, packaging[0]
-                )
+                f"Several packagings ({packaging}) found to update by "
+                f"device {self.name}. Will update the first: {packaging[0]}"
             )
             _logger.warning(warning_msg)
             packaging = packaging[0]
