@@ -1,10 +1,10 @@
 # Copyright 2021 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo.addons.component.tests.common import SavepointComponentCase
+from odoo.addons.component.tests.common import TransactionComponentCase
 
 
-class TestZippcubeWizard(SavepointComponentCase):
+class TestZippcubeWizard(TransactionComponentCase):
     @staticmethod
     def get_measure_result(length, width, height, weight):
         return {
@@ -21,23 +21,26 @@ class TestZippcubeWizard(SavepointComponentCase):
 
         cls.device_obj = cls.env["measuring.device"]
         cls.cs_wizard = cls.env["measuring.wizard"]
-        PackType = cls.env["product.packaging.type"]
-        pack_type_data = [
+        PackLevel = cls.env["product.packaging.level"]
+        pack_level_data = [
             ("internal", 3, 1, 0),
             ("retail", 10, 1, 1),
             ("transport", 20, 1, 1),
             ("pallet", 30, 1, 1),
         ]
-        for name, seq, gtin, req in pack_type_data:
-            PackType.create(
+        required_pack_level_ids = set()
+        for name, seq, gtin, req in pack_level_data:
+            pack = PackLevel.create(
                 {
                     "name": name,
                     "code": name.upper(),
                     "sequence": seq,
                     "has_gtin": gtin,
-                    "required": req,
                 }
             )
+            if req:
+                required_pack_level_ids.add(pack.id)
+        cls.required_pack_levels = PackLevel.browse(required_pack_level_ids)
 
         cls.device = cls.device_obj.create(
             {
@@ -54,9 +57,25 @@ class TestZippcubeWizard(SavepointComponentCase):
 
         cls.product_1 = cls.env.ref("product.product_product_6")
         cls.product_2 = cls.env.ref("product.product_product_7")
+        cls.products = cls.product_1 | cls.product_2
 
         cls.product_1.barcode = "424242"
-        PackType.cron_check_create_required_packaging()
+        cls.create_product_packagings()
+
+    @classmethod
+    def create_product_packagings(cls):
+        # Mimic behavior of product_packaging_type_required, which was
+        # creating packaging for packaging levels with required = true
+        # can be dropped if we decide we want it back
+        for product in cls.products:
+            pack_vals = []
+            for pack_level in cls.required_pack_levels:
+                vals = {
+                    "packaging_level_id": pack_level.id,
+                    "name": pack_level.name,
+                }
+                pack_vals.append((0, 0, vals))
+            product.packaging_ids = pack_vals
 
     def test_product_onchange(self):
         self.wizard.product_id = self.product_1.id
@@ -77,7 +96,7 @@ class TestZippcubeWizard(SavepointComponentCase):
     def setup_wizard(self, verify=True):
         self.wizard.product_id = self.product_1.id
         self.wizard.onchange_product_id()
-        fields = ["packaging_length", "width", "height", "max_weight", "volume"]
+        fields = ["packaging_length", "width", "height", "weight", "volume"]
         for idx, line in enumerate(self.wizard.line_ids):
             return_value = TestZippcubeWizard.get_measure_result(
                 100 * 2**idx, 100, 100, 3**idx
@@ -93,7 +112,7 @@ class TestZippcubeWizard(SavepointComponentCase):
                     "packaging_length": (2**idx) * 1000,
                     "width": 1000,
                     "height": 1000,
-                    "max_weight": 3.0**idx,
+                    "weight": 3.0**idx,
                     "volume": 2.0**idx,
                 },
             )
@@ -129,14 +148,14 @@ class TestZippcubeWizard(SavepointComponentCase):
         for idx, packaging in enumerate(packagings, 1):
             self.assertEqual(
                 packaging.read(
-                    ["packaging_length", "width", "height", "max_weight", "volume"]
+                    ["packaging_length", "width", "height", "weight", "volume"]
                 )[0],
                 {
                     "id": packaging.id,
                     "packaging_length": (2**idx) * 1000,
                     "width": 1000,
                     "height": 1000,
-                    "max_weight": 3.0**idx,
+                    "weight": 3.0**idx,
                     "volume": 2.0**idx,
                 },
             )
@@ -146,7 +165,7 @@ class TestZippcubeWizard(SavepointComponentCase):
         res = self.wizard.action_reopen_fullscreen()
         self.assertEqual(res["res_id"], self.wizard.id)
         res = self.wizard.reload()
-        self.assertEqual(res, {"type": "ir.actions.act_view_reload"})
+        self.assertEqual(res, {"type": "ir.actions.client", "tag": "soft_reload"})
         self.wizard._notify("Test message")
         self.wizard.line_ids[-1].scan_requested = True
         res = self.wizard.action_close()
