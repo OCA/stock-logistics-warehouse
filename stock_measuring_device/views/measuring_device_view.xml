@@ -16,7 +16,7 @@
                         type="object"
                         name="test_device"
                         string="Test Device"
-                        attrs="{'invisible': [('id','=',False)]}"
+                        invisible="not id"
                     />
                     <field name="state" widget="statusbar" />
                 </header>
@@ -32,20 +32,20 @@
             </form>
         </field>
     </record>
-    <record model="ir.ui.view" id="view_measuring_device_tree">
-        <field name="name">measuring.device.tree</field>
+    <record model="ir.ui.view" id="view_measuring_device_list">
+        <field name="name">measuring.device.list</field>
         <field name="model">measuring.device</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="name" />
                 <field name="warehouse_id" />
                 <field name="device_type" />
-            </tree>
+            </list>
         </field>
     </record>
     <record id="action_measuring_device_form" model="ir.actions.act_window">
         <field name="name">Measuring Devices</field>
         <field name="res_model">measuring.device</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
 </odoo>
