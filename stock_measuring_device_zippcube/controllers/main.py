@@ -24,7 +24,7 @@ class ZippcubeController(http.Controller):
     )
     def measurement(self, zippcube_device_name):
         data = request.jsonrequest
-        _logger.info("/measurement, data received: {}".format(data))
+        _logger.info(f"/measurement, data received: {data}")
 
         env = request.env(su=True)
         device = env["measuring.device"].search(
