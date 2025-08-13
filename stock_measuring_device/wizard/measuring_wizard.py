@@ -9,7 +9,9 @@ class MeasuringWizard(models.TransientModel):
     _description = "measuring Wizard"
     _rec_name = "device_id"
 
-    product_id = fields.Many2one("product.product", domain=[("type", "=", "product")])
+    product_id = fields.Many2one(
+        "product.product", domain=[("type", "=", "consu"), ("is_storable", "=", True)]
+    )
     line_ids = fields.One2many("measuring.wizard.line", "wizard_id")
     device_id = fields.Many2one("measuring.device", readonly=True)
 
@@ -30,7 +32,7 @@ class MeasuringWizard(models.TransientModel):
             "sequence": 0,
             "name": "Unit",
             "qty": 1,
-            "max_weight": self.product_id.weight,
+            "weight": self.product_id.weight,
             "packaging_length": self.product_id.product_length,
             "width": self.product_id.product_width,
             "height": self.product_id.product_height,
@@ -57,38 +59,38 @@ class MeasuringWizard(models.TransientModel):
     def _prepare_packaging_lines(self):
         vals_list = []
         product_packaging = self.env["product.packaging"]
-        packaging_types = self.env["product.packaging.type"].search([])
-        for seq, pack_type in enumerate(packaging_types):
+        packaging_levels = self.env["product.packaging.level"].search([])
+        for seq, pack_level in enumerate(packaging_levels):
             pack = product_packaging.search(
                 [
                     ("product_id", "=", self.product_id.id),
-                    ("packaging_type_id", "=", pack_type.id),
+                    ("packaging_level_id", "=", pack_level.id),
                 ],
                 limit=1,
             )
             vals = {
                 "wizard_id": self.id,
                 "sequence": seq + 1,
-                "name": pack_type.name,
-                "qty": 0,
-                "max_weight": 0,
+                "name": pack_level.name,
+                "qty": 1,
+                "weight": 0,
                 "packaging_length": 0,
                 "width": 0,
                 "height": 0,
                 "barcode": False,
-                "packaging_type_id": pack_type.id,
+                "packaging_level_id": pack_level.id,
             }
             if pack:
                 vals.update(
                     {
                         "qty": pack.qty,
-                        "max_weight": pack.max_weight,
+                        "weight": pack.weight,
                         "packaging_length": pack.packaging_length,
                         "width": pack.width,
                         "height": pack.height,
                         "barcode": pack.barcode,
                         "packaging_id": pack.id,
-                        "packaging_type_id": pack_type.id,
+                        "packaging_level_id": pack_level.id,
                         "scan_requested": bool(pack.measuring_device_id),
                     }
                 )
@@ -112,21 +114,21 @@ class MeasuringWizard(models.TransientModel):
         product_vals = {}
         packaging_ids_list = []
         for line in self.line_ids:
-            packaging_type = line.packaging_type_id
+            packaging_level = line.packaging_level_id
             if not line.is_measured:
                 continue
-            if packaging_type:
+            if packaging_level:
                 # Handle lines with packaging
                 vals = {
                     "name": line.name,
                     "qty": line.qty,
-                    "max_weight": line.max_weight,
+                    "weight": line.weight,
                     "packaging_length": line.packaging_length,
                     "width": line.width,
                     "height": line.height,
                     "length_uom_id": mm_uom.id,
                     "barcode": line.barcode,
-                    "packaging_type_id": line.packaging_type_id.id,
+                    "packaging_level_id": line.packaging_level_id.id,
                 }
                 pack = line.packaging_id
                 if pack:
@@ -141,13 +143,13 @@ class MeasuringWizard(models.TransientModel):
                         "product_width": line.width,
                         "product_height": line.height,
                         "dimensional_uom_id": mm_uom.id,
-                        "weight": line.max_weight,
+                        "weight": line.weight,
                     }
                 )
         product_vals.update({"packaging_ids": packaging_ids_list})
         self.product_id.write(product_vals)
         # Call onchange to update volume on product.product
-        self.product_id.onchange_calculate_volume()
+        self.product_id._compute_volume()
         # reload lines
         self.onchange_product_id()
 
@@ -176,9 +178,7 @@ class MeasuringWizard(models.TransientModel):
             self.onchange_product_id()
 
     def reload(self):
-        return {
-            "type": "ir.actions.act_view_reload",
-        }
+        return {"type": "ir.actions.client", "tag": "soft_reload"}
 
     def _send_notification_refresh(self):
         """Send a refresh notification on the wizard.
@@ -193,7 +193,7 @@ class MeasuringWizard(models.TransientModel):
             "action": "refresh",
             "params": {"model": self._name, "id": self.id},
         }
-        self.env["bus.bus"].sendone(channel, bus_message)
+        self.env["bus.bus"]._sendone(channel, "potato_type", bus_message)
 
     def _notify(self, message):
         """Show a gentle notification on the wizard

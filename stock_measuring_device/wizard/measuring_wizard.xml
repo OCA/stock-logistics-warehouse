@@ -48,7 +48,7 @@
                 </group>
                 <separator />
                 <field name="line_ids">
-                    <tree
+                    <list
                         editable="bottom"
                         create="0"
                         delete="0"
@@ -56,28 +56,27 @@
                     >
                         <field name="scan_requested" invisible="1" />
                         <field name="sequence" invisible="1" />
-                        <field name="required" invisible="1" />
                         <field name="name" />
                         <field name="qty" />
                         <field
-                            name="max_weight"
-                            options="{'bg_color': 'lightcoral: max_weight == 0.0 and required'}"
+                            name="weight"
+                            options="{'bg_color': 'lightcoral: weight == 0.0'}"
                         />
                         <field
                             name="packaging_length"
-                            options="{'bg_color': 'lightcoral: packaging_length == 0.0 and required'}"
+                            options="{'bg_color': 'lightcoral: packaging_length == 0.0'}"
                         />
                         <field
                             name="width"
-                            options="{'bg_color': 'lightcoral: width == 0.0 and required'}"
+                            options="{'bg_color': 'lightcoral: width == 0.0'}"
                         />
                         <field
                             name="height"
-                            options="{'bg_color': 'lightcoral: height == 0.0 and required'}"
+                            options="{'bg_color': 'lightcoral: height == 0.0'}"
                         />
                         <field
                             name="volume"
-                            options="{'bg_color': 'lightcoral: volume == 0.0 and required'}"
+                            options="{'bg_color': 'lightcoral: volume == 0.0'}"
                         />
                         <button
                             name="measuring_select_for_measure"
@@ -90,10 +89,10 @@
                             type="object"
                             string="Cancel Scan"
                             class="btn btn-danger"
-                            attrs="{'invisible': [('scan_requested', '!=', True)]}"
+                            invisible="not scan_requested"
                         />
                         <field name="barcode" />
-                    </tree>
+                    </list>
                 </field>
                 <footer>
                     <button

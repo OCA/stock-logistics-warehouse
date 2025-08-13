@@ -7,6 +7,4 @@ from odoo import fields, models
 class StockWarehouse(models.Model):
     _inherit = "stock.warehouse"
 
-    measuring_device_ids = fields.One2many(
-        "measuring.device", "warehouse_id", string="Measuring Devices"
-    )
+    measuring_device_ids = fields.One2many("measuring.device", "warehouse_id")

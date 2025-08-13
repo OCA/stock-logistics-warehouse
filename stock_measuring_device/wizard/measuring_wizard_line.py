@@ -13,7 +13,7 @@ class MeasuringWizardLine(models.TransientModel):
     sequence = fields.Integer()
     name = fields.Char("Packaging", readonly=True)
     qty = fields.Float("Quantity")
-    max_weight = fields.Float("Weight (kg)", readonly=True)
+    weight = fields.Float("Weight (kg)", readonly=True)
     packaging_length = fields.Integer("Length (mm)", readonly=True)
     width = fields.Integer("Width (mm)", readonly=True)
     height = fields.Integer("Height (mm)", readonly=True)
@@ -28,9 +28,8 @@ class MeasuringWizardLine(models.TransientModel):
     packaging_id = fields.Many2one(
         "product.packaging", string="Packaging (rel)", readonly=True
     )
-    packaging_type_id = fields.Many2one("product.packaging.type", readonly=True)
+    packaging_level_id = fields.Many2one("product.packaging.level", readonly=True)
     is_unit_line = fields.Boolean(readonly=True)
-    required = fields.Boolean(related="packaging_type_id.required", readonly=True)
     is_measured = fields.Boolean()
 
     @api.depends("packaging_length", "width", "height")
@@ -48,7 +47,7 @@ class MeasuringWizardLine(models.TransientModel):
         if not self.packaging_id and not self.is_unit_line:
             pack_vals = {
                 "name": self.name,
-                "packaging_type_id": self.packaging_type_id.id,
+                "packaging_level_id": self.packaging_level_id.id,
                 "product_id": self.wizard_id.product_id.id,
             }
             pack = self.env["product.packaging"].create(pack_vals)
