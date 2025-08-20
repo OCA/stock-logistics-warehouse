@@ -42,6 +42,12 @@
                     help="Group reservation rate over 75%"
                     domain="[('type_group_reservation_rate', '>', 75.0)]"
                 />
+                <filter
+                    name="type_group_reservation_rate_100"
+                    string="Group reservation Rate > 100%"
+                    help="Group reservation rate equals 100%"
+                    domain="[('type_group_reservation_rate', '=', 100.0)]"
+                />
                 <separator />
             </xpath>
         </field>
