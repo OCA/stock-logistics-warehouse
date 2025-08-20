@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-08-20 10:25+0000\n"
+"PO-Revision-Date: 2025-08-20 14:17+0000\n"
 "Last-Translator: Andrzej Gerasimuk <a.gerasimuk@archimedes.pl>\n"
 "Language-Team: none\n"
 "Language: pl\n"
@@ -80,7 +80,7 @@ msgid ""
 "Cannot have more than one in-progress inventory adjustment affecting the "
 "same location or product at the same time."
 msgstr ""
-"Nie można jednocześnie prowadzić więcej niż jednej korekty stanu "
+"Nie można jednocześnie prowadzić więcej niż jednej inwentaryzacji stanu "
 "magazynowego dotyczącej tej samej lokalizacji lub produktu."
 
 #. module: stock_inventory
@@ -187,8 +187,8 @@ msgid ""
 "adjustment is automatically set to done."
 msgstr ""
 "Po włączeniu tej opcji, gdy tylko wszystkie obliczenia ilościowe potrzebne "
-"do korekty zostaną zakończone, korekta zostanie automatycznie oznaczona jako "
-"ukończona."
+"do inwentaryzacji zostaną zakończone, inwentaryzacja zostanie automatycznie "
+"oznaczona jako ukończona."
 
 #. module: stock_inventory
 #: model:ir.model.fields.selection,name:stock_inventory.selection__stock_inventory__state__in_progress
@@ -391,8 +391,8 @@ msgid ""
 "There are active adjustments for the requested products: %(names)s. Blocking "
 "adjustments: %(blocking_names)s"
 msgstr ""
-"Istnieją aktywne korekty stanu dla wybranych produktów: %(names)s. Blokujące "
-"korekty: %(blocking_names)s"
+"Istnieją aktywne inwentaryzacje stanu dla wybranych produktów: %(names)s. "
+"Blokujące inwentaryzacje: %(blocking_names)s"
 
 #. module: stock_inventory
 #. odoo-python
@@ -402,8 +402,8 @@ msgid ""
 "There's already an Adjustment in Process using one requested Location: "
 "%(names)s. Blocking adjustments: %(blocking_names)s"
 msgstr ""
-"Istnieje już korekta w toku, wykorzystująca wybraną lokalizację: %(names)s. "
-"Blokujące korekty: %(blocking_names)s"
+"Istnieje już inwentaryzacja w toku, wykorzystująca wybraną lokalizację: "
+"%(names)s. Blokujące inwentaryzacje: %(blocking_names)s"
 
 #. module: stock_inventory
 #: model:ir.model.fields,help:stock_inventory.field_stock_inventory__owner_id
@@ -453,7 +453,7 @@ msgstr ""
 #: code:addons/stock_inventory/models/stock_inventory.py:0
 #, python-format
 msgid "You can only delete inventory adjustments groups in draft state."
-msgstr ""
+msgstr "Można usuwać grupy inwentaryzacji zapasów tylko w wersji roboczej."
 
 #. module: stock_inventory
 #. odoo-python
