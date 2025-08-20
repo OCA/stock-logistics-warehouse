@@ -10,11 +10,16 @@ class StockPicking(models.Model):
     type_group_reservation_rate = fields.Float(
         compute="_compute_type_group_reservation_rate",
         store=True,
+        index=True,
         help="This is the reservation rate across all picking moves of the"
         "same picking type group and of the same procurement group.",
     )
+    picking_type_group_id = fields.Many2one(
+        comodel_name="stock.picking.type.group",
+        related="picking_type_id.picking_type_group_id",
+    )
 
-    @api.depends("group_id.stock_move_ids.reservation_rate")
+    @api.depends("group_id.stock_move_ids.type_group_reservation_rate")
     def _compute_type_group_reservation_rate(self):
         zero_rate = self.browse()
         for picking in self:
@@ -30,7 +35,8 @@ class StockPicking(models.Model):
                 zero_rate |= picking
             else:
                 rate = sum(
-                    move.reservation_rate for move in pickings_for_rate.move_ids
+                    move.type_group_reservation_rate
+                    for move in pickings_for_rate.move_ids
                 ) / len(pickings_for_rate.move_ids)
                 if picking.type_group_reservation_rate != rate:
                     picking.type_group_reservation_rate = rate

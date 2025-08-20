@@ -10,6 +10,7 @@
                 <field
                     name="type_group_reservation_rate"
                     widget="progressbar_gradient"
+                    invisible="not picking_type_group_id"
                 />
             </field>
         </field>
@@ -55,6 +56,7 @@
                     name="type_group_reservation_rate"
                     widget="progressbar_gradient"
                     optional="hide"
+                    invisible="not picking_type_group_id"
                 />
             </field>
         </field>

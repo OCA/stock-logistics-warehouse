@@ -10,8 +10,14 @@
     "author": "ACSONE SA/NV,Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "depends": [
+        "queue_job",
         "stock_picking_reservation_rate",
         "stock_picking_type_group",
     ],
-    "data": ["views/stock_picking.xml"],
+    "data": [
+        "security/security.xml",
+        "views/stock_picking.xml",
+        "wizards/recompute_stock_group_reservation_rate.xml",
+    ],
+    "pre_init_hook": "pre_init_hook",
 }
