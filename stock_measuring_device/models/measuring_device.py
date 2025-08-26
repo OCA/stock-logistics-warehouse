@@ -13,8 +13,8 @@ class MeasuringDevice(models.Model):
     _description = "Measuring and Weighing Device"
     _order = "warehouse_id, name"
 
-    name = fields.Char("Name", required=True)
-    warehouse_id = fields.Many2one("stock.warehouse", "Warehouse", required=True)
+    name = fields.Char(required=True)
+    warehouse_id = fields.Many2one("stock.warehouse", required=True)
     device_type = fields.Selection(
         selection=[],
         help="The type of device (e.g. zippcube, cubiscan...) "

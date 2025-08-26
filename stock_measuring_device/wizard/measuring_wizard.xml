@@ -52,7 +52,7 @@
                         editable="bottom"
                         create="0"
                         delete="0"
-                        decoration-warning="scan_requested is True"
+                        decoration-warning="scan_requested"
                     >
                         <field name="scan_requested" invisible="1" />
                         <field name="sequence" invisible="1" />

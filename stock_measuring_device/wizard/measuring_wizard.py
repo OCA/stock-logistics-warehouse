@@ -188,12 +188,10 @@ class MeasuringWizard(models.TransientModel):
         must contain an "action" and "params".
         """
         self.ensure_one()
-        channel = "notify_measuring_wizard_screen"
-        bus_message = {
-            "action": "refresh",
-            "params": {"model": self._name, "id": self.id},
-        }
-        self.env["bus.bus"]._sendone(channel, "potato_type", bus_message)
+        self.env.user._bus_send(
+            "notify_measuring_wizard_screen",
+            {"action": "refresh", "params": {"model": self._name, "id": self.id}},
+        )
 
     def _notify(self, message):
         """Show a gentle notification on the wizard

@@ -32,7 +32,7 @@
     "assets": {
         "web.assets_backend": [
             "/stock_measuring_device/static/src/scss/measuring_wizard.scss",
-            "/stock_measuring_device/static/src/js/measuring_wizard.js",
+            "/stock_measuring_device/static/src/js/measuring_wizard.esm.js",
         ],
     },
 }
