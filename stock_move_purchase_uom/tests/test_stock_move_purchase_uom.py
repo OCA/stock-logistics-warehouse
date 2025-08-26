@@ -19,6 +19,8 @@ class TestStockMovePurchaseUom(TestCommon):
                 "show_operations": True,
             }
         )
+        group_stock_multi_locations = cls.env.ref("stock.group_stock_multi_locations")
+        cls.env.user.write({"groups_id": [(4, group_stock_multi_locations.id, 0)]})
 
     def test_stock_move_purchase_uom_unlinked_move_line(self):
         picking_form = Form(self.env["stock.picking"])
@@ -32,11 +34,11 @@ class TestStockMovePurchaseUom(TestCommon):
         picking = picking_form.save()
         picking.action_confirm()
         with Form(picking) as picking_form:
-            with picking_form.move_line_ids_without_package.new() as move_line:
+            with picking_form.move_ids_without_package.new() as move_line:
                 move_line.product_id = self.product
                 # Since the line is not being linked to the move (move_id is false)
                 # the uom to set is the product purchase uom.
-                self.assertEqual(move_line.product_uom_id.id, self.product.uom_po_id.id)
+                self.assertEqual(move_line.product_uom.id, self.product.uom_po_id.id)
 
     def test_stock_move_purchase_uom_linked_move_line(self):
         self.stock_picking_type_2.show_operations = False
@@ -58,7 +60,8 @@ class TestStockMovePurchaseUom(TestCommon):
         ) as move_form:
             with move_form.move_line_ids.new() as move_line:
                 move_line.product_id = self.product
-                # Since the line is being linked to the move the uom used will be the move one.
+                # Since the line is being linked to the move the uom used will be
+                # the move one.
                 self.assertEqual(
                     move_line.product_uom_id.id, move_line.move_id.product_uom.id
                 )

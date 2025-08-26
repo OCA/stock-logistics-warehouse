@@ -20,7 +20,7 @@ class TestCommon(TransactionCase):
         cls.product = cls.env["product.product"].create(
             {
                 "name": "Test product",
-                "type": "product",
+                "is_storable": True,
                 "categ_id": cls.env.ref("product.product_category_all").id,
                 "uom_id": cls.cm_uom.id,
                 "uom_po_id": cls.meter_uom.id,

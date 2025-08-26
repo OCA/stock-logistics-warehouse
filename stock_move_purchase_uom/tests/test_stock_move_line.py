@@ -20,13 +20,14 @@ class TestStockMoveLine(TestCommon):
 
     def test_onchange_product_id_use_purchase_uom(self):
         self.stock_picking_type.use_purchase_uom = True
-        stock_move_line = Form(self.env["stock.move.line"])
-        stock_move_line.picking_id = self.picking
-        stock_move_line.product_id = self.product
-        self.assertEqual(stock_move_line.product_uom_id.id, self.product.uom_po_id.id)
+        with Form(self.picking) as picking_form:
+            with picking_form.move_ids_without_package.new() as move_line:
+                move_line.product_id = self.product
+                self.assertEqual(move_line.product_uom.id, self.product.uom_po_id.id)
 
     def test_onchange_product_id_no_use_purchase_uom(self):
-        stock_move_line = Form(self.env["stock.move.line"])
-        stock_move_line.picking_id = self.picking
-        stock_move_line.product_id = self.product
-        self.assertEqual(stock_move_line.product_uom_id.id, self.product.uom_id.id)
+        self.stock_picking_type.use_purchase_uom = False
+        with Form(self.picking) as picking_form:
+            with picking_form.move_ids_without_package.new() as move_line:
+                move_line.product_id = self.product
+                self.assertEqual(move_line.product_uom.id, self.product.uom_id.id)

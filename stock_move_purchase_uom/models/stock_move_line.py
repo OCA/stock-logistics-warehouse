@@ -10,8 +10,9 @@ class StockMoveLine(models.Model):
     def _onchange_product_id(self):
         origin_product_uom = self.product_uom_id
         res = super()._onchange_product_id()
-        # We impose the purchase uom if the operation type has the use_purchase_uom enabled
-        # and we are creating the line and the stock_move_line is not linked to a stock_move.
+        # We impose the purchase uom if the operation type has the
+        # use_purchase_uom enabled and we are creating the line and
+        # the stock_move_line is not linked to a stock_move.
         if (
             self.picking_type_id
             and self.picking_type_id.use_purchase_uom
