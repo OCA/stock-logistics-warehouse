@@ -3,7 +3,7 @@
 
 {
     "name": "Move Stock Location Purchase UoM",
-    "version": "15.0.1.0.0",
+    "version": "18.0.1.0.0",
     "author": "ForgeFlow, Odoo Community Association (OCA)",
     "summary": "This module 'glues' the modules stock_move_location"
     " and stock_move_purchase_uom.",

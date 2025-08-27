@@ -37,13 +37,13 @@ class StockMoveLocationWizard(models.TransientModel):
     def _get_move_values(self, picking, lines):
         res = super()._get_move_values(picking, lines)
         picking_id = res["picking_id"]
-        picking = self.env["stock.picking"].search([("id", "=", picking_id)])
+        picking = self.env["stock.picking"].browse(picking_id)
         if picking.picking_type_id.use_purchase_uom:
             original_uom_id = res["product_uom"]
-            original_uom = self.env["uom.uom"].search([("id", "=", original_uom_id)])
+            original_uom = self.env["uom.uom"].browse(original_uom_id)
             original_qty = res["product_uom_qty"]
             product_id = res["product_id"]
-            product = self.env["product.product"].search([("id", "=", product_id)])
+            product = self.env["product.product"].browse(product_id)
 
             new_uom = product.uom_po_id
             new_qty = original_uom._compute_quantity(original_qty, new_uom)

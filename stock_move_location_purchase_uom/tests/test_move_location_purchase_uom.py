@@ -43,7 +43,7 @@ class TestMoveLocationPurchaseUom(common.TransactionCase):
         cls.product = product_obj.create(
             {
                 "name": "Test",
-                "type": "product",
+                "is_storable": True,
             }
         )
 
@@ -119,4 +119,4 @@ class TestMoveLocationPurchaseUom(common.TransactionCase):
         self.assertEqual(len(picking.move_line_ids), 1)
         picking_line = picking.move_line_ids[0]
         self.assertEqual(picking_line.product_uom_id, self.product.uom_po_id)
-        self.assertEqual(picking_line.qty_done, expected_move_quantity)
+        self.assertEqual(picking_line.quantity, expected_move_quantity)
