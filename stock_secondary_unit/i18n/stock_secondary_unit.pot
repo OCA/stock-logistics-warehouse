@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 17.0\n"
+"Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -14,13 +14,18 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: stock_secondary_unit
+#: model_terms:ir.ui.view,arch_db:stock_secondary_unit.product_form_view_procurement_button
+#: model_terms:ir.ui.view,arch_db:stock_secondary_unit.product_template_form_view_procurement_button
+msgid "<span class=\"o_stat_text\">Secondary Unit</span>"
+msgstr ""
+
+#. module: stock_secondary_unit
 #: model_terms:ir.ui.view,arch_db:stock_secondary_unit.report_delivery_document
 msgid "<strong>Secondary Qty</strong>"
 msgstr ""
 
 #. module: stock_secondary_unit
 #: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_move__product_uom_qty
-#: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_reservation__product_uom_qty
 msgid "Demand"
 msgstr ""
 
@@ -40,8 +45,8 @@ msgid "Product Variant"
 msgstr ""
 
 #. module: stock_secondary_unit
-#: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_move_line__qty_done
-msgid "Qty Done"
+#: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_move_line__quantity
+msgid "Quantity"
 msgstr ""
 
 #. module: stock_secondary_unit
@@ -86,7 +91,6 @@ msgstr ""
 
 #. module: stock_secondary_unit
 #: model:ir.model.fields,help:stock_secondary_unit.field_stock_move__product_uom_qty
-#: model:ir.model.fields,help:stock_secondary_unit.field_stock_reservation__product_uom_qty
 msgid ""
 "This is the quantity of product that is planned to be moved.Lowering this "
 "quantity does not generate a backorder.Changing this quantity on assigned "
