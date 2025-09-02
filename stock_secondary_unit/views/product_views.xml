@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2018 Tecnativa - Sergio Teruel
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="view_template_property_form" model="ir.ui.view">
+        <field name="name">Product template Secondary Unit</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="stock.view_template_property_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='inventory']" position="inside">
+                <group string="Secondary unit" groups="stock.group_stock_user">
+                    <field
+                        name="stock_secondary_uom_id"
+                        options="{'no_create': True}"
+                    />
+                </group>
+            </xpath>
+        </field>
+    </record>
+    <record id="product_template_form_view_procurement_button" model="ir.ui.view">
+        <field name="model">product.template</field>
+        <field
+            name="inherit_id"
+            ref="stock.product_template_form_view_procurement_button"
+        />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//div[@name='button_box']//button[@name='action_update_quantity_on_hand']"
+                position="after"
+            >
+                <button
+                    type="object"
+                    name="action_update_quantity_on_hand"
+                    invisible="not is_storable"
+                    class="oe_stat_button"
+                    icon="fa-building-o"
+                    groups="stock.group_stock_user"
+                >
+                    <div class="o_field_widget o_stat_info">
+                        <span class="o_stat_value d-flex gap-1">
+                            <field
+                                name="secondary_unit_qty_available"
+                                nolabel="1"
+                                class="oe_inline"
+                            />
+                            <field
+                                name="stock_secondary_uom_id"
+                                class="oe_inline"
+                                groups="uom.group_uom"
+                                readonly="1"
+                                options="{'no_open': True}"
+                            />
+                        </span>
+                        <span class="o_stat_text">Secondary Unit</span>
+                    </div>
+                </button>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="product_form_view_procurement_button" model="ir.ui.view">
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="stock.product_form_view_procurement_button" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//div[@name='button_box']//button[@name='action_update_quantity_on_hand']"
+                position="after"
+            >
+                <button
+                    type="object"
+                    name="action_update_quantity_on_hand"
+                    invisible="not is_storable"
+                    class="oe_stat_button"
+                    icon="fa-building-o"
+                    groups="stock.group_stock_user"
+                    context="{'product_variant': True}"
+                >
+                    <div class="o_field_widget o_stat_info">
+                        <span class="o_stat_value d-flex gap-1">
+                            <field
+                                name="secondary_unit_qty_available"
+                                nolabel="1"
+                                class="oe_inline"
+                            />
+                            <field
+                                name="stock_secondary_uom_id"
+                                class="oe_inline"
+                                groups="uom.group_uom"
+                                readonly="1"
+                                options="{'no_open': True}"
+                            />
+                        </span>
+                        <span class="o_stat_text">Secondary Unit</span>
+                    </div>
+                </button>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="product_template_tree_view" model="ir.ui.view">
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_tree_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='uom_id']" position="after">
+                <field
+                    name="secondary_unit_qty_available"
+                    groups="stock.group_stock_user"
+                />
+                <field
+                    name="stock_secondary_uom_id"
+                    options="{'no_open': True, 'no_create': True}"
+                    groups="stock.group_stock_user"
+                />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="product_product_tree_view" model="ir.ui.view">
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_product_tree_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='uom_id']" position="after">
+                <field
+                    name="secondary_unit_qty_available"
+                    groups="stock.group_stock_user"
+                />
+                <field
+                    name="stock_secondary_uom_id"
+                    options="{'no_open': True, 'no_create': True}"
+                    groups="stock.group_stock_user"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>
