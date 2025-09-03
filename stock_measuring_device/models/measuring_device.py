@@ -65,7 +65,7 @@ class MeasuringDevice(models.Model):
         self.ensure_one()
         return bool(
             self.env["product.packaging"].search_count(
-                [("measuring_device_id", "=", self.id)]
+                [("measuring_device_id", "=", self.id)], limit=1
             )
         )
 
