@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html)
 import logging
 
-from odoo import _, fields, models
+from odoo import fields, models
 
 _logger = logging.getLogger(__name__)
 
@@ -41,7 +41,7 @@ class MeasuringDevice(models.Model):
 
     def open_wizard(self):
         res = {
-            "name": _("Measurement Wizard"),
+            "name": self.env._("Measurement Wizard"),
             "res_model": "measuring.wizard",
             "type": "ir.actions.act_window",
             "view_id": False,

@@ -1,6 +1,7 @@
 # Copyright 2021 Camptocamp SA
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html)
-from odoo import _, api, fields, models
+
+from odoo import api, fields, models
 
 
 class MeasuringWizardLine(models.TransientModel):
@@ -53,7 +54,7 @@ class MeasuringWizardLine(models.TransientModel):
             pack = self.env["product.packaging"].create(pack_vals)
             self.packaging_id = pack.id
         if self.wizard_id.device_id._is_being_used():
-            self.wizard_id._notify(_("Measurement machine already in use."))
+            self.wizard_id._notify(self.env._("Measurement machine already in use."))
             success = False
 
         if success:

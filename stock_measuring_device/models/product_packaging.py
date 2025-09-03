@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html)
 import logging
 
-from odoo import _, fields, models
+from odoo import fields, models
 
 _logger = logging.getLogger(__name__)
 
@@ -39,7 +39,7 @@ class ProductPackaging(models.Model):
             [("measuring_device_id", "=", device.id)], order="write_date DESC", limit=2
         )
         if len(packaging) > 1:
-            warning_msg = _(
+            warning_msg = self.env._(
                 f"Several packagings ({packaging}) found to update by "
                 f"device {self.name}. Will update the first: {packaging[0]}"
             )
