@@ -39,7 +39,7 @@ class MeasuringWizard(models.TransientModel):
             "is_unit_line": True,
         }
         product_dimension_uom = self.product_id.dimensional_uom_id
-        mm_uom = self.env.ref("stock_measuring_device.product_uom_mm")
+        mm_uom = self.env.ref("uom.product_uom_millimeter")
         if mm_uom != product_dimension_uom:
             vals.update(
                 {
@@ -110,7 +110,7 @@ class MeasuringWizard(models.TransientModel):
 
     def action_save(self):
         self.ensure_one()
-        mm_uom = self.env.ref("stock_measuring_device.product_uom_mm")
+        mm_uom = self.env.ref("uom.product_uom_millimeter")
         product_vals = {}
         packaging_ids_list = []
         for line in self.line_ids:

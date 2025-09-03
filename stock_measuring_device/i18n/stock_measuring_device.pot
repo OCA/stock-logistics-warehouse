@@ -314,8 +314,3 @@ msgstr ""
 #: model:ir.model,name:stock_measuring_device.model_measuring_wizard_line
 msgid "measuring Wizard Line"
 msgstr ""
-
-#. module: stock_measuring_device
-#: model:uom.uom,name:stock_measuring_device.product_uom_mm
-msgid "mm"
-msgstr ""

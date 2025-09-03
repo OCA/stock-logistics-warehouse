@@ -20,7 +20,6 @@
     ],
     "data": [
         "security/ir.model.access.csv",
-        "data/uom.xml",
         "views/measuring_device_view.xml",
         "wizard/measuring_wizard.xml",
         "views/menu.xml",
