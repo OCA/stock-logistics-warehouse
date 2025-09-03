@@ -8,9 +8,7 @@ export const measuringWizardNotificationService = {
         this.orm = orm;
         const self = this;
         this.bus_service.subscribe("notify_measuring_wizard_screen", (notification) => {
-            self.notifyMeasuringWizardScreen(notification).then((result) => {
-                return result;
-            });
+            self.notifyMeasuringWizardScreen(notification);
         });
         this.bus_service.start();
     },
