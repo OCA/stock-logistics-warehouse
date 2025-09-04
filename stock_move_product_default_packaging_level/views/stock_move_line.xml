@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 ACSONE SA/NV
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record model="ir.ui.view" id="stock_move_line_tree_view">
+        <field name="model">stock.move.line</field>
+        <field name="inherit_id" ref="stock.view_move_line_tree" />
+        <field name="arch" type="xml">
+            <field name="product_uom_id" position="after">
+                <field
+                    name="from_default_level_packaging_id"
+                    groups="product.group_stock_packaging"
+                    optional="show"
+                />
+            </field>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 ACSONE SA/NV
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl). -->
+<odoo>
+    <record model="ir.ui.view" id="stock_move_form_view">
+        <field name="model">stock.move</field>
+        <field name="inherit_id" ref="stock.view_move_form" />
+        <field name="arch" type="xml">
+            <field name="product_id" position="after">
+                <field
+                    name="from_default_level_packaging_id"
+                    groups="product.group_stock_packaging"
+                />
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="stock_move_tree_view">
+        <field name="model">stock.move</field>
+        <field name="inherit_id" ref="stock.view_move_tree" />
+        <field name="arch" type="xml">
+            <field name="product_packaging_id" position="after">
+                <field
+                    name="from_default_level_packaging_id"
+                    groups="product.group_stock_packaging"
+                    optional="show"
+                />
+            </field>
+        </field>
+    </record>
+</odoo>
