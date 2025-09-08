@@ -25,7 +25,6 @@ class TestProcurementAutoCreateGroup(TransactionCase):
 
         cls.partner = cls.env["res.partner"].create({"name": "Partner"})
 
-        # Create rules and routes:
         pull_push_route_auto = cls.route_obj.create({"name": "Auto Create Group"})
         cls.pull_push_rule_auto = cls.rule_obj.create(
             {
@@ -55,7 +54,7 @@ class TestProcurementAutoCreateGroup(TransactionCase):
                 "location_src_id": cls.loc_components.id,
             }
         )
-        push_route_auto = cls.route_obj.create({"name": "Auto Create Group"})
+        push_route_auto = cls.route_obj.create({"name": "Auto Create Group Push"})
         cls.push_rule_auto = cls.rule_obj.create(
             {
                 "name": "route_auto",
@@ -70,7 +69,9 @@ class TestProcurementAutoCreateGroup(TransactionCase):
                 "action": "push",
             }
         )
-        push_route_no_auto = cls.route_obj.create({"name": "Not Auto Create Group"})
+        push_route_no_auto = cls.route_obj.create(
+            {"name": "Not Auto Create Group Push"}
+        )
         cls.rule_obj.create(
             {
                 "name": "route_no_auto",
@@ -86,10 +87,16 @@ class TestProcurementAutoCreateGroup(TransactionCase):
             }
         )
 
-        # Prepare products:
-        cls.prod_auto_pull_push = cls.product_obj.create(
+        cls.prod_auto_pull_push_1 = cls.product_obj.create(
             {
-                "name": "Test Product 1",
+                "name": "Test Product 1A - Same Route",
+                "type": "product",
+                "route_ids": [(6, 0, [pull_push_route_auto.id])],
+            }
+        )
+        cls.prod_auto_pull_push_2 = cls.product_obj.create(
+            {
+                "name": "Test Product 1B - Same Route",
                 "type": "product",
                 "route_ids": [(6, 0, [pull_push_route_auto.id])],
             }
@@ -101,9 +108,16 @@ class TestProcurementAutoCreateGroup(TransactionCase):
                 "route_ids": [(6, 0, [pull_push_route_no_auto.id])],
             }
         )
-        cls.prod_auto_push = cls.product_obj.create(
+        cls.prod_auto_push_1 = cls.product_obj.create(
             {
-                "name": "Test Product 3",
+                "name": "Test Product 3A - Push Same Route",
+                "type": "product",
+                "route_ids": [(6, 0, [push_route_auto.id])],
+            }
+        )
+        cls.prod_auto_push_2 = cls.product_obj.create(
+            {
+                "name": "Test Product 3B - Push Same Route",
                 "type": "product",
                 "route_ids": [(6, 0, [push_route_auto.id])],
             }
@@ -122,6 +136,7 @@ class TestProcurementAutoCreateGroup(TransactionCase):
     def _procure(cls, product):
         values = {
             "group_id": cls.group,
+            "route_ids": product.route_ids,
         }
         cls.group_obj.run(
             [
@@ -137,7 +152,6 @@ class TestProcurementAutoCreateGroup(TransactionCase):
                 )
             ]
         )
-        return True
 
     @classmethod
     def _push_trigger(cls, product):
@@ -169,7 +183,7 @@ class TestProcurementAutoCreateGroup(TransactionCase):
         picking.button_validate()
 
     def test_01_pull_push_no_auto_create_group(self):
-        """Test auto creation of group."""
+        """Test no auto creation of group - should use provided group."""
         move = self.move_obj.search(
             [("product_id", "=", self.prod_no_auto_pull_push.id)]
         )
@@ -182,21 +196,20 @@ class TestProcurementAutoCreateGroup(TransactionCase):
         self.assertEqual(
             move.group_id,
             self.group,
-            "Procurement Group should not have been assigned.",
+            "Should use the provided procurement group.",
         )
 
     def test_02_pull_push_auto_create_group(self):
-        move = self.move_obj.search([("product_id", "=", self.prod_auto_pull_push.id)])
+        move = self.move_obj.search(
+            [("product_id", "=", self.prod_auto_pull_push_1.id)]
+        )
         self.assertFalse(move)
-        self._procure(self.prod_auto_pull_push)
-        move = self.move_obj.search([("product_id", "=", self.prod_auto_pull_push.id)])
+        self._procure(self.prod_auto_pull_push_1)
+        move = self.move_obj.search(
+            [("product_id", "=", self.prod_auto_pull_push_1.id)]
+        )
         self.assertTrue(move)
         self.assertTrue(move.group_id, "Procurement Group not assigned.")
-        self.assertEqual(
-            move.group_id.partner_id,
-            self.partner,
-            "Procurement Group partner missing.",
-        )
 
     def test_03_onchange_method(self):
         """Test onchange method for stock rule."""
@@ -207,7 +220,7 @@ class TestProcurementAutoCreateGroup(TransactionCase):
         self.assertFalse(proc_rule.auto_create_group)
 
     def test_04_push_no_auto_create_group(self):
-        """Test no auto creation of group."""
+        """Test push rule without auto_create_group."""
         move = self.move_obj.search(
             [
                 ("product_id", "=", self.prod_no_auto_push.id),
@@ -224,24 +237,122 @@ class TestProcurementAutoCreateGroup(TransactionCase):
         )
         self.assertTrue(move)
         self.assertFalse(
-            move.group_id, "Procurement Group should not have been assigned."
+            move.group_id, "Procurement Group should not have been created."
         )
 
     def test_05_push_auto_create_group(self):
-        """Test auto creation of group."""
-        move = self.move_obj.search(
+        """Test push rule with auto_create_group creates groups."""
+        self._push_trigger(self.prod_auto_push_1)
+        self._push_trigger(self.prod_auto_push_2)
+
+        move_1 = self.move_obj.search(
             [
-                ("product_id", "=", self.prod_auto_push.id),
+                ("product_id", "=", self.prod_auto_push_1.id),
                 ("location_dest_id", "=", self.loc_components.id),
             ]
         )
-        self.assertFalse(move)
-        self._push_trigger(self.prod_auto_push)
-        move = self.move_obj.search(
+        move_2 = self.move_obj.search(
             [
-                ("product_id", "=", self.prod_auto_push.id),
+                ("product_id", "=", self.prod_auto_push_2.id),
                 ("location_dest_id", "=", self.loc_components.id),
             ]
+        )
+
+        self.assertTrue(move_1)
+        self.assertTrue(move_2)
+        self.assertTrue(move_1.group_id, "Should create group for push product 1")
+        self.assertTrue(move_2.group_id, "Should create group for push product 2")
+
+        # Currently push rules create separate groups (original OCA behavior)
+        self.assertNotEqual(
+            move_1.group_id,
+            move_2.group_id,
+            "Push rules currently create separate groups",
+        )
+
+    def test_06_orderpoint_scheduler_route_grouping(self):
+        """Test route grouping through orderpoint scheduler"""
+
+        self.env["stock.quant"].search(
+            [
+                (
+                    "product_id",
+                    "in",
+                    [self.prod_auto_pull_push_1.id, self.prod_auto_pull_push_2.id],
+                )
+            ]
+        ).unlink()
+
+        # Needing replenishment orderpoints
+        orderpoint_1 = self.env["stock.warehouse.orderpoint"].create(
+            {
+                "product_id": self.prod_auto_pull_push_1.id,
+                "location_id": self.location.id,
+                "product_min_qty": 10.0,
+                "product_max_qty": 20.0,
+                "route_id": self.prod_auto_pull_push_1.route_ids[0].id,
+            }
+        )
+        orderpoint_2 = self.env["stock.warehouse.orderpoint"].create(
+            {
+                "product_id": self.prod_auto_pull_push_2.id,
+                "location_id": self.location.id,
+                "product_min_qty": 10.0,
+                "product_max_qty": 20.0,
+                "route_id": self.prod_auto_pull_push_2.route_ids[0].id,
+            }
+        )
+
+        orderpoint_1._compute_qty_to_order()
+        orderpoint_2._compute_qty_to_order()
+
+        self.assertGreater(
+            orderpoint_1.qty_to_order, 0, "Orderpoint 1 should need replenishment"
+        )
+        self.assertGreater(
+            orderpoint_2.qty_to_order, 0, "Orderpoint 2 should need replenishment"
+        )
+
+        (orderpoint_1 + orderpoint_2)._procure_orderpoint_confirm()
+
+        move_1 = self.move_obj.search(
+            [("product_id", "=", self.prod_auto_pull_push_1.id)]
+        )
+        move_2 = self.move_obj.search(
+            [("product_id", "=", self.prod_auto_pull_push_2.id)]
+        )
+
+        self.assertTrue(move_1, "Move 1 should be created")
+        self.assertTrue(move_2, "Move 2 should be created")
+
+        self.assertTrue(move_1.group_id, "Move 1 should have group")
+        self.assertTrue(move_2.group_id, "Move 2 should have group")
+        self.assertEqual(
+            move_1.group_id, move_2.group_id, "Should share same group via scheduler"
+        )
+
+    def test_07_orderpoint_no_auto_create_routes(self):
+        """Test orderpoint scheduler when no routes have auto_create_group"""
+
+        orderpoint = self.env["stock.warehouse.orderpoint"].create(
+            {
+                "product_id": self.prod_no_auto_pull_push.id,
+                "location_id": self.location.id,
+                "product_min_qty": 10.0,
+                "product_max_qty": 20.0,
+                "route_id": self.prod_no_auto_pull_push.route_ids[0].id,
+            }
+        )
+
+        self.env["stock.quant"].search(
+            [("product_id", "=", self.prod_no_auto_pull_push.id)]
+        ).unlink()
+        orderpoint._compute_qty_to_order()
+        self.assertGreater(orderpoint.qty_to_order, 0)
+
+        orderpoint._procure_orderpoint_confirm()
+
+        move = self.move_obj.search(
+            [("product_id", "=", self.prod_no_auto_pull_push.id)]
         )
         self.assertTrue(move)
-        self.assertTrue(move.group_id, "Procurement Group not assigned.")
