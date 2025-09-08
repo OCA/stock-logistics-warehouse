@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding='UTF-8' ?>
+<odoo>
+    <record id="view_production_lot_form" model="ir.ui.view">
+        <field name="name">stock.production.lot.inherit.form</field>
+        <field name="model">stock.lot</field>
+        <field name="inherit_id" ref="stock.view_production_lot_form" />
+        <field name="arch" type="xml">
+            <field name="ref" position="after">
+                <field name="maturity_date" />
+            </field>
+            <xpath expr="//div[hasclass('oe_title')]" position="inside">
+                <span
+                    class="badge text-bg-warning"
+                    invisible="not product_maturity_alert"
+                >Not mature yet</span>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_production_lot_tree" model="ir.ui.view">
+        <field name="model">stock.lot</field>
+        <field name="inherit_id" ref="stock.view_production_lot_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='create_date']" position="after">
+                <field name="product_qty" column_invisible="True" />
+                <field
+                    name="maturity_date"
+                    widget="remaining_days"
+                    invisible="product_qty &lt;= 0"
+                    optional="hide"
+                />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_production_lot_view_kanban" model="ir.ui.view">
+        <field name="model">stock.lot</field>
+        <field name="inherit_id" ref="stock.view_production_lot_kanban" />
+        <field name="arch" type="xml">
+            <xpath expr="//templates" position="before">
+                <field name="product_qty" />
+                <field name="product_maturity_alert" />
+            </xpath>
+            <xpath expr="//field[@name='name']" position="after">
+                <div>
+                    <span
+                        title="Not mature"
+                        class="fa fa-apple text-warning me-2"
+                        invisible="product_qty &lt;= 0 or not product_maturity_alert or not maturity_date"
+                    />
+                    <field
+                        name="maturity_date"
+                        widget="remaining_days"
+                        class="d-inline-block"
+                    />
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>
