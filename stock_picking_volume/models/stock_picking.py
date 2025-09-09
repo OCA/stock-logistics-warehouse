@@ -11,6 +11,7 @@ class StockPicking(models.Model):
         compute="_compute_volume",
         store=True,
         compute_sudo=True,
+        digits="Volume",
     )
     volume_uom_name = fields.Char(
         string="Volume unit of measure label", compute="_compute_volume_uom_name"

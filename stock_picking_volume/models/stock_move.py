@@ -11,6 +11,7 @@ class StockMove(models.Model):
         compute="_compute_volume",
         store=True,
         compute_sudo=True,
+        digits="Volume",
     )
 
     volume_uom_name = fields.Char(
