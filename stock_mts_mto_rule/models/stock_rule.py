@@ -70,7 +70,7 @@ class StockRule(models.Model):
                 procurement.values,
             )
             if float_is_zero(needed_qty, precision_digits=precision):
-                getattr(self.env["stock.rule"], "_run_%s" % rule.mts_rule_id.action)(
+                getattr(self.env["stock.rule"], f"_run_{rule.mts_rule_id.action}")(
                     [(procurement, rule.mts_rule_id)]
                 )
             elif (
@@ -79,13 +79,13 @@ class StockRule(models.Model):
                 )
                 == 0.0
             ):
-                getattr(self.env["stock.rule"], "_run_%s" % rule.mto_rule_id.action)(
+                getattr(self.env["stock.rule"], f"_run_{rule.mts_rule_id.action}")(
                     [(procurement, rule.mto_rule_id)]
                 )
             else:
                 mts_qty = procurement.product_qty - needed_qty
                 mts_procurement = procurement._replace(product_qty=mts_qty)
-                getattr(self.env["stock.rule"], "_run_%s" % rule.mts_rule_id.action)(
+                getattr(self.env["stock.rule"], f"_run_{rule.mts_rule_id.action}")(
                     [(mts_procurement, rule.mts_rule_id)]
                 )
 
@@ -101,7 +101,7 @@ class StockRule(models.Model):
                 moves_to_assign._action_assign()
 
                 mto_procurement = procurement._replace(product_qty=needed_qty)
-                getattr(self.env["stock.rule"], "_run_%s" % rule.mto_rule_id.action)(
+                getattr(self.env["stock.rule"], f"_run_{rule.mts_rule_id.action}")(
                     [(mto_procurement, rule.mto_rule_id)]
                 )
         return True

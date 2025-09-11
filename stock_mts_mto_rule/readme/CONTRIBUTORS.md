@@ -2,3 +2,4 @@
 - Jared Kipe \<<jared@hibou.io>\>
 - Alan Ramos \<<alan.ramos@jarsa.com.mx>\>
 - Aleksander Milinkevich \<<aleksander@versada.eu>\>
+- Michel Guiheneuf \<<mgu@apik.cloud>\>
