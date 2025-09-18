@@ -78,17 +78,11 @@ class TestStockRequestAnalytic(common.TransactionCase):
         new_test_user(
             cls.env,
             login="stock_request_user",
-            groups="%s,%s,%s"
-            % (
-                "stock_request.group_stock_request_user",
-                "analytic.group_analytic_accounting",
-                "stock.group_stock_user",
-            ),
+            groups="stock_request.group_stock_request_user,analytic.group_analytic_accounting,stock.group_stock_user",
             company_ids=[(6, 0, [cls.main_company.id, cls.company_2.id])],
         )
 
     def prepare_order_request_analytic(self, analytic, company, analytic_tags=None):
-        analytic_tags = analytic_tags or self.AccountAnalyticTag
         vals = {
             "company_id": company.id,
             "warehouse_id": self.warehouse.id,
@@ -103,7 +97,6 @@ class TestStockRequestAnalytic(common.TransactionCase):
                         "product_uom_id": self.product.uom_id.id,
                         "product_uom_qty": 5.0,
                         "analytic_account_id": analytic.id,
-                        "analytic_tag_ids": [(4, tag.id) for tag in analytic_tags],
                         "company_id": company.id,
                         "warehouse_id": self.warehouse.id,
                         "location_id": self.demand_loc.id,
@@ -156,7 +149,8 @@ class TestStockRequestAnalytic(common.TransactionCase):
     def test_stock_analytic(self):
         analytic_tag = self.env.ref("analytic.tag_contract")
         vals = self.prepare_order_request_analytic(
-            self.analytic1, self.main_company, analytic_tags=analytic_tag
+            self.analytic1,
+            self.main_company,
         )
         order = self.StockRequestOrder.create(vals)
         req = order.stock_request_ids

@@ -6,15 +6,12 @@ from odoo.exceptions import ValidationError
 
 MAP_ACTIONS = {
     "analytic_account": "analytic.action_account_analytic_account_form",
-    "analytic_tag": "analytic.account_analytic_tag_action",
 }
 MAP_FIELDS = {
     "analytic_account": "analytic_account_ids",
-    "analytic_tag": "analytic_tag_ids",
 }
 MAP_VIEWS = {
     "analytic_account": "analytic.view_account_analytic_account_form",
-    "analytic_tag": "analytic.account_analytic_tag_form_view",
 }
 
 
@@ -26,11 +23,6 @@ class StockRequestOrder(models.Model):
         readonly=True,
         compute_sudo=True,
     )
-    analytic_tag_count = fields.Integer(
-        compute="_compute_analytic_ids",
-        readonly=True,
-        compute_sudo=True,
-    )
     analytic_account_ids = fields.One2many(
         comodel_name="account.analytic.account",
         compute="_compute_analytic_ids",
@@ -38,12 +30,12 @@ class StockRequestOrder(models.Model):
         readonly=True,
         compute_sudo=True,
     )
-    analytic_tag_ids = fields.One2many(
-        comodel_name="account.analytic.tag",
-        compute="_compute_analytic_ids",
-        string="Analytic Tags",
+    analytic_distribution_ids = fields.One2many(
+        comodel_name="account.analytic.distribution",
+        inverse_name="res_id",
+        domain=lambda self: [("res_model", "=", self._name)],
+        string="Analytic Distributions",
         readonly=True,
-        compute_sudo=True,
     )
     default_analytic_account_id = fields.Many2one(
         comodel_name="account.analytic.account",
@@ -57,9 +49,7 @@ class StockRequestOrder(models.Model):
             req.analytic_account_ids = req.stock_request_ids.mapped(
                 "analytic_account_id"
             )
-            req.analytic_tag_ids = req.stock_request_ids.mapped("analytic_tag_ids")
             req.analytic_count = len(req.analytic_account_ids)
-            req.analytic_tag_count = len(req.analytic_tag_ids)
 
     def action_view_analytic(self):
         self.ensure_one()

@@ -18,10 +18,11 @@ class StockRequest(models.Model):
         check_company=True,
         compute_sudo=True,
     )
-    analytic_tag_ids = fields.Many2many(
-        comodel_name="account.analytic.tag",
-        string="Analytic Tags",
-        check_company=True,
+    analytic_distribution_ids = fields.Many2many(
+        comodel_name="account.analytic.distribution",
+        inverse_name="res_id",
+        domain=lambda self: [("res_model", "=", self._name)],
+        string="Analytic Distribution",
     )
 
     @api.depends("order_id")
