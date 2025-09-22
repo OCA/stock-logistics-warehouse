@@ -48,20 +48,19 @@ def extract_and_action_done(move):
     to first extract some move lines in a separate move, then validate it
     with this method.
     """
-    # Put remaining qty to process from partially available moves
-    # in their own move (which will be then 'confirmed')
-    partial_moves = move.filtered(lambda m: m.state == "partially_available")
-    for partial_move in partial_moves:
-        split_other_move_lines(partial_move, partial_move.move_line_ids)
     # Process assigned moves
     moves = move.filtered(lambda m: m.state == "assigned")
     if not moves:
         return False
     for picking in moves.picking_id:
         moves_todo = picking.move_ids & moves
+        # No need to create a new transfer if we are processing all moves
         if moves_todo == picking.move_ids:
-            # No need to create a new transfer if we are processing all moves
             new_picking = picking
+        # We process some available moves of the picking, but there are still
+        # some other moves to process, then we put the moves to process in
+        # a new transfer to validate. All remaining moves stay in the
+        # current transfer.
         else:
             new_picking = picking.copy(
                 {
@@ -71,13 +70,12 @@ def extract_and_action_done(move):
                     "backorder_id": picking.id,
                 }
             )
-            moves_todo.write({"picking_id": new_picking.id})
-            moves_todo.package_level_id.write({"picking_id": new_picking.id})
-            moves_todo.move_line_ids.write({"picking_id": new_picking.id})
-            moves_todo.move_line_ids.package_level_id.write(
-                {"picking_id": new_picking.id}
-            )
-            new_picking.action_assign()
+            moves_todo.picking_id = new_picking.id
+            moves_todo.package_level_id.picking_id = new_picking.id
+            moves_todo.move_line_ids.picking_id = new_picking.id
+            moves_todo.move_line_ids.package_level_id.picking_id = new_picking.id
+            if moves_todo.state != "assigned":
+                moves_todo._action_assign()
             assert new_picking.state == "assigned"
         new_picking.button_validate()
     return True

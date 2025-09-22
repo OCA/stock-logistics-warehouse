@@ -213,12 +213,20 @@ class TestPick(VerticalLiftCase):
         self.assertEqual(
             current_destination, self.env.ref("stock.stock_location_customers")
         )
+        self.assertEqual(move_line.state, "assigned")
         operation.on_barcode_scanned(stock_location.barcode)
         self.assertEqual(move_line.location_dest_id, stock_location)
+        self.assertEqual(move_line.move_id.location_dest_id, current_destination)
+        self.assertEqual(move_line.picking_id.location_dest_id, current_destination)
         self.assertEqual(operation.state, "save")
         # Done for test coverage
         operation.button_save()
+        self.assertEqual(move_line.state, "done")
         operation.on_barcode_scanned("test")
+        self.assertEqual(move_line.state, "done")
+        # These destination were NOT updated
+        self.assertEqual(move_line.move_id.location_dest_id, current_destination)
+        self.assertEqual(move_line.picking_id.location_dest_id, current_destination)
 
     def test_button_release(self):
         self._open_screen("pick")
