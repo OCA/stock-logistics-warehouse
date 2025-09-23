@@ -25,10 +25,17 @@ def split_other_move_lines(move, move_lines):
         backorder_move = move.create(backorder_move_vals)
         if not backorder_move:
             return False
-        backorder_move._action_confirm(merge=False)
+        # Following two lines were swapped with Odoo 18.0
+        # to assign `move_line_ids` before calling `_action_confirm`.
+        # Reason is that `_action_confirm` could call `_action_assign`
+        # and create `stock.move.line` record.  And such move line record
+        # would be orphaned if attribute `move_line_ids` is set after.
+        # Let's avoid this by setting the attribute beforehand.
         backorder_move.move_line_ids = other_move_lines
+        backorder_move._action_confirm(merge=False)
         backorder_move._recompute_state()
-        backorder_move._action_assign()
+        if backorder_move.state != "assigned":
+            backorder_move._action_assign()
         move._recompute_state()
         return backorder_move
     return False

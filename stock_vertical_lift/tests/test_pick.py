@@ -271,3 +271,191 @@ class TestPick(VerticalLiftCase):
         ml.move_id.state = "draft"
         ml.product_id = False
         self.assertFalse(operation.product_packagings)
+
+    def test_pick_save_move_split(self):
+        # 1. Update cell quantities
+        product = self.env.ref("stock_vertical_lift.product_running_socks")
+        cell_x1y2 = self.env.ref(
+            "stock_vertical_lift.stock_location_vertical_lift_demo_tray_1b_x1y2"
+        )
+        cell_x2y2 = self.env.ref(
+            "stock_vertical_lift.stock_location_vertical_lift_demo_tray_1b_x2y2"
+        )
+
+        self._update_qty_in_location(cell_x1y2, product, 400)
+        self._update_qty_in_location(cell_x2y2, product, 700)
+        self.picking_out.move_ids.product_uom_qty = 800
+
+        # 2. Initial checks
+        self.assertEqual(self.out_move_line.picking_id, self.picking_out)
+        self.assertEqual(self.out_move_line.quantity, 10)
+        self.assertEqual(self.out_move_line.move_id.quantity, 15)
+        self.assertEqual(self.out_move_line.move_id.product_uom_qty, 800)
+
+        # 3. Operation Save
+        operation = self._open_screen("pick")
+        operation.state = "save"
+        operation.current_move_line_id = self.out_move_line
+        operation.button_save()
+
+        mlines = self.picking_out.move_line_ids
+        customer_loc = self.env.ref("stock.stock_location_customers")
+
+        # 4. Check result
+        self.assertEqual(operation.state, "release")
+        self.assertEqual(operation.current_move_line_id, self.out_move_line)
+        self.assertEqual(self.out_move_line.move_id.quantity, 10)
+        self.assertEqual(mlines.move_id.quantity, 790)
+
+        # Out move line 'done'
+        self.assertEqual(self.out_move_line.state, "done")
+        self.assertEqual(self.out_move_line.product_id, product)
+        self.assertEqual(self.out_move_line.quantity, 10)
+        self.assertEqual(self.out_move_line.location_dest_id, customer_loc)
+        self.assertEqual(self.out_move_line.location_id, cell_x1y2)
+        self.assertEqual(
+            self.out_move_line.move_id.product_uom_qty,
+            self.out_move_line.move_id.quantity,
+        )
+        # Assigned to new picking
+        self.assertNotEqual(self.out_move_line.picking_id, self.picking_out)
+
+        # Two move lines 'assigned'
+        self.assertEqual(len(mlines), 2)
+        result = [(mline.location_id.name, mline.quantity) for mline in mlines]
+        expected = [
+            ("x02y02", 400.0),
+            ("x01y02", 390.0),
+        ]
+        self.assertEqual(result, expected)
+        self.assertEqual(mlines.move_id.state, "assigned")
+        self.assertEqual(mlines.product_id, product)
+        self.assertEqual(mlines.move_id.product_uom_qty, mlines.move_id.quantity)
+        self.assertEqual([ml.move_id for ml in mlines], [self.picking_out.move_ids] * 2)
+        self.assertEqual([ml.location_dest_id for ml in mlines], [customer_loc] * 2)
+
+    def test_pick_save_with_package(self):
+        # 1. Update cell quantities
+        product = self.env.ref("stock_vertical_lift.product_running_socks")
+        cell_x1y2 = self.env.ref(
+            "stock_vertical_lift.stock_location_vertical_lift_demo_tray_1b_x1y2"
+        )
+        cell_x2y2 = self.env.ref(
+            "stock_vertical_lift.stock_location_vertical_lift_demo_tray_1b_x2y2"
+        )
+
+        # Set a package for product on cell x1y2
+        package1 = self.env["stock.quant.package"].create({"name": "Package 1"})
+        self._update_qty_in_location(cell_x1y2, product, 400, package=package1)
+        self._update_qty_in_location(cell_x2y2, product, 700)
+        self.picking_out.move_ids.product_uom_qty = 800
+
+        # 2. Initial checks
+        self.assertEqual(self.out_move_line.picking_id, self.picking_out)
+        self.assertEqual(self.out_move_line.quantity, 10)
+        self.assertEqual(self.out_move_line.move_id.quantity, 15)
+        self.assertEqual(self.out_move_line.move_id.product_uom_qty, 800)
+
+        # 3. Operation Save
+        operation = self._open_screen("pick")
+        # assume we already scanned the destination, current state is save
+        operation.state = "save"
+        operation.current_move_line_id = self.out_move_line
+        operation.button_save()
+
+        mlines = self.picking_out.move_line_ids
+        customer_loc = self.env.ref("stock.stock_location_customers")
+
+        # 4. Check result
+        self.assertEqual(operation.state, "release")
+        self.assertEqual(operation.current_move_line_id, self.out_move_line)
+        self.assertEqual(self.out_move_line.move_id.quantity, 10)
+        self.assertEqual(mlines.move_id.quantity, 790)
+
+        # Out move line 'done'
+        self.assertEqual(self.out_move_line.state, "done")
+        self.assertEqual(self.out_move_line.product_id, product)
+        self.assertEqual(self.out_move_line.quantity, 10)
+        self.assertEqual(self.out_move_line.location_dest_id, customer_loc)
+        self.assertEqual(self.out_move_line.location_id, cell_x1y2)
+        self.assertEqual(
+            self.out_move_line.move_id.product_uom_qty,
+            self.out_move_line.move_id.quantity,
+        )
+        # Assigned to new picking
+        self.assertNotEqual(self.out_move_line.picking_id, self.picking_out)
+
+        # Three move lines 'assigned'
+        self.assertEqual(len(mlines), 3)
+        result = [(mline.location_id.name, mline.quantity) for mline in mlines]
+        expected = [
+            ("x02y02", 700.0),
+            ("x03y02", 10.0),
+            ("x01y02", 80.0),
+        ]
+        self.assertEqual(result, expected)
+        self.assertEqual(mlines.move_id.state, "assigned")
+        self.assertEqual(mlines.product_id, product)
+        self.assertEqual(mlines.move_id.product_uom_qty, mlines.move_id.quantity)
+        self.assertEqual([ml.move_id for ml in mlines], [self.picking_out.move_ids] * 3)
+        self.assertEqual([ml.location_dest_id for ml in mlines], [customer_loc] * 3)
+
+    def test_pick_save_partially_available(self):
+        # 1. Update cell quantities
+        product = self.env.ref("stock_vertical_lift.product_running_socks")
+        cell_x1y2 = self.env.ref(
+            "stock_vertical_lift.stock_location_vertical_lift_demo_tray_1b_x1y2"
+        )
+
+        package1 = self.env["stock.quant.package"].create({"name": "Package 1"})
+        self._update_qty_in_location(cell_x1y2, product, 40, package=package1)
+        self.picking_out.move_ids.product_uom_qty = 300
+
+        # 2. Initial checks
+        self.assertEqual(self.out_move_line.picking_id, self.picking_out)
+        self.assertEqual(self.out_move_line.quantity, 10)
+        self.assertEqual(self.out_move_line.move_id.quantity, 15)
+        self.assertEqual(self.out_move_line.move_id.product_uom_qty, 300)
+
+        # 3. Operation Save
+        operation = self._open_screen("pick")
+        operation.state = "save"
+        operation.current_move_line_id = self.out_move_line
+        operation.button_save()
+
+        mlines = self.picking_out.move_line_ids
+        customer_loc = self.env.ref("stock.stock_location_customers")
+
+        # 4. Check result
+        self.assertEqual(operation.state, "release")
+        self.assertEqual(operation.current_move_line_id, self.out_move_line)
+        self.assertEqual(self.out_move_line.move_id.quantity, 10)
+        self.assertEqual(mlines.move_id.quantity, 60)
+
+        # Out move line 'done'
+        self.assertEqual(self.out_move_line.state, "done")
+        self.assertEqual(self.out_move_line.product_id, product)
+        self.assertEqual(self.out_move_line.quantity, 10)
+        self.assertEqual(self.out_move_line.location_dest_id, customer_loc)
+        self.assertEqual(self.out_move_line.location_id, cell_x1y2)
+        self.assertEqual(
+            self.out_move_line.move_id.product_uom_qty,
+            self.out_move_line.move_id.quantity,
+        )
+        # Assigned to new picking
+        self.assertNotEqual(self.out_move_line.picking_id, self.picking_out)
+
+        # Three move lines 'partially_available'
+        self.assertEqual(len(mlines), 3)
+        result = [(mline.location_id.name, mline.quantity) for mline in mlines]
+        expected = [
+            ("x02y02", 10.0),
+            ("x03y02", 10.0),
+            ("x01y02", 40.0),
+        ]
+        self.assertEqual(result, expected)
+        self.assertEqual(mlines.move_id.state, "partially_available")
+        self.assertEqual(mlines.product_id, product)
+        self.assertEqual(mlines.move_id.product_uom_qty, 290)
+        self.assertEqual([ml.move_id for ml in mlines], [self.picking_out.move_ids] * 3)
+        self.assertEqual([ml.location_dest_id for ml in mlines], [customer_loc] * 3)
