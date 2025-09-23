@@ -149,11 +149,11 @@ class TestPick(VerticalLiftCase):
         # ensure that we have stock in some cells, we'll put product1
         # in the first Shuttle and product2 in the second
         cell1 = self.env.ref(
-            "stock_vertical_lift." "stock_location_vertical_lift_demo_tray_1a_x3y2"
+            "stock_vertical_lift.stock_location_vertical_lift_demo_tray_1a_x3y2"
         )
         self._update_quantity_in_cell(cell1, product1, 50)
         cell2 = self.env.ref(
-            "stock_vertical_lift." "stock_location_vertical_lift_demo_tray_2a_x1y1"
+            "stock_vertical_lift.stock_location_vertical_lift_demo_tray_2a_x1y1"
         )
         self._update_quantity_in_cell(cell2, product2, 50)
 
@@ -254,7 +254,7 @@ class TestPick(VerticalLiftCase):
 
     def test_tray_qty(self):
         cell = self.env.ref(
-            "stock_vertical_lift." "stock_location_vertical_lift_demo_tray_1a_x3y2"
+            "stock_vertical_lift.stock_location_vertical_lift_demo_tray_1a_x3y2"
         )
         self.out_move_line.location_id = cell
         operation = self.shuttle._operation_for_mode()
