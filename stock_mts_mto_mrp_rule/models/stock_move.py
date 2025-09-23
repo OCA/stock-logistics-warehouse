@@ -23,6 +23,7 @@ class StockMove(models.Model):
         precision = self.env["decimal.precision"].precision_get(
             "Product Unit of Measure"
         )
+        no_split_procurement_moves = self.browse([])
         for move in self:
             product_id = move.product_id
             domain = [
@@ -34,7 +35,7 @@ class StockMove(models.Model):
                 False, product_id, move.warehouse_id, domain
             )
             if not rules or rules and rules.action != "split_procurement":
-                super(StockMove, move)._adjust_procure_method()
+                no_split_procurement_moves |= move
             else:
                 needed_qty = rules.get_mto_qty_to_order(
                     product_id, move.product_qty, move.product_uom, {}
@@ -55,3 +56,6 @@ class StockMove(models.Model):
                         )
                     )
                     move._action_assign()
+
+        if no_split_procurement_moves:
+            super(StockMove, no_split_procurement_moves)._adjust_procure_method()
