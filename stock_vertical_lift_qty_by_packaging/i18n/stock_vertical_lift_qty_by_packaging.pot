@@ -1,0 +1,41 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_vertical_lift_qty_by_packaging
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_vertical_lift_qty_by_packaging
+#: model:ir.model.fields,field_description:stock_vertical_lift_qty_by_packaging.field_vertical_lift_operation_transfer__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: stock_vertical_lift_qty_by_packaging
+#: model:ir.model.fields,field_description:stock_vertical_lift_qty_by_packaging.field_vertical_lift_operation_transfer__id
+msgid "ID"
+msgstr ""
+
+#. module: stock_vertical_lift_qty_by_packaging
+#: model:ir.model.fields,field_description:stock_vertical_lift_qty_by_packaging.field_vertical_lift_operation_transfer____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: stock_vertical_lift_qty_by_packaging
+#: model:ir.model.fields,field_description:stock_vertical_lift_qty_by_packaging.field_vertical_lift_operation_pick__product_qty_by_packaging_display
+#: model:ir.model.fields,field_description:stock_vertical_lift_qty_by_packaging.field_vertical_lift_operation_put__product_qty_by_packaging_display
+#: model:ir.model.fields,field_description:stock_vertical_lift_qty_by_packaging.field_vertical_lift_operation_transfer__product_qty_by_packaging_display
+msgid "Product Qty By Packaging Display"
+msgstr ""
+
+#. module: stock_vertical_lift_qty_by_packaging
+#: model:ir.model,name:stock_vertical_lift_qty_by_packaging.model_vertical_lift_operation_transfer
+msgid "Vertical Lift Operation - Transfer"
+msgstr ""
