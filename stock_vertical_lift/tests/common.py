@@ -20,34 +20,34 @@ class VerticalLiftCase(common.LocationTrayTypeCase):
         cls.stock_location = cls.env.ref("stock.stock_location_stock")
         cls.customers_location = cls.env.ref("stock.stock_location_customers")
         cls.location_1a = cls.env.ref(
-            "stock_vertical_lift." "stock_location_vertical_lift_demo_tray_1a"
+            "stock_vertical_lift.stock_location_vertical_lift_demo_tray_1a"
         )
         cls.location_1a_x1y1 = cls.env.ref(
-            "stock_vertical_lift." "stock_location_vertical_lift_demo_tray_1a_x1y1"
+            "stock_vertical_lift.stock_location_vertical_lift_demo_tray_1a_x1y1"
         )
         cls.location_1a_x2y1 = cls.env.ref(
-            "stock_vertical_lift." "stock_location_vertical_lift_demo_tray_1a_x2y1"
+            "stock_vertical_lift.stock_location_vertical_lift_demo_tray_1a_x2y1"
         )
         cls.location_1a_x3y1 = cls.env.ref(
-            "stock_vertical_lift." "stock_location_vertical_lift_demo_tray_1a_x3y1"
+            "stock_vertical_lift.stock_location_vertical_lift_demo_tray_1a_x3y1"
         )
         cls.location_1a_x1y2 = cls.env.ref(
-            "stock_vertical_lift." "stock_location_vertical_lift_demo_tray_1a_x1y2"
+            "stock_vertical_lift.stock_location_vertical_lift_demo_tray_1a_x1y2"
         )
         cls.location_1b = cls.env.ref(
-            "stock_vertical_lift." "stock_location_vertical_lift_demo_tray_1b"
+            "stock_vertical_lift.stock_location_vertical_lift_demo_tray_1b"
         )
         cls.location_1b_x1y1 = cls.env.ref(
-            "stock_vertical_lift." "stock_location_vertical_lift_demo_tray_1b_x1y1"
+            "stock_vertical_lift.stock_location_vertical_lift_demo_tray_1b_x1y1"
         )
         cls.location_1b_x1y2 = cls.env.ref(
-            "stock_vertical_lift." "stock_location_vertical_lift_demo_tray_1b_x1y2"
+            "stock_vertical_lift.stock_location_vertical_lift_demo_tray_1b_x1y2"
         )
         cls.location_2a = cls.env.ref(
-            "stock_vertical_lift." "stock_location_vertical_lift_demo_tray_2a"
+            "stock_vertical_lift.stock_location_vertical_lift_demo_tray_2a"
         )
         cls.location_2a_x1y1 = cls.env.ref(
-            "stock_vertical_lift." "stock_location_vertical_lift_demo_tray_2a_x1y1"
+            "stock_vertical_lift.stock_location_vertical_lift_demo_tray_2a_x1y1"
         )
 
     @classmethod
