@@ -44,10 +44,10 @@ class StockMove(models.Model):
 class StockMoveLine(models.Model):
     _inherit = ["stock.move.line", "product.secondary.unit.mixin"]
     _name = "stock.move.line"
-    _secondary_unit_fields = {"qty_field": "qty_done", "uom_field": "product_uom_id"}
+    _secondary_unit_fields = {"qty_field": "quantity", "uom_field": "product_uom_id"}
 
-    qty_done = fields.Float(
-        store=True, readonly=False, compute="_compute_qty_done", precompute=True
+    quantity = fields.Float(
+        store=True, readonly=False, compute="_compute_quantity", precompute=True
     )
 
     @api.model_create_multi
@@ -59,5 +59,7 @@ class StockMoveLine(models.Model):
         return super().create(vals_list)
 
     @api.depends("secondary_uom_id", "secondary_uom_qty")
-    def _compute_qty_done(self):
+    def _compute_quantity(self):
+        res = super()._compute_quantity()
         self._compute_helper_target_field_qty()
+        return res
