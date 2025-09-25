@@ -1,0 +1,965 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * stock_cycle_count
+#
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 9.0c\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-06-10 05:35+0000\n"
+"PO-Revision-Date: 2024-12-11 09:37+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.6.2\n"
+
+#. module: stock_cycle_count
+#. odoo-python
+#: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:0
+#, python-format
+msgid "(No description provided.)"
+msgstr "(descrizione non fornita)"
+
+#. module: stock_cycle_count
+#: model_terms:ir.ui.view,arch_db:stock_cycle_count.res_config_settings_view_form_cycle_adjustment
+msgid ""
+"<span class=\"fa fa-lg fa-building-o\" title=\"Values set here are company-"
+"specific.\" aria-label=\"Values set here are company-specific.\" "
+"groups=\"base.group_multi_company\" role=\"img\"/>"
+msgstr ""
+"<span class=\"fa fa-lg fa-building-o\" title=\"I valori impostati qui sono "
+"specifici per azienda.\" aria-label=\"I valori impostati qui sono specifici "
+"per azienda.\" groups=\"base.group_multi_company\" role=\"img\"/>"
+
+#. module: stock_cycle_count
+#: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_location_accuracy
+msgid "<span>Location:</span>"
+msgstr "<span>Ubicazione:</span>"
+
+#. module: stock_cycle_count
+#: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_location_accuracy
+msgid "<strong>Complete name:</strong>"
+msgstr "<strong>Nome completo:</strong>"
+
+#. module: stock_cycle_count
+#: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_location_accuracy
+msgid "<strong>Current Accuracy:</strong>"
+msgstr "<strong>Precisione attuale:</strong>"
+
+#. module: stock_cycle_count
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_location__qty_variance_inventory_threshold
+msgid "Acceptable Inventory Quantity Variance Threshold"
+msgstr "Soglia varianza quantità d'inventario accettabile"
+
+#. module: stock_cycle_count
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_inventory__inventory_accuracy
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_move_line__line_accuracy
+#: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_location_accuracy
+msgid "Accuracy"
+msgstr "Precisione"
+
+#. module: stock_cycle_count
+#: model:ir.actions.report,name:stock_cycle_count.action_report_stock_location_accuracy
+msgid "Accuracy Report"
+msgstr "Resoconto precisione"
+
+#. module: stock_cycle_count
+#: model:ir.actions.act_window,name:stock_cycle_count.act_accuracy_stats
+#: model_terms:ir.ui.view,arch_db:stock_cycle_count.view_location_form
+msgid "Accuracy Stats"
+msgstr "Statistiche precisione"
+
+#. module: stock_cycle_count
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__message_needaction
+msgid "Action Needed"
+msgstr "Azione richiesta"
+
+#. module: stock_cycle_count
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule__active
+msgid "Active"
+msgstr "Attivo"
+
+#. module: stock_cycle_count
+#: model:ir.model.fields,help:stock_cycle_count.field_stock_inventory__prefill_counted_quantity
+msgid ""
+"Allows to start with a pre-filled counted quantity for each lines or with "
+"all counted quantities set to zero."
+msgstr ""
+"Consente di iniziare con una quantità contata precompilata per ogni riga o "
+"con tutte le quantità impostate a zero."
+
+#. module: stock_cycle_count
+#. odoo-python
+#: code:addons/stock_cycle_count/models/stock_inventory.py:0
+#, python-format
+msgid "An adjustment linked to a cycle count should exclude the sublocations."
+msgstr ""
+"Una rettifica collegata ad un inventario a rotazione dovrebbe escludere le "
+"sotto ubicazioni."
+
+#. module: stock_cycle_count
+#: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_rule_form_view
+msgid "Applied in:"
+msgstr "Applicato in:"
+
+#. module: stock_cycle_count
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule__apply_in
+msgid "Apply this rule in:"
+msgstr "Applica questa regola in:"
+
+#. module: stock_cycle_count
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__responsible_id
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_inventory__responsible_id
+#: model_terms:ir.ui.view,arch_db:stock_cycle_count.report_cyclecount
+#: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_form_view
+#: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_search_view
+msgid "Assigned to"
+msgstr "Assegnato a"
+
+#. module: stock_cycle_count
+#: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_search_view
+msgid "Assigned to me"
+msgstr "Assegnato a me"
+
+#. module: stock_cycle_count
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__message_attachment_count
+msgid "Attachment Count"
+msgstr "Conteggio allegati"
+
+#. module: stock_cycle_count
+#: model:ir.model.fields,field_description:stock_cycle_count.field_res_company__auto_start_inventory_from_cycle_count
+#: model:ir.model.fields,field_description:stock_cycle_count.field_res_config_settings__auto_start_inventory_from_cycle_count
+msgid "Auto Start Inventory Adjustment from Cycle Count"
+msgstr "Avvio automatico rettifiche inventario da inventario a rotazione"
+
+#. module: stock_cycle_count
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__automatic_deadline_date
+msgid "Automatic Required Date"
+msgstr "Data richiesta automaticamente"
+
+#. module: stock_cycle_count
+#: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_form_view
+msgid "Cancel"
+msgstr "Annulla"
+
+#. module: stock_cycle_count
+#: model:ir.model.fields.selection,name:stock_cycle_count.selection__stock_cycle_count__state__cancelled
+#: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_search_view
+msgid "Cancelled"
+msgstr "Annullato"
+
+#. module: stock_cycle_count
+#: model:ir.model,name:stock_cycle_count.model_res_company
+msgid "Companies"
+msgstr "Aziende"
+
+#. module: stock_cycle_count
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__company_id
+msgid "Company"
+msgstr "Azienda"
+
+#. module: stock_cycle_count
+#: model:ir.actions.server,name:stock_cycle_count.action_server_warehouse_execute_cycle_count
+msgid "Compute Cycle Count Rules"
+msgstr "Calcola regole conteggio a rotazione"
+
+#. module: stock_cycle_count
+#: model:ir.model,name:stock_cycle_count.model_res_config_settings
+msgid "Config Settings"
+msgstr "Impostazioni configurazione"
+
+#. module: stock_cycle_count
+#: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_form_view
+msgid "Confirm"
+msgstr "Conferma"
+
+#. module: stock_cycle_count
+#: model:ir.actions.server,name:stock_cycle_count.action_server_cycle_count_confirm
+msgid "Confirm Cycle Counts"
+msgstr "Conferma inventari a rotazione"
+
+#. module: stock_cycle_count
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_inventory__prefill_counted_quantity
+msgid "Counted Quantities"
+msgstr "Quantità contate"
+
+#. module: stock_cycle_count
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_move_line__counted_qty
+msgid "Counted Quantity"
+msgstr "Quantità contata"
+
+#. module: stock_cycle_count
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule__periodic_qty_per_period
+msgid "Counts per period"
+msgstr "Inventari per periodo"
+
+#. module: stock_cycle_count
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__create_uid
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule__create_uid
+msgid "Created by"
+msgstr "Creato da"
+
+#. module: stock_cycle_count
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__create_date
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule__create_date
+msgid "Created on"
+msgstr "Creato il"
+
+#. module: stock_cycle_count
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule__currency_id
+msgid "Currency"
+msgstr "Valuta"
+
+#. module: stock_cycle_count
+#: model:ir.actions.report,name:stock_cycle_count.action_report_stock_cycle_count
+#: model_terms:ir.ui.view,arch_db:stock_cycle_count.res_config_settings_view_form_cycle_adjustment
+#: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_form_view
+#: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_search_view
+#: model_terms:ir.ui.view,arch_db:stock_cycle_count.view_location_form
+msgid "Cycle Count"
+msgstr "Conteggio rotazione"
+
+#. module: stock_cycle_count
+#: model_terms:ir.ui.view,arch_db:stock_cycle_count.report_cyclecount
+msgid "Cycle Count #"
+msgstr "N° conteggio rotazione"
+
+#. module: stock_cycle_count
+#: model:ir.ui.menu,name:stock_cycle_count.menu_report_accuracy_stats
+msgid "Cycle Count Accuracy"
+msgstr "Precisione conteggio a rotazione"
+
+#. module: stock_cycle_count
+#: model:ir.actions.server,name:stock_cycle_count.ir_cron_compute_cycle_count_action_ir_actions_server
+#: model:ir.cron,cron_name:stock_cycle_count.ir_cron_compute_cycle_count_action
+msgid "Cycle Count Planner Computation"
+msgstr "Calcolo pianificatore conteggio a rotazione"
+
+#. module: stock_cycle_count
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_warehouse__cycle_count_planning_horizon
+msgid "Cycle Count Planning Horizon (in days)"
+msgstr "Orizzonte pianificazione conteggio a rotazione (in giorni)"
+
+#. module: stock_cycle_count
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_warehouse__cycle_count_rule_ids
+#: model:ir.ui.menu,name:stock_cycle_count.menu_stock_cycle_count_rule
+msgid "Cycle Count Rules"
+msgstr "Regole conteggio a rotazione"
+
+#. module: stock_cycle_count
+#: model_terms:ir.ui.view,arch_db:stock_cycle_count.view_warehouse_form
+msgid ""
+"Cycle Count Rules\n"
+"                    applied in this Warehouse:"
+msgstr ""
+"Regole conteggio a rotazione\n"
+"                    applicate in questo magazzino:"
+
+#. module: stock_cycle_count
+#: model:ir.model.fields,help:stock_cycle_count.field_stock_warehouse__cycle_count_planning_horizon
+msgid ""
+"Cycle Count planning horizon in days. Only the counts inside the horizon "
+"will be created."
+msgstr ""
+"Orizzonte pianificazione inventario a rotazione in giorni. Solo gli "
+"inventari entro l'orizzonte verranno creati."
+
+#. module: stock_cycle_count
+#: model_terms:ir.ui.view,arch_db:stock_cycle_count.view_warehouse_form
+msgid "Cycle Counting"
+msgstr "Conteggio a rotazione"
+
+#. module: stock_cycle_count
+#: model:ir.ui.menu,name:stock_cycle_count.menu_stock_cycle_count
+msgid "Cycle Counts"
+msgstr "Inventari a rotazione"
+
+#. module: stock_cycle_count
+#: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_search_view
+msgid "Cycle Counts Assigned to me"
+msgstr "Inventari a rotazione assegnati a me"
+
+#. module: stock_cycle_count
+#: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_search_view
+msgid "Cycle Counts Cancelled"
+msgstr "Inventari a rotazione annullati"
+
+#. module: stock_cycle_count
+#: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_search_view
+msgid "Cycle Counts Done"
+msgstr "Inventari a rotazione eseguiti"
+
+#. module: stock_cycle_count
+#: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_search_view
+msgid "Cycle Counts Planned"
+msgstr "Inventari a rotazione pianificati"
+
+#. module: stock_cycle_count
+#: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_search_view
+msgid "Cycle Counts in Execution"
+msgstr "Inventari a rotazione in esecuzione"
+
+#. module: stock_cycle_count
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__cycle_count_rule_id
+msgid "Cycle count rule"
+msgstr "Regola conteggio a rotazione"
+
+#. module: stock_cycle_count
+#: model_terms:ir.ui.view,arch_db:stock_cycle_count.view_warehouse_form
+msgid "Cycle count rules"
+msgstr "Regole conteggio a rotazione"
+
+#. module: stock_cycle_count
+#: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_location_accuracy
+msgid "Date"
+msgstr "Data"
+
+#. module: stock_cycle_count
+#: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_form_view
+msgid "Deadline Date"
+msgstr "Data limite"
+
+#. module: stock_cycle_count
+#: model_terms:ir.ui.view,arch_db:stock_cycle_count.res_config_settings_view_form_cycle_adjustment
+msgid "Default Counted Quantity Mode"
+msgstr "Modo quantità contata predefinita"
+
+#. module: stock_cycle_count
+#: model:ir.model.fields.selection,name:stock_cycle_count.selection__res_company__inventory_adjustment_counted_quantities__counted
+#: model:ir.model.fields.selection,name:stock_cycle_count.selection__stock_inventory__prefill_counted_quantity__counted
+msgid "Default to stock on hand"
+msgstr "Predefinito a giacienza a disposizione"
+
+#. module: stock_cycle_count
+#: model:ir.model.fields.selection,name:stock_cycle_count.selection__res_company__inventory_adjustment_counted_quantities__zero
+#: model:ir.model.fields.selection,name:stock_cycle_count.selection__stock_inventory__prefill_counted_quantity__zero
+msgid "Default to zero"
+msgstr "Predefinito a zero"
+
+#. module: stock_cycle_count
+#: model:ir.model.fields,help:stock_cycle_count.field_stock_location__cycle_count_disabled
+msgid "Define whether the location is going to be cycle counted."
+msgstr "Definisce se l'ubicazione sta per essere conteggiata a rotazione."
+
+#. module: stock_cycle_count
+#: model:ir.model.fields,help:stock_cycle_count.field_stock_location__zero_confirmation_disabled
+msgid ""
+"Define whether this location will trigger a zero-confirmation validation "
+"when a rule for its warehouse is defined to perform zero-confirmations."
+msgstr ""
+"Definisce se questa ubicazione scatena una validazione conferma-zero quando "
+"per il suo magazzino è impostata una regola di conferma-zero."
+
+#. module: stock_cycle_count
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_location__zero_confirmation_disabled
+msgid "Disable Zero Confirmations"
+msgstr "Disabilita conferme-zero"
+
+#. module: stock_cycle_count
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__display_name
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule__display_name
+msgid "Display Name"
+msgstr "Nome visualizzato"
+
+#. module: stock_cycle_count
+#: model:ir.model.fields.selection,name:stock_cycle_count.selection__stock_cycle_count__state__done
+#: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_search_view
+msgid "Done"
+msgstr "Completato"
+
+#. module: stock_cycle_count
+#. odoo-python
+#: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:0
+#, python-format
+msgid ""
+"Ensures that at least a defined number of counts in a given period will be "
+"run."
+msgstr ""
+"Garantisce che vengano eseguiti almeno un numero definito di Inventari in un "
+"dato periodo."
+
+#. module: stock_cycle_count
+#. odoo-python
+#: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:0
+#, python-format
+msgid "Error found determining the frequency of periodic cycle count rule. %s"
+msgstr ""
+"Errore rilevato nel calcolo della frequenza degli inventari a rotazione "
+"periodici. %s"
+
+#. module: stock_cycle_count
+#. odoo-python
+#: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:0
+#, python-format
+msgid "Error found when comparing turnover with the rule threshold. %s"
+msgstr ""
+"Errore rilevato confrontando la rotazione con la soglia della regola. %s"
+
+#. module: stock_cycle_count
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_location__cycle_count_disabled
+msgid "Exclude from Cycle Count"
+msgstr "Esclude da inventari a rotazione"
+
+#. module: stock_cycle_count
+#: model:ir.model.fields.selection,name:stock_cycle_count.selection__stock_cycle_count__state__open
+#: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_search_view
+msgid "Execution"
+msgstr "Esecuzione"
+
+#. module: stock_cycle_count
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__message_follower_ids
+msgid "Followers"
+msgstr "Seguito da"
+
+#. module: stock_cycle_count
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Seguito da (partner)"
+
+#. module: stock_cycle_count
+#: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_search_view
+msgid "Group By..."
+msgstr "Raggruppa per..."
+
+#. module: stock_cycle_count
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__has_message
+msgid "Has Message"
+msgstr "Ha un messaggio"
+
+#. module: stock_cycle_count
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__id
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule__id
+msgid "ID"
+msgstr "ID"
+
+#. module: stock_cycle_count
+#: model:ir.model.fields,help:stock_cycle_count.field_stock_cycle_count__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "Se selezionato, i nuovi messaggi richiedono la tua attenzione."
+
+#. module: stock_cycle_count
+#: model:ir.model.fields,help:stock_cycle_count.field_stock_cycle_count__message_has_error
+msgid "If checked, some messages have a delivery error."
+msgstr "Se selezionato, alcuni messaggi hanno un errore di consegna."
+
+#. module: stock_cycle_count
+#: model:ir.model.fields,help:stock_cycle_count.field_res_company__auto_start_inventory_from_cycle_count
+#: model:ir.model.fields,help:stock_cycle_count.field_res_company__inventory_adjustment_counted_quantities
+#: model:ir.model.fields,help:stock_cycle_count.field_res_config_settings__auto_start_inventory_from_cycle_count
+#: model:ir.model.fields,help:stock_cycle_count.field_res_config_settings__inventory_adjustment_counted_quantities
+#: model_terms:ir.ui.view,arch_db:stock_cycle_count.res_config_settings_view_form_cycle_adjustment
+msgid ""
+"If enabled, confirming a Cycle Count will start the related Inventory "
+"Adjustment."
+msgstr ""
+"Se abilitato, confermando un inventario a rotazione inizierà le relative "
+"rettifiche di inventario."
+
+#. module: stock_cycle_count
+#: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_rule_form_view
+msgid ""
+"In either case you can exclude specific locations\n"
+"                        going to the locations form and checking the box\n"
+"                        \"Exclude from Cycle Count\"."
+msgstr ""
+"In entrambi i casi si possono escludere ubicazioni specifiche\n"
+"                        accedendo alla maschera delle ubicazioni e settando "
+"l'opzione\n"
+"                        \"Escludere da inventario a rotazione\"."
+
+#. module: stock_cycle_count
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_warehouse__counts_for_accuracy_qty
+msgid "Inventories for location accuracy calculation"
+msgstr "Inventari per il calcolo della precisione dell'ubicazione"
+
+#. module: stock_cycle_count
+#: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_location_accuracy
+msgid "Inventory"
+msgstr "Inventario"
+
+#. module: stock_cycle_count
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_location__loc_accuracy
+#: model_terms:ir.ui.view,arch_db:stock_cycle_count.view_inventory_pivot
+msgid "Inventory Accuracy"
+msgstr "Precisione inventario"
+
+#. module: stock_cycle_count
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__inventory_adj_count
+msgid "Inventory Adj Count"
+msgstr "Conteggio correzioni inventario"
+
+#. module: stock_cycle_count
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__stock_adjustment_ids
+msgid "Inventory Adjustment"
+msgstr "Rettifica di inventario"
+
+#. module: stock_cycle_count
+#: model:ir.model.fields,field_description:stock_cycle_count.field_res_company__inventory_adjustment_counted_quantities
+#: model:ir.model.fields,field_description:stock_cycle_count.field_res_config_settings__inventory_adjustment_counted_quantities
+msgid "Inventory Adjustment Counted quantities from Cycle Count"
+msgstr ""
+"Rettifiche di inventario delle quantità contate da intentario a rotazione"
+
+#. module: stock_cycle_count
+#: model:ir.model,name:stock_cycle_count.model_stock_inventory
+msgid "Inventory Adjustment Group"
+msgstr "Gruppo rettifiche d'inventario"
+
+#. module: stock_cycle_count
+#: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_form_view
+msgid "Inventory Adjustments"
+msgstr "Rettifiche di magazzino"
+
+#. module: stock_cycle_count
+#: model:ir.model,name:stock_cycle_count.model_stock_location
+msgid "Inventory Locations"
+msgstr "Ubicazioni di inventario"
+
+#. module: stock_cycle_count
+#: model_terms:ir.ui.view,arch_db:stock_cycle_count.view_inventory_graph
+msgid "Inventory accuracy evolution"
+msgstr "Evoluzione precisione inventario"
+
+#. module: stock_cycle_count
+#: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_form_view
+msgid "Inventory adjustments associated"
+msgstr "Rettifiche di magazzino associate"
+
+#. module: stock_cycle_count
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__message_is_follower
+msgid "Is Follower"
+msgstr "Sta seguendo"
+
+#. module: stock_cycle_count
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count____last_update
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule____last_update
+msgid "Last Modified on"
+msgstr "Ultima modifica il"
+
+#. module: stock_cycle_count
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__write_uid
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule__write_uid
+msgid "Last Updated by"
+msgstr "Ultimo aggiornamento di"
+
+#. module: stock_cycle_count
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__write_date
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule__write_date
+msgid "Last Updated on"
+msgstr "Ultimo aggiornamento il"
+
+#. module: stock_cycle_count
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__location_id
+#: model_terms:ir.ui.view,arch_db:stock_cycle_count.report_cyclecount
+#: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_form_view
+#: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_search_view
+msgid "Location"
+msgstr "Ubicazione"
+
+#. module: stock_cycle_count
+#: model:ir.model,name:stock_cycle_count.model_report_stock_location_accuracy
+msgid "Location Accuracy Report"
+msgstr "Resoconto precisione ubicazione"
+
+#. module: stock_cycle_count
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__message_main_attachment_id
+msgid "Main Attachment"
+msgstr "Allegato principale"
+
+#. module: stock_cycle_count
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__manual_deadline_date
+msgid "Manual Required Date"
+msgstr "Data richiesta manualmente"
+
+#. module: stock_cycle_count
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__message_has_error
+msgid "Message Delivery error"
+msgstr "Errore consegna messaggio"
+
+#. module: stock_cycle_count
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__message_ids
+msgid "Messages"
+msgstr "Messaggi"
+
+#. module: stock_cycle_count
+#. odoo-python
+#: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:0
+#, python-format
+msgid "Minimum Accuracy"
+msgstr "Precisione minima"
+
+#. module: stock_cycle_count
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule__accuracy_threshold
+msgid "Minimum Accuracy Threshold"
+msgstr "Soglia precisione minima"
+
+#. module: stock_cycle_count
+#: model_terms:ir.ui.view,arch_db:stock_cycle_count.view_inventory_filter
+msgid "My Adjustments"
+msgstr "Le mie rettifiche"
+
+#. module: stock_cycle_count
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__name
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule__name
+msgid "Name"
+msgstr "Nome"
+
+#. module: stock_cycle_count
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__message_needaction_counter
+msgid "Number of Actions"
+msgstr "Numero di azioni"
+
+#. module: stock_cycle_count
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__message_has_error_counter
+msgid "Number of errors"
+msgstr "Numero di errori"
+
+#. module: stock_cycle_count
+#: model:ir.model.fields,help:stock_cycle_count.field_stock_warehouse__counts_for_accuracy_qty
+msgid "Number of latest inventories used to calculate location accuracy"
+msgstr ""
+"Numero degli ultimi inventari utilizzati per calcolare la precisione "
+"dell'ubicazione"
+
+#. module: stock_cycle_count
+#: model:ir.model.fields,help:stock_cycle_count.field_stock_cycle_count__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr "Numero di messaggi che richiedono un'azione"
+
+#. module: stock_cycle_count
+#: model:ir.model.fields,help:stock_cycle_count.field_stock_cycle_count__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "Numero di messaggi con errore di consegna"
+
+#. module: stock_cycle_count
+#. odoo-python
+#: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:0
+#, python-format
+msgid ""
+"Perform an Inventory Adjustment every time a location in the warehouse runs "
+"out of stock in order to confirm it is truly empty."
+msgstr ""
+"Esegue una rettifica di magazzino ogni volta che una ubicazione del "
+"magazzino si esaurisce per confermare che sia veramente vuota."
+
+#. module: stock_cycle_count
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule__periodic_count_period
+msgid "Period in days"
+msgstr "Periodo in giorni"
+
+#. module: stock_cycle_count
+#. odoo-python
+#: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:0
+#, python-format
+msgid "Periodic"
+msgstr "Periodico"
+
+#. module: stock_cycle_count
+#: model:ir.model.fields.selection,name:stock_cycle_count.selection__stock_cycle_count__state__draft
+#: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_search_view
+msgid "Planned"
+msgstr "Pianificato"
+
+#. module: stock_cycle_count
+#: model:ir.model,name:stock_cycle_count.model_stock_move_line
+msgid "Product Moves (Stock Move Line)"
+msgstr "Movimenti prodotto (riga movimento di magazzino)"
+
+#. module: stock_cycle_count
+#: model:ir.model,name:stock_cycle_count.model_stock_quant
+msgid "Quants"
+msgstr "Quanti"
+
+#. module: stock_cycle_count
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__date_deadline
+#: model_terms:ir.ui.view,arch_db:stock_cycle_count.report_cyclecount
+#: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_search_view
+msgid "Required Date"
+msgstr "Data richiesta"
+
+#. module: stock_cycle_count
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule__rule_description
+msgid "Rule Description"
+msgstr "Descrizione regola"
+
+#. module: stock_cycle_count
+#. odoo-python
+#: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:0
+#, python-format
+msgid ""
+"Schedules a count every time the accuracy of a location goes under a given "
+"threshold."
+msgstr ""
+"Pianifica un conteggio ogni volta che la precisione di una ubicazione scende "
+"sotto una data soglia."
+
+#. module: stock_cycle_count
+#. odoo-python
+#: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:0
+#, python-format
+msgid ""
+"Schedules a count every time the total turnover of a location exceeds the "
+"threshold. This considers every product going into/out of the location"
+msgstr ""
+"Pianifica un conteggio ogni volta che la rotazione totale di una ubicazione "
+"supera la soglia. Questo tiene conto di ogni prodotto che entra o esce "
+"dall'ubicazione"
+
+#. module: stock_cycle_count
+#: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_search_view
+msgid "Search Cycle Count"
+msgstr "Cera inventario a rotazione"
+
+#. module: stock_cycle_count
+#: model:ir.model.fields.selection,name:stock_cycle_count.selection__stock_cycle_count_rule__apply_in__location
+msgid "Selected Location Zones."
+msgstr "Aree ubicazione selezionate."
+
+#. module: stock_cycle_count
+#: model:ir.model.fields.selection,name:stock_cycle_count.selection__stock_cycle_count_rule__apply_in__warehouse
+msgid "Selected warehouses"
+msgstr "Magazzini selezionati"
+
+#. module: stock_cycle_count
+#: model_terms:ir.ui.view,arch_db:stock_cycle_count.res_config_settings_view_form_cycle_adjustment
+msgid "Sets default counted quanities in Inventory Adjustments"
+msgstr "Imposta le quantità contate predefinite nelle rettifiche di inventario"
+
+#. module: stock_cycle_count
+#: model:ir.model.fields,help:stock_cycle_count.field_stock_inventory__responsible_id
+msgid "Specific responsible of Inventory Adjustment."
+msgstr "Responsabile specifico rettifiche di magazzino."
+
+#. module: stock_cycle_count
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__state
+#: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_search_view
+msgid "State"
+msgstr "Stato"
+
+#. module: stock_cycle_count
+#: model_terms:ir.ui.view,arch_db:stock_cycle_count.report_cyclecount
+msgid "Status"
+msgstr "Stato"
+
+#. module: stock_cycle_count
+#: model:ir.actions.act_window,name:stock_cycle_count.action_stock_cycle_count
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_inventory__cycle_count_id
+msgid "Stock Cycle Count"
+msgstr "Inventario a rotazione di magazzino"
+
+#. module: stock_cycle_count
+#: model:ir.actions.act_window,name:stock_cycle_count.action_stock_cycle_count_rules
+msgid "Stock Cycle Count Rules"
+msgstr "Regole inventario a rotazione di magazzino"
+
+#. module: stock_cycle_count
+#: model:ir.model,name:stock_cycle_count.model_stock_cycle_count
+msgid "Stock Cycle Counts"
+msgstr "Inventari a rotazione di magazzino"
+
+#. module: stock_cycle_count
+#: model:ir.model,name:stock_cycle_count.model_stock_cycle_count_rule
+msgid "Stock Cycle Counts Rules"
+msgstr "Regole inventari a rotazione di magazzino"
+
+#. module: stock_cycle_count
+#: model:ir.model,name:stock_cycle_count.model_stock_move
+msgid "Stock Move"
+msgstr "Movimento di magazzino"
+
+#. module: stock_cycle_count
+#. odoo-python
+#: code:addons/stock_cycle_count/models/stock_inventory.py:0
+#, python-format
+msgid ""
+"The Inventory Adjustment is inconsistent with the Cycle Count:\n"
+"%(message)s"
+msgstr ""
+"La rettifica di inventario non è consistente l'inventario a rotazione:\n"
+"%(message)s"
+
+#. module: stock_cycle_count
+#. odoo-python
+#: code:addons/stock_cycle_count/models/stock_inventory.py:0
+#, python-format
+msgid "The adjustment should be done for all products in the location."
+msgstr ""
+"Le rettifiche dovrebbero essere eseguite per tutti i prodotti "
+"nell'ubicazione."
+
+#. module: stock_cycle_count
+#. odoo-python
+#: code:addons/stock_cycle_count/models/stock_inventory.py:0
+#, python-format
+msgid ""
+"The company of the adjustment does not match with the company in the cycle "
+"count."
+msgstr ""
+"L'azienda delle rettifiche non corrisponde con l'azienda nell'inventario a "
+"rotazione."
+
+#. module: stock_cycle_count
+#. odoo-python
+#: code:addons/stock_cycle_count/models/stock_inventory.py:0
+#, python-format
+msgid "The location in the inventory does not match with the cycle count."
+msgstr ""
+"L'ubicazione nel magazzino non corrisponde con nell'inventario a rotazione."
+
+#. module: stock_cycle_count
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_move_line__theoretical_qty
+msgid "Theoretical Quantity"
+msgstr "Quantità teorica"
+
+#. module: stock_cycle_count
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule__turnover_inventory_value_threshold
+msgid "Turnover Inventory Value Threshold"
+msgstr "Soglia valore rotazione inventario"
+
+#. module: stock_cycle_count
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule__rule_type
+msgid "Type of rule"
+msgstr "Tipo di regola"
+
+#. module: stock_cycle_count
+#. odoo-python
+#: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:0
+#, python-format
+msgid "Value Turnover"
+msgstr "Valore rotazione"
+
+#. module: stock_cycle_count
+#: model:ir.model,name:stock_cycle_count.model_stock_warehouse
+msgid "Warehouse"
+msgstr "Magazzino"
+
+#. module: stock_cycle_count
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule__warehouse_ids
+msgid "Warehouses where applied"
+msgstr "Magazzini dove applicato"
+
+#. module: stock_cycle_count
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__website_message_ids
+msgid "Website Messages"
+msgstr "Messaggi sito web"
+
+#. module: stock_cycle_count
+#: model:ir.model.fields,help:stock_cycle_count.field_stock_cycle_count__website_message_ids
+msgid "Website communication history"
+msgstr "Storico comunicazioni sito web"
+
+#. module: stock_cycle_count
+#: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_rule_form_view
+msgid ""
+"You can apply the cycle count rules in complete\n"
+"                        warehouses or specific zones. A zone it is\n"
+"                        understood as a location and all its children."
+msgstr ""
+"Si possono applicare le regole degli inventari a rotazione nei\n"
+"                        magazzini completi o aree specifiche. Un'area è\n"
+"                        identificata come una ubicazione e le sue derivate."
+
+#. module: stock_cycle_count
+#. odoo-python
+#: code:addons/stock_cycle_count/models/stock_cycle_count.py:0
+#, python-format
+msgid "You can only confirm cycle counts in state 'Planned'."
+msgstr ""
+"Si possono confermare solo gli inventari a rotazione in stato 'Pianificato'."
+
+#. module: stock_cycle_count
+#. odoo-python
+#: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:0
+#, python-format
+msgid "You can only have one zero confirmation rule per warehouse."
+msgstr "Si può avere solo una regola di conferma-zero per magazzino."
+
+#. module: stock_cycle_count
+#. odoo-python
+#: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:0
+#, python-format
+msgid "You cannot define a negative or null number of counts per period."
+msgstr ""
+"Non si può definire un numero di inventari negativo o nullo per periodo."
+
+#. module: stock_cycle_count
+#. odoo-python
+#: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:0
+#, python-format
+msgid "You cannot define a negative period."
+msgstr "Non si può definire un periodo negativo."
+
+#. module: stock_cycle_count
+#. odoo-python
+#: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:0
+#, python-format
+msgid "Zero Confirmation"
+msgstr "Conferma-zero"
+
+#. module: stock_cycle_count
+#. odoo-python
+#: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:0
+#, python-format
+msgid "Zero confirmation rules can only have one warehouse assigned."
+msgstr "Regole di conferma-zero possono avere un solo magazzino associato."
+
+#. module: stock_cycle_count
+#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule__location_ids
+msgid "Zones where applied"
+msgstr "Aree dove applicato"
+
+#. module: stock_cycle_count
+#: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_form_view
+#: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_rule_form_view
+msgid "cycle counts test:"
+msgstr "test inventari a rotazione:"
+
+#~ msgid "Number of messages which requires an action"
+#~ msgstr "Numero di messaggi che richiedono un'azione"
+
+#~ msgid "Number of unread messages"
+#~ msgstr "Numero di messaggi non letti"
+
+#, python-format
+#~ msgid ""
+#~ "The Inventory Adjustment is inconsistent with the Cycle Count:\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Le rettifiche di inventario sono inconsistenti con l'inventario a "
+#~ "rotazione:\n"
+#~ "%s"
+
+#~ msgid "Unread Messages"
+#~ msgstr "Messaggi non letti"
+
+#~ msgid "Unread Messages Counter"
+#~ msgstr "Contatore Messaggi non letti"
+
+#~ msgid "Followers (Channels)"
+#~ msgstr "Followers (Canali)"
+
+#~ msgid "SMS Delivery error"
+#~ msgstr "Errore consegna SMS"
+
+#, python-format
+#~ msgid ""
+#~ "You cannot modify the configuration of an Inventory Adjustment related to "
+#~ "a Cycle Count."
+#~ msgstr ""
+#~ "Non si può modificare la configurazione di una rettifica di magazzino "
+#~ "relativa ad un inventario a rotazione."
+
+#~ msgid "If checked new messages require your attention."
+#~ msgstr "Se selezionato i nuovi messaggi richiedono la tua attenzione."
+
+#~ msgid "Date of the last message posted on the record."
+#~ msgstr "Data dell'ultimo messaggio aggiunto al record."
+
+#~ msgid "Last Message Date"
+#~ msgstr "Data dell'ultimo messaggio"

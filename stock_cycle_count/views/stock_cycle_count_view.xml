@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2017 ForgeFlow S.L.
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <!-- Stock Cycle Count List view -->
+    <record id="stock_cycle_count_tree_view" model="ir.ui.view">
+        <field name="name">stock.cycle.count.list</field>
+        <field name="model">stock.cycle.count</field>
+        <field name="arch" type="xml">
+            <list
+                decoration-muted="state == 'cancelled'"
+                decoration-info="state == 'draft'"
+                multi_edit="1"
+                default_order="date_deadline asc"
+            >
+                <field name="name" />
+                <field name="location_id" />
+                <field name="cycle_count_rule_id" />
+                <field name="responsible_id" />
+                <field name="date_deadline" />
+                <field name="state" />
+                <field name="company_id" optional="hide" />
+            </list>
+        </field>
+    </record>
+    <record id="stock_cycle_count_form_view" model="ir.ui.view">
+        <field name="name">stock.cycle.count.form</field>
+        <field name="model">stock.cycle.count</field>
+        <field name="arch" type="xml">
+            <form string="cycle counts test:">
+                <header>
+                    <button
+                        name="action_create_inventory_adjustment"
+                        type="object"
+                        invisible="state != 'draft'"
+                        string="Confirm"
+                        class="oe_highlight"
+                    />
+                    <button
+                        name="do_cancel"
+                        type="object"
+                        string="Cancel"
+                        invisible="state != 'draft'"
+                    />
+                    <field
+                        name="state"
+                        widget="statusbar"
+                        statusbar_visible="draft,open,done"
+                    />
+                </header>
+                <sheet>
+                    <div
+                        class="oe_button_box"
+                        name="button_box"
+                        invisible="state not in ('draft', 'open', 'done')"
+                    >
+                        <button
+                            name="action_view_inventory"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-building-o"
+                        >
+                            <field
+                                name="inventory_adj_count"
+                                widget="statinfo"
+                                help="Inventory adjustments associated"
+                                modifiers="{'readonly': true}"
+                                string="Inventory Adjustments"
+                            />
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <label string="Cycle Count" for="name" />
+                        <h1>
+                            <field name="name" readonly="1" />
+                        </h1>
+                    </div>
+                    <group name="top">
+                        <group name="left">
+                            <field
+                                name="location_id"
+                                readonly="state != 'draft'"
+                            >Location</field>
+                            <field name="cycle_count_rule_id" />
+                        </group>
+                        <group name="right">
+                            <field
+                                name="responsible_id"
+                                readonly="state not in ('draft', 'open')"
+                            >Assigned to</field>
+                            <field
+                                name="date_deadline"
+                                readonly="state != 'draft'"
+                            >Deadline Date</field>
+                            <field name="company_id" readonly="1" />
+                        </group>
+                    </group>
+                </sheet>
+                <chatter />
+            </form>
+        </field>
+    </record>
+    <record id="stock_cycle_count_search_view" model="ir.ui.view">
+        <field name="name">stock.cycle.count.search</field>
+        <field name="model">stock.cycle.count</field>
+        <field name="arch" type="xml">
+            <search string="Search Cycle Count">
+                <field name="name" string="Cycle Count" />
+                <separator />
+                <field name="state" />
+                <filter
+                    name="planned"
+                    string="Planned"
+                    domain="[('state','=', 'draft')]"
+                    help="Cycle Counts Planned"
+                />
+                <filter
+                    name="execution"
+                    string="Execution"
+                    domain="[('state','=', 'open')]"
+                    help="Cycle Counts in Execution"
+                />
+                <filter
+                    name="done"
+                    string="Done"
+                    domain="[('state','=', 'done')]"
+                    help="Cycle Counts Done"
+                />
+                <filter
+                    name="cancelled"
+                    string="Cancelled"
+                    domain="[('state','=', 'cancelled')]"
+                    help="Cycle Counts Cancelled"
+                />
+                <separator />
+                <filter
+                    name="assigned_to_user"
+                    string="Assigned to me"
+                    domain="[('responsible_id','=', uid)]"
+                    help="Cycle Counts Assigned to me"
+                />
+                <field name="responsible_id" />
+                <group expand="0" string="Group By...">
+                    <filter
+                        string="Location"
+                        name="location"
+                        domain="[]"
+                        context="{'group_by':'location_id'}"
+                    />
+                    <filter
+                        string="State"
+                        name="state"
+                        domain="[]"
+                        context="{'group_by':'state'}"
+                    />
+                    <filter
+                        string="Assigned to"
+                        name="responsible"
+                        domain="[]"
+                        context="{'group_by':'responsible_id'}"
+                    />
+                    <filter
+                        string="Required Date"
+                        name="date_deadline"
+                        domain="[]"
+                        context="{'group_by': 'date_deadline:day'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+    <!-- Action to open Stock Cycle Count -->
+    <record id="action_stock_cycle_count" model="ir.actions.act_window">
+        <field name="name">Stock Cycle Count</field>
+        <field name="res_model">stock.cycle.count</field>
+        <field name="view_mode">list,form</field>
+        <field
+            name="context"
+        >{'search_default_planned':1,'search_default_execution':1}</field>
+    </record>
+
+    <menuitem
+        id="menu_stock_cycle_count"
+        name="Cycle Counts"
+        parent="stock.menu_stock_adjustments"
+        sequence="40"
+        action="action_stock_cycle_count"
+    />
+    <!-- Action to confirm several Stock Cycle Counts -->
+    <record id="action_server_cycle_count_confirm" model="ir.actions.server">
+        <field name="name">Confirm Cycle Counts</field>
+        <field name="model_id" ref="model_stock_cycle_count" />
+        <field name="binding_model_id" ref="model_stock_cycle_count" />
+        <field name="state">code</field>
+        <field name="code">records.action_create_inventory_adjustment()</field>
+    </record>
+</odoo>
