@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2020 ForgeFlow S.L.
+    Copyright 2025 OERP Canada <https://www.oerp.ca>
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="view_stock_quant_tree" model="ir.ui.view">
+        <field name="name">Stock tree view - discrepancy extension</field>
+        <field name="model">stock.quant</field>
+        <field name="inherit_id" ref="stock.view_stock_quant_tree_inventory_editable" />
+        <field name="arch" type="xml">
+            <field name="location_id" position="after">
+                <field name="create_date" readonly="1" />
+            </field>
+            <xpath expr="//field[@name='inventory_quantity']" position="after">
+                <button
+                    name="action_request_verification"
+                    string="SVR"
+                    type="object"
+                    invisible="requested_verification or not inventory_quantity_set or not allow_svr_creation"
+                    groups="stock.group_stock_manager"
+                    class="btn btn-link"
+                    icon="fa-plus"
+                    help="Generate a slot verification request for this line"
+                />
+                <field name="allow_svr_creation" invisible="1" />
+                <field name="requested_verification" invisible="1" />
+                <field name="slot_verification_ids" invisible="1" />
+                <button
+                    string="SVR"
+                    invisible="slot_verification_ids == [] or not requested_verification"
+                    name="action_open_svr"
+                    type="object"
+                    icon="fa-sticky-note"
+                />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="action_quant_line_tree" model="ir.actions.act_window">
+        <field name="name">Open Stock Lines</field>
+        <field name="res_model">stock.quant</field>
+        <field name="view_mode">list</field>
+        <field name="view_id" ref="stock.view_stock_quant_tree_inventory_editable" />
+    </record>
+</odoo>
