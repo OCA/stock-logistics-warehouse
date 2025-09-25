@@ -44,9 +44,9 @@ msgid "Product Variant"
 msgstr "Variante de producto"
 
 #. module: stock_secondary_unit
-#: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_move_line__qty_done
-msgid "Qty Done"
-msgstr "Cantidad realizada"
+#: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_move_line__quantity
+msgid "Quantity"
+msgstr ""
 
 #. module: stock_secondary_unit
 #: model:ir.model.fields,field_description:stock_secondary_unit.field_product_product__secondary_unit_qty_available
@@ -99,6 +99,9 @@ msgstr ""
 "Esta es la cantidad de producto que se planea mover.Bajar esta cantidad no "
 "genera un pedido pendiente.Cambiar esta cantidad en movimientos asignados "
 "afecta la reserva de producto, y debe hacerse con cuidado."
+
+#~ msgid "Qty Done"
+#~ msgstr "Cantidad realizada"
 
 #~ msgid "Done"
 #~ msgstr "Hecho"

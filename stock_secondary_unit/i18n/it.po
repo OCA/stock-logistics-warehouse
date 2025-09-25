@@ -43,9 +43,9 @@ msgid "Product Variant"
 msgstr "Variante prodotto"
 
 #. module: stock_secondary_unit
-#: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_move_line__qty_done
-msgid "Qty Done"
-msgstr "Q.tà prodotta"
+#: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_move_line__quantity
+msgid "Quantity"
+msgstr ""
 
 #. module: stock_secondary_unit
 #: model:ir.model.fields,field_description:stock_secondary_unit.field_product_product__secondary_unit_qty_available
@@ -99,6 +99,9 @@ msgstr ""
 "questa quantità non genera ordini residui. Modificare la quantità su "
 "movimenti assegnati modifica la prenotazione prodotto e deve essere fatta "
 "con cautela."
+
+#~ msgid "Qty Done"
+#~ msgstr "Q.tà prodotta"
 
 #~ msgid "Done"
 #~ msgstr "Evasa"
