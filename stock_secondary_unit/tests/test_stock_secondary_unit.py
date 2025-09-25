@@ -149,7 +149,7 @@ class TestProductSecondaryUnit(TransactionCase):
             delivery_order.move_line_ids.mapped("secondary_uom_qty")
         )
         self.assertEqual(uom_qty, 20.0)
-        self.assertEqual(secondary_uom_qty, 0.0)
+        self.assertEqual(secondary_uom_qty, 40.0)
 
     def test_picking_secondary_unit(self):
         product = self.product_template.product_variant_ids[0]
@@ -184,12 +184,12 @@ class TestProductSecondaryUnit(TransactionCase):
         stock_move_line.product_uom_id = stock_move_line.product_id.uom_id.id
         stock_move_line.secondary_uom_qty = 1
         stock_move_line.secondary_uom_id = product.product_tmpl_id.secondary_uom_ids[0]
-        self.assertEqual(stock_move_line.qty_done, 0.5)
+        self.assertEqual(stock_move_line.quantity, 0.5)
         stock_move_line.secondary_uom_qty = 2
-        self.assertEqual(stock_move_line.qty_done, 1)
+        self.assertEqual(stock_move_line.quantity, 1)
         stock_move_line.secondary_uom_id = product.product_tmpl_id.secondary_uom_ids[1]
-        self.assertEqual(stock_move_line.qty_done, 1.8)
-        stock_move_line.qty_done = 5
+        self.assertEqual(stock_move_line.quantity, 1.8)
+        stock_move_line.quantity = 5
         self.assertAlmostEqual(stock_move_line.secondary_uom_qty, 5.56, 2)
 
     def test_secondary_unit_merge_move_diff_uom(self):
