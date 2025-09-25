@@ -137,6 +137,11 @@ msgid "In Progress"
 msgstr ""
 
 #. module: stock_inventory_verification_request
+#: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__product_default_code
+msgid "Internal Reference"
+msgstr ""
+
+#. module: stock_inventory_verification_request
 #: model_terms:ir.ui.view,arch_db:stock_inventory_verification_request.stock_slot_verification_request_form_view
 msgid "Inv. Adj. Created"
 msgstr ""
@@ -277,9 +282,26 @@ msgid "Open Stock Lines"
 msgstr ""
 
 #. module: stock_inventory_verification_request
+#: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__processed_by
+msgid "Processed By"
+msgstr ""
+
+#. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__product_id
+#: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__product_name
 msgid "Product"
 msgstr "Ürün"
+
+#. module: stock_inventory_verification_request
+#: model:ir.actions.act_window,name:stock_inventory_verification_request.action_move_lines_svr
+#: model_terms:ir.ui.view,arch_db:stock_inventory_verification_request.stock_slot_verification_request_form_view
+msgid "Product Moves Involved"
+msgstr ""
+
+#. module: stock_inventory_verification_request
+#: model_terms:ir.ui.view,arch_db:stock_inventory_verification_request.stock_slot_verification_request_form_view
+msgid "Product Moves related to the given location and Product/lot."
+msgstr ""
 
 #. module: stock_inventory_verification_request
 #: model:ir.model,name:stock_inventory_verification_request.model_stock_quant
@@ -332,16 +354,6 @@ msgstr ""
 
 #. module: stock_inventory_verification_request
 #: model_terms:ir.ui.view,arch_db:stock_inventory_verification_request.stock_slot_verification_request_form_view
-msgid "Stock Moves Involved"
-msgstr ""
-
-#. module: stock_inventory_verification_request
-#: model_terms:ir.ui.view,arch_db:stock_inventory_verification_request.stock_slot_verification_request_form_view
-msgid "Stock Moves related to the given location and product."
-msgstr ""
-
-#. module: stock_inventory_verification_request
-#: model_terms:ir.ui.view,arch_db:stock_inventory_verification_request.stock_slot_verification_request_form_view
 msgid "Stock Reviewed"
 msgstr ""
 
@@ -357,7 +369,7 @@ msgstr ""
 
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,help:stock_inventory_verification_request.field_stock_slot_verification_request__created_inventory_ids
-msgid "These inventory adjustment were created from this SVR."
+msgid "These inventory adjustments were created from this SVR."
 msgstr ""
 
 #. module: stock_inventory_verification_request
@@ -373,6 +385,11 @@ msgstr ""
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__message_unread_counter
 msgid "Unread Messages Counter"
+msgstr ""
+
+#. module: stock_inventory_verification_request
+#: model:ir.model.fields,help:stock_inventory_verification_request.field_stock_slot_verification_request__processed_by
+msgid "User who has solved or cancelled the request."
 msgstr ""
 
 #. module: stock_inventory_verification_request
