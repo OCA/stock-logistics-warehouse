@@ -40,8 +40,8 @@ msgid "Product Variant"
 msgstr ""
 
 #. module: stock_secondary_unit
-#: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_move_line__qty_done
-msgid "Qty Done"
+#: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_move_line__quantity
+msgid "Quantity"
 msgstr ""
 
 #. module: stock_secondary_unit
