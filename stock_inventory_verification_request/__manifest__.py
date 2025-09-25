@@ -18,6 +18,7 @@
     "data": [
         "security/ir.model.access.csv",
         "security/stock_security.xml",
+        "views/stock_move_line_views.xml",
         "views/stock_slot_verification_request_view.xml",
         "views/stock_inventory_view.xml",
         "views/stock_location_view.xml",
