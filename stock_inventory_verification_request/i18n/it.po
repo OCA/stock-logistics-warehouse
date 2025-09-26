@@ -122,7 +122,6 @@ msgstr "ID"
 
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,help:stock_inventory_verification_request.field_stock_slot_verification_request__message_needaction
-#: model:ir.model.fields,help:stock_inventory_verification_request.field_stock_slot_verification_request__message_unread
 msgid "If checked, new messages require your attention."
 msgstr "Se selezionata, nuovi messaggi richiedono attenzione."
 
@@ -135,6 +134,11 @@ msgstr ""
 #: model:ir.model.fields.selection,name:stock_inventory_verification_request.selection__stock_slot_verification_request__state__open
 #: model_terms:ir.ui.view,arch_db:stock_inventory_verification_request.stock_slot_verification_request_search_view
 msgid "In Progress"
+msgstr ""
+
+#. module: stock_inventory_verification_request
+#: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__product_default_code
+msgid "Internal Reference"
 msgstr ""
 
 #. module: stock_inventory_verification_request
@@ -188,11 +192,6 @@ msgid "Is Follower"
 msgstr ""
 
 #. module: stock_inventory_verification_request
-#: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request____last_update
-msgid "Last Modified on"
-msgstr "Ultima modifica il"
-
-#. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__write_uid
 msgid "Last Updated by"
 msgstr "Ultimo aggiornamento di"
@@ -210,11 +209,6 @@ msgstr "Ubicazione"
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__lot_id
 msgid "Lot"
-msgstr ""
-
-#. module: stock_inventory_verification_request
-#: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__message_main_attachment_id
-msgid "Main Attachment"
 msgstr ""
 
 #. module: stock_inventory_verification_request
@@ -259,7 +253,7 @@ msgstr ""
 
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,help:stock_inventory_verification_request.field_stock_slot_verification_request__message_needaction_counter
-msgid "Number of messages which requires an action"
+msgid "Number of messages requiring action"
 msgstr ""
 
 #. module: stock_inventory_verification_request
@@ -268,19 +262,35 @@ msgid "Number of messages with delivery error"
 msgstr ""
 
 #. module: stock_inventory_verification_request
-#: model:ir.model.fields,help:stock_inventory_verification_request.field_stock_slot_verification_request__message_unread_counter
-msgid "Number of unread messages"
+#: model:ir.actions.act_window,name:stock_inventory_verification_request.action_quant_line_tree
+msgid "Open Stock Lines"
 msgstr ""
 
 #. module: stock_inventory_verification_request
-#: model:ir.actions.act_window,name:stock_inventory_verification_request.action_quant_line_tree
-msgid "Open Stock Lines"
+#: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__processed_by
+msgid "Processed By"
 msgstr ""
 
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__product_id
 msgid "Product"
 msgstr "Prodotto"
+
+#. module: stock_inventory_verification_request
+#: model:ir.actions.act_window,name:stock_inventory_verification_request.action_move_lines_svr
+#: model_terms:ir.ui.view,arch_db:stock_inventory_verification_request.stock_slot_verification_request_form_view
+msgid "Product Moves Involved"
+msgstr ""
+
+#. module: stock_inventory_verification_request
+#: model_terms:ir.ui.view,arch_db:stock_inventory_verification_request.stock_slot_verification_request_form_view
+msgid "Product Moves related to the given location and Product/lot."
+msgstr ""
+
+#. module: stock_inventory_verification_request
+#: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__product_name
+msgid "Product Name"
+msgstr ""
 
 #. module: stock_inventory_verification_request
 #: model:ir.model,name:stock_inventory_verification_request.model_stock_quant
@@ -333,16 +343,6 @@ msgstr ""
 
 #. module: stock_inventory_verification_request
 #: model_terms:ir.ui.view,arch_db:stock_inventory_verification_request.stock_slot_verification_request_form_view
-msgid "Stock Moves Involved"
-msgstr ""
-
-#. module: stock_inventory_verification_request
-#: model_terms:ir.ui.view,arch_db:stock_inventory_verification_request.stock_slot_verification_request_form_view
-msgid "Stock Moves related to the given location and product."
-msgstr ""
-
-#. module: stock_inventory_verification_request
-#: model_terms:ir.ui.view,arch_db:stock_inventory_verification_request.stock_slot_verification_request_form_view
 msgid "Stock Reviewed"
 msgstr ""
 
@@ -358,7 +358,7 @@ msgstr ""
 
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,help:stock_inventory_verification_request.field_stock_slot_verification_request__created_inventory_ids
-msgid "These inventory adjustment were created from this SVR."
+msgid "These inventory adjustments were created from this SVR."
 msgstr ""
 
 #. module: stock_inventory_verification_request
@@ -367,13 +367,8 @@ msgid "This Inventory adjustment was created from the specified SVR."
 msgstr ""
 
 #. module: stock_inventory_verification_request
-#: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__message_unread
-msgid "Unread Messages"
-msgstr ""
-
-#. module: stock_inventory_verification_request
-#: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__message_unread_counter
-msgid "Unread Messages Counter"
+#: model:ir.model.fields,help:stock_inventory_verification_request.field_stock_slot_verification_request__processed_by
+msgid "User who has solved or cancelled the request."
 msgstr ""
 
 #. module: stock_inventory_verification_request
@@ -391,6 +386,9 @@ msgstr ""
 #: model:ir.model.fields,help:stock_inventory_verification_request.field_stock_slot_verification_request__website_message_ids
 msgid "Website communication history"
 msgstr ""
+
+#~ msgid "Last Modified on"
+#~ msgstr "Ultima modifica il"
 
 #~ msgid "Inventory"
 #~ msgstr "Inventario"
