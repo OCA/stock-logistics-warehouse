@@ -75,6 +75,9 @@ class StockQuant(models.Model):
                         "product_id": quant.product_id.id,
                         "company_id": quant.company_id.id,
                         "lot_id": quant.lot_id.id if quant.lot_id else False,
+                        "inventory_id": quant.current_inventory_id.id
+                        if quant.current_inventory_id
+                        else False,
                     }
                 )
                 quant.requested_verification = True

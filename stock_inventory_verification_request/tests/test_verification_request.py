@@ -684,3 +684,57 @@ class TestStockVerificationRequest(BaseCommon):
             action["domain"],
             "Domain must filter the correct quant ID.",
         )
+
+    def test_09_product_related_fields(self):
+        svr = self.obj_svr.create(
+            {
+                "location_id": self.test_loc.id,
+                "state": "wait",
+                "product_id": self.product1.id,
+            }
+        )
+        self.assertEqual(
+            svr.product_name, "Test Product 1", "Product name not set correctly in SVR."
+        )
+        self.assertEqual(
+            svr.product_default_code,
+            "PROD1",
+            "Product default code not set correctly in SVR.",
+        )
+
+    def test_10_processed_by(self):
+        svr = self.obj_svr.create(
+            {
+                "location_id": self.test_loc.id,
+                "state": "wait",
+                "product_id": self.product1.id,
+            }
+        )
+        self.assertFalse(svr.processed_by)
+        svr.action_confirm()
+        self.assertFalse(
+            svr.processed_by, "Processed By should remain empty after confirm."
+        )
+        svr.action_solved()
+        self.assertEqual(
+            svr.processed_by.id,
+            self.env.uid,
+            "Processed By not set correctly after solved action.",
+        )
+        svr_cancel = self.obj_svr.create(
+            {
+                "location_id": self.test_loc.id,
+                "state": "wait",
+                "product_id": self.product1.id,
+            }
+        )
+        svr_cancel.action_confirm()
+        self.assertFalse(
+            svr_cancel.processed_by, "Processed By should remain empty after confirm."
+        )
+        svr_cancel.action_cancel()
+        self.assertEqual(
+            svr_cancel.processed_by.id,
+            self.env.uid,
+            "Processed By not set correctly after cancel action.",
+        )
