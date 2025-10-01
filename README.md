@@ -50,7 +50,7 @@ addon | version | maintainers | summary
 [stock_move_location](stock_move_location/) | 18.0.1.0.0 |  | This module allows to move all stock in a stock location to an other one.
 [stock_move_location_purchase_uom](stock_move_location_purchase_uom/) | 18.0.1.0.0 |  | This module 'glues' the modules stock_move_location and stock_move_purchase_uom.
 [stock_move_packaging_qty](stock_move_packaging_qty/) | 18.0.1.0.1 | <a href='https://github.com/yajo'><img src='https://github.com/yajo.png' width='32' height='32' style='border-radius:50%;' alt='yajo'/></a> <a href='https://github.com/EmilioPascual'><img src='https://github.com/EmilioPascual.png' width='32' height='32' style='border-radius:50%;' alt='EmilioPascual'/></a> <a href='https://github.com/Shide'><img src='https://github.com/Shide.png' width='32' height='32' style='border-radius:50%;' alt='Shide'/></a> | Add packaging fields in the stock moves
-[stock_move_purchase_uom](stock_move_purchase_uom/) | 18.0.1.0.0 |  | Allow to use the purchase UoM in a stock move
+[stock_move_purchase_uom](stock_move_purchase_uom/) | 18.0.1.1.0 |  | Allow to use the purchase UoM in a stock move
 [stock_move_reset_quantity](stock_move_reset_quantity/) | 18.0.1.0.0 |  | Reset quantity to zero
 [stock_packaging_calculator](stock_packaging_calculator/) | 18.0.2.0.0 |  | Compute product quantity to pick by packaging
 [stock_picking_completion_info](stock_picking_completion_info/) | 18.0.1.0.0 |  | Display on current document completion information according to next operations
