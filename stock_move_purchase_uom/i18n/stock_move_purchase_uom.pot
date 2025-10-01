@@ -14,6 +14,11 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: stock_move_purchase_uom
+#: model:ir.model.fields.selection,name:stock_move_purchase_uom.selection__stock_picking_type__purchase_uom_rounding_method__half-up
+msgid "Closest"
+msgstr ""
+
+#. module: stock_move_purchase_uom
 #: model:ir.model,name:stock_move_purchase_uom.model_stock_picking_type
 msgid "Picking Type"
 msgstr ""
@@ -24,8 +29,25 @@ msgid "Product Moves (Stock Move Line)"
 msgstr ""
 
 #. module: stock_move_purchase_uom
+#: model:ir.model.fields,field_description:stock_move_purchase_uom.field_stock_picking_type__purchase_uom_rounding_method
+msgid "Purchase Uom Rounding Method"
+msgstr ""
+
+#. module: stock_move_purchase_uom
 #: model:ir.model,name:stock_move_purchase_uom.model_stock_move
 msgid "Stock Move"
+msgstr ""
+
+#. module: stock_move_purchase_uom
+#: model:ir.model.fields,help:stock_move_purchase_uom.field_stock_picking_type__purchase_uom_rounding_method
+msgid ""
+"The tie-breaking rule used for float rounding operations when using the "
+"Purchase UoM"
+msgstr ""
+
+#. module: stock_move_purchase_uom
+#: model:ir.model.fields.selection,name:stock_move_purchase_uom.selection__stock_picking_type__purchase_uom_rounding_method__up
+msgid "Up"
 msgstr ""
 
 #. module: stock_move_purchase_uom
