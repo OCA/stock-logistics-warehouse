@@ -10,18 +10,6 @@ class TestStockMovePurchaseUom(TestCommon):
     def setUpClass(cls):
         super().setUpClass()
 
-        cls.stock_picking_type_2 = cls.env["stock.picking.type"].create(
-            {
-                "name": "Internal transfer 2",
-                "code": "internal",
-                "sequence_code": "INT",
-                "use_purchase_uom": True,
-                "show_operations": True,
-            }
-        )
-        group_stock_multi_locations = cls.env.ref("stock.group_stock_multi_locations")
-        cls.env.user.write({"groups_id": [(4, group_stock_multi_locations.id, 0)]})
-
     def test_stock_move_purchase_uom_unlinked_move_line(self):
         picking_form = Form(self.env["stock.picking"])
         picking_form.partner_id = self.partner

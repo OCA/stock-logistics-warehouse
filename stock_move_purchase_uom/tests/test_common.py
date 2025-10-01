@@ -7,6 +7,7 @@ class TestCommon(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+        cls.env.user.groups_id |= cls.env.ref("stock.group_stock_multi_locations")
         cls.partner = cls.env["res.partner"].create({"name": "Test Partner"})
         cls.location = cls.env.ref("stock.stock_location_stock")
         cls.location_dest = cls.env["stock.location"].create(
@@ -42,5 +43,14 @@ class TestCommon(TransactionCase):
                 "product_uom_qty": 1,
                 "picking_type_id": cls.stock_picking_type.id,
                 "product_uom": cls.cm_uom.id,
+            }
+        )
+        cls.stock_picking_type_2 = cls.env["stock.picking.type"].create(
+            {
+                "name": "Internal transfer 2",
+                "code": "internal",
+                "sequence_code": "INT",
+                "use_purchase_uom": True,
+                "show_operations": True,
             }
         )
