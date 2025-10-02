@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-08-07 14:25+0000\n"
+"PO-Revision-Date: 2025-10-02 18:43+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -196,7 +196,7 @@ msgstr "In corso"
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__stock_quant_ids
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_move_line__inventory_adjustment_id
 msgid "Inventory Adjustment"
-msgstr "Rettifica d'inventario"
+msgstr "Rettifica di inventario"
 
 #. module: stock_inventory
 #: model:ir.actions.act_window,name:stock_inventory.action_view_inventory_group_form
