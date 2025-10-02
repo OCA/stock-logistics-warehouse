@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-01-16 14:36+0000\n"
-"PO-Revision-Date: 2024-01-15 11:36+0000\n"
+"PO-Revision-Date: 2025-10-02 16:42+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -17,32 +17,32 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.17\n"
+"X-Generator: Weblate 5.10.4\n"
 
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__message_needaction
 msgid "Action Needed"
-msgstr ""
+msgstr "Azione richiesta"
 
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_quant__allow_svr_creation
 msgid "Allow SVR Creation"
-msgstr ""
+msgstr "Consenti creazione RVI"
 
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__responsible_id
 msgid "Assigned to"
-msgstr ""
+msgstr "Assegnata a"
 
 #. module: stock_inventory_verification_request
 #: model_terms:ir.ui.view,arch_db:stock_inventory_verification_request.stock_slot_verification_request_search_view
 msgid "Assigned to me"
-msgstr ""
+msgstr "Assegnata a me"
 
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__message_attachment_count
 msgid "Attachment Count"
-msgstr ""
+msgstr "Conteggio allegati"
 
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields.selection,name:stock_inventory_verification_request.selection__stock_slot_verification_request__state__cancelled
@@ -53,27 +53,27 @@ msgstr "Annullato"
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__company_id
 msgid "Company"
-msgstr ""
+msgstr "Azienda"
 
 #. module: stock_inventory_verification_request
 #: model_terms:ir.ui.view,arch_db:stock_inventory_verification_request.stock_slot_verification_request_form_view
 msgid "Confirm"
-msgstr ""
+msgstr "Conferma"
 
 #. module: stock_inventory_verification_request
 #: model_terms:ir.ui.view,arch_db:stock_inventory_verification_request.stock_slot_verification_request_form_view
 msgid "Create Inventory Adjustment"
-msgstr ""
+msgstr "Crea rettifica di inventario"
 
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__created_inventory_ids
 msgid "Created Inventories"
-msgstr ""
+msgstr "Inventari creati"
 
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__created_inventory_count
 msgid "Created Inventory Count"
-msgstr ""
+msgstr "Conteggio inventari creati"
 
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__create_uid
@@ -93,27 +93,27 @@ msgstr "Nome visualizzato"
 #. module: stock_inventory_verification_request
 #: model_terms:ir.ui.view,arch_db:stock_inventory_verification_request.stock_slot_verification_request_search_view
 msgid "Done"
-msgstr ""
+msgstr "Evasa"
 
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__message_follower_ids
 msgid "Followers"
-msgstr ""
+msgstr "Seguito da"
 
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__message_partner_ids
 msgid "Followers (Partners)"
-msgstr ""
+msgstr "Seguito da (partner)"
 
 #. module: stock_inventory_verification_request
 #: model_terms:ir.ui.view,arch_db:stock_inventory_verification_request.view_stock_quant_tree
 msgid "Generate a slot verification request for this line"
-msgstr ""
+msgstr "Genera una richiesta verifica posizione per questa riga"
 
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__has_message
 msgid "Has Message"
-msgstr ""
+msgstr "Ha un messaggio"
 
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__id
@@ -128,68 +128,68 @@ msgstr "Se selezionata, nuovi messaggi richiedono attenzione."
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,help:stock_inventory_verification_request.field_stock_slot_verification_request__message_has_error
 msgid "If checked, some messages have a delivery error."
-msgstr ""
+msgstr "Se selezionata, alcuni messaggi hanno un errore di consegna."
 
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields.selection,name:stock_inventory_verification_request.selection__stock_slot_verification_request__state__open
 #: model_terms:ir.ui.view,arch_db:stock_inventory_verification_request.stock_slot_verification_request_search_view
 msgid "In Progress"
-msgstr ""
+msgstr "In lavoro"
 
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__product_default_code
 msgid "Internal Reference"
-msgstr ""
+msgstr "Riferimento interno"
 
 #. module: stock_inventory_verification_request
 #: model_terms:ir.ui.view,arch_db:stock_inventory_verification_request.stock_slot_verification_request_form_view
 msgid "Inv. Adj. Created"
-msgstr ""
+msgstr "Rett. inv. creata"
 
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__inventory_id
 msgid "Inventory Adjustment"
-msgstr ""
+msgstr "Rettifica di inventario"
 
 #. module: stock_inventory_verification_request
 #: model:ir.model,name:stock_inventory_verification_request.model_stock_inventory
 msgid "Inventory Adjustment Group"
-msgstr ""
+msgstr "Gruppo rettifiche d'inventario"
 
 #. module: stock_inventory_verification_request
 #: model_terms:ir.ui.view,arch_db:stock_inventory_verification_request.stock_slot_verification_request_form_view
 msgid "Inventory Adjustments created from this SVR."
-msgstr ""
+msgstr "Rettifiche di inventario create da questa RVI."
 
 #. module: stock_inventory_verification_request
 #: model:ir.model,name:stock_inventory_verification_request.model_stock_location
 msgid "Inventory Locations"
-msgstr ""
+msgstr "Ubicazioni di inventario"
 
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__involved_quant_ids
 msgid "Involved Inventory Quants"
-msgstr ""
+msgstr "Quanti inventario coinvolti"
 
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__involved_move_line_count
 msgid "Involved Move Line Count"
-msgstr ""
+msgstr "Conteggio righe movimento coinvolte"
 
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__involved_quant_count
 msgid "Involved Quant Count"
-msgstr ""
+msgstr "Conteggio quanti coinvolti"
 
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__involved_move_line_ids
 msgid "Involved Stock Moves"
-msgstr ""
+msgstr "Movimenti magazzino coinvolti"
 
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__message_is_follower
 msgid "Is Follower"
-msgstr ""
+msgstr "Segue"
 
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__write_uid
@@ -209,32 +209,32 @@ msgstr "Ubicazione"
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__lot_id
 msgid "Lot"
-msgstr ""
+msgstr "Lotto"
 
 #. module: stock_inventory_verification_request
 #: model_terms:ir.ui.view,arch_db:stock_inventory_verification_request.stock_slot_verification_request_form_view
 msgid "Mark as Cancelled"
-msgstr ""
+msgstr "Segna come annullata"
 
 #. module: stock_inventory_verification_request
 #: model_terms:ir.ui.view,arch_db:stock_inventory_verification_request.stock_slot_verification_request_form_view
 msgid "Mark as Solved"
-msgstr ""
+msgstr "Segna come evasa"
 
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__message_has_error
 msgid "Message Delivery error"
-msgstr ""
+msgstr "Errore di consegna messaggio"
 
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__message_ids
 msgid "Messages"
-msgstr ""
+msgstr "Messaggi"
 
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__name
 msgid "Name"
-msgstr ""
+msgstr "Nome"
 
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__notes
@@ -244,32 +244,32 @@ msgstr "Note"
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__message_needaction_counter
 msgid "Number of Actions"
-msgstr ""
+msgstr "Numero di azioni"
 
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__message_has_error_counter
 msgid "Number of errors"
-msgstr ""
+msgstr "Numero di errori"
 
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,help:stock_inventory_verification_request.field_stock_slot_verification_request__message_needaction_counter
 msgid "Number of messages requiring action"
-msgstr ""
+msgstr "Numero di messaggi che richiedono un'azione"
 
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,help:stock_inventory_verification_request.field_stock_slot_verification_request__message_has_error_counter
 msgid "Number of messages with delivery error"
-msgstr ""
+msgstr "Numero di messaggi con errore di consegna"
 
 #. module: stock_inventory_verification_request
 #: model:ir.actions.act_window,name:stock_inventory_verification_request.action_quant_line_tree
 msgid "Open Stock Lines"
-msgstr ""
+msgstr "Righe giacenza aperte"
 
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__processed_by
 msgid "Processed By"
-msgstr ""
+msgstr "Elaborata da"
 
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__product_id
@@ -280,32 +280,32 @@ msgstr "Prodotto"
 #: model:ir.actions.act_window,name:stock_inventory_verification_request.action_move_lines_svr
 #: model_terms:ir.ui.view,arch_db:stock_inventory_verification_request.stock_slot_verification_request_form_view
 msgid "Product Moves Involved"
-msgstr ""
+msgstr "Movimento prodotto coinvolti"
 
 #. module: stock_inventory_verification_request
 #: model_terms:ir.ui.view,arch_db:stock_inventory_verification_request.stock_slot_verification_request_form_view
 msgid "Product Moves related to the given location and Product/lot."
-msgstr ""
+msgstr "Movimenti prodotto relativi all'ubicazione data e al prodotto/lotto."
 
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__product_name
 msgid "Product Name"
-msgstr ""
+msgstr "Nome prodotto"
 
 #. module: stock_inventory_verification_request
 #: model:ir.model,name:stock_inventory_verification_request.model_stock_quant
 msgid "Quants"
-msgstr ""
+msgstr "Quanti"
 
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_quant__requested_verification
 msgid "Requested Verification?"
-msgstr ""
+msgstr "Verifica richiesta?"
 
 #. module: stock_inventory_verification_request
 #: model_terms:ir.ui.view,arch_db:stock_inventory_verification_request.view_stock_quant_tree
 msgid "SVR"
-msgstr ""
+msgstr "RVI"
 
 #. module: stock_inventory_verification_request
 #: model:ir.model,name:stock_inventory_verification_request.model_stock_slot_verification_request
@@ -314,22 +314,22 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:stock_inventory_verification_request.stock_slot_verification_request_form_view
 #: model_terms:ir.ui.view,arch_db:stock_inventory_verification_request.view_location_form
 msgid "Slot Verification Request"
-msgstr ""
+msgstr "Richiesta verifica posizione"
 
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_location__slot_verification_ids
 msgid "Slot Verification Requests"
-msgstr ""
+msgstr "Richieste verifica posizione"
 
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields.selection,name:stock_inventory_verification_request.selection__stock_slot_verification_request__state__done
 msgid "Solved"
-msgstr ""
+msgstr "Risolta"
 
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_inventory__solving_slot_verification_request_id
 msgid "Solving Slot Verification Request"
-msgstr ""
+msgstr "Risoluzione richiesta verifica posizione"
 
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__state
@@ -339,53 +339,53 @@ msgstr "Stato"
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__quant_id
 msgid "Stock Line"
-msgstr ""
+msgstr "Riga giacenza"
 
 #. module: stock_inventory_verification_request
 #: model_terms:ir.ui.view,arch_db:stock_inventory_verification_request.stock_slot_verification_request_form_view
 msgid "Stock Reviewed"
-msgstr ""
+msgstr "Giacenza revisionata"
 
 #. module: stock_inventory_verification_request
 #: model:ir.actions.act_window,name:stock_inventory_verification_request.action_slot_verification_request
 msgid "Stock Slot Verification Request"
-msgstr ""
+msgstr "Richiesta verifica posizione giacenza"
 
 #. module: stock_inventory_verification_request
 #: model_terms:ir.ui.view,arch_db:stock_inventory_verification_request.stock_slot_verification_request_form_view
 msgid "Stock related to the given location and product."
-msgstr ""
+msgstr "Giacenza relativa all'ubicazione e prodotto dati."
 
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,help:stock_inventory_verification_request.field_stock_slot_verification_request__created_inventory_ids
 msgid "These inventory adjustments were created from this SVR."
-msgstr ""
+msgstr "Questa rettifica di inventario è stata creata da questa RVI."
 
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,help:stock_inventory_verification_request.field_stock_inventory__solving_slot_verification_request_id
 msgid "This Inventory adjustment was created from the specified SVR."
-msgstr ""
+msgstr "Questa rettifica di inventario è stata creata dalla RVI indicata."
 
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,help:stock_inventory_verification_request.field_stock_slot_verification_request__processed_by
 msgid "User who has solved or cancelled the request."
-msgstr ""
+msgstr "Utente che ha risolto o annullato la richiesta."
 
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields.selection,name:stock_inventory_verification_request.selection__stock_slot_verification_request__state__wait
 #: model_terms:ir.ui.view,arch_db:stock_inventory_verification_request.stock_slot_verification_request_search_view
 msgid "Waiting Actions"
-msgstr ""
+msgstr "Azioni in attesa"
 
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__website_message_ids
 msgid "Website Messages"
-msgstr ""
+msgstr "Messaggi sito web"
 
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,help:stock_inventory_verification_request.field_stock_slot_verification_request__website_message_ids
 msgid "Website communication history"
-msgstr ""
+msgstr "Cronologia comunicazioni sito web"
 
 #~ msgid "Last Modified on"
 #~ msgstr "Ultima modifica il"
