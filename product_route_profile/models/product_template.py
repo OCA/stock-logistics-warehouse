@@ -30,9 +30,11 @@ class ProductTemplate(models.Model):
     def _compute_route_ids(self):
         for rec in self.sudo():
             if rec.force_route_profile_id:
-                rec.route_ids = [(6, 0, rec.force_route_profile_id.route_ids.ids)]
+                rec.route_ids = [
+                    fields.Command.set(rec.force_route_profile_id.route_ids.ids)
+                ]
             elif rec.route_profile_id:
-                rec.route_ids = [(6, 0, rec.route_profile_id.route_ids.ids)]
+                rec.route_ids = [fields.Command.set(rec.route_profile_id.route_ids.ids)]
             else:
                 rec.route_ids = False
 
@@ -61,7 +63,7 @@ class ProductTemplate(models.Model):
     def _prepare_profile(self):
         return {
             "name": " / ".join(self.route_ids.mapped("name")),
-            "route_ids": [(6, 0, self.route_ids.ids)],
+            "route_ids": [fields.Command.set(self.route_ids.ids)],
         }
 
     @api.model_create_multi
@@ -73,7 +75,7 @@ class ProductTemplate(models.Model):
             if route_profile_id:
                 vals = vals.copy()
                 route_profile = self.env["route.profile"].browse(route_profile_id)
-                vals["route_ids"] = [(6, 0, route_profile.route_ids.ids)]
+                vals["route_ids"] = [fields.Command.set(route_profile.route_ids.ids)]
                 vals_with_profile.append(vals)
             else:
                 vals_without_profile.append(vals)

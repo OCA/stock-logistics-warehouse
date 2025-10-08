@@ -2,9 +2,11 @@
 # @author Kévin Roche <kevin.roche@akretion.com>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo.tests.common import TransactionCase
+from odoo.fields import Command
+from odoo.tests.common import TransactionCase, tagged
 
 
+@tagged("-at_install", "post_install")
 class TestProductRouteProfile(TransactionCase):
     @classmethod
     def setUpClass(cls):
@@ -24,13 +26,13 @@ class TestProductRouteProfile(TransactionCase):
         cls.route_profile_1 = cls.env["route.profile"].create(
             {
                 "name": "profile 1",
-                "route_ids": [(6, 0, [cls.route_1.id])],
+                "route_ids": [Command.set(cls.route_1.ids)],
             }
         )
         cls.route_profile_2 = cls.env["route.profile"].create(
             {
                 "name": "profile 2",
-                "route_ids": [(6, 0, [cls.route_2.id])],
+                "route_ids": [Command.set(cls.route_2.ids)],
             }
         )
 
