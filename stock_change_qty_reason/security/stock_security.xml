@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="group_qty_reason_preset" model="res.groups">
+        <field name="name">Manage Stock Change Qty Preset Reasons</field>
+        <field name="category_id" ref="base.module_category_hidden" />
+    </record>
+</odoo>

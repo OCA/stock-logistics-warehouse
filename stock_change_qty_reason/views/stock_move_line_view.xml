@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2019-2023 ForgeFlow S.L.
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="reason_view_move_line_tree" model="ir.ui.view">
+        <field name="name">stock.move.line.tree</field>
+        <field name="model">stock.move.line</field>
+        <field name="inherit_id" ref="stock.view_move_line_tree" />
+        <field name="arch" type="xml">
+            <field name="company_id" position="after">
+                <field
+                    name="reason"
+                    groups="!stock_change_qty_reason.group_qty_reason_preset"
+                />
+                <field
+                    name="preset_reason_id"
+                    string="Reason"
+                    groups="stock_change_qty_reason.group_qty_reason_preset"
+                />
+            </field>
+        </field>
+    </record>
+</odoo>
