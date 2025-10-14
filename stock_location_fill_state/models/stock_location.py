@@ -11,7 +11,6 @@ from odoo.addons.stock_location_pending_move.models.stock_location import (
 
 
 class StockLocation(models.Model):
-
     _inherit = "stock.location"
 
     exclude_from_fill_state_computation = fields.Boolean(
@@ -34,7 +33,8 @@ class StockLocation(models.Model):
         [empty] Empty location
         [filled] Filled location
         [being_filled] The location is empty and an incoming move is in progress
-        [being_emptied] The location is filled and the outgoing move(s) will empty the location
+        [being_emptied] The location is filled and the outgoing move(s) will
+                        empty the location
         """,
     )
 
@@ -56,26 +56,36 @@ class StockLocation(models.Model):
         """
         return [("location_id", "in", self.ids)]
 
+    @property
+    @api.model
+    def _move_line_fill_state_qty_done(self):
+        """
+        Return the move line field that provides the quantity picked
+        """
+        return "quantity"
+
     @api.depends(
         "quant_ids.quantity",
-        "pending_out_move_line_ids.qty_done",
+        "pending_out_move_line_ids.picked",
+        "pending_out_move_line_ids.quantity",
         "pending_in_move_ids",
         "pending_in_move_line_ids",
     )
     def _compute_fill_state(self):
-        """ """
         locations_to_compute = self._get_locations_for_fill_state()
         location_domain = locations_to_compute._get_quant_fill_state_domain()
         out_qty_by_location = {}
         qty_by_location = {}
-        domain = AND([PENDING_MOVE_DOMAIN, location_domain])
+        domain = AND([PENDING_MOVE_DOMAIN, location_domain, [["picked", "=", True]]])
         for group in self.env["stock.move.line"].read_group(
             domain,
-            fields=["qty_done:sum"],
+            fields=[f"{self._move_line_fill_state_qty_done}:sum"],
             groupby=["location_id"],
         ):
             location_id = group["location_id"][0]
-            out_qty_by_location[location_id] = group["qty_done"]
+            out_qty_by_location[location_id] = group[
+                self._move_line_fill_state_qty_done
+            ]
         for group in self.env["stock.quant"].read_group(
             location_domain, fields=["quantity:sum"], groupby=["location_id"]
         ):
@@ -104,5 +114,5 @@ class StockLocation(models.Model):
         for state, records in records_by_state.items():
             # Don't update if value is already set
             records.filtered(
-                lambda record: record.fill_state != state
+                lambda record, state=state: record.fill_state != state
             ).fill_state = state

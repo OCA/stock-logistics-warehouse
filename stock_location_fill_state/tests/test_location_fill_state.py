@@ -18,7 +18,8 @@ class TestLocationFillState(BaseCommon):
         cls.product = cls.env["product.product"].create(
             {
                 "name": "Product",
-                "type": "product",
+                "type": "consu",
+                "is_storable": True,
             }
         )
         cls.stock_1 = cls.env["stock.location"].create(
@@ -76,7 +77,7 @@ class TestLocationFillState(BaseCommon):
             "being_filled",
             self.stock_1.fill_state,
         )
-        move.quantity_done = 1.0
+        move.picked = True
         move._action_done()
         self.assertEqual(
             "filled",
@@ -94,7 +95,7 @@ class TestLocationFillState(BaseCommon):
         )
         move._action_confirm()
         move._action_assign()
-        move.quantity_done = 1.0
+        move.picked = True
         self.assertEqual(
             "being_emptied",
             self.stock_1.fill_state,
@@ -114,7 +115,7 @@ class TestLocationFillState(BaseCommon):
         )
         moves = self.env["stock.move"].search(domain)
         for move in moves:
-            move.quantity_done = move.product_uom_qty
+            move.picked = True
         moves._action_done()
 
         self.assertFalse(self.customers.fill_state)
@@ -160,7 +161,7 @@ class TestLocationFillState(BaseCommon):
             "being_filled",
             self.stock_1.fill_state,
         )
-        move.quantity_done = 1.0
+        move.picked = True
         move._action_done()
         self.assertEqual(
             "filled",
@@ -178,7 +179,7 @@ class TestLocationFillState(BaseCommon):
         )
         move._action_confirm()
         move._action_assign()
-        move.quantity_done = 1.0
+        move.picked = True
         self.assertEqual(
             "being_emptied",
             self.stock_1.fill_state,
