@@ -92,7 +92,12 @@
                         class="o_shuttle_operation bg-primary jumbotron jumbotron-fluid"
                     >
                         <div class="container">
-                            <field name="state" invisible="0" readonly="True" />
+                            <field
+                                name="state"
+                                invisible="0"
+                                readonly="True"
+                                force_save="1"
+                            />
                         </div>
                     </div>
                     <div class="o_shuttle_data" />
@@ -143,6 +148,7 @@
                                     name="location_dest_id"
                                     class="bg-primary o_shuttle_highlight"
                                     readonly="1"
+                                    force_save="1"
                                     options="{'no_open': True}"
                                 />
                             </div>
