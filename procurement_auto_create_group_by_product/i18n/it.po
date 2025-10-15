@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-03-14 15:06+0000\n"
+"PO-Revision-Date: 2025-10-15 11:42+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -14,12 +14,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.10.2\n"
+"X-Generator: Weblate 5.10.4\n"
 
 #. module: procurement_auto_create_group_by_product
 #: model:ir.model.fields,field_description:procurement_auto_create_group_by_product.field_product_product__auto_create_procurement_group_ids
 msgid "Auto Create Procurement Group"
-msgstr ""
+msgstr "Crea automaticamente gruppo di approvvigionamento"
 
 #. module: procurement_auto_create_group_by_product
 #: model:ir.model.fields,field_description:procurement_auto_create_group_by_product.field_procurement_group__display_name
@@ -35,7 +35,7 @@ msgstr "Nome visualizzato"
 #: model:ir.model.fields,field_description:procurement_auto_create_group_by_product.field_stock_move__id
 #: model:ir.model.fields,field_description:procurement_auto_create_group_by_product.field_stock_rule__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: procurement_auto_create_group_by_product
 #: model:ir.model.fields,field_description:procurement_auto_create_group_by_product.field_procurement_group____last_update
@@ -43,30 +43,30 @@ msgstr ""
 #: model:ir.model.fields,field_description:procurement_auto_create_group_by_product.field_stock_move____last_update
 #: model:ir.model.fields,field_description:procurement_auto_create_group_by_product.field_stock_rule____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Ultima modifica il"
 
 #. module: procurement_auto_create_group_by_product
 #: model:ir.model,name:procurement_auto_create_group_by_product.model_procurement_group
 msgid "Procurement Group"
-msgstr ""
+msgstr "Gruppo di approvvigionamento"
 
 #. module: procurement_auto_create_group_by_product
 #: model:ir.model.fields,field_description:procurement_auto_create_group_by_product.field_stock_rule__auto_create_group_by_product
 msgid "Procurement Group by Product"
-msgstr ""
+msgstr "Gruppo approvvigionamento per prodotto"
 
 #. module: procurement_auto_create_group_by_product
 #: model:ir.model,name:procurement_auto_create_group_by_product.model_product_product
 #: model:ir.model.fields,field_description:procurement_auto_create_group_by_product.field_procurement_group__product_id
 msgid "Product"
-msgstr ""
+msgstr "Prodotto"
 
 #. module: procurement_auto_create_group_by_product
 #: model:ir.model,name:procurement_auto_create_group_by_product.model_stock_move
 msgid "Stock Move"
-msgstr ""
+msgstr "Movimento di magazzino"
 
 #. module: procurement_auto_create_group_by_product
 #: model:ir.model,name:procurement_auto_create_group_by_product.model_stock_rule
 msgid "Stock Rule"
-msgstr ""
+msgstr "Regola di giacenza"
