@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record model="ir.ui.view" id="stock_location_form_view">
+        <field name="model">stock.location</field>
+        <field name="inherit_id" ref="stock.view_location_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='location_id']/parent::h2" position="after">
+                <h2>
+                    <label for="fill_state" string="Fill State" />
+                    <field
+                        name="fill_state"
+                        widget="badge"
+                        decoration-danger="fill_state == 'filled'"
+                        decoration-info="fill_state == 'being_filled'"
+                        decoration-warning="fill_state == 'being_emptied'"
+                        decoration-success="fill_state =='empty'"
+                    />
+                </h2>
+            </xpath>
+            <field name="usage" position="after">
+                <field
+                    name="exclude_from_fill_state_computation"
+                    invisible="usage in ['customer', 'supplier']"
+                />
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="stock_location_search_view">
+        <field name="model">stock.location</field>
+        <field name="inherit_id" ref="stock.view_location_search" />
+        <field name="arch" type="xml">
+            <filter name="inactive" position="after">
+                <separator />
+                <filter
+                    string="Filled"
+                    name="filled"
+                    domain="[('fill_state','=','filled')]"
+                />
+                <filter
+                    string="Empty"
+                    name="empty"
+                    domain="[('fill_state','=','empty')]"
+                />
+                <filter
+                    string="Being Filled"
+                    name="being_filled"
+                    domain="[('fill_state','=','being_filled')]"
+                />
+                <filter
+                    string="Being Emptied"
+                    name="being_emptied"
+                    domain="[('fill_state','=','being_emptied')]"
+                />
+            </filter>
+        </field>
+    </record>
+
+    <record id="stock_location_tree_view" model="ir.ui.view">
+        <field name="model">stock.location</field>
+        <field name="inherit_id" ref="stock.view_location_tree2" />
+        <field name="arch" type="xml">
+            <field name="storage_category_id" position="after">
+                <field
+                    name="fill_state"
+                    widget="badge"
+                    decoration-danger="fill_state == 'filled'"
+                    decoration-info="fill_state == 'being_filled'"
+                    decoration-warning="fill_state == 'being_emptied'"
+                    decoration-success="fill_state =='empty'"
+                />
+            </field>
+        </field>
+    </record>
+</odoo>

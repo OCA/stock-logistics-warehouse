@@ -1,0 +1,89 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_location_fill_state
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-11-19 08:27+0000\n"
+"PO-Revision-Date: 2024-11-19 08:27+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_location_fill_state
+#: model:ir.model.fields,help:stock_location_fill_state.field_stock_location__fill_state
+msgid ""
+"\n"
+"        This shows the location fill state.\n"
+"        Possible values:\n"
+"        [empty] Empty location\n"
+"        [filled] Filled location\n"
+"        [being_filled] The location is empty and an incoming move is in "
+"progress\n"
+"        [being_emptied] The location is filled and the outgoing move(s) will "
+"empty the location\n"
+"        "
+msgstr ""
+"\n"
+"        Ceci montre le statut de remplissage de l'emplacement.\n"
+"        Valeurs possibles:\n"
+"        [empty] Emplacement vide\n"
+"        [filled] Emplacement rempli\n"
+"        [being_filled] L'emplacement est vide et un mouvement entrant est en "
+"cours\n"
+"        [being_emptied] L'emplacement est rempli et un mouvement sortant en "
+"cours videra l'emplacement\n"
+"        "
+
+#. module: stock_location_fill_state
+#: model:ir.model.fields.selection,name:stock_location_fill_state.selection__stock_location__fill_state__being_emptied
+#: model_terms:ir.ui.view,arch_db:stock_location_fill_state.stock_location_search_view
+msgid "Being Emptied"
+msgstr "Libération"
+
+#. module: stock_location_fill_state
+#: model:ir.model.fields.selection,name:stock_location_fill_state.selection__stock_location__fill_state__being_filled
+#: model_terms:ir.ui.view,arch_db:stock_location_fill_state.stock_location_search_view
+msgid "Being Filled"
+msgstr "En réappro"
+
+#. module: stock_location_fill_state
+#: model:ir.model.fields,help:stock_location_fill_state.field_stock_location__exclude_from_fill_state_computation
+msgid ""
+"Don't compute the fill state for this location. Checking this onintensively "
+"used locations can improve performances."
+msgstr ""
+
+#. module: stock_location_fill_state
+#: model:ir.model.fields.selection,name:stock_location_fill_state.selection__stock_location__fill_state__empty
+#: model_terms:ir.ui.view,arch_db:stock_location_fill_state.stock_location_search_view
+msgid "Empty"
+msgstr "Vide"
+
+#. module: stock_location_fill_state
+#: model:ir.model.fields,field_description:stock_location_fill_state.field_stock_location__exclude_from_fill_state_computation
+msgid "Exclude From Fill State Computation"
+msgstr ""
+
+#. module: stock_location_fill_state
+#: model:ir.model.fields,field_description:stock_location_fill_state.field_stock_location__fill_state
+#: model_terms:ir.ui.view,arch_db:stock_location_fill_state.stock_location_form_view
+msgid "Fill State"
+msgstr "Remplissage"
+
+#. module: stock_location_fill_state
+#: model:ir.model.fields.selection,name:stock_location_fill_state.selection__stock_location__fill_state__filled
+#: model_terms:ir.ui.view,arch_db:stock_location_fill_state.stock_location_search_view
+msgid "Filled"
+msgstr "Rempli"
+
+#. module: stock_location_fill_state
+#: model:ir.model,name:stock_location_fill_state.model_stock_location
+msgid "Inventory Locations"
+msgstr "Emplacements de stock"

@@ -1,0 +1,89 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_location_fill_state
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2025-05-22 12:26+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.10.4\n"
+
+#. module: stock_location_fill_state
+#: model:ir.model.fields,help:stock_location_fill_state.field_stock_location__fill_state
+msgid ""
+"\n"
+"        This shows the location fill state.\n"
+"        Possible values:\n"
+"        [empty] Empty location\n"
+"        [filled] Filled location\n"
+"        [being_filled] The location is empty and an incoming move is in progress\n"
+"        [being_emptied] The location is filled and the outgoing move(s) will empty the location\n"
+"        "
+msgstr ""
+"\n"
+"        Questo mostra lo stato di riempimento dell'ubicazione.\n"
+"        Valori possibili:\n"
+"        [empty] Ubicazione vuota\n"
+"        [filled] Ubicazione riempita\n"
+"        [being_filled] L'ubicazione è vuota ed è in corso un movimento in "
+"ingresso\n"
+"        [being_emptied] L'ubicazione è riempita e il/i movimento/i in uscita "
+"svuoteranno la posizione\n"
+"        "
+
+#. module: stock_location_fill_state
+#: model:ir.model.fields.selection,name:stock_location_fill_state.selection__stock_location__fill_state__being_emptied
+#: model_terms:ir.ui.view,arch_db:stock_location_fill_state.stock_location_search_view
+msgid "Being Emptied"
+msgstr "In svuotamento"
+
+#. module: stock_location_fill_state
+#: model:ir.model.fields.selection,name:stock_location_fill_state.selection__stock_location__fill_state__being_filled
+#: model_terms:ir.ui.view,arch_db:stock_location_fill_state.stock_location_search_view
+msgid "Being Filled"
+msgstr "In riempimento"
+
+#. module: stock_location_fill_state
+#: model:ir.model.fields,help:stock_location_fill_state.field_stock_location__exclude_from_fill_state_computation
+msgid ""
+"Don't compute the fill state for this location. Checking this onintensively "
+"used locations can improve performances."
+msgstr ""
+"Non calcolare lo stato di riempimento per questa ubicazione. Selezionarlo "
+"per le ubicazioni utilizzate più intensamente può migliorare le prestazioni."
+
+#. module: stock_location_fill_state
+#: model:ir.model.fields.selection,name:stock_location_fill_state.selection__stock_location__fill_state__empty
+#: model_terms:ir.ui.view,arch_db:stock_location_fill_state.stock_location_search_view
+msgid "Empty"
+msgstr "Vuota"
+
+#. module: stock_location_fill_state
+#: model:ir.model.fields,field_description:stock_location_fill_state.field_stock_location__exclude_from_fill_state_computation
+msgid "Exclude From Fill State Computation"
+msgstr "Escludi dal calcolo dello stato riempimento"
+
+#. module: stock_location_fill_state
+#: model:ir.model.fields,field_description:stock_location_fill_state.field_stock_location__fill_state
+#: model_terms:ir.ui.view,arch_db:stock_location_fill_state.stock_location_form_view
+msgid "Fill State"
+msgstr "Stato riempimento"
+
+#. module: stock_location_fill_state
+#: model:ir.model.fields.selection,name:stock_location_fill_state.selection__stock_location__fill_state__filled
+#: model_terms:ir.ui.view,arch_db:stock_location_fill_state.stock_location_search_view
+msgid "Filled"
+msgstr "Riempita"
+
+#. module: stock_location_fill_state
+#: model:ir.model,name:stock_location_fill_state.model_stock_location
+msgid "Inventory Locations"
+msgstr "Ubicazioni di inventario"
