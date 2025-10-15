@@ -2,13 +2,14 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 from odoo.osv.expression import AND
 
-from odoo.addons.base.tests.common import BaseCommon
 from odoo.addons.stock_location_pending_move.models.stock_location import (
     PENDING_MOVE_DOMAIN,
 )
 
+from .common import LocationFillStateCommon
 
-class TestLocationFillState(BaseCommon):
+
+class TestLocationFillState(LocationFillStateCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
