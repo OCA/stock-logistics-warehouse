@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-05-29 16:26+0000\n"
+"PO-Revision-Date: 2025-10-15 11:42+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -19,17 +19,17 @@ msgstr ""
 #. module: stock_inventory_cost_info
 #: model_terms:ir.ui.view,arch_db:stock_inventory_cost_info.report_inventory_cost_info
 msgid "<strong>Adjustment cost</strong>"
-msgstr ""
+msgstr "<strong>Correttivo costo</strong>"
 
 #. module: stock_inventory_cost_info
 #: model:ir.model.fields,field_description:stock_inventory_cost_info.field_stock_inventory_line__adjustment_cost
 msgid "Adjustment cost"
-msgstr ""
+msgstr "Correttivo costo"
 
 #. module: stock_inventory_cost_info
 #: model:ir.model.fields,field_description:stock_inventory_cost_info.field_stock_inventory_line__currency_id
 msgid "Currency"
-msgstr ""
+msgstr "Valuta"
 
 #. module: stock_inventory_cost_info
 #: model:ir.model.fields,field_description:stock_inventory_cost_info.field_stock_inventory_line__display_name
@@ -39,19 +39,19 @@ msgstr "Nome visualizzato"
 #. module: stock_inventory_cost_info
 #: model:ir.model.fields,field_description:stock_inventory_cost_info.field_stock_inventory_line__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: stock_inventory_cost_info
 #: model:ir.model,name:stock_inventory_cost_info.model_stock_inventory_line
 msgid "Inventory Line"
-msgstr ""
+msgstr "Riga d'inventario"
 
 #. module: stock_inventory_cost_info
 #: model:ir.model.fields,field_description:stock_inventory_cost_info.field_stock_inventory_line____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Ultima modifica il"
 
 #. module: stock_inventory_cost_info
 #: model_terms:ir.ui.view,arch_db:stock_inventory_cost_info.stock_inventory_line_tree
 msgid "Total"
-msgstr ""
+msgstr "Totale"
