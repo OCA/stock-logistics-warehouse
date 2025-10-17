@@ -32,7 +32,7 @@ class ProductTemplate(models.Model):
     )
     consumption_calculation_method = fields.Selection(
         _get_consumption_calculation_method,
-        "Consumption Calculation Method",
+        string="Calculation Method",
         default="moves",
     )
     display_range = fields.Integer(
@@ -55,6 +55,9 @@ class ProductTemplate(models.Model):
         ),
     )
 
+    def _load_average_consumption_fields(self):
+        return ["average_consumption", "total_consumption", "nb_days"]
+
     # Fields Function Section
     @api.depends(
         "product_variant_ids",
@@ -63,28 +66,30 @@ class ProductTemplate(models.Model):
         "consumption_calculation_method",
         "calculation_range",
     )
-    @api.multi
     def _compute_average_consumption(self):
         for template in self:
+            template.average_consumption = 0.0
+            template.total_consumption = 0.0
+            template.nb_days = 0
             if template.consumption_calculation_method == "moves":
                 template._average_consumption_moves()
 
-    @api.multi
     def _average_consumption_moves(self):
-        for template in self:
-            if template.product_variant_ids:
-                nb_days = max(template.product_variant_ids.mapped("nb_days"))
-                total_consumption = sum(
-                    template.product_variant_ids.mapped("total_consumption")
-                )
-                template.nb_days = nb_days
-                template.total_consumption = total_consumption
-                template.average_consumption = (
-                    nb_days and (total_consumption / nb_days) or False
-                )
+        self.ensure_one()
+        nb_days = 0
+        total_consumption = 0.0
+        average_consumption = 0.0
+        if self.product_variant_ids:
+            nb_days = max(self.product_variant_ids.mapped("nb_days"))
+            total_consumption = sum(
+                self.product_variant_ids.mapped("total_consumption")
+            )
+            average_consumption = nb_days and (total_consumption / nb_days) or 0.0
+        self.nb_days = nb_days
+        self.total_consumption = total_consumption
+        self.average_consumption = average_consumption
 
     @api.depends("display_range", "average_consumption")
-    @api.multi
     def _compute_displayed_average_consumption(self):
         for template in self:
             template.displayed_average_consumption = (

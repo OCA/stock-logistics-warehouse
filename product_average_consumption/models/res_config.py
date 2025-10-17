@@ -57,75 +57,35 @@ class StockConfigSettings(models.TransientModel):
         if not self.module_product_history:
             self.default_consumption_calculation_method = "moves"
 
-    @api.model
-    def create(self, vals):
-        if vals.get("default_display_range", False):
-            self.env.cr.execute(
-                """
-                UPDATE product_template
-                SET display_range=%s""",
-                (vals.get("default_display_range"),),
-            )
-        if vals.get("default_calculation_range", False):
-            self.env.cr.execute(
-                """
-                UPDATE product_template
-                SET calculation_range=%s""",
-                (vals.get("default_calculation_range"),),
-            )
-        # TOCHECK Need to move to product_history module
-        # if vals.get('default_number_of_periods', False):
-        #     self.env.cr.execute("""
-        #         UPDATE product_template
-        #         SET number_of_periods=%s""", (
-        #         vals.get('default_number_of_periods'),))
-        if vals.get("default_consumption_calculation_method", False):
-            self.env.cr.execute(
-                """
-                UPDATE product_template
-                SET consumption_calculation_method=%s""",
-                (vals.get("default_consumption_calculation_method"),),
-            )
-        return super().create(vals)
+    def _prepare_values_consumption_to_update_product_tmpl(self, changed_vals):
+        values = {}
+        if changed_vals.get("default_display_range") is not None:
+            values["display_range"] = changed_vals["default_display_range"]
+        if changed_vals.get("default_calculation_range") is not None:
+            values["calculation_range"] = changed_vals["default_calculation_range"]
+        if changed_vals.get("default_consumption_calculation_method") is not None:
+            values["consumption_calculation_method"] = changed_vals[
+                "default_consumption_calculation_method"
+            ]
+        return values
 
-    @api.multi
+    def update_consumption_info_for_products(self, changed_vals):
+        values_consumption = self._prepare_values_consumption_to_update_product_tmpl(
+            changed_vals
+        )
+        ProductTemplateSudo = self.env["product.template"].sudo()
+        if values_consumption:
+            ProductTemplateSudo.search([]).write(values_consumption)
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        res = super().create(vals_list)
+        res.update_consumption_info_for_products(
+            len(vals_list) > 0 and vals_list[0] or {}
+        )
+        return res
+
     def write(self, vals):
-        if vals.get("default_display_range", False):
-            self.env.cr.execute(
-                """
-                UPDATE product_template
-                SET display_range=%s""",
-                (vals.get("default_display_range"),),
-            )
-        if vals.get("default_calculation_range", False):
-            self.env.cr.execute(
-                """
-                UPDATE product_template
-                SET calculation_range=%s""",
-                (vals.get("default_calculation_range"),),
-            )
-        # TOCHECK Need to move to product_history module
-        # if vals.get('default_number_of_periods', False):
-        #     self.env.cr.execute("""
-        #         UPDATE product_template
-        #         SET number_of_periods=%s""", (
-        #         vals.get('default_number_of_periods'),))
-        if vals.get("default_consumption_calculation_method", False):
-            self.env.cr.execute(
-                """
-                UPDATE product_template
-                SET consumption_calculation_method=%s""",
-                (vals.get("default_consumption_calculation_method"),),
-            )
-        return super().write(vals)
-
-    @api.onchange("default_calculation_range")
-    @api.multi
-    def _onchange_default_calculation_range(self):
-        for config in self:
-            self.env.cr.execute(
-                """
-                UPDATE product_template
-                SET calculation_range=%s""",
-                (config.default_calculation_range,),
-            )
+        res = super().write(vals)
+        self.update_consumption_info_for_products(vals)
+        return res

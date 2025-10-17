@@ -28,11 +28,13 @@
         <field name="arch" type="xml">
             <group name="group_lots_and_weight" position="after">
                 <group name="Consumption" string="Consumption figures">
-                    <field name="consumption_calculation_method" />
+                    <group colspan="4">
+                        <field name="consumption_calculation_method" />
+                    </group>
                     <group
                         name="ConsumptionMove"
-                        attrs="{'invisible':
-                           [('consumption_calculation_method','!=','moves')]}"
+                        colspan="4"
+                        invisible="consumption_calculation_method != 'moves'"
                     >
                         <field name="calculation_range" />
                         <field name="nb_days" />
