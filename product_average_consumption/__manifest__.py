@@ -24,19 +24,19 @@
 #
 ##############################################################################
 {
-    'name': 'Product - Average Consumption',
-    'version': '12.0.1.0.0',
-    'category': 'Product',
-    'author': 'GRAP, Druidoo',
-    'website': 'https://cooplalouve.fr',
-    'license': 'AGPL-3',
-    'depends': [
-        'product',
-        'stock',
+    "name": "Product - Average Consumption",
+    "version": "12.0.1.0.0",
+    "category": "Product",
+    "author": "GRAP, Druidoo",
+    "website": "https://github.com/OCA/stock-logistics-warehouse",
+    "license": "AGPL-3",
+    "depends": [
+        "product",
+        "stock",
     ],
-    'data': [
-        'views/product_template_view.xml',
-        'views/res_config_view.xml',
+    "data": [
+        "views/product_template_view.xml",
+        "views/res_config_view.xml",
     ],
-    'installable': True,
+    "installable": True,
 }
