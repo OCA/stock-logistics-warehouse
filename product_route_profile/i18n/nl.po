@@ -1,0 +1,132 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* product_route_profile
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2023-06-23 19:09+0000\n"
+"Last-Translator: Bosd <c5e2fd43-d292-4c90-9d1f-74ff3436329a@anonaddy.me>\n"
+"Language-Team: none\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
+
+#. module: product_route_profile
+#: model:ir.model.fields,field_description:product_route_profile.field_route_profile__company_id
+msgid "Company"
+msgstr "Bedrijf"
+
+#. module: product_route_profile
+#: model:ir.model.fields,field_description:product_route_profile.field_route_profile__create_uid
+msgid "Created by"
+msgstr "Aangemaakt door"
+
+#. module: product_route_profile
+#: model:ir.model.fields,field_description:product_route_profile.field_route_profile__create_date
+msgid "Created on"
+msgstr "Aangemaakt op"
+
+#. module: product_route_profile
+#: model:ir.model.fields,help:product_route_profile.field_product_product__route_ids
+#: model:ir.model.fields,help:product_route_profile.field_product_template__route_ids
+msgid ""
+"Depending on the modules installed, this will allow you to define the route "
+"of the product: whether it will be bought, manufactured, replenished on "
+"order, etc."
+msgstr ""
+"Afhankelijk van de geïnstalleerde modules kunt u hiermee de route van het "
+"product bepalen: of het wordt gekocht, geproduceerd, op bestelling wordt "
+"aangevuld, enz."
+
+#. module: product_route_profile
+#: model:ir.model.fields,field_description:product_route_profile.field_route_profile__display_name
+msgid "Display Name"
+msgstr "Weergavenaam"
+
+#. module: product_route_profile
+#: model:ir.model.fields,field_description:product_route_profile.field_route_profile__id
+msgid "ID"
+msgstr "ID"
+
+#. module: product_route_profile
+#: model:ir.model.fields,help:product_route_profile.field_product_product__force_route_profile_id
+#: model:ir.model.fields,help:product_route_profile.field_product_template__force_route_profile_id
+msgid ""
+"If defined, the priority route profile will be used and will replace the "
+"route profile, only for this company."
+msgstr ""
+"Indien gedefinieerd, wordt het prioritaire routeprofiel gebruikt en vervangt "
+"het het routeprofiel, enkel voor dit bedrijf."
+
+#. module: product_route_profile
+#: model:ir.model.fields,field_description:product_route_profile.field_route_profile__write_uid
+msgid "Last Updated by"
+msgstr "Laatst bijgewerkt door"
+
+#. module: product_route_profile
+#: model:ir.model.fields,field_description:product_route_profile.field_route_profile__write_date
+msgid "Last Updated on"
+msgstr "Laatst bijgewerkt op"
+
+#. module: product_route_profile
+#: model:ir.model.fields,field_description:product_route_profile.field_route_profile__name
+msgid "Name"
+msgstr "Naam"
+
+#. module: product_route_profile
+#: model:ir.model.fields,field_description:product_route_profile.field_product_product__force_route_profile_id
+#: model:ir.model.fields,field_description:product_route_profile.field_product_template__force_route_profile_id
+msgid "Priority Route Profile"
+msgstr "Prioriteit Roue Profiel"
+
+#. module: product_route_profile
+#: model:ir.model,name:product_route_profile.model_product_template
+msgid "Product"
+msgstr ""
+
+#. module: product_route_profile
+#: model:ir.model,name:product_route_profile.model_route_profile
+#: model:ir.model.fields,field_description:product_route_profile.field_product_product__route_profile_id
+#: model:ir.model.fields,field_description:product_route_profile.field_product_template__route_profile_id
+msgid "Route Profile"
+msgstr "Route Profiel"
+
+#. module: product_route_profile
+#: model:ir.model.fields,field_description:product_route_profile.field_product_product__route_ids
+#: model:ir.model.fields,field_description:product_route_profile.field_product_template__route_ids
+#: model:ir.model.fields,field_description:product_route_profile.field_route_profile__route_ids
+msgid "Routes"
+msgstr "Routes"
+
+#. module: product_route_profile
+#: model:ir.actions.act_window,name:product_route_profile.action_route_profile_form
+#: model:ir.ui.menu,name:product_route_profile.menu_route_profile_config
+#: model_terms:ir.ui.view,arch_db:product_route_profile.route_profile_form
+msgid "Routes Profiles"
+msgstr "Route Profielen"
+
+#. module: product_route_profile
+#: model_terms:ir.actions.act_window,help:product_route_profile.action_route_profile_form
+msgid ""
+"You can define here the routes profiles that run through\n"
+"                your warehouses and that define the flows of your products.\n"
+"                A route profile can be set on each product as \"Route "
+"Profile\" or \"Priority Route Profile\" (company dependent)."
+msgstr ""
+"U kunt hier de routeprofielen definiëren die door\n"
+"                uw magazijnen lopen en die de stromen van uw producten "
+"bepalen.\n"
+"                Een routeprofiel kan voor elk product worden ingesteld als "
+"\"Routeprofiel\" of \"Prioriteit routeprofiel\" (afhankelijk van het "
+"bedrijf)."
+
+#~ msgid "Last Modified on"
+#~ msgstr "Laatst bijgewerkt op"
+
+#~ msgid "Product Template"
+#~ msgstr "Productsjabloon"
