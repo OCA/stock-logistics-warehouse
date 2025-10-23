@@ -63,10 +63,10 @@ class VerticalLiftShuttle(models.Model):
     @property
     def _screen_view_for_mode(self):
         return {
-            "pick": ("stock_vertical_lift." "vertical_lift_operation_pick_screen_view"),
-            "put": ("stock_vertical_lift." "vertical_lift_operation_put_screen_view"),
+            "pick": ("stock_vertical_lift.vertical_lift_operation_pick_screen_view"),
+            "put": ("stock_vertical_lift.vertical_lift_operation_put_screen_view"),
             "inventory": (
-                "stock_vertical_lift." "vertical_lift_operation_inventory_screen_view"
+                "stock_vertical_lift.vertical_lift_operation_inventory_screen_view"
             ),
         }
 
@@ -81,8 +81,8 @@ class VerticalLiftShuttle(models.Model):
 
         """
         self.ensure_one()
-        _logger.info("send %r", payload)
         command_values = {"shuttle_id": self.id, "command": payload.decode()}
+        _logger.info("send %(command)r", command_values)
 
         self.env["vertical.lift.command"].sudo().create(command_values)
         if self.hardware == "simulation":

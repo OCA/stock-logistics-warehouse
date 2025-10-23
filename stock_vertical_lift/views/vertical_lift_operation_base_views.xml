@@ -146,7 +146,7 @@
                             <div>
                                 <field
                                     name="location_dest_id"
-                                    class="bg-primary o_shuttle_highlight"
+                                    class="bg-primary o_shuttle_highlight text-white"
                                     readonly="1"
                                     force_save="1"
                                     options="{'no_open': True}"
