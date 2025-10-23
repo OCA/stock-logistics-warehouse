@@ -20,3 +20,8 @@ class RouteProfile(models.Model):
         string="Routes",
         domain=[("product_selectable", "=", True)],
     )
+    product_ids = fields.One2many(
+        comodel_name="product.template",
+        inverse_name="route_profile_id",
+        string="Products (default)",
+    )

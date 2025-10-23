@@ -60,11 +60,6 @@ Usage
 
 
 
-Known issues / Roadmap
-======================
-
-Tests of this module are running separately than the other tests.
-
 Bug Tracker
 ===========
 
