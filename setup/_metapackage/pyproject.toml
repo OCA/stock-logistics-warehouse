@@ -1,6 +1,6 @@
 [project]
 name = "odoo-addons-oca-stock-logistics-warehouse"
-version = "18.0.20251015.0"
+version = "18.0.20251023.0"
 dependencies = [
     "odoo-addon-account_move_line_stock_info==18.0.*",
     "odoo-addon-procurement_auto_create_group==18.0.*",
@@ -19,6 +19,7 @@ dependencies = [
     "odoo-addon-stock_location_children==18.0.*",
     "odoo-addon-stock_location_empty==18.0.*",
     "odoo-addon-stock_location_fill_state==18.0.*",
+    "odoo-addon-stock_location_fill_state_qty_picked==18.0.*",
     "odoo-addon-stock_location_is_sublocation==18.0.*",
     "odoo-addon-stock_location_lockdown==18.0.*",
     "odoo-addon-stock_location_pending_move==18.0.*",
