@@ -3,7 +3,7 @@
 {
     "name": "Vertical Lift",
     "summary": "Provides the core for integration with Vertical Lifts",
-    "version": "18.0.1.2.1",
+    "version": "18.0.1.2.2",
     "category": "Stock",
     "author": "Camptocamp, Odoo Community Association (OCA)",
     "license": "AGPL-3",
