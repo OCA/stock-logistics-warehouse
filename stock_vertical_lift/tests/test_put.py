@@ -2,9 +2,12 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import logging
 
+from odoo.tools import mute_logger
+
 from .common import VerticalLiftCase
 
 _logger = logging.getLogger(__name__)
+SHUTTLE_LOGGER = "odoo.addons.stock_vertical_lift.models.vertical_lift_shuttle"
 
 
 class TestPut(VerticalLiftCase):
@@ -18,6 +21,7 @@ class TestPut(VerticalLiftCase):
         cls.in_move_line = cls.picking_in.move_line_ids
         cls.in_move_line.location_dest_id = cls.shuttle.location_id
 
+    @mute_logger(SHUTTLE_LOGGER)
     def test_put_action_open_screen(self):
         self.shuttle.switch_put()
         action = self.shuttle.action_open_screen()
@@ -26,6 +30,7 @@ class TestPut(VerticalLiftCase):
         self.assertEqual(action["res_model"], "vertical.lift.operation.put")
         self.assertEqual(action["res_id"], operation.id)
 
+    @mute_logger(SHUTTLE_LOGGER)
     def test_switch_put(self):
         self.shuttle.switch_put()
         self.assertEqual(self.shuttle.mode, "put")
@@ -34,6 +39,7 @@ class TestPut(VerticalLiftCase):
             self.env["stock.move.line"].browse(),
         )
 
+    @mute_logger(SHUTTLE_LOGGER, "odoo.models.unlink")
     def test_put_count_move_lines(self):
         # If stock_picking_cancel_confirm is installed, we need to explicitly
         # confirm the cancellation.
@@ -71,12 +77,14 @@ class TestPut(VerticalLiftCase):
         self.assertEqual(operation2.number_of_ops, 0)
         self.assertEqual(operation2.number_of_ops_all, 3)
 
+    @mute_logger(SHUTTLE_LOGGER)
     def test_transition_start(self):
         operation = self._open_screen("put")
         # we begin with an empty screen, user has to scan a package, product,
         # or lot
         self.assertEqual(operation.state, "scan_source")
 
+    @mute_logger(SHUTTLE_LOGGER)
     def test_transition_scan_source_to_scan_tray_type(self):
         operation = self._open_screen("put")
         self.assertEqual(operation.state, "scan_source")
@@ -88,6 +96,7 @@ class TestPut(VerticalLiftCase):
         self.assertEqual(operation.state, "scan_tray_type")
         self.assertEqual(operation.current_move_line_id, self.in_move_line)
 
+    @mute_logger(SHUTTLE_LOGGER)
     def test_transition_scan_tray_type_to_save(self):
         operation = self._open_screen("put")
         # assume we already scanned the product
@@ -103,6 +112,7 @@ class TestPut(VerticalLiftCase):
             self.in_move_line.location_dest_id in self.location_1a.child_ids
         )
 
+    @mute_logger(SHUTTLE_LOGGER)
     def test_change_tray_type_on_save(self):
         operation = self._open_screen("put")
         move_line = self.in_move_line
@@ -123,6 +133,7 @@ class TestPut(VerticalLiftCase):
         # a cell has been set in the other tray
         self.assertTrue(move_line.location_dest_id in self.location_1b.child_ids)
 
+    @mute_logger(SHUTTLE_LOGGER)
     def test_transition_scan_tray_type_no_empty_cell(self):
         operation = self._open_screen("put")
         # assume we already scanned the product
@@ -139,6 +150,7 @@ class TestPut(VerticalLiftCase):
         # destination not changed
         self.assertEqual(self.in_move_line.location_dest_id, self.shuttle.location_id)
 
+    @mute_logger(SHUTTLE_LOGGER)
     def test_transition_save(self):
         operation = self._open_screen("put")
         # first steps of the workflow are done
@@ -150,6 +162,7 @@ class TestPut(VerticalLiftCase):
         self.assertEqual(self.in_move_line.state, "done")
         self.assertEqual(self.in_move_line.quantity, qty_to_process)
 
+    @mute_logger(SHUTTLE_LOGGER)
     def test_transition_button_release(self):
         operation = self._open_screen("put")
         move_line = self.in_move_line
@@ -163,3 +176,52 @@ class TestPut(VerticalLiftCase):
         operation.button_release()
         self.assertEqual(operation.state, "scan_source")
         self.assertFalse(operation.current_move_line_id)
+
+    @mute_logger(SHUTTLE_LOGGER, "odoo.models.unlink")
+    def test_put_package_with_multiple_move_lines(self):
+        """Check moving a package linked to multiple move lines.
+
+        Even when scanning a package, the module moves one move line at a time
+        And not the whole package.
+        If the package is spread on multiple move lines an exception is raised.
+
+        The module will try to merge the move lines.
+
+        """
+        pick = self.picking_in
+        # split the move in 2 move lines
+        line1 = pick.move_line_ids
+        # Add two quants in a package
+        pack = self.env["stock.quant.package"].create({"name": "test"})
+        # Update the available stock necessary for the move
+        self._update_qty_in_location(pick.location_id, line1.product_id, 14, pack)
+        # The stock for the 2nd move line must be on a different quant
+        self.env["stock.quant"].create(
+            {
+                "product_id": line1.product_id.id,
+                "location_id": pick.location_id.id,
+                "quantity": 1,
+                "package_id": pack.id,
+            }
+        )
+        # Split the move line to have 2
+        line2 = line1.copy({"quantity": 1, "picking_id": pick.id})
+        line1.with_context(bypass_reservation_update=True).quantity = 14
+        line1.package_id = pack
+        line2.package_id = pack
+
+        # Do the full put workflow
+        operation = self._open_screen("put")
+        line = operation._find_move_line(pack.name)
+        operation.current_move_line_id = line
+        operation.current_move_line_id.location_dest_id = self.location_1a_x1y1
+        operation.state = "save"
+        operation.button_save()
+        self.assertEqual(line1.state, "done")
+        # Check the lines quantity has been merged
+        self.assertEqual(line1.quantity, 15)
+        self.assertTrue(line1.picked)
+        # Check there is no more move lines to do for the pack
+        line_left = operation._find_move_line(pack.name)
+        self.assertFalse(line_left)
+        self.assertEqual(pick.state, "done")

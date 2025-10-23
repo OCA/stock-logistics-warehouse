@@ -2,9 +2,12 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import logging
 
+from odoo.tools import mute_logger
+
 from .common import VerticalLiftCase
 
 _logger = logging.getLogger(__name__)
+SHUTTLE_LOGGER = "odoo.addons.stock_vertical_lift.models.vertical_lift_shuttle"
 
 
 class TestPick(VerticalLiftCase):
@@ -18,6 +21,7 @@ class TestPick(VerticalLiftCase):
         # stock_picking_out_demo_vertical_lift_1
         cls.out_move_line = cls.picking_out.move_line_ids[0]
 
+    @mute_logger(SHUTTLE_LOGGER)
     def test_switch_pick(self):
         self.shuttle.switch_pick()
         self.assertEqual(self.shuttle.mode, "pick")
@@ -25,6 +29,7 @@ class TestPick(VerticalLiftCase):
             self.shuttle._operation_for_mode().current_move_line_id, self.out_move_line
         )
 
+    @mute_logger(SHUTTLE_LOGGER)
     def test_pick_action_open_screen(self):
         self.shuttle.switch_pick()
         action = self.shuttle.action_open_screen()
@@ -34,6 +39,7 @@ class TestPick(VerticalLiftCase):
         self.assertEqual(action["res_model"], "vertical.lift.operation.pick")
         self.assertEqual(action["res_id"], operation.id)
 
+    @mute_logger(SHUTTLE_LOGGER)
     def test_pick_select_next_move_line(self):
         operation = self._open_screen("pick")
         operation.select_next_move_line()
@@ -42,6 +48,7 @@ class TestPick(VerticalLiftCase):
         )
         self.assertEqual(operation.state, "scan_destination")
 
+    @mute_logger(SHUTTLE_LOGGER)
     def test_pick_select_next_move_line_was_skipped(self):
         """Previously skipped moves can be reprocessed"""
         self.picking_out.move_line_ids.write({"vertical_lift_skipped": True})
@@ -61,6 +68,7 @@ class TestPick(VerticalLiftCase):
             operation.current_move_line_id, self.picking_out.move_line_ids[0]
         )
 
+    @mute_logger(SHUTTLE_LOGGER)
     def test_pick_save(self):
         operation = self._open_screen("pick")
         # assume we already scanned the destination, current state is save
@@ -70,14 +78,17 @@ class TestPick(VerticalLiftCase):
         self.assertEqual(operation.current_move_line_id.state, "done")
         self.assertEqual(operation.state, "release")
 
+    @mute_logger(SHUTTLE_LOGGER)
     def test_pick_skip_from_scan_destination(self):
         """Being in state Scan Destination, skip it"""
         self._test_pick_skip_from_state("scan_destination")
 
+    @mute_logger(SHUTTLE_LOGGER)
     def test_pick_skip_from_save(self):
         """Being in state Save, skip it"""
         self._test_pick_skip_from_state("save")
 
+    @mute_logger(SHUTTLE_LOGGER)
     def test_pick_skip_from_release(self):
         """Being in state Release, skip it"""
         self._test_pick_skip_from_state("release")
@@ -95,6 +106,7 @@ class TestPick(VerticalLiftCase):
         self.assertEqual(operation.current_move_line_id.state, "assigned")
         self.assertEqual(operation.state, "scan_destination")
 
+    @mute_logger(SHUTTLE_LOGGER)
     def test_pick_related_fields(self):
         operation = self._open_screen("pick")
         ml = operation.current_move_line_id = self.out_move_line
@@ -128,6 +140,7 @@ class TestPick(VerticalLiftCase):
         self.assertEqual(operation.quantity, ml.quantity)
         self.assertEqual(operation.lot_id, ml.lot_id)
 
+    @mute_logger(SHUTTLE_LOGGER, "odoo.models.unlink")
     def test_pick_count_move_lines(self):
         product1 = self.env.ref("stock_vertical_lift.product_running_socks")
         product2 = self.env.ref("stock_vertical_lift.product_recovery_socks")
@@ -202,6 +215,7 @@ class TestPick(VerticalLiftCase):
         self.assertEqual(operation1.number_of_ops_all, 6)
         self.assertEqual(operation2.number_of_ops_all, 6)
 
+    @mute_logger(SHUTTLE_LOGGER)
     def test_on_barcode_scanned(self):
         operation = self._open_screen("pick")
         self.assertEqual(operation.state, "scan_destination")
@@ -228,10 +242,12 @@ class TestPick(VerticalLiftCase):
         self.assertEqual(move_line.move_id.location_dest_id, current_destination)
         self.assertEqual(move_line.picking_id.location_dest_id, current_destination)
 
+    @mute_logger(SHUTTLE_LOGGER)
     def test_button_release(self):
         self._open_screen("pick")
         self._test_button_release(self.picking_out.move_line_ids, "noop")
 
+    @mute_logger(SHUTTLE_LOGGER)
     def test_process_current_pick(self):
         operation = self._open_screen("pick")
         operation.current_move_line_id = self.out_move_line
@@ -240,6 +256,7 @@ class TestPick(VerticalLiftCase):
         self.assertEqual(self.out_move_line.state, "done")
         self.assertEqual(self.out_move_line.quantity, qty_to_process)
 
+    @mute_logger(SHUTTLE_LOGGER)
     def test_matrix(self):
         operation = self._open_screen("pick")
         operation.current_move_line_id = self.out_move_line
@@ -260,6 +277,7 @@ class TestPick(VerticalLiftCase):
             },
         )
 
+    @mute_logger(SHUTTLE_LOGGER)
     def test_tray_qty(self):
         cell = self.env.ref(
             "stock_vertical_lift.stock_location_vertical_lift_demo_tray_1a_x3y2"
@@ -273,6 +291,7 @@ class TestPick(VerticalLiftCase):
         self.assertEqual(operation.tray_qty, 30)
         self.assertTrue(operation.product_packagings)
 
+    @mute_logger(SHUTTLE_LOGGER)
     def test_product_packagings(self):
         operation = self.shuttle._operation_for_mode()
         ml = operation.current_move_line_id

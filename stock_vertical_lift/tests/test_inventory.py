@@ -2,12 +2,16 @@
 # Copyright 2025 Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo.tests import Form
+from odoo.tests import Form, RecordCapturer
+from odoo.tools import mute_logger
 
 from .common import VerticalLiftCase
 
+SHUTTLE_LOGGER = "odoo.addons.stock_vertical_lift.models.vertical_lift_shuttle"
+
 
 class TestInventory(VerticalLiftCase):
+    @mute_logger(SHUTTLE_LOGGER)
     def test_switch_inventory(self):
         self.shuttle.switch_inventory()
         self.assertEqual(self.shuttle.mode, "inventory")
@@ -16,6 +20,7 @@ class TestInventory(VerticalLiftCase):
             self.env["stock.quant"].browse(),
         )
 
+    @mute_logger(SHUTTLE_LOGGER)
     def test_inventory_action_open_screen(self):
         self.shuttle.switch_inventory()
         action = self.shuttle.action_open_screen()
@@ -24,6 +29,7 @@ class TestInventory(VerticalLiftCase):
         self.assertEqual(action["res_model"], "vertical.lift.operation.inventory")
         self.assertEqual(action["res_id"], operation.id)
 
+    @mute_logger(SHUTTLE_LOGGER)
     def test_inventory_actions(self):
         self.shuttle.switch_inventory()
         action = self.shuttle.action_menu()
@@ -66,6 +72,7 @@ class TestInventory(VerticalLiftCase):
         vls_manual = ClassWithContext.browse(rec_id)
         vls_manual.button_save()
 
+    @mute_logger(SHUTTLE_LOGGER)
     def test_inventory_count_ops(self):
         self._update_qty_in_location(self.location_1a_x1y1, self.product_socks, 10)
         self._update_qty_in_location(self.location_1a_x2y1, self.product_recovery, 10)
@@ -82,6 +89,7 @@ class TestInventory(VerticalLiftCase):
         self.assertEqual(operation.number_of_ops, 2)
         self.assertEqual(operation.number_of_ops_all, 3)
 
+    @mute_logger(SHUTTLE_LOGGER)
     def test_process_current_inventory(self):
         stock_quant = self._create_stock_quants(
             [(self.location_1a_x1y1, self.product_socks)]
@@ -108,6 +116,7 @@ class TestInventory(VerticalLiftCase):
         }
         self.assertEqual(result, expected_result)
 
+    @mute_logger(SHUTTLE_LOGGER)
     def test_wrong_quantity(self):
         quant = self._create_stock_quants(
             [(self.location_1a_x1y1, self.product_socks)]
@@ -126,12 +135,17 @@ class TestInventory(VerticalLiftCase):
 
         # entering the same quantity a second time validates
         operation.quantity_input = 12.0
-        operation.button_save()
+        with RecordCapturer(self.env["stock.move"], []) as capt:
+            operation.button_save()
+            move = capt.records[0]
+            self.assertEqual(move.state, "done")
+            self.assertEqual(move.quantity, 2.0)
         self.assertFalse(operation.quant_id)
         self.assertTrue(quant.vertical_lift_done)
         self.assertEqual(quant.quantity, 12.0)
         self.assertFalse(operation.quant_id)
 
+    @mute_logger(SHUTTLE_LOGGER)
     def test_confirm_wrong_quantity(self):
         stock_quant = self._create_stock_quants(
             [(self.location_1a_x1y1, self.product_socks)]
@@ -150,6 +164,7 @@ class TestInventory(VerticalLiftCase):
         operation.button_save()
         self.assertEqual(operation.state, "quantity")
 
+    @mute_logger(SHUTTLE_LOGGER)
     def test_inventory_next_line(self):
         stock_quants = self._create_stock_quants(
             [
@@ -172,6 +187,7 @@ class TestInventory(VerticalLiftCase):
         self.assertEqual(operation.last_quantity_input, 0.0)
         self.assertEqual(operation.quantity_input, 0.0)
 
+    @mute_logger(SHUTTLE_LOGGER)
     def test_inventory_locations(self):
         self.shuttle.switch_inventory()
         opr_inventory = self.shuttle._operation_for_mode()
