@@ -1,4 +1,5 @@
 # Copyright 2019 Camptocamp SA
+# Copyright 2025 Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo.tests import Form
@@ -128,7 +129,7 @@ class TestInventory(VerticalLiftCase):
         operation.button_save()
         self.assertFalse(operation.quant_id)
         self.assertTrue(quant.vertical_lift_done)
-        self.assertEqual(quant.inventory_quantity, 12.0)
+        self.assertEqual(quant.quantity, 12.0)
         self.assertFalse(operation.quant_id)
 
     def test_confirm_wrong_quantity(self):

@@ -1,4 +1,5 @@
 # Copyright 2019 Camptocamp SA
+# Copyright 2025 Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import api, fields, models
@@ -224,19 +225,19 @@ class VerticalLiftOperationInventory(models.Model):
         return bool(next_quant_id)
 
     def process_current(self):
-        stock_quant = self.quant_id
-        if not stock_quant.vertical_lift_done:
-            stock_quant.vertical_lift_done = True
+        quant = self.quant_id
+        if quant and not quant.vertical_lift_done:
+            quant.vertical_lift_done = True
             if (
                 float_compare(
                     self.quantity_input,
-                    stock_quant.inventory_quantity,
-                    precision_digits=2,
+                    quant.quantity,
+                    precision_rounding=quant.product_uom_id.rounding,
                 )
                 != 0
             ):
-                stock_quant.inventory_quantity = self.quantity_input
-                stock_quant.action_apply_inventory()
+                quant.inventory_quantity = self.quantity_input
+                quant._apply_inventory()
             self.quantity_input = self.last_quantity_input = 0.0
         return True
 
