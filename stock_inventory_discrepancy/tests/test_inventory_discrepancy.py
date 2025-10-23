@@ -13,6 +13,7 @@ class TestInventoryDiscrepancy(BaseCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+        cls.env.company.inventory_discrepancy_enable = True
         cls.obj_location = cls.env["stock.location"]
         cls.obj_product = cls.env["product.product"]
         cls.obj_warehouse = cls.env["stock.warehouse"]
