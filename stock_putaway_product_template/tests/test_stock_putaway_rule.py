@@ -1,6 +1,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 # Copyright 2020 Tecnativa - Sergio Teruel
 # Copyright 2020-2021 Víctor Martínez - Tecnativa
+# Copyright 2025 Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
 
 from odoo.tests import common
 
@@ -37,17 +38,17 @@ class TestStockPutawayRule(common.TransactionCase):
         )
         cls.template._create_variant_ids()
         cls.view_id = cls.env.ref("stock.stock_putaway_list").id
+        cls.location = cls.env.ref("stock.stock_location_stock")
 
     def _stock_putaway_rule_product(self, location, product):
         rule = self.putawayRuleObj.create(
             {
                 "company_id": location.company_id.id,
                 "product_id": product.id,
-                "location_in_id": location.id,
+                "location_in_id": self.location.id,
                 "location_out_id": location.id,
             }
         )
-        self.assertEqual(rule.location_in_id, location)
         self.assertEqual(rule.product_tmpl_id, product.product_tmpl_id)
         self.assertEqual(rule.product_id, product)
         return rule
@@ -60,18 +61,11 @@ class TestStockPutawayRule(common.TransactionCase):
     def test_apply_putaway(self):
         # Create one strategy line for product template and other with a
         # specific variant
-        location = self.env["stock.location"].create(
-            {
-                "name": "shelf1",
-                "usage": "internal",
-                "location_id": self.env.ref("stock.stock_location_stock").id,
-            }
+        location1 = self.location.copy(
+            {"name": "Location test 1", "location_id": self.location.id}
         )
-        location1 = location.copy(
-            {"name": "Location test 1", "location_id": location.id}
-        )
-        location2 = location.copy(
-            {"name": "Location test 2", "location_id": location.id}
+        location2 = self.location.copy(
+            {"name": "Location test 2", "location_id": self.location.id}
         )
         # Create rule according to product_tmpl_id
         rule_product = self.putawayRuleObj.create(
@@ -96,12 +90,11 @@ class TestStockPutawayRule(common.TransactionCase):
             {
                 "company_id": location1.company_id.id,
                 "category_id": self.template.categ_id.id,
-                "location_in_id": location1.id,
+                "location_in_id": self.location.id,
                 "location_out_id": location1.id,
             }
         )
         self.assertEqual(rule_category.category_id, self.template.categ_id)
-        self.assertEqual(rule_category.location_in_id, location1)
         self.assertEqual(rule_category.product_tmpl_id.id, False)
         self.assertEqual(rule_category.product_id.id, False)
         # Check rules related
@@ -110,7 +103,6 @@ class TestStockPutawayRule(common.TransactionCase):
         self.assertEqual(len(self._get_product_rules(variant2)), 2)
         self.assertEqual(len(self._get_product_rules(variant3)), 1)
         # Check _get_putaway_strategy
-        locations = location + location.child_ids
-        self.assertEqual(locations._get_putaway_strategy(variant1), location1)
-        self.assertEqual(locations._get_putaway_strategy(variant2), location2)
-        self.assertEqual(locations._get_putaway_strategy(variant3), location1)
+        self.assertEqual(self.location._get_putaway_strategy(variant1), location1)
+        self.assertEqual(self.location._get_putaway_strategy(variant2), location2)
+        self.assertEqual(self.location._get_putaway_strategy(variant3), location1)
