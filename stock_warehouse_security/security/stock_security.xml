@@ -1,6 +1,5 @@
 <?xml version="1.0" ?>
 <odoo noupdate="1">
-
     <record id="ir_rule_stock_location_allowed_warehouse" model="ir.rule">
         <field name="name">Stock locations from allowed Warehouse</field>
         <field name="model_id" ref="stock.model_stock_location" />
@@ -12,7 +11,6 @@
         <field eval="1" name="perm_read" />
         <field eval="1" name="perm_create" />
     </record>
-
 
     <record id="ir_rule_stock_picking_type_allowed_warehouse" model="ir.rule">
         <field name="name">Stock pickings type from allowed Warehouse</field>
@@ -96,5 +94,4 @@
         <field eval="1" name="perm_read" />
         <field eval="1" name="perm_create" />
     </record>
-
 </odoo>
