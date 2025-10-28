@@ -5,32 +5,37 @@
 #    @author Julien WESTE
 #    @author Sylvain LE GAL (https://twitter.com/legalsylvain)
 
-from odoo import models, fields, api
+from odoo import api, fields, models
 
 HISTORY_RANGE = [
-    ('days', 'Days'),
-    ('weeks', 'Week'),
-    ('months', 'Month'),
+    ("days", "Days"),
+    ("weeks", "Week"),
+    ("months", "Month"),
 ]
 
 
 class ProductHistory(models.Model):
     _name = "product.history"
     _description = "Product History"
-    _order = 'from_date desc'
+    _order = "from_date desc"
 
     # Columns section
     product_id = fields.Many2one(
-        comodel_name='product.product', string='Product',
-        required=True, ondelete='cascade')
-    company_id = fields.Many2one(
-        'res.company', related='product_id.company_id')
+        comodel_name="product.product",
+        string="Product",
+        required=True,
+        ondelete="cascade",
+    )
+    company_id = fields.Many2one("res.company", related="product_id.company_id")
     product_tmpl_id = fields.Many2one(
-        'product.template', related='product_id.product_tmpl_id',
-        string='Template', store=True)
+        "product.template",
+        related="product_id.product_tmpl_id",
+        string="Template",
+        store=True,
+    )
     location_id = fields.Many2one(
-        'stock.location', string='Location', required=True,
-        ondelete='cascade')
+        "stock.location", string="Location", required=True, ondelete="cascade"
+    )
     from_date = fields.Date(required=True)
     to_date = fields.Date(required=True)
     purchase_qty = fields.Float("Purchases", default=0)
@@ -43,15 +48,14 @@ class ProductHistory(models.Model):
     outgoing_qty = fields.Float("Outgoing quantity", default=0)
     virtual_qty = fields.Float("Virtual quantity", default=0)
     ignored = fields.Boolean(default=False)
-    history_range = fields.Selection(
-        HISTORY_RANGE,
-        required=True)
+    history_range = fields.Selection(HISTORY_RANGE, required=True)
 
     _sql_constraints = [
-        ('history_uniq',
-         'unique(product_id, location_id, from_date, to_date, history_range)',
-         'This history line already exists!'
-         ),
+        (
+            "history_uniq",
+            "unique(product_id, location_id, from_date, to_date, history_range)",
+            "This history line already exists!",
+        ),
     ]
 
     # Private section
@@ -73,7 +77,6 @@ class ProductHistory(models.Model):
 
     @api.model
     def create(self, vals):
-        if vals.get('history_range') == 'weeks' and \
-                vals.get('sale_qty', 0) == 0:
-            vals['ignored'] = True
-        return super(ProductHistory, self).create(vals)
+        if vals.get("history_range") == "weeks" and vals.get("sale_qty", 0) == 0:
+            vals["ignored"] = True
+        return super().create(vals)

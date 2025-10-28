@@ -1,42 +1,52 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-
     <record id="view_template_history_form" model="ir.ui.view">
         <field name="model">product.template</field>
-        <field name="inherit_id" ref="stock.product_template_form_view_procurement_button"/>
+        <field
+            name="inherit_id"
+            ref="stock.product_template_form_view_procurement_button"
+        />
         <field name="priority">20</field>
         <field name="arch" type="xml">
             <page name="sales" position="after">
                 <page string="History" name="history" groups="base.group_no_one">
                     <group name="options">
-                        <field name="history_range"/>
+                        <field name="history_range" />
                     </group>
-                    <field name="product_history_ids"/>
+                    <field name="product_history_ids" />
                 </page>
             </page>
             <button name="action_view_orderpoints" position="before">
-                <button name="%(product_history.view_product_history_action)d" type="action"
-                        icon="fa-line-chart" class="oe_stat_button"
-                        groups="stock.group_stock_manager"
-                        string="History">
-                </button>
+                <button
+                    name="%(product_history.view_product_history_action)d"
+                    type="action"
+                    icon="fa-line-chart"
+                    class="oe_stat_button"
+                    groups="stock.group_stock_manager"
+                    string="History"
+                />
             </button>
         </field>
     </record>
 
     <record id="view_template_history_form2" model="ir.ui.view">
         <field name="model">product.template</field>
-        <field name="inherit_id" ref="product_average_consumption.view_template_consumption_form"/>
+        <field
+            name="inherit_id"
+            ref="product_average_consumption.view_template_consumption_form"
+        />
         <field name="arch" type="xml">
             <group name="ConsumptionMove" position="after">
-                <group name="ConsumptionHistory" attrs="{'invisible': [('consumption_calculation_method','!=','history')]}">
-                    <field name="number_of_periods"/>
-                    <field name="total_consumption"/>
-                    <field name="displayed_average_consumption"/>
-                    <field name="display_range"/>
+                <group
+                    name="ConsumptionHistory"
+                    attrs="{'invisible': [('consumption_calculation_method','!=','history')]}"
+                >
+                    <field name="number_of_periods" />
+                    <field name="total_consumption" />
+                    <field name="displayed_average_consumption" />
+                    <field name="display_range" />
                 </group>
             </group>
         </field>
     </record>
-
 </odoo>

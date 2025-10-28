@@ -6,26 +6,25 @@
 #    @author Sylvain LE GAL (https://twitter.com/legalsylvain)
 
 {
-    'name': 'Product - History',
-    'version': '12.0.2.0.0',
-    'category': 'Product',
-    'author': 'Akretion,'
-              'Druidoo',
-    'website': 'http://druidoo.io',
-    'license': 'AGPL-3',
-    'depends': [
-        'product',
-        'stock',
-        'product_average_consumption',
-        'queue_job',
+    "name": "Product - History",
+    "version": "12.0.2.0.0",
+    "category": "Product",
+    "author": "Akretion," "Druidoo",
+    "website": "https://github.com/OCA/stock-logistics-warehouse",
+    "license": "AGPL-3",
+    "depends": [
+        "product",
+        "stock",
+        "product_average_consumption",
+        "queue_job",
     ],
-    'data': [
-        'security/product_history_security.xml',
-        'security/ir.model.access.csv',
-        'views/res_config_view.xml',
-        'views/product_history_view.xml',
-        'views/product_template_view.xml',
-        'data/function.xml',
-        'data/cron.xml',
+    "data": [
+        "security/product_history_security.xml",
+        "security/ir.model.access.csv",
+        "views/res_config_view.xml",
+        "views/product_history_view.xml",
+        "views/product_template_view.xml",
+        "data/function.xml",
+        "data/cron.xml",
     ],
 }
