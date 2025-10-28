@@ -6,9 +6,7 @@
         <field name="user_id" ref="base.user_root" />
         <field name="interval_number">1</field>
         <field name="interval_type">days</field>
-        <field name="nextcall" eval="DateTime(2015,1,1,0,0,1)" />
-        <field name="numbercall">-1</field>
-        <field name="doall" eval="True" />
+        <field name="nextcall" eval="(DateTime.today()).strftime('%Y-%m-%d')" />
         <field name="model_id" ref="model_product_product" />
         <field name="state">code</field>
         <field name="code">model.run_product_history_day()</field>
@@ -20,9 +18,7 @@
         <field name="user_id" ref="base.user_root" />
         <field name="interval_number">1</field>
         <field name="interval_type">days</field>
-        <field name="nextcall" eval="DateTime(2015,1,1,0,0,1)" />
-        <field name="numbercall">-1</field>
-        <field name="doall" eval="True" />
+        <field name="nextcall" eval="(DateTime.today()).strftime('%Y-%m-%d')" />
         <field name="model_id" ref="model_product_product" />
         <field name="state">code</field>
         <field name="code">model.run_product_history_week()</field>
@@ -34,9 +30,7 @@
         <field name="user_id" ref="base.user_root" />
         <field name="interval_number">1</field>
         <field name="interval_type">days</field>
-        <field name="nextcall" eval="DateTime(2015,1,1,0,0,1)" />
-        <field name="numbercall">-1</field>
-        <field name="doall" eval="True" />
+        <field name="nextcall" eval="(DateTime.today()).strftime('%Y-%m-%d')" />
         <field name="model_id" ref="model_product_product" />
         <field name="state">code</field>
         <field name="code">model.run_product_history_month()</field>
@@ -50,8 +44,6 @@
         <field name="name">Recompute the last 6weeks product history</field>
         <field name="active" eval="False" />
         <field name="user_id" ref="base.user_root" />
-        <field name="numbercall">-1</field>
-        <field name="doall" eval="True" />
         <field name="model_id" ref="model_product_product" />
         <field name="state">code</field>
         <field name="code">model.run_recompute_6weeks_product_history()</field>

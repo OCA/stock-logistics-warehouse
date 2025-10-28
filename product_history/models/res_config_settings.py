@@ -29,3 +29,13 @@ class ProductHistorySettings(models.TransientModel):
         help="""This field is used if the selected method is based on"""
         """ Product History""",
     )
+
+    def _prepare_values_consumption_to_update_product_tmpl(self, changed_vals):
+        values = super()._prepare_values_consumption_to_update_product_tmpl(
+            changed_vals
+        )
+        if changed_vals.get("default_number_of_periods") is not None:
+            values["number_of_periods"] = changed_vals["default_number_of_periods"]
+        if changed_vals.get("default_history_range") is not None:
+            values["history_range"] = changed_vals["default_history_range"]
+        return values

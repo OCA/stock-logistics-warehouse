@@ -13,8 +13,7 @@ from datetime import timedelta as td
 from dateutil.relativedelta import relativedelta as rd
 
 from odoo import api, fields, models
-
-from odoo.addons.queue_job.job import job
+from odoo.tools import SQL
 
 _logger = logging.getLogger(__name__)
 
@@ -46,7 +45,7 @@ class ProductProduct(models.Model):
         related="product_tmpl_id.history_range",
         readonly=True,
     )
-    product_history_ids = fields.Many2many(
+    product_history_ids = fields.One2many(
         comodel_name="product.history",
         inverse_name="product_id",
         string="History",
@@ -74,117 +73,57 @@ class ProductProduct(models.Model):
     )
 
     # Private section
-    @api.depends("history_range", "product_history_ids", "number_of_periods_target")
-    @api.multi
+    @api.depends(
+        "consumption_calculation_method",
+        "calculation_range",
+        "history_range",
+        "product_history_ids",
+        "number_of_periods_target",
+    )
     def _compute_average_consumption(self):
+        res = super()._compute_average_consumption()
         for product in self:
             if product.consumption_calculation_method == "history":
                 product._average_consumption_history()
-        super()._compute_average_consumption()
+        return res
 
     @api.depends("history_range")
-    @api.multi
     def _compute_product_history_ids(self):
         for product in self:
-            ph_ids = self.env["product.history"].search(
+            histories = self.env["product.history"].search(
                 [
-                    ("product_id", "=", product.id),
+                    ("product_id", "in", product.ids),
                     ("history_range", "=", product.history_range),
                 ]
             )
-            ph_ids = [ph.id for ph in ph_ids]
-            product.product_history_ids = [(6, 0, ph_ids)]
+            product.product_history_ids = histories
 
-    @api.multi
-    def _compute_qtys(self, states=("done",)):
-        domain = [("state", "in", states)] + self._get_domain_dates()
-        for product in self:
-            domain_product = domain + [("product_id", "=", product.id)]
-            res = {
-                "purchase_qty": 0,
-                "view_qty": 0,
-                "sale_qty": 0,
-                "inventory_qty": 0,
-                "procurement_qty": 0,
-                "production_qty": 0,
-                "transit_qty": 0,
-                "total_qty": 0,
-            }
-            move_pool = self.env["stock.move"]
-
-            for field, usage, sign in (
-                ("purchase_qty", "supplier", 1),
-                ("sale_qty", "customer", 1),
-                ("inventory_qty", "inventory", 1),
-                ("procurement_qty", "procurement", 1),
-                ("production_qty", "production", 1),
-                ("transit_qty", "transit", 1),
-            ):
-                moves = move_pool.read_group(
-                    domain_product
-                    + [
-                        ("location_id.usage", "=", usage),
-                        ("location_dest_id.usage", "=", "internal"),
-                    ],
-                    ["product_qty"],
-                    [],
-                )
-                for move in moves:
-                    res[field] = sign * (move["product_qty"] or 0)
-                    res["total_qty"] += sign * (move["product_qty"] or 0)
-                moves = move_pool.read_group(
-                    domain_product
-                    + [
-                        ("location_dest_id.usage", "=", usage),
-                        ("location_id.usage", "=", "internal"),
-                    ],
-                    ["product_qty"],
-                    [],
-                )
-                for move in moves:
-                    res[field] -= sign * (move["product_qty"] or 0)
-                    res["total_qty"] -= sign * (move["product_qty"] or 0)
-            return res
-
-    @api.multi
     def _average_consumption_history(self):
-        for product in self:
-            nb = product.number_of_periods_target
-            history_range = product.history_range
-            history_ids = (
-                self.env["product.history"]
-                .search(
-                    [
-                        ("product_id", "=", product.id),
-                        ("history_range", "=", history_range),
-                        ("ignored", "=", 0),
-                    ]
+        self.ensure_one()
+        nb = self.number_of_periods_target
+        history_range = self.history_range
+        histories = self.product_history_ids.filtered(lambda h: not h.ignored)
+        nb = min(len(histories), nb)
+        if nb == 0:
+            return
+        else:
+            list_indexes = list(range(nb))
+            total_consumption = 0
+            for index in list_indexes:
+                total_consumption -= histories[index].sale_qty
+                self.nb_days = nb * DAYS_IN_RANGE[history_range]
+                self.total_consumption = total_consumption
+                self.average_consumption = total_consumption / (
+                    nb * DAYS_IN_RANGE[history_range]
                 )
-                .sorted()
-            )
-            nb = min(len(history_ids), nb)
-            if nb == 0:
-                product.total_consumption = 0
-                product.average_consumption = 0
-                product.number_of_periods_real = 0
-            else:
-                list_indexes = list(range(nb))
-                total_consumption = 0
-                for index in list_indexes:
-                    total_consumption -= history_ids[index].sale_qty
-                product.total_consumption = total_consumption
-                product.average_consumption = (
-                    total_consumption / nb / DAYS_IN_RANGE[product.history_range]
-                )
-                product.number_of_periods_real = nb
-                self._compute_displayed_average_consumption()
+                self.number_of_periods_real = nb
 
     # Action section
     @api.model
     def _get_products_multiple_parts(self):
         """Gets the list of products to process, splitted in chunks"""
         Product = self.env["product.product"].with_context(active_test=False)
-        product_ids = Product._search([])
+        product_ids = Product.search([]).ids
         # Split in chunks
         chunked = [
             product_ids[i : i + NUMBER_OF_PRODUCTS_PER_JOB]
@@ -236,15 +175,7 @@ class ProductProduct(models.Model):
         products._compute_history("weeks")
         products._compute_history("days")
 
-    @api.multi
-    def _compute_history(self, history_range):
-        to_date = date.today()
-        if history_range == "months":
-            delta = rd(months=1)
-        elif history_range == "weeks":
-            delta = rd(weeks=1)
-        else:
-            delta = rd(days=1)
+    def _prepare_dates_per_product(self, history_range, to_date):
         last_dates = {}
         last_qtys = {}
         product_ids = []
@@ -255,34 +186,25 @@ class ProductProduct(models.Model):
                 product,
             )
             product_ids.append(product.id)
-            history_ids = self.env["product.history"].search(
-                [("history_range", "=", history_range), ("product_id", "=", product.id)]
+            history = self.env["product.history"].search(
+                [
+                    ("history_range", "=", history_range),
+                    ("product_id", "in", product.ids),
+                ],
+                order="id DESC",
+                limit=1,
             )
-            if history_ids:
-                self.env.cr.execute(
-                    """
-                    SELECT to_date, end_qty FROM product_history
-                    WHERE product_id = %s
-                    AND history_range = %s
-                    ORDER BY "id" DESC LIMIT 1
-                """,
-                    (product.id, history_range),
-                )
-                last_record = self.env.cr.fetchone()
-                last_date = last_record and last_record[0]
-                last_qty = last_record and last_record[1] or 0
+            if history:
+                last_date = history.to_date
+                last_qty = history.end_qty
                 from_date = last_date + td(days=1)
             else:
-                self.env.cr.execute(
-                    """
-                    SELECT date FROM stock_move
-                    WHERE product_id = %s
-                    ORDER BY "date" LIMIT 1
-                """,
-                    (product.id,),
+                stock_move = self.env["stock.move"].search(
+                    [("product_id", "in", product.ids)],
+                    order="date ASC",
+                    limit=1,
                 )
-                fetch = self.env.cr.fetchone()
-                from_date = fetch and fetch[0].date() or to_date
+                from_date = stock_move.date and stock_move.date.date() or to_date
                 if history_range == "months":
                     from_date = date(from_date.year, from_date.month, 1)
                 elif history_range == "weeks":
@@ -290,19 +212,18 @@ class ProductProduct(models.Model):
                 last_qty = 0
             last_dates[product.id] = from_date
             last_qtys[product.id] = last_qty
-
         product_ids.sort()
-        if not last_dates:
-            return False
-        last_date = min(last_dates.values())
+        return product_ids, last_dates, last_qtys
 
-        sql = """
+    def _sql_query_history_moves(self, product_ids, last_date):
+        sql_query = SQL(
+            """
             SELECT
                 MIN(sm.id),
                 sm.product_id,
                 DATE_TRUNC('day', sm.date),
                 sm.state,
-                SUM(sm.product_qty) AS product_qty,
+                COALESCE(SUM(sm.product_uom_qty), 0) AS product_qty,
                 orig.usage,
                 dest.usage
             FROM stock_move AS sm,
@@ -323,11 +244,34 @@ class ProductProduct(models.Model):
             ORDER BY
                 sm.product_id,
                 DATE_TRUNC('day', sm.date)
-        """
-        params = (tuple(product_ids), fields.Datetime.to_string(last_date))
-        self.env.cr.execute(sql, params)
+            """,
+            tuple(product_ids),
+            fields.Datetime.to_string(last_date),
+        )
+        return sql_query
+
+    # flake8: noqa: C901
+    def _compute_history(self, history_range):
+        to_date = date.today()
+        if history_range == "months":
+            delta = rd(months=1)
+        elif history_range == "weeks":
+            delta = rd(weeks=1)
+        else:
+            delta = rd(days=1)
+        product_ids, last_dates, last_qtys = self._prepare_dates_per_product(
+            history_range,
+            to_date,
+        )
+        if not last_dates:
+            return False
+        last_date = min(last_dates.values())
+
+        sql = self._sql_query_history_moves(product_ids, last_date)
+        self.env.cr.execute(sql)
         stock_moves = self.env.cr.fetchall()
 
+        location_id = self.env["stock.location"].search([], limit=1).id
         for product_id in product_ids:
             stock_moves_product = []
 
@@ -343,7 +287,7 @@ class ProductProduct(models.Model):
             product = self.env["product.product"].browse(product_id)
             from_date = last_dates.get(product_id)
             last_qty = last_qtys.get(product_id, 0)
-            history_id = False
+            history = False
 
             while from_date + delta <= to_date:
                 stock_moves_product_dates = []
@@ -401,7 +345,7 @@ class ProductProduct(models.Model):
                 vals = {
                     "product_id": product_id,
                     "product_tmpl_id": product.product_tmpl_id.id,
-                    "location_id": self.env["stock.location"].search([])[0].id,
+                    "location_id": location_id,
                     "from_date": dt.strftime(from_date, "%Y-%m-%d"),
                     "to_date": dt.strftime(last_date, "%Y-%m-%d"),
                     "purchase_qty": purchase_qty,
@@ -414,23 +358,22 @@ class ProductProduct(models.Model):
                     "outgoing_qty": outgoing_qty,
                     "history_range": history_range,
                 }
-                history_id = self.env["product.history"].create(vals)
+                history = self.env["product.history"].create(vals)
                 from_date = last_date + td(days=1)
 
-            if history_id:
+            if history:
                 if history_range == "months":
-                    product.last_history_month = history_id.id
+                    product.last_history_month = history.id
                 elif history_range == "weeks":
-                    product.last_history_week = history_id.id
+                    product.last_history_week = history.id
                 else:
-                    product.last_history_day = history_id.id
+                    product.last_history_day = history.id
                 product._compute_average_consumption()
 
-    @api.multi
     def recompute_last_6weeks_history(self):
         for product in self:
             history_ids = self.env["product.history"].search(
-                [("history_range", "=", "weeks"), ("product_id", "=", product.id)],
+                [("history_range", "=", "weeks"), ("product_id", "in", product.ids)],
                 order="id desc",
                 limit=7,
             )
@@ -448,7 +391,6 @@ class ProductProduct(models.Model):
                     )
                     past_7th_history.write(dict(end_qty=ending_qty))
 
-    @api.multi
     def get_stock_inventory_at(self, at_date=False):
         values = {}
         if not at_date:
@@ -459,97 +401,96 @@ class ProductProduct(models.Model):
         elif isinstance(at_date, dt):
             at_date = fields.Datetime.to_string(at_date)
 
-        query = """
-            SELECT
-                product_id,
-                sum(quantity) AS quantity
-            FROM
-            (
+        query = SQL(
+            """
+                SELECT
+                    product_id,
+                    sum(quantity) AS quantity
+                FROM
                 (
-                    SELECT
-                        sum(quant.qty) AS quantity,
-                        stock_move.product_id AS product_id
-                    FROM stock_quant AS quant
-                    JOIN stock_quant_move_rel
-                        ON stock_quant_move_rel.quant_id = quant.id
-                    JOIN stock_move
-                        ON stock_move.id = stock_quant_move_rel.move_id
-                    JOIN stock_location dest_location
-                        ON stock_move.location_dest_id = dest_location.id
-                    JOIN stock_location source_location
-                        ON stock_move.location_id = source_location.id
-                    WHERE
-                        quant.qty > 0
-                        AND stock_move.state = 'done'
-                        AND dest_location.usage IN ( 'internal', 'transit' )
-                        AND (
-                            NOT (
-                                source_location.company_id IS NULL
-                                AND dest_location.company_id IS NULL
+                    (
+                        SELECT
+                            sum(quant.qty) AS quantity,
+                            stock_move.product_id AS product_id
+                        FROM stock_quant AS quant
+                        JOIN stock_quant_move_rel
+                            ON stock_quant_move_rel.quant_id = quant.id
+                        JOIN stock_move
+                            ON stock_move.id = stock_quant_move_rel.move_id
+                        JOIN stock_location dest_location
+                            ON stock_move.location_dest_id = dest_location.id
+                        JOIN stock_location source_location
+                            ON stock_move.location_id = source_location.id
+                        WHERE
+                            quant.qty > 0
+                            AND stock_move.state = 'done'
+                            AND dest_location.usage IN ( 'internal', 'transit' )
+                            AND (
+                                NOT (
+                                    source_location.company_id IS NULL
+                                    AND dest_location.company_id IS NULL
+                                )
+                                OR source_location.company_id !=
+                                    dest_location.company_id
+                                OR source_location.usage NOT IN
+                                    ( 'internal', 'transit' )
                             )
-                            OR source_location.company_id !=
-                                dest_location.company_id
-                            OR source_location.usage NOT IN
-                                ( 'internal', 'transit' )
-                        )
-                        AND stock_move.date <= %s
-                        AND stock_move.product_id = %s
-                    GROUP BY stock_move.product_id
+                            AND stock_move.date <= %s
+                            AND stock_move.product_id = %s
+                        GROUP BY stock_move.product_id
 
-                ) UNION ALL (
+                    ) UNION ALL (
 
-                    SELECT
-                        sum(-quant.qty) AS quantity,
-                        stock_move.product_id AS product_id
-                    FROM stock_quant AS quant
-                    JOIN stock_quant_move_rel
-                        ON stock_quant_move_rel.quant_id = quant.id
-                    JOIN stock_move
-                        ON stock_move.id = stock_quant_move_rel.move_id
-                    JOIN stock_location source_location
-                        ON stock_move.location_id = source_location.id
-                    JOIN stock_location dest_location
-                        ON stock_move.location_dest_id = dest_location.id
-                    WHERE
-                        quant.qty > 0
-                        AND stock_move.state = 'done'
-                        AND source_location.usage IN ( 'internal', 'transit' )
-                        AND (
-                            NOT (
-                                dest_location.company_id IS NULL
-                                AND source_location.company_id IS NULL
+                        SELECT
+                            sum(-quant.qty) AS quantity,
+                            stock_move.product_id AS product_id
+                        FROM stock_quant AS quant
+                        JOIN stock_quant_move_rel
+                            ON stock_quant_move_rel.quant_id = quant.id
+                        JOIN stock_move
+                            ON stock_move.id = stock_quant_move_rel.move_id
+                        JOIN stock_location source_location
+                            ON stock_move.location_id = source_location.id
+                        JOIN stock_location dest_location
+                            ON stock_move.location_dest_id = dest_location.id
+                        WHERE
+                            quant.qty > 0
+                            AND stock_move.state = 'done'
+                            AND source_location.usage IN ( 'internal', 'transit' )
+                            AND (
+                                NOT (
+                                    dest_location.company_id IS NULL
+                                    AND source_location.company_id IS NULL
+                                )
+                                OR dest_location.company_id !=
+                                    source_location.company_id
+                                OR dest_location.usage NOT IN
+                                    ( 'internal', 'transit' )
                             )
-                            OR dest_location.company_id !=
-                                source_location.company_id
-                            OR dest_location.usage NOT IN
-                                ( 'internal', 'transit' )
-                        )
-                        AND stock_move.date <= %s
-                        AND stock_move.product_id = %s
-                    GROUP BY stock_move.product_id
-                )
-            ) AS foo
-            GROUP BY product_id
-        """
+                            AND stock_move.date <= %s
+                            AND stock_move.product_id = %s
+                        GROUP BY stock_move.product_id
+                    )
+                ) AS foo
+                GROUP BY product_id
+            """,
+        )
         for product in self:
             product.env.cr.execute(query, (at_date, product.id, at_date, product.id))
             result = product.env.cr.fetchall()
             values[product.id] = result and result[0][1] or 0
         return values
 
-    @job
     def job_compute_history(self, history_range, product_ids):
         """Job for Computing Product History"""
         products = self.browse(product_ids)
         products._compute_history(history_range)
 
-    @job
     def job_compute_average_consumption(self, product_ids):
         """Job for Computing Average Consumption"""
         products = self.browse(product_ids)
         products._compute_average_consumption()
 
-    @job
     def job_recompute_last_6weeks_history(self, history_range, product_ids):
         """Job for Recompute the last 6 weeks Product History"""
         products = self.browse(product_ids)

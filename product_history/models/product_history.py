@@ -22,7 +22,6 @@ class ProductHistory(models.Model):
     # Columns section
     product_id = fields.Many2one(
         comodel_name="product.product",
-        string="Product",
         required=True,
         ondelete="cascade",
     )
@@ -33,9 +32,7 @@ class ProductHistory(models.Model):
         string="Template",
         store=True,
     )
-    location_id = fields.Many2one(
-        "stock.location", string="Location", required=True, ondelete="cascade"
-    )
+    location_id = fields.Many2one("stock.location", required=True, ondelete="cascade")
     from_date = fields.Date(required=True)
     to_date = fields.Date(required=True)
     purchase_qty = fields.Float("Purchases", default=0)
@@ -59,24 +56,22 @@ class ProductHistory(models.Model):
     ]
 
     # Private section
-    @api.multi
     def mark_line(self, ignored=True):
         for line in self:
             line.ignored = ignored
             line.product_id._compute_average_consumption()
             line.product_id.product_tmpl_id._compute_average_consumption()
 
-    @api.multi
     def ignore_line(self):
         self.mark_line(True)
         return True
 
-    @api.multi
     def unignore_line(self):
         self.mark_line(False)
 
-    @api.model
-    def create(self, vals):
-        if vals.get("history_range") == "weeks" and vals.get("sale_qty", 0) == 0:
-            vals["ignored"] = True
-        return super().create(vals)
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            if vals.get("history_range") == "weeks" and vals.get("sale_qty", 0) == 0:
+                vals["ignored"] = True
+        return super().create(vals_list)

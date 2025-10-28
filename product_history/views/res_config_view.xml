@@ -8,20 +8,18 @@
             ref="product_average_consumption.view_average_consumption_config_settings"
         />
         <field name="arch" type="xml">
-            <xpath
-                expr="//field[@name='default_consumption_calculation_method']/.."
-                position="after"
-            >
-                <div
-                    class="o_setting_right_pane"
-                    attrs="{'invisible': [('default_consumption_calculation_method','!=','history')]}"
-                >
-                    <div class="row">
-                        <label for="default_number_of_periods" class="col-8" />
-                        <field name="default_number_of_periods" class="col-2" />
-                    </div>
+            <field name="default_consumption_calculation_method" position="after">
+                <div invisible="default_consumption_calculation_method != 'history'">
+                    <label for="default_number_of_periods" />
+                    <span class="ml16">
+                        <field name="default_number_of_periods" />
+                    </span>
+                    <label for="default_history_range" class="mt8" />
+                    <span class="ml16">
+                        <field name="default_history_range" />
+                    </span>
                 </div>
-            </xpath>
+            </field>
         </field>
     </record>
 </odoo>

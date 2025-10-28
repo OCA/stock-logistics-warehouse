@@ -56,10 +56,10 @@ Authors
 Contributors
 ~~~~~~~~~~~~
 
-* Druidoo <https://www.druidoo.io>
-* Julien WESTE
-* Sylvain LE GAL (https://twitter.com/legalsylvain)
-
+* Akretion
+* Druidoo
+* [Trobz](https://www.trobz.com)
+  * Phan Hong Phuc \<<phucph@trobz.com>\>
 
 Maintainers
 ~~~~~~~~~~~

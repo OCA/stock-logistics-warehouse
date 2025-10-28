@@ -7,9 +7,9 @@
 
 {
     "name": "Product - History",
-    "version": "12.0.2.0.0",
+    "version": "18.0.1.0.0",
     "category": "Product",
-    "author": "Akretion," "Druidoo",
+    "author": "Akretion," "Druidoo, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "license": "AGPL-3",
     "depends": [
@@ -18,6 +18,11 @@
         "product_average_consumption",
         "queue_job",
     ],
+    "assets": {
+        "web.assets_backend": [
+            "product_history/static/src/scss/product_history.scss",
+        ],
+    },
     "data": [
         "security/product_history_security.xml",
         "security/ir.model.access.csv",

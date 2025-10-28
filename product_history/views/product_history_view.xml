@@ -14,7 +14,12 @@
     <record id="view_product_history_tree" model="ir.ui.view">
         <field name="model">product.history</field>
         <field name="arch" type="xml">
-            <tree edit="false" create="false" delete="false">
+            <list
+                edit="false"
+                create="false"
+                delete="false"
+                class="o_product_history_list"
+            >
                 <field name="history_range" />
                 <field name="product_id" />
                 <field name="from_date" />
@@ -27,24 +32,23 @@
                 <field name="incoming_qty" />
                 <field name="outgoing_qty" />
                 <field name="virtual_qty" />
-                <field name="ignored" invisible="1" />
                 <button
                     name="ignore_line"
-                    attrs="{'invisible': [('ignored','=',True)]}"
+                    invisible="ignored"
                     type="object"
                     class="text-success"
                     icon="fa-check-circle"
-                    string="This history line is active. Click this button to ignore it."
+                    title="This history line is active. Click this button to ignore it."
                 />
                 <button
                     name="unignore_line"
-                    attrs="{'invisible': [('ignored','=',False)]}"
+                    invisible="not ignored"
                     type="object"
                     class="text-danger"
                     icon="fa-times-circle"
-                    string="This history line is active. Click this button to reactivate it."
+                    title="This history line is inactive. Click this button to reactivate it."
                 />
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -62,8 +66,7 @@
         <field name="name">Product History</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">product.history</field>
-        <field name="view_type">form</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
         <field name="context">{}</field>
     </record>
 

@@ -9,7 +9,7 @@
         <field name="priority">20</field>
         <field name="arch" type="xml">
             <page name="sales" position="after">
-                <page string="History" name="history" groups="base.group_no_one">
+                <page string="History" name="history" groups="stock.group_stock_user">
                     <group name="options">
                         <field name="history_range" />
                     </group>
@@ -39,7 +39,7 @@
             <group name="ConsumptionMove" position="after">
                 <group
                     name="ConsumptionHistory"
-                    attrs="{'invisible': [('consumption_calculation_method','!=','history')]}"
+                    invisible="consumption_calculation_method != 'history'"
                 >
                     <field name="number_of_periods" />
                     <field name="total_consumption" />

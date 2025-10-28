@@ -41,7 +41,7 @@ class ProductTemplate(models.Model):
         _get_consumption_calculation_method, default="moves"
     )
     history_range = fields.Selection(HISTORY_RANGE, default="weeks")
-    product_history_ids = fields.Many2many(
+    product_history_ids = fields.One2many(
         comodel_name="product.history",
         inverse_name="product_tmpl_id",
         string="History",
@@ -55,55 +55,49 @@ class ProductTemplate(models.Model):
 
     # Private section
     @api.depends("history_range")
-    @api.multi
     def _compute_product_history_ids(self):
         for template in self:
-            template.product_history_ids.unlink()
-            ph_ids = self.env["product.history"].search(
+            histories = self.env["product.history"].search(
                 [
-                    ("product_tmpl_id", "=", template.id),
+                    ("product_tmpl_id", "in", template.ids),
                     ("history_range", "=", template.history_range),
                 ]
             )
-            ph_ids = [ph.id for ph in ph_ids]
-            template.product_history_ids = [(6, 0, ph_ids)]
+            template.product_history_ids = histories
 
     @api.depends(
-        "consumption_calculation_method",
-        "number_of_periods",
-        "calculation_range",
-        "product_history_ids",
         "product_variant_ids",
+        "product_variant_ids.nb_days",
+        "product_variant_ids.total_consumption",
+        "consumption_calculation_method",
+        "calculation_range",
     )
-    @api.multi
     def _compute_average_consumption(self):
+        res = super()._compute_average_consumption()
         for template in self:
             if template.consumption_calculation_method == "history":
                 template._average_consumption_history()
-        super()._compute_average_consumption()
+        return res
 
-    @api.multi
     def _average_consumption_history(self):
-        for template in self:
-            if template.product_variant_ids:
-                for product in template.product_variant_ids:
-                    product._average_consumption_history()
-                number_of_periods = max(
-                    product.number_of_periods_real
-                    for product in template.product_variant_ids
+        self.ensure_one()
+        average_consumption = 0.0
+        total_consumption = 0.0
+        if self.product_variant_ids:
+            number_of_periods = max(
+                product.number_of_periods_real for product in self.product_variant_ids
+            )
+            total_consumption = sum(
+                product.total_consumption for product in self.product_variant_ids
+            )
+            average_consumption = (
+                number_of_periods
+                and (
+                    total_consumption
+                    / number_of_periods
+                    / DAYS_IN_RANGE[self.history_range]
                 )
-                total_consumption = sum(
-                    product.total_consumption
-                    for product in template.product_variant_ids
-                )
-                template.number_of_periods = number_of_periods
-                template.total_consumption = total_consumption
-                template.average_consumption = (
-                    number_of_periods
-                    and (
-                        total_consumption
-                        / number_of_periods
-                        / DAYS_IN_RANGE[product.history_range]
-                    )
-                    or False
-                )
+                or 0.0
+            )
+            self.average_consumption = average_consumption
+            self.total_consumption = total_consumption
