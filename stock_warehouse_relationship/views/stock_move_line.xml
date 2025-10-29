@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-
     <record id="stock_move_line_view_search" model="ir.ui.view">
         <field name="model">stock.move.line</field>
         <field name="inherit_id" ref="stock.stock_move_line_view_search" />
@@ -10,5 +9,4 @@
             </field>
         </field>
     </record>
-
 </odoo>
