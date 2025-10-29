@@ -1,6 +1,6 @@
 from odoo.tests.common import users
 
-from odoo.addons.stock_multi_warehouse_security.tests.common import TestStockCommon
+from odoo.addons.stock_warehouse_security.tests.common import TestStockCommon
 
 
 class TestStockWarehouseAccess(TestStockCommon):

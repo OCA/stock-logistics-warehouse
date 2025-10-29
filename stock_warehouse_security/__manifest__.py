@@ -3,8 +3,8 @@
 # @author Pierre Verkest <pierreverkest84@gmail.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 {
-    "name": "Stock Multi-Warehouse Security",
-    "version": "16.0.1.0.0",
+    "name": "Stock Warehouse Security",
+    "version": "18.0.1.0.0",
     "category": "Warehouse Management",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "author": "Akretion, Pierre Verkest, Odoo Community Association (OCA)",
@@ -13,7 +13,7 @@
     "installable": True,
     "summary": "Restrict user access in multi-warehouse environment",
     "depends": [
-        "stock_warehouse_relationship",
+        "stock",
     ],
     "data": [
         "security/stock_security.xml",
