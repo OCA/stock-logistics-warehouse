@@ -2,7 +2,7 @@ With this module you are able to set a restricted list of allowed
 warehouses that user can see and operate with.
 
 This module is inspired from the experiences of
-[stock_multi_warehouse_security](https://github.com/akretion/stock-logistics-warehouse/tree/12-muli-wh-security/stock_multi_warehouse_security/)
+[stock_warehouse_security](https://github.com/akretion/stock-logistics-warehouse/tree/12-muli-wh-security/stock_warehouse_security/)
 on version 12.0 but has some key differences on user experience:
 
 - In this module there is no new groups, user is able to see allowed

@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* stock_multi_warehouse_security
+# 	* stock_warehouse_security
 #
 msgid ""
 msgstr ""
@@ -14,32 +14,32 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
-#. module: stock_multi_warehouse_security
-#: model:ir.model.fields,field_description:stock_multi_warehouse_security.field_res_users__warehouse_ids
+#. module: stock_warehouse_security
+#: model:ir.model.fields,field_description:stock_warehouse_security.field_res_users__warehouse_ids
 msgid "Allowed Warehouses"
 msgstr "Entrepôts autorisés"
 
-#. module: stock_multi_warehouse_security
-#: model:ir.model.fields,field_description:stock_multi_warehouse_security.field_res_users__display_name
+#. module: stock_warehouse_security
+#: model:ir.model.fields,field_description:stock_warehouse_security.field_res_users__display_name
 msgid "Display Name"
 msgstr "Nom affiché"
 
-#. module: stock_multi_warehouse_security
-#: model:ir.model.fields,field_description:stock_multi_warehouse_security.field_res_users__id
+#. module: stock_warehouse_security
+#: model:ir.model.fields,field_description:stock_warehouse_security.field_res_users__id
 msgid "ID"
 msgstr "ID"
 
-#. module: stock_multi_warehouse_security
-#: model:ir.model.fields,field_description:stock_multi_warehouse_security.field_res_users____last_update
+#. module: stock_warehouse_security
+#: model:ir.model.fields,field_description:stock_warehouse_security.field_res_users____last_update
 msgid "Last Modified on"
 msgstr "Dernière modification le"
 
-#. module: stock_multi_warehouse_security
-#: model_terms:ir.ui.view,arch_db:stock_multi_warehouse_security.view_users_form
+#. module: stock_warehouse_security
+#: model_terms:ir.ui.view,arch_db:stock_warehouse_security.view_users_form
 msgid "Multi Warehouse"
 msgstr "Multi entrepôt"
 
-#. module: stock_multi_warehouse_security
-#: model:ir.model,name:stock_multi_warehouse_security.model_res_users
+#. module: stock_warehouse_security
+#: model:ir.model,name:stock_warehouse_security.model_res_users
 msgid "Users"
 msgstr "Utilisateurs"
