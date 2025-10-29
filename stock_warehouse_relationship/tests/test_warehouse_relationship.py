@@ -34,10 +34,7 @@ class TestWarehouseRelationship(TransactionCase):
         cls.customers_location = cls.env.ref("stock.stock_location_customers")
 
         cls.product = cls.env["product.product"].create(
-            {
-                "name": "Product for test",
-                "type": "product",
-            }
+            {"name": "Product for test", "type": "consu", "is_storable": True}
         )
         cls.stock_picking_wh_1 = cls._create_picking(
             cls.warehouse_1, location_src=cls.suppliers_location
@@ -124,7 +121,7 @@ class TestWarehouseRelationship(TransactionCase):
     def test_stock_quant_warehouse_id(self):
         pickings = self.stock_picking_wh_1 | self.stock_picking_wh_2
         pickings.action_assign()
-        pickings.move_ids.write({"quantity_done": 5})
+        pickings.move_ids.write({"quantity": 5})
         pickings.button_validate()
 
         self.assertEqual(
@@ -149,7 +146,7 @@ class TestWarehouseRelationship(TransactionCase):
                     "result_package_id": self.env["stock.quant.package"]
                     .create({"name": f"Dest Pack {picking.warehouse_id.name}"})
                     .id,
-                    "qty_done": 5,
+                    "quantity": 5,
                 }
             )
         pickings.button_validate()

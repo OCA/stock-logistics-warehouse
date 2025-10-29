@@ -41,7 +41,6 @@ Following models are linked by this module:
 - *stock.picking*
 - *stock.move*
 - *stock.move.line*
-- *stock.quant*
 - *stock.quant.package*
 
 This module is inspired from the experiences of
@@ -85,6 +84,10 @@ Contributors
      - Pierre Verkest <pierreverkest84@gmail.com>
 
 - Florian da Costa <florian.dacosta@akretion.com>
+
+- `Tecnativa <https://www.tecnativa.com>`__:
+
+  - Christian Ramos
 
 Maintainers
 -----------

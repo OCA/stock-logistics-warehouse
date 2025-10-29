@@ -11,7 +11,6 @@ Following models are linked by this module:
 - *stock.picking*
 - *stock.move*
 - *stock.move.line*
-- *stock.quant*
 - *stock.quant.package*
 
 This module is inspired from the experiences of
