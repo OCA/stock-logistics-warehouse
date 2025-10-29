@@ -118,7 +118,8 @@ class TestStockCommon(TransactionCase):
         cls.product = cls.env["product.product"].create(
             {
                 "name": "Product for test",
-                "type": "product",
+                "type": "consu",
+                "is_storable": True,
             }
         )
         cls.stock_picking_wh_1 = cls._create_picking(
@@ -133,7 +134,7 @@ class TestStockCommon(TransactionCase):
         for wh in cls.warehouses:
             cls.env["stock.warehouse.orderpoint"].with_company(wh.company_id).create(
                 {
-                    "name": "RR for %s" % wh.name,
+                    "name": f"RR for {wh.name}",
                     "warehouse_id": wh.id,
                     "location_id": wh.lot_stock_id.id,
                     "product_id": cls.product.id,
@@ -173,7 +174,6 @@ class TestStockCommon(TransactionCase):
                     "picking_type_id": picking_type.id,
                     "location_id": location_src.id,
                     "location_dest_id": location_dest.id,
-                    "warehouse_id": warehouse.id,
                 }
             )
         )
