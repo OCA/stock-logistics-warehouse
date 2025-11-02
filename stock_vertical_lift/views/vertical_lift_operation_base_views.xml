@@ -116,6 +116,7 @@
                 <attribute name="invisible">not current_move_line_id</attribute>
             </xpath>
             <xpath expr="//div[hasclass('o_shuttle_data')]" position="inside">
+                <field name="current_move_line_id" invisible="True" force_save="1" />
                 <!-- on the left of the screen -->
                 <div class="o_shuttle_data_content o_shuttle_move">
                     <div>
