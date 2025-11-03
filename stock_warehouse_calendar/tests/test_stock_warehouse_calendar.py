@@ -15,7 +15,7 @@ class TestStockWarehouseCalendar(BaseCommon):
         cls.wh_obj = cls.env["stock.warehouse"]
         cls.move_obj = cls.env["stock.move"]
         cls.picking_obj = cls.env["stock.picking"]
-        cls.pg_obj = cls.env["procurement.group"]
+        cls.rule_obj = cls.env["stock.rule"]
 
         cls.company = cls.env.ref("base.main_company")
         cls.warehouse = cls.env.ref("stock.warehouse0")
@@ -50,13 +50,12 @@ class TestStockWarehouseCalendar(BaseCommon):
             "location_src_id": cls.warehouse_2.lot_stock_id.id,
             "action": "pull",
             "warehouse_id": cls.warehouse.id,
-            "propagate_warehouse_id": cls.warehouse_2.id,
             "picking_type_id": cls.env.ref("stock.picking_type_internal").id,
             "name": "WH-T->WH",
             "route_id": cls.transfer_route.id,
             "delay": 1,
         }
-        cls.transfer_rule = cls.env["stock.rule"].create(rule_vals)
+        cls.transfer_rule = cls.rule_obj.create(rule_vals)
 
         # Create push route and rule with calendar
         cls.push_route = cls.env["stock.route"].create(
@@ -65,7 +64,7 @@ class TestStockWarehouseCalendar(BaseCommon):
                 "warehouse_selectable": True,
             }
         )
-        cls.push_rule = cls.env["stock.rule"].create(
+        cls.push_rule = cls.rule_obj.create(
             {
                 "name": "Push with calendar",
                 "action": "push",
@@ -79,7 +78,7 @@ class TestStockWarehouseCalendar(BaseCommon):
         )
 
         # Create push rule without calendar
-        cls.push_rule_no_calendar = cls.env["stock.rule"].create(
+        cls.push_rule_no_calendar = cls.rule_obj.create(
             {
                 "name": "Push without calendar",
                 "action": "push",
@@ -103,9 +102,9 @@ class TestStockWarehouseCalendar(BaseCommon):
             "company_id": self.company,
             "rule_id": self.transfer_rule,
         }
-        self.pg_obj.run(
+        self.rule_obj.run(
             [
-                self.pg_obj.Procurement(
+                self.rule_obj.Procurement(
                     self.product,
                     100,
                     self.product.uom_id,
@@ -117,9 +116,7 @@ class TestStockWarehouseCalendar(BaseCommon):
                 )
             ]
         )
-        move = self.env["stock.move"].search(
-            [("product_id", "=", self.product.id)], limit=1
-        )
+        move = self.move_obj.search([("product_id", "=", self.product.id)], limit=1)
         date = fields.Date.to_date(move.date)
         # Friday 4th Jan 2097
         friday = fields.Date.to_date("2097-01-04 09:00:00")
@@ -135,9 +132,9 @@ class TestStockWarehouseCalendar(BaseCommon):
             "company_id": self.company,
             "rule_id": self.transfer_rule,
         }
-        self.pg_obj.run(
+        self.rule_obj.run(
             [
-                self.pg_obj.Procurement(
+                self.rule_obj.Procurement(
                     self.product,
                     100,
                     self.product.uom_id,
@@ -149,9 +146,7 @@ class TestStockWarehouseCalendar(BaseCommon):
                 )
             ]
         )
-        move = self.env["stock.move"].search(
-            [("product_id", "=", self.product.id)], limit=1
-        )
+        move = self.move_obj.search([("product_id", "=", self.product.id)], limit=1)
         date = fields.Date.to_date(move.date)
         #  Expected date is Friday, 4th Jan 2097,
         #  due to the 1-day lead time and work calendar
@@ -224,7 +219,6 @@ class TestStockWarehouseCalendar(BaseCommon):
                         0,
                         0,
                         {
-                            "name": "Test push move",
                             "product_id": self.product.id,
                             "product_uom": self.product.uom_id.id,
                             "product_uom_qty": 10,
@@ -265,9 +259,8 @@ class TestStockWarehouseCalendar(BaseCommon):
     def test_07_push_rule_without_calendar(self):
         """Test push rule with warehouse that has no calendar."""
         # Create a move on Friday
-        move = self.env["stock.move"].create(
+        move = self.move_obj.create(
             {
-                "name": "Test push move no calendar",
                 "product_id": self.product.id,
                 "product_uom": self.product.uom_id.id,
                 "product_uom_qty": 10,
@@ -295,9 +288,8 @@ class TestStockWarehouseCalendar(BaseCommon):
 
         # Create a move
         move_date = "2097-01-11 09:00:00"  # Friday
-        move = self.env["stock.move"].create(
+        move = self.move_obj.create(
             {
-                "name": "Test push move zero delay",
                 "product_id": self.product.id,
                 "product_uom": self.product.uom_id.id,
                 "product_uom_qty": 10,
