@@ -29,7 +29,7 @@ class StockRule(models.Model):
             company_id,
             values,
         )
-        warehouse = self.propagate_warehouse_id or self.warehouse_id
+        warehouse = self.warehouse_id
         if warehouse.calendar_id and self.delay:
             date = warehouse.wh_plan_days(values["date_planned"], -1 * self.delay)
             res["date"] = date
