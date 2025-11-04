@@ -77,7 +77,9 @@ def extract_and_action_done(move):
             if moves_todo.state != "assigned":
                 moves_todo._action_assign()
             assert new_picking.state == "assigned"
-        new_picking.button_validate()
+        new_picking.with_context(
+            skip_backorder=True, skip_expired=True, skip_sms=True
+        ).button_validate()
     return True
 
 
@@ -486,6 +488,7 @@ class VerticalLiftOperationTransfer(models.AbstractModel):
 
     def process_current(self):
         line = self.current_move_line_id
+        line.ensure_one()
         if line.state in ("assigned", "partially_available"):
             # if the move has other move lines, it is split to have only this move line
             split_other_move_lines(line.move_id, line)
