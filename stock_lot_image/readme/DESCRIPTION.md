@@ -1,0 +1,1 @@
+This module adds the ability to define images in a lot (similar to what happens with website_sale in products).
