@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_production_lot_form" model="ir.ui.view">
+        <field name="model">stock.lot</field>
+        <field name="inherit_id" ref="stock.view_production_lot_form" />
+        <field name="arch" type="xml">
+            <page name="description" position="after">
+                <page name="lot_images" string="Images">
+                    <field
+                        name="image_ids"
+                        class="o_stock_lot_image_list"
+                        context="{'default_name': name}"
+                        mode="kanban"
+                        add-label="Add Media"
+                        nolabel="1"
+                        widget="x2_many_media_viewer"
+                        options="{'convert_to_webp': True}"
+                    />
+                </page>
+            </page>
+        </field>
+    </record>
+</odoo>
