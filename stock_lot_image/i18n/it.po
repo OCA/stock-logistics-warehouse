@@ -1,0 +1,171 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_lot_image
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#. module: stock_lot_image
+#: model_terms:ir.ui.view,arch_db:stock_lot_image.stock_lot_image_view_kanban
+msgid "#{record.name.value}"
+msgstr ""
+
+#. module: stock_lot_image
+#: model_terms:ir.ui.view,arch_db:stock_lot_image.stock_lot_image_view_form
+msgid "<span>Video Preview</span>"
+msgstr ""
+
+#. module: stock_lot_image
+#: model_terms:ir.ui.view,arch_db:stock_lot_image.stock_lot_image_view_kanban
+msgid "Acceptable file size"
+msgstr ""
+
+#. module: stock_lot_image
+#: model_terms:ir.ui.view,arch_db:stock_lot_image.view_production_lot_form
+msgid "Add Media"
+msgstr ""
+
+#. module: stock_lot_image
+#: model:ir.model.fields,field_description:stock_lot_image.field_stock_lot_image__can_image_1024_be_zoomed
+msgid "Can Image 1024 be zoomed"
+msgstr ""
+
+#. module: stock_lot_image
+#: model:ir.model.fields,field_description:stock_lot_image.field_stock_lot_image__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: stock_lot_image
+#: model:ir.model.fields,field_description:stock_lot_image.field_stock_lot_image__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: stock_lot_image
+#: model:ir.model.fields,field_description:stock_lot_image.field_stock_lot_image__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: stock_lot_image
+#: model:ir.model.fields,field_description:stock_lot_image.field_stock_lot_image__embed_code
+msgid "Embed Code"
+msgstr ""
+
+#. module: stock_lot_image
+#: model_terms:ir.ui.view,arch_db:stock_lot_image.stock_lot_image_view_kanban
+msgid "Huge file size. The image should be optimized/reduced."
+msgstr ""
+
+#. module: stock_lot_image
+#: model:ir.model.fields,field_description:stock_lot_image.field_stock_lot_image__id
+msgid "ID"
+msgstr ""
+
+#. module: stock_lot_image
+#: model:ir.model.fields,field_description:stock_lot_image.field_stock_lot_image__image_1920
+msgid "Image"
+msgstr ""
+
+#. module: stock_lot_image
+#: model:ir.model.fields,field_description:stock_lot_image.field_stock_lot_image__image_1024
+msgid "Image 1024"
+msgstr ""
+
+#. module: stock_lot_image
+#: model:ir.model.fields,field_description:stock_lot_image.field_stock_lot_image__image_128
+msgid "Image 128"
+msgstr ""
+
+#. module: stock_lot_image
+#: model:ir.model.fields,field_description:stock_lot_image.field_stock_lot_image__image_256
+msgid "Image 256"
+msgstr ""
+
+#. module: stock_lot_image
+#: model:ir.model.fields,field_description:stock_lot_image.field_stock_lot_image__image_512
+msgid "Image 512"
+msgstr ""
+
+#. module: stock_lot_image
+#: model_terms:ir.ui.view,arch_db:stock_lot_image.stock_lot_image_view_form
+msgid "Image Name"
+msgstr ""
+
+#. module: stock_lot_image
+#: model:ir.model.fields,field_description:stock_lot_image.field_stock_lot__image_ids
+#: model_terms:ir.ui.view,arch_db:stock_lot_image.view_production_lot_form
+msgid "Images"
+msgstr ""
+
+#. module: stock_lot_image
+#: model:ir.model.fields,field_description:stock_lot_image.field_stock_lot_image__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: stock_lot_image
+#: model:ir.model.fields,field_description:stock_lot_image.field_stock_lot_image__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: stock_lot_image
+#: model:ir.model.fields,field_description:stock_lot_image.field_stock_lot_image__lot_id
+msgid "Lot"
+msgstr ""
+
+#. module: stock_lot_image
+#: model:ir.model,name:stock_lot_image.model_stock_lot
+msgid "Lot/Serial"
+msgstr ""
+
+#. module: stock_lot_image
+#: model:ir.model.fields,field_description:stock_lot_image.field_stock_lot_image__name
+msgid "Name"
+msgstr ""
+
+#. module: stock_lot_image
+#: model_terms:ir.ui.view,arch_db:stock_lot_image.stock_lot_image_view_kanban
+msgid ""
+"Optimization required! Reduce the image size or increase your compression "
+"settings."
+msgstr ""
+
+#. module: stock_lot_image
+#: model_terms:ir.ui.view,arch_db:stock_lot_image.stock_lot_image_view_form
+msgid "Please enter a valid Video URL."
+msgstr ""
+
+#. module: stock_lot_image
+#. odoo-python
+#: code:addons/stock_lot_image/models/stock_lot_image.py:0
+msgid ""
+"Provided video URL for '%s' is not valid. Please enter a valid video URL."
+msgstr ""
+
+#. module: stock_lot_image
+#: model:ir.model.fields,field_description:stock_lot_image.field_stock_lot_image__sequence
+msgid "Sequence"
+msgstr ""
+
+#. module: stock_lot_image
+#: model:ir.model,name:stock_lot_image.model_stock_lot_image
+msgid "Stock Lot Image"
+msgstr ""
+
+#. module: stock_lot_image
+#: model:ir.model.fields,help:stock_lot_image.field_stock_lot_image__video_url
+msgid "URL of a video for showcasing your lot."
+msgstr ""
+
+#. module: stock_lot_image
+#: model:ir.model.fields,field_description:stock_lot_image.field_stock_lot_image__video_url
+#: model_terms:ir.ui.view,arch_db:stock_lot_image.stock_lot_image_view_form
+msgid "Video URL"
+msgstr ""
