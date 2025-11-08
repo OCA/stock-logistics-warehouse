@@ -1,0 +1,67 @@
+<odoo>
+    <!-- FORM -->
+    <record id="view_stock_location_form_macrolot" model="ir.ui.view">
+        <field name="name">stock.location.form.macrolot</field>
+        <field name="model">stock.location</field>
+        <field name="inherit_id" ref="stock.view_location_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="before">
+                <header>
+                    <button
+                        name="validate_stage"
+                        string="Validate"
+                        type="object"
+                        class="oe_highlight"
+                        icon="fa-check"
+                        invisible="not is_macrolot or last_stage_validated"
+                    />
+                    <field
+                        name="stage_id"
+                        widget="statusbar"
+                        options="{'clickable': [('last_stage_validated', '=', True)]}"
+                        invisible="not is_macrolot"
+                    />
+                </header>
+            </xpath>
+            <xpath expr="//field[@name='is_silo']" position="after">
+                <field name="is_macrolot" />
+                <field name="actual_macrolot_id" invisible="not is_macrolot" />
+                <field name="macrolot_product_id" invisible="not is_macrolot" />
+                <field name="last_stage_validated" invisible="1" />
+            </xpath>
+            <xpath expr="//group[@groups='stock.group_adv_location']" position="after">
+                <notebook>
+                    <page string="Location History" invisible="not is_macrolot">
+                        <field
+                            name="location_history_ids"
+                            context="{'default_location_id': id}"
+                            mode="list"
+                            readonly="1"
+                        >
+                            <list>
+                                <field name="macrolot_id" />
+                                <field name="registry_type" />
+                                <field name="before_stage_id" />
+                                <field name="after_stage_id" />
+                                <field name="user_id" />
+                                <field name="registry_date" />
+                            </list>
+                        </field>
+                    </page>
+                </notebook>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- LIST -->
+    <record id="view_stock_location_list_macrolot" model="ir.ui.view">
+        <field name="name">stock.location.list.macrolot</field>
+        <field name="model">stock.location</field>
+        <field name="inherit_id" ref="stock.view_location_tree2" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='complete_name']" position="after">
+                <field name="is_macrolot" />
+            </xpath>
+        </field>
+    </record>
+</odoo>
