@@ -107,12 +107,15 @@ class StockRule(models.Model):
                 # Search all confirmed stock_moves of mts_procurement and assign them
                 # to adjust the product's free qty
                 group_id = mts_procurement.values.get("group_id")
+                # TODO: Check if this is necessary as moves are auto assigned
                 if group_id:
-                    domain = expression.AND([domain, [("group_id", "=", group_id.id)]])
-                moves_to_assign = self.env["stock.move"].search(
-                    domain, order="priority desc, date asc"
-                )
-                moves_to_assign._action_assign()
+                    group_domain = expression.AND(
+                        [domain, [("group_id", "=", group_id.id)]]
+                    )
+                    moves_to_assign = self.env["stock.move"].search(
+                        group_domain, order="priority desc, date asc"
+                    )
+                    moves_to_assign._action_assign()
 
                 mto_procurement = procurement._replace(product_qty=needed_qty)
                 rule._run_mto_action(mto_procurement)
