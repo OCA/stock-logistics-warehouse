@@ -20,7 +20,7 @@ class StockLocationStage(models.Model):
     )
     is_default = fields.Boolean("Is a default stage", help="Used a default stage")
     next_ids = fields.Many2many(
-        "location.stage",
+        "stock.location.stage",
         "location_stage_rel",
         "stage_id",
         "allowed_stage_id",

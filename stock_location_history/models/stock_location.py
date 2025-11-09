@@ -11,6 +11,8 @@ class StockLocation(models.Model):
         help="If enabled, the location stages will be tracked.",
     )
     stage_id = fields.Many2one("stock.location.stage", string="Stage")
+    lot_id = fields.Many2one("stock.lot")
+    product_id = fields.Many2one(related="lot_id.product_id", store=True)
     last_stage_id = fields.Many2one("stock.location.stage", string="Last stage")
     location_history_ids = fields.One2many(
         "stock.location.history", "location_id", string="Location History"
@@ -27,12 +29,12 @@ class StockLocation(models.Model):
         ):
             raise ValidationError(_("Stage change not allowed for your user"))
         if (
-            self.past_stage_id
-            and self.past_stage_id.validation
+            self.last_stage_id
+            and self.last_stage_id.validation
             and not self.last_stage_validated
         ):
             raise ValidationError(_("Validation required"))
-        if self.stage_id != self.past_stage_id and self.past_stage_id:
+        if self.stage_id != self.last_stage_id and self.last_stage_id:
             if not self.validate_stage_route():
                 raise ValidationError(_("Invalid stage change"))
             else:
@@ -54,16 +56,16 @@ class StockLocation(models.Model):
                     and self.stage_id
                 ):
                     raise ValidationError(_("Product required"))
-                elif self.past_stage_id.is_first and self.macrolot_product_id:
+                elif self.last_stage_id.is_first and self.macrolot_product_id:
                     self.create_new_macrolot()
                     self.create_location_history("prog")
                 elif self.past_stage_id.is_pause:
                     self.create_location_history("reg")
                 else:
                     self.create_location_history("prog")
-        elif not self.past_stage_id and self.stage_id:
+        elif not self.last_stage_id and self.stage_id:
             self.create_location_history("free")
-        self.past_stage_id = self.stage_id
+        self.last_stage_id = self.stage_id
         self.last_stage_validated = not self.stage_id.validation
 
     @api.constrains("location_history_ids")
@@ -86,21 +88,19 @@ class StockLocation(models.Model):
     def create_location_history(self, registry_type):
         history_vals = {
             "location_id": self.id,
-            "previous_stage_id": self.past_stage_id.id,
+            "lot_id": self.lot_id.id,
+            "previous_stage_id": self.last_stage_id.id,
             "next_stage_id": self.stage_id.id,
             "registry_type": registry_type,
             "user_id": self.env.uid,
         }
-        if self.actual_macrolot_id:
-            history_vals["macrolot_id"] = self.actual_macrolot_id.id
-
         self.env["stock.location.history"].create(history_vals)
 
     def validate_stage(self):
         if not any(
             g in self.env.user.groups_id for g in self.stage_id.validation_group_ids
         ):
-            raise ValidationError(_("Stage change not allowed for your user"))
+            raise ValidationError(_("You are not allowed to change the stage"))
         else:
             self.create_location_history("val")
             self.last_stage_validated = True

@@ -1,7 +1,45 @@
 <odoo>
+    <record id="view_stock_location_stage_list" model="ir.ui.view">
+        <field name="name">stock.location.stage.list</field>
+        <field name="model">stock.location.stage</field>
+        <field name="arch" type="xml">
+            <list string="Stages" create="true" delete="true">
+                <field name="name" />
+                <field name="validation" />
+                <field name="is_closed" />
+                <field name="is_default" />
+            </list>
+        </field>
+    </record>
+
+    <record id="view_stock_location_stage_form" model="ir.ui.view">
+        <field name="name">stock.location.stage.form</field>
+        <field name="model">stock.location.stage</field>
+        <field name="arch" type="xml">
+            <form string="Stages">
+                <sheet>
+                    <group>
+                        <field name="name" />
+                        <field name="validation" />
+                        <field name="sequence" />
+                        <field name="active" />
+                        <field name="is_closed" />
+                        <field name="is_default" />
+                        <field name="is_use" />
+                    </group>
+                    <group string="Permissions">
+                        <field name="change_group_ids" widget="many2many_tags" />
+                        <field name="validation_group_ids" widget="many2many_tags" />
+                        <field name="next_ids" widget="many2many_tags" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
     <record id="action_stock_location_stage" model="ir.actions.act_window">
         <field name="name">Location Stages</field>
-        <field name="res_model">location.stage</field>
+        <field name="res_model">stock.location.stage</field>
         <field name="view_mode">list,form</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
@@ -11,59 +49,12 @@
         </field>
     </record>
 
-    <record id="view_stock_location_stages" model="ir.ui.view">
-        <field name="name">stock.location.stages</field>
-        <field name="model">location.stage</field>
-        <field name="arch" type="xml">
-            <list string="Etapas" create="true" delete="true">
-                <field name="name" />
-                <field name="validation" />
-                <field name="create_date" />
-                <field name="create_uid" />
-                <field name="write_date" />
-                <field name="write_uid" />
-                <field name="is_final" />
-                <field name="is_first" />
-                <field name="is_pause" />
-            </list>
-        </field>
-    </record>
-
-    <record id="view_stock_location_stages_form" model="ir.ui.view">
-        <field name="name">stock.location.stages.form</field>
-        <field name="model">location.stage</field>
-        <field name="arch" type="xml">
-            <form string="Stages">
-                <sheet>
-                    <group>
-                        <field name="name" />
-                        <field name="validation" />
-                        <field name="sequence" />
-                        <field name="active" />
-                        <field name="is_final" />
-                        <field name="is_first" />
-                        <field name="is_pause" />
-                        <field name="is_use" />
-                    </group>
-                    <group string="Permissions">
-                        <field name="change_group_ids" widget="many2many_tags" />
-                        <field name="validation_group_ids" widget="many2many_tags" />
-                        <field
-                            name="allowed_destination_location_ids"
-                            widget="many2many_tags"
-                        />
-                    </group>
-                </sheet>
-            </form>
-        </field>
-    </record>
-
     <!--Menú-->
     <menuitem
         id="menu_location_stages"
         name="Location Stages"
         parent="stock.menu_stock_config_settings"
-        action="gaqsa_stock.action_stock_location_stage"
+        action="stock_location_history.action_stock_location_stage"
         sequence="30"
     />
 </odoo>
