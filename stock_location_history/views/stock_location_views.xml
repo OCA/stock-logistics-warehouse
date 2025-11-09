@@ -1,10 +1,19 @@
 <odoo>
     <!-- FORM -->
-    <record id="view_stock_location_form_macrolot" model="ir.ui.view">
-        <field name="name">stock.location.form.macrolot</field>
+    <record id="view_stock_location_form" model="ir.ui.view">
+        <field name="name">stock.location.form</field>
         <field name="model">stock.location</field>
         <field name="inherit_id" ref="stock.view_location_form" />
         <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button
+                    name="open_location_history"
+                    string="History"
+                    type="object"
+                    class="oe_stat_button"
+                    icon="fa-history"
+                />
+            </xpath>
             <xpath expr="//sheet" position="before">
                 <header>
                     <button
@@ -33,8 +42,8 @@
     </record>
 
     <!-- LIST -->
-    <record id="view_stock_location_history_list" model="ir.ui.view">
-        <field name="name">stock.location.history.list</field>
+    <record id="view_stock_location_list" model="ir.ui.view">
+        <field name="name">stock.location.list</field>
         <field name="model">stock.location</field>
         <field name="inherit_id" ref="stock.view_location_tree2" />
         <field name="arch" type="xml">
@@ -43,4 +52,26 @@
             </xpath>
         </field>
     </record>
+
+    <record id="action_stock_location_track_stage" model="ir.actions.act_window">
+        <field name="name">Locations</field>
+        <field name="res_model">stock.location</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('track_stage', '=', True)]</field>
+    </record>
+
+    <menuitem
+        id="menu_operation_stock_location"
+        name="Locations"
+        parent="stock.menu_stock_warehouse_mgmt"
+        sequence="2"
+    />
+
+    <menuitem
+        id="menu_operation_stock_location_track_stage"
+        name="Locations"
+        parent="stock_location_history.menu_operation_stock_location"
+        action="stock_location_history.action_stock_location_track_stage"
+        sequence="10"
+    />
 </odoo>

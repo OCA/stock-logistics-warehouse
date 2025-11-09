@@ -7,9 +7,11 @@
     "depends": ["stock"],
     "category": "Stock",
     "data": [
+        "data/stock_location_stage_data.xml",
         "security/ir.model.access.csv",
         "views/stock_location_views.xml",
         "views/stock_location_stage_views.xml",
+        "views/stock_location_history_views.xml",
     ],
     "development_status": "Beta",
     "maintainers": ["jasiel-OSI"],

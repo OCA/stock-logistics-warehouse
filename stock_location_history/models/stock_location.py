@@ -14,12 +14,20 @@ class StockLocation(models.Model):
     lot_id = fields.Many2one("stock.lot")
     product_id = fields.Many2one(related="lot_id.product_id", store=True)
     last_stage_id = fields.Many2one("stock.location.stage", string="Last stage")
-    location_history_ids = fields.One2many(
-        "stock.location.history", "location_id", string="Location History"
-    )
     last_stage_validated = fields.Boolean(
         string="Is the last stage progress validated?"
     )
+
+    def open_location_history(self):
+        self.ensure_one()
+        return {
+            "name": _("Location History"),
+            "type": "ir.actions.act_window",
+            "res_model": "stock.location.history",
+            "view_mode": "list,form",
+            "domain": [("location_id", "=", self.id)],
+            "context": {"default_location_id": self.id},
+        }
 
     @api.constrains("stage_id")
     def check_stage_change(self):
@@ -27,7 +35,7 @@ class StockLocation(models.Model):
         if self.stage_id and not any(
             g in self.env.user.groups_id for g in self.stage_id.change_group_ids
         ):
-            raise ValidationError(_("Stage change not allowed for your user"))
+            raise ValidationError(_("You are not allowed to change the stage."))
         if (
             self.last_stage_id
             and self.last_stage_id.validation
@@ -38,33 +46,7 @@ class StockLocation(models.Model):
             if not self.validate_stage_route():
                 raise ValidationError(_("Invalid stage change"))
             else:
-                if self.stage_id.is_first:
-                    self.create_location_history("free")
-                elif self.stage_id.is_final:
-                    self.create_location_history("maint")
-                elif self.stage_id.is_pause:
-                    self.create_location_history("paused")
-                elif self.stage_id.is_use:
-                    if not self.verifyBDSource():
-                        raise ValidationError(_("Database not found"))
-                    else:
-                        self.with_delay().PLC_Complete()
-                    self.create_location_history("prog")
-                elif (
-                    self.past_stage_id.is_first
-                    and not self.macrolot_product_id
-                    and self.stage_id
-                ):
-                    raise ValidationError(_("Product required"))
-                elif self.last_stage_id.is_first and self.macrolot_product_id:
-                    self.create_new_macrolot()
-                    self.create_location_history("prog")
-                elif self.past_stage_id.is_pause:
-                    self.create_location_history("reg")
-                else:
-                    self.create_location_history("prog")
-        elif not self.last_stage_id and self.stage_id:
-            self.create_location_history("free")
+                self.create_location_history(self.stage_id.name)
         self.last_stage_id = self.stage_id
         self.last_stage_validated = not self.stage_id.validation
 
@@ -82,7 +64,7 @@ class StockLocation(models.Model):
     def validate_stage_route(self):
         if not self.stage_id:
             return True
-        destination_ids = self.last_stage_id.allowed_destination_location_ids
+        destination_ids = self.last_stage_id.next_ids
         return self.stage_id in destination_ids
 
     def create_location_history(self, registry_type):
@@ -90,17 +72,17 @@ class StockLocation(models.Model):
             "location_id": self.id,
             "lot_id": self.lot_id.id,
             "previous_stage_id": self.last_stage_id.id,
-            "next_stage_id": self.stage_id.id,
+            "new_stage_id": self.stage_id.id,
             "registry_type": registry_type,
             "user_id": self.env.uid,
         }
-        self.env["stock.location.history"].create(history_vals)
+        self.env["stock.location.history"].sudo().create(history_vals)
 
     def validate_stage(self):
         if not any(
             g in self.env.user.groups_id for g in self.stage_id.validation_group_ids
         ):
-            raise ValidationError(_("You are not allowed to change the stage"))
+            raise ValidationError(_("You are not allowed to change the stage."))
         else:
-            self.create_location_history("val")
+            self.create_location_history("Validation")
             self.last_stage_validated = True

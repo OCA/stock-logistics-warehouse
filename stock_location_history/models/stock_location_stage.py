@@ -7,9 +7,10 @@ class StockLocationStage(models.Model):
     _order = "sequence, name, id"
 
     name = fields.Char(required=True)
-    validation = fields.Boolean(string="Requires validation?")
+    description = fields.Text()
+    validation = fields.Boolean(string="Requires validation?", default=False)
     sequence = fields.Integer(default=1)
-    active = fields.Boolean(help="If active, the stage will be displayed")
+    active = fields.Boolean(help="If active, the stage will be displayed", default=True)
     fold = fields.Boolean(
         "Folded in Kanban",
         help="This stage is folded in the kanban view when "
@@ -36,7 +37,7 @@ class StockLocationStage(models.Model):
         "location_stage_validation_group_rel",
         "stage_id",
         "group_id",
-        string="Group allowed to validate",
+        string="Groups allowed to validate",
         help="Only users in this group can validate the current stage",
     )
     change_group_ids = fields.Many2many(
@@ -44,6 +45,6 @@ class StockLocationStage(models.Model):
         "location_stage_change_group_rel",
         "stage_id",
         "group_id",
-        string="Group allowed to change the current stage",
+        string="Groups allowed to change the stage",
         help="Only users in this group can move the process forward from this stage",
     )

@@ -18,19 +18,29 @@
         <field name="arch" type="xml">
             <form string="Stages">
                 <sheet>
-                    <group>
-                        <field name="name" />
-                        <field name="validation" />
-                        <field name="sequence" />
-                        <field name="active" />
-                        <field name="is_closed" />
-                        <field name="is_default" />
-                        <field name="is_use" />
-                    </group>
-                    <group string="Permissions">
-                        <field name="change_group_ids" widget="many2many_tags" />
-                        <field name="validation_group_ids" widget="many2many_tags" />
-                        <field name="next_ids" widget="many2many_tags" />
+                    <group id="main">
+                        <group id="left">
+                            <field name="name" />
+                            <field name="validation" />
+                            <field name="sequence" />
+                            <field name="active" />
+                            <field name="is_closed" />
+                            <field name="is_default" />
+                            <field name="is_use" />
+                        </group>
+                        <group if="right" string="Permissions">
+                            <field name="change_group_ids" widget="many2many_tags" />
+                            <field
+                                name="validation_group_ids"
+                                widget="many2many_tags"
+                            />
+                            <field name="next_ids" widget="many2many_tags" />
+                        </group>
+                        <field
+                            name="description"
+                            colspan="2"
+                            placeholder="Description..."
+                        />
                     </group>
                 </sheet>
             </form>
