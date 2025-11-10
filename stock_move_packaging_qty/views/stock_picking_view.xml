@@ -7,7 +7,7 @@
         <field name="arch" type="xml">
             <!-- Packaging quantity -->
             <xpath
-                expr="//field[@name='move_ids_without_package']/list/field[@name='product_uom' and @column_invisible='True']"
+                expr="//field[@name='move_ids_without_package']/list/field[@name='product_packaging_id']"
                 position="after"
             >
                 <field
@@ -20,7 +20,6 @@
                     readonly="not product_id or not is_quantity_done_editable or move_lines_count != 1"
                     invisible="not product_packaging_id"
                 />
-                <xpath expr="//field[@name='product_packaging_id']" position="move" />
             </xpath>
         </field>
     </record>
