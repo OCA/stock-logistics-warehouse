@@ -531,6 +531,11 @@ msgid "Packaging"
 msgstr ""
 
 #. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__location_move
+msgid "Part of move location"
+msgstr ""
+
+#. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__picked
 msgid "Picked"
 msgstr ""
@@ -920,6 +925,11 @@ msgstr ""
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__additional
 msgid "Whether the move was added after the picking's confirmation"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,help:stock_reserve.field_stock_reservation__location_move
+msgid "Whether this move is a part of stock_location moves"
 msgstr ""
 
 #. module: stock_reserve

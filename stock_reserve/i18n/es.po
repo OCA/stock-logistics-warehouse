@@ -577,6 +577,11 @@ msgid "Packaging"
 msgstr "Embalaje"
 
 #. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__location_move
+msgid "Part of move location"
+msgstr "Parte de un movimiento entre ubicaciones"
+
+#. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__picked
 msgid "Picked"
 msgstr "Seleccionado"
@@ -983,6 +988,12 @@ msgid "Whether the move was added after the picking's confirmation"
 msgstr "Si el movimiento se agregó después de la confirmación de la operación"
 
 #. module: stock_reserve
+#: model:ir.model.fields,help:stock_reserve.field_stock_reservation__location_move
+msgid "Whether this move is a part of stock_location moves"
+msgstr ""
+"Si este movimiento es parte de movimiento de ubicaciones de existencias"
+
+#. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__workorder_id
 msgid "Work Order To Consume"
 msgstr ""
@@ -1079,9 +1090,6 @@ msgstr ""
 #~ msgid "Package quantity"
 #~ msgstr "Cantidad de paquetes"
 
-#~ msgid "Part of move location"
-#~ msgstr "Parte de un movimiento entre ubicaciones"
-
 #~ msgid "Priority Date"
 #~ msgstr "Fecha prioritaria"
 
@@ -1131,10 +1139,6 @@ msgstr ""
 
 #~ msgid "Unrelease Allowed"
 #~ msgstr "Desbloqueo permitido"
-
-#~ msgid "Whether this move is a part of stock_location moves"
-#~ msgstr ""
-#~ "Si este movimiento es parte de movimiento de ubicaciones de existencias"
 
 #~ msgid ""
 #~ "Technical field depicting the warehouse to consider for the route "

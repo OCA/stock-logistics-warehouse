@@ -594,6 +594,11 @@ msgid "Packaging"
 msgstr "Imballaggio"
 
 #. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__location_move
+msgid "Part of move location"
+msgstr "Parte di un movimento ubicazione"
+
+#. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__picked
 msgid "Picked"
 msgstr "Prelevato"
@@ -1011,6 +1016,11 @@ msgid "Whether the move was added after the picking's confirmation"
 msgstr "Se il movimento è stato aggiunto sopo la conferma del prelievo"
 
 #. module: stock_reserve
+#: model:ir.model.fields,help:stock_reserve.field_stock_reservation__location_move
+msgid "Whether this move is a part of stock_location moves"
+msgstr "Se questo movimento fa parte dei movimenti tra ubicazioni"
+
+#. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__workorder_id
 msgid "Work Order To Consume"
 msgstr "Ordine di lavoro da consumare"
@@ -1107,9 +1117,6 @@ msgstr ""
 #~ msgid "Package quantity"
 #~ msgstr "Quantità collo"
 
-#~ msgid "Part of move location"
-#~ msgstr "Parte di un movimento ubicazione"
-
 #~ msgid "Priority Date"
 #~ msgstr "Data priorità"
 
@@ -1159,9 +1166,6 @@ msgstr ""
 
 #~ msgid "Unrelease Allowed"
 #~ msgstr "Consenti trattenute"
-
-#~ msgid "Whether this move is a part of stock_location moves"
-#~ msgstr "Se questo movimento fa parte dei movimenti tra ubicazioni"
 
 #~ msgid "Date"
 #~ msgstr "Data"
