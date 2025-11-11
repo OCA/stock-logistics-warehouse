@@ -27,12 +27,6 @@
                     domain="[]"
                     context="{'group_by': 'reference'}"
                 />
-                <filter
-                    string="Date"
-                    name="grp_date"
-                    domain="[]"
-                    context="{'group_by': 'create_date'}"
-                />
             </xpath>
         </field>
     </record>
