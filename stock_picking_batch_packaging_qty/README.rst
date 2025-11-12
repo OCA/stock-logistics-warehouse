@@ -35,6 +35,38 @@ Add packaging fields in tree views inside picking batch.
 .. contents::
    :local:
 
+Configuration
+=============
+
+To view the new columns integrated into this module, we need to
+configure batch transfers. To do this, we have to activate it as
+follows:
+
+1. Go to “Inventory.”
+2. Activate “Batch, Wave & Cluster Transfers.”
+
+And we need to activate product packaging:
+
+1. Go to “Inventory.”
+2. Activate “Product Packagings.”
+
+Usage
+=====
+
+To see how this module works, we are going to create a new packaged
+product:
+
+1. Products > Products. You can create or edit a new one
+2. In the “Inventory” section, add a line in “Packaging”
+
+Where you will find the new columns:
+
+1. Operations > Batch Transfers create one or use one with a packaged
+   product.
+2. Confirm the batch transfer.
+3. In Detailed Operations, we see two new fields.
+4. In Operations, in the hidden view, we have a new column to display.
+
 Bug Tracker
 ===========
 
