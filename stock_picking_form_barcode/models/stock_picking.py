@@ -21,13 +21,13 @@ class StockPicking(models.Model):
             if picking.name == "/" or isinstance(picking.id, NewId):
                 picking.barcode = False
             else:
-                format = picking.picking_type_id.picking_barcode_format
-                if not format:
-                    format = "auto"
-                if format == "QR":
+                code_format = picking.picking_type_id.picking_barcode_format
+                if not code_format:
+                    code_format = "auto"
+                if code_format == "QR":
                     width = 100
                 barcode_input = self.env["ir.actions.report"].barcode(
-                    barcode_type=format,
+                    barcode_type=code_format,
                     value=picking.name,
                     width=width,
                     height=height,
