@@ -1,0 +1,2 @@
+-   Eduardo de Miguel ([Moduon](https://www.moduon.team/))
+-   Andrii Kompaniiets ([Moduon](https://www.moduon.team/))
