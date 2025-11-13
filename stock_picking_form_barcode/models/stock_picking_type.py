@@ -10,3 +10,6 @@ class StockPickingType(models.Model):
     display_picking_barcode = fields.Boolean(
         help="Check this if you want to display the picking barcode on its form"
     )
+    picking_barcode_format = fields.Selection(
+        selection=[("QR", "QR Code"), ("Code128", "Code128")],
+    )

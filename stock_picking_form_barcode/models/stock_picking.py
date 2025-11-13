@@ -15,10 +15,22 @@ class StockPicking(models.Model):
     @api.depends("name")
     def _compute_barcode(self):
         for picking in self:
+            # defaults
+            width = 600
+            height = 100
             if picking.name == "/" or isinstance(picking.id, NewId):
                 picking.barcode = False
             else:
+                format = picking.picking_type_id.picking_barcode_format
+                if not format:
+                    format = "auto"
+                if format == "QR":
+                    width = 100
                 barcode_input = self.env["ir.actions.report"].barcode(
-                    barcode_type="auto", value=picking.name, humanreadable=False
+                    barcode_type=format,
+                    value=picking.name,
+                    width=width,
+                    height=height,
+                    humanreadable=False,
                 )
                 picking.barcode = b64encode(barcode_input)

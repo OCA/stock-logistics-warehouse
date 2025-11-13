@@ -7,8 +7,11 @@
         <field name="inherit_id" ref="stock.view_picking_type_form" />
         <field name="arch" type="xml">
             <field name="create_backorder" position="after">
-                <field name="display_picking_barcode" />>
-
+                <field name="display_picking_barcode" />
+                <field
+                    name="picking_barcode_format"
+                    invisible="not display_picking_barcode"
+                />
             </field>
         </field>
     </record>
