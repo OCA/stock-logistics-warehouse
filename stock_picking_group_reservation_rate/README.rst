@@ -48,22 +48,14 @@ rate of the pickings:
   picking operations priorities as some pickings can become available
   later.
 
+In addition, another field allows to display the group reservation rate
+of another group (e.g.: to see Pickings rate on packings level)
+
 Configuration
 =============
 
-[ This file is not always required; it should explain **how to configure
-the module before using it**; it is aimed at users with administration
-privileges.
-
-Please be detailed on the path to configuration (eg: do you need to
-activate developer mode?), describe step by step configurations and the
-use of screenshots is strongly recommended.]
-
-To configure this module, you need to:
-
-- Go to *App* > Menu > Menu item
-- Activate boolean… > save
-- …
+- Go to Inventory > Warehouse > Operation Types
+- Fill in the additional picking group to monitor the reservation rate.
 
 Bug Tracker
 ===========

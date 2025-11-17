@@ -20,6 +20,7 @@ class TestReservationRateGroup(ReservationRateCommon):
         cls.type_group.picking_type_ids = (
             cls.picking_type_a | cls.picking_type_b | cls.picking_type_c
         )
+        cls.warehouse.out_type_id.additional_picking_type_group_id = cls.type_group
 
     def test_reservation_rate(self):
         self._set_inventory()
@@ -260,4 +261,25 @@ class TestReservationRateGroup(ReservationRateCommon):
         self.assertEqual(
             0.0,
             move.type_group_reservation_rate,
+        )
+
+    def test_additional_reservation_rate(self):
+        self._set_inventory()
+        self._run_procurements()
+        out_move_a = self.env["stock.move"].search(
+            [
+                ("location_dest_id", "=", self.customers.id),
+                ("product_id", "=", self.product_a.id),
+            ]
+        )
+        self.assertEqual(0.0, out_move_a.reservation_rate)
+        pick_move_a = self.env["stock.move"].search(
+            [
+                ("location_dest_id", "=", self.out.id),
+                ("product_id", "=", self.product_a.id),
+            ]
+        )
+        self.assertEqual(100.0, pick_move_a.reservation_rate)
+        self.assertEqual(
+            50.0, out_move_a.picking_id.additional_type_group_reservation_rate
         )

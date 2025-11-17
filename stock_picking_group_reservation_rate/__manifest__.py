@@ -17,6 +17,7 @@
     "data": [
         "security/security.xml",
         "views/stock_picking.xml",
+        "views/stock_picking_type.xml",
         "wizards/recompute_stock_group_reservation_rate.xml",
     ],
     "pre_init_hook": "pre_init_hook",

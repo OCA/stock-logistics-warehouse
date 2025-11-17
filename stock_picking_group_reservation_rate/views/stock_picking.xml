@@ -6,6 +6,22 @@
         <field name="model">stock.picking</field>
         <field name="inherit_id" ref="stock.view_picking_form" />
         <field name="arch" type="xml">
+            <xpath expr="//label[@for='scheduled_date']/parent::group" position="after">
+                <group
+                    string="Additional Reservation Rate"
+                    name="additional_reservation_rate"
+                >
+                    <field
+                        name="additional_picking_type_group_id"
+                        invisible="not additional_picking_type_group_id"
+                    />
+                    <field
+                        name="additional_type_group_reservation_rate"
+                        widget="progressbar_gradient"
+                        invisible="not additional_picking_type_group_id"
+                    />
+                </group>
+            </xpath>
             <field name="products_availability" position="after">
                 <field
                     name="type_group_reservation_rate"
