@@ -1,0 +1,11 @@
+[project]
+name = "odoo-addons-oca-stock-logistics-warehouse"
+version = "19.0.20251120.0"
+dependencies = [
+    "odoo-addon-stock_warehouse_calendar==19.0.*",
+]
+classifiers=[
+    "Programming Language :: Python",
+    "Framework :: Odoo",
+    "Framework :: Odoo :: 19.0",
+]
