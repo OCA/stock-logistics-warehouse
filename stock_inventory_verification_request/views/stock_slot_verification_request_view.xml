@@ -201,8 +201,8 @@
     <menuitem
         id="menu_slot_verification_request"
         name="Slot Verification Request"
-        parent="stock.menu_stock_warehouse_mgmt"
-        sequence="31"
+        parent="stock.menu_stock_adjustments"
+        sequence="32"
         action="action_slot_verification_request"
     />
 </odoo>
