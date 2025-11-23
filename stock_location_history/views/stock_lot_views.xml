@@ -1,0 +1,59 @@
+<odoo>
+    <!-- FORM VIEW FOR STOCK.LOT -->
+    <record id="view_stock_lot_form_inherit" model="ir.ui.view">
+        <field name="name">stock.lot.form.inherit</field>
+        <field name="model">stock.lot</field>
+        <field name="inherit_id" ref="stock.view_production_lot_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="before">
+                <group>
+                    <field
+                        name="quantity_in"
+                        string="Cantidad (Todo lo que ha entrado)"
+                    />
+                    <field name="first_ticket" string="Primer Ticker" />
+                    <field name="date_first_ticket" string="Fecha PT" />
+                    <field name="last_ticket" string="Ultimo Ticket" />
+                    <field name="date_last_ticket" string="Fecha UT" />
+                    <field
+                        name="quantity_difference"
+                        string="Diferencia (Cantidad a la mano)"
+                    />
+                    <field
+                        name="total_consumption"
+                        string="Cantidad Total (Consumos)"
+                    />
+                    <field name="initial_mix" string="Mezcla Inicial" />
+                    <field name="kg_consumed_mi" string="KG consumidos MI" />
+                    <field name="final_mix" string="Mezcla Final" />
+                    <field name="kg_consumed_mf" string="KG consumidos MF" />
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- TREE VIEW FOR STOCK.LOT -->
+    <record id="view_stock_lot_tree_inherit" model="ir.ui.view">
+        <field name="name">stock.lot.tree.inherit</field>
+        <field name="model">stock.lot</field>
+        <field name="inherit_id" ref="stock.view_production_lot_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="quantity_in" string="Cantidad" />
+                <field name="first_ticket" string="Primer Ticker" />
+                <field name="date_first_ticket" string="Fecha PT" />
+                <field name="last_ticket" string="Ultimo Ticket" />
+                <field name="date_last_ticket" string="Fecha UT" />
+                <field
+                    name="quantity_difference"
+                    string="Diferencia (Cantidad a la mano)"
+                />
+                <field name="total_consumption" string="Cantidad Total (Consumos)" />
+                <field name="initial_mix" string="Mezcla Inicial" />
+                <field name="kg_consumed_mi" string="KG consumidos MI" />
+                <field name="final_mix" string="Mezcla Final" />
+                <field name="kg_consumed_mf" string="KG consumidos MF" />
+            </xpath>
+        </field>
+    </record>
+</odoo>
