@@ -40,38 +40,38 @@ bulk products.
 Configuration
 =============
 
--  Go to Inventory > Configuration > Location Stages.
+- Go to Inventory > Configuration > Location Stages.
 
--  Click New to create a stage and configure only the following
-   parameters:
+- Click New to create a stage and configure only the following
+  parameters:
 
-      -  Name
-      -  Sequence
-      -  Status: Active
-      -  Allowed Validation Groups
-      -  Allowed Stage Change Groups
+     - Name
+     - Sequence
+     - Status: Active
+     - Allowed Validation Groups
+     - Allowed Stage Change Groups
 
--  Set Stage Properties
+- Set Stage Properties
 
--  For each stage, specify whether it applies to one of the following
-   categories (these fields are used for form validations):
+- For each stage, specify whether it applies to one of the following
+  categories (these fields are used for form validations):
 
-      -  Is First
-      -  Is Final
-      -  Is Pause
-      -  Is Use
+     - Is First
+     - Is Final
+     - Is Pause
+     - Is Use
 
--  Configure Stage Transitions
+- Configure Stage Transitions
 
--  After creating all the stages, define the allowed transitions for
-   each stage to establish a proper flow.
+- After creating all the stages, define the allowed transitions for each
+  stage to establish a proper flow.
 
 Usage
 =====
 
--  Go to Inventory > Operations > Locations
--  Open a location to see its stages and history
--  Use the buttons to change the stages of the location
+- Go to Inventory > Operations > Locations
+- Open a location to see its stages and history
+- Use the buttons to change the stages of the location
 
 \* Based on its stage, the location will be available to receive a new
 lot of bulk products or not.
@@ -97,7 +97,7 @@ Authors
 Contributors
 ------------
 
--  Johannan Luna <jluna@opensourceintegrators.com>
+- Johannan Luna <jluna@opensourceintegrators.com>
 
 Maintainers
 -----------

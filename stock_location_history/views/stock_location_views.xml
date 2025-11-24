@@ -34,8 +34,8 @@
             </xpath>
             <xpath expr="//field[@name='storage_category_id']" position="after">
                 <field name="track_stage" />
-                <field name="lot_id" invisible="not track_stage" />
-                <field name="product_id" invisible="not track_stage" />
+                <field name="actual_product_id" invisible="not track_stage" />
+                <field name="lot_id" invisible="not track_stage" readonly="1" />
                 <field name="last_stage_validated" invisible="1" />
             </xpath>
         </field>
