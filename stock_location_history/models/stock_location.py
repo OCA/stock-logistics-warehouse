@@ -1,7 +1,11 @@
 import logging
 
+import logging
+
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
+
+_logger = logging.getLogger(__name__)
 
 _logger = logging.getLogger(__name__)
 
@@ -34,8 +38,32 @@ class StockLocation(models.Model):
                     _("Cannot disable stage tracking while not on the default stage.")
                 )
 
+
+    @api.onchange("track_stage")
+    def _onchange_track_stage(self):
+        if self.track_stage and not self.stage_id:
+            # Assign default stage when enabling tracking
+            default_stage = self.env["stock.location.stage"].search(
+                [("is_default", "=", True)], limit=1
+            )
+            if default_stage:
+                self.stage_id = default_stage
+        elif not self.track_stage and self.stage_id:
+            # Prevent disabling tracking if not on default stage
+            default_stage = self.env["stock.location.stage"].search(
+                [("is_default", "=", True)], limit=1
+            )
+            if default_stage and self.stage_id != default_stage:
+                raise ValidationError(
+                    _("Cannot disable stage tracking while not on the default stage.")
+                )
+
     stage_id = fields.Many2one("stock.location.stage", string="Stage")
     lot_id = fields.Many2one("stock.lot")
+    # product_id = fields.Many2one(related="lot_id.product_id", store=True)
+    actual_product_id = fields.Many2one(
+        "product.product", string="Product", domain=[("tracking", "=", "lot")]
+    )
     # product_id = fields.Many2one(related="lot_id.product_id", store=True)
     actual_product_id = fields.Many2one(
         "product.product", string="Product", domain=[("tracking", "=", "lot")]
