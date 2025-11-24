@@ -58,25 +58,31 @@ class StockLocation(models.Model):
 
     @api.constrains("stage_id")
     def check_stage_change(self):
+        default_stage = self.env["stock.location.stage"].search(
+                [("is_default", "=", True)], limit=1
+            )
         self.ensure_one()
         # Check if we're trying to disable track_stage when not on default stage
         # This runs when stage_id changes, so we check if track_stage is False
         # but stage_id is not empty
         if not self.track_stage and self.stage_id:
-            default_stage = self.env["stock.location.stage"].search(
-                [("is_default", "=", True)], limit=1
-            )
             if default_stage and self.stage_id != default_stage:
                 raise ValidationError(
                     _("Cannot disable stage tracking while not on the default stage.")
                 )
+            
+        if (not self.last_stage_id and not self.stage_id.is_default):
+            if not self.actual_product_id:
+                raise ValidationError(
+                    _("A product must be assigned before changing stages.")
+                )
+            else:
+                new_lot = self.macrolotCreation()
+                self.lot_id = new_lot
 
         # Check if we're leaving the default stage; actual_product_id must be set
         if self.last_stage_id and self.last_stage_id.is_default and self.stage_id:
             # Check if we're moving away from default stage
-            default_stage = self.env["stock.location.stage"].search(
-                [("is_default", "=", True)], limit=1
-            )
             if (
                 default_stage
                 and self.last_stage_id == default_stage
@@ -89,26 +95,8 @@ class StockLocation(models.Model):
                     )
                 # If there is a product assigned, create a lot and assign it
                 else:
-                    # Create a new lot with the requested naming convention
-                    # Format: <location_name>-<5-digit_consecutive_number>
-                    location_name = self.name.replace(" ", "_").upper()[
-                        :10
-                    ]  # Take first 10 chars, uppercase, remove spaces
-                    # Count existing lots for this location
-                    existing_lots = self.env["stock.lot"].search(
-                        [("name", "like", f"{location_name}-")]
-                    )
-                    next_number = len(existing_lots) + 1
-                    lot_name = f"{location_name}-{next_number:05d}"
-                    lot_vals = {
-                        "name": lot_name,
-                        "product_id": self.actual_product_id.id,
-                        "company_id": self.env.company.id,
-                        "location_id": self.id,
-                    }
-                    new_lot = self.env["stock.lot"].sudo().create(lot_vals)
-                    self.lot_id = new_lot.id
-                    self.with_delay().PLC_Complete()
+                    new_lot = self.macrolotCreation()
+                    self.lot_id = new_lot
 
         # Check if we're transitioning FROM a closed stage TO a default stage
         if (
@@ -261,3 +249,24 @@ class StockLocation(models.Model):
                     return True
         except Exception as e:
             raise ValidationError(_(f"Error querying in MSSQL: {e}")) from e
+    def macrolotCreation(self):
+        # Create a new lot with the requested naming convention
+        # Format: <location_name>-<5-digit_consecutive_number>
+        location_name = self.name.replace(" ", "_").upper()[
+            :10
+        ]  # Take first 10 chars, uppercase, remove spaces
+        # Count existing lots for this location
+        existing_lots = self.env["stock.lot"].search(
+            [("name", "like", f"{location_name}-")]
+        )
+        next_number = len(existing_lots) + 1
+        lot_name = f"{location_name}-{next_number:05d}"
+        lot_vals = {
+            "name": lot_name,
+            "product_id": self.actual_product_id.id,
+            "company_id": self.env.company.id,
+            "location_id": self.id,
+        }
+        new_lot = self.env["stock.lot"].sudo().create(lot_vals)
+        self.with_delay().PLC_Complete()
+        return new_lot
