@@ -21,13 +21,13 @@ Stock Lot Condition
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fstock--logistics--warehouse-lightgray.png?logo=github
-    :target: https://github.com/OCA/stock-logistics-warehouse/tree/18.0/stock_lot_condition
+    :target: https://github.com/OCA/stock-logistics-warehouse/tree/19.0/stock_lot_condition
     :alt: OCA/stock-logistics-warehouse
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/stock-logistics-warehouse-18-0/stock-logistics-warehouse-18-0-stock_lot_condition
+    :target: https://translation.odoo-community.org/projects/stock-logistics-warehouse-19-0/stock-logistics-warehouse-19-0-stock_lot_condition
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/stock-logistics-warehouse&target_branch=18.0
+    :target: https://runboat.odoo-community.org/builds?repo=OCA/stock-logistics-warehouse&target_branch=19.0
     :alt: Try me on Runboat
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
@@ -52,34 +52,34 @@ company:
 1. Classification by Grade (A, B, C) This system is common in
    refurbished products (electronics) and second-hand clothing.
 
-- Grade A (Excellent/Like new): The item is in perfect working
-  condition. It may have very slight signs of use or none at all. In the
-  case of clothing, there are no noticeable stains or damage.
-- Grade B (Good/Very Good/Fair): The item functions perfectly, but shows
-  visible signs of normal use, such as minor scratches, slight dents, or
-  cosmetic wear.
-- Grade C (Acceptable/Sufficient): The item is fully functional but has
-  more obvious cosmetic flaws, such as dents, deep scratches, or
-  significant wear. Clothing may have stains or loose stitching.
+-  Grade A (Excellent/Like new): The item is in perfect working
+   condition. It may have very slight signs of use or none at all. In
+   the case of clothing, there are no noticeable stains or damage.
+-  Grade B (Good/Very Good/Fair): The item functions perfectly, but
+   shows visible signs of normal use, such as minor scratches, slight
+   dents, or cosmetic wear.
+-  Grade C (Acceptable/Sufficient): The item is fully functional but has
+   more obvious cosmetic flaws, such as dents, deep scratches, or
+   significant wear. Clothing may have stains or loose stitching.
 
 2. Condition Descriptions (Sales Platforms) Platforms such as Amazon use
    a descriptive system so that buyers have clear expectations:
 
-- As new: The item is intact and works perfectly, but the packaging may
-  be damaged.
-- Very good: Minimal use, with minor cosmetic signs.
-- Good: Works perfectly, but with visible wear from normal use.
-- Acceptable: May have cosmetic imperfections, scratches, dents, etc.,
-  but is still functional.
+-  As new: The item is intact and works perfectly, but the packaging may
+   be damaged.
+-  Very good: Minimal use, with minor cosmetic signs.
+-  Good: Works perfectly, but with visible wear from normal use.
+-  Acceptable: May have cosmetic imperfections, scratches, dents, etc.,
+   but is still functional.
 
 3. For Specific Parts (e.g. Automotive) In the spare parts sector,
    classification is often based on origin and warranty:
 
-- Used part: Removed from another vehicle as is, its condition may vary
-  and usually requires the customer's approval of its condition.
-- Refurbished/remanufactured part: The part has been restored to its
-  original specifications or to a condition very close to new, offering
-  guarantees similar to a new part.
+-  Used part: Removed from another vehicle as is, its condition may vary
+   and usually requires the customer's approval of its condition.
+-  Refurbished/remanufactured part: The part has been restored to its
+   original specifications or to a condition very close to new, offering
+   guarantees similar to a new part.
 
 Bug Tracker
 ===========
@@ -87,7 +87,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/stock-logistics-warehouse/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/stock-logistics-warehouse/issues/new?body=module:%20stock_lot_condition%0Aversion:%2018.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/stock-logistics-warehouse/issues/new?body=module:%20stock_lot_condition%0Aversion:%2019.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -102,10 +102,10 @@ Authors
 Contributors
 ------------
 
-- ``Tecnativa <https://www.tecnativa.com>``\ \_:
+-  ``Tecnativa <https://www.tecnativa.com>``\ \_:
 
-  - Pedro M. Baeza
-  - Víctor Martínez
+   -  Pedro M. Baeza
+   -  Víctor Martínez
 
 Maintainers
 -----------
@@ -128,6 +128,6 @@ Current `maintainer <https://odoo-community.org/page/maintainer-role>`__:
 
 |maintainer-victoralmau| 
 
-This module is part of the `OCA/stock-logistics-warehouse <https://github.com/OCA/stock-logistics-warehouse/tree/18.0/stock_lot_condition>`_ project on GitHub.
+This module is part of the `OCA/stock-logistics-warehouse <https://github.com/OCA/stock-logistics-warehouse/tree/19.0/stock_lot_condition>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.
