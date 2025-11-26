@@ -127,9 +127,9 @@ class VlmOperationTaskAction(models.TransientModel):
         action = self.env["ir.actions.actions"]._for_xml_id(
             "stock_vlm_mgmt.action_vlm_task_action"
         )
-        action[
-            "name"
-        ] = f"VLM task {self.vlm_tasks_partial + idx} of {self.vlm_tasks_total}"
+        action["name"] = (
+            f"VLM task {self.vlm_tasks_partial + idx} of {self.vlm_tasks_total}"
+        )
         action["context"] = dict(
             self.env.context,
             default_vlm_task_id=go_to_task.id,
