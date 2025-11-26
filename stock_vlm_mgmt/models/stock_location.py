@@ -71,7 +71,7 @@ class StockLocation(models.Model):
             timeout=timeout,
             user=self.vlm_user,
             password=self.vlm_password,
-            **options
+            **options,
         )
         response = vlm_connector.request_operation(data)
         response_code = response.get("code", "")

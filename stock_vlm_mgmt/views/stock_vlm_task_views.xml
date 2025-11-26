@@ -116,7 +116,7 @@
                         enable_counters="1"
                     />
                 </searchpanel>
-           </search>
+            </search>
         </field>
     </record>
     <record id="vlm_operation_bulk_task_action" model="ir.actions.server">

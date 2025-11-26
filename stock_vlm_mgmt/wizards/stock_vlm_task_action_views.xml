@@ -39,12 +39,12 @@
                     </div>
                     <div class="alert alert-info mb-0 h4" role="alert">
                         <button
-                            name="action_command"
-                            string="Start task"
-                            type="object"
-                            class="btn btn-primary btn-lg"
-                            attrs="{'invisible': [('state', '=', 'done')]}"
-                        />&amp;nbsp;
+                        name="action_command"
+                        string="Start task"
+                        type="object"
+                        class="btn btn-primary btn-lg"
+                        attrs="{'invisible': [('state', '=', 'done')]}"
+                    />&amp;nbsp;
                         <i class="fa fa-info-circle" />&amp;nbsp;
                         <field name="vlm_task_id" readonly="1" widget="selection" />
                     </div>

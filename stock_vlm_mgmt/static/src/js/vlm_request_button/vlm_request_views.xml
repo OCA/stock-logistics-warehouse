@@ -14,10 +14,10 @@
                 t-on-click="onClickVlmRequest"
             >
                 <i
-                    class="fa fa-rocket"
-                    title="Perform tasks"
-                    role="image"
-                /> Perform tasks
+                class="fa fa-rocket"
+                title="Perform tasks"
+                role="image"
+            /> Perform tasks
             </button>
         </xpath>
     </t>

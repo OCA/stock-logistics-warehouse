@@ -97,7 +97,7 @@
                         enable_counters="1"
                     />
                 </searchpanel>
-           </search>
+            </search>
         </field>
     </record>
     <record id="location_quant_vlm_action" model="ir.actions.act_window">
