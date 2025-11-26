@@ -15,7 +15,7 @@ class StockLotCondition(models.Model):
 
     sequence = fields.Integer()
     name = fields.Char(required=True, translate=True)
-    color = fields.Integer(default=_get_default_color)
+    color = fields.Integer(default=lambda self: self._get_default_color())
     active = fields.Boolean(default=True)
     description = fields.Char(translate=True)
     required_note = fields.Boolean(
