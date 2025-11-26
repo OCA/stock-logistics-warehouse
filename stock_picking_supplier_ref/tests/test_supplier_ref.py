@@ -1,17 +1,10 @@
-from odoo.tests.common import TransactionCase
+from odoo.addons.base.tests.common import BaseCommon
 
 
-class TestStockPickingSupplierReference(TransactionCase):
+class TestStockPickingSupplierReference(BaseCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-
-        # Create a partner
-        cls.partner = cls.env["res.partner"].create(
-            {
-                "name": "Test Partner",
-            }
-        )
 
         # Create a product
         cls.product = cls.env["product.product"].create(
@@ -37,7 +30,6 @@ class TestStockPickingSupplierReference(TransactionCase):
         # Create stock move
         cls.env["stock.move"].create(
             {
-                "name": cls.product.name,
                 "product_id": cls.product.id,
                 "product_uom_qty": 10,
                 "product_uom": cls.product.uom_id.id,
