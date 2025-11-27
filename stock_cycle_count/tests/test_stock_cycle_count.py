@@ -3,6 +3,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 from datetime import datetime, timedelta
 
+from odoo import Command
 from odoo.exceptions import AccessError, ValidationError
 from odoo.tests import common
 
@@ -153,7 +154,7 @@ class TestStockCycleCount(common.TransactionCase):
         counts = self.cycle_count_model.search([("location_id", "in", locs.ids)])
         self.assertFalse(counts, "Existing cycle counts before execute planner.")
         date_pre_existing_cc = datetime.today() + timedelta(days=30)
-        loc = locs.filtered(lambda l: l.usage != "view")[0]
+        loc = locs.filtered(lambda line: line.usage != "view")[0]
         pre_existing_count = self.cycle_count_model.create(
             {
                 "name": "To be cancelled when running cron job.",
@@ -169,7 +170,7 @@ class TestStockCycleCount(common.TransactionCase):
         self.inventory_model.create(
             {
                 "name": "Pre-existing inventory",
-                "location_ids": [(4, loc.id)],
+                "location_ids": [Command.link(loc.id)],
                 "date": date,
             }
         )
@@ -192,7 +193,9 @@ class TestStockCycleCount(common.TransactionCase):
         )
         move1._action_confirm()
         move1._action_assign()
-        move1.move_line_ids[0].qty_done = 1.0
+        for move_line in move1.move_line_ids:
+            move_line.quantity = 1
+        move1.picked = True
         move1._action_done()
         # Remove the pre_existing_count
         self.inventory_model.search(
@@ -221,7 +224,9 @@ class TestStockCycleCount(common.TransactionCase):
         )
         move2._action_confirm()
         move2._action_assign()
-        move2.move_line_ids[0].qty_done = 1.0
+        for move_line in move2.move_line_ids:
+            move_line.quantity = 1
+        move2.picked = True
         move2._action_done()
         count = self.cycle_count_model.search(
             [

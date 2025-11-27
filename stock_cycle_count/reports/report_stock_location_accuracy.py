@@ -29,7 +29,7 @@ class LocationAccuracyReport(models.AbstractModel):
         )
         for loc in locations:
             location_data[loc] = counts.filtered(
-                lambda count: loc in count.location_ids
+                lambda count, loc=loc: loc in count.location_ids
             )
         return location_data
 
