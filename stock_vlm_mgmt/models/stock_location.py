@@ -1,6 +1,6 @@
 # Copyright 2023 Tecnativa - David Vidal
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-from odoo import _, fields, models
+from odoo import fields, models
 from odoo.exceptions import UserError
 
 
@@ -60,12 +60,14 @@ class StockLocation(models.Model):
         -4: VLM Hardware issues
         """
         self.ensure_one()
-        if not hasattr(self, "_%s_vlm_connector" % self.vlm_vendor):
-            raise UserError(_("No implemented request connector for this vendor!"))
+        if not hasattr(self, f"_{self.vlm_vendor}_vlm_connector"):
+            raise UserError(
+                self.env._("No implemented request connector for this vendor!")
+            )
         timeout = (
             self.env["ir.config_parameter"].sudo().get_param("stock_vlm_mgmt.timeout")
         )
-        vlm_connector = getattr(self, "_%s_vlm_connector" % self.vlm_vendor)()(
+        vlm_connector = getattr(self, f"_{self.vlm_vendor}_vlm_connector")()(
             self.vlm_hostname,
             self.vlm_port,
             timeout=timeout,
@@ -79,11 +81,13 @@ class StockLocation(models.Model):
         # problems.
         if response_code == "-1":
             raise UserError(
-                _("The connection was refused by the VLM and couldn't be stablished.")
+                self.env._(
+                    "The connection was refused by the VLM and couldn't be stablished."
+                )
             )
         elif response_code == "-2":
             raise UserError(
-                _(
+                self.env._(
                     "The command response has been lost for unknown reasons. Did you "
                     "perform the operation on the VLM? Make sure there aren't "
                     "unconsistencies with the recorded data"
@@ -91,24 +95,26 @@ class StockLocation(models.Model):
             )
         elif response_code == "-3":
             raise UserError(
-                _("The task couldn't be performed due to a timeout in the request"),
+                self.env._(
+                    "The task couldn't be performed due to a timeout in the request"
+                ),
             )
         elif response_code == "-4":
             raise UserError(
-                _(
+                self.env._(
                     "The task couldn't be performed. Try again or check  the vertical "
                     "lift module for hardware issues"
                 )
             )
         elif response_code == "-5":
-            raise UserError(_("The task was cancelled by the VLM"))
+            raise UserError(self.env._("The task was cancelled by the VLM"))
         return response
 
     def action_release_vlm_trays(self):
         """Send to the VLM a special command that releases all the trays"""
         data = self._prepare_vlm_request(
             task_type="release",
-            info1=_(
+            info1=self.env._(
                 "%(user)s has requested a release of the trays from Odoo",
                 user=self.env.user.name,
             ),
@@ -136,9 +142,9 @@ class StockLocation(models.Model):
         view_id = self.env.ref("stock_vlm_mgmt.view_stock_quant_inventory_tree").id
         action.update(
             {
-                "view_mode": "tree",
+                "view_mode": "list",
                 "views": [
-                    [view_id, "tree"] for view in action["views"] if view[1] == "tree"
+                    [view_id, "list"] for view in action["views"] if view[1] == "list"
                 ],
             }
         )

@@ -6,7 +6,7 @@
         t-inherit-mode="primary"
         owl="1"
     >
-        <xpath expr="//t[contains(@t-if, 'isExportEnable')]" position="before">
+        <xpath expr="//div[hasclass('o_list_buttons')]" position="inside">
             <button
                 t-if="nbSelected"
                 type="button"

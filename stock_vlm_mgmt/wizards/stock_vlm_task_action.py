@@ -1,6 +1,7 @@
 # Copyright 2023 Tecnativa - David Vidal
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-from odoo import _, api, fields, models
+from odoo import api, fields, models
+from odoo.fields import Command
 
 
 class VlmOperationTaskAction(models.TransientModel):
@@ -60,10 +61,10 @@ class VlmOperationTaskAction(models.TransientModel):
             }
         )
         if not self.env.context.get("default_vlm_task_ids"):
-            vals.update({"vlm_task_ids": [(6, 0, task.ids)]})
+            vals.update({"vlm_task_ids": [Command.set(task.ids)]})
         warning = self.env.context.get("vlm_task_action_warning")
         if warning == "mismatch_greater":
-            vals["warning"] = _(
+            vals["warning"] = self.env._(
                 "Quantity mismatch! The quantity reported by the VLM is greater "
                 "than original demand!. Please check it. If it's ok, you can fix "
                 "it now and save the task manually."
@@ -163,12 +164,12 @@ class VlmOperationTaskAction(models.TransientModel):
     def _set_warning_message(self, response):
         self.warning = False
         if response == "zero_quantity":
-            self.warning = _(
+            self.warning = self.env._(
                 "No quantity was processed. Do you want to put the goods in another "
                 "position? (you can also skip the task)"
             )
         elif response == "mismatch_greater":
-            self.warning = _(
+            self.warning = self.env._(
                 "The quantity reported is greater than the one set in the task!"
             )
 

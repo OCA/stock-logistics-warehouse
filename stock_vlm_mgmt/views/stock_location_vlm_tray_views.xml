@@ -29,7 +29,6 @@
                         <group name="info">
                             <field name="location_id" />
                             <field name="tray_type_id" />
-                            <field name="is_full" invisible="1" readonly="1" />
                             <field
                                 name="tray_matrix"
                                 string="Tray layout"
@@ -46,11 +45,10 @@
     <record id="view_location_vlm_tray_tree" model="ir.ui.view">
         <field name="model">stock.location.vlm.tray</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="name" />
                 <field name="location_id" />
                 <field name="tray_type_id" />
-                <field name="is_full" invisible="1" readonly="1" />
                 <field name="tray_matrix" widget="location_tray_matrix" nolabel="1" />
                 <button
                     string="Call"
@@ -66,13 +64,13 @@
                     name="action_tray_content"
                     type="object"
                 />
-            </tree>
+            </list>
         </field>
     </record>
     <record id="location_vlm_tray_action" model="ir.actions.act_window">
         <field name="name">Vertical Lift Module Trays</field>
         <field name="res_model">stock.location.vlm.tray</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
         <field name="view_id" ref="view_location_vlm_tray_tree" />
     </record>
     <menuitem
