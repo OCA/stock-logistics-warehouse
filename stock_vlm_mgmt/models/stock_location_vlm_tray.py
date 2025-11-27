@@ -1,6 +1,6 @@
 # Copyright 2023 Tecnativa - David Vidal
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.osv import expression
 
 
@@ -68,9 +68,9 @@ class StockLocationVlmTray(models.Model):
         view_id = self.env.ref("stock_vlm_mgmt.view_stock_quant_inventory_tree").id
         action.update(
             {
-                "view_mode": "tree",
+                "view_mode": "list",
                 "views": [
-                    [view_id, "tree"] for view in action["views"] if view[1] == "tree"
+                    [view_id, "list"] for view in action["views"] if view[1] == "list"
                 ],
             }
         )
@@ -81,7 +81,7 @@ class StockLocationVlmTray(models.Model):
         data = self.location_id._prepare_vlm_request(
             task_type="count",
             carrier=self.name,
-            info1=_(
+            info1=self.env._(
                 "%(user)s has requested a release of the trays from Odoo",
                 user=self.env.user.name,
             ),

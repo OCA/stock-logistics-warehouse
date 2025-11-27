@@ -1,6 +1,6 @@
 # Copyright 2023 Tecnativa - David Vidal
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError
 from odoo.osv import expression
 from odoo.tools.float_utils import float_compare, float_round
@@ -46,7 +46,7 @@ class StockQuantVlm(models.Model):
         """As in stock.quant inventory mode, we have an special context to trigger
         the update of the linked quant. This way we can make partial stocks tray
         by tray just setting the difference (positive or negative in the quant)"""
-        return self.env.context.get("vlm_inventory_mode") and self.user_has_groups(
+        return self.env.context.get("vlm_inventory_mode") and self.env.user.has_groups(
             "stock.group_stock_manager"
         )
 
@@ -55,7 +55,9 @@ class StockQuantVlm(models.Model):
         quant or tray"""
         if not self._is_inventory_mode():
             return
-        for vlm_quant in self.filtered(lambda x: x.product_id.type == "product"):
+        for vlm_quant in self.filtered(
+            lambda x: x.product_id.type == "consu" and x.product_id.is_storable
+        ):
             rounding = vlm_quant.product_id.uom_id.rounding
             # TODO: Support lots and other quant stuff
             quant = vlm_quant.quant_id or vlm_quant.quant_id.search(
@@ -98,15 +100,16 @@ class StockQuantVlm(models.Model):
         if self._is_inventory_mode() and "quantity" in vals:
             self._set_inventory_quantity(vals["quantity"])
         if "product_id" in vals:
-            raise UserError(_("You can't change the product"))
+            raise UserError(self.env._("You can't change the product"))
         return super().write(vals)
 
-    @api.model
-    def create(self, vals):
-        vlm_quant = super().create(vals)
-        if self._is_inventory_mode():
-            vlm_quant._set_inventory_quantity(vals["quantity"], skip_diff=True)
-        return vlm_quant
+    @api.model_create_multi
+    def create(self, vals_list):
+        vlm_quants = super().create(vals_list)
+        for vlm_quant in vlm_quants:
+            if self._is_inventory_mode():
+                vlm_quant._set_inventory_quantity(vlm_quant.quantity, skip_diff=True)
+        return vlm_quants
 
     def unlink(self):
         # We need to trigger the quantities update whenever this happens

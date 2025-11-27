@@ -11,7 +11,7 @@
                     name="web_ribbon"
                     title="Archived"
                     bg_color="bg-danger"
-                    attrs="{'invisible': [('active', '=', True)]}"
+                    invisible="active"
                 />
                 <label for="name" class="oe_edit_only" />
                 <h1>
@@ -19,7 +19,6 @@
                 </h1>
                 <group>
                     <group string="Tray Configuration" name="settings">
-                        <field name="active" invisible="1" />
                         <field name="code" />
                         <field name="rows" />
                         <field name="cols" />
@@ -66,12 +65,12 @@
     <record id="view_stock_location_tray_type_tree" model="ir.ui.view">
         <field name="model">stock.location.vlm.tray.type</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="name" />
                 <field name="code" />
                 <field name="rows" />
                 <field name="cols" />
-            </tree>
+            </list>
         </field>
     </record>
     <record id="action_stock_location_tray_type" model="ir.actions.act_window">

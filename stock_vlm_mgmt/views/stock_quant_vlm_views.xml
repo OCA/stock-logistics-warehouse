@@ -17,7 +17,6 @@
                                 name="tray_id"
                                 domain="[('location_id', '=', location_id)]"
                             />
-                            <field name="tray_type_id" invisible="1" />
                             <field name="pos_x" readonly="1" force_save="1" />
                             <field name="pos_y" readonly="1" force_save="1" />
                         </group>
@@ -37,7 +36,7 @@
     <record id="view_stock_quant_vlm_tree" model="ir.ui.view">
         <field name="model">stock.quant.vlm</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="tray_id" domain="[('location_id', '=', location_id)]" />
                 <field name="quant_id" optional="hide" readonly="1" />
                 <field name="location_id" optional="show" readonly="1" />
@@ -45,7 +44,7 @@
                 <field name="quantity" />
                 <field name="pos_x" optional="show" />
                 <field name="pos_y" optional="show" />
-            </tree>
+            </list>
         </field>
     </record>
     <record id="location_quant_form_action" model="ir.actions.act_window">
@@ -59,9 +58,9 @@
         <field name="inherit_id" ref="view_stock_quant_vlm_tree" />
         <field name="mode">primary</field>
         <field name="arch" type="xml">
-            <tree position="attributes">
+            <list position="attributes">
                 <attribute name="editable">top</attribute>
-            </tree>
+            </list>
             <field name="location_id" position="attributes">
                 <attribute name="optional">hide</attribute>
             </field>
@@ -103,7 +102,7 @@
     <record id="location_quant_vlm_action" model="ir.actions.act_window">
         <field name="name">Vertical Lift Module Quants</field>
         <field name="res_model">stock.quant.vlm</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
         <field name="search_view_id" ref="vlm_quant_search_view" />
         <field name="view_id" ref="view_stock_quant_vlm_tree" />
     </record>

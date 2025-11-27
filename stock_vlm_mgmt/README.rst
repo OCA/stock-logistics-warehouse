@@ -86,6 +86,7 @@ Contributors
 
   - David Vidal
   - Pedro M. Baeza
+  - Christian Ramos
 
 Maintainers
 -----------

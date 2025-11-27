@@ -3,6 +3,7 @@
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 from odoo import api, fields, models
+from odoo.exceptions import UserError
 from odoo.tools import float_compare, float_is_zero
 
 
@@ -101,7 +102,9 @@ class VlmOperationTask(models.Model):
         #   - TODO: The quantity couldn't be fulfilled: the picking was wrong
         elif quantity_compare < 0:
             # Return it as it is
-            if float_is_zero(quantity_done, self.product_id.uom_id.rounding):
+            if float_is_zero(
+                quantity_done, precision_rounding=self.product_id.uom_id.rounding
+            ):
                 return ("zero_quantity", self)
             # Add an extra task for the remaining quantity and launch the wizard
             # so the user decides where to put them
@@ -182,7 +185,7 @@ class VlmOperationTask(models.Model):
         )
         tasks = self.filtered(lambda x: x.state != "done" or x.skipped)
         if not tasks:
-            return
+            raise UserError(self.env._("There are no pending tasks to perform"))
         action["name"] = f"VLM task {1} of {len(self.ids)}"
         action["context"] = dict(
             self.env.context,
