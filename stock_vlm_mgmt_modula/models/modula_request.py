@@ -2,7 +2,6 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 import logging
 from time import sleep
-from typing import Union
 from urllib.parse import urljoin
 
 import requests
@@ -62,7 +61,7 @@ class ModulaRequest:
         self.password = password
         self.url = f"http://{self.ip}:{self.port}"
 
-    def _prepare_request(self, data: Union[dict, list]) -> dict:
+    def _prepare_request(self, data: dict | list) -> dict:
         """Standard Modula WMS request. They keys could be customized but it's not
         supported at this moment. The method can be overriden tho."""
         if isinstance(data, dict):
