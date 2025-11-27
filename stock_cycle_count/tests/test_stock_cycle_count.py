@@ -10,7 +10,7 @@ from odoo.tests import common
 class TestStockCycleCount(common.TransactionCase):
     @classmethod
     def setUpClass(cls):
-        super(TestStockCycleCount, cls).setUpClass()
+        super().setUpClass()
         cls.res_users_model = cls.env["res.users"]
         cls.cycle_count_model = cls.env["stock.cycle.count"]
         cls.stock_cycle_count_rule_model = cls.env["stock.cycle.count.rule"]
