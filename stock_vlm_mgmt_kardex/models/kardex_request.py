@@ -76,7 +76,9 @@ class KardexRequest:
         """
         parsed_data = dict.fromkeys(KARDEX_KEYS, None)
         try:
-            parsed_data.update({k: v for k, v in zip(KARDEX_KEYS, data.split(";"))})
+            parsed_data.update(
+                {k: v for k, v in zip(KARDEX_KEYS, data.split(";"), strict=False)}
+            )
         except Exception:
             _logger.debug(f"Exception parsing data: {data}")
         if parsed_data.get("qty"):
@@ -134,7 +136,7 @@ class KardexRequest:
                 try:
                     res = device.recv(1024).decode("utf-8")
                     _logger.info(res)
-                except socket.timeout:
+                except TimeoutError:
                     response["code"] = "-3"
                     return response
                 response = self.parse_data(res)
