@@ -630,3 +630,63 @@ class TestStockCycleCount(common.TransactionCase):
                 additional_user_2.id,
                 "Quant user not updated after inventory responsible change.",
             )
+
+    def test_inventory_adjustment_auto_complete_accuracy(self):
+        self.env.company.stock_inventory_auto_complete = True
+        date = datetime.today() - timedelta(days=1)
+        # Create location
+        loc = self.stock_location_model.create(
+            {"name": "Test Location", "usage": "internal"}
+        )
+        # Create stock quants for specific location
+        quant1 = self.quant_model.create(
+            {
+                "product_id": self.product1.id,
+                "location_id": loc.id,
+                "quantity": 10.0,
+            }
+        )
+        quant2 = self.quant_model.create(
+            {
+                "product_id": self.product2.id,
+                "location_id": loc.id,
+                "quantity": 15.0,
+            }
+        )
+        # Create adjustments for specific location
+        adjustment = self.inventory_model.create(
+            {
+                "name": "Pre-existing inventory",
+                "location_ids": [Command.link(loc.id)],
+                "date": date,
+            }
+        )
+        # Start the adjustment
+        adjustment.action_state_to_in_progress()
+        # Check that there are stock quants for the specific location
+        self.assertTrue(self.env["stock.quant"].search([("location_id", "=", loc.id)]))
+        # Make the count of the stock
+        quant1.update(
+            {
+                "inventory_quantity": 5,
+            }
+        )
+        quant2.update(
+            {
+                "inventory_quantity": 10,
+            }
+        )
+        # Apply the changes
+        quant1._apply_inventory()
+        quant2._apply_inventory()
+        # Check that line_accuracy is calculated properly
+        sml = self.env["stock.move.line"].search(
+            [("location_id", "=", loc.id), ("product_id", "=", self.product1.id)]
+        )
+        self.assertEqual(sml.line_accuracy, 0.5)
+        sml = self.env["stock.move.line"].search(
+            [("location_id", "=", loc.id), ("product_id", "=", self.product2.id)]
+        )
+        self.assertEqual(sml.line_accuracy, 0.6667000000000001)
+        # Check that accuracy is correctly calculated
+        self.assertEqual(adjustment.inventory_accuracy, 60)
