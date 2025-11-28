@@ -21,7 +21,7 @@ class StockQuant(models.Model):
     def _apply_inventory(self):
         res = super()._apply_inventory()
         record_moves = self.env["stock.move.line"]
-        adjustment = self.env["stock.inventory"].browse()
+        adjustments = []
         for rec in self:
             adjustment = rec.current_inventory_id
             moves = record_moves.search(
@@ -55,8 +55,11 @@ class StockQuant(models.Model):
             )
             rec.to_do = False
             rec.current_inventory_id = False
-        if adjustment and self.env.company.stock_inventory_auto_complete:
-            adjustment.action_auto_state_to_done()
+            if adjustment not in adjustments:
+                adjustments.append(adjustment)
+        if adjustments and self.env.company.stock_inventory_auto_complete:
+            for adjustment in adjustments:
+                adjustment.action_auto_state_to_done()
         return res
 
     def _get_inventory_fields_write(self):
