@@ -57,7 +57,7 @@ class TestPick(VerticalLiftCase):
         self.assertEqual(inventory.state, "done")
         self.assertEqual(
             inventory.name,
-            "Zero check in location: {}".format(tray_location.complete_name),
+            f"Zero check in location: {tray_location.complete_name}",
         )
         self.assertEqual(len(inventory.line_ids), 1)
         self.assertEqual(inventory.line_ids[0].product_id, tray_product)
@@ -75,10 +75,7 @@ class TestPick(VerticalLiftCase):
         self.assertEqual(inventory.state, "draft")
         self.assertEqual(
             inventory.name,
-            "{} zero check issue on location {}".format(
-                self.picking_out.name,
-                tray_location.complete_name,
-            ),
+            f"{self.picking_out.name} zero check issue on location {tray_location.complete_name}",
         )
         self.assertEqual(inventory.product_ids, tray_product)
         self.assertEqual(inventory.location_ids, tray_location)
