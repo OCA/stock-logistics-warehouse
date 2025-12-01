@@ -50,8 +50,10 @@
                 />
                 <field name="total_consumption" string="Cantidad Total (Consumos)" />
                 <field name="initial_mix" string="Mezcla Inicial" />
+                <field name="initial_mix_date" string="Fecha Mezcla Inicial" />
                 <field name="kg_consumed_mi" string="KG consumidos MI" />
                 <field name="final_mix" string="Mezcla Final" />
+                <field name="final_mix_date" string="Fecha Mezcla Final" />
                 <field name="kg_consumed_mf" string="KG consumidos MF" />
             </xpath>
         </field>

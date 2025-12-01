@@ -1,7 +1,5 @@
 import logging
 
-import logging
-
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 
@@ -37,7 +35,6 @@ class StockLocation(models.Model):
                 raise ValidationError(
                     _("Cannot disable stage tracking while not on the default stage.")
                 )
-
 
     @api.onchange("track_stage")
     def _onchange_track_stage(self):
@@ -87,8 +84,8 @@ class StockLocation(models.Model):
     @api.constrains("stage_id")
     def check_stage_change(self):
         default_stage = self.env["stock.location.stage"].search(
-                [("is_default", "=", True)], limit=1
-            )
+            [("is_default", "=", True)], limit=1
+        )
         self.ensure_one()
         # Check if we're trying to disable track_stage when not on default stage
         # This runs when stage_id changes, so we check if track_stage is False
@@ -98,8 +95,8 @@ class StockLocation(models.Model):
                 raise ValidationError(
                     _("Cannot disable stage tracking while not on the default stage.")
                 )
-            
-        if (not self.last_stage_id and not self.stage_id.is_default):
+
+        if not self.last_stage_id and not self.stage_id.is_default:
             if not self.actual_product_id:
                 raise ValidationError(
                     _("A product must be assigned before changing stages.")
@@ -277,6 +274,7 @@ class StockLocation(models.Model):
                     return True
         except Exception as e:
             raise ValidationError(_(f"Error querying in MSSQL: {e}")) from e
+
     def macrolotCreation(self):
         # Create a new lot with the requested naming convention
         # Format: <location_name>-<5-digit_consecutive_number>
@@ -287,7 +285,18 @@ class StockLocation(models.Model):
         existing_lots = self.env["stock.lot"].search(
             [("name", "like", f"{location_name}-")]
         )
-        next_number = len(existing_lots) + 1
+
+        max_number = 0
+        for lot in existing_lots:
+            if "-" in lot.name:
+                suffix = lot.name.split("-")[-1]
+                if suffix.isdigit():
+                    num = int(suffix)
+                    if num > max_number:
+                        max_number = num
+
+        next_number = max_number + 1
+
         lot_name = f"{location_name}-{next_number:05d}"
         lot_vals = {
             "name": lot_name,

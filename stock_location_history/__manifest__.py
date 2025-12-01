@@ -4,7 +4,7 @@
     "license": "AGPL-3",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "author": "Open Source Integrators, Odoo Community Association (OCA)",
-    "depends": ["stock"],
+    "depends": ["stock", "gaqsa_plc"],
     "category": "Stock",
     "data": [
         # "data/stock_location_stage_data.xml",
