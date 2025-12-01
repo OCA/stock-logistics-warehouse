@@ -4,23 +4,24 @@
 #    @author Julien WESTE
 #    @author Sylvain LE GAL (https://twitter.com/legalsylvain)
 
-from odoo import api, fields, models
+from odoo import fields, models
 
 
 class ComputedPurchaseOrderLine(models.Model):
     _inherit = "computed.purchase.order.line"
 
     # Columns section
-    displayed_product_history_ids = fields.Many2many(
+    displayed_product_history_ids = fields.One2many(
         "product.history",
         related="product_id.product_history_ids",
         string="Product History",
     )
 
     # Private section
-    @api.multi
     def view_history(self):
-        action = self.env.ref("product_history_for_cpo.action_view_history").read()[0]
+        action = self.env["ir.actions.actions"]._for_xml_id(
+            "product_history.action_history_view"
+        )
         ids = []
         history_ranges = []
         for cpol in self:
@@ -30,4 +31,10 @@ class ComputedPurchaseOrderLine(models.Model):
             ("product_id", "in", ids),
             ("history_range", "in", history_ranges),
         ]
+        action["target"] = "new"
+        action["context"] = {
+            "active_model": "computed.purchase.order.line",
+            "active_id": self and self[0].id,
+            "active_ids": self.ids,
+        }
         return action

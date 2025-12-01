@@ -6,17 +6,9 @@
 
 {
     "name": "Product History for CPO",
-    "version": "12.0.1.0.0",
+    "version": "18.0.1.0.0",
     "category": "Product",
-    "description": """
-Give access to Product History information in CPO process
-==========================================================
-Functionnality :
-----------------
-    In the cpo_line, a button can popup the product history. You can then
-    see all history lines and mark some of them as "ignored".
-""",
-    "author": "Akretion, Druidoo",
+    "author": "Akretion, Druidoo, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "license": "AGPL-3",
     "depends": [
