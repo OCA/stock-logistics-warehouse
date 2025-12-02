@@ -11,8 +11,7 @@ class StockQuant(models.Model):
         string="Discrepancy percent (%)",
         compute="_compute_discrepancy",
         digits=(3, 2),
-        help="The discrepancy expressed in percent with theoretical quantity "
-        "as basis",
+        help="The discrepancy expressed in percent with theoretical quantity as basis",
         aggregator="avg",
         store=True,
         compute_sudo=True,
