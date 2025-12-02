@@ -1,6 +1,6 @@
 from odoo import api, fields, models
 from odoo.exceptions import UserError, ValidationError
-from odoo.osv import expression
+from odoo.fields import Domain
 
 
 class InventoryAdjustmentsGroup(models.Model):
@@ -178,18 +178,13 @@ class InventoryAdjustmentsGroup(models.Model):
 
     @api.depends("stock_move_ids")
     def _compute_count_stock_moves(self):
-        group_fname = "inventory_adjustment_id"
-        group_data = self.env["stock.move.line"].read_group(
-            [
-                (group_fname, "in", self.ids),
-            ],
-            [group_fname],
-            [group_fname],
+        field_name = "inventory_adjustment_id"
+        result = self.env["stock.move.line"]._read_group(
+            domain=[(field_name, "in", self.ids)],
+            groupby=[field_name],
+            aggregates=[f"{field_name}:count"],
         )
-        data_by_adj_id = {
-            row[group_fname][0]: row.get(f"{group_fname}_count", 0)
-            for row in group_data
-        }
+        data_by_adj_id = {rec.id: cnt for rec, cnt in result}
         for rec in self:
             rec.count_stock_moves = data_by_adj_id.get(rec.id, 0)
 
@@ -229,13 +224,11 @@ class InventoryAdjustmentsGroup(models.Model):
 
     def _get_domain_manual_quants(self, base_domain):
         self.ensure_one()
-        return expression.AND(
-            [base_domain, [("product_id", "in", self.product_ids.ids)]]
-        )
+        return Domain.AND([base_domain, [("product_id", "in", self.product_ids.ids)]])
 
     def _get_domain_one_quant(self, base_domain):
         self.ensure_one()
-        return expression.AND(
+        return Domain.AND(
             [
                 base_domain,
                 [
@@ -246,7 +239,7 @@ class InventoryAdjustmentsGroup(models.Model):
 
     def _get_domain_lot_quants(self, base_domain):
         self.ensure_one()
-        return expression.AND(
+        return Domain.AND(
             [
                 base_domain,
                 [
@@ -258,7 +251,7 @@ class InventoryAdjustmentsGroup(models.Model):
 
     def _get_domain_category_quants(self, base_domain):
         self.ensure_one()
-        return expression.AND(
+        return Domain.AND(
             [
                 base_domain,
                 [
@@ -475,7 +468,7 @@ class InventoryAdjustmentsGroup(models.Model):
     def unlink(self):
         for adjustment in self:
             if adjustment.state != "draft":
-                raise UserError(
+                raise UserError(  # pylint: disable=E8140
                     self.env._(
                         "You can only delete inventory adjustments groups in"
                         " draft state."

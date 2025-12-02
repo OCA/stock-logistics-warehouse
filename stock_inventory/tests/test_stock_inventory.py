@@ -52,14 +52,12 @@ class TestStockInventory(BaseCommon):
                 "company_id": self.env.company.id,
             }
         )
-        self.location_src = self.env.ref("stock.stock_location_locations_virtual")
         self.location_dst = self.env.ref("stock.stock_location_customers")
 
         self.location1 = self.location_model.create(
             {
                 "name": "Location 1",
                 "usage": "internal",
-                "location_id": self.location_src.id,
             }
         )
         self.location2 = self.location_model.create(
