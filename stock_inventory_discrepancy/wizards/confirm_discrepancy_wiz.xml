@@ -15,7 +15,7 @@
         <field name="name">confirm.discrepancy.wiz.form</field>
         <field name="model">confirm.discrepancy.wiz</field>
         <field name="arch" type="xml">
-            <form string="Dates does not match">
+            <form>
                 <p
                     groups="!stock_inventory_discrepancy.group_stock_inventory_validation_always"
                 >
@@ -31,7 +31,7 @@
                 </p>
                 <field
                     name="discrepancy_quant_ids"
-                    context="{'tree_view_ref':'stock_inventory_discrepancy.stock_quant_confirm_discrepancy'}"
+                    context="{'list_view_ref':'stock_inventory_discrepancy.stock_quant_confirm_discrepancy'}"
                     options="{'no_create': True}"
                 />
                 <footer>
