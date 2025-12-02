@@ -27,7 +27,7 @@
                     optional="hide"
                 />
                 <field name="discrepancy_threshold" optional="hide" />
-                <field name="has_over_discrepancy" invisible="1" />
+                <field name="has_over_discrepancy" column_invisible="1" />
             </field>
             <xpath expr="//list" position="attributes">
                 <attribute
@@ -43,7 +43,7 @@
         <field name="inherit_id" ref="stock.quant_search_view" />
         <field eval="10" name="priority" />
         <field name="arch" type="xml">
-            <filter name="reserved" position="after">
+            <filter name="negative" position="after">
                 <filter
                     name='has_over_discrepancy'
                     string="Over Discrepancy"

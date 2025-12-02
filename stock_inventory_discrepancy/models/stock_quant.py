@@ -1,6 +1,6 @@
 # Copyright 2023 Tecnativa - Ernesto Tejeda
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError
 
 
@@ -28,15 +28,15 @@ class StockQuant(models.Model):
 
     def _search_has_over_discrepancy(self, operator, value):
         if operator not in ["=", "!="]:
-            raise UserError(_("This operator is not supported"))
+            raise UserError(self.env._("This operator is not supported"))
         if value == "True":
             value = True
         elif value == "False":
             value = False
         if not isinstance(value, bool):
-            raise UserError(_("Value should be True or False (not %s)") % value)
+            raise UserError(self.env._("Value should be True or False (not %s)", value))
         ids = []
-        for quant in self.search([]):
+        for quant in self.search([]):  # pylint: disable=W8163
             has_over_discrepancy = (
                 quant.discrepancy_percent > quant.location_id.discrepancy_threshold
             )
@@ -72,25 +72,25 @@ class StockQuant(models.Model):
                 rec.discrepancy_percent > rec.discrepancy_threshold
             )
 
-    def action_apply_inventory(self):
+    def action_apply_inventory(self, date=None):
         if self.env.context.get("skip_exceeded_discrepancy", False):
-            return super().action_apply_inventory()
+            return super().action_apply_inventory(date=date)
         if not self.env.company.inventory_discrepancy_enable:
-            return super().action_apply_inventory()
+            return super().action_apply_inventory(date=date)
         over_discrepancy = self.filtered(lambda r: r.has_over_discrepancy)
         if over_discrepancy:
             action = self.env["ir.actions.act_window"]._for_xml_id(
                 "stock_inventory_discrepancy.confirm_discrepancy_action"
             )
             action["context"] = dict(
-                self._context.copy(),
+                self.env.context.copy(),
                 discrepancy_quant_ids=over_discrepancy.ids,
                 active_ids=self.ids,
             )
             return action
-        return super().action_apply_inventory()
+        return super().action_apply_inventory(date=date)
 
-    def _apply_inventory(self):
+    def _apply_inventory(self, date=None):
         if (
             not self.env.user.has_group("stock.group_stock_manager")
             and not self.env.user.has_group(
@@ -101,8 +101,8 @@ class StockQuant(models.Model):
             )
         ):
             raise UserError(
-                _("Only a stock manager can validate an inventory adjustment.")
+                self.env._("Only a stock manager can validate an inventory adjustment.")
             )
         # Allow to write last_inventory_date on stock.location
         self = self.sudo().with_context(from_apply_inventory=True)
-        return super()._apply_inventory()
+        return super()._apply_inventory(date=date)
