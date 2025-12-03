@@ -25,9 +25,7 @@ class ProcurementGroup(models.Model):
         ):
             route_id = values.get("route_ids", "no_route")
 
-            route_groups_mapping = dict(
-                self.env.context.get("route_groups_mapping", {})
-            )
+            route_groups_mapping = self.env.context.get("route_groups_mapping", {})
             group = False
             if route_id in route_groups_mapping:
                 # Use existing group for this route
@@ -43,10 +41,6 @@ class ProcurementGroup(models.Model):
                 route_groups_mapping[route_id] = group.id
 
             values["group_id"] = group
-
-            self.env.context = dict(
-                self.env.context, route_groups_mapping=route_groups_mapping
-            )
 
         elif rule and rule.auto_create_group and values.get("date_planned"):
             values["group_id"] = rule._get_auto_procurement_group(product_id)
