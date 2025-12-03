@@ -14,7 +14,7 @@ class StockWarehouseOrderpoint(models.Model):
         orderpoint has a route with 'auto_create_group' enabled.
         """
 
-        route_groups_mapping = {}
+        route_groups_mapping = self.env.context.get("route_groups_mapping", {})
 
         context_with_grouping = {
             "enable_route_grouping": True,
