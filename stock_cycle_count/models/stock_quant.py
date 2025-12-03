@@ -13,6 +13,7 @@ class StockQuant(models.Model):
         theoretical_dict = {}
         counted_dict = {}
         StockMoveLine = self.env["stock.move.line"]
+        inv_adjustments_ids = set()
         for quant in self:
             if quant.discrepancy_percent > 100:
                 line_accuracy = 0
@@ -42,3 +43,11 @@ class StockQuant(models.Model):
                         "counted_qty": counted_dict[quant.id],
                     }
                 )
+                adjustment_id = last_move_line.inventory_adjustment_id.id
+                inv_adjustments_ids.add(adjustment_id)
+
+        if inv_adjustments_ids:
+            inv_adjustments = self.env["stock.inventory"].browse(
+                list(inv_adjustments_ids)
+            )
+            inv_adjustments._calculate_inventory_accuracy()

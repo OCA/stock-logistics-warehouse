@@ -127,13 +127,11 @@ class StockInventory(models.Model):
 
     def action_state_to_done(self):
         res = super().action_state_to_done()
-        self._calculate_inventory_accuracy()
         self._update_cycle_state()
         return res
 
     def action_force_done(self):
         res = super().action_force_done()
-        self._calculate_inventory_accuracy()
         self._update_cycle_state()
         return res
 
