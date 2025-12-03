@@ -24,7 +24,7 @@ class StockLocation(models.Model):
             self.env["stock.inventory"].sudo()._get_locations_open_inventories(self.ids)
         )
         if location_inventory_open_ids:
-            raise ValidationError(
+            raise ValidationError(  # pylint: disable=no-raise-unlink
                 self.env._("An inventory is being conducted at this location")
             )
         return super().unlink()

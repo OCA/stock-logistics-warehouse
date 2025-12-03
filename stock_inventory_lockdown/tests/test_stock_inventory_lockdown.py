@@ -54,20 +54,22 @@ class StockInventoryLocationTest(TestStockCommon):
     def create_stock_move(self, product, origin_id=False, dest_id=False):
         return self.env["stock.move"].create(
             {
-                "name": "Test move lock down",
                 "product_id": product.id,
                 "product_uom_qty": 10.0,
                 "product_uom": product.uom_id.id,
-                "location_id": origin_id or self.supplier_location,
-                "location_dest_id": dest_id or self.customer_location,
+                "location_id": origin_id or self.supplier_location.id,
+                "location_dest_id": dest_id or self.customer_location.id,
             }
         )
 
     def test_update_parent_location(self):
         """Updating the parent of a location is OK if no inv. in progress."""
         self.inventory.action_state_to_draft()
-        self.inventory.location_ids.location_id = self.env.ref(
-            "stock.stock_location_14"
+        self.inventory.location_ids.location_id = self.env["stock.location"].create(
+            {
+                "name": "Shelf 2",
+                "location_id": self.env.ref("stock.warehouse0").lot_stock_id.id,
+            }
         )
 
     def test_update_parent_location_locked_down(self):
