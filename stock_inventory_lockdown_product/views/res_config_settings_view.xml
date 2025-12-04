@@ -12,18 +12,17 @@
         <field name="model">res.config.settings</field>
         <field name="inherit_id" ref="stock_inventory.res_config_settings_view_form" />
         <field name="arch" type="xml">
-            <xpath expr="//div[@name='stock_inventory_container']" position="inside">
-                <div class="col-xs-12 col-md-6 o_setting_box">
-                    <div class="o_setting_left_pane">
-                        <field name="use_soft_inventory_lock" />
-                    </div>
-                    <div class="o_setting_right_pane">
-                        <label for="use_soft_inventory_lock" />
-                        <div class="text-muted">
-                            When enabled, inventory locks only restrict stock moves involving products that are part of an active inventory adjustment.
-                        </div>
-                    </div>
-                </div>
+            <xpath
+                expr="//block[@id='stock_inventory_setting_container']"
+                position="inside"
+            >
+                <setting
+                    id="use_soft_inventory_lock"
+                    string="Use Product-Aware Inventory Lock"
+                    help="When enabled, inventory locks only restrict stock moves involving products that are part of an active inventory adjustment."
+                >
+                    <field name="use_soft_inventory_lock" />
+                </setting>
             </xpath>
         </field>
     </record>

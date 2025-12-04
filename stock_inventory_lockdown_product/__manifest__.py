@@ -4,7 +4,7 @@
 {
     "name": "Inventory Lock Down Product",
     "summary": "Lock down stock locations during inventories for inventoried products",
-    "version": "15.0.1.0.0",
+    "version": "19.0.1.0.0",
     "development_status": "Beta",
     "depends": ["stock_inventory_lockdown"],
     "author": "ForgeFlow, Odoo Community Association (OCA)",

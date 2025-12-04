@@ -36,12 +36,11 @@ class StockInventoryLocationTest(TestStockCommon):
     def create_stock_move(self, product, origin_id=False, dest_id=False):
         return self.env["stock.move"].create(
             {
-                "name": "Test move lock down",
                 "product_id": product.id,
                 "product_uom_qty": 10.0,
                 "product_uom": product.uom_id.id,
                 "location_id": origin_id or self.supplier_location.id,
-                "location_dest_id": dest_id or self.customer_location,
+                "location_dest_id": dest_id or self.customer_location.id,
             }
         )
 
@@ -51,17 +50,19 @@ class StockInventoryLocationTest(TestStockCommon):
                 "name": "Lock down location",
                 "location_ids": [(4, self.internal_location.id)],
                 "product_ids": [(4, self.productA.id)],
+                "product_selection": "manual",
             }
         )
         inventory.action_state_to_in_progress()
         move = self.create_stock_move(
             product=self.productA,
             origin_id=self.internal_location.id,
-            dest_id=self.customer_location,
+            dest_id=self.customer_location.id,
         )
         move._action_confirm()
         move._action_assign()
-        move.move_line_ids.qty_done = 5
+        move._set_quantity_done(5)
+        move.picked = True
         with self.assertRaises(ValidationError):
             move._action_done()
 
@@ -71,17 +72,19 @@ class StockInventoryLocationTest(TestStockCommon):
                 "name": "Lock down location",
                 "location_ids": [(4, self.internal_location.id)],
                 "product_ids": [(4, self.productA.id)],
+                "product_selection": "manual",
             }
         )
         inventory.action_state_to_in_progress()
         move = self.create_stock_move(
             product=self.productB,
             origin_id=self.internal_location.id,
-            dest_id=self.customer_location,
+            dest_id=self.customer_location.id,
         )
         move._action_confirm()
         move._action_assign()
-        move.move_line_ids.qty_done = 5
+        move._set_quantity_done(5)
+        move.picked = True
         move._action_done()  # Should not raise
 
     def test_soft_lock_disabled_should_block_any_product(self):
@@ -90,6 +93,7 @@ class StockInventoryLocationTest(TestStockCommon):
                 "name": "Lock down location",
                 "location_ids": [(4, self.internal_location.id)],
                 "product_ids": [(4, self.productA.id)],
+                "product_selection": "manual",
             }
         )
         inventory.action_state_to_in_progress()
@@ -97,10 +101,11 @@ class StockInventoryLocationTest(TestStockCommon):
         move = self.create_stock_move(
             product=self.productB,
             origin_id=self.internal_location.id,
-            dest_id=self.customer_location,
+            dest_id=self.customer_location.id,
         )
         move._action_confirm()
         move._action_assign()
-        move.move_line_ids.qty_done = 10.0
+        move._set_quantity_done(10)
+        move.picked = True
         with self.assertRaises(ValidationError):
             move._action_done()
