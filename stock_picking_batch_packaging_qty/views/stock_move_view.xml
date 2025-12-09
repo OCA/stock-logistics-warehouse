@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 Moduon Team S.L.
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0) -->
+<data>
+    <record id="view_picking_move_tree_inherited" model="ir.ui.view">
+        <field name="name">stock_picking_batch.picking.move.tree</field>
+        <field name="model">stock.move</field>
+        <field
+            name="inherit_id"
+            ref="stock_picking_batch.view_picking_move_tree_inherited"
+        />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='product_packaging_id']" position="after">
+                <field
+                    name="product_packaging_qty"
+                    groups="product.group_stock_packaging"
+                    optional="hide"
+                    invisible="not product_packaging_id"
+                    string="Pack Qty"
+                />
+            </xpath>
+        </field>
+    </record>
+</data>
