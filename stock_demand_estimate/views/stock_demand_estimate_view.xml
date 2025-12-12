@@ -13,7 +13,7 @@
                 <field name="product_uom" />
                 <field name="product_qty" />
                 <field name="daily_qty" />
-                <field name="active" invisible="1" />
+                <field name="active" column_invisible="True" />
             </list>
         </field>
     </record>
