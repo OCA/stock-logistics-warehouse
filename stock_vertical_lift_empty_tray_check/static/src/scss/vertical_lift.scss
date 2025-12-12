@@ -1,0 +1,11 @@
+.o_web_client {
+    .o_shuttle_empty_tray_check_button {
+        display: flex;
+        flex: 1 0 auto;
+        padding: 0 4em;
+
+        &.o_shuttle_empty_tray_check_button_right {
+            justify-content: flex-end;
+        }
+    }
+}

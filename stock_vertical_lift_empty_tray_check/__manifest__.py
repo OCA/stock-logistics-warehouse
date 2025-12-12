@@ -14,6 +14,11 @@
         "views/res_config_setting_views.xml",
         "views/vertical_lift_operation_pick_zero_check_views.xml",
     ],
+    "assets": {
+        "web.assets_backend": [
+            "stock_vertical_lift_empty_tray_check/static/src/scss/vertical_lift.scss",
+        ]
+    },
     "installable": True,
     "development_status": "Alpha",
 }

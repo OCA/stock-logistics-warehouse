@@ -34,7 +34,7 @@ class VerticalLiftOperationPick(models.Model):
             {"vertical_lift_operation_pick_id": self.id}
         )
         return {
-            "name": self.env._("Is the tray empty?"),
+            "name": self.env._("Empty check"),
             "type": "ir.actions.act_window",
             "view_mode": "form",
             "target": "new",

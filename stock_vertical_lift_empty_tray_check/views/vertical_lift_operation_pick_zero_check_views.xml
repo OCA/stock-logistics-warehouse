@@ -7,27 +7,27 @@
         <field name="model">vertical.lift.operation.pick.zero.check</field>
         <field name="arch" type="xml">
             <form>
-                <div class="row">
-                    <div class="col-6">
+                <p class="text-center fs-1">Is the tray empty?</p>
+                <footer>
+                    <div class="o_shuttle_empty_tray_check_button">
                         <button
                             name="button_confirm_empty"
                             string="Tray Empty"
                             type="object"
-                            class="btn-success"
-                            style="padding: 1em; font-size: 2em; text-transform: uppercase;"
+                            class="btn-success fs-1"
                         />
                     </div>
-                    <div class="col-6">
+                    <div
+                        class="o_shuttle_empty_tray_check_button o_shuttle_empty_tray_check_button_right"
+                    >
                         <button
                             name="button_confirm_not_empty"
                             string="Tray Not Empty"
                             type="object"
-                            class="btn-danger"
-                            style="padding: 1em; font-size: 2em; text-transform: uppercase;"
+                            class="btn-danger fs-1"
                         />
                     </div>
-                </div>
-                <footer />
+                </footer>
             </form>
         </field>
     </record>
