@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.vertical.lift</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="30" />
+        <field
+            name="inherit_id"
+            ref="stock_vertical_lift.res_config_settings_view_form"
+        />
+        <field name="arch" type="xml">
+            <xpath expr="//setting[@id='vertical_lift_secret']" position="after">
+                <setting
+                    id="empty_tray_check"
+                    title="Enable check empty vertical lift tray"
+                    help="Operator will verify when system detects an empty vertical tray"
+                >
+                    <field name="vertical_lift_empty_tray_check" />
+                    <div class="content-group">
+                        <div class="text-muted">
+                                If checked and the system thinks the vertical tray is
+                                empty, the operator will be asked to explicitly check
+                                if this is the case or not
+                            </div>
+                    </div>
+                </setting>
+            </xpath>
+        </field>
+    </record>
+</odoo>
