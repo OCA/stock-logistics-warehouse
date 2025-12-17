@@ -131,6 +131,8 @@ Contributors
 
 - Kitti Upariphutthiphong <kittiu@ecosoft.co.th>
 
+- Carlos Sainz-Pardo <carlos.sainz@netkia.es>
+
 Maintainers
 -----------
 
