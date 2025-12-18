@@ -5,6 +5,20 @@ from odoo.tests.common import TransactionCase
 
 
 class TestMtoMtsRoute(TransactionCase):
+    def _get_common_procurement_for_customer(self, product_qty=2.0, values=None):
+        if values is None:
+            values = self.procurement_vals
+        return self.env["procurement.group"].Procurement(
+            self.product,
+            product_qty,
+            self.uom,
+            self.customer_loc,
+            self.product.name,
+            "test",
+            self.warehouse.company_id,
+            values,
+        )
+
     def _create_quant(self, qty):
         self.quant = self.env["stock.quant"].create(
             {
@@ -19,59 +33,19 @@ class TestMtoMtsRoute(TransactionCase):
         mto_route = self.env.ref("stock.route_warehouse0_mto")
         mto_route.active = True
         self.product.route_ids = [Command.set(mto_route.ids)]
-        self.env["procurement.group"].run(
-            [
-                self.group.Procurement(
-                    self.product,
-                    2.0,
-                    self.uom,
-                    self.customer_loc,
-                    self.product.name,
-                    "test",
-                    self.warehouse.company_id,
-                    self.procurement_vals,
-                )
-            ]
-        )
+        self.env["procurement.group"].run([self._get_common_procurement_for_customer()])
         moves = self.move_obj.search([("group_id", "=", self.group.id)])
         self.assertEqual(len(moves), 2)
 
     def test_standard_mts_route(self):
-        self.env["procurement.group"].run(
-            [
-                self.group.Procurement(
-                    self.product,
-                    2.0,
-                    self.uom,
-                    self.customer_loc,
-                    self.product.name,
-                    "test",
-                    self.warehouse.company_id,
-                    self.procurement_vals,
-                )
-            ]
-        )
+        self.env["procurement.group"].run([self._get_common_procurement_for_customer()])
         moves = self.move_obj.search([("group_id", "=", self.group.id)])
         self.assertEqual(len(moves), 1)
 
     def test_mts_mto_route_split(self):
-        mto_mts_route = self.env.ref("stock_mts_mto_rule.route_mto_mts")
-        self.product.route_ids = [Command.set(mto_mts_route.ids)]
+        self.product.route_ids = [Command.set(self.mto_mts_route.ids)]
         self._create_quant(1.0)
-        self.env["procurement.group"].run(
-            [
-                self.group.Procurement(
-                    self.product,
-                    2.0,
-                    self.uom,
-                    self.customer_loc,
-                    self.product.name,
-                    "test",
-                    self.warehouse.company_id,
-                    self.procurement_vals,
-                )
-            ]
-        )
+        self.env["procurement.group"].run([self._get_common_procurement_for_customer()])
         moves = self.env["stock.move"].search([("group_id", "=", self.group.id)])
         self.assertEqual(3, len(moves))
         move_mts = self.env["stock.move"].search(
@@ -95,22 +69,8 @@ class TestMtoMtsRoute(TransactionCase):
         self.assertEqual("waiting", move_mto.state)
 
     def test_mts_mto_route_mto_only(self):
-        mto_mts_route = self.env.ref("stock_mts_mto_rule.route_mto_mts")
-        self.product.route_ids = [Command.set(mto_mts_route.ids)]
-        self.env["procurement.group"].run(
-            [
-                self.group.Procurement(
-                    self.product,
-                    2.0,
-                    self.uom,
-                    self.customer_loc,
-                    self.product.name,
-                    "test",
-                    self.warehouse.company_id,
-                    self.procurement_vals,
-                )
-            ]
-        )
+        self.product.route_ids = [Command.set(self.mto_mts_route.ids)]
+        self.env["procurement.group"].run([self._get_common_procurement_for_customer()])
         moves = self.env["stock.move"].search(
             [
                 ("group_id", "=", self.group.id),
@@ -122,23 +82,9 @@ class TestMtoMtsRoute(TransactionCase):
         self.assertEqual("make_to_order", moves[0].procure_method)
 
     def test_mts_mto_route_mts_only(self):
-        mto_mts_route = self.env.ref("stock_mts_mto_rule.route_mto_mts")
-        self.product.route_ids = [Command.set(mto_mts_route.ids)]
+        self.product.route_ids = [Command.set(self.mto_mts_route.ids)]
         self._create_quant(3.0)
-        self.env["procurement.group"].run(
-            [
-                self.group.Procurement(
-                    self.product,
-                    2.0,
-                    self.uom,
-                    self.customer_loc,
-                    self.product.name,
-                    "test",
-                    self.warehouse.company_id,
-                    self.procurement_vals,
-                )
-            ]
-        )
+        self.env["procurement.group"].run([self._get_common_procurement_for_customer()])
         moves = self.env["stock.move"].search([("group_id", "=", self.group.id)])
         self.assertEqual(1, len(moves))
         self.assertEqual(2.0, moves[0].product_uom_qty)
@@ -154,8 +100,10 @@ class TestMtoMtsRoute(TransactionCase):
             rule.write({"mts_rule_id": self.dummy_rule.id})
 
     def test_mts_mto_route_mto_removed(self):
-        self.env.ref("stock_mts_mto_rule.route_mto_mts").unlink()
-        with self.assertRaises(exceptions.UserError):
+        self.mto_mts_route.unlink()
+        with self.assertRaisesRegex(
+            exceptions.UserError, "Can't find any generic route.*"
+        ):
             # mts_mto_rule_id is checked as a global rule
             self.warehouse.mts_mto_rule_id = False
 
@@ -191,9 +139,7 @@ class TestMtoMtsRoute(TransactionCase):
         self.assertEqual(
             mts_mto_route.picking_type_id, self.warehouse.mto_pull_id.picking_type_id
         )
-        self.assertEqual(
-            mts_mto_route.route_id, self.env.ref("stock_mts_mto_rule.route_mto_mts")
-        )
+        self.assertEqual(mts_mto_route.route_id, self.mto_mts_route)
 
     def test_remove_mts_mto_management(self):
         warehouse_rule = self.warehouse.mts_mto_rule_id
@@ -226,6 +172,7 @@ class TestMtoMtsRoute(TransactionCase):
         self.company_partner = self.env.ref("base.main_partner")
         self.group = self.env["procurement.group"].create({"name": "test"})
         self.procurement_vals = {"warehouse_id": self.warehouse, "group_id": self.group}
+        self.mto_mts_route = self.env.ref("stock_mts_mto_rule.route_mto_mts")
         # Since mrp and purchase modules may not be installed, we need to
         # create a dummy step to show that mts, mto, and mts+mto flows work.
         # Else, if purchase/manufacture are not installed, the mto would fail.
