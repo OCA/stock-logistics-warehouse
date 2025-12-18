@@ -16,6 +16,22 @@ class StockRule(models.Model):
     mts_rule_id = fields.Many2one("stock.rule", string="MTS Rule", check_company=True)
     mto_rule_id = fields.Many2one("stock.rule", string="MTO Rule", check_company=True)
 
+    def _run_subrule_action(self, procurement, subrule):
+        """Shortcut to run a subrule for a single procurement."""
+        self.ensure_one()
+        run_subrule = getattr(self.env["stock.rule"], f"_run_{subrule.action}")
+        return run_subrule([(procurement, subrule)])
+
+    def _run_mts_action(self, procurement):
+        """Shortcut to run the MTS rule linked to this MTS+MTO rule."""
+        self.mts_rule_id.ensure_one()
+        return self._run_subrule_action(procurement, self.mts_rule_id)
+
+    def _run_mto_action(self, procurement):
+        """Shortcut to run the MTO rule linked to this MTS+MTO rule."""
+        self.mto_rule_id.ensure_one()
+        return self._run_subrule_action(procurement, self.mto_rule_id)
+
     @api.constrains("action", "mts_rule_id", "mto_rule_id")
     def _check_mts_mto_rule(self):
         for rule in self:
@@ -63,31 +79,29 @@ class StockRule(models.Model):
             domain = self.env["procurement.group"]._get_moves_to_assign_domain(
                 procurement.company_id.id
             )
+            # Determine the quantity to order as MTO
             needed_qty = rule.get_mto_qty_to_order(
                 procurement.product_id,
                 procurement.product_qty,
                 procurement.product_uom,
                 procurement.values,
             )
+            # Enough stock, only MTS
             if float_is_zero(needed_qty, precision_digits=precision):
-                getattr(self.env["stock.rule"], f"_run_{rule.mts_rule_id.action}")(
-                    [(procurement, rule.mts_rule_id)]
-                )
+                rule._run_mts_action(procurement)
+            # No stock, only MTO
             elif (
                 float_compare(
                     needed_qty, procurement.product_qty, precision_digits=precision
                 )
                 == 0.0
             ):
-                getattr(self.env["stock.rule"], f"_run_{rule.mto_rule_id.action}")(
-                    [(procurement, rule.mto_rule_id)]
-                )
+                rule._run_mto_action(procurement)
+            # Partial stock, split between MTS and MTO
             else:
                 mts_qty = procurement.product_qty - needed_qty
                 mts_procurement = procurement._replace(product_qty=mts_qty)
-                getattr(self.env["stock.rule"], f"_run_{rule.mts_rule_id.action}")(
-                    [(mts_procurement, rule.mts_rule_id)]
-                )
+                rule._run_mts_action(mts_procurement)
 
                 # Search all confirmed stock_moves of mts_procurement and assign them
                 # to adjust the product's free qty
@@ -95,12 +109,10 @@ class StockRule(models.Model):
                 if group_id:
                     domain = expression.AND([domain, [("group_id", "=", group_id.id)]])
                 moves_to_assign = self.env["stock.move"].search(
-                    group_domain, order="priority desc, date asc"
+                    domain, order="priority desc, date asc"
                 )
                 moves_to_assign._action_assign()
 
                 mto_procurement = procurement._replace(product_qty=needed_qty)
-                getattr(self.env["stock.rule"], f"_run_{rule.mto_rule_id.action}")(
-                    [(mto_procurement, rule.mto_rule_id)]
-                )
+                rule._run_mto_action(mto_procurement)
         return True
