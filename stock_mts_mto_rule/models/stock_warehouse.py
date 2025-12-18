@@ -1,6 +1,6 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, fields, models
+from odoo import fields, models
 
 
 class StockWarehouse(models.Model):
@@ -35,7 +35,7 @@ class StockWarehouse(models.Model):
 
     def _get_route_name(self, route_type):
         if route_type == "mts_mto":
-            return _("MTS+MTO")
+            return self.env._("MTS+MTO")
         return super()._get_route_name(route_type)
 
     def _get_global_route_rules_values(self):
@@ -55,9 +55,11 @@ class StockWarehouse(models.Model):
                         "company_id": self.company_id.id,
                         "auto": "manual",
                         "propagate_cancel": True,
-                        "route_id": self._find_global_route(
+                        "route_id": self._find_or_create_global_route(
                             "stock_mts_mto_rule.route_mto_mts",
-                            _("Make To Order + Make To Stock"),
+                            self.env._("Make To Order + Make To Stock"),
+                            create=False,  # ignored when raise_if_not_found enabled
+                            raise_if_not_found=True,
                         ).id,
                     },
                     "update_values": {
