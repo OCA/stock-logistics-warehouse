@@ -221,7 +221,7 @@ class TestMtoMtsRoute(TransactionCase):
         self.warehouse.mto_mts_management = True
         self.customer_loc = self.env.ref("stock.stock_location_customers")
         self.product = self.env["product.product"].create(
-            {"name": "Test product", "type": "product"}
+            {"name": "Test product", "type": "consu", "is_storable": True}
         )
         self.company_partner = self.env.ref("base.main_partner")
         self.group = self.env["procurement.group"].create({"name": "test"})
@@ -235,11 +235,12 @@ class TestMtoMtsRoute(TransactionCase):
         }
         self.dummy_route = self.env["stock.route"].create(route_vals)
         rule_vals = {
+            "location_dest_from_rule": True,
             "location_dest_id": self.env.ref("stock.stock_location_stock").id,
             "location_src_id": self.env.ref("stock.stock_location_suppliers").id,
             "action": "pull",
             "warehouse_id": self.warehouse.id,
-            "picking_type_id": self.env.ref("stock.picking_type_out").id,
+            "picking_type_id": self.env.ref("stock.picking_type_in").id,
             "name": "dummy rule",
             "route_id": self.dummy_route.id,
         }
