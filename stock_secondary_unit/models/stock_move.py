@@ -51,12 +51,6 @@ class StockMove(models.Model):
             )
         return vals
 
-    def _merge_moves_fields(self):
-        """Set the last secondary uom qty when merge positive stock move"""
-        res = super()._merge_moves_fields()
-        res["secondary_uom_qty"] = sum(self.mapped("secondary_uom_qty"))
-        return res
-
     def _merge_moves(self, merge_into=False):
         """Set the last secondary uom qty when merge negative stock move"""
         # We have to do this when merging negative moves because the positive ones call
