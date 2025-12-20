@@ -3,7 +3,7 @@
 {
     "name": "Stock Secondary Unit",
     "summary": "Get product quantities in a secondary unit",
-    "version": "15.0.2.3.2",
+    "version": "15.0.2.3.3",
     "development_status": "Production/Stable",
     "category": "stock",
     "website": "https://github.com/OCA/stock-logistics-warehouse",

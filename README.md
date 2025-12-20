@@ -77,7 +77,7 @@ addon | version | maintainers | summary
 [stock_reserve](stock_reserve/) | 15.0.1.2.1 |  | Stock reservations on products
 [stock_reserve_rule](stock_reserve_rule/) | 15.0.1.1.0 |  | Configure reservation rules by location
 [stock_search_supplierinfo_code](stock_search_supplierinfo_code/) | 15.0.1.0.0 |  | Allows to search for picking from supplierinfo code
-[stock_secondary_unit](stock_secondary_unit/) | 15.0.2.3.2 |  | Get product quantities in a secondary unit
+[stock_secondary_unit](stock_secondary_unit/) | 15.0.2.3.3 |  | Get product quantities in a secondary unit
 [stock_valuation_layer_accounting_date](stock_valuation_layer_accounting_date/) | 15.0.1.0.0 |  | Stock Valuation Layer Accounting Date
 [stock_warehouse_calendar](stock_warehouse_calendar/) | 15.0.1.0.0 | <a href='https://github.com/JordiBForgeFlow'><img src='https://github.com/JordiBForgeFlow.png' width='32' height='32' style='border-radius:50%;' alt='JordiBForgeFlow'/></a> | Adds a calendar to the Warehouse
 
