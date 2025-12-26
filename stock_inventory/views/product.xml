@@ -1,0 +1,19 @@
+<odoo>
+    <record id="action_product_template_inventory" model="ir.actions.server">
+        <field name="name">Inventory</field>
+        <field name="model_id" ref="product.model_product_template" />
+        <field name="state">code</field>
+        <field name="code">action = model.action_inventory()</field>
+        <field name="binding_model_id" ref="product.model_product_template"/>
+        <field name="binding_view_types">list</field>
+    </record>
+
+    <record id="action_product_product_inventory" model="ir.actions.server">
+        <field name="name">Inventory</field>
+        <field name="model_id" ref="product.model_product_product" />
+        <field name="state">code</field>
+        <field name="code">action = model.action_inventory()</field>
+        <field name="binding_model_id" ref="product.model_product_product"/>
+        <field name="binding_view_types">list</field>
+    </record>
+</odoo>

@@ -589,3 +589,14 @@ class TestStockInventory(TransactionCase):
             ).current_inventory_id,
             inventory2,
         )
+
+    def test_14_action_inventory(self):
+        """ Ensure Inventory Group creation from Action,
+            and user redirection to Inventory Group's form
+        """
+        product_tmpl = self.product.product_tmpl_id
+        action = product_tmpl.with_context(active_ids=product_tmpl.ids).action_inventory()
+        inventory_id = action.get('res_id')
+        inventory = self.env['stock.inventory'].browse(inventory_id)
+
+        self.assertEqual(inventory.product_ids.ids, self.product.ids)

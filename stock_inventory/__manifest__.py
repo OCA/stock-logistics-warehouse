@@ -15,6 +15,7 @@
         "views/stock_inventory.xml",
         "views/stock_quant.xml",
         "views/stock_move_line.xml",
+        "views/product.xml",
         "views/res_config_settings_view.xml",
     ],
     "installable": True,
