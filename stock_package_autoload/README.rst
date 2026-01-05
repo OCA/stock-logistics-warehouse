@@ -66,9 +66,10 @@ Authors
 Contributors
 ------------
 
-- `PyTech-SRL <info@pytech.it>`__:
+- `PyTech <https://www.pytech.it>`__:
 
-     - Sebastiano Picchi <sebastiano.picchi@pytech.it>
+  - Sebastiano Picchi <sebastiano.picchi@pytech.it>
+  - Simone Rubino <simone.rubino@pytech.it>
 
 Maintainers
 -----------
