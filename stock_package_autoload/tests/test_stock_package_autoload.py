@@ -1,4 +1,4 @@
-from odoo.tests.common import TransactionCase, tagged
+from odoo.tests import Form, TransactionCase, tagged
 
 
 @tagged("post_install", "-at_install")
@@ -20,7 +20,7 @@ class TestStockPackageAutoload(TransactionCase):
         cls.product = cls.ProductProduct.create(
             {
                 "name": "Test Product With Serial",
-                "type": "product",
+                "is_storable": True,
                 "tracking": "serial",
             }
         )
@@ -57,36 +57,28 @@ class TestStockPackageAutoload(TransactionCase):
             }
         )
 
+        cls.env.user.groups_id += cls.env.ref("stock.group_tracking_lot")
+
     def test_autoload_package(self):
-        picking_to_package = self.StockPicking.create(
-            {
-                "partner_id": self.env.ref("base.res_partner_address_15").id,
-                "picking_type_id": self.env.ref("stock.picking_type_out").id,
-                "location_id": self.location.id,
-                "location_dest_id": self.location_dest.id,
-                "company_id": self.company.id,
-                "move_line_ids_without_package": [
-                    (
-                        0,
-                        0,
-                        {
-                            "product_id": self.product.id,
-                            "reserved_uom_qty": 3,
-                            "product_uom_id": self.uom_unit.id,
-                            "location_id": self.location.id,
-                            "location_dest_id": self.location_dest.id,
-                            "company_id": self.env.company.id,
-                        },
-                    )
-                ],
-            }
-        )
+        picking_f = Form(self.StockPicking)
+        picking_f.partner_id = self.env.ref("base.res_partner_address_15")
+        picking_f.picking_type_id = self.env.ref("stock.picking_type_out")
+        with picking_f.move_ids_without_package.new() as move_f:
+            move_f.product_id = self.product
+            move_f.product_uom_qty = 3.0
+
+        picking_to_package = picking_f.save()
         picking_to_package.action_confirm()
         move = picking_to_package.move_ids_without_package
         package_domain = self.StockQuantPackage.search(move._package_domain())
         self.assertEqual(package_domain, self.package)
-        move.load_products_from_package_id = self.package
-        move._onchange_load_products_from_package_id()
+
+        with Form(
+            move[0],
+            view=self.env.ref("stock_package_autoload.view_stock_move_operations"),
+        ) as move_f:
+            move_f.load_products_from_package_id = self.package
+
         self.assertFalse(move.load_products_from_package_id)
         n_move_lines = len(move.move_line_ids)
         self.assertEqual(
@@ -100,8 +92,12 @@ class TestStockPackageAutoload(TransactionCase):
         self.assertLess(len(move.move_line_ids), n_move_lines)
         # by selecting the same package again, only the missing serial will be added to
         # the move lines
-        move.load_products_from_package_id = self.package
-        move._onchange_load_products_from_package_id()
+        with Form(
+            move[0],
+            view=self.env.ref("stock_package_autoload.view_stock_move_operations"),
+        ) as move_f:
+            move_f.load_products_from_package_id = self.package
+
         self.assertEqual(n_move_lines, len(move.move_line_ids))
         self.assertEqual(
             move.move_line_ids.mapped("lot_id"), self.package.quant_ids.mapped("lot_id")

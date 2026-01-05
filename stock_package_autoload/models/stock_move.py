@@ -54,16 +54,16 @@ class StockMove(models.Model):
             "location_dest_id": self.location_dest_id.id,
             "company_id": self.company_id.id,
         }
-        data_list = []
+        command_list = []
         for quant in product_quants:
             data = common_line_data.copy()
             data.update(
                 {
-                    "qty_done": quant.quantity,
+                    "quantity": quant.quantity,
                     "product_uom_id": quant.product_uom_id.id,
                     "lot_id": quant.lot_id.id,
                 }
             )
-            data_list.append(data)
-        self.env["stock.move.line"].create(data_list)
+            command_list.append(fields.Command.create(data))
+        self.move_line_ids = command_list
         self.load_products_from_package_id = False
