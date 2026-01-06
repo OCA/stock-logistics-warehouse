@@ -75,3 +75,6 @@ re-derived from the primary quantity and losing precision or meaning:
   sums what was actually counted across the move's lines, so other code
   needing "how many pieces were actually done" doesn't have to
   re-derive that sum ad hoc every time.
+
+It also introduces a secondary UoM on stock quants and displays the
+corresponding converted quantity.

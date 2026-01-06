@@ -33,6 +33,25 @@ class TestProductSecondaryUnit(BaseCommon):
         cls.attribute_value_black = ProductAttributeValue.create(
             {"name": "test_black", "attribute_id": cls.attribute_color.id}
         )
+        cls.serial_product = cls.env["product.product"].create(
+            {
+                "name": "Serial Product",
+                "uom_id": cls.product_uom_unit.id,
+                "type": "consu",
+                "is_storable": True,
+                "tracking": "serial",
+                "secondary_uom_ids": [
+                    Command.create(
+                        {
+                            "code": "A",
+                            "name": "Double",
+                            "uom_id": cls.product_uom_unit.id,
+                            "factor": 2,
+                        },
+                    )
+                ],
+            }
+        )
         cls.product_template = cls.env["product.template"].create(
             {
                 "name": "test",
@@ -102,6 +121,10 @@ class TestProductSecondaryUnit(BaseCommon):
         )
 
     def test_01_stock_secondary_unit_template(self):
+        # The template field mirrors its variants, so clear it on them to get
+        # the template without a second unit for inventory.
+        self.product_template.product_variant_ids.stock_secondary_uom_id = False
+        self.assertFalse(self.product_template.stock_secondary_uom_id)
         self.assertEqual(self.product_template.secondary_unit_qty_available, 0)
 
     def test_02_stock_secondary_unit_variant(self):
@@ -755,3 +778,50 @@ class TestProductSecondaryUnit(BaseCommon):
         picking.action_confirm()
         self.assertEqual(len(picking.move_ids), 1)
         self.assertEqual(picking.move_ids.secondary_uom_qty, 2)
+
+    def test_stock_quant_secondary_uom_qty(self):
+        template = self.env["product.template"].create(
+            {
+                "name": "test",
+                "uom_id": self.product_uom_unit.id,
+                "is_storable": True,
+                "secondary_uom_ids": [
+                    Command.create(
+                        {
+                            "code": "T",
+                            "name": "unit-2",
+                            "uom_id": self.product_uom_unit.id,
+                            "factor": 0.5,
+                        },
+                    ),
+                    Command.create(
+                        {
+                            "code": "U",
+                            "name": "unit-4",
+                            "uom_id": self.product_uom_unit.id,
+                            "factor": 0.25,
+                        },
+                    ),
+                ],
+            }
+        )
+        secondary_uom_1 = template.secondary_uom_ids[0]
+        secondary_uom_2 = template.secondary_uom_ids[1]
+        product = template.product_variant_ids[0]
+        # Test variant's secondary UoM is applied to quant
+        product.stock_secondary_uom_id = secondary_uom_1
+        quant = self.env["stock.quant"].create(
+            {
+                "location_id": self.location_stock.id,
+                "product_id": product.id,
+                "inventory_quantity": 10,
+            }
+        )
+        quant.action_apply_inventory()
+        self.assertEqual(quant.secondary_uom_id, secondary_uom_1)
+        self.assertEqual(quant.secondary_uom_qty, 20)
+        # Test template's secondary UoM syncs to variant (single-variant product)
+        template.stock_secondary_uom_id = secondary_uom_2
+        self.assertEqual(product.stock_secondary_uom_id, secondary_uom_2)
+        self.assertEqual(quant.secondary_uom_id, secondary_uom_2)
+        self.assertEqual(quant.secondary_uom_qty, 40)
