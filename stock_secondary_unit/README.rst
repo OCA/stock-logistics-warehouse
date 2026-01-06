@@ -1,7 +1,3 @@
-.. image:: https://odoo-community.org/readme-banner-image
-   :target: https://odoo-community.org/get-involved?utm_source=readme
-   :alt: Odoo Community Association
-
 ====================
 Stock Secondary Unit
 ====================
@@ -17,7 +13,7 @@ Stock Secondary Unit
 .. |badge1| image:: https://img.shields.io/badge/maturity-Production%2FStable-green.png
     :target: https://odoo-community.org/page/development-status
     :alt: Production/Stable
-.. |badge2| image:: https://img.shields.io/badge/license-AGPL--3-blue.png
+.. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fstock--logistics--warehouse-lightgray.png?logo=github
@@ -33,7 +29,8 @@ Stock Secondary Unit
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
 This module extends the functionality of stock module to allow define
-other units with their conversion factor.
+other units with their conversion factor. It also introduces a secondary
+UoM on stock quants and displays the corresponding converted quantity.
 
 **Table of contents**
 
@@ -73,15 +70,18 @@ Authors
 Contributors
 ------------
 
-- `Tecnativa <https://www.tecnativa.com>`__
+-  `Tecnativa <https://www.tecnativa.com>`__
 
-  - Carlos Dauden
-  - Sergio Teruel
-  - Carlos Roca
+   -  Carlos Dauden
+   -  Sergio Teruel
+   -  Carlos Roca
 
-- Kitti Upariphutthiphong <kittiu@ecosoft.co.th>
-- Pimolnat Suntian <pimolnats@ecosoft.co.th>
-- Alan Ramos <alan.ramos@jarsa.com.mx>
+-  Kitti Upariphutthiphong <kittiu@ecosoft.co.th>
+-  Pimolnat Suntian <pimolnats@ecosoft.co.th>
+-  Alan Ramos <alan.ramos@jarsa.com.mx>
+-  `Quartile <https://www.quartile.co>`__:
+
+   -  Aung Ko Ko Lin
 
 Maintainers
 -----------
