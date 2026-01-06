@@ -9,7 +9,7 @@ class AccountAnalyticAccount(models.Model):
 
     stock_request_ids = fields.One2many(
         comodel_name="stock.request",
-        inverse_name="analytic_account_id",
+        inverse_name="analytic_distribution",
         string="Stock Requests",
         copy=False,
     )

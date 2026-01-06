@@ -12,7 +12,7 @@ class ProcurementRule(models.Model):
         product_id,
         product_qty,
         product_uom,
-        location_id,
+        location_dest_id,
         name,
         origin,
         company_id,
@@ -22,7 +22,7 @@ class ProcurementRule(models.Model):
             product_id,
             product_qty,
             product_uom,
-            location_id,
+            location_dest_id,
             name,
             origin,
             company_id,
@@ -30,10 +30,6 @@ class ProcurementRule(models.Model):
         )
         if values.get("stock_request_id"):
             stock_request = self.env["stock.request"].browse(values["stock_request_id"])
-            analytic_account = stock_request.analytic_account_id
-            analytic_tags = stock_request.analytic_tag_ids
-            res.update(
-                analytic_account_id=analytic_account.id,
-                analytic_tag_ids=[(4, tag.id) for tag in analytic_tags],
-            )
+            if stock_request.analytic_distribution:
+                res.update(analytic_distribution=stock_request.analytic_distribution)
         return res
