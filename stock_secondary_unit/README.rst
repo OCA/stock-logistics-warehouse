@@ -1,7 +1,3 @@
-.. image:: https://odoo-community.org/readme-banner-image
-   :target: https://odoo-community.org/get-involved?utm_source=readme
-   :alt: Odoo Community Association
-
 ====================
 Stock Secondary Unit
 ====================
@@ -17,7 +13,7 @@ Stock Secondary Unit
 .. |badge1| image:: https://img.shields.io/badge/maturity-Production%2FStable-green.png
     :target: https://odoo-community.org/page/development-status
     :alt: Production/Stable
-.. |badge2| image:: https://img.shields.io/badge/license-AGPL--3-blue.png
+.. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fstock--logistics--warehouse-lightgray.png?logo=github
@@ -33,7 +29,8 @@ Stock Secondary Unit
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
 This module extends the functionality of stock module to allow define
-other units with their conversion factor.
+other units with their conversion factor. It also introduces a secondary
+UoM on stock quants and displays the corresponding converted quantity.
 
 **Table of contents**
 
@@ -51,6 +48,14 @@ To use this module you need to:
 4. Go to *Inventory tab* and set a second unit of measure.
 5. Push button 'On hand' and set quantities in stock for this product.
 6. Go to product list and you can see the secondary unit value.
+
+Known issues / Roadmap
+======================
+
+When generating or importing serials/lots, the default secondary unit
+for move lines is taken from the first matching stock move that has a
+secondary UoM. It is assumed that the same product will not use
+different secondary units within the same picking.
 
 Bug Tracker
 ===========
@@ -73,15 +78,18 @@ Authors
 Contributors
 ------------
 
-- `Tecnativa <https://www.tecnativa.com>`__
+-  `Tecnativa <https://www.tecnativa.com>`__
 
-  - Carlos Dauden
-  - Sergio Teruel
-  - Carlos Roca
+   -  Carlos Dauden
+   -  Sergio Teruel
+   -  Carlos Roca
 
-- Kitti Upariphutthiphong <kittiu@ecosoft.co.th>
-- Pimolnat Suntian <pimolnats@ecosoft.co.th>
-- Alan Ramos <alan.ramos@jarsa.com.mx>
+-  Kitti Upariphutthiphong <kittiu@ecosoft.co.th>
+-  Pimolnat Suntian <pimolnats@ecosoft.co.th>
+-  Alan Ramos <alan.ramos@jarsa.com.mx>
+-  `Quartile <https://www.quartile.co>`__:
+
+   -  Aung Ko Ko Lin
 
 Maintainers
 -----------
