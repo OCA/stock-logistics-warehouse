@@ -10,12 +10,14 @@ class TestsCommon(BaseCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+        # Disable tracking for tests as recommended in Odoo 19.0 migration guide
+        cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
         cls.location_obj = cls.env["stock.location"]
         cls.product_obj = cls.env["product.product"]
         cls.wizard_obj = cls.env["wiz.stock.move.location"]
         cls.quant_obj = cls.env["stock.quant"]
         cls.company = cls.env.ref("base.main_company")
-        cls.partner = cls.env.ref("base.res_partner_category_0")
+        cls.partner = cls.env["res.partner"].create({"name": "Test Partner"})
 
         cls.internal_loc_1 = cls.location_obj.create(
             {
@@ -90,10 +92,10 @@ class TestsCommon(BaseCommon):
                 "company_id": cls.company.id,
             }
         )
-        cls.package = cls.env["stock.quant.package"].create({})
-        cls.package1 = cls.env["stock.quant.package"].create({})
+        cls.package = cls.env["stock.package"].create({})
+        cls.package1 = cls.env["stock.package"].create({})
 
-        cls.package2 = cls.env["stock.quant.package"].create({})
+        cls.package2 = cls.env["stock.package"].create({})
 
     @classmethod
     def setup_product_amounts(cls):

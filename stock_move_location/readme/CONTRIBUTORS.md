@@ -16,3 +16,5 @@
   - Aung Ko Ko Lin
 - Laurent Mignon \<<laurent.mignon@acsone.eu>\>
 - Maksym Yankin \<<maksym.yankin@camptocamp.com>\>
+- Open Source Integrators \<<https://www.opensourceintegrators.com>\>
+  - Daniel Reis <<dreis@opensourceintegrators.com>>
