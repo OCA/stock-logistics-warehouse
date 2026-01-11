@@ -2,7 +2,7 @@
 # Copyright 2018 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 from odoo.tools import float_compare
 
@@ -36,7 +36,7 @@ class StockMoveLocationWizardLine(models.TransientModel):
     )
     package_id = fields.Many2one(
         string="Package Number",
-        comodel_name="stock.quant.package",
+        comodel_name="stock.package",
         domain="[('location_id', '=', origin_location_id)]",
     )
     owner_id = fields.Many2one(comodel_name="res.partner", string="From Owner")
@@ -73,7 +73,9 @@ class StockMoveLocationWizardLine(models.TransientModel):
             move_qty_lt_0 = self._compare(record.move_quantity, 0.0, rounding) == -1
             if move_qty_gt_max_qty or move_qty_lt_0:
                 raise ValidationError(
-                    _("Move quantity can not exceed max quantity or be negative")
+                    self.env._(
+                        "Move quantity can not exceed max quantity or be negative"
+                    )
                 )
 
     def create_move_lines(self, picking, move):
@@ -117,24 +119,34 @@ class StockMoveLocationWizardLine(models.TransientModel):
         if self.env.context.get("planned"):
             # for planned transfer we don't care about the amounts at all
             return 0.0
-        search_args = [
-            ("location_id", "=", self.origin_location_id.id),
-            ("product_id", "=", self.product_id.id),
-        ]
-        if self.lot_id:
-            search_args.append(("lot_id", "=", self.lot_id.id))
+
+        # Check if we should exclude reserved quantities
+        exclude_reserved = self.move_location_wizard_id.exclude_reserved_qty
+
+        if exclude_reserved:
+            # Use the built-in stock.quant method to get available quantity
+            available_qty = self.env["stock.quant"]._get_available_quantity(
+                product_id=self.product_id,
+                location_id=self.origin_location_id,
+                lot_id=self.lot_id,
+                package_id=self.package_id,
+                owner_id=self.owner_id,
+                strict=False,
+            )
         else:
-            search_args.append(("lot_id", "=", False))
-        if self.package_id:
-            search_args.append(("package_id", "=", self.package_id.id))
-        else:
-            search_args.append(("package_id", "=", False))
-        if self.owner_id:
-            search_args.append(("owner_id", "=", self.owner_id.id))
-        else:
-            search_args.append(("owner_id", "=", False))
-        res = self.env["stock.quant"].read_group(search_args, ["quantity"], [])
-        available_qty = res[0]["quantity"]
+            # Include reserved quantities - use total quantity from quant
+            quant = self.env["stock.quant"].search(
+                [
+                    ("product_id", "=", self.product_id.id),
+                    ("location_id", "=", self.origin_location_id.id),
+                    ("lot_id", "=", self.lot_id.id or False),
+                    ("package_id", "=", self.package_id.id or False),
+                    ("owner_id", "=", self.owner_id.id or False),
+                ],
+                limit=1,
+            )
+            available_qty = quant.quantity if quant else 0
+
         if not available_qty:
             # if it is immediate transfer and product doesn't exist in that
             # location -> make the transfer of 0.
