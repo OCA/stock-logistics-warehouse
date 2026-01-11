@@ -2,7 +2,7 @@
 # Copyright Iryna Vyshnevska 2020 Camptocamp
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 
-from odoo import _, models
+from odoo import models
 from odoo.exceptions import UserError
 
 
@@ -38,9 +38,9 @@ class StockPicking(models.Model):
 
     def _validate_picking(self):
         if self.location_id.child_ids:
-            raise UserError(_("Please choose a source end location"))
+            raise UserError(self.env._("Please choose a source end location"))
         if self.move_ids:
-            raise UserError(_("Moves lines already exists"))
+            raise UserError(self.env._("Moves lines already exists"))
 
     def _get_movable_quants(self):
         return (

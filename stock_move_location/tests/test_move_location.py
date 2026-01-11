@@ -283,8 +283,8 @@ class TestMoveLocation(TestsCommon):
         """
         delivery_order_type = self.env.ref("stock.picking_type_out")
         internal_transfer_type = self.env.ref("stock.picking_type_internal")
-        wh_stock_shelf_1 = self.env.ref("stock.stock_location_components")
-        wh_stock_shelf_2 = self.env.ref("stock.stock_location_14")
+        wh_stock_shelf_1 = self.env.ref("stock.stock_location_stock")
+        wh_stock_shelf_2 = wh_stock_shelf_1.copy({"name": "Shelf 2"})
         wh_stock_shelf_3 = wh_stock_shelf_1.copy({"name": "Shelf 3"})
 
         # Create some quants
@@ -297,7 +297,6 @@ class TestMoveLocation(TestsCommon):
         # delivery_picking.location_id = wh_stock_shelf_1
         delivery_move = self.env["stock.move"].create(
             {
-                "name": "Delivery move",
                 "product_id": self.product_lots.id,
                 "product_uom_qty": 20.0,
                 "product_uom": self.product_lots.uom_id.id,

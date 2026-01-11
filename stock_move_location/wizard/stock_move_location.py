@@ -5,8 +5,7 @@
 
 
 from odoo import Command, api, fields, models
-from odoo.fields import first
-from odoo.osv import expression
+from odoo.fields import Domain
 
 
 class StockMoveLocationWizard(models.TransientModel):
@@ -84,8 +83,9 @@ class StockMoveLocationWizard(models.TransientModel):
                 ):
                     continue
                 while location_id and not picking_type:
-                    domain = [("default_location_src_id", "=", location_id.id)]
-                    domain = expression.AND([base_domain, domain])
+                    domain = Domain(
+                        [("default_location_src_id", "=", location_id.id)]
+                    ) & Domain(base_domain)
                     picking_type = picking_type.search(domain, limit=1)
                     # Move up to the parent location if no picking type found
                     location_id = not picking_type and location_id.location_id or False
@@ -103,7 +103,7 @@ class StockMoveLocationWizard(models.TransientModel):
             self.env.context.get("active_ids", False)
         )
         res["stock_move_location_line_ids"] = self._prepare_wizard_move_lines(quants)
-        res["origin_location_id"] = first(quants).location_id.id
+        res["origin_location_id"] = quants[0].location_id.id if quants else False
         return res
 
     @api.model
@@ -206,7 +206,6 @@ class StockMoveLocationWizard(models.TransientModel):
         product_uom_id = lines[0].product_uom_id.id
         qty = sum(x.move_quantity for x in lines)
         return {
-            "name": product.display_name,
             "location_id": location_from_id,
             "location_dest_id": location_to_id,
             "product_id": product.id,
@@ -246,10 +245,7 @@ class StockMoveLocationWizard(models.TransientModel):
         """
         moves_to_reassign = self.env["stock.move"]
         lines_to_ckeck_reverve = self.stock_move_location_line_ids.filtered(
-            lambda line: (
-                line.move_quantity > line.max_quantity
-                and not line.origin_location_id.should_bypass_reservation()
-            )
+            lambda line: not line.origin_location_id.should_bypass_reservation()
         )
         for line in lines_to_ckeck_reverve:
             move_lines = self.env["stock.move.line"].search(
@@ -296,35 +292,25 @@ class StockMoveLocationWizard(models.TransientModel):
 
     def _get_group_quants(self):
         domain = self._get_quants_domain()
-        result = self.env["stock.quant"].read_group(
+        result = self.env["stock.quant"]._read_group(
             domain=domain,
-            fields=[
-                "product_id",
-                "lot_id",
-                "package_id",
-                "owner_id",
-                "quantity:sum",
-                "reserved_quantity:sum",
-            ],
-            groupby=["id", "product_id", "lot_id", "package_id", "owner_id"],
-            orderby="id",
-            lazy=False,
+            groupby=["product_id", "lot_id", "package_id", "owner_id"],
+            aggregates=["quantity:sum", "reserved_quantity:sum"],
         )
         return result
 
     def _get_stock_move_location_lines_values(self):
-        product_obj = self.env["product.product"]
         product_data = []
         for group in self._get_group_quants():
-            product = product_obj.browse(group["product_id"][0]).exists()
+            product, lot, package, owner, total_qty, res_qty = group
+
             # Apply the putaway strategy
             location_dest_id = (
-                self.apply_putaway_strategy
+                product
+                and self.apply_putaway_strategy
                 and self.destination_location_id._get_putaway_strategy(product).id
                 or self.destination_location_id.id
             )
-            res_qty = group.get("reserved_quantity", 0.0)
-            total_qty = group.get("quantity", 0.0)
             max_qty = (
                 total_qty if not self.exclude_reserved_qty else total_qty - res_qty
             )
@@ -337,14 +323,10 @@ class StockMoveLocationWizard(models.TransientModel):
                     "total_quantity": total_qty,
                     "origin_location_id": self.origin_location_id.id,
                     "destination_location_id": location_dest_id,
-                    # cursor returns None instead of False
-                    "lot_id": group["lot_id"][0] if group.get("lot_id") else False,
-                    "package_id": group["package_id"][0]
-                    if group.get("package_id")
-                    else False,
-                    "owner_id": group["owner_id"][0]
-                    if group.get("owner_id")
-                    else False,
+                    # Extract IDs from record objects
+                    "lot_id": lot.id,
+                    "package_id": package.id,
+                    "owner_id": owner.id,
                     "product_uom_id": product.uom_id.id,
                     "custom": False,
                 }
