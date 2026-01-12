@@ -41,4 +41,15 @@
             </td>
         </xpath>
     </template>
+    <template
+        id="stock_report_delivery_aggregated_move_lines"
+        inherit_id="stock.stock_report_delivery_aggregated_move_lines"
+    >
+        <xpath expr="//tr[@t-foreach='aggregated_lines']/td[1]" position="after">
+            <td>
+                <span t-field="aggregated_lines[line]['move'].secondary_uom_qty" />
+                <span t-field="aggregated_lines[line]['move'].secondary_uom_id" />
+            </td>
+        </xpath>
+    </template>
 </odoo>
