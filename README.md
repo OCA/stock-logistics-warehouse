@@ -7,9 +7,13 @@
 
 <!-- /!\ do not modify above this line -->
 
-# stock-logistics-warehouse
+# Stock Warehouse
 
-stock-logistics-warehouse
+Extend the stock related models (warehouse, location, picking, move, lot...) but without impact flows and processes. It's mainly adding fields or buttons.
+
+Are you looking for modules related to logistics? Or would like to contribute
+to? There are many repositories with specific purposes. Have a look at this
+[README](https://github.com/OCA/wms/blob/19.0/README.md).
 
 <!-- /!\ do not modify below this line -->
 
