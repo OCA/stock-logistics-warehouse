@@ -88,7 +88,7 @@ class TestStockWarehouseAccess(TestStockCommon):
         )
         picking.action_assign()
         self.assertEqual(picking.state, "assigned")
-        picking.move_ids.write({"quantity": 5})
+        picking.move_ids.write({"quantity_done": 5})
         picking.button_validate()
         self.assertEqual(picking.state, "done")
 
@@ -97,9 +97,7 @@ class TestStockWarehouseAccess(TestStockCommon):
         "stock_user_c12_wh23",
     )
     def test_forbid_create_picking_other_warehouse(self):
-        with self.assertRaisesRegex(
-            AccessError, ".*doesn't have 'create' access to:.*"
-        ):
+        with self.assertRaisesRegex(AccessError, ".*you are not allowed to create.*"):
             self._create_picking(
                 self.warehouse_1,
                 location_src=self.suppliers_location,
@@ -205,7 +203,7 @@ class TestStockWarehouseAccessWithReceivedGoods(TestStockCommon):
             cls.stock_picking_wh_1 | cls.stock_picking_wh_2 | cls.stock_picking_wh_3
         )
         pickings.action_assign()
-        pickings.move_ids.write({"quantity": 5})
+        pickings.move_ids.write({"quantity_done": 5})
         pickings.button_validate()
 
     @users(
@@ -288,7 +286,7 @@ class TestStockWarehouseAccessWithReceivedPackedGoods(TestStockCommon):
                     "result_package_id": cls.env["stock.quant.package"]
                     .create({"name": f"Dest Pack {warehouse}"})
                     .id,
-                    "quantity": 5,
+                    "qty_done": 5,
                 }
             )
         pickings.button_validate()

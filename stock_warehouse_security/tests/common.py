@@ -118,8 +118,7 @@ class TestStockCommon(TransactionCase):
         cls.product = cls.env["product.product"].create(
             {
                 "name": "Product for test",
-                "type": "consu",
-                "is_storable": True,
+                "type": "product",
             }
         )
         cls.stock_picking_wh_1 = cls._create_picking(
