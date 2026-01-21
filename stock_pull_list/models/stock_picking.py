@@ -9,7 +9,6 @@ class StockPicking(models.Model):
     _inherit = "stock.picking"
 
     def action_create_pull_list(self):
-
         source_location = fields.first(self).location_id
         for record in self:
             if source_location != record.location_id:
