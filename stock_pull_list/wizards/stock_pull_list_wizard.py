@@ -3,7 +3,7 @@
 
 import itertools
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError
 from odoo.tools import float_compare
 
@@ -13,8 +13,8 @@ class PullListWizard(models.TransientModel):
     _description = "Stock Pull List Wizard"
 
     @api.model
-    def default_get(self, fields):
-        res = super().default_get(fields)
+    def default_get(self, fields_list):
+        res = super().default_get(fields_list)
         company = self.env.user.company_id
         wh = self.env["stock.warehouse"].search(
             [("company_id", "=", company.id)], limit=1
@@ -45,7 +45,7 @@ class PullListWizard(models.TransientModel):
         help="All needs for each product will be grouped in one line, "
         "disregarding date.",
     )
-    procurement_group_ids = fields.Many2many(comodel_name="procurement.group")
+    stock_reference_ids = fields.Many2many(comodel_name="stock.reference")
     # Step 2 - filtering options.
     select_all = fields.Boolean(default=True)
     rule_action = fields.Selection(
@@ -71,8 +71,8 @@ class PullListWizard(models.TransientModel):
             domain.append(("state", "not in", ("assigned",)))
         if self.date_to:
             domain.append(("date", "<=", self.date_to))
-        if self.procurement_group_ids:
-            domain.append(("group_id", "in", self.procurement_group_ids.ids))
+        if self.stock_reference_ids:
+            domain.append(("reference_ids", "in", self.stock_reference_ids.ids))
         return domain
 
     def _get_moves_incoming_domain(self):
@@ -120,7 +120,7 @@ class PullListWizard(models.TransientModel):
             "warehouse_id": self.warehouse_id,
             "company_id": self.env.user.company_id,
         }
-        stock_rule_id = self.env["procurement.group"]._get_rule(
+        stock_rule_id = self.env["stock.rule"]._get_rule(
             product_id, location_id, values
         )
         return stock_rule_id
@@ -147,7 +147,8 @@ class PullListWizard(models.TransientModel):
         incoming_dict = {}
         for supply in incoming_moves:
             move_for_date = demand_moves.filtered(
-                lambda m: m.product_id == supply.product_id and m.date >= supply.date
+                lambda m, supply=supply: m.product_id == supply.product_id
+                and m.date >= supply.date
             )
             if move_for_date:
                 date_selected = move_for_date[0].date if not force_date else force_date
@@ -179,13 +180,11 @@ class PullListWizard(models.TransientModel):
             "stock_pull_list.view_run_stock_pull_list_wizard_wizard_step_2"
         ).id
         res = {
-            "name": _("Pull List"),
-            "src_model": "stock.pull.list.wizard",
-            "view_type": "form",
+            "name": self.env._("Pull List"),
             "view_mode": "form",
             "view_id": view_id,
             "target": "new",
-            "res_model": "stock.pull.list.wizard",
+            "res_model": self._name,
             "res_id": self.id,
             "type": "ir.actions.act_window",
         }
@@ -211,12 +210,12 @@ class PullListWizard(models.TransientModel):
         res = self._act_window_pull_list_step_2()
         return res
 
-    def _prepare_procurement_values(self, date, group):
+    def _prepare_procurement_values(self, date, stock_ref):
         values = {
             "date_planned": date,
             "warehouse_id": self.warehouse_id,
             "company_id": self.env.user.company_id,
-            "group_id": group,
+            "reference_ids": stock_ref,
         }
         return values
 
@@ -237,7 +236,7 @@ class PullListWizard(models.TransientModel):
             options_list.append(self.line_ids.mapped(f).ids)
         return list(itertools.product(*options_list))
 
-    def _prepare_proc_group_values(self):
+    def _prepare_stock_ref_values(self):
         vals = {}
         name = self.env["ir.sequence"].next_by_code("stock.pull.list")
         if name:
@@ -248,8 +247,9 @@ class PullListWizard(models.TransientModel):
         self.ensure_one()
         lines_obj = self.env["stock.pull.list.wizard.line"]
         errors = []
-        proc_groups = []
-        pg_obj = self.env["procurement.group"]
+        stock_references = []
+        sr_obj = self.env["stock.reference"]
+        StockRule = self.env["stock.rule"]
         grouping_keys = self._get_procurement_group_keys()
         fields = self._get_fields_for_keys()
         for gk in grouping_keys:
@@ -260,44 +260,42 @@ class PullListWizard(models.TransientModel):
             lines = lines_obj.search(domain)
             if not lines:
                 continue
-            group = pg_obj.create(self._prepare_proc_group_values())
-            proc_groups.append(group.id)
+            stock_ref = sr_obj.create(self._prepare_stock_ref_values())
+            stock_references.append(stock_ref.id)
             procurements = []
-            for line in lines.filtered(lambda l: l.selected):
+            for line in lines.filtered("selected"):
                 n += 1
                 if 0 < self.max_lines < n:
                     n = 0
-                    group = pg_obj.create(self._prepare_proc_group_values())
-                    proc_groups.append(group.id)
+                    stock_ref = sr_obj.create(self._prepare_stock_ref_values())
+                    stock_references.append(stock_ref.id)
 
-                values = self._prepare_procurement_values(line.date, group)
+                values = self._prepare_procurement_values(line.date, stock_ref)
                 procurements.append(
-                    pg_obj.Procurement(
+                    StockRule.Procurement(
                         line.product_id,
                         line.needed_qty,
                         line.product_id.uom_id,
                         line.location_id,
-                        "Pull List %s" % self.id,
-                        "Pull List %s" % self.id,
+                        f"Pull List {self.id}",
+                        f"Pull List {self.id}",
                         self.env.user.company_id,
                         values,
                     )
                 )
             # Run procurements
             try:
-                pg_obj.run(procurements)
+                StockRule.run(procurements)
             except UserError as error:
-                errors.append(error.name)
+                errors.append(error.args[0])
             if errors:
                 raise UserError("\n".join(errors))
         res = {
-            "name": _("Generated Procurement Groups"),
-            "src_model": "stock.pull.list.wizard",
-            "view_type": "form",
-            "view_mode": "tree,form",
-            "res_model": "procurement.group",
+            "name": self.env._("Generated Stock Rules"),
+            "view_mode": "list,form",
+            "res_model": "stock.reference",
             "type": "ir.actions.act_window",
-            "domain": str([("id", "in", proc_groups)]),
+            "domain": [("id", "in", stock_references)],
         }
         return res
 

@@ -3,76 +3,76 @@
 
 from datetime import timedelta as td
 
-from odoo import fields
+from odoo import Command, fields
 from odoo.tests.common import TransactionCase
 
 
 class TestPullListCommon(TransactionCase):
-    def setUp(self):
-        super().setUp()
-        self.wh_obj = self.env["stock.warehouse"]
-        self.move_obj = self.env["stock.move"]
-        self.picking_obj = self.env["stock.picking"]
-        self.wiz_obj = self.env["stock.pull.list.wizard"]
-        self.stock_change_obj = self.env["stock.change.product.qty"]
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.wh_obj = cls.env["stock.warehouse"]
+        cls.move_obj = cls.env["stock.move"]
+        cls.picking_obj = cls.env["stock.picking"]
+        cls.wiz_obj = cls.env["stock.pull.list.wizard"]
 
-        self.company = self.env.ref("base.main_company")
-        self.warehouse = self.env.ref("stock.warehouse0")
-        self.customer_loc = self.env.ref("stock.stock_location_customers")
+        cls.company = cls.env.ref("base.main_company")
+        cls.warehouse = cls.env.ref("stock.warehouse0")
+        cls.customer_loc = cls.env.ref("stock.stock_location_customers")
 
-        self.warehouse_2 = self.wh_obj.create(
-            {"code": "WH-T", "name": "Warehouse Test"}
-        )
-        self.product_a = self.env["product.product"].create(
-            {"name": "test product A", "default_code": "TEST-A", "type": "product"}
+        cls.warehouse_2 = cls.wh_obj.create({"code": "WH-T", "name": "Warehouse Test"})
+        cls.product_a = cls.env["product.product"].create(
+            {
+                "name": "test product A",
+                "default_code": "TEST-A",
+                "is_storable": True,
+            }
         )
 
         route_vals = {
             "name": "WH2 -> WH",
         }
-        self.transfer_route = self.env["stock.route"].create(route_vals)
+        cls.transfer_route = cls.env["stock.route"].create(route_vals)
         rule_vals = {
-            "location_src_id": self.warehouse_2.lot_stock_id.id,
-            "location_dest_id": self.warehouse.lot_stock_id.id,
+            "location_src_id": cls.warehouse_2.lot_stock_id.id,
+            "location_dest_id": cls.warehouse.lot_stock_id.id,
             "action": "pull_push",
-            "warehouse_id": self.warehouse.id,
-            "propagate_warehouse_id": self.warehouse_2.id,
-            "picking_type_id": self.env.ref("stock.picking_type_internal").id,
+            "warehouse_id": cls.warehouse.id,
+            "picking_type_id": cls.env.ref("stock.picking_type_internal").id,
             "name": "WH2->WH",
-            "route_id": self.transfer_route.id,
+            "route_id": cls.transfer_route.id,
             "delay": 1,
         }
-        self.transfer_rule = self.env["stock.rule"].create(rule_vals)
-        self.product_a.route_ids = [(6, 0, self.transfer_route.ids)]
+        cls.transfer_rule = cls.env["stock.rule"].create(rule_vals)
+        cls.product_a.route_ids = [Command.set(cls.transfer_route.ids)]
 
         # Dates:
-        self.today = fields.Datetime.today()
-        self.yesterday = self.today - td(days=1)
-        self.date_3 = self.today + td(days=3)
+        cls.today = fields.Datetime.today()
+        cls.yesterday = cls.today - td(days=1)
+        cls.date_3 = cls.today + td(days=3)
 
-    def _generate_moves(self):
-        self.create_picking_out_a(self.yesterday, 50)
-        self.create_picking_out_a(self.date_3, 70)
+    @classmethod
+    def _generate_moves(cls):
+        cls.create_picking_out_a(cls.yesterday, 50)
+        cls.create_picking_out_a(cls.date_3, 70)
 
-    def create_picking_out_a(self, date_move, qty):
-        picking = self.picking_obj.create(
+    @classmethod
+    def create_picking_out_a(cls, date_move, qty):
+        picking = cls.picking_obj.create(
             {
-                "picking_type_id": self.ref("stock.picking_type_out"),
-                "location_id": self.warehouse.lot_stock_id.id,
-                "location_dest_id": self.customer_loc.id,
+                "picking_type_id": cls.env.ref("stock.picking_type_out").id,
+                "location_id": cls.warehouse.lot_stock_id.id,
+                "location_dest_id": cls.customer_loc.id,
                 "scheduled_date": date_move,
                 "move_ids": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
-                            "name": "Test move",
-                            "product_id": self.product_a.id,
+                            "product_id": cls.product_a.id,
                             "date": date_move,
-                            "product_uom": self.product_a.uom_id.id,
+                            "product_uom": cls.product_a.uom_id.id,
                             "product_uom_qty": qty,
-                            "location_id": self.warehouse.lot_stock_id.id,
-                            "location_dest_id": self.customer_loc.id,
+                            "location_id": cls.warehouse.lot_stock_id.id,
+                            "location_dest_id": cls.customer_loc.id,
                         },
                     )
                 ],
@@ -81,14 +81,9 @@ class TestPullListCommon(TransactionCase):
         picking.action_confirm()
         return picking
 
-    def _update_product_qty(self, product, quantity):
+    @classmethod
+    def _update_product_qty(cls, product, quantity):
         """Update Product quantity."""
-        change_product_qty = self.stock_change_obj.create(
-            {
-                "product_id": product.id,
-                "product_tmpl_id": product.product_tmpl_id.id,
-                "new_quantity": quantity,
-            }
+        cls.env["stock.quant"]._update_available_quantity(
+            product, cls.warehouse.lot_stock_id, quantity
         )
-        change_product_qty.change_product_qty()
-        return change_product_qty

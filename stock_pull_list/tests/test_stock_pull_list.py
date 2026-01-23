@@ -11,14 +11,14 @@ class TestStockPullList(TestPullListCommon):
         self._generate_moves()
         wiz = self.wiz_obj.create({})
         wiz.action_prepare()
-        lines = wiz.line_ids.filtered(lambda l: l.product_id == self.product_a)
+        lines = wiz.line_ids.filtered(lambda line: line.product_id == self.product_a)
         self.assertEqual(len(lines), 2)
-        line_1 = lines.filtered(lambda l: l.date == self.yesterday.date())
+        line_1 = lines.filtered(lambda line: line.date == self.yesterday.date())
         self.assertEqual(line_1.raw_demand_qty, 50)
         self.assertEqual(line_1.needed_qty, 50)
         self.assertEqual(line_1.stock_rule_id, self.transfer_rule)
 
-        line_2 = lines.filtered(lambda l: l.date == self.date_3.date())
+        line_2 = lines.filtered(lambda line: line.date == self.date_3.date())
         self.assertEqual(line_2.raw_demand_qty, 70)
         self.assertEqual(line_2.needed_qty, 70)
 
@@ -26,7 +26,7 @@ class TestStockPullList(TestPullListCommon):
         self._generate_moves()
         wiz = self.wiz_obj.create({"consolidate_by_product": True})
         wiz.action_prepare()
-        line = wiz.line_ids.filtered(lambda l: l.product_id == self.product_a)
+        line = wiz.line_ids.filtered(lambda line: line.product_id == self.product_a)
         self.assertEqual(len(line), 1)
         self.assertEqual(line.date, self.today.date())
         expected = 50 + 70
@@ -41,7 +41,7 @@ class TestStockPullList(TestPullListCommon):
         self._generate_moves()
         wiz = self.wiz_obj.create({"consolidate_by_product": True})
         wiz.action_prepare()
-        line = wiz.line_ids.filtered(lambda l: l.product_id == self.product_a)
+        line = wiz.line_ids.filtered(lambda line: line.product_id == self.product_a)
         self.assertEqual(len(line), 0)
 
     def test_04_server_action(self):
@@ -56,9 +56,9 @@ class TestStockPullList(TestPullListCommon):
         picking.picking_type_id.update({"allow_pull_list_server_action": True})
         picking.action_create_pull_list()
         wizard = self.env["stock.pull.list.wizard"].search([])
-        lines = wizard.line_ids.filtered(lambda l: l.product_id == self.product_a)
+        lines = wizard.line_ids.filtered(lambda line: line.product_id == self.product_a)
         self.assertEqual(len(lines), 2)
-        line_1 = lines.filtered(lambda l: l.date == self.yesterday.date())
+        line_1 = lines.filtered(lambda line: line.date == self.yesterday.date())
         self.assertEqual(line_1.raw_demand_qty, 50)
         self.assertEqual(line_1.needed_qty, 50)
         self.assertEqual(line_1.stock_rule_id, self.transfer_rule)
