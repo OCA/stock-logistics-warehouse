@@ -21,7 +21,7 @@
         .o_shuttle_header {
             display: flex;
             flex-flow: row wrap;
-            padding: $o-shuttle-padding;
+            padding: 0 0.5em;
         }
 
         .o_shuttle_header_content {
@@ -47,7 +47,7 @@
         .o_shuttle_operation {
             text-align: center;
             font-size: 2.5em;
-            padding: 0.5em;
+            padding: 0 0.5em;
             color: #ffffff;
         }
 

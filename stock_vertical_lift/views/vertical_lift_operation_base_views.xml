@@ -127,7 +127,7 @@
                                     <field
                                         name="picking_id"
                                         options="{'no_open': True}"
-                                        class="mr8"
+                                        class="oe_inline mr8"
                                     />
                                     <span>/</span>
                                     <field
@@ -154,13 +154,12 @@
                                 />
                             </div>
                             <label for="product_id" />
-                            <div colspan="2" class="oe_title">
-                                <h1>
-                                    <field
-                                        name="product_id"
-                                        options="{'no_open': True}"
-                                    />
-                                </h1>
+                            <div>
+                                <field
+                                    name="product_id"
+                                    options="{'no_open': True}"
+                                    class="fw-bold fs-1"
+                                />
                             </div>
                             <div colspan="2">
                                 <field name="product_packagings" />
