@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="0">
+    <record model="ir.rule" id="stock_inventory_comp_rule">
+        <field name="name">Stock Inventory multi-company</field>
+        <field name="model_id" ref="model_stock_inventory" />
+        <field name="global" eval="True" />
+        <field
+            name="domain_force"
+        >['|',('company_id','=',False),('company_id', 'in', company_ids)]</field>
+    </record>
+</odoo>

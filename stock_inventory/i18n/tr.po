@@ -1,0 +1,462 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_inventory
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2025-08-29 10:43+0000\n"
+"Last-Translator: Betül Öğmen <betulo@eska.biz>\n"
+"Language-Team: none\n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.10.4\n"
+
+#. module: stock_inventory
+#: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__count_stock_quants
+msgid "# Adjustments"
+msgstr "# Ayarlamalar"
+
+#. module: stock_inventory
+#: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__message_needaction
+msgid "Action Needed"
+msgstr "Eylem Gerekiyor"
+
+#. module: stock_inventory
+#: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__action_state_to_cancel_allowed
+msgid "Action State To Cancel Allowed"
+msgstr "Eylem Durumu İptal Edilebilir"
+
+#. module: stock_inventory
+#: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__count_stock_quants_string
+msgid "Adjustments"
+msgstr "Ayarlamalar"
+
+#. module: stock_inventory
+#: model:ir.model.fields.selection,name:stock_inventory.selection__stock_inventory__product_selection__all
+msgid "All Products"
+msgstr "Tüm Ürünler"
+
+#. module: stock_inventory
+#: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__responsible_id
+msgid "Assigned to"
+msgstr "Atanan"
+
+#. module: stock_inventory
+#: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__message_attachment_count
+msgid "Attachment Count"
+msgstr "Ek Sayısı"
+
+#. module: stock_inventory
+#: model_terms:ir.ui.view,arch_db:stock_inventory.res_config_settings_view_form
+msgid "Auto Complete Inventory Adjustment"
+msgstr "Otomatik Tamamlama Envanter Ayarlaması"
+
+#. module: stock_inventory
+#: model_terms:ir.ui.view,arch_db:stock_inventory.view_inventory_group_form
+msgid "Back to Draft"
+msgstr "Taslağa Geri Dön"
+
+#. module: stock_inventory
+#: model_terms:ir.ui.view,arch_db:stock_inventory.view_inventory_group_form
+msgid "Begin Adjustments"
+msgstr "Ayarlamalara Başla"
+
+#. module: stock_inventory
+#: model_terms:ir.ui.view,arch_db:stock_inventory.view_inventory_group_form
+msgid "Cancel"
+msgstr "İptal Et"
+
+#. module: stock_inventory
+#: model:ir.model.fields.selection,name:stock_inventory.selection__stock_inventory__state__cancel
+msgid "Cancelled"
+msgstr "İptal Edildi"
+
+#. module: stock_inventory
+#. odoo-python
+#: code:addons/stock_inventory/models/stock_inventory.py:0
+msgid ""
+"Cannot have more than one in-progress inventory adjustment affecting the "
+"same location or product at the same time."
+msgstr ""
+"Aynı konumu veya ürünü aynı anda etkileyen birden fazla devam eden envanter "
+"ayarlaması olamaz."
+
+#. module: stock_inventory
+#: model:ir.model,name:stock_inventory.model_res_company
+msgid "Companies"
+msgstr "Şirketler"
+
+#. module: stock_inventory
+#: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__company_id
+msgid "Company"
+msgstr "Şirket"
+
+#. module: stock_inventory
+#: model:ir.model,name:stock_inventory.model_res_config_settings
+msgid "Config Settings"
+msgstr "Yapılandırma Ayarları"
+
+#. module: stock_inventory
+#: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__create_uid
+msgid "Created by"
+msgstr "Oluşturan"
+
+#. module: stock_inventory
+#: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__create_date
+msgid "Created on"
+msgstr "Oluşturulma"
+
+#. module: stock_inventory
+#: model:ir.model.fields,field_description:stock_inventory.field_stock_quant__current_inventory_id
+msgid "Current Inventory"
+msgstr "Mevcut Envanter"
+
+#. module: stock_inventory
+#: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__date
+msgid "Date"
+msgstr "Tarih"
+
+#. module: stock_inventory
+#: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__display_name
+msgid "Display Name"
+msgstr "Görünen İsim"
+
+#. module: stock_inventory
+#: model:ir.model.fields.selection,name:stock_inventory.selection__stock_inventory__state__done
+msgid "Done"
+msgstr "Tamamlandı"
+
+#. module: stock_inventory
+#: model:ir.model.fields.selection,name:stock_inventory.selection__stock_inventory__state__draft
+msgid "Draft"
+msgstr "Taslak"
+
+#. module: stock_inventory
+#: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__exclude_sublocation
+msgid "Exclude Sublocation"
+msgstr "Alt Konumu Hariç Tut"
+
+#. module: stock_inventory
+#: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__message_follower_ids
+msgid "Followers"
+msgstr "Takipçiler"
+
+#. module: stock_inventory
+#: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Takipçiler (İş Ortakları)"
+
+#. module: stock_inventory
+#: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__has_message
+msgid "Has Message"
+msgstr "Mesaj Var"
+
+#. module: stock_inventory
+#: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__id
+msgid "ID"
+msgstr ""
+
+#. module: stock_inventory
+#: model:ir.model.fields,help:stock_inventory.field_stock_inventory__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "İşaretliyse, yeni mesajlar dikkatinize sunulacak."
+
+#. module: stock_inventory
+#: model:ir.model.fields,help:stock_inventory.field_stock_inventory__message_has_error
+msgid "If checked, some messages have a delivery error."
+msgstr "İşaretliyse, bazı mesajlar gönderi hatası içermektedir."
+
+#. module: stock_inventory
+#: model:ir.model.fields,help:stock_inventory.field_stock_inventory__exclude_sublocation
+msgid ""
+"If enabled, it will only take into account the locations selected, and not "
+"their children."
+msgstr ""
+"Etkinleştirilirse, yalnızca seçilen konumlar dikkate alınır, alt konumları "
+"dikkate alınmaz."
+
+#. module: stock_inventory
+#: model:ir.model.fields,help:stock_inventory.field_res_company__stock_inventory_auto_complete
+#: model:ir.model.fields,help:stock_inventory.field_res_config_settings__stock_inventory_auto_complete
+#: model_terms:ir.ui.view,arch_db:stock_inventory.res_config_settings_view_form
+msgid ""
+"If enabled, when all the quants prepared for the adjustment are done, the "
+"adjustment is automatically set to done."
+msgstr ""
+"Etkinleştirilirse, ayarlama için hazırlanan tüm miktarlar tamamlandığında "
+"ayarlama otomatik olarak tamamlandı olarak ayarlanır."
+
+#. module: stock_inventory
+#: model:ir.model.fields.selection,name:stock_inventory.selection__stock_inventory__state__in_progress
+msgid "In Progress"
+msgstr "Devam Eden"
+
+#. module: stock_inventory
+#: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__stock_quant_ids
+#: model:ir.model.fields,field_description:stock_inventory.field_stock_move_line__inventory_adjustment_id
+msgid "Inventory Adjustment"
+msgstr "Envanter Düzenlemesi"
+
+#. module: stock_inventory
+#: model:ir.actions.act_window,name:stock_inventory.action_view_inventory_group_form
+#: model:ir.model,name:stock_inventory.model_stock_inventory
+msgid "Inventory Adjustment Group"
+msgstr "Envanter Düzenleme Grubu"
+
+#. module: stock_inventory
+#: model:ir.ui.menu,name:stock_inventory.menu_action_inventory_tree
+msgid "Inventory Adjustments"
+msgstr "Envanter Düzenlemeleri"
+
+#. module: stock_inventory
+#: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__stock_move_ids
+msgid "Inventory Adjustments Done"
+msgstr "Tamamlanan Envanter Düzenlemeleri"
+
+#. module: stock_inventory
+#: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__name
+msgid "Inventory Reference"
+msgstr "Envanter Referansı"
+
+#. module: stock_inventory
+#: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__message_is_follower
+msgid "Is Follower"
+msgstr "Takipçi Mi"
+
+#. module: stock_inventory
+#: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__write_uid
+msgid "Last Updated by"
+msgstr "Son Değiştirilme"
+
+#. module: stock_inventory
+#: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__write_date
+msgid "Last Updated on"
+msgstr "Son Güncelleme"
+
+#. module: stock_inventory
+#: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__location_ids
+#: model_terms:ir.ui.view,arch_db:stock_inventory.view_inventory_group_form
+msgid "Locations"
+msgstr "Konumlar"
+
+#. module: stock_inventory
+#: model:ir.model.fields.selection,name:stock_inventory.selection__stock_inventory__product_selection__lot
+msgid "Lot/Serial Number"
+msgstr "Lot/Seri Numarası"
+
+#. module: stock_inventory
+#: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__lot_ids
+msgid "Lot/Serial Numbers"
+msgstr "Lot/Seri Numaraları"
+
+#. module: stock_inventory
+#: model:ir.model.fields.selection,name:stock_inventory.selection__stock_inventory__product_selection__manual
+msgid "Manual Selection"
+msgstr "Manuel Seçim"
+
+#. module: stock_inventory
+#: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__message_has_error
+msgid "Message Delivery error"
+msgstr "Mesaj Teslim hatası"
+
+#. module: stock_inventory
+#: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__message_ids
+msgid "Messages"
+msgstr "Mesajlar"
+
+#. module: stock_inventory
+#. odoo-python
+#: code:addons/stock_inventory/models/stock_quant.py:0
+msgid "No move lines have been created"
+msgstr "Hiçbir hareket satırı oluşturulmadı"
+
+#. module: stock_inventory
+#: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__message_needaction_counter
+msgid "Number of Actions"
+msgstr "Eylemlerin Adedi"
+
+#. module: stock_inventory
+#: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__message_has_error_counter
+msgid "Number of errors"
+msgstr "Hata adedi"
+
+#. module: stock_inventory
+#: model:ir.model.fields,help:stock_inventory.field_stock_inventory__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr "İşlem gerektiren mesaj sayısı"
+
+#. module: stock_inventory
+#: model:ir.model.fields,help:stock_inventory.field_stock_inventory__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "Teslimat hatası olan mesaj adedi"
+
+#. module: stock_inventory
+#: model:ir.model.fields.selection,name:stock_inventory.selection__stock_inventory__product_selection__one
+msgid "One Product"
+msgstr "Bir Ürün"
+
+#. module: stock_inventory
+#: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__owner_id
+msgid "Owner"
+msgstr "Sahibi"
+
+#. module: stock_inventory
+#: model_terms:ir.ui.view,arch_db:stock_inventory.stock_inventory_search_view
+msgid "Product"
+msgstr "Ürün"
+
+#. module: stock_inventory
+#: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__category_id
+#: model:ir.model.fields.selection,name:stock_inventory.selection__stock_inventory__product_selection__category
+msgid "Product Category"
+msgstr "Ürün Kategorisi"
+
+#. module: stock_inventory
+#: model:ir.model,name:stock_inventory.model_stock_move_line
+msgid "Product Moves (Stock Move Line)"
+msgstr "Ürün Hareketleri (Stok Hareket Satırları)"
+
+#. module: stock_inventory
+#: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__product_selection
+msgid "Product Selection"
+msgstr "Ürün Seçimi"
+
+#. module: stock_inventory
+#: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__product_ids
+msgid "Products"
+msgstr "Ürünler"
+
+#. module: stock_inventory
+#: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__products_under_review_ids
+#: model_terms:ir.ui.view,arch_db:stock_inventory.stock_inventory_search_view
+msgid "Products Under Review"
+msgstr "İncelemedeki Ürünler"
+
+#. module: stock_inventory
+#: model:ir.model,name:stock_inventory.model_stock_quant
+msgid "Quants"
+msgstr "Miktarlar"
+
+#. module: stock_inventory
+#: model_terms:ir.ui.view,arch_db:stock_inventory.view_inventory_group_form
+msgid "Set to Done"
+msgstr "Tamamlandı Olarak Ayarla"
+
+#. module: stock_inventory
+#: model:ir.model.fields,help:stock_inventory.field_stock_inventory__responsible_id
+msgid "Specific responsible of Inventory Adjustment."
+msgstr "Envanter Ayarlamasından özel sorumlu."
+
+#. module: stock_inventory
+#: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__state
+msgid "State"
+msgstr "Durumu"
+
+#. module: stock_inventory
+#: model:ir.model.fields,field_description:stock_inventory.field_stock_quant__stock_inventory_ids
+msgid "Stock Inventories"
+msgstr "Stok Envanterleri"
+
+#. module: stock_inventory
+#: model_terms:ir.ui.view,arch_db:stock_inventory.res_config_settings_view_form
+msgid "Stock Inventory"
+msgstr "Stok Envanteri"
+
+#. module: stock_inventory
+#: model:ir.model.fields,field_description:stock_inventory.field_res_company__stock_inventory_auto_complete
+#: model:ir.model.fields,field_description:stock_inventory.field_res_config_settings__stock_inventory_auto_complete
+msgid "Stock Inventory Auto Complete"
+msgstr "Stok Envanteri Otomatik Tamamla"
+
+#. module: stock_inventory
+#: model:ir.actions.act_window,name:stock_inventory.action_view_stock_move_line_inventory_tree
+msgid "Stock Move Lines"
+msgstr "Stok Hareket Satırları"
+
+#. module: stock_inventory
+#: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__count_stock_moves
+msgid "Stock Moves Lines"
+msgstr "Stok Hareketleri Satırları"
+
+#. module: stock_inventory
+#. odoo-python
+#: code:addons/stock_inventory/models/stock_inventory.py:0
+msgid ""
+"There are active adjustments for the requested products: %(names)s. Blocking "
+"adjustments: %(blocking_names)s"
+msgstr ""
+"İstenen ürünler için etkin ayarlamalar mevcut: %(names)s. Engelleme "
+"ayarlamaları: %(blocking_names)s"
+
+#. module: stock_inventory
+#. odoo-python
+#: code:addons/stock_inventory/models/stock_inventory.py:0
+msgid ""
+"There's already an Adjustment in Process using one requested Location: "
+"%(names)s. Blocking adjustments: %(blocking_names)s"
+msgstr ""
+"İstenen bir Konum kullanılarak halihazırda İşlemde olan bir Ayarlama var: "
+"%(names)s. Engelleme ayarlamaları: %(blocking_names)s"
+
+#. module: stock_inventory
+#: model:ir.model.fields,help:stock_inventory.field_stock_inventory__owner_id
+msgid "This is the owner of the inventory adjustment"
+msgstr "Bu, envanter düzenlemesinin sahibidir"
+
+#. module: stock_inventory
+#: model:ir.model.fields,field_description:stock_inventory.field_stock_quant__to_do
+#: model_terms:ir.ui.view,arch_db:stock_inventory.view_stock_quant_search_not_done
+msgid "To Do"
+msgstr "Yapılacak"
+
+#. module: stock_inventory
+#: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__website_message_ids
+msgid "Website Messages"
+msgstr "Website Mesajları"
+
+#. module: stock_inventory
+#: model:ir.model.fields,help:stock_inventory.field_stock_inventory__website_message_ids
+msgid "Website communication history"
+msgstr "Websitesi iletişim geçmişi"
+
+#. module: stock_inventory
+#. odoo-python
+#: code:addons/stock_inventory/models/stock_inventory.py:0
+msgid ""
+"When 'Product Selection: Lot Serial Number' is selected you are only able to "
+"add one product."
+msgstr ""
+"'Ürün Seçimi: Lot Seri Numarası' seçildiğinde sadece bir ürün "
+"ekleyebilirsiniz."
+
+#. module: stock_inventory
+#. odoo-python
+#: code:addons/stock_inventory/models/stock_inventory.py:0
+msgid ""
+"When 'Product Selection: One Product' is selected you are only able to add "
+"one product."
+msgstr ""
+"'Ürün Seçimi: Tek Ürün' seçildiğinde yalnızca bir ürün ekleyebilirsiniz."
+
+#. module: stock_inventory
+#. odoo-python
+#: code:addons/stock_inventory/models/stock_inventory.py:0
+msgid "You can only delete inventory adjustments groups in draft state."
+msgstr ""
+"Sadece taslak durumundaki envanter düzenlemesi gruplarını silebilirsiniz."
+
+#. module: stock_inventory
+#. odoo-python
+#: code:addons/stock_inventory/models/stock_inventory.py:0
+msgid "You can't cancel this inventory %(display_name)s."
+msgstr "Bu envanter %(display_name)s'i iptal edemezsiniz."
+
+#. module: stock_inventory
+#: model_terms:ir.ui.view,arch_db:stock_inventory.view_inventory_group_form
+msgid "e.g. Annual inventory"
+msgstr "örn. Yıllık envanter"
