@@ -93,6 +93,14 @@
                             <field name="port" />
                             <field name="use_tls" />
                         </group>
+                        <group>
+                            <field name="use_shared_storage_location" />
+                            <field
+                                name="shared_storage_location_id"
+                                required="use_shared_storage_location"
+                                invisible="not use_shared_storage_location"
+                            />
+                        </group>
                     </group>
                     <group groups="base.group_no_one">
                         <label for="command_ids" />

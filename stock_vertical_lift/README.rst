@@ -1,7 +1,3 @@
-.. image:: https://odoo-community.org/readme-banner-image
-   :target: https://odoo-community.org/get-involved?utm_source=readme
-   :alt: Odoo Community Association
-
 =============
 Vertical Lift
 =============
@@ -17,7 +13,7 @@ Vertical Lift
 .. |badge1| image:: https://img.shields.io/badge/maturity-Alpha-red.png
     :target: https://odoo-community.org/page/development-status
     :alt: Alpha
-.. |badge2| image:: https://img.shields.io/badge/license-AGPL--3-blue.png
+.. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fstock--logistics--warehouse-lightgray.png?logo=github
@@ -54,25 +50,25 @@ General
 
 In Inventory Settings, you must have:
 
-   - Storage Locations
-   - Multi-Warehouses
-   - Multi-Step Routes
+   -  Storage Locations
+   -  Multi-Warehouses
+   -  Multi-Step Routes
 
 Locations
 ---------
 
 Additional configuration parameters are added in Locations:
 
-- Sub-locations of a location with the "Is a Vertical Lift View
-  Location" activated are considered as "Shuttles". A shuttle is a
-  vertical lift shelf.
-- Sub-locations of shuttles are considered as "Trays", which is a tier
-  of a shuttle. When a tray is created, a tray type must be selected.
-  When saved, the tray location will automatically create as many
-  sub-locations - called "Cells" - as the tray type contains.
-- The tray type of a tray can be changed as long as none of its cell
-  contains products. When changed, it archives the cells and creates new
-  ones as configured on the new tray type.
+-  Sub-locations of a location with the "Is a Vertical Lift View
+   Location" activated are considered as "Shuttles". A shuttle is a
+   vertical lift shelf.
+-  Sub-locations of shuttles are considered as "Trays", which is a tier
+   of a shuttle. When a tray is created, a tray type must be selected.
+   When saved, the tray location will automatically create as many
+   sub-locations - called "Cells" - as the tray type contains.
+-  The tray type of a tray can be changed as long as none of its cell
+   contains products. When changed, it archives the cells and creates
+   new ones as configured on the new tray type.
 
 Tray types
 ----------
@@ -129,15 +125,15 @@ The barcodes used are of the type Code 128 (with the code set B).
 Known issues / Roadmap
 ======================
 
-- Complete screen workflows (currently enough for a demo, not for
-  production)
-- Inventory: find a way to have a nice autofocus for quantity, still
-  compatible with barcode scanner (Odoo disables the autofocus when
-  using barcode, which makes sense)
-- Put-away: handle packages
-- Handle "multi-shuttle" put-away
-- Create glue module for product_expiry
-- Challenge the save + release buttons and workflow
+-  Complete screen workflows (currently enough for a demo, not for
+   production)
+-  Inventory: find a way to have a nice autofocus for quantity, still
+   compatible with barcode scanner (Odoo disables the autofocus when
+   using barcode, which makes sense)
+-  Put-away: handle packages
+-  Handle "multi-shuttle" put-away
+-  Create glue module for product_expiry
+-  Challenge the save + release buttons and workflow
 
 Bug Tracker
 ===========
@@ -160,22 +156,22 @@ Authors
 Contributors
 ------------
 
-- Guewen Baconnier <guewen.baconnier@camptocamp.com>
+-  Guewen Baconnier <guewen.baconnier@camptocamp.com>
 
 Trobz
 
-- Dung Tran <dungtd@trobz.com>
+-  Dung Tran <dungtd@trobz.com>
 
-- Nhan Tran <nhant@trobz.com>
+-  Nhan Tran <nhant@trobz.com>
 
-- Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
+-  Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
 
 Other credits
 -------------
 
 The development of this module has been financially supported by:
 
-- Camptocamp
+-  Camptocamp
 
 Maintainers
 -----------
