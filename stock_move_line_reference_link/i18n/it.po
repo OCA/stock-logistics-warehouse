@@ -1,0 +1,42 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_move_line_reference_link
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2024-07-01 09:47+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
+
+#. module: stock_move_line_reference_link
+#: model:ir.model.fields,field_description:stock_move_line_reference_link.field_stock_move_line__linked_reference
+msgid "Linked Reference"
+msgstr "Riferimento collegato"
+
+#. module: stock_move_line_reference_link
+#: model:ir.model,name:stock_move_line_reference_link.model_stock_move_line
+msgid "Product Moves (Stock Move Line)"
+msgstr "Movimenti prodotto (riga movimento di magazzino)"
+
+#. module: stock_move_line_reference_link
+#: model_terms:ir.ui.view,arch_db:stock_move_line_reference_link.view_move_line_form
+msgid "Reference Link"
+msgstr "Collegamento riferimento"
+
+#. module: stock_move_line_reference_link
+#: model:ir.model.fields.selection,name:stock_move_line_reference_link.selection__stock_move_line__linked_reference__stock_move
+msgid "stock.move"
+msgstr "stock.move"
+
+#. module: stock_move_line_reference_link
+#: model:ir.model.fields.selection,name:stock_move_line_reference_link.selection__stock_move_line__linked_reference__stock_picking
+msgid "stock.picking"
+msgstr "stock.picking"
