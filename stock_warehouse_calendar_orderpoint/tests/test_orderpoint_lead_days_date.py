@@ -41,7 +41,7 @@ class TestOrderpointLeadDaysDate(CommonCalendarOrderpoint):
     def test_00_monday_with_orderpoint_calendar_set(self):
         self.wh.orderpoint_calendar_id = self.reordering_calendar
         self.assertEqual(
-            str(self.orderpoint._get_next_reordering_date()), "2024-04-03 08:00:00"
+            str(self.wh._get_next_reordering_date()), "2024-04-03 08:00:00"
         )
         self._test_with_values(
             self.reordering_calendar,
@@ -71,7 +71,7 @@ class TestOrderpointLeadDaysDate(CommonCalendarOrderpoint):
     def test_01_monday_with_orderpoint_calendar_unset(self):
         self.wh.orderpoint_calendar_id = False
         self.assertEqual(
-            str(self.orderpoint._get_next_reordering_date()), "2024-04-01 12:00:00"
+            str(self.wh._get_next_reordering_date()), "2024-04-01 12:00:00"
         )
         self._test_with_values(
             False, self.working_hours_calendar, "skip_to_first_workday", 6, "2024-04-08"
@@ -89,7 +89,7 @@ class TestOrderpointLeadDaysDate(CommonCalendarOrderpoint):
     def test_02_wednesday_with_orderpoint_calendar_set_before_first_slot(self):
         self.wh.orderpoint_calendar_id = self.reordering_calendar
         self.assertEqual(
-            str(self.orderpoint._get_next_reordering_date()), "2024-04-03 08:00:00"
+            str(self.wh._get_next_reordering_date()), "2024-04-03 08:00:00"
         )
         self._test_with_values(
             self.reordering_calendar,
@@ -119,7 +119,7 @@ class TestOrderpointLeadDaysDate(CommonCalendarOrderpoint):
     def test_03_wednesday_with_orderpoint_calendar_set_during_first_slot(self):
         self.wh.orderpoint_calendar_id = self.reordering_calendar
         self.assertEqual(
-            str(self.orderpoint._get_next_reordering_date()), "2024-04-03 10:00:00"
+            str(self.wh._get_next_reordering_date()), "2024-04-03 10:00:00"
         )
         self._test_with_values(
             self.reordering_calendar,
@@ -149,7 +149,7 @@ class TestOrderpointLeadDaysDate(CommonCalendarOrderpoint):
     def test_04_wednesday_with_orderpoint_calendar_set_between_slots(self):
         self.wh.orderpoint_calendar_id = self.reordering_calendar
         self.assertEqual(
-            str(self.orderpoint._get_next_reordering_date()), "2024-04-03 13:00:00"
+            str(self.wh._get_next_reordering_date()), "2024-04-03 13:00:00"
         )
         self._test_with_values(
             self.reordering_calendar,
@@ -179,7 +179,7 @@ class TestOrderpointLeadDaysDate(CommonCalendarOrderpoint):
     def test_05_wednesday_with_orderpoint_calendar_set_during_second_slot(self):
         self.wh.orderpoint_calendar_id = self.reordering_calendar
         self.assertEqual(
-            str(self.orderpoint._get_next_reordering_date()), "2024-04-03 15:00:00"
+            str(self.wh._get_next_reordering_date()), "2024-04-03 15:00:00"
         )
         self._test_with_values(
             self.reordering_calendar,
@@ -209,7 +209,7 @@ class TestOrderpointLeadDaysDate(CommonCalendarOrderpoint):
     def test_06_wednesday_with_orderpoint_calendar_set_after_second_slot(self):
         self.wh.orderpoint_calendar_id = self.reordering_calendar
         self.assertEqual(
-            str(self.orderpoint._get_next_reordering_date()), "2024-04-06 13:00:00"
+            str(self.wh._get_next_reordering_date()), "2024-04-06 13:00:00"
         )
         self._test_with_values(
             self.reordering_calendar,
@@ -239,7 +239,7 @@ class TestOrderpointLeadDaysDate(CommonCalendarOrderpoint):
     def test_07_wednesday_with_orderpoint_calendar_unset(self):
         self.wh.orderpoint_calendar_id = False
         self.assertEqual(
-            str(self.orderpoint._get_next_reordering_date()), "2024-04-03 12:00:00"
+            str(self.wh._get_next_reordering_date()), "2024-04-03 12:00:00"
         )
         self._test_with_values(
             False, self.working_hours_calendar, "skip_to_first_workday", 4, "2024-04-08"
@@ -257,7 +257,7 @@ class TestOrderpointLeadDaysDate(CommonCalendarOrderpoint):
     def test_08_saturday_with_orderpoint_calendar_set_before_slot(self):
         self.wh.orderpoint_calendar_id = self.reordering_calendar
         self.assertEqual(
-            str(self.orderpoint._get_next_reordering_date()), "2024-04-06 13:00:00"
+            str(self.wh._get_next_reordering_date()), "2024-04-06 13:00:00"
         )
         self._test_with_values(
             self.reordering_calendar,
@@ -287,7 +287,7 @@ class TestOrderpointLeadDaysDate(CommonCalendarOrderpoint):
     def test_09_saturday_with_orderpoint_calendar_set_during_slot(self):
         self.wh.orderpoint_calendar_id = self.reordering_calendar
         self.assertEqual(
-            str(self.orderpoint._get_next_reordering_date()), "2024-04-06 15:00:00"
+            str(self.wh._get_next_reordering_date()), "2024-04-06 15:00:00"
         )
         self._test_with_values(
             self.reordering_calendar,
@@ -317,7 +317,7 @@ class TestOrderpointLeadDaysDate(CommonCalendarOrderpoint):
     def test_10_saturday_with_orderpoint_calendar_set_after_slot(self):
         self.wh.orderpoint_calendar_id = self.reordering_calendar
         self.assertEqual(
-            str(self.orderpoint._get_next_reordering_date()), "2024-04-10 08:00:00"
+            str(self.wh._get_next_reordering_date()), "2024-04-10 08:00:00"
         )
         self._test_with_values(
             self.reordering_calendar,
@@ -347,7 +347,7 @@ class TestOrderpointLeadDaysDate(CommonCalendarOrderpoint):
     def test_11_saturday_with_orderpoint_calendar_unset(self):
         self.wh.orderpoint_calendar_id = False
         self.assertEqual(
-            str(self.orderpoint._get_next_reordering_date()), "2024-04-06 12:00:00"
+            str(self.wh._get_next_reordering_date()), "2024-04-06 12:00:00"
         )
         self._test_with_values(
             False, self.working_hours_calendar, "skip_to_first_workday", 7, "2024-04-15"
@@ -365,7 +365,7 @@ class TestOrderpointLeadDaysDate(CommonCalendarOrderpoint):
     def test_12_sunday_with_orderpoint_calendar_set(self):
         self.wh.orderpoint_calendar_id = self.reordering_calendar
         self.assertEqual(
-            str(self.orderpoint._get_next_reordering_date()), "2024-04-10 08:00:00"
+            str(self.wh._get_next_reordering_date()), "2024-04-10 08:00:00"
         )
         self._test_with_values(
             self.reordering_calendar,
@@ -395,7 +395,7 @@ class TestOrderpointLeadDaysDate(CommonCalendarOrderpoint):
     def test_13_sunday_with_orderpoint_calendar_unset(self):
         self.wh.orderpoint_calendar_id = False
         self.assertEqual(
-            str(self.orderpoint._get_next_reordering_date()), "2024-04-07 12:00:00"
+            str(self.wh._get_next_reordering_date()), "2024-04-07 12:00:00"
         )
         self._test_with_values(
             False, self.working_hours_calendar, "skip_to_first_workday", 7, "2024-04-15"

@@ -7,7 +7,7 @@ from odoo.tests.common import TransactionCase
 
 class TestStockWarehouseCalendar(TransactionCase):
     def setUp(self):
-        super(TestStockWarehouseCalendar, self).setUp()
+        super().setUp()
         self.wh_obj = self.env["stock.warehouse"]
         self.move_obj = self.env["stock.move"]
         self.pg_obj = self.env["procurement.group"]

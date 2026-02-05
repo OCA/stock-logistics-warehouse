@@ -57,6 +57,14 @@ class StockWarehouse(models.Model):
             self = self.with_context(force_wh_company=vals["company_id"])
         return super().create(vals)
 
+    def _get_next_reordering_date(self):
+        self.ensure_one()
+        now = fields.Datetime.now()
+        calendar = self.orderpoint_calendar_id
+        # TODO: should we take into account days off of the reordering calendar with
+        #  'compute_leaves=True' here?
+        return calendar and calendar.plan_hours(0, now) or now
+
     def _get_lead_date(self, date_order, lead_days):
         self.ensure_one()
         # Get the WH calendar

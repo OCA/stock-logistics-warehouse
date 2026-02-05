@@ -1,7 +1,7 @@
 # Copyright 2022 Camptocamp SA
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl)
 
-from odoo import api, fields, models
+from odoo import api, models
 
 
 class StockWarehouseOrderpoint(models.Model):
@@ -22,11 +22,11 @@ class StockWarehouseOrderpoint(models.Model):
             if not orderpoint.product_id or not orderpoint.location_id:
                 orderpoint.lead_days_date = False
                 continue
-            # Get the reordering date from the OP calendar
-            reordering_date = orderpoint._get_next_reordering_date()
+            wh = orderpoint.warehouse_id
             # Get the lead days for this orderpoint
             lead_days = orderpoint._get_lead_days()
-            wh = orderpoint.warehouse_id
+            # Get the reordering date from the OP calendar
+            reordering_date = wh._get_next_reordering_date()
             # Compute the lead_days_date, according to the calendar
             orderpoint.lead_days_date = wh._get_lead_date(reordering_date, lead_days)
 
@@ -34,14 +34,6 @@ class StockWarehouseOrderpoint(models.Model):
         self.ensure_one()
         lead_days, __ = self.rule_ids._get_lead_days(self.product_id)
         return lead_days
-
-    def _get_next_reordering_date(self):
-        self.ensure_one()
-        now = fields.Datetime.now()
-        calendar = self.warehouse_id.orderpoint_calendar_id
-        # TODO: should we take into account days off of the reordering calendar with
-        #  'compute_leaves=True' here?
-        return calendar and calendar.plan_hours(0, now) or now
 
     @api.depends("rule_ids", "product_id.seller_ids", "product_id.seller_ids.delay")
     def _compute_json_popover(self):

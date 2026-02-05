@@ -13,7 +13,7 @@ class StockRule(models.Model):
         if self.env.context.get("orderpoint_id"):
             op_id = self.env.context["orderpoint_id"]
             op = self.env["stock.warehouse.orderpoint"].browse(op_id)
-            reordering_date = op._get_next_reordering_date()
+            reordering_date = op.warehouse_id._get_next_reordering_date()
             # Display the reordering date first so the user will know from which
             # date the computation is done.
             if reordering_date:
