@@ -11,7 +11,11 @@
                 <field name="location_dest_id" position="after">
                     <label for="volume" />
                     <div>
-                        <field name="volume" class="oe_inline" />
+                        <field
+                        name="volume"
+                        class="oe_inline"
+                        attrs="{'readonly': [('state', 'in', ['done', 'cancel'])]}"
+                    />
                         <field
                         name="volume_uom_name"
                         nolabel="1"

@@ -12,7 +12,11 @@
                 <group name='logistics_data' string="Logistics">
                     <label for="volume" />
                     <div>
-                        <field name="volume" class="oe_inline" />
+                        <field
+                            name="volume"
+                            class="oe_inline"
+                            attrs="{'readonly': [('state', 'in', ['done', 'cancel'])]}"
+                        />
                         <field
                             name="volume_uom_name"
                             nolabel="1"
