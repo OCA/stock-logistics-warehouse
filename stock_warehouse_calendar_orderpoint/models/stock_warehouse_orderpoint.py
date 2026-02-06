@@ -35,6 +35,11 @@ class StockWarehouseOrderpoint(models.Model):
         lead_days, __ = self.rule_ids._get_lead_days(self.product_id)
         return lead_days
 
+    # DEPRECATED
+    def _get_next_reordering_date(self):
+        self.ensure_one()
+        return self.warehouse_id._get_next_reordering_date()
+
     @api.depends("rule_ids", "product_id.seller_ids", "product_id.seller_ids.delay")
     def _compute_json_popover(self):
         # Overridden to send the OP ID to 'stock.rule._get_lead_days()'

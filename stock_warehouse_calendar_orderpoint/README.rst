@@ -58,6 +58,12 @@ For example, if we plan to execute the reordering rules on a given weekday
 (configuration of the Reordering Calendar), it will take this day as a
 starting date instead of the current day (standard behavior).
 
+Known issues / Roadmap
+======================
+
+Method `_get_next_reordering_date()` is moved to `stock.warehouse` where it belongs. Method
+on the `stock.warehouse.orderpoint` is deprecated and will be removed.
+
 Bug Tracker
 ===========
 
