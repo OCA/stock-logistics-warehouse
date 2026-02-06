@@ -16,7 +16,6 @@ class StockMove(models.Model):
                 and move.picking_type_id
                 and move.picking_type_id.use_purchase_uom
                 and purchase_uom
-                and move.product_uom != purchase_uom
                 and not move.origin_returned_move_id
             ):
                 updated_product_uom_qty = move.product_uom._compute_quantity(

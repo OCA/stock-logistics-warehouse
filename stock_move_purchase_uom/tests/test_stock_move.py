@@ -47,3 +47,55 @@ class TestStockMove(TestCommon):
         picking = picking_form.save()
         move = picking.move_ids_without_package[0]
         self.assertEqual(move.product_uom_qty, 0.01)
+
+    def test_create_move_same_uom_rounding_up(self):
+        unit_uom = self.env.ref("uom.product_uom_unit")
+        unit_uom.rounding = 1.0
+        product_unit = self.env["product.product"].create(
+            {
+                "name": "Test product unit",
+                "is_storable": True,
+                "categ_id": self.env.ref("product.product_category_all").id,
+                "uom_id": unit_uom.id,
+                "uom_po_id": unit_uom.id,
+            }
+        )
+        self.stock_picking_type_2.purchase_uom_rounding_method = "UP"
+        move = self.env["stock.move"].create(
+            {
+                "name": product_unit.display_name,
+                "location_id": self.location.id,
+                "location_dest_id": self.location_dest.id,
+                "product_id": product_unit.id,
+                "product_uom_qty": 5.25,
+                "picking_type_id": self.stock_picking_type_2.id,
+                "product_uom": unit_uom.id,
+            }
+        )
+        self.assertEqual(move.product_uom_qty, 6.0)
+
+    def test_create_move_same_uom_rounding_half_up(self):
+        unit_uom = self.env.ref("uom.product_uom_unit")
+        unit_uom.rounding = 1.0
+        product_unit = self.env["product.product"].create(
+            {
+                "name": "Test product unit",
+                "is_storable": True,
+                "categ_id": self.env.ref("product.product_category_all").id,
+                "uom_id": unit_uom.id,
+                "uom_po_id": unit_uom.id,
+            }
+        )
+        self.stock_picking_type_2.purchase_uom_rounding_method = "HALF-UP"
+        move = self.env["stock.move"].create(
+            {
+                "name": product_unit.display_name,
+                "location_id": self.location.id,
+                "location_dest_id": self.location_dest.id,
+                "product_id": product_unit.id,
+                "product_uom_qty": 5.25,
+                "picking_type_id": self.stock_picking_type_2.id,
+                "product_uom": unit_uom.id,
+            }
+        )
+        self.assertEqual(move.product_uom_qty, 5.0)
