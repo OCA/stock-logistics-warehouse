@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Open Source Integrators
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl). -->
+<odoo>
+    <record id="stock_inventory_adjustment_name_form_view" model="ir.ui.view">
+        <field name="name">stock.inventory.adjustment.name.form.inherit.location</field>
+        <field name="model">stock.inventory.adjustment.name</field>
+        <field
+            name="inherit_id"
+            ref="stock.stock_inventory_adjustment_name_form_view"
+        />
+        <field name="arch" type="xml">
+            <field name="inventory_adjustment_name" position="after">
+                <field name="inventory_location_id" />
+            </field>
+        </field>
+    </record>
+</odoo>
