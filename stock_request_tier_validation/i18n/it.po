@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-02-18 11:06+0000\n"
+"PO-Revision-Date: 2026-02-10 11:56+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.6.2\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: stock_request_tier_validation
 #: model_terms:ir.ui.view,arch_db:stock_request_tier_validation.stock_request_order_form_inherit_tier
@@ -172,7 +172,7 @@ msgstr "Definizione livello"
 #: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request__tier_validation_before_write
 #: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request_order__tier_validation_before_write
 msgid "Tier Validation Before Write"
-msgstr "Livello validazione prima della scrittura"
+msgstr "Validazione livello prima della scrittura"
 
 #. module: stock_request_tier_validation
 #: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request__to_validate_message
