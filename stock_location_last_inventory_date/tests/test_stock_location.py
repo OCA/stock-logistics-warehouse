@@ -145,3 +145,52 @@ class TestStockLocation(SavepointCase):
             ]
         )
         self.assertEqual(locations, self.top_location)
+
+    def test_empty_location(self):
+        empty_location = self.env["stock.location"].create(
+            {"name": "Leaf", "location_id": self.top_location.id}
+        )
+        leaf_empty_location = self.env["stock.location"].create(
+            {"name": "Leaf", "location_id": empty_location.id}
+        )
+        inventory = self.env["stock.inventory"].create(
+            {
+                "name": "Inventory Adjustment",
+                "location_ids": [(4, empty_location.id)],
+            }
+        )
+        inventory.action_start()
+        inventory.action_validate()
+        self.assertEqual(empty_location.last_inventory_date, inventory.date)
+        self.assertEqual(leaf_empty_location.last_inventory_date, inventory.date)
+        self.assertFalse(self.top_location.last_inventory_date)
+
+    def test_inventory_nochange_location(self):
+
+        inventory = self.env["stock.inventory"].create(
+            {
+                "name": "Inventory Adjustment",
+                "product_ids": [(4, self.product.id)],
+                "location_ids": [(4, self.leaf_location.id)],
+            }
+        )
+        inventory.action_start()
+        inventory.action_validate()
+        self.assertEqual(self.leaf_location.last_inventory_date, inventory.date)
+        self.assertFalse(self.top_location.last_inventory_date)
+
+        new_inventory_date = fields.Date.add(inventory.date, days=10)
+        string_inventory_date = fields.Datetime.to_string(new_inventory_date)
+
+        with freeze_time(string_inventory_date):
+            inventory = self.env["stock.inventory"].create(
+                {
+                    "name": "Inventory Adjustment",
+                    "product_ids": [(4, self.product.id)],
+                    "location_ids": [(4, self.leaf_location.id)],
+                }
+            )
+            inventory.action_start()
+            inventory.action_validate()
+            self.assertEqual(self.leaf_location.last_inventory_date, inventory.date)
+            self.assertFalse(self.top_location.last_inventory_date)
