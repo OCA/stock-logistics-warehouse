@@ -297,3 +297,55 @@ class TestReleaseChannelRestriction(BaseCommon):
         )
         self.picking_2.release_channel_id = self.default_channel
         self.picking_1._action_done()
+
+    def test_release_channel_restriction_children(self):
+        """
+        Check that a restriction on a location in the same family
+        applies.
+
+                        OUT
+
+                OUT1            OUT2
+        """
+        self.delivery_1 = self.env["stock.picking"].search(
+            [
+                ("move_ids.location_id", "=", self.out.id),
+                ("product_id", "=", self.product.id),
+                ("group_id", "=", self.group_1.id),
+            ]
+        )
+        self.delivery_1.assign_release_channel()
+        self.assertEqual(self.default_channel, self.delivery_1.release_channel_id)
+        self.picking_1 = self.env["stock.picking"].search(
+            [
+                ("move_ids.location_id", "=", self.warehouse.lot_stock_id.id),
+                ("product_id", "=", self.product.id),
+                ("group_id", "=", self.group_1.id),
+            ]
+        )
+
+        self.picking_1.move_line_ids.location_dest_id = self.out_1
+        self.picking_1.move_line_ids.qty_done = (
+            self.picking_1.move_line_ids.reserved_qty
+        )
+
+        self.picking_1._action_done()
+        self.assertEqual("done", self.picking_1.state)
+
+        self.assertEqual("assigned", self.delivery_1.state)
+
+        self.picking_2 = self.env["stock.picking"].search(
+            [
+                ("move_ids.location_id", "=", self.warehouse.lot_stock_id.id),
+                ("product_id", "=", self.product.id),
+                ("group_id", "=", self.group_2.id),
+            ]
+        )
+        # Use another sub-location
+        self.picking_2.move_line_ids.location_dest_id = self.out_2
+        self.picking_2.move_line_ids.qty_done = (
+            self.picking_2.move_line_ids.reserved_qty
+        )
+
+        with self.assertRaises(ReleaseChannelLocationRestrictionError):
+            self.picking_2._action_done()

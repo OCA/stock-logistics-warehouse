@@ -1,7 +1,7 @@
 # Copyright 2024 ACSONE SA/NV
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
-
 from odoo import _, api, fields, models
+from odoo.fields import first
 
 RELEASE_RESTRICTION = [
     (
@@ -17,6 +17,12 @@ RELEASE_RESTRICTION = [
 
 class StockLocation(models.Model):
     _inherit = "stock.location"
+
+    current_release_channel_restriction_id = fields.Many2one(
+        comodel_name="stock.release.channel",
+        compute="_compute_current_release_channel_restriction_id",
+        recursive=True,
+    )
 
     release_channel_restriction = fields.Selection(
         selection=RELEASE_RESTRICTION,
@@ -50,6 +56,42 @@ class StockLocation(models.Model):
             "in the same release channel."
         ),
     )
+
+    def _get_first_ancestor_with_same_restriction(self):
+        """
+        This will retrieve all first parent with "same" restriction
+        on the recordset.
+        """
+        parents = self.search(
+            [
+                ("id", "parent_of", self.ids),
+                ("location_id.release_channel_restriction", "!=", "same"),
+            ]
+        )
+        return parents
+
+    @api.depends(
+        "release_channel_restriction",
+        "pending_in_move_line_ids",
+        "pending_out_move_line_ids",
+    )
+    def _compute_current_release_channel_restriction_id(self):
+        """
+        This will compute the current release channel that
+        """
+        parents = self._get_first_ancestor_with_same_restriction()
+        for location in self:
+            # Get all locations related to this one (same parent with "same" restriction)
+            family_location_ids = parents.filtered_domain(
+                [("id", "parent_of", location.id)]
+            ).child_ids.filtered(
+                lambda record: record.release_channel_restriction == "same"
+            )
+            release_channel_id = first(
+                family_location_ids.pending_out_move_line_ids.picking_id.release_channel_id
+            )
+
+            location.current_release_channel_restriction_id = release_channel_id
 
     @api.model
     def _selection_release_channel_restriction(self):
