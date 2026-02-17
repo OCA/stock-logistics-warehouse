@@ -75,7 +75,7 @@ class TestStockQuantManualAssign(TransactionCase):
         wizard.quants_lines[1].write({"selected": True, "qty": 50.0})
         self.assertEqual(wizard.lines_qty, 150.0)
 
-    def test_quant_assign_wizard(self):
+    def test_01_quant_assign_wizard(self):
         wizard = self._create_wizard()
         self.assertEqual(
             len(wizard.quants_lines.ids),
@@ -94,7 +94,7 @@ class TestStockQuantManualAssign(TransactionCase):
         )
         self.assertEqual(wizard.move_qty, self.move.product_uom_qty)
 
-    def test_quant_assign_wizard_constraint(self):
+    def test_02_quant_assign_wizard_constraint(self):
         wizard = self._create_wizard()
         self.assertEqual(
             len(wizard.quants_lines.ids),
@@ -116,7 +116,7 @@ class TestStockQuantManualAssign(TransactionCase):
                 }
             )
 
-    def test_quant_manual_assign(self):
+    def test_03_quant_manual_assign(self):
         wizard = self._create_wizard()
         self.assertEqual(
             len(wizard.quants_lines.ids),
@@ -139,7 +139,7 @@ class TestStockQuantManualAssign(TransactionCase):
         wizard.assign_quants()
         self.assertEqual(sum(self.move.move_line_ids.mapped("quantity")), 150.0)
 
-    def test_quant_assign_wizard_after_availability_check(self):
+    def test_04_quant_assign_wizard_after_availability_check(self):
         self.move._action_assign()
         wizard = self._create_wizard()
         self.assertEqual(
@@ -160,4 +160,39 @@ class TestStockQuantManualAssign(TransactionCase):
         self.assertEqual(
             sum(line.qty for line in wizard.quants_lines),
             self.move.quantity,
+        )
+
+    def test_05_quant_assign_wizard_negative_qty_fix(self):
+        """
+        Test Case: Reserved > On Hand.
+        Verifies that if a quant has an inconsistent state where reserved_quantity
+        is higher than quantity, the wizard sets the qty to 0 instead of a negative
+        value.
+        """
+        loc_fix = self._create_location("Location Fix")
+        quant_fix = self._create_quant(self.product, 10.0, loc_fix)
+
+        # Force an inconsistency: Reserved (15.0) > On Hand (10.0)
+        # We use SQL because Odoo constraints/logic would prevent doing this via ORM
+        self.env.cr.execute(
+            "UPDATE stock_quant SET reserved_quantity = 15.0 WHERE id = %s",
+            (quant_fix.id,),
+        )
+        quant_fix.invalidate_recordset()
+        wizard = self._create_wizard()
+        line_fix = wizard.quants_lines.filtered(lambda line: line.quant_id == quant_fix)
+        self.assertTrue(
+            line_fix, "The inconsistent quant should be loaded in the wizard"
+        )
+        self.assertEqual(
+            line_fix.reserved, 15.0, "Wizard should see 15.0 reserved units"
+        )
+        line_fix.selected = True
+        line_fix._onchange_selected()
+
+        self.assertEqual(
+            line_fix.qty,
+            0.0,
+            "The suggested quantity must be 0.0 when reserved > on_hand "
+            "(prevent negative qty).",
         )

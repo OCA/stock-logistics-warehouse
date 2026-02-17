@@ -183,7 +183,7 @@ class AssignManualQuantsLines(models.TransientModel):
             # for this current move. If other operations change available
             # quantity on quant, a constraint would be raised later on
             # validation.
-            quant_qty = self.on_hand - self.reserved
+            quant_qty = max(0.0, self.on_hand - self.reserved)
             remaining_qty = self.assign_wizard.move_qty
             self.qty = min(quant_qty, remaining_qty)
 
