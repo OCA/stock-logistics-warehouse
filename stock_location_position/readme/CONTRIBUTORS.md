@@ -3,3 +3,5 @@
 - Guewen Baconnier (Camptocamp) \<<guewen.baconnier@camptocamp.com>\>
 - Akim Juillerat \<<akim.juillerat@camptocamp.com>\>
 - Phuc Tran Thanh \<<phuc@trobz.com>\>
+- [Studio73](https://www.studio73.es/):
+  - Eugenio Micó \<<eugenio@studio73.es>\>
