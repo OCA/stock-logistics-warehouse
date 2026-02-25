@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 ForgeFlow S.L.
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record
+        id="res_config_settings_view_form_inherit_soft_inventory_lock"
+        model="ir.ui.view"
+    >
+        <field
+            name="name"
+        >res.config.settings.view.form.inherit.soft.inventory.lock</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="stock_inventory.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//block[@id='stock_inventory_setting_container']"
+                position="inside"
+            >
+                <setting
+                    id="use_soft_inventory_lock"
+                    string="Use Product-Aware Inventory Lock"
+                    help="When enabled, inventory locks only restrict stock moves involving products that are part of an active inventory adjustment."
+                >
+                    <field name="use_soft_inventory_lock" />
+                </setting>
+            </xpath>
+        </field>
+    </record>
+</odoo>
