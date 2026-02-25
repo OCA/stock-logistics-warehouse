@@ -120,7 +120,11 @@ msgid "Date"
 msgstr "Date"
 
 #. module: stock_inventory
+#: model:ir.model.fields,field_description:stock_inventory.field_res_company__display_name
+#: model:ir.model.fields,field_description:stock_inventory.field_res_config_settings__display_name
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__display_name
+#: model:ir.model.fields,field_description:stock_inventory.field_stock_move_line__display_name
+#: model:ir.model.fields,field_description:stock_inventory.field_stock_quant__display_name
 msgid "Display Name"
 msgstr "Nom d'affichage"
 
@@ -155,7 +159,11 @@ msgid "Has Message"
 msgstr ""
 
 #. module: stock_inventory
+#: model:ir.model.fields,field_description:stock_inventory.field_res_company__id
+#: model:ir.model.fields,field_description:stock_inventory.field_res_config_settings__id
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__id
+#: model:ir.model.fields,field_description:stock_inventory.field_stock_move_line__id
+#: model:ir.model.fields,field_description:stock_inventory.field_stock_quant__id
 msgid "ID"
 msgstr "ID"
 
@@ -389,8 +397,8 @@ msgstr ""
 #. odoo-python
 #: code:addons/stock_inventory/models/stock_inventory.py:0
 msgid ""
-"There's already an Adjustment in Process using one requested Location: "
-"%(names)s. Blocking adjustments: %(blocking_names)s"
+"There's already an Adjustment in Process using one requested Location: %"
+"(names)s. Blocking adjustments: %(blocking_names)s"
 msgstr ""
 
 #. module: stock_inventory
