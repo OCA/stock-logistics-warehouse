@@ -4,7 +4,7 @@ from odoo.tests import TransactionCase
 class StockPickingProductInterchangeableCommon(TransactionCase):
     @classmethod
     def setUpClass(cls):
-        super(StockPickingProductInterchangeableCommon, cls).setUpClass()
+        super().setUpClass()
         cls.product_fork = cls.env.ref(
             "stock_picking_product_interchangeable.product_product_fork"
         )

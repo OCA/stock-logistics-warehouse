@@ -75,7 +75,8 @@ class TestStockPicking(StockPickingProductInterchangeableCommon):
         )
 
     def test_create_delivery_stock_picking_with_pass_interchangeable(self):
-        """Test flow to skip interchangeable behavior for delivery stock.picking record"""
+        """Test flow to skip interchangeable behavior for
+        delivery stock.picking record"""
         record = self._create_stock_picking(30, True)
         self.assertEqual(len(record.move_ids), 1, msg="Moves count must be equal to 1")
         knife_move = record.move_ids

@@ -80,9 +80,7 @@ class StockMove(models.Model):
             picking.note += note
 
     def _action_confirm(self, merge=True, merge_into=False):
-        moves = super(StockMove, self)._action_confirm(
-            merge=merge, merge_into=merge_into
-        )
+        moves = super()._action_confirm(merge=merge, merge_into=merge_into)
         inter_moves = moves.filtered(
             lambda move: move._interchangeable_stock_move_filter()
         )
