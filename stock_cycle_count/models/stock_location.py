@@ -14,7 +14,7 @@ try:
     from statistics import mean
 
     STATS_PATH = tools.find_in_path("statistics")
-except (ImportError, IOError) as err:
+except (OSError, ImportError) as err:
     _logger.debug(err)
 
 

@@ -10,7 +10,7 @@ from odoo.tests import common
 class TestStockCycleCount(common.TransactionCase):
     @classmethod
     def setUpClass(cls):
-        super(TestStockCycleCount, cls).setUpClass()
+        super().setUpClass()
         cls.res_users_model = cls.env["res.users"]
         cls.cycle_count_model = cls.env["stock.cycle.count"]
         cls.stock_cycle_count_rule_model = cls.env["stock.cycle.count.rule"]
@@ -153,7 +153,7 @@ class TestStockCycleCount(common.TransactionCase):
         counts = self.cycle_count_model.search([("location_id", "in", locs.ids)])
         self.assertFalse(counts, "Existing cycle counts before execute planner.")
         date_pre_existing_cc = datetime.today() + timedelta(days=30)
-        loc = locs.filtered(lambda l: l.usage != "view")[0]
+        loc = locs.filtered(lambda line: line.usage != "view")[0]
         pre_existing_count = self.cycle_count_model.create(
             {
                 "name": "To be cancelled when running cron job.",
