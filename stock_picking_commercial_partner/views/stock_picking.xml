@@ -2,7 +2,6 @@
 <!-- Copyright 2023 ACSONE SA/NV
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <record model="ir.ui.view" id="stock_picking_form_view">
         <field
             name="name"
@@ -23,7 +22,7 @@
         <field name="model">stock.picking</field>
         <field name="inherit_id" ref="stock.view_picking_internal_search" />
         <field name="arch" type="xml">
-             <field name="partner_id" position="after">
+            <field name="partner_id" position="after">
                 <field name="commercial_partner_id" />
             </field>
             <group position="inside">
@@ -49,5 +48,4 @@
             </field>
         </field>
     </record>
-
 </odoo>
