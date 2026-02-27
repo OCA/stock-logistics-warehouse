@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="product_packaging_form_view_inherit" model="ir.ui.view">
+        <field name="name">stock.package.form.view.inherit</field>
+        <field name="model">stock.package</field>
+        <field name="inherit_id" ref="stock.stock_package_view_form" />
+        <field name="arch" type="xml">
+            <sheet position="inside">
+                <group name="dimensions" string="Dimensions">
+                    <group id="group_volume">
+                        <label for="volume" />
+                        <div class="o_row">
+                            <field name="volume" />
+                            <field name="volume_uom_name" />
+                        </div>
+                    </group>
+                    <group id="group_packaging_length">
+                        <label for="packaging_length" />
+                        <div class="o_row">
+                            <field name="packaging_length" />
+                            <field name="length_uom_name" />
+                        </div>
+                    </group>
+                    <group id="group_width">
+                        <label for="width" />
+                        <div class="o_row">
+                            <field name="width" />
+                            <field name="length_uom_name" />
+                        </div>
+                    </group>
+                    <group id="group_height">
+                        <label for="height" />
+                        <div class="o_row">
+                            <field name="height" />
+                            <field name="length_uom_name" />
+                        </div>
+                    </group>
+                </group>
+                <group string="Weight">
+                    <group id="group_weight">
+                        <label for="weight" />
+                        <div class="o_row" name="weight">
+                            <field name="weight" />
+                            <span>
+                                <field name="weight_uom_name" />
+                            </span>
+                        </div>
+                    </group>
+                </group>
+                <group string="Units of Measure">
+                    <group>
+                        <field name="volume_uom_id" />
+                        <field name="length_uom_id" />
+                    </group>
+                    <group>
+                        <field name="weight_uom_id" />
+                    </group>
+                </group>
+            </sheet>
+        </field>
+    </record>
+</odoo>
