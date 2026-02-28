@@ -6,40 +6,46 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2026-02-28 16:09+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: stock_account_change_qty_reason
 #: model:ir.model.fields,field_description:stock_account_change_qty_reason.field_stock_inventory_line_reason__account_reason_input_id
 msgid "Input Account for Stock Valuation"
-msgstr ""
+msgstr "Conto ingresso per valorizzazione giacenze"
 
 #. module: stock_account_change_qty_reason
 #: model:ir.model.fields,field_description:stock_account_change_qty_reason.field_stock_inventory_line_reason__account_reason_output_id
 msgid "Output Account for Stock Valuation"
-msgstr ""
+msgstr "Conto uscita per valorizzazione giacenze"
 
 #. module: stock_account_change_qty_reason
 #: model:ir.model,name:stock_account_change_qty_reason.model_stock_inventory_line_reason
 msgid "Stock Inventory Line Reason"
-msgstr ""
+msgstr "Causale riga d'inventario"
 
 #. module: stock_account_change_qty_reason
 #: model:ir.model,name:stock_account_change_qty_reason.model_stock_move
 msgid "Stock Move"
-msgstr ""
+msgstr "Movimento di magazzino"
 
 #. module: stock_account_change_qty_reason
 #: model:ir.model.fields,help:stock_account_change_qty_reason.field_stock_inventory_line_reason__account_reason_output_id
 msgid "When set, it will be used as offsetting account when products are issued from the company."
 msgstr ""
+"Quando impostato, verrà utilizzato come conto di compensazione quando i "
+"prodotti sono distribuiti dall'azienda."
 
 #. module: stock_account_change_qty_reason
 #: model:ir.model.fields,help:stock_account_change_qty_reason.field_stock_inventory_line_reason__account_reason_input_id
 msgid "When set, it will be used as offsetting account when products are received into the company."
 msgstr ""
+"Quando impostato, verrà usato come conto di compensazione quando i prodotti "
+"sono ricevuti dall'azienda."
