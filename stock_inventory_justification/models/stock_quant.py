@@ -37,8 +37,8 @@ class StockQuant(models.Model):
         ]
         return res
 
-    def _apply_inventory(self):
-        res = super()._apply_inventory()
+    def _apply_inventory(self, date=None):
+        res = super()._apply_inventory(date=date)
         self.write({"inventory_justification_ids": [(5,)]})
         return res
 
