@@ -29,25 +29,13 @@ class StockPutawayRule(models.Model):
                 if params.get("model", "") == "product.template" and params.get("id"):
                     rec.product_tmpl_id = params.get("id")
 
-    def filtered(self, func):
-        res = super().filtered(func)
-        if res or not self.env.context.get("filter_putaway_rule"):
-            return res
-        if isinstance(func, str):
-            name = func
-
-            def func(rec):
-                any(rec.mapped(name))
-
-            # populate cache
-            self.mapped(name)
-        product = func.__closure__[0].cell_contents
-        if isinstance(product, str):
-            return res
-        if product._name != "product.product":
-            return res
-        return self.with_context(filter_putaway_rule=False).filtered(
-            lambda x: (
-                x.product_tmpl_id == product.product_tmpl_id and not x.product_id
-            )
+    def _get_putaway_location(
+        self, product, quantity=0, package=None, packaging=None, qty_by_location=None
+    ):
+        rules = self.filtered(
+            lambda r: not r.product_tmpl_id
+            or r.product_tmpl_id == product.product_tmpl_id
+        )
+        return super(StockPutawayRule, rules)._get_putaway_location(
+            product, quantity, package, packaging, qty_by_location=qty_by_location
         )
