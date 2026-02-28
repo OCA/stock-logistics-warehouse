@@ -18,12 +18,23 @@ class TestStockLocationLockdown(TransactionCase):
         cls.supplier_location = cls.env.ref("stock.stock_location_suppliers")
         cls.customer_location = cls.env.ref("stock.stock_location_customers")
 
-        # Call an existing product and force no Lot/Serial Number tracking
-        cls.product = cls.env.ref("product.product_product_27")
-        cls.product.tracking = "none"
+        cls.product = cls.env["product.product"].create(
+            {
+                "name": "Test Lockdown Product",
+                "is_storable": True,
+                "tracking": "none",
+            }
+        )
 
-        # Catch the first quant's stock location
-        cls.stock_location = cls.env["stock.quant"].search([])[0].location_id
+        stock_location = cls.env.ref("stock.stock_location_stock")
+        cls.env["stock.quant"].with_context(inventory_mode=True).create(
+            {
+                "product_id": cls.product.id,
+                "location_id": stock_location.id,
+                "quantity": 10.0,
+            }
+        )
+        cls.stock_location = stock_location
 
     def test_transfer_stock_in_locked_location(self):
         """
@@ -38,7 +49,6 @@ class TestStockLocationLockdown(TransactionCase):
             "quantity": self.product.qty_available + 1,
             "picked": True,
             "product_uom": self.product.uom_id.id,
-            "name": "test",
             "move_line_ids": [
                 (
                     0,
@@ -71,7 +81,6 @@ class TestStockLocationLockdown(TransactionCase):
             "quantity": self.product.qty_available + 1,
             "picked": True,
             "product_uom": self.product.uom_id.id,
-            "name": "test",
             "move_line_ids": [
                 (
                     0,
