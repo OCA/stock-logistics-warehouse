@@ -15,8 +15,10 @@ class TestStockPutawayRule(common.TransactionCase):
         ProductAttribute = cls.env["product.attribute"]
         ProductAttributeValue = cls.env["product.attribute.value"]
         TemplateAttributeLine = cls.env["product.template.attribute.line"]
-        # Add a product with variants
-        cls.template = ProductTemplate.create({"name": "Product test", "type": "consu"})
+        cls.categ = cls.env["product.category"].create({"name": "Putaway Test"})
+        cls.template = ProductTemplate.create(
+            {"name": "Product test", "type": "consu", "categ_id": cls.categ.id}
+        )
         cls.size_attribute = ProductAttribute.create(
             {"name": "Test size", "sequence": 1}
         )
