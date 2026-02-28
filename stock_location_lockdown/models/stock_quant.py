@@ -17,10 +17,8 @@ class StockQuant(models.Model):
                 raise ValidationError(
                     self.env._(
                         "The location %(location)s is blocked and can "
-                        "not be used for moving the product %(product)s"
+                        "not be used for moving the product %(product)s",
+                        location=record.location_id.display_name,
+                        product=record.product_id.display_name,
                     )
-                    % {
-                        "location": record.location_id.display_name,
-                        "product": record.product_id.display_name,
-                    }
                 )
