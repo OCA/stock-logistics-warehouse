@@ -8,13 +8,10 @@ class StockInventoryJustification(models.Model):
     _name = "stock.inventory.justification"
     _description = "Inventory justification"
 
-    _sql_constraints = [
-        (
-            "unique_name",
-            "EXCLUDE (name WITH =) WHERE (active = True)",
-            "This stock inventory justification already exists.",
-        ),
-    ]
-
     name = fields.Char(required=True)
     active = fields.Boolean(default=True)
+
+    _unique_name = models.Constraint(
+        "EXCLUDE (name WITH =) WHERE (active = True)",
+        "This stock inventory justification already exists.",
+    )
