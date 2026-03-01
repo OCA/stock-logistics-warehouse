@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="action_update_all_products" model="ir.actions.server">
+        <field name="name">Update Products Availability</field>
+        <field name="model_id" ref="stock.model_stock_move"/>
+        <field name="state">code</field>
+        <field name="code">model._update_all_products()</field>
+    </record>
+
+    <menuitem
+        id="menu_update_all_products"
+        name="Update Products Availability"
+        parent="stock.menu_warehouse_report"
+        action="action_update_all_products"
+        />
+    </data>
+</odoo>

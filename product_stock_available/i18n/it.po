@@ -1,0 +1,71 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* product_stock_available
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-03-01 15:10+0000\n"
+"PO-Revision-Date: 2026-03-01 16:13+0100\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.3\n"
+"Last-Translator: \n"
+"Language: it\n"
+
+#. module: product_stock_available
+#: model_terms:ir.ui.view,arch_db:product_stock_available.view_product_template_kanban_available_warehouse
+msgid "<span class=\"text-muted\">Available in Locations:  </span>"
+msgstr "<span class=\"text-muted\">Disponibile nelle ubicazioni:  </span>"
+
+#. module: product_stock_available
+#: model_terms:ir.ui.view,arch_db:product_stock_available.view_product_template_kanban_available_warehouse
+msgid "<span class=\"text-muted\">Available in Warehouses: </span>"
+msgstr "<span class=\"text-muted\">Disponibile nei magazzini: </span>"
+
+#. module: product_stock_available
+#: model_terms:ir.ui.view,arch_db:product_stock_available.view_product_template_search_available_warehouse
+msgid "Available in Location"
+msgstr "Disponibile nella ubicazione"
+
+#. module: product_stock_available
+#: model:ir.model.fields,field_description:product_stock_available.field_product_product__available_location_ids
+#: model:ir.model.fields,field_description:product_stock_available.field_product_template__available_location_ids
+msgid "Available in Locations"
+msgstr "Disponibile nelle ubicazioni"
+
+#. module: product_stock_available
+#: model_terms:ir.ui.view,arch_db:product_stock_available.view_product_template_search_available_warehouse
+msgid "Available in Warehouse"
+msgstr "Disponibile nel magazzino"
+
+#. module: product_stock_available
+#: model:ir.model.fields,field_description:product_stock_available.field_product_product__available_warehouse_ids
+#: model:ir.model.fields,field_description:product_stock_available.field_product_template__available_warehouse_ids
+msgid "Available in Warehouses"
+msgstr "Disponibile nei magazzini"
+
+#. module: product_stock_available
+#: model:ir.model,name:product_stock_available.model_product_product
+msgid "Product"
+msgstr "Prodotto"
+
+#. module: product_stock_available
+#: model:ir.model,name:product_stock_available.model_product_template
+msgid "Product Template"
+msgstr "Modello prodotto"
+
+#. module: product_stock_available
+#: model:ir.model,name:product_stock_available.model_stock_move
+msgid "Stock Move"
+msgstr "Movimento di magazzino"
+
+#. module: product_stock_available
+#: model:ir.actions.server,name:product_stock_available.action_update_all_products
+#: model:ir.ui.menu,name:product_stock_available.menu_update_all_products
+msgid "Update Products Availability"
+msgstr "Aggiorna disponibilità prodotti"

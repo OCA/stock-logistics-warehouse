@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Product Template Tree View -->
+        <record id="view_product_template_tree_available_warehouse" model="ir.ui.view">
+            <field name="name">product.template.tree.available.warehouse</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_tree_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='standard_price']" position="after">
+                    <field name="available_warehouse_ids" widget="many2many_tags"/>
+                    <field name="available_location_ids" widget="many2many_tags"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Product Template Kanban View -->
+        <record id="view_product_template_kanban_available_warehouse" model="ir.ui.view">
+            <field name="name">product.template.kanban.available.warehouse</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_kanban_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[hasclass('oe_kanban_details')]//div[@name='tags']" position="inside">
+                    <ul>
+                        <li t-if="record.available_warehouse_ids.raw_value">
+                            <span class="text-muted">Available in Warehouses: </span>
+                            <field name="available_warehouse_ids" widget="many2many_tags"/>
+                        </li>
+                        <li t-if="record.available_location_ids.raw_value">
+                            <span class="text-muted">Available in Locations:  </span>
+                            <field name="available_location_ids" widget="many2many_tags"/>
+                        </li>
+                    </ul>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Product Template Search View -->
+        <record id="view_product_template_search_available_warehouse" model="ir.ui.view">
+            <field name="name">product.template.search.available.warehouse</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_search_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//search" position="inside">
+                    <field name="available_warehouse_ids"
+                        string="Available in Warehouse"
+                        filter_domain="[('available_warehouse_ids', 'ilike', self)]"/>
+                    <field name="available_location_ids"
+                        string="Available in Location"
+                        filter_domain="[('available_location_ids', 'ilike', self)]"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Product Tree View -->
+        <record id="view_product_product_tree_available_warehouse" model="ir.ui.view">
+            <field name="name">product.product.tree.available.warehouse</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_product_tree_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='standard_price']" position="after">
+                    <field name="available_warehouse_ids" widget="many2many_tags"/>
+                    <field name="available_location_ids" widget="many2many_tags"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Product Kanban View -->
+        <record id="view_product_product_kanban_available_warehouse" model="ir.ui.view">
+            <field name="name">product.product.kanban.available.warehouse</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_kanban_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[hasclass('oe_kanban_details')]//div[@name='tags']" position="inside">
+                    <ul>
+                        <li t-if="record.available_warehouse_ids.raw_value">
+                            <span class="text-muted">Available in Warehouses: </span>
+                            <field name="available_warehouse_ids" widget="many2many_tags"/>
+                        </li>
+                        <li t-if="record.available_location_ids.raw_value">
+                            <span class="text-muted">Available in Locations:  </span>
+                            <field name="available_location_ids" widget="many2many_tags"/>
+                        </li>
+                    </ul>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Product Search View -->
+        <record id="view_product_product_search_available_warehouse" model="ir.ui.view">
+            <field name="name">product.product.search.available.warehouse</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="stock.stock_product_search_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//search" position="inside">
+                    <field name="available_warehouse_ids"
+                        string="Available in Warehouse"
+                        filter_domain="[('available_warehouse_ids', 'ilike', self)]"/>
+                    <field name="available_location_ids"
+                        string="Available in Location"
+                        filter_domain="[('available_location_ids', 'ilike', self)]"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
