@@ -1,0 +1,122 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_product_security_restricted
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-03-01 19:34+0000\n"
+"PO-Revision-Date: 2026-03-01 19:34+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_product_security_restricted
+#: model:ir.model,name:stock_product_security_restricted.model_mrp_bom
+msgid "Bill of Material"
+msgstr ""
+
+#. module: stock_product_security_restricted
+#: model:ir.model.fields,field_description:stock_product_security_restricted.field_mrp_bom__has_restricted_access
+#: model:ir.model.fields,field_description:stock_product_security_restricted.field_product_category__has_restricted_access
+#: model:ir.model.fields,field_description:stock_product_security_restricted.field_product_product__has_restricted_access
+#: model:ir.model.fields,field_description:stock_product_security_restricted.field_product_template__has_restricted_access
+#: model:ir.model.fields,field_description:stock_product_security_restricted.field_restricted_access_mixin__has_restricted_access
+#: model:ir.model.fields,field_description:stock_product_security_restricted.field_stock_location__has_restricted_access
+#: model:ir.model.fields,field_description:stock_product_security_restricted.field_stock_warehouse__has_restricted_access
+msgid "Has Restricted Access"
+msgstr ""
+
+#. module: stock_product_security_restricted
+#: model:ir.model.fields,help:stock_product_security_restricted.field_product_category__restricted_access
+#: model:ir.model.fields,help:stock_product_security_restricted.field_stock_warehouse__restricted_access
+msgid "If checked, only users with restricted access can modify this record"
+msgstr ""
+
+#. module: stock_product_security_restricted
+#: model:ir.model.fields,help:stock_product_security_restricted.field_mrp_bom__has_restricted_access
+#: model:ir.model.fields,help:stock_product_security_restricted.field_product_category__has_restricted_access
+#: model:ir.model.fields,help:stock_product_security_restricted.field_product_product__has_restricted_access
+#: model:ir.model.fields,help:stock_product_security_restricted.field_product_template__has_restricted_access
+#: model:ir.model.fields,help:stock_product_security_restricted.field_restricted_access_mixin__has_restricted_access
+#: model:ir.model.fields,help:stock_product_security_restricted.field_stock_location__has_restricted_access
+#: model:ir.model.fields,help:stock_product_security_restricted.field_stock_warehouse__has_restricted_access
+msgid "Indicates if this record has restricted access based on related fields"
+msgstr ""
+
+#. module: stock_product_security_restricted
+#: model:ir.model,name:stock_product_security_restricted.model_stock_location
+msgid "Inventory Locations"
+msgstr ""
+
+#. module: stock_product_security_restricted
+#: model:ir.model,name:stock_product_security_restricted.model_product_template
+msgid "Product"
+msgstr ""
+
+#. module: stock_product_security_restricted
+#: model:ir.model,name:stock_product_security_restricted.model_product_category
+msgid "Product Category"
+msgstr ""
+
+#. module: stock_product_security_restricted
+#: model:res.groups,name:stock_product_security_restricted.group_product_creation
+msgid "Product Creation"
+msgstr ""
+
+#. module: stock_product_security_restricted
+#: model:res.groups,name:stock_product_security_restricted.group_product_creation_restricted
+msgid "Product Creation - Restricted"
+msgstr ""
+
+#. module: stock_product_security_restricted
+#: model:ir.module.category,name:stock_product_security_restricted.module_category_product_security
+msgid "Product Security"
+msgstr ""
+
+#. module: stock_product_security_restricted
+#: model:ir.model,name:stock_product_security_restricted.model_product_product
+msgid "Product Variant"
+msgstr ""
+
+#. module: stock_product_security_restricted
+#: model:ir.module.category,description:stock_product_security_restricted.module_category_product_security
+msgid "Product and BOM Access Control"
+msgstr ""
+
+#. module: stock_product_security_restricted
+#: model:ir.model.fields,field_description:stock_product_security_restricted.field_product_category__restricted_access
+#: model:ir.model.fields,field_description:stock_product_security_restricted.field_stock_warehouse__restricted_access
+msgid "Restricted Access"
+msgstr ""
+
+#. module: stock_product_security_restricted
+#: model:ir.model,name:stock_product_security_restricted.model_restricted_access_mixin
+msgid "Restricted Access Mixin"
+msgstr ""
+
+#. module: stock_product_security_restricted
+#: model:ir.model,name:stock_product_security_restricted.model_stock_warehouse
+msgid "Warehouse"
+msgstr ""
+
+#. module: stock_product_security_restricted
+#. odoo-python
+#: code:addons/stock_product_security_restricted/models/restricted_access_mixin.py:0
+#, python-format
+msgid ""
+"You do not have permission to change restricted access settings for "
+"%(model)s. Only users with 'Product Creation - Restricted' group can modify "
+"the restricted_access field."
+msgstr ""
+
+#. module: stock_product_security_restricted
+#. odoo-python
+#: code:addons/stock_product_security_restricted/models/restricted_access_mixin.py:0
+#, python-format
+msgid "You do not have permission to edit restricted %(model)s: %(names)s"
+msgstr ""
