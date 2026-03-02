@@ -6,23 +6,25 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2026-03-02 18:45+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: stock_inventory_lockdown_product
 #: model:ir.model,name:stock_inventory_lockdown_product.model_res_company
 msgid "Companies"
-msgstr ""
+msgstr "Aziende"
 
 #. module: stock_inventory_lockdown_product
 #: model:ir.model,name:stock_inventory_lockdown_product.model_res_config_settings
 msgid "Config Settings"
-msgstr ""
+msgstr "Impostazioni configurazione"
 
 #. module: stock_inventory_lockdown_product
 #: model:ir.model.fields,field_description:stock_inventory_lockdown_product.field_res_company__display_name
@@ -30,7 +32,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_inventory_lockdown_product.field_stock_inventory__display_name
 #: model:ir.model.fields,field_description:stock_inventory_lockdown_product.field_stock_move_line__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nome visualizzato"
 
 #. module: stock_inventory_lockdown_product
 #: model:ir.model.fields,field_description:stock_inventory_lockdown_product.field_res_company__id
@@ -38,12 +40,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_inventory_lockdown_product.field_stock_inventory__id
 #: model:ir.model.fields,field_description:stock_inventory_lockdown_product.field_stock_move_line__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: stock_inventory_lockdown_product
 #: model:ir.model,name:stock_inventory_lockdown_product.model_stock_inventory
 msgid "Inventory Adjustment Group"
-msgstr ""
+msgstr "Gruppo rettifiche d'inventario"
 
 #. module: stock_inventory_lockdown_product
 #. odoo-python
@@ -53,18 +55,22 @@ msgid ""
 "- %(locations)s\n"
 "Product '%(product)s' is included in the inventory. Moving it to/from these locations is not allowed until the adjustment is complete."
 msgstr ""
+"Rettifica di inventario in corso presso le seguenti ubicazioni:\n"
+"- %(locations)s\n"
+"Il prodotto '%(product)s' è incluso nell'inventario. Non è consentito "
+"spostarlo da/verso queste ubicazioni fino al completamento della rettifica."
 
 #. module: stock_inventory_lockdown_product
 #: model:ir.model,name:stock_inventory_lockdown_product.model_stock_move_line
 msgid "Product Moves (Stock Move Line)"
-msgstr ""
+msgstr "Movimenti prodotto (riga movimento di magazzino)"
 
 #. module: stock_inventory_lockdown_product
 #: model:ir.model.fields,field_description:stock_inventory_lockdown_product.field_res_company__use_soft_inventory_lock
 #: model:ir.model.fields,field_description:stock_inventory_lockdown_product.field_res_config_settings__use_soft_inventory_lock
 #: model_terms:ir.ui.view,arch_db:stock_inventory_lockdown_product.res_config_settings_view_form_inherit_soft_inventory_lock
 msgid "Use Product-Aware Inventory Lock"
-msgstr ""
+msgstr "Utilizza blocco inventario dipendente dal prodotto"
 
 #. module: stock_inventory_lockdown_product
 #: model_terms:ir.ui.view,arch_db:stock_inventory_lockdown_product.res_config_settings_view_form_inherit_soft_inventory_lock
@@ -72,6 +78,9 @@ msgid ""
 "When enabled, inventory locks only restrict stock moves involving products "
 "that are part of an active inventory adjustment."
 msgstr ""
+"Se abilitati, i blocchi dell'inventario limitano solo i movimenti delle "
+"giacenze che riguardano prodotti che fanno parte di una rettifica "
+"dell'inventario attiva."
 
 #. module: stock_inventory_lockdown_product
 #: model:ir.model.fields,help:stock_inventory_lockdown_product.field_res_company__use_soft_inventory_lock
@@ -80,3 +89,5 @@ msgid ""
 "When enabled, only restrict stock moves if the product is part of an ongoing"
 " inventory adjustment at the location."
 msgstr ""
+"Se abilitato, limita i movimenti delle giacenze solo se il prodotto fa parte "
+"di una rettifica di inventario in corso presso l'ubicazione."
