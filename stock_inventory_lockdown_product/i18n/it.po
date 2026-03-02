@@ -1,0 +1,82 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_inventory_lockdown_product
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#. module: stock_inventory_lockdown_product
+#: model:ir.model,name:stock_inventory_lockdown_product.model_res_company
+msgid "Companies"
+msgstr ""
+
+#. module: stock_inventory_lockdown_product
+#: model:ir.model,name:stock_inventory_lockdown_product.model_res_config_settings
+msgid "Config Settings"
+msgstr ""
+
+#. module: stock_inventory_lockdown_product
+#: model:ir.model.fields,field_description:stock_inventory_lockdown_product.field_res_company__display_name
+#: model:ir.model.fields,field_description:stock_inventory_lockdown_product.field_res_config_settings__display_name
+#: model:ir.model.fields,field_description:stock_inventory_lockdown_product.field_stock_inventory__display_name
+#: model:ir.model.fields,field_description:stock_inventory_lockdown_product.field_stock_move_line__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: stock_inventory_lockdown_product
+#: model:ir.model.fields,field_description:stock_inventory_lockdown_product.field_res_company__id
+#: model:ir.model.fields,field_description:stock_inventory_lockdown_product.field_res_config_settings__id
+#: model:ir.model.fields,field_description:stock_inventory_lockdown_product.field_stock_inventory__id
+#: model:ir.model.fields,field_description:stock_inventory_lockdown_product.field_stock_move_line__id
+msgid "ID"
+msgstr ""
+
+#. module: stock_inventory_lockdown_product
+#: model:ir.model,name:stock_inventory_lockdown_product.model_stock_inventory
+msgid "Inventory Adjustment Group"
+msgstr ""
+
+#. module: stock_inventory_lockdown_product
+#. odoo-python
+#: code:addons/stock_inventory_lockdown_product/models/stock_move_line.py:0
+msgid ""
+"Inventory adjustment underway at the following location(s):\n"
+"- %(locations)s\n"
+"Product '%(product)s' is included in the inventory. Moving it to/from these locations is not allowed until the adjustment is complete."
+msgstr ""
+
+#. module: stock_inventory_lockdown_product
+#: model:ir.model,name:stock_inventory_lockdown_product.model_stock_move_line
+msgid "Product Moves (Stock Move Line)"
+msgstr ""
+
+#. module: stock_inventory_lockdown_product
+#: model:ir.model.fields,field_description:stock_inventory_lockdown_product.field_res_company__use_soft_inventory_lock
+#: model:ir.model.fields,field_description:stock_inventory_lockdown_product.field_res_config_settings__use_soft_inventory_lock
+#: model_terms:ir.ui.view,arch_db:stock_inventory_lockdown_product.res_config_settings_view_form_inherit_soft_inventory_lock
+msgid "Use Product-Aware Inventory Lock"
+msgstr ""
+
+#. module: stock_inventory_lockdown_product
+#: model_terms:ir.ui.view,arch_db:stock_inventory_lockdown_product.res_config_settings_view_form_inherit_soft_inventory_lock
+msgid ""
+"When enabled, inventory locks only restrict stock moves involving products "
+"that are part of an active inventory adjustment."
+msgstr ""
+
+#. module: stock_inventory_lockdown_product
+#: model:ir.model.fields,help:stock_inventory_lockdown_product.field_res_company__use_soft_inventory_lock
+#: model:ir.model.fields,help:stock_inventory_lockdown_product.field_res_config_settings__use_soft_inventory_lock
+msgid ""
+"When enabled, only restrict stock moves if the product is part of an ongoing"
+" inventory adjustment at the location."
+msgstr ""
