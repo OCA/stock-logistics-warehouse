@@ -2,7 +2,7 @@
     "name": "Stock Picking Product Interchangeable",
     "summary": """Stock Picking Product Interchangeable""",
     "author": "Cetmix, Odoo Community Association (OCA)",
-    "version": "16.0.1.0.0",
+    "version": "16.0.1.0.1",
     "category": "Inventory/Inventory",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "maintainers": ["CetmixGitDrone"],
