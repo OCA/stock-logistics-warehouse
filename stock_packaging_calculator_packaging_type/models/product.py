@@ -8,7 +8,7 @@ class Product(models.Model):
     _inherit = "product.product"
 
     def _packaging_name_getter(self, packaging):
-        return packaging.packaging_type_id.name
+        return packaging.packaging_level_id.name
 
     def _qty_by_packaging_as_str(self, packaging, qty):
         # By default use packaging type code
@@ -18,8 +18,8 @@ class Product(models.Model):
         compact_mode = self.env.context.get("qty_by_packaging_type_compact", True)
         sep = "" if compact_mode else " "
         # Override to use packaging type code
-        if packaging and packaging.packaging_type_id:
-            name = packaging.packaging_type_id[qty_by_packaging_type_fname]
+        if packaging and packaging.packaging_level_id:
+            name = packaging.packaging_level_id[qty_by_packaging_type_fname]
             return f"{qty}{sep}{name}"
         else:
             return super()._qty_by_packaging_as_str(packaging, qty)
