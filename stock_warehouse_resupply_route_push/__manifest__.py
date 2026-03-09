@@ -3,7 +3,7 @@
 {
     "name": "Stock Warehouse Resupply Route Push",
     "summary": "Use push rules for resupply from other warehouse routes.",
-    "version": "18.0.1.0.0",
+    "version": "18.0.1.0.1",
     "category": "Inventory",
     "author": "ForgeFlow, Odoo Community Association (OCA)",
     "maintainers": ["LoisRForgeFlow"],
