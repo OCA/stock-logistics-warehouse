@@ -28,6 +28,14 @@ msgstr ""
 #. module: stock_warehouse_resupply_route_push
 #. odoo-python
 #: code:addons/stock_warehouse_resupply_route_push/models/stock_warehouse.py:0
+msgid ""
+"Address is required in warehouse %s to use Inter-warehouse push routes "
+"generation."
+msgstr ""
+
+#. module: stock_warehouse_resupply_route_push
+#. odoo-python
+#: code:addons/stock_warehouse_resupply_route_push/models/stock_warehouse.py:0
 msgid "Delivery Orders (Inter Warehouse - External)"
 msgstr ""
 
