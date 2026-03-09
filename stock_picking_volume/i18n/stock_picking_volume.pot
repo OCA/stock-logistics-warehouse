@@ -1,0 +1,46 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_picking_volume
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_picking_volume
+#: model_terms:ir.ui.view,arch_db:stock_picking_volume.stock_picking_form_view
+msgid "Logistics"
+msgstr ""
+
+#. module: stock_picking_volume
+#: model:ir.model,name:stock_picking_volume.model_product_product
+msgid "Product Variant"
+msgstr ""
+
+#. module: stock_picking_volume
+#: model:ir.model,name:stock_picking_volume.model_stock_move
+msgid "Stock Move"
+msgstr ""
+
+#. module: stock_picking_volume
+#: model:ir.model,name:stock_picking_volume.model_stock_picking
+msgid "Transfer"
+msgstr ""
+
+#. module: stock_picking_volume
+#: model:ir.model.fields,field_description:stock_picking_volume.field_stock_move__volume
+#: model:ir.model.fields,field_description:stock_picking_volume.field_stock_picking__volume
+msgid "Volume"
+msgstr ""
+
+#. module: stock_picking_volume
+#: model:ir.model.fields,field_description:stock_picking_volume.field_stock_move__volume_uom_name
+#: model:ir.model.fields,field_description:stock_picking_volume.field_stock_picking__volume_uom_name
+msgid "Volume unit of measure label"
+msgstr ""
