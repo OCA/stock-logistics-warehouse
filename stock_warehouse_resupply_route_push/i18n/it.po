@@ -31,6 +31,14 @@ msgstr "Sequenza %(name)s inter-magazzino (esterno)"
 #. module: stock_warehouse_resupply_route_push
 #. odoo-python
 #: code:addons/stock_warehouse_resupply_route_push/models/stock_warehouse.py:0
+msgid ""
+"Address is required in warehouse %s to use Inter-warehouse push routes "
+"generation."
+msgstr ""
+
+#. module: stock_warehouse_resupply_route_push
+#. odoo-python
+#: code:addons/stock_warehouse_resupply_route_push/models/stock_warehouse.py:0
 msgid "Delivery Orders (Inter Warehouse - External)"
 msgstr "Ordini di consegna (Inter-magazzino - Esterno)"
 
@@ -53,8 +61,7 @@ msgstr "Tipo inter-magazzino (interno)"
 #. module: stock_warehouse_resupply_route_push
 #: model:ir.model.fields,help:stock_warehouse_resupply_route_push.field_stock_warehouse__resupply_wh_push
 msgid ""
-"Note that this will create new operation type for inter-warehouse "
-"deliveries."
+"Note that this will create new operation type for inter-warehouse deliveries."
 msgstr ""
 "Notare che questo creerà un nuovo tipo operazione per consegne inter-"
 "magazzino."
