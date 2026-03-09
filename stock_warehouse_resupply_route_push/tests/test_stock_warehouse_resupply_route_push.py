@@ -12,6 +12,9 @@ class TestWarehouseResupplyRoutePush(BaseCommon):
         super().setUpClass()
         cls.wh_0 = cls.env.ref("stock.warehouse0")
         cls.company_2 = cls.env["res.company"].create({"name": "Test company 2"})
+        cls.partner_wh1 = cls.env["res.partner"].create({"name": "WH1"})
+        cls.partner_wh2 = cls.env["res.partner"].create({"name": "WH2"})
+        cls.partner_wh5 = cls.env["res.partner"].create({"name": "WH5"})
         cls.wh_comp_2 = cls.env["stock.warehouse"].create(
             {
                 "name": "Test WH company 2",
@@ -20,22 +23,35 @@ class TestWarehouseResupplyRoutePush(BaseCommon):
             }
         )
         cls.wh_1 = cls.env["stock.warehouse"].create(
-            {"name": "Test WH 1", "code": "WH1"}
+            {"name": "Test WH 1", "code": "WH1", "partner_id": cls.partner_wh1.id}
         )
         cls.wh_2 = cls.env["stock.warehouse"].create(
             {
                 "name": "Test WH 2",
                 "code": "WH2",
+                "partner_id": cls.partner_wh2.id,
+                "resupply_wh_push": True,
+                "resupply_wh_ids": [(6, 0, [cls.wh_1.id])],
+            }
+        )
+        cls.wh_5 = cls.env["stock.warehouse"].create(
+            {
+                "name": "Test WH 5",
+                "code": "WH5",
+                "partner_id": cls.partner_wh5.id,
                 "resupply_wh_push": True,
                 "resupply_wh_ids": [(6, 0, [cls.wh_1.id])],
             }
         )
         cls.route_wh_1_to_wh_2 = cls.wh_2.resupply_route_ids
+        cls.route_wh_1_to_wh_5 = cls.wh_5.resupply_route_ids
         cls.product = cls.env["product.product"].create(
             {
                 "name": "Test product",
                 "is_storable": True,
-                "route_ids": [(6, 0, [cls.route_wh_1_to_wh_2.id])],
+                "route_ids": [
+                    (6, 0, [cls.route_wh_1_to_wh_2.id, cls.route_wh_1_to_wh_5.id])
+                ],
             }
         )
         cls.env["stock.quant"]._update_available_quantity(
@@ -308,3 +324,115 @@ class TestWarehouseResupplyRoutePush(BaseCommon):
         route_wh_comp_2_to_wh_2 = self.wh_2.resupply_route_ids - route_wh_1_to_wh_2
         # Not supported yet as explained in the ROADMAP so falling back to standard.
         self.assertNotIn("push", route_wh_comp_2_to_wh_2.rule_ids.mapped("action"))
+
+    def test_08_push_rule_triggered_by_manual_picking(self):
+        """Test that the push rule (with warehouse_id=False) is triggered when
+        a manual inter-warehouse picking is validated, not via procurement.
+
+        The push rule must have warehouse_id=False so it applies regardless of
+        the warehouse context of the move. The correct destination warehouse is
+        resolved via the push_domain, which filters by the picking's delivery
+        address (partner_id) matching the destination warehouse's address.
+        """
+        push_rule = self.route_wh_1_to_wh_2.rule_ids.filtered(
+            lambda r: r.action == "push"
+        )
+        self.assertFalse(push_rule.warehouse_id)
+        transit_location = push_rule.location_src_id
+
+        # Create a manual delivery picking from wh_1 to the transit location,
+        # with partner_id matching wh_2 so push_domain selects the right rule.
+        picking = self.env["stock.picking"].create(
+            {
+                "picking_type_id": self.wh_1.out_inter_wh_internal_type_id.id,
+                "location_id": self.wh_1.lot_stock_id.id,
+                "location_dest_id": transit_location.id,
+                "partner_id": self.wh_2.partner_id.id,
+                "move_ids": [
+                    (
+                        0,
+                        0,
+                        {
+                            "name": self.product.name,
+                            "product_id": self.product.id,
+                            "product_uom": self.product.uom_id.id,
+                            "product_uom_qty": 5.0,
+                            "location_id": self.wh_1.lot_stock_id.id,
+                            "location_dest_id": transit_location.id,
+                        },
+                    )
+                ],
+            }
+        )
+        picking.action_confirm()
+        picking.action_assign()
+        picking.move_line_ids.write({"picked": True})
+        picking._action_done()
+        self.assertEqual(picking.state, "done")
+
+        # The push rule should have created a receipt at wh_2
+        receipt_move = picking.move_ids.move_dest_ids
+        self.assertEqual(len(receipt_move), 1)
+        self.assertEqual(receipt_move.picking_type_id, self.wh_2.in_type_id)
+        self.assertEqual(receipt_move.location_id, transit_location)
+        self.assertEqual(receipt_move.location_dest_id, self.wh_2.lot_stock_id)
+        self.assertEqual(receipt_move.state, "assigned")
+
+    def test_09_resupply_from_wh_push_multiple_wh_supplied(self):
+        # Check pull rule has partner_address_id set from wh_5 partner_id
+        pull_rule_wh5 = self.route_wh_1_to_wh_5.rule_ids.filtered(
+            lambda x: x.action == "pull"
+        )
+        self.assertEqual(pull_rule_wh5.partner_address_id, self.wh_5.partner_id)
+        # Check push rule has push_domain has partner_id from wh_5
+        push_rule_wh5 = self.route_wh_1_to_wh_5.rule_ids.filtered(
+            lambda x: x.action == "push"
+        )
+        self.assertEqual(
+            push_rule_wh5.push_domain,
+            "[('partner_id', '=', %d)]" % self.wh_5.partner_id.id,
+        )
+
+        moves = self._run_procurement(self.product, self.wh_2, 5)
+        # We expect only the delivery from wh 1 to wh 2.
+        self.assertEqual(len(moves), 1)
+        delivery_from_wh_1 = moves
+        self.assertEqual(delivery_from_wh_1.picking_type_id.code, "outgoing")
+        self.assertEqual(
+            delivery_from_wh_1.picking_type_id, self.wh_1.out_inter_wh_internal_type_id
+        )
+        self.assertEqual(delivery_from_wh_1.location_dest_id.usage, "transit")
+        # Validating the first move create the next one
+        self._validate_picking(delivery_from_wh_1.picking_id)
+        self.assertEqual(delivery_from_wh_1.state, "done")
+        receipt_at_wh_2 = delivery_from_wh_1.move_dest_ids
+        self.assertEqual(len(receipt_at_wh_2), 1)
+        self.assertEqual(receipt_at_wh_2.state, "assigned")
+        self.assertEqual(receipt_at_wh_2.picking_type_id, self.wh_2.in_type_id)
+        self.assertEqual(
+            delivery_from_wh_1.location_dest_id, receipt_at_wh_2.location_id
+        )
+        self._validate_picking(receipt_at_wh_2.picking_id)
+        self.assertEqual(receipt_at_wh_2.state, "done")
+
+        moves = self._run_procurement(self.product, self.wh_5, 5)
+        # We expect only the delivery from wh 1 to wh 5.
+        self.assertEqual(len(moves), 1)
+        delivery_from_wh_1 = moves
+        self.assertEqual(delivery_from_wh_1.picking_type_id.code, "outgoing")
+        self.assertEqual(
+            delivery_from_wh_1.picking_type_id, self.wh_1.out_inter_wh_internal_type_id
+        )
+        self.assertEqual(delivery_from_wh_1.location_dest_id.usage, "transit")
+        # Validating the first move create the next one
+        self._validate_picking(delivery_from_wh_1.picking_id)
+        self.assertEqual(delivery_from_wh_1.state, "done")
+        receipt_at_wh_5 = delivery_from_wh_1.move_dest_ids
+        self.assertEqual(len(receipt_at_wh_5), 1)
+        self.assertEqual(receipt_at_wh_5.state, "assigned")
+        self.assertEqual(receipt_at_wh_5.picking_type_id, self.wh_5.in_type_id)
+        self.assertEqual(
+            delivery_from_wh_1.location_dest_id, receipt_at_wh_5.location_id
+        )
+        self._validate_picking(receipt_at_wh_5.picking_id)
+        self.assertEqual(receipt_at_wh_5.state, "done")

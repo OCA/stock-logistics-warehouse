@@ -2,6 +2,7 @@
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl)
 
 from odoo import Command, fields, models
+from odoo.exceptions import ValidationError
 from odoo.tools.translate import _
 
 
@@ -113,6 +114,14 @@ class StockWarehouse(models.Model):
     def create_resupply_routes(self, supplier_warehouses):
         if not self.resupply_wh_push:
             return super().create_resupply_routes(supplier_warehouses)
+        if not self.partner_id:
+            raise ValidationError(
+                _(
+                    "Address is required in warehouse %s to use "
+                    "Inter-warehouse push routes generation."
+                )
+                % self.name
+            )
         # For now, it is still not possible to use push for inter-warehouses
         # between 2 companies, because we cannot create a stock rule with
         # locations of different companies.
@@ -167,6 +176,7 @@ class StockWarehouse(models.Model):
                     "route_id": inter_wh_route.id,
                     "location_dest_from_rule": False,
                     "warehouse_id": self.id,
+                    "partner_address_id": self.partner_id.id,
                 },
             )
             if supplier_wh.delivery_steps != "ship_only":
@@ -198,8 +208,10 @@ class StockWarehouse(models.Model):
                     )
                 ],
                 values={
+                    "warehouse_id": False,
                     "route_id": inter_wh_route.id,
                     "propagate_warehouse_id": supplier_wh.id,
+                    "push_domain": "[('partner_id', '=', %d)]" % self.partner_id.id,
                 },
             )
             for rule_vals in rules_list:
