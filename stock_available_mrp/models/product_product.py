@@ -70,14 +70,20 @@ class ProductProduct(models.Model):
                     ]
                 )
                 potential_qty = bom_id.product_qty * components_potential_qty
-                potential_qty = potential_qty > 0.0 and potential_qty or 0.0
+                sign = -1 if potential_qty < 0.0 else 1
+                potential_qty = (
+                    potential_qty > 0.0 and potential_qty or potential_qty * -1
+                )
 
                 # We want to respect the rounding factor of the potential_qty
                 # Rounding down as we want to be pesimistic.
-                potential_qty = bom_id.product_uom_id._compute_quantity(
-                    potential_qty,
-                    bom_id.product_tmpl_id.uom_id,
-                    rounding_method="DOWN",
+                potential_qty = (
+                    bom_id.product_uom_id._compute_quantity(
+                        potential_qty,
+                        bom_id.product_tmpl_id.uom_id,
+                        rounding_method="DOWN",
+                    )
+                    * sign
                 )
 
             res[product.id]["potential_qty"] = potential_qty

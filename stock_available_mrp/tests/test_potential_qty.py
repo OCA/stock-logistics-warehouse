@@ -284,6 +284,56 @@ class TestPotentialQty(SavepointCase):
             "Wrong potential quantity in Chicago WH location",
         )
 
+    def test_potential_minus_qty(self):
+        for i in [self.tmpl, self.var1, self.var2]:
+            self.assertPotentialQty(i, 0.0, "The potential quantity should start at 0")
+        outgoing_transfer = self.env["stock.picking"].create(
+            {
+                "partner_id": self.env.ref("base.partner_demo").id,
+                "picking_type_id": self.env.ref("stock.picking_type_out").id,
+                "location_id": self.env.ref("stock.stock_location_stock").id,
+                "location_dest_id": self.env.ref("stock.stock_location_customers").id,
+                "move_line_ids": [
+                    (
+                        0,
+                        0,
+                        {
+                            "product_id": self.var1.id,
+                            "product_uom_id": self.var1.uom_id.id,
+                            "qty_done": 5,
+                            "location_id": self.env.ref(
+                                "stock.stock_location_stock"
+                            ).id,
+                            "location_dest_id": self.env.ref(
+                                "stock.stock_location_customers"
+                            ).id,
+                        },
+                    ),
+                    (
+                        0,
+                        0,
+                        {
+                            "product_id": self.var2.id,
+                            "product_uom_id": self.var2.uom_id.id,
+                            "qty_done": 5,
+                            "location_id": self.env.ref(
+                                "stock.stock_location_stock"
+                            ).id,
+                            "location_dest_id": self.env.ref(
+                                "stock.stock_location_customers"
+                            ).id,
+                        },
+                    ),
+                ],
+            }
+        )
+        outgoing_transfer.action_confirm()
+        outgoing_transfer._action_done()
+        for i in [self.tmpl, self.var1, self.var2]:
+            self.assertPotentialQty(
+                i, -10.0, "The potential quantity should start at 0"
+            )
+
     def test_multi_unit_recursive_bom(self):
         # Test multi-level and multi-units BOM
         uom_unit = self.env.ref("uom.product_uom_unit")
