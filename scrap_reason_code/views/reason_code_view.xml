@@ -10,7 +10,9 @@
             <form string="Reason Code">
                 <sheet>
                     <div class="oe_title">
-                        <h1><field name="name" nolabel="1" /></h1>
+                        <h1>
+                            <field name="name" nolabel="1" />
+                        </h1>
                     </div>
                     <group>
                         <field name="description" />

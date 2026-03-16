@@ -111,7 +111,7 @@ class StockScrap(TransactionCase):
         self.assertEqual(
             scrap.scrap_qty,
             5,
-            "Scrap quantity has been modified and is not " "correct anymore.",
+            "Scrap quantity has been modified and is not correct anymore.",
         )
         moves = scrap.move_ids
         self.assertEqual(moves.mapped("reason_code_id.id"), [self.reason_code.id])
@@ -175,7 +175,7 @@ class StockScrap(TransactionCase):
         self.assertEqual(
             scrap2.scrap_qty,
             5,
-            "Scrap quantity has been modified and is not " "correct anymore.",
+            "Scrap quantity has been modified and is not correct anymore.",
         )
         moves = scrap2.move_ids
         self.assertEqual(moves.mapped("reason_code_id.id"), [self.reason_code.id])
