@@ -15,5 +15,17 @@ class StockHelperCommonCase(TransactionCase):
         cls.customer_loc = cls.env.ref("stock.stock_location_customers")
         cls.supplier_loc = cls.env.ref("stock.stock_location_suppliers")
         cls.stock_loc = cls.wh.lot_stock_id
-        cls.shelf1_loc = cls.env.ref("stock.stock_location_components")
-        cls.shelf2_loc = cls.env.ref("stock.stock_location_14")
+        cls.shelf1_loc = cls.env["stock.location"].create(
+            {
+                "name": "Shelf 1",
+                "location_id": cls.stock_loc.id,
+                "usage": "internal",
+            }
+        )
+        cls.shelf2_loc = cls.env["stock.location"].create(
+            {
+                "name": "Shelf 2",
+                "location_id": cls.stock_loc.id,
+                "usage": "internal",
+            }
+        )
