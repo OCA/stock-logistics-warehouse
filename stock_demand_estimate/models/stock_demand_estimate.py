@@ -4,7 +4,7 @@
 
 from datetime import date, timedelta
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError
 
 
@@ -85,7 +85,7 @@ class StockDemandEstimate(models.Model):
 
     def _inverse_product_quantity(self):
         raise UserError(
-            _(
+            self.env._(
                 "The requested operation cannot be "
                 "processed because of a programming error "
                 "setting the `product_qty` field instead "
