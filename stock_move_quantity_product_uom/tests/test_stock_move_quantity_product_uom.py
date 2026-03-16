@@ -19,7 +19,6 @@ class TestStockMOveQuantityProductUom(TransactionCase):
                 "name": "Test Product",
                 "is_storable": True,
                 "uom_id": cls.uom_kg.id,
-                "uom_po_id": cls.uom_kg.id,
             }
         )
 
@@ -36,7 +35,6 @@ class TestStockMOveQuantityProductUom(TransactionCase):
                         0,
                         0,
                         {
-                            "name": "Test Move",
                             "product_id": self.product.id,
                             "product_uom": self.uom_g.id,
                             "product_uom_qty": 1000,
