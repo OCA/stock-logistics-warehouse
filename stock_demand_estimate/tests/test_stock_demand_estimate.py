@@ -52,7 +52,7 @@ class TestStockDemandEstimate(TransactionCase):
                 "email": "example@yourcompany.com",
                 "company_id": company.id,
                 "company_ids": [(4, company.id)],
-                "groups_id": [(6, 0, group_ids)],
+                "group_ids": [(6, 0, group_ids)],
             }
         )
         return user

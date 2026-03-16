@@ -101,7 +101,7 @@
                     domain="['|', ('date_to', '=', False), ('date_to', '&gt;', context_today().strftime('%Y-%m-%d'))]"
                 />
                 <separator />
-                <group expand="0" string="Group By">
+                <group>
                     <filter
                         string="Product"
                         name="groupby_product"
