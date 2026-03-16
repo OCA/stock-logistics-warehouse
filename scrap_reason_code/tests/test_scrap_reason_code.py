@@ -13,16 +13,15 @@ class StockScrap(TransactionCase):
 
         self.stock_location = self.env.ref("stock.stock_location_stock")
         self.customer_location = self.env.ref("stock.stock_location_customers")
-        self.categ_1 = self.env.ref("product.product_category_all")
+        self.categ_1 = self.env.ref("product.product_category_goods")
         self.categ_2 = self.env["product.category"].create({"name": "Test category"})
         stock_location_locations_virtual = self.env["stock.location"].create(
-            {"name": "Virtual Locations", "usage": "view", "posz": 1}
+            {"name": "Virtual Locations", "usage": "view"}
         )
         self.scrapped_location = self.env["stock.location"].create(
             {
                 "name": "Scrapped",
                 "location_id": stock_location_locations_virtual.id,
-                "scrap_location": True,
                 "usage": "inventory",
             }
         )
@@ -30,14 +29,16 @@ class StockScrap(TransactionCase):
         self.scrap_product = self.env["product.product"].create(
             {
                 "name": "Scrap Product A",
-                "type": "product",
+                "type": "consu",
+                "is_storable": True,
                 "categ_id": self.categ_1.id,
             }
         )
         self.scrap_product_2 = self.env["product.product"].create(
             {
                 "name": "Scrap Product A",
-                "type": "product",
+                "type": "consu",
+                "is_storable": True,
                 "categ_id": self.categ_2.id,
             }
         )
@@ -54,6 +55,7 @@ class StockScrap(TransactionCase):
                 "name": "Test Code 2",
                 "description": "Test description",
                 "product_category_ids": [(6, 0, self.categ_2.ids)],
+                "location_id": self.scrapped_location.id,
             }
         )
 
@@ -79,7 +81,6 @@ class StockScrap(TransactionCase):
         )
         move1 = self.env["stock.move"].create(
             {
-                "name": "A move to confirm and scrap its product",
                 "location_id": self.stock_location.id,
                 "location_dest_id": self.customer_location.id,
                 "product_id": self.scrap_product.id,
@@ -139,7 +140,6 @@ class StockScrap(TransactionCase):
         )
         move2 = self.env["stock.move"].create(
             {
-                "name": "A move to confirm and scrap its product",
                 "location_id": self.stock_location.id,
                 "location_dest_id": self.customer_location.id,
                 "product_id": self.scrap_product.id,
@@ -210,6 +210,7 @@ class StockScrap(TransactionCase):
                 "product_uom_id": self.scrap_product_2.uom_id.id,
                 "scrap_qty": 5,
                 "reason_code_id": self.reason_code_only_categ_2.id,
+                "scrap_location_id": self.reason_code_only_categ_2.location_id.id,
             }
         )
         with self.assertRaises(ValidationError):

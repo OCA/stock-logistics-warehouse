@@ -11,16 +11,18 @@ class ScrapReasonCode(models.Model):
     _description = "Reason Code"
 
     name = fields.Char("Code", required=True)
+    tag_id = fields.Many2many("stock.scrap.reason.tag", string="Tag")
     description = fields.Text()
     location_id = fields.Many2one(
         "stock.location",
         string="Scrap Location",
-        domain="[('scrap_location', '=', True)]",
+        domain="[('usage', '=', 'inventory')]",
+        required=True,
     )
     product_category_ids = fields.Many2many(
         string="Allowed Product Categories",
         comodel_name="product.category",
-        help="Indicate the cateogories of products that can use this reason code "
-        "when doing a scrap. If left empy, this reason code can be used "
+        help="Indicate the categories of products that can use this reason code "
+        "when doing a scrap. If left empty, this reason code can be used "
         "with any product.",
     )

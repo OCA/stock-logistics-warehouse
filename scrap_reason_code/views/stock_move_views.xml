@@ -7,8 +7,7 @@
         <field name="inherit_id" ref="stock.view_move_form" />
         <field name="arch" type="xml">
             <xpath expr="//group[@name='origin_grp']" position='after'>
-                <field name="scrapped" invisible="1" />
-                <group string="Reason Code" invisible="not scrapped">
+                <group string="Reason Code" invisible="not scrap_id">
                     <field name="reason_code_id" />
                 </group>
             </xpath>

@@ -3,7 +3,7 @@
 # Copyright 2023 ForgeFlow S.L. (https://www.forgeflow.com)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 
 
@@ -14,6 +14,7 @@ class StockScrap(models.Model):
         comodel_name="scrap.reason.code",
         domain="[('id', 'in', allowed_reason_code_ids)]",
     )
+    scrap_reason_tag_ids = fields.Many2many(readonly=True)
     allowed_reason_code_ids = fields.Many2many(
         comodel_name="scrap.reason.code",
         compute="_compute_allowed_reason_code_ids",
@@ -42,7 +43,7 @@ class StockScrap(models.Model):
                 and rec.reason_code_id not in rec.allowed_reason_code_ids
             ):
                 raise ValidationError(
-                    _(
+                    self.env._(
                         "The selected reason code is not allowed for this "
                         "product category."
                     )
@@ -57,23 +58,21 @@ class StockScrap(models.Model):
     def _onchange_reason_code_id(self):
         if self.reason_code_id.location_id:
             self.scrap_location_id = self.reason_code_id.location_id
+            self.scrap_reason_tag_ids = self.reason_code_id.tag_id
 
-    def _update_scrap_reason_code_location(self, vals):
-        if "reason_code_id" in vals:
-            location_id = (
-                self.env["scrap.reason.code"]
-                .browse(vals.get("reason_code_id"))
-                .location_id.id
-            )
-            if location_id:
-                vals.update({"scrap_location_id": location_id})
+    def _update_scrap_reason_code(self):
+        for record in self:
+            record.scrap_location_id = record.reason_code_id.location_id
+            record.scrap_reason_tag_ids = record.reason_code_id.tag_id
 
     def write(self, vals):
-        self._update_scrap_reason_code_location(vals)
-        return super().write(vals)
+        res = super().write(vals)
+        if "reason_code_id" in vals:
+            self._update_scrap_reason_code()
+        return res
 
     @api.model_create_multi
     def create(self, vals_list):
-        for vals in vals_list:
-            self._update_scrap_reason_code_location(vals)
-        return super().create(vals_list)
+        res = super().create(vals_list)
+        res._update_scrap_reason_code()
+        return res
