@@ -764,6 +764,11 @@ msgid "Reserved Packaging Quantity"
 msgstr "Quantità imballo prenotata"
 
 #. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__sale_line_id
+msgid "Sale Order Line"
+msgstr ""
+
+#. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation__date
 msgid "Scheduled date until move is done, then date of actual move processing"
 msgstr ""
