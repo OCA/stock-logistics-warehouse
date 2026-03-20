@@ -1,5 +1,6 @@
 # Copyright 2024 ForgeFlow S.L. (https://www.forgeflow.com)
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
+from odoo import Command
 from odoo.tests import Form
 
 from .test_common import TestCommon
@@ -99,3 +100,42 @@ class TestStockMove(TestCommon):
             }
         )
         self.assertEqual(move.product_uom_qty, 5.0)
+
+    def test_create_move_linked_sml_not_unreserved(self):
+        # The UoM conversion in create must not trigger unreservation of
+        # explicitly linked SML
+        sml = self.env["stock.move.line"].create(
+            {
+                "product_id": self.product.id,
+                "product_uom_id": self.cm_uom.id,
+                "quantity": 70,
+                "location_id": self.location.id,
+                "location_dest_id": self.location_dest.id,
+                "company_id": self.env.company.id,
+            }
+        )
+        move = self.env["stock.move"].create(
+            {
+                "name": self.product.display_name,
+                "location_id": self.location.id,
+                "location_dest_id": self.location_dest.id,
+                "product_id": self.product.id,
+                "product_uom_qty": 30,
+                "product_uom": self.cm_uom.id,
+                "picking_type_id": self.stock_picking_type_2.id,
+                "state": "assigned",
+                "move_line_ids": [Command.link(sml.id)],
+            }
+        )
+        self.assertTrue(sml.exists())
+        self.assertEqual(sml.move_id, move)
+        # UoM was converted on the SM but not on the SML
+        self.assertEqual(move.product_uom, self.meter_uom)
+        self.assertEqual(sml.product_uom_id, self.cm_uom)
+        # SML quantity is unchanged (70 cm)
+        self.assertEqual(sml.quantity, 70)
+        # SM demand converted: 30 cm --> 0.3 m
+        self.assertEqual(move.product_uom_qty, 0.3)
+        # SM reserved qty is computed from SML: 70 cm --> 0.7 m
+        # Quantities are coherent, but SML is kept as original
+        self.assertEqual(move.quantity, 0.7)
