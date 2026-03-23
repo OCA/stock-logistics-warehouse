@@ -12,6 +12,7 @@
     "maintainers": ["rousseldenis"],
     "depends": [
         "stock_location_pending_move",
+        "stock_picking_delivery_link",
         "stock_release_channel",
     ],
     "data": [

@@ -62,13 +62,16 @@ class StockLocation(models.Model):
         This will retrieve all first parent with "same" restriction
         on the recordset.
         """
-        parents = self.search(
-            [
-                ("id", "parent_of", self.ids),
-                ("location_id.release_channel_restriction", "!=", "same"),
-            ]
-        )
-        return parents
+        self.ensure_one()
+        location = self
+        while parent := location.location_id:
+            if (
+                parent.release_channel_restriction == "same"
+                and parent.location_id.release_channel_restriction != "same"
+            ):
+                return parent
+            location = parent
+        return self.browse()
 
     @api.depends(
         "release_channel_restriction",
@@ -79,16 +82,13 @@ class StockLocation(models.Model):
         """
         This will compute the current release channel that
         """
-        parents = self._get_first_ancestor_with_same_restriction()
         for location in self:
-            # Get all locations related to this one (same parent with "same" restriction)
-            family_location_ids = parents.filtered_domain(
-                [("id", "parent_of", location.id)]
-            ).child_ids.filtered(
-                lambda record: record.release_channel_restriction == "same"
-            )
+            # Get all locations related to this one
+            # (same parent with "same" restriction)
+            parent = self._get_first_ancestor_with_same_restriction()
+            family_location_ids = parent.child_ids
             release_channel_id = first(
-                family_location_ids.pending_out_move_line_ids.picking_id.release_channel_id
+                family_location_ids.pending_out_move_line_ids.picking_id.ship_picking_id.release_channel_id
             )
 
             location.current_release_channel_restriction_id = release_channel_id
