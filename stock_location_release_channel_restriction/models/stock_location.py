@@ -88,7 +88,10 @@ class StockLocation(models.Model):
         """
         This will compute the current release channel that
         """
-        for location in self:
+        locations_with_restriction = self.filtered(
+            lambda location: location.release_channel_restriction == "same"
+        )
+        for location in locations_with_restriction:
             # Get all locations related to this one
             # (same parent with "same" restriction)
             parent = self._get_first_ancestor_with_same_restriction()
@@ -98,6 +101,9 @@ class StockLocation(models.Model):
             )
 
             location.current_release_channel_restriction_id = release_channel_id
+        (
+            self - locations_with_restriction
+        ).current_release_channel_restriction_id = False
 
     @api.depends(
         "specific_release_channel_restriction", "parent_release_channel_restriction"
