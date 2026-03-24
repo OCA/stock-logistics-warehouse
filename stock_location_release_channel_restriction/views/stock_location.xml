@@ -40,7 +40,7 @@
                 <filter
                     string="Has Release Channel Restriction"
                     name="release_channel_restriction"
-                    domain="[('has_release_channel_restriction','=',True)]"
+                    domain="[('current_release_channel_restriction_id','=',True)]"
                 />
             </filter>
         </field>

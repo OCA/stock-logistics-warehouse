@@ -23,12 +23,8 @@ class StockLocation(models.Model):
         compute="_compute_current_release_channel_restriction_id",
         recursive=True,
         store=True,
-    )
-
-    has_release_channel_restriction = fields.Boolean(
-        compute="_compute_has_release_channel_restriction",
-        recursive=True,
-        store=True,
+        help="This is the current release channel that restrict this "
+        "location for future incoming movements.",
     )
 
     release_channel_restriction = fields.Selection(
@@ -46,6 +42,8 @@ class StockLocation(models.Model):
         readonly=True,
         related="location_id.release_channel_restriction",
         recursive=True,
+        help="This field is used to compute recursively the restriction parameter"
+        " from parent hierarchy.",
     )
 
     specific_release_channel_restriction = fields.Selection(
@@ -100,13 +98,6 @@ class StockLocation(models.Model):
             )
 
             location.current_release_channel_restriction_id = release_channel_id
-
-    @api.depends("current_release_channel_restriction_id")
-    def _compute_has_release_channel_restriction(self):
-        for location in self:
-            location.has_release_channel_restriction = bool(
-                location.current_release_channel_restriction_id
-            )
 
     @api.model
     def _selection_release_channel_restriction(self):
