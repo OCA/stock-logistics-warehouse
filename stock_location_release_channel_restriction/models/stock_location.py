@@ -1,6 +1,6 @@
 # Copyright 2024 ACSONE SA/NV
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.fields import first
 
 RELEASE_RESTRICTION = [
@@ -98,25 +98,6 @@ class StockLocation(models.Model):
             )
 
             location.current_release_channel_restriction_id = release_channel_id
-
-    @api.model
-    def _selection_release_channel_restriction(self):
-        return [
-            (
-                "mixed",
-                _(
-                    "Movements of different release channels are allowed "
-                    "into the location"
-                ),
-            ),
-            (
-                "same",
-                _(
-                    "Only movements of the same release channel are "
-                    "allowed into the location"
-                ),
-            ),
-        ]
 
     @api.depends(
         "specific_release_channel_restriction", "parent_release_channel_restriction"
