@@ -22,13 +22,19 @@ class StockLocation(models.Model):
         comodel_name="stock.release.channel",
         compute="_compute_current_release_channel_restriction_id",
         recursive=True,
+        store=True,
+    )
+
+    has_release_channel_restriction = fields.Boolean(
+        compute="_compute_has_release_channel_restriction",
+        recursive=True,
+        store=True,
     )
 
     release_channel_restriction = fields.Selection(
         selection=RELEASE_RESTRICTION,
         help="If 'same' is selected the system will prevent to put "
         "items of different release channels into the same location.",
-        index=True,
         compute="_compute_release_channel_restriction",
         store=True,
         recursive=True,
@@ -74,9 +80,11 @@ class StockLocation(models.Model):
         return self.browse()
 
     @api.depends(
+        "location_id.release_channel_restriction",
         "release_channel_restriction",
         "pending_in_move_line_ids",
         "pending_out_move_line_ids",
+        "location_id.current_release_channel_restriction_id",
     )
     def _compute_current_release_channel_restriction_id(self):
         """
@@ -92,6 +100,13 @@ class StockLocation(models.Model):
             )
 
             location.current_release_channel_restriction_id = release_channel_id
+
+    @api.depends("current_release_channel_restriction_id")
+    def _compute_has_release_channel_restriction(self):
+        for location in self:
+            location.has_release_channel_restriction = bool(
+                location.current_release_channel_restriction_id
+            )
 
     @api.model
     def _selection_release_channel_restriction(self):

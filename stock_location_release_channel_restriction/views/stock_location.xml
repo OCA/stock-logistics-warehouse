@@ -30,4 +30,31 @@
         </field>
     </record>
 
+    <record id="view_location_search" model="ir.ui.view">
+        <field name="name">stock.location.search</field>
+        <field name="model">stock.location</field>
+        <field name="inherit_id" ref="stock.view_location_search" />
+        <field name="arch" type="xml">
+            <filter name="inactive" position="after">
+                <separator />
+                <filter
+                    string="Has Release Channel Restriction"
+                    name="release_channel_restriction"
+                    domain="[('has_release_channel_restriction','=',True)]"
+                />
+            </filter>
+        </field>
+    </record>
+
+    <record id="view_location_tree2" model="ir.ui.view">
+        <field name="name">stock.location.tree</field>
+        <field name="model">stock.location</field>
+        <field name="inherit_id" ref="stock.view_location_tree2" />
+        <field name="arch" type="xml">
+            <field name="storage_category_id" position="after">
+                <field name="current_release_channel_restriction_id" optional="hide" />
+            </field>
+        </field>
+    </record>
+
 </odoo>
