@@ -120,15 +120,32 @@ class StockMoveLocationWizardLine(models.TransientModel):
             # for planned transfer we don't care about the amounts at all
             return 0.0
 
-        # Use the built-in stock.quant method to get available quantity
-        available_qty = self.env["stock.quant"]._get_available_quantity(
-            product_id=self.product_id,
-            location_id=self.origin_location_id,
-            lot_id=self.lot_id,
-            package_id=self.package_id,
-            owner_id=self.owner_id,
-            strict=False,
-        )
+        # Check if we should exclude reserved quantities
+        exclude_reserved = self.move_location_wizard_id.exclude_reserved_qty
+
+        if exclude_reserved:
+            # Use the built-in stock.quant method to get available quantity
+            available_qty = self.env["stock.quant"]._get_available_quantity(
+                product_id=self.product_id,
+                location_id=self.origin_location_id,
+                lot_id=self.lot_id,
+                package_id=self.package_id,
+                owner_id=self.owner_id,
+                strict=False,
+            )
+        else:
+            # Include reserved quantities - use total quantity from quant
+            quant = self.env["stock.quant"].search(
+                [
+                    ("product_id", "=", self.product_id.id),
+                    ("location_id", "=", self.origin_location_id.id),
+                    ("lot_id", "=", self.lot_id.id or False),
+                    ("package_id", "=", self.package_id.id or False),
+                    ("owner_id", "=", self.owner_id.id or False),
+                ],
+                limit=1,
+            )
+            available_qty = quant.quantity if quant else 0
 
         if not available_qty:
             # if it is immediate transfer and product doesn't exist in that

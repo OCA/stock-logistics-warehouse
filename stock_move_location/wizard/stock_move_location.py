@@ -50,7 +50,7 @@ class StockMoveLocationWizard(models.TransientModel):
     )
     edit_locations = fields.Boolean(default=True)
     apply_putaway_strategy = fields.Boolean()
-    exclude_reserved_qty = fields.Boolean(default=True)
+    exclude_reserved_qty = fields.Boolean(default=False)
 
     @api.depends("edit_locations")
     def _compute_readonly_locations(self):
@@ -263,6 +263,11 @@ class StockMoveLocationWizard(models.TransientModel):
             moves_to_unreserve = move_lines.mapped("move_id")
             # Unreserve in old location
             moves_to_unreserve._do_unreserve()
+            # Update move location to new destination location so reassignment
+            # reserves from the correct location where quants were moved
+            for move in moves_to_unreserve:
+                if move.location_id == line.origin_location_id:
+                    move.location_id = line.destination_location_id
             moves_to_reassign |= moves_to_unreserve
         return moves_to_reassign
 

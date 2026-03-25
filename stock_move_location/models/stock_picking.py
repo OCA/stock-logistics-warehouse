@@ -43,13 +43,28 @@ class StockPicking(models.Model):
             raise UserError(self.env._("Moves lines already exists"))
 
     def _get_movable_quants(self):
-        return (
-            self.env["stock.quant"]
-            .search(
-                [
-                    ("location_id", "=", self.location_id.id),
-                    ("quantity", ">", 0.0),
-                ]
-            )
-            .filtered(lambda quant: quant.quantity - quant.reserved_quantity > 0.0)
+        # Unreserve all quantities in this location before filling
+        self._unreserve_quants_in_location()
+        return self.env["stock.quant"].search(
+            [
+                ("location_id", "=", self.location_id.id),
+                ("quantity", ">", 0.0),
+            ]
         )
+
+    def _unreserve_quants_in_location(self):
+        """Unreserve all quantities in the source location."""
+        self.ensure_one()
+        # Find all move lines that have reserved stock in this location
+        move_lines = self.env["stock.move.line"].search(
+            [
+                ("location_id", "=", self.location_id.id),
+                ("state", "in", ["assigned", "partially_available"]),
+                ("quantity", ">", 0.0),
+            ]
+        )
+        # Unreserve the moves
+        if move_lines:
+            moves = move_lines.mapped("move_id")
+            moves.write({"picked": False})  # Don't skip picked moves
+            moves._do_unreserve()

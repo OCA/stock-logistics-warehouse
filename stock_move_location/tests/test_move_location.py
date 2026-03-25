@@ -324,7 +324,6 @@ class TestMoveLocation(TestsCommon):
         )
         self.env["stock.move"].create(
             {
-                "name": "Internal move",
                 "product_id": self.product_lots.id,
                 "product_uom_qty": 100.0,
                 "product_uom": self.product_lots.uom_id.id,
@@ -343,6 +342,8 @@ class TestMoveLocation(TestsCommon):
         )
         internal_picking.button_validate()
         self.assertEqual(internal_picking.state, "done")
+        # Update delivery move location to the new location after internal transfer
+        delivery_move.location_id = wh_stock_shelf_3
         # Assign the delivery must work
         delivery_picking.action_assign()
         self.assertEqual(delivery_picking.state, "assigned")
