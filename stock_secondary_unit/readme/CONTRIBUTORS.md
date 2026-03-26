@@ -5,3 +5,5 @@
 - Kitti Upariphutthiphong \<<kittiu@ecosoft.co.th>\>
 - Pimolnat Suntian \<<pimolnats@ecosoft.co.th>\>
 - Alan Ramos \<<alan.ramos@jarsa.com.mx>\>
+- [Studio73](https://www.studio73.es/):
+    - Vicent Castells

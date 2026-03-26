@@ -61,7 +61,9 @@
         <field name="name">stock.move.operations.form.inherit</field>
         <field name="model">stock.move</field>
         <field name="inherit_id" ref="stock.view_stock_move_operations" />
+        <field name="priority" eval="1000" />
         <field name="arch" type="xml">
+            <xpath expr="//field[@name='product_qty']" position="replace" />
             <xpath expr="//field[@name='product_id']" position="after">
                 <field name="is_initial_demand_editable" invisible="1" />
                 <field

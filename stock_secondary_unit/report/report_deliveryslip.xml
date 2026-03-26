@@ -7,15 +7,12 @@
         inherit_id="stock.report_delivery_document"
         priority="8"
     >
-        <xpath
-            expr='//table[@t-if="o.state!=&apos;done&apos;"]/thead/tr/th'
-            position="after"
-        >
+        <xpath expr='//table[@name="stock_move_table"]/thead/tr/th' position="after">
             <th>
                 <strong>Secondary Qty</strong>
             </th>
         </xpath>
-        <xpath expr="//span[@t-field='move.product_id']/.." position="after">
+        <xpath expr="//span[@t-field='move.product_id']/parent::td" position="after">
             <td>
                 <span t-field="move.secondary_uom_qty" />
                 <span t-field="move.secondary_uom_id.name" />
@@ -34,7 +31,10 @@
         id="stock_report_delivery_has_serial_move_line"
         inherit_id="stock.stock_report_delivery_has_serial_move_line"
     >
-        <xpath expr="//span[@t-field='move_line.product_id']/.." position="after">
+        <xpath
+            expr="//span[@t-field='move_line.product_id']/parent::td"
+            position="after"
+        >
             <td>
                 <span t-field="move_line.secondary_uom_qty" />
                 <span t-field="move_line.secondary_uom_id" />
@@ -48,10 +48,13 @@
         <xpath expr="//td[@name='move_line_aggregated_qty_ordered']" position="before">
             <td class="text-center" name="move_line_secondary_quantity">
                 <span
-                    t-esc="aggregated_lines[line]['secondary_uom_qty']"
+                    t-esc="aggregated_lines[line].get('secondary_uom_qty', 0.0)"
                     t-options="{'widget': 'float', 'decimal_precision': 'Product Unit of Measure'}"
                 />
-                <span t-esc="aggregated_lines[line]['secondary_uom_id'].display_name" />
+                <span
+                    t-if="aggregated_lines[line].get('secondary_uom_id')"
+                    t-esc="aggregated_lines[line]['secondary_uom_id'].display_name"
+                />
             </td>
         </xpath>
     </template>

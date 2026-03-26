@@ -12,3 +12,8 @@ class ProductTemplate(models.Model):
         domain="[('product_tmpl_id', '=', id), ('product_id', '=', False)]",
         string="Second unit for inventory",
     )
+    secondary_uom_name = fields.Char(
+        related="stock_secondary_uom_id.name",
+        string="Nombre Unidad Secundaria",
+        readonly=True,
+    )

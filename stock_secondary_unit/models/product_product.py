@@ -15,3 +15,8 @@ class ProductProduct(models.Model):
         "'&', ('product_tmpl_id', '=', product_tmpl_id),"
         "     ('product_id', '=', False)]",
     )
+    secondary_uom_name = fields.Char(
+        related="stock_secondary_uom_id.name",
+        string="Nombre Unidad Secundaria",
+        readonly=True,
+    )
