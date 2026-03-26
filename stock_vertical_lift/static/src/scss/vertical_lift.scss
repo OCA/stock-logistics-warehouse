@@ -45,6 +45,7 @@
         }
 
         .o_shuttle_operation {
+            min-width: 70%;
             text-align: center;
             font-size: 2.5em;
             padding: 0 0.5em;
@@ -89,6 +90,7 @@
             }
 
             .o_shuttle_highlight {
+                padding: 2px;
                 padding: 6px;
                 border-radius: 10px;
             }

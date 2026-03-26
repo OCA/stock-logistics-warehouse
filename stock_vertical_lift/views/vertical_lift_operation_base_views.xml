@@ -64,6 +64,18 @@
                                 title="Barcode Input"
                             />
                         </div>
+                        <div
+                            class="o_shuttle_operation bg-primary jumbotron jumbotron-fluid"
+                        >
+                            <div class="container">
+                                <field
+                                    name="state"
+                                    invisible="0"
+                                    readonly="True"
+                                    force_save="1"
+                                />
+                            </div>
+                        </div>
                         <div class="o_shuttle_content o_shuttle_content_right">
                             <div>
                                 <!-- will react on barcode 'O-BTN.save' -->
@@ -86,18 +98,6 @@
                                     invisible="state != 'release'"
                                 />
                             </div>
-                        </div>
-                    </div>
-                    <div
-                        class="o_shuttle_operation bg-primary jumbotron jumbotron-fluid"
-                    >
-                        <div class="container">
-                            <field
-                                name="state"
-                                invisible="0"
-                                readonly="True"
-                                force_save="1"
-                            />
                         </div>
                     </div>
                     <div class="o_shuttle_data" />
