@@ -1,0 +1,1 @@
+odoo-addon-product_secondary_unit @ git+https://github.com/OCA/product-attribute.git@refs/pull/2222/head#subdirectory=product_secondary_unit
