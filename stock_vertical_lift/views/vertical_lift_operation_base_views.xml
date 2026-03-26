@@ -118,55 +118,51 @@
             <xpath expr="//div[hasclass('o_shuttle_data')]" position="inside">
                 <field name="current_move_line_id" invisible="True" force_save="1" />
                 <!-- on the left of the screen -->
-                <div class="o_shuttle_data_content o_shuttle_move">
-                    <div>
+                <div class="o_shuttle_data_content">
+                    <group>
+                        <label for="picking_id" />
+                        <div>
+                            <div>
+                                <field
+                                    name="picking_id"
+                                    options="{'no_open': True}"
+                                    class="oe_inline mr8"
+                                />
+                                <span>/</span>
+                                <field name="picking_origin" class="oe_inline ml8" />
+                            </div>
+                        </div>
+                        <label for="picking_partner_id" />
+                        <div>
+                            <field
+                                name="picking_partner_id"
+                                options="{'no_open': True}"
+                            />
+                        </div>
+                        <label for="location_dest_id" />
+                        <div>
+                            <field
+                                name="location_dest_id"
+                                class="bg-primary o_shuttle_highlight text-white"
+                                readonly="1"
+                                force_save="1"
+                                options="{'no_open': True}"
+                            />
+                        </div>
+                        <field
+                            name="product_id"
+                            class="h1"
+                            options="{'no_open': True}"
+                        />
+                    </group>
+                    <group>
                         <group>
-                            <label for="picking_id" />
-                            <div>
-                                <div>
-                                    <field
-                                        name="picking_id"
-                                        options="{'no_open': True}"
-                                        class="oe_inline mr8"
-                                    />
-                                    <span>/</span>
-                                    <field
-                                        name="picking_origin"
-                                        class="oe_inline ml8"
-                                    />
-                                </div>
-                            </div>
-                            <label for="picking_partner_id" />
-                            <div>
-                                <field
-                                    name="picking_partner_id"
-                                    options="{'no_open': True}"
-                                />
-                            </div>
-                            <label for="location_dest_id" />
-                            <div>
-                                <field
-                                    name="location_dest_id"
-                                    class="bg-primary o_shuttle_highlight text-white"
-                                    readonly="1"
-                                    force_save="1"
-                                    options="{'no_open': True}"
-                                />
-                            </div>
-                            <label for="product_id" />
-                            <div>
-                                <field
-                                    name="product_id"
-                                    options="{'no_open': True}"
-                                    class="fw-bold fs-1"
-                                />
-                            </div>
                             <div colspan="2">
                                 <field name="product_packagings" />
                             </div>
                             <field name="lot_id" />
                             <label for="quantity" string="Quantity" class="ml32" />
-                            <div colspan="2" class="ml32">
+                            <div class="ml32">
                                 <h1 class="bg-primary o_shuttle_highlight">
                                     <field
                                         name="quantity"
@@ -180,29 +176,25 @@
                                 </h1>
                             </div>
                         </group>
-                    </div>
-                </div>
-                <!-- on the right of the screen -->
-                <div
-                    class="o_shuttle_data_content o_shuttle_tray"
-                    invisible="not tray_type_id"
-                >
-                    <group col="1">
-                        <field name="tray_name" />
-                        <field name="tray_type_code" />
-                        <field name="tray_x" />
-                        <field name="tray_y" />
-                        <label for="tray_qty" />
-                        <div colspan="2" class="oe_title">
-                            <h1>
-                                <field name="tray_qty" />
-                            </h1>
-                        </div>
-                    </group>
-                    <group>
-                        <div>
-                            <field name="tray_matrix" widget="location_tray_matrix" />
-                        </div>
+                        <!-- on the right of the screen -->
+                        <group>
+                            <group>
+                                <field name="tray_qty" class="h1" />
+                                <field
+                                    name="tray_matrix"
+                                    nolabel="1"
+                                    widget="location_tray_matrix"
+                                />
+                            </group>
+                            <group
+                                style="width: 80%; display: grid; grid-template-columns: repeat(4, 1fr);"
+                            >
+                                <field name="tray_x" />
+                                <field name="tray_name" />
+                                <field name="tray_y" />
+                                <field name="tray_type_code" />
+                            </group>
+                        </group>
                     </group>
                 </div>
             </xpath>
