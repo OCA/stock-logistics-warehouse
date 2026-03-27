@@ -21,10 +21,12 @@ class StockMoveLine(models.Model):
     @api.constrains("location_dest_id", "location_id", "state")
     def _check_locked_location(self):
         for move_line in self.filtered(lambda m: m.state == "done"):
-            locked_location_ids = self.env[
-                "stock.inventory"
-            ]._get_locations_open_inventories(
-                [move_line.location_dest_id.id, move_line.location_id.id]
+            locked_location_ids = (
+                self.env["stock.inventory"]
+                .sudo()
+                ._get_locations_open_inventories(
+                    [move_line.location_dest_id.id, move_line.location_id.id]
+                )
             )
             if locked_location_ids and not any(
                 [
