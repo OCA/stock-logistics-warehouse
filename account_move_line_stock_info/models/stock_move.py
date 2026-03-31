@@ -13,7 +13,6 @@ class StockMove(models.Model):
         copy=False,
     )
 
-    @api.model
     def _prepare_account_move_line(
         self, qty, cost, credit_account_id, debit_account_id, svl_id, description
     ):
