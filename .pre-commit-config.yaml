@@ -52,7 +52,7 @@ repos:
       - id: oca-gen-addon-readme
         args:
           - --addons-dir=.
-          - --branch=19.0
+          - --branch=18.0
           - --org-name=OCA
           - --repo-name=stock-logistics-warehouse
           - --if-source-changed
