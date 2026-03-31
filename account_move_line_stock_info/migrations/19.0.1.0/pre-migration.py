@@ -1,6 +1,3 @@
 def migrate(cr, version):
-    # Example: remove obsolete field
-    cr.execute("""
-        ALTER TABLE stock_move
-        DROP COLUMN IF EXISTS old_field
-    """)
+    """Pre-migration script for version 19.0.1.0."""
+    pass
