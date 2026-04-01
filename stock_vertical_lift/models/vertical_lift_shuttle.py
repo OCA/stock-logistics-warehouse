@@ -81,7 +81,7 @@ class VerticalLiftShuttle(models.Model):
 
         """
         self.ensure_one()
-        command_values = {"shuttle_id": self.id, "command": payload.decode()}
+        command_values = self._prepare_vertical_lift_command_values(payload)
         _logger.info("send %(command)r", command_values)
 
         self.env["vertical.lift.command"].sudo().create(command_values)
@@ -103,6 +103,10 @@ class VerticalLiftShuttle(models.Model):
                         break
             finally:
                 self._hardware_release_server_connection(conn)
+
+    def _prepare_vertical_lift_command_values(self, payload):
+        self.ensure_one()
+        return {"shuttle_id": self.id, "command": payload.decode()}
 
     def _hardware_response_callback(self, command):
         """should be called when a response is received from the hardware
