@@ -30,6 +30,11 @@ class StockPicking(models.Model):
         related="picking_type_id.additional_picking_type_group_id",
     )
 
+    # Add index as used in the depends
+    group_id = fields.Many2one(
+        index=True,
+    )
+
     @api.depends("group_id.stock_move_ids.type_group_reservation_rate")
     def _compute_type_group_reservation_rate(self):
         self._set_type_group_reservation_rate()
