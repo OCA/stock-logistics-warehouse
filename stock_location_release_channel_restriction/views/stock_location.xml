@@ -19,10 +19,6 @@
                         name="specific_release_channel_restriction"
                         class="oe_edit_only"
                     />
-                    <field
-                        name="release_channel_restriction_in_move"
-                        attrs="{'invisible': [('release_channel_restriction', '!=', 'same')]}"
-                    />
                 </group>
             </xpath>
 

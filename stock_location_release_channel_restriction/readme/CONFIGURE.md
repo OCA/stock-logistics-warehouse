@@ -8,6 +8,3 @@
 - If you want to apply that restriction only on some specific locations,
   check the 'Specific Release Channel Restriction'. It won't be applied
   on children locations.
-- If you want to take into account all pending incoming operations in that 
-  location too, check the 'Release Channel Restriction For Incoming Moves' box too
-  (that appears only if 'mixed' restriction is not selected above).

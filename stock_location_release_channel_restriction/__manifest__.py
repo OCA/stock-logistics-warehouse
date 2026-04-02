@@ -11,7 +11,9 @@
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "maintainers": ["rousseldenis"],
     "depends": [
+        "base_partition",
         "stock_location_pending_move",
+        "stock_location_children",
         "stock_picking_delivery_link",
         "stock_release_channel",
     ],
