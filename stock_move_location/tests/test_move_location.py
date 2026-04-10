@@ -356,3 +356,33 @@ class TestMoveLocation(TestsCommon):
         self.assertEqual(len(delivery_move.move_line_ids), 1)
         self.assertEqual(delivery_move.move_line_ids.reserved_uom_qty, 20.0)
         self.assertEqual(delivery_move.move_line_ids.location_id, wh_stock_shelf_3)
+
+    def test_picking_type_preserved_on_origin_change(self):
+        """picking_type_id must not be reset when origin_location changes."""
+        wizard = self._create_wizard(self.internal_loc_1, self.internal_loc_2)
+        # Pick a picking type different from the default to assert preservation
+        other_picking_type = self.env["stock.picking.type"].search(
+            [
+                ("code", "in", ("internal", "outgoing")),
+                ("id", "!=", wizard.picking_type_id.id),
+            ],
+            limit=1,
+        )
+        self.assertTrue(
+            other_picking_type,
+            "Test requires at least two picking types to exist",
+        )
+        wizard.picking_type_id = other_picking_type
+        wizard.origin_location_id = self.internal_loc_2
+        wizard.onchange_origin_location()
+        self.assertEqual(wizard.picking_type_id, other_picking_type)
+
+    def test_destination_propagated_to_lines_without_dest(self):
+        """Lines without destination receive the wizard's destination on transfer."""
+        wizard = self._create_wizard(self.internal_loc_1, self.internal_loc_2)
+        wizard.onchange_origin_location()
+        # Simulate a line that ended up without destination
+        wizard.stock_move_location_line_ids[0].destination_location_id = False
+        wizard.action_move_location()
+        self.assertTrue(wizard.picking_id)
+        self.assertEqual(wizard.picking_id.location_dest_id, self.internal_loc_2)
