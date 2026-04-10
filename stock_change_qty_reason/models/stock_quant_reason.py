@@ -11,10 +11,7 @@ class StockQuantReason(models.Model):
     description = fields.Text("Reason Description")
     active = fields.Boolean(default=True)
 
-    _sql_constraints = [
-        (
-            "name_unique",
-            "UNIQUE(name)",
-            "You cannot have two reason with the same name.",
-        )
-    ]
+    _name_unique = models.Constraint(
+        "UNIQUE(name)",
+        "You cannot have two reason with the same name.",
+    )

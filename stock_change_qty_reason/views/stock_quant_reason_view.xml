@@ -8,25 +8,33 @@
         <field name="arch" type="xml">
             <form string="Preset Reason">
                 <sheet>
-                    <div class="oe_button_box" name="button_box">
-                        <button
-                            name="toggle_active"
-                            type="object"
-                            class="oe_stat_button"
-                            icon="fa-archive"
-                        >
-                            <span class="o_form_label">
-                                Active
-                            </span>
-                            <field name="active" />
-                        </button>
-                    </div>
+                    <widget
+                        name="web_ribbon"
+                        title="Archived"
+                        bg_color="text-bg-danger"
+                        invisible="active"
+                    />
+                    <div class="oe_button_box" name="button_box" />
                     <group>
                         <field name="name" />
                         <field name="description" />
                     </group>
                 </sheet>
             </form>
+        </field>
+    </record>
+
+    <record id="view_preset_reason_search" model="ir.ui.view">
+        <field name="name">Preset Reason</field>
+        <field name="model">stock.quant.reason</field>
+        <field name="arch" type="xml">
+            <search string="Search Stock Quant Reason">
+                <filter
+                    string="Archived"
+                    name="archived"
+                    domain="[('active', '=', False)]"
+                />
+            </search>
         </field>
     </record>
     <record id="action_change_qty_reasons_list" model="ir.actions.act_window">
