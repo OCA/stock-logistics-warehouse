@@ -1,6 +1,7 @@
 # Copyright 2022 ForgeFlow <http://www.forgeflow.com>
 
-from odoo import _, models
+from odoo import models
+from odoo.fields import Domain
 
 
 class StockQuant(models.Model):
@@ -9,7 +10,7 @@ class StockQuant(models.Model):
     def action_reserved_moves(self):
         self.ensure_one()
         action = {
-            "name": _(
+            "name": self.env._(
                 "Reserved Moves for: %(product_name)s",
                 product_name=self.product_id.name,
             ),
@@ -26,13 +27,15 @@ class StockQuant(models.Model):
             ],
             "type": "ir.actions.act_window",
             "context": {},
-            "domain": [
-                ("product_id", "=", self.product_id.id),
-                ("state", "not in", ["done", "cancel"]),
-                ("quantity_product_uom", ">", 0),
-                ("location_id", "=", self.location_id.id),
-                ("lot_id", "=", self.lot_id.id),
-                ("owner_id", "=", self.owner_id.id),
-            ],
+            "domain": Domain.AND(
+                [
+                    Domain("product_id", "=", self.product_id.id),
+                    Domain("state", "not in", ["done", "cancel"]),
+                    Domain("quantity_product_uom", ">", 0),
+                    Domain("location_id", "=", self.location_id.id),
+                    Domain("lot_id", "=", self.lot_id.id),
+                    Domain("owner_id", "=", self.owner_id.id),
+                ]
+            ),
         }
         return action
