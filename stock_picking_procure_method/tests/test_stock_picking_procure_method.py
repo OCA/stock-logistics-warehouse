@@ -15,7 +15,8 @@ class TestStockPickingMTO(BaseCommon):
             {
                 "name": "Test MTO Product",
                 "route_ids": [Command.set(cls.mto_route.ids)],
-                "type": "product",
+                "type": "consu",
+                "is_storable": True,
             }
         )
         cls.wh_obj = cls.env["stock.warehouse"]
