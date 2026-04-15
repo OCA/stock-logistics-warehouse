@@ -43,6 +43,7 @@ addon | version | maintainers | summary
 [stock_move_location](stock_move_location/) | 17.0.1.0.0 |  | This module allows to move all stock in a stock location to an other one.
 [stock_mts_mto_rule](stock_mts_mto_rule/) | 17.0.1.0.1 |  | Add a MTS+MTO route
 [stock_packaging_calculator](stock_packaging_calculator/) | 17.0.1.1.0 |  | Compute product quantity to pick by packaging
+[stock_picking_procure_method](stock_picking_procure_method/) | 17.0.1.0.0 |  | Allows to force the procurement method from the picking
 [stock_picking_show_linked](stock_picking_show_linked/) | 17.0.1.0.0 |  | This addon allows to easily access related pickings (in the case of chained routes) through a button in the parent picking view.
 [stock_picking_volume](stock_picking_volume/) | 17.0.1.1.0 | <a href='https://github.com/lmignon'><img src='https://github.com/lmignon.png' width='32' height='32' style='border-radius:50%;' alt='lmignon'/></a> | Compute volume information on stock moves and pickings
 [stock_picking_volume_packaging](stock_picking_volume_packaging/) | 17.0.1.0.0 |  | Use volume information on potential product packaging to compute the volume of a stock.move
