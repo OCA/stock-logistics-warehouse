@@ -91,11 +91,13 @@
             <xpath expr="//field[@name='uom_id']" position="after">
                 <field
                     name="secondary_unit_qty_available"
+                    optional="show"
                     groups="stock.group_stock_user"
                 />
                 <field
                     name="stock_secondary_uom_id"
                     options="{'no_open': True, 'no_create': True}"
+                    optional="show"
                     groups="stock.group_stock_user"
                 />
             </xpath>
@@ -108,11 +110,13 @@
             <xpath expr="//field[@name='uom_id']" position="after">
                 <field
                     name="secondary_unit_qty_available"
+                    optional="show"
                     groups="stock.group_stock_user"
                 />
                 <field
                     name="stock_secondary_uom_id"
                     options="{'no_open': True, 'no_create': True}"
+                    optional="show"
                     groups="stock.group_stock_user"
                 />
             </xpath>
