@@ -856,6 +856,22 @@ msgid "Width of the tray in mm"
 msgstr ""
 
 #. module: stock_vlm_mgmt
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_quant_vlm__human_pos_x
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task__human_pos_x
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task_action__human_pos_x
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_vlm_tray_cell_position_mixin__human_pos_x
+msgid "X"
+msgstr ""
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_quant_vlm__human_pos_y
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task__human_pos_y
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task_action__human_pos_y
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_vlm_tray_cell_position_mixin__human_pos_y
+msgid "Y"
+msgstr ""
+
+#. module: stock_vlm_mgmt
 #. odoo-python
 #: code:addons/stock_vlm_mgmt/models/stock_quant.py:0
 msgid "You can't change the product"
