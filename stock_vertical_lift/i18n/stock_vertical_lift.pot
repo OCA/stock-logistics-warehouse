@@ -784,6 +784,22 @@ msgid "View"
 msgstr ""
 
 #. module: stock_vertical_lift
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_inventory__tray_x
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_pick__tray_x
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_put__tray_x
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_transfer__tray_x
+msgid "X"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_inventory__tray_y
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_pick__tray_y
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_put__tray_y
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_transfer__tray_y
+msgid "Y"
+msgstr ""
+
+#. module: stock_vertical_lift
 #: model:ir.model.constraint,message:stock_vertical_lift.constraint_vertical_lift_shuttle_location_id_unique
 msgid "You cannot have two shuttles using the same location."
 msgstr ""
