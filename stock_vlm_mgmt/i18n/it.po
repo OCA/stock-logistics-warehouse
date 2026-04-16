@@ -20,7 +20,6 @@ msgstr ""
 #. odoo-python
 #: code:addons/stock_vlm_mgmt/models/stock_location.py:0
 #: code:addons/stock_vlm_mgmt/models/stock_location_vlm_tray.py:0
-#, python-format
 msgid "%(user)s has requested a release of the trays from Odoo"
 msgstr "Il rilascio del vassoio da Odoo è stasto richiesto da %(user)s"
 
@@ -279,15 +278,6 @@ msgid "LIFO"
 msgstr "LIFO"
 
 #. module: stock_vlm_mgmt
-#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location_vlm_tray____last_update
-#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location_vlm_tray_type____last_update
-#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_quant_vlm____last_update
-#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task____last_update
-#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task_action____last_update
-msgid "Last Modified on"
-msgstr "Ultima modifica il"
-
-#. module: stock_vlm_mgmt
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location_vlm_tray__write_uid
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location_vlm_tray_type__write_uid
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_quant_vlm__write_uid
@@ -363,17 +353,15 @@ msgstr "Successivo 🡺"
 #. module: stock_vlm_mgmt
 #. odoo-python
 #: code:addons/stock_vlm_mgmt/models/stock_location.py:0
-#, python-format
 msgid "No implemented request connector for this vendor!"
 msgstr "Nessun connettore richiesta implementato per questo fornitore!"
 
 #. module: stock_vlm_mgmt
 #. odoo-python
 #: code:addons/stock_vlm_mgmt/wizards/stock_vlm_task_action.py:0
-#, python-format
 msgid ""
-"No quantity was processed. Do you want to put the goods in another position?"
-" (you can also skip the task)"
+"No quantity was processed. Do you want to put the goods in another position? "
+"(you can also skip the task)"
 msgstr ""
 "Nessuna quantità è stata elaborata. Si vuole mettere la merce in un'altra "
 "posizione? (si può anche saltare il lavoro)"
@@ -406,8 +394,6 @@ msgstr "Elavora lavori VLM"
 #. module: stock_vlm_mgmt
 #. odoo-javascript
 #: code:addons/stock_vlm_mgmt/static/src/js/vlm_request_button/vlm_request_views.xml:0
-#: code:addons/stock_vlm_mgmt/static/src/js/vlm_request_button/vlm_request_views.xml:0
-#, python-format
 msgid "Perform tasks"
 msgstr "Elabora lavori"
 
@@ -475,10 +461,9 @@ msgstr "Quantità in attesa"
 #. module: stock_vlm_mgmt
 #. odoo-python
 #: code:addons/stock_vlm_mgmt/wizards/stock_vlm_task_action.py:0
-#, python-format
 msgid ""
-"Quantity mismatch! The quantity reported by the VLM is greater than original"
-" demand!. Please check it. If it's ok, you can fix it now and save the task "
+"Quantity mismatch! The quantity reported by the VLM is greater than original "
+"demand!. Please check it. If it's ok, you can fix it now and save the task "
 "manually."
 msgstr ""
 "Disallineamento quantità! La qquantità indicata dal VLM è maggiore della "
@@ -573,7 +558,6 @@ msgstr "Test"
 #. module: stock_vlm_mgmt
 #. odoo-python
 #: code:addons/stock_vlm_mgmt/models/stock_location.py:0
-#, python-format
 msgid ""
 "The command response has been lost for unknown reasons. Did you perform the "
 "operation on the VLM? Make sure there aren't unconsistencies with the "
@@ -586,21 +570,18 @@ msgstr ""
 #. module: stock_vlm_mgmt
 #. odoo-python
 #: code:addons/stock_vlm_mgmt/models/stock_location.py:0
-#, python-format
 msgid "The connection was refused by the VLM and couldn't be stablished."
 msgstr "La connessione è stata rifiutata dal VLM e non può essere stabilita."
 
 #. module: stock_vlm_mgmt
 #. odoo-python
 #: code:addons/stock_vlm_mgmt/wizards/stock_vlm_task_action.py:0
-#, python-format
 msgid "The quantity reported is greater than the one set in the task!"
 msgstr "La quantità riportata è maggiore di quella impostata nel lavoro!"
 
 #. module: stock_vlm_mgmt
 #. odoo-python
 #: code:addons/stock_vlm_mgmt/models/stock_location.py:0
-#, python-format
 msgid "The task couldn't be performed due to a timeout in the request"
 msgstr ""
 "Il lavoro non può essere eseguito a causa della scadenza della richiesta"
@@ -608,10 +589,9 @@ msgstr ""
 #. module: stock_vlm_mgmt
 #. odoo-python
 #: code:addons/stock_vlm_mgmt/models/stock_location.py:0
-#, python-format
 msgid ""
-"The task couldn't be performed. Try again or check  the vertical lift module"
-" for hardware issues"
+"The task couldn't be performed. Try again or check  the vertical lift module "
+"for hardware issues"
 msgstr ""
 "Il lavoro non può essere eseguito. Riprovare o controllare il magazzino "
 "verticale per problemi meccanici"
@@ -619,9 +599,14 @@ msgstr ""
 #. module: stock_vlm_mgmt
 #. odoo-python
 #: code:addons/stock_vlm_mgmt/models/stock_location.py:0
-#, python-format
 msgid "The task was cancelled by the VLM"
 msgstr "Il lavoro è stato annullato dal VLM"
+
+#. module: stock_vlm_mgmt
+#. odoo-python
+#: code:addons/stock_vlm_mgmt/models/stock_vlm_task.py:0
+msgid "There are no pending tasks to perform"
+msgstr ""
 
 #. module: stock_vlm_mgmt
 #: model:ir.model,name:stock_vlm_mgmt.model_stock_picking
@@ -679,13 +664,6 @@ msgstr "Schema vassoio"
 #: model:ir.model,name:stock_vlm_mgmt.model_vlm_tray_cell_position_mixin
 msgid "Tray position helpers"
 msgstr "Aiuto posizione vassoio"
-
-#. module: stock_vlm_mgmt
-#. odoo-javascript
-#: code:addons/stock_vlm_mgmt/static/src/js/location_tray_matrix/stock_location_tray.esm.js:0
-#, python-format
-msgid "Tray storage layout"
-msgstr "Schema deposito vassoio"
 
 #. module: stock_vlm_mgmt
 #: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.view_location_form
@@ -902,9 +880,24 @@ msgid "Width of the tray in mm"
 msgstr "Larghezza del vassoio in mm"
 
 #. module: stock_vlm_mgmt
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_quant_vlm__human_pos_x
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task__human_pos_x
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task_action__human_pos_x
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_vlm_tray_cell_position_mixin__human_pos_x
+msgid "X"
+msgstr ""
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_quant_vlm__human_pos_y
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task__human_pos_y
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task_action__human_pos_y
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_vlm_tray_cell_position_mixin__human_pos_y
+msgid "Y"
+msgstr ""
+
+#. module: stock_vlm_mgmt
 #. odoo-python
 #: code:addons/stock_vlm_mgmt/models/stock_quant.py:0
-#, python-format
 msgid "You can't change the product"
 msgstr "Non si può modificare il prodotto"
 
@@ -922,3 +915,10 @@ msgstr "mm per cella"
 #: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.vlm_task_action_form_view
 msgid "🡸 Previous"
 msgstr "🡸 Precedente"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Ultima modifica il"
+
+#, python-format
+#~ msgid "Tray storage layout"
+#~ msgstr "Schema deposito vassoio"
