@@ -1,0 +1,43 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_picking_procure_method
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2023-11-21 13:33+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
+
+#. module: stock_picking_procure_method
+#: model:ir.model.fields,help:stock_picking_procure_method.field_stock_picking__procure_method
+msgid ""
+"By default, the system will take from the stock in the source location and "
+"passively wait for availability. The other possibility allows you to "
+"directly create a procurement on the source location (and thus ignore its "
+"current stock) to gather products. If we want to chain moves and have this "
+"one to wait for the previous, this second option should be chosen."
+msgstr ""
+"Come predefinito, il sistema preleverà dalla giacenza nell'ubicazione "
+"origine e aspetterà passivamente la disponibilità. L'altra possibilità "
+"consente di creare direttamente un approvvigionamento nell'ubicazione "
+"origine (e quindi ignorare l'attuale giacenza) per ottenere i prodotti. Se "
+"si vogliono concatenare movimenti e che questo attenda il precedente, deve "
+"essere scelta questa seconda opzione."
+
+#. module: stock_picking_procure_method
+#: model:ir.model.fields,field_description:stock_picking_procure_method.field_stock_picking__procure_method
+msgid "Supply Method"
+msgstr "Metodo fornitura"
+
+#. module: stock_picking_procure_method
+#: model:ir.model,name:stock_picking_procure_method.model_stock_picking
+msgid "Transfer"
+msgstr "Trasferimento"
