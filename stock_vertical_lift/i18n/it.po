@@ -28,8 +28,8 @@ msgid ""
 "<i class=\"fa fa-ellipsis-v\" role=\"img\" aria-label=\"Manage\" "
 "title=\"Manage\"/>"
 msgstr ""
-"<i class=\"fa fa-ellipsis-v\" role=\"img\" aria-label=\"Gestione\" title="
-"\"Gestione\"/>"
+"<i class=\"fa fa-ellipsis-v\" role=\"img\" aria-label=\"Gestione\" "
+"title=\"Gestione\"/>"
 
 #. module: stock_vertical_lift
 #: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_operation_base_screen_view
@@ -799,6 +799,22 @@ msgstr "Vassoio sollevamento verticale"
 #: model:ir.model.fields.selection,name:stock_vertical_lift.selection__stock_location__vertical_lift_kind__view
 msgid "View"
 msgstr "Vista"
+
+#. module: stock_vertical_lift
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_inventory__tray_x
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_pick__tray_x
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_put__tray_x
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_transfer__tray_x
+msgid "X"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_inventory__tray_y
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_pick__tray_y
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_put__tray_y
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_transfer__tray_y
+msgid "Y"
+msgstr ""
 
 #. module: stock_vertical_lift
 #: model:ir.model.constraint,message:stock_vertical_lift.constraint_vertical_lift_shuttle_location_id_unique
