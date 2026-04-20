@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-07-15 15:53+0000\n"
+"PO-Revision-Date: 2026-04-20 16:45+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.10.4\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: stock_vlm_mgmt
 #. odoo-python
@@ -606,7 +606,7 @@ msgstr "Il lavoro è stato annullato dal VLM"
 #. odoo-python
 #: code:addons/stock_vlm_mgmt/models/stock_vlm_task.py:0
 msgid "There are no pending tasks to perform"
-msgstr ""
+msgstr "Non ci sono prelievi in sospeso da eseguire"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model,name:stock_vlm_mgmt.model_stock_picking
@@ -885,7 +885,7 @@ msgstr "Larghezza del vassoio in mm"
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task_action__human_pos_x
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_vlm_tray_cell_position_mixin__human_pos_x
 msgid "X"
-msgstr ""
+msgstr "X"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_quant_vlm__human_pos_y
@@ -893,7 +893,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task_action__human_pos_y
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_vlm_tray_cell_position_mixin__human_pos_y
 msgid "Y"
-msgstr ""
+msgstr "Y"
 
 #. module: stock_vlm_mgmt
 #. odoo-python
