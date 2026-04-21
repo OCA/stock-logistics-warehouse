@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_production_lot_tree" model="ir.ui.view">
+        <field name="model">stock.lot</field>
+        <field name="inherit_id" ref="stock.view_production_lot_tree" />
+        <field name="arch" type="xml">
+            <field name="last_delivery_partner_id" position="after">
+                <field
+                    name="warehouse_id"
+                    invisible="not warehouse_id"
+                    optional="show"
+                    groups="stock.group_stock_multi_warehouses"
+                />
+            </field>
+        </field>
+    </record>
+    <record id="view_production_lot_form" model="ir.ui.view">
+        <field name="model">stock.lot</field>
+        <field name="inherit_id" ref="stock.view_production_lot_form" />
+        <field name="arch" type="xml">
+            <field name="location_id" position="after">
+                <field
+                    name="warehouse_id"
+                    invisible="not warehouse_id"
+                    groups="stock.group_stock_multi_warehouses"
+                />
+            </field>
+        </field>
+    </record>
+    <record id="search_product_lot_filter" model="ir.ui.view">
+        <field name="model">stock.lot</field>
+        <field name="inherit_id" ref="stock.search_product_lot_filter" />
+        <field name="arch" type="xml">
+            <filter name="group_by_Company" position="before">
+                <filter
+                    name="group_by_warehouse"
+                    string="Warehouse"
+                    domain="[]"
+                    context="{'group_by': 'warehouse_id'}"
+                    groups="stock.group_stock_multi_warehouses"
+                />
+            </filter>
+        </field>
+    </record>
+</odoo>
