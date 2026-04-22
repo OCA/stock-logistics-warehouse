@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="quant_package_search_view" model="ir.ui.view">
+        <field name="model">stock.quant.package</field>
+        <field name="inherit_id" ref="stock.quant_package_search_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//search" position="inside">
+                <separator />
+                <filter
+                    name="inactive"
+                    string="Archived"
+                    domain="[('active','=',False)]"
+                />
+                <filter
+                    name="active_and_inactive"
+                    string="Archived or Active"
+                    context="{'active_test': False}"
+                />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_quant_package_form" model="ir.ui.view">
+        <field name="model">stock.quant.package</field>
+        <field name="inherit_id" ref="stock.view_quant_package_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//sheet/div" position="before">
+                <widget
+                    name="web_ribbon"
+                    title="Archived"
+                    bg_color="bg-danger"
+                    invisible="active"
+                />
+            </xpath>
+            <xpath expr="//sheet/group/group" position="inside">
+                <field name="active" invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
