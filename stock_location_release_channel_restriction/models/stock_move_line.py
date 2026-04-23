@@ -94,14 +94,9 @@ class StockMoveLine(models.Model):
             .partition("location_id")
             .items()
         ):
-            # Remove it if no family location has pending outgoing moves
-            parent = location._get_first_ancestor_with_same_restriction()
-            family_locations = parent.children_ids.filtered(
-                lambda child: child.release_channel_restriction == "same"
+            location._remove_current_release_channel_restriction(
+                lines=lines, force=force
             )
-            if not (family_locations.pending_out_move_line_ids - lines) or force:
-                location.current_release_channel_restriction_id = False
-                family_locations.current_release_channel_restriction_id = False
 
     def _action_done(self):
         """

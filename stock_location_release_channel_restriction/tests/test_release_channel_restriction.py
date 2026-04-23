@@ -500,3 +500,66 @@ class TestReleaseChannelRestriction(BaseCommon):
         self.delivery_2._action_done()
         self.assertFalse(self.out_1.current_release_channel_restriction_id)
         self.assertFalse(self.out_2.current_release_channel_restriction_id)
+
+    def test_release_channel_restriction_reset_wizard(self):
+        """
+
+        Assign the channel to the first delivery
+        Transfer the linked picking
+        """
+        self.delivery_1 = self.env["stock.picking"].search(
+            [
+                ("move_ids.location_id", "=", self.out.id),
+                ("product_id", "=", self.product.id),
+                ("group_id", "=", self.group_1.id),
+            ]
+        )
+        self.delivery_1.assign_release_channel()
+        self.assertEqual(self.default_channel, self.delivery_1.release_channel_id)
+        self.picking_1 = self.env["stock.picking"].search(
+            [
+                ("move_ids.location_id", "=", self.warehouse.lot_stock_id.id),
+                ("product_id", "=", self.product.id),
+                ("group_id", "=", self.group_1.id),
+            ]
+        )
+        # Check if destination is valid
+        self.assertTrue(
+            self.picking_1.move_line_ids._valid_location_release_channel_restriction(
+                self.out_1
+            )
+        )
+
+        self.picking_1.move_line_ids.location_dest_id = self.out_1
+        self.picking_1.move_line_ids.qty_done = (
+            self.picking_1.move_line_ids.reserved_qty
+        )
+
+        self.picking_1._action_done()
+        self.assertEqual("done", self.picking_1.state)
+        self.assertTrue(self.out_1.current_release_channel_restriction_id)
+        self.assertTrue(self.out_2.current_release_channel_restriction_id)
+
+        action = self.out_1.action_reset_release_channel()
+        context = action.get("context")
+        wizard = (
+            self.env["stock.location.reset.release.channel"]
+            .with_context(**context)
+            .create({})
+        )
+        wizard.reset()
+        self.assertFalse(self.out_1.current_release_channel_restriction_id)
+        self.assertTrue(self.out_2.current_release_channel_restriction_id)
+
+        wizard = (
+            self.env["stock.location.reset.release.channel"]
+            .with_context(**context)
+            .create(
+                {
+                    "reset_family": True,
+                }
+            )
+        )
+        wizard.reset()
+        self.assertFalse(self.out_1.current_release_channel_restriction_id)
+        self.assertFalse(self.out_2.current_release_channel_restriction_id)

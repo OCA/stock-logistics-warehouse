@@ -18,6 +18,8 @@
         "stock_release_channel",
     ],
     "data": [
+        "security/security.xml",
         "views/stock_location.xml",
+        "wizards/stock_location_reset_channel.xml",
     ],
 }

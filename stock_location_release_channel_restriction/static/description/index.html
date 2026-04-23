@@ -420,6 +420,32 @@ on children locations.</li>
 </div>
 <div class="section" id="usage">
 <h2><a class="toc-backref" href="#toc-entry-3">Usage</a></h2>
+<ul>
+<li><p class="first">When transferring stock movements with assigned release channel to a
+location where the restriction feature is enabled, the next moves
+should have the same release channel in order to be allowed to be
+transferred.</p>
+</li>
+<li><p class="first">When the last movement that restrict the location to a particular
+release channel has left the location, the release channel is removed
+on the location and all locations that belong to the same family and
+restriction:</p>
+<pre class="literal-block">
+                     Output (No restriction)
+OUTPUT CASE 1 (Restriction)                                      OUTPUT CASE 2 (Restriction)
+</pre>
+<p>CASE A (Restriction) CASE B (Restriction) CASE C (R) CASE D
+(Restriction)</p>
+<p>So, when an outgoing move is leaving the CASE A, the release channel
+restriction is removed from CASE B and CASE C too if no outgoing move
+is waiting in those locations</p>
+</li>
+<li><p class="first">To remove the restriction on some locations, select them in the list
+view and click on ‘Remove Release Channel’ action. It will force the
+restriction removal. If you select the ‘Reset Family’ option, the
+behaviour described here above is applied too.</p>
+</li>
+</ul>
 </div>
 <div class="section" id="bug-tracker">
 <h2><a class="toc-backref" href="#toc-entry-4">Bug Tracker</a></h2>

@@ -1,7 +1,9 @@
 # Copyright 2024 ACSONE SA/NV
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
-from odoo import api, fields, models
+from odoo import _, api, fields, models
+from odoo.fields import Command
 
+from odoo.addons.stock.models.stock_move_line import StockMoveLine
 from odoo.addons.stock_release_channel.models.stock_release_channel import (
     StockReleaseChannel,
 )
@@ -59,7 +61,7 @@ class StockLocation(models.Model):
         self, release_channel: StockReleaseChannel
     ):
         for location in self:
-            parent = location._get_first_ancestor_with_same_restriction()
+            parent = location._get_first_ancestor_with_same_channel_restriction()
             parent.children_ids.filtered(
                 lambda child: child.release_channel_restriction == "same"
             ).sudo().write(
@@ -68,7 +70,7 @@ class StockLocation(models.Model):
                 }
             )
 
-    def _get_first_ancestor_with_same_restriction(self):
+    def _get_first_ancestor_with_same_channel_restriction(self):
         """
         This will retrieve all first parent with "same" restriction
         on the recordset.
@@ -119,3 +121,46 @@ class StockLocation(models.Model):
                     incoming_channels=release_channel,
                     env=self.env,
                 )
+
+    def _remove_current_release_channel_restriction(
+        self, lines: StockMoveLine | None = None, force=False, family=True
+    ):
+        """
+            This will remove the current release channel restriction on locations.
+
+        Args:
+            lines (_type_, optional): The stock move lines to not take into account.
+            force (bool, optional): Force the removal on self recordset.
+            family (bool, optional): Remove the release channel on family locations too.
+        """
+        if lines is None:
+            lines = self.env["stock.move.line"].browse()
+        for location in self:
+            # Remove it if no family location has pending outgoing moves
+            parent = location._get_first_ancestor_with_same_channel_restriction()
+            if family:
+                family_locations = parent.children_ids.filtered(
+                    lambda child: child.release_channel_restriction == "same"
+                )
+            else:
+                family_locations = self.browse()
+            locations = family_locations | location
+            if not (locations.pending_out_move_line_ids - lines) or force:
+                locations.current_release_channel_restriction_id = False
+
+    def action_reset_release_channel(self):
+        view_id = self.env.ref(
+            "stock_location_release_channel_restriction.stock_location_reset_release_channel_form_view"
+        ).id
+        return {
+            "name": _("Reset Release Channel"),
+            "type": "ir.actions.act_window",
+            "view_mode": "form",
+            "res_model": "stock.location.reset.release.channel",
+            "view_id": view_id,
+            "views": [(view_id, "form")],
+            "target": "new",
+            "context": {
+                "default_location_ids": [Command.set(self.ids)],
+            },
+        }
