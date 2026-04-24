@@ -8,7 +8,7 @@ from odoo.tests.common import SavepointCase
 class TestProductRouteProfileInternalResupply(SavepointCase):
     @classmethod
     def setUpClass(cls):
-        super(TestProductRouteProfileInternalResupply, cls).setUpClass()
+        super().setUpClass()
 
         cls.company = cls.env.ref("base.main_company")
         cls.env["res.config.settings"].write(
