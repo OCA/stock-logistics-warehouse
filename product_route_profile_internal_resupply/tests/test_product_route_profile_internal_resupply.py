@@ -2,10 +2,10 @@
 # @author Kévin Roche <kevin.roche@akretion.com>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo.tests.common import SavepointCase
+from odoo.tests.common import TransactionCase
 
 
-class TestProductRouteProfileInternalResupply(SavepointCase):
+class TestProductRouteProfileInternalResupply(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -30,8 +30,8 @@ class TestProductRouteProfileInternalResupply(SavepointCase):
 
     def test_1_int_supply_route(self):
         self.wh.resupply_wh_ids = self.wh_2
-        int_supply_route = self.env["stock.location.route"].search(
-            [("internal_supply", "=", True)]
+        int_supply_route = self.env["stock.route"].search(
+            [("internal_supply", "=", True)], limit=1
         )
         self.assertTrue(int_supply_route)
         self.product.internal_supply_ids = int_supply_route

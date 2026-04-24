@@ -1,6 +1,6 @@
-=======================================
-Product Route Profile Internal Resupply
-=======================================
+=========================================
+Product Route Profile - Internal Resupply
+=========================================
 
 .. 
    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -28,8 +28,15 @@ Product Route Profile Internal Resupply
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-This module allows to add Internal Supplies Routes separately to other
-routes in route_profile.
+This module allows to add dedicated Internal Supplies Routes on
+products, which won't be included in the related route profile.
+
+By default Odoo allows you to set different routes for a given product.
+The 'Product Route Profile' module allows you to define profiles common
+to multiple products, but you could need to configure internal routes
+that are dedicated to some products (e.g. warehouse 'Retail Store'
+replenishes some products from 'Warehouse 1' and others from 'Warehouse
+2').
 
 **Table of contents**
 

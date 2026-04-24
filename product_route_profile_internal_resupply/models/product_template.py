@@ -9,7 +9,7 @@ class ProductTemplate(models.Model):
     _inherit = "product.template"
 
     internal_supply_ids = fields.Many2many(
-        comodel_name="stock.location.route",
+        comodel_name="stock.route",
         string="internal Supplies",
         domain=[
             ("internal_supply", "=", True),
@@ -18,7 +18,7 @@ class ProductTemplate(models.Model):
 
     @api.depends("internal_supply_ids")
     def _compute_route_ids(self):
-        super()._compute_route_ids()
+        return super()._compute_route_ids()
 
     def _get_routes(self):
         return super()._get_routes() | self.internal_supply_ids
@@ -29,5 +29,6 @@ class ProductTemplate(models.Model):
 
     def _search_route_ids(self, operator, value):
         res = super()._search_route_ids(operator, value)
-        res.insert(1, '"|", ("internal_supply_ids", operator, value),')
+        res.insert(1, "|")
+        res.insert(2, ("internal_supply_ids", operator, value))
         return res

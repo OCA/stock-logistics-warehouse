@@ -5,10 +5,7 @@
 from odoo import fields, models
 
 
-class StockLocationRoute(models.Model):
-    _inherit = "stock.location.route"
+class StockRoute(models.Model):
+    _inherit = "stock.route"
 
-    internal_supply = fields.Boolean(
-        string="Internal Supply",
-        readonly=True,
-    )
+    internal_supply = fields.Boolean(readonly=True)
