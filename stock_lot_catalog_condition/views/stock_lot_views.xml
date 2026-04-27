@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="lot_view_kanban_catalog" model="ir.ui.view">
+        <field name="model">stock.lot</field>
+        <field name="inherit_id" ref="stock_lot_catalog.lot_view_kanban_catalog" />
+        <field name="arch" type="xml">
+            <field name="id" position="after">
+                <field name="condition_id" />
+                <field name="condition_color" />
+            </field>
+            <div name="o_kanban_product_id" position="after">
+                <div name="o_kanban_condition_id" t-if="record.condition_id.value">
+                    <span
+                        t-attf-class="o_tag position-relative d-inline-flex align-items-center user-select-none mw-100 o_badge badge rounded-pill lh-1 o_tag_color_#{record.condition_color.value}"
+                        tabindex="-1"
+                        t-att-data-color="record.condition_color.value"
+                        t-att-title="record.condition_id.value"
+                    >
+                        <div class="o_tag_badge_text">
+                            <field name="condition_id" />
+                        </div>
+                    </span>
+                </div>
+            </div>
+        </field>
+    </record>
+    <record id="lot_view_search_catalog" model="ir.ui.view">
+        <field name="model">stock.lot</field>
+        <field name="inherit_id" ref="stock_lot_catalog.lot_view_search_catalog" />
+        <field name="arch" type="xml">
+            <filter name="group_by_product_id" position="after">
+                <filter
+                    string="Condition"
+                    name="group_by_condition_id"
+                    context="{'group_by':'condition_id'}"
+                />
+            </filter>
+            <xpath expr="//searchpanel/field[@name='location_id']" position="after">
+                <field name="condition_id" string="Condition" />
+            </xpath>
+        </field>
+    </record>
+</odoo>
