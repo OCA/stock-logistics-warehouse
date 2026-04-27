@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t
+        t-name="StockLotCatalogKanbanRenderer"
+        t-inherit="web.KanbanRenderer"
+        t-inherit-mode="primary"
+    >
+        <t t-if="showNoContentHelper" position="replace">
+            <t t-if="showNoContentHelper">
+                <div class="o_view_nocontent" role="alert">
+                    <div class="o_nocontent_help">
+                        <p class="o_view_nocontent_smiling_face">
+                            No lots could be found.<br />
+                            <button
+                            name="button_name_create_lot"
+                            class="mt-2 btn btn-primary"
+                            t-on-click="this.createLot"
+                        >Create a lot</button>
+                        </p>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </t>
+</templates>

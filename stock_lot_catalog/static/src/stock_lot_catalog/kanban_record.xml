@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-name="StockLotCatalogKanbanRecord">
+        <article
+            t-att-class="getRecordClasses() + (lotCatalogData.quantity ? ' o_product_added' : '')"
+            t-att-data-id="props.record.id"
+            t-att-tabindex="props.record.model.useSampleModel ? -1 : 0"
+            t-on-click="onGlobalClick"
+            t-ref="root"
+        >
+            <div class="d-flex flex-column h-100">
+                <t
+                    t-call="{{ templates[this.constructor.KANBAN_CARD_ATTRIBUTE] }}"
+                    t-call-context="this.renderingContext"
+                />
+                <t
+                    t-component="orderLineComponent"
+                    lotId="props.record.resId"
+                    t-props="lotCatalogData"
+                />
+            </div>
+            <t t-call="{{ this.constructor.menuTemplate }}" />
+        </article>
+    </t>
+</templates>
