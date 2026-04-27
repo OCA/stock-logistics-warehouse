@@ -3,16 +3,20 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 from datetime import datetime, timedelta
 
-from odoo import Command
+from freezegun import freeze_time
+
+from odoo import Command, fields
 from odoo.exceptions import AccessError, ValidationError
-from odoo.tests import common
+from odoo.tests import new_test_user
+from odoo.tools import mute_logger
+
+from odoo.addons.base.tests.common import BaseCommon
 
 
-class TestStockCycleCount(common.TransactionCase):
+class TestStockCycleCount(BaseCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.res_users_model = cls.env["res.users"]
         cls.cycle_count_model = cls.env["stock.cycle.count"]
         cls.stock_cycle_count_rule_model = cls.env["stock.cycle.count.rule"]
         cls.inventory_model = cls.env["stock.inventory"]
@@ -23,14 +27,20 @@ class TestStockCycleCount(common.TransactionCase):
         cls.quant_model = cls.env["stock.quant"]
         cls.move_model = cls.env["stock.move"]
 
-        cls.company = cls.env.ref("base.main_company")
-        cls.partner = cls.env.ref("base.res_partner_1")
-        cls.g_stock_manager = cls.env.ref("stock.group_stock_manager")
-        cls.g_stock_user = cls.env.ref("stock.group_stock_user")
+        cls.company = cls.env.company
+        cls.partner = cls.env["res.partner"].create({"name": "Test partner"})
 
         # Create users:
-        cls.manager = cls._create_user("user_1", [cls.g_stock_manager], cls.company).id
-        cls.user = cls._create_user("user_2", [cls.g_stock_user], cls.company).id
+        cls.manager = new_test_user(
+            cls.env,
+            login="user_1",
+            groups="stock.group_stock_manager",
+        )
+        cls.user = new_test_user(
+            cls.env,
+            login="user_2",
+            groups="stock.group_stock_user",
+        )
 
         # Create warehouses:
         cls.big_wh = cls.stock_warehouse_model.create(
@@ -94,21 +104,6 @@ class TestStockCycleCount(common.TransactionCase):
         )
 
     @classmethod
-    def _create_user(cls, login, groups, company):
-        group_ids = [group.id for group in groups]
-        user = cls.res_users_model.create(
-            {
-                "name": login,
-                "login": login,
-                "email": "example@yourcompany.com",
-                "company_id": company.id,
-                "company_ids": [Command.link(company.id)],
-                "groups_id": [Command.set(group_ids)],
-            }
-        )
-        return user
-
-    @classmethod
     def _create_stock_cycle_count_rule_periodic(cls, uid, name, values):
         rule = cls.stock_cycle_count_rule_model.with_user(uid).create(
             {
@@ -151,6 +146,7 @@ class TestStockCycleCount(common.TransactionCase):
         )
         return rule
 
+    @mute_logger("odoo.models.unlink")
     def test_cycle_count_planner(self):
         """Tests creation of cycle counts."""
         # Common rules:
@@ -282,6 +278,7 @@ class TestStockCycleCount(common.TransactionCase):
             "Rules defined for zones are not getting the right " "warehouse.",
         )
 
+    @mute_logger("odoo.addons.base.models.ir_model")
     def test_user_security(self):
         """Tests user rights."""
         with self.assertRaises(AccessError):
@@ -356,8 +353,9 @@ class TestStockCycleCount(common.TransactionCase):
         with self.assertRaises(ValidationError):
             inventory.company_id = company
 
+    @freeze_time("2026-01-01")
     def test_inventory_adjustment_accuracy(self):
-        date = datetime.today() - timedelta(days=1)
+        date = fields.Date.today()
         # Create location
         loc = self.stock_location_model.create(
             {"name": "Test Location", "usage": "internal"}
@@ -570,15 +568,19 @@ class TestStockCycleCount(common.TransactionCase):
         self.assertEqual(quant_2.inventory_quantity, 0.0)
 
     def test_responsible_id_propagation_with_inventory_adjustment(self):
-        additional_user = self._create_user(
-            "user_3", [self.g_stock_manager], self.company
+        additional_user = new_test_user(
+            self.env,
+            login="user_3",
+            groups="stock.group_stock_manager",
         )
-        additional_user_2 = self._create_user(
-            "user_4", [self.g_stock_manager], self.company
+        additional_user_2 = new_test_user(
+            self.env,
+            login="user_4",
+            groups="stock.group_stock_manager",
         )
         self.cycle_count_1.responsible_id = self.manager
         self.assertEqual(
-            self.cycle_count_1.responsible_id.id,
+            self.cycle_count_1.responsible_id,
             self.manager,
             "Initial responsible not correctly assigned.",
         )
