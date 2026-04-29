@@ -3,7 +3,7 @@
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
 
-    <record model="ir.rule" id="ir_rule_stock_inventory_user_manager">
+    <record model="ir.rule" id="ir_rule_stock_inventory_restriction_manager">
         <field name="name">Stock inventory user manager rule</field>
         <field name="groups" eval="[(6, 0, [ref('stock.group_stock_manager')])]" />
         <field name="model_id" ref="stock.model_stock_inventory" />
@@ -14,7 +14,7 @@
         <field name="domain_force">[(1, "=", 1)]</field>
     </record>
 
-    <record model="ir.rule" id="ir_rule_stock_inventory_user">
+    <record model="ir.rule" id="ir_rule_stock_inventory_restriction">
         <field name="name">Stock inventory user rule</field>
         <field name="groups" eval="[(4, ref('base.group_user'))]" />
         <field name="model_id" ref="stock.model_stock_inventory" />
