@@ -66,6 +66,16 @@
                         </div>
                         <div class="o_shuttle_content o_shuttle_content_right">
                             <div>
+                                <!-- will react on barcode 'OBTsave-and-release' -->
+                                <button
+                                    name="button_save_and_release"
+                                    type="object"
+                                    string="Save &amp; Release"
+                                    icon="fa-check"
+                                    class="btn-primary"
+                                    barcode_trigger="save-and-release"
+                                    invisible="state != 'save'"
+                                />
                                 <!-- will react on barcode 'OBTsave' -->
                                 <button
                                     name="button_save"

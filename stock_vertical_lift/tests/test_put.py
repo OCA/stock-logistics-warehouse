@@ -163,6 +163,23 @@ class TestPut(VerticalLiftCase):
         self.assertEqual(self.in_move_line.quantity, qty_to_process)
 
     @mute_logger(SHUTTLE_LOGGER)
+    def test_transition_button_save_and_release(self):
+        operation = self._open_screen("put")
+        move_line = self.in_move_line
+        # first steps of the workflow are done
+        operation.current_move_line_id = move_line
+        move_line.location_dest_id = self.location_1a_x1y1
+        operation.state = "save"
+        qty_to_process = move_line.quantity
+        operation.button_save_and_release()
+        # save part: move line is done
+        self.assertEqual(move_line.state, "done")
+        self.assertEqual(move_line.quantity, qty_to_process)
+        # release part: back to scan_source, no current line
+        self.assertEqual(operation.state, "scan_source")
+        self.assertFalse(operation.current_move_line_id)
+
+    @mute_logger(SHUTTLE_LOGGER)
     def test_transition_button_release(self):
         operation = self._open_screen("put")
         move_line = self.in_move_line
