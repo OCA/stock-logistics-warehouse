@@ -6,6 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-04-29 09:09+0000\n"
+"PO-Revision-Date: 2026-04-29 09:09+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -21,6 +23,11 @@ msgstr ""
 #. module: stock_move_packaging_qty
 #: model_terms:ir.ui.view,arch_db:stock_move_packaging_qty.view_stock_move_operations
 msgid "<span>)</span>"
+msgstr ""
+
+#. module: stock_move_packaging_qty
+#: model:ir.model.fields,field_description:stock_move_packaging_qty.field_stock_picking_type__automatic_done_packaging_calculation
+msgid "Automatically Calculate Done Packaging Quantity"
 msgstr ""
 
 #. module: stock_move_packaging_qty
@@ -49,6 +56,11 @@ msgid "Packaging"
 msgstr ""
 
 #. module: stock_move_packaging_qty
+#: model:ir.model,name:stock_move_packaging_qty.model_stock_picking_type
+msgid "Picking Type"
+msgstr ""
+
+#. module: stock_move_packaging_qty
 #: model:ir.model,name:stock_move_packaging_qty.model_stock_move_line
 msgid "Product Moves (Stock Move Line)"
 msgstr ""
@@ -72,6 +84,13 @@ msgstr ""
 #. module: stock_move_packaging_qty
 #: model:ir.model,name:stock_move_packaging_qty.model_stock_move
 msgid "Stock Move"
+msgstr ""
+
+#. module: stock_move_packaging_qty
+#: model:ir.model.fields,help:stock_move_packaging_qty.field_stock_picking_type__automatic_done_packaging_calculation
+msgid ""
+"The system calculates Done Packaging Automatically on Stock Move Lines.\n"
+"Disable this to prevent automatic calculation."
 msgstr ""
 
 #. module: stock_move_packaging_qty
