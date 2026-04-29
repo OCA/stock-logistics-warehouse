@@ -7,7 +7,7 @@ from odoo.tests.common import TransactionCase
 
 class TestStockInventoryUser(TransactionCase):
     def setUp(self):
-        super(TestStockInventoryUser, self).setUp()
+        super().setUp()
         self.inventory_model = self.env["stock.inventory"]
         self.res_users_model = self.env["res.users"]
 
