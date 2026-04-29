@@ -1,6 +1,6 @@
-====================
-Stock Inventory User
-====================
+===========================
+Stock Inventory Restriction
+===========================
 
 .. 
    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -10,9 +10,9 @@ Stock Inventory User
    !! source digest: sha256:4a64dbd297fa1ac7f51333495dda73e693688e2a0e608e84850c55c48d35529f
    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-.. |badge1| image:: https://img.shields.io/badge/maturity-Mature-brightgreen.png
+.. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
-    :alt: Mature
+    :alt: Beta
 .. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
@@ -28,8 +28,8 @@ Stock Inventory User
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-Adds user on stock inventory. Forbid other user to modify an inventory
-of a user
+Restrict modification and validation of inventories to assigned users
+(only inventory managers still have full access).
 
 **Table of contents**
 
@@ -58,11 +58,7 @@ Contributors
 ------------
 
 - Benoît GUILLOT <benoit.guillot@akretion.com>
-
-Other credits
--------------
-
-
+- Sébastien Alix <sebastien.alix@akretion.com>
 
 Maintainers
 -----------

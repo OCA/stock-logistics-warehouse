@@ -1,2 +1,2 @@
-Adds user on stock inventory. Forbid other user to modify an inventory
-of a user
+Restrict modification and validation of inventories to assigned users
+(only inventory managers still have full access).

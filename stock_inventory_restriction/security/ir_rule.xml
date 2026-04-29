@@ -5,7 +5,7 @@
     <record model="ir.rule" id="ir_rule_stock_inventory_restriction_manager">
         <field name="name">Stock inventory user manager rule</field>
         <field name="groups" eval="[(6, 0, [ref('stock.group_stock_manager')])]" />
-        <field name="model_id" ref="stock.model_stock_inventory" />
+        <field name="model_id" ref="stock_inventory.model_stock_inventory" />
         <field name="perm_read" eval="False" />
         <field name="perm_create" eval="False" />
         <field name="perm_write" eval="True" />
@@ -13,23 +13,23 @@
         <field name="domain_force">[(1, "=", 1)]</field>
     </record>
 
-    <record model="ir.rule" id="ir_rule_stock_inventory_restriction">
+    <record model="ir.rule" id="ir_rule_stock_inventory_restriction_user">
         <field name="name">Stock inventory user rule</field>
         <field name="groups" eval="[(4, ref('base.group_user'))]" />
-        <field name="model_id" ref="stock.model_stock_inventory" />
+        <field name="model_id" ref="stock_inventory.model_stock_inventory" />
         <field name="perm_read" eval="False" />
         <field name="perm_create" eval="False" />
         <field name="perm_write" eval="True" />
         <field name="perm_unlink" eval="False" />
         <field
             name="domain_force"
-        >[("user_id", "=", user.id), ("user_id", "!=", False)]</field>
+        >[("responsible_id", "=", user.id), ("responsible_id", "!=", False)]</field>
     </record>
 
-    <record model="ir.rule" id="ir_rule_stock_inventory_line_user_manager">
+    <record model="ir.rule" id="ir_rule_stock_inventory_restriction_quant_manager">
         <field name="name">Stock inventory line user manager rule</field>
         <field name="groups" eval="[(6, 0, [ref('stock.group_stock_manager')])]" />
-        <field name="model_id" ref="stock.model_stock_inventory_line" />
+        <field name="model_id" ref="stock.model_stock_quant" />
         <field name="perm_read" eval="False" />
         <field name="perm_create" eval="True" />
         <field name="perm_write" eval="True" />
@@ -37,16 +37,16 @@
         <field name="domain_force">[(1, "=", 1)]</field>
     </record>
 
-    <record model="ir.rule" id="ir_rule_stock_inventory_line_user">
+    <record model="ir.rule" id="ir_rule_stock_inventory_restriction_quant_user">
         <field name="name">Stock inventory line user rule</field>
         <field name="groups" eval="[(4, ref('base.group_user'))]" />
-        <field name="model_id" ref="stock.model_stock_inventory_line" />
+        <field name="model_id" ref="stock.model_stock_quant" />
         <field name="perm_read" eval="False" />
         <field name="perm_create" eval="True" />
         <field name="perm_write" eval="True" />
         <field name="perm_unlink" eval="False" />
         <field
             name="domain_force"
-        >[("inventory_id.user_id", "=", user.id), ("inventory_id.user_id", "!=", False)]</field>
+        >[("current_inventory_id.responsible_id", "=", user.id), ("current_inventory_id.responsible_id", "!=", False)]</field>
     </record>
 </odoo>

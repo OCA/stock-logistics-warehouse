@@ -1,75 +1,81 @@
 # Copyright 2022 Akretion (https://www.akretion.com).
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
+from odoo import Command, fields
 from odoo.exceptions import AccessError
 from odoo.tests.common import TransactionCase
 
+from odoo.addons.base.tests.common import DISABLED_MAIL_CONTEXT
+
 
 class TestStockInventoryUser(TransactionCase):
-    def setUp(self):
-        super().setUp()
-        self.inventory_model = self.env["stock.inventory"]
-        self.res_users_model = self.env["res.users"]
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.env = cls.env(context=dict(cls.env.context, **DISABLED_MAIL_CONTEXT))
+        cls.inventory_model = cls.env["stock.inventory"]
+        cls.res_users_model = cls.env["res.users"]
 
-        self.company = self.env.ref("base.main_company")
-        self.grp_stock_manager = self.env.ref("stock.group_stock_manager")
-        self.grp_stock_user = self.env.ref("stock.group_stock_user")
-        self.location = self.env.ref("stock.warehouse0").lot_stock_id
+        cls.company = cls.env.ref("base.main_company")
+        cls.grp_stock_manager = cls.env.ref("stock.group_stock_manager")
+        cls.grp_stock_user = cls.env.ref("stock.group_stock_user")
+        cls.location = cls.env.ref("stock.warehouse0").lot_stock_id
 
-        self.manager = self.res_users_model.create(
+        cls.manager = cls.res_users_model.create(
             {
                 "name": "Test Stock Manager",
                 "login": "manager_1",
                 "email": "example@yourcompany.com",
-                "company_id": self.company.id,
-                "company_ids": [(4, self.company.id)],
-                "groups_id": [(6, 0, [self.grp_stock_manager.id])],
+                "company_id": cls.company.id,
+                "company_ids": [Command.link(cls.company.id)],
+                "groups_id": [Command.set(cls.grp_stock_manager.ids)],
             }
         )
-        self.user = self.res_users_model.create(
+        cls.user = cls.res_users_model.create(
             {
                 "name": "Test Stock User",
                 "login": "user_1",
                 "email": "example@yourcompany.com",
-                "company_id": self.company.id,
-                "company_ids": [(4, self.company.id)],
-                "groups_id": [(6, 0, [self.grp_stock_user.id])],
+                "company_id": cls.company.id,
+                "company_ids": [Command.link(cls.company.id)],
+                "groups_id": [Command.set(cls.grp_stock_user.ids)],
             }
         )
-        self.user_2 = self.res_users_model.create(
+        cls.user_2 = cls.res_users_model.create(
             {
                 "name": "Test Stock User 2",
                 "login": "user_2",
                 "email": "example@yourcompany.com",
-                "company_id": self.company.id,
-                "company_ids": [(4, self.company.id)],
-                "groups_id": [(6, 0, [self.grp_stock_user.id])],
+                "company_id": cls.company.id,
+                "company_ids": [Command.link(cls.company.id)],
+                "groups_id": [Command.set(cls.grp_stock_user.ids)],
             }
         )
 
     def test_inventory_user(self):
-        inventory = self.inventory_model.with_user(self.manager).create({})
-        self.assertTrue(inventory)
-        inventory.write({"user_id": self.user})
-        self.assertEqual(inventory.user_id, self.user)
-        inventory.with_user(self.user).write(
-            {"location_ids": [(6, 0, self.location.ids)]}
-        )
-        self.env["stock.inventory.line"].with_user(self.user).create(
+        inventory = self.inventory_model.with_user(self.manager).create(
             {
-                "inventory_id": inventory.id,
-                "product_id": self.env.ref("stock.product_cable_management_box").id,
-                "location_id": self.location.id,
+                "responsible_id": self.user.id,
+                "location_ids": [Command.set(self.location.ids)],
             }
         )
-        self.assertEqual(inventory.location_ids, self.location)
+        # Assigned user can update its inventory
+        inventory.with_user(self.user).write(
+            {"location_ids": [Command.set(self.location.ids)]}
+        )
+        # Other users cannot
         with self.assertRaises(AccessError):
-            inventory.with_user(self.user_2).write({"location_ids": [(5, 0)]})
+            inventory.with_user(self.user_2).write({"location_ids": [Command.clear()]})
+        # Start inventory and check quants access
+        inventory.action_state_to_in_progress()
+        self.assertTrue(inventory.stock_quant_ids)
+        quant = fields.first(inventory.stock_quant_ids)
+        self.assertEqual(quant.user_id, self.user)
+        # Users cannot modify inventoried quants of other users
         with self.assertRaises(AccessError):
-            self.env["stock.inventory.line"].with_user(self.user_2).create(
-                {
-                    "inventory_id": inventory.id,
-                    "product_id": self.env.ref("stock.product_cable_management_box").id,
-                    "location_id": self.location.id,
-                }
-            )
+            quant.with_user(self.user_2).action_set_inventory_quantity()
+        # Working with the expected user
+        quant.with_user(self.user).action_set_inventory_quantity()
+        quant.action_clear_inventory_quantity()
+        # Working with the stock manager too
+        quant.with_user(self.manager).action_set_inventory_quantity()
