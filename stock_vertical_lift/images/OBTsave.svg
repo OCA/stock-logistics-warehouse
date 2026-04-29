@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="246" height="144">
+    <svg id="barcodeSVG" role="img" aria-label="Barcode preview" width="244px" height="142px"
+        x="0px" y="0px" viewBox="0 0 244 142" xmlns="http://www.w3.org/2000/svg" version="1.1"
+        style="transform: translate(0,0)">
+        <rect x="0" y="0" width="244" height="142" style="fill:#ffffff;" />
+        <g transform="translate(10, 10)" style="fill:#000000;">
+            <rect x="0" y="0" width="4" height="100" />
+            <rect x="6" y="0" width="2" height="100" />
+            <rect x="12" y="0" width="2" height="100" />
+            <rect x="22" y="0" width="2" height="100" />
+            <rect x="30" y="0" width="6" height="100" />
+            <rect x="38" y="0" width="4" height="100" />
+            <rect x="44" y="0" width="2" height="100" />
+            <rect x="52" y="0" width="2" height="100" />
+            <rect x="56" y="0" width="4" height="100" />
+            <rect x="66" y="0" width="4" height="100" />
+            <rect x="72" y="0" width="6" height="100" />
+            <rect x="84" y="0" width="2" height="100" />
+            <rect x="88" y="0" width="2" height="100" />
+            <rect x="92" y="0" width="8" height="100" />
+            <rect x="104" y="0" width="2" height="100" />
+            <rect x="110" y="0" width="2" height="100" />
+            <rect x="116" y="0" width="2" height="100" />
+            <rect x="120" y="0" width="4" height="100" />
+            <rect x="132" y="0" width="8" height="100" />
+            <rect x="142" y="0" width="2" height="100" />
+            <rect x="148" y="0" width="2" height="100" />
+            <rect x="154" y="0" width="2" height="100" />
+            <rect x="158" y="0" width="4" height="100" />
+            <rect x="166" y="0" width="2" height="100" />
+            <rect x="176" y="0" width="2" height="100" />
+            <rect x="186" y="0" width="4" height="100" />
+            <rect x="194" y="0" width="2" height="100" />
+            <rect x="198" y="0" width="4" height="100" />
+            <rect x="208" y="0" width="6" height="100" />
+            <rect x="216" y="0" width="2" height="100" />
+            <rect x="220" y="0" width="4" height="100" />
+            <text style="font: 20px Roboto" text-anchor="middle" x="112" y="122">OBTsave</text>
+        </g>
+    </svg>
+</svg>
