@@ -163,6 +163,40 @@ class TestPut(VerticalLiftCase):
         self.assertEqual(self.in_move_line.quantity, qty_to_process)
 
     @mute_logger(SHUTTLE_LOGGER)
+    def test_transition_scan_source_skip_tray_type_on_cell(self):
+        """When the destination is already a tray cell, the scan_tray_type
+        step is passed automatically on source scan."""
+        operation = self._open_screen("put")
+        self.in_move_line.location_dest_id = self.location_1a_x1y1
+        self.assertTrue(self.location_1a_x1y1.cell_in_tray_type_id)
+        operation.on_barcode_scanned(self.product_socks.barcode)
+        self.assertEqual(operation.state, "save")
+        self.assertEqual(operation.current_move_line_id, self.in_move_line)
+
+    @mute_logger(SHUTTLE_LOGGER)
+    def test_transition_scan_source_skip_tray_type_on_tray(self):
+        """When the destination is a tray (not a specific cell), the
+        scan_tray_type step is also passed automatically on source scan."""
+        operation = self._open_screen("put")
+        self.in_move_line.location_dest_id = self.location_1a
+        self.assertTrue(self.location_1a.tray_type_id)
+        operation.on_barcode_scanned(self.product_socks.barcode)
+        self.assertEqual(operation.state, "save")
+        self.assertEqual(operation.current_move_line_id, self.in_move_line)
+        # an actual cell of that tray was assigned
+        self.assertIn(self.in_move_line.location_dest_id, self.location_1a.child_ids)
+
+    @mute_logger(SHUTTLE_LOGGER)
+    def test_transition_scan_source_no_skip_on_shuttle_root(self):
+        """When the destination is the shuttle root (no tray type),
+        the scan_tray_type step is not skipped."""
+        operation = self._open_screen("put")
+        # default from setUpClass: location_dest_id == shuttle root
+        self.assertEqual(self.in_move_line.location_dest_id, self.shuttle.location_id)
+        operation.on_barcode_scanned(self.product_socks.barcode)
+        self.assertEqual(operation.state, "scan_tray_type")
+
+    @mute_logger(SHUTTLE_LOGGER)
     def test_transition_button_save_and_release(self):
         operation = self._open_screen("put")
         move_line = self.in_move_line

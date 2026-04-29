@@ -62,9 +62,13 @@ class VerticalLiftOperationPut(models.Model):
 
         return tuple(updated_transitions)
 
-    def _has_storage_type_domain(self):
+    def _get_current_package(self):
         move_line = self.current_move_line_id
-        package_type = move_line.package_id.package_type_id
+        package_id = move_line.result_package_id
+        return package_id
+
+    def _has_storage_type_domain(self):
+        package = self._get_current_package()
         # When a put-away is done based on the package's type and no
         # destination is found, we can have 2 reasons:
         #
@@ -87,7 +91,7 @@ class VerticalLiftOperationPut(models.Model):
             (
                 "computed_storage_category_id.capacity_ids",
                 "in",
-                package_type.storage_category_capacity_ids.ids,
+                package.package_type_id.storage_category_capacity_ids.ids,
             ),
         ]
 
@@ -103,11 +107,12 @@ class VerticalLiftOperationPut(models.Model):
 
     def _putaway_with_storage_type(self):
         move_line = self.current_move_line_id
+        package_id = self._get_current_package()
         # Trigger the put-away application to place it somewhere inside
         # the current shuttle's location.
         new_destination = move_line.location_dest_id._get_package_type_putaway_strategy(
             self.location_id,
-            move_line.package_id,
+            package_id,
             move_line.product_id,
             move_line.quantity,
         )
@@ -121,13 +126,12 @@ class VerticalLiftOperationPut(models.Model):
         return False
 
     def _put_away_with_storage_type_failed(self):
-        move_line = self.current_move_line_id
-        package_type = move_line.package_id.package_type_id
+        package_id = self._get_current_package()
         self.env.user.notify_warning(
             self.env._(
                 "No free space found for package type '%(package_type)s' "
                 "in shuttle '%(name)s'",
-                package_type=package_type.name,
+                package_type=package_id.package_type_id.name,
                 name=self.name,
             ),
             params=self._get_user_notification_params(),

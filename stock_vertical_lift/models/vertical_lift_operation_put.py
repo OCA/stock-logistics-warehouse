@@ -29,7 +29,12 @@ class VerticalLiftOperationPut(models.Model):
                 # (by on_barcode_scanner)
                 lambda self: self.current_move_line_id,
             ),
-            self.Transition("scan_tray_type", "save"),
+            self.Transition(
+                "scan_tray_type",
+                "save",
+                lambda self: self._skip_scan_tray_type(),
+                direct_eval=True,
+            ),
             self.Transition("save", "release", lambda self: self.process_current()),
             self.Transition(
                 "release", "scan_source", lambda self: self.clear_current_move_line()
@@ -65,26 +70,58 @@ class VerticalLiftOperationPut(models.Model):
 
     def _scan_source_action(self, barcode):
         line = self._find_move_line(barcode)
-        if line:
-            self.current_move_line_id = line
-            self.next_step()
-        else:
+        if not line:
             self.env.user.notify_warning(
                 self.env._(
                     "No move line found for barcode %(barcode)s", barcode=barcode
                 ),
                 params=self._get_user_notification_params(),
             )
+            return
+        self.current_move_line_id = line
+        self.next_step()
+
+    def _skip_scan_tray_type(self):
+        if self.state != "scan_tray_type":
+            return False
+        dest = self.location_dest_id
+        is_shuttle_sublocation = (
+            self.env["stock.location"].search_count(
+                [
+                    ("id", "=", dest.id),
+                    ("id", "child_of", self.shuttle_id.location_id.id),
+                ],
+                limit=1,
+            )
+            > 0
+        )
+        if not is_shuttle_sublocation:
+            return False
+        tray_type = dest.tray_type_id or dest.cell_in_tray_type_id
+        if not tray_type:
+            return False
+        if not self._apply_tray_type(tray_type, notify=False):
+            return False
+        return True
 
     def _scan_tray_type_action(self, barcode):
         tray_type = self._find_tray_type(barcode)
-        if tray_type:
-            if self._assign_available_cell(tray_type):
-                self.fetch_tray()
-                if self.step() == "scan_tray_type":
-                    # when we are in "save" step, stay here
-                    self.next_step()
-            else:
+        if not tray_type:
+            self.env.user.notify_warning(
+                self.env._(
+                    "No tray type found for barcode %(barcode)s", barcode=barcode
+                ),
+                params=self._get_user_notification_params(),
+            )
+            return
+        self._apply_tray_type(tray_type)
+        if self.step() == "scan_tray_type":
+            # when we are in "save" step, stay here
+            self.next_step()
+
+    def _apply_tray_type(self, tray_type, notify=True):
+        if not self._assign_available_cell(tray_type):
+            if notify:
                 self.env.user.notify_warning(
                     self.env._(
                         "No free space for tray type %(name)s in this shuttle.",
@@ -92,13 +129,9 @@ class VerticalLiftOperationPut(models.Model):
                     ),
                     params=self._get_user_notification_params(),
                 )
-        else:
-            self.env.user.notify_warning(
-                self.env._(
-                    "No tray type found for barcode %(barcode)s", barcode=barcode
-                ),
-                params=self._get_user_notification_params(),
-            )
+            return False
+        self.fetch_tray()
+        return True
 
     def _find_tray_type(self, barcode):
         return self.env["stock.location.tray.type"].search(
