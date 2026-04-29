@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="lot_view_kanban_catalog" model="ir.ui.view">
+        <field name="name">lot.view.kanban.catalog</field>
+        <field name="model">stock.lot</field>
+        <field name="arch" type="xml">
+            <kanban records_draggable="0" js_class="stock_lot_kanban_catalog">
+                <field name="id" />
+                <templates>
+                    <t t-name="card" class="p-0">
+                        <div class="d-flex flex-grow-1 m-2">
+                            <div
+                                class="p-2 pt-1 d-flex flex-column m-0 overflow-hidden"
+                                t-attf-id="lot-{{record.id.raw_value}}"
+                            >
+                                <div class="d-flex">
+                                    <field
+                                        name="name"
+                                        class="fw-bolder fs-4 text-reset mb-1"
+                                    />
+                                </div>
+                                <div name="o_kanban_ref" t-if="record.ref.value">
+                                    [<field name="ref" />]
+                                </div>
+                                <div name="o_kanban_product_id">
+                                    <field name="product_id" />
+                                </div>
+                                <div
+                                    name="o_kanban_price"
+                                    t-attf-id="lot-{{record.id.raw_value}}-price"
+                                />
+                                <field
+                                    name="product_template_attribute_value_ids"
+                                    widget="many2many_tags"
+                                    domain="[('id', 'in', parent.ids)]"
+                                    groups="product.group_product_variant"
+                                    options="{'color_field': 'color'}"
+                                />
+                            </div>
+                            <field
+                                name="product_image_128"
+                                class="ms-auto"
+                                invisible="not product_image_128"
+                                widget="image"
+                                options="{'size': [55, 55], 'img_class': 'object-fit-contain'}"
+                                alt="Lot"
+                            />
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+    <record id="lot_view_search_catalog" model="ir.ui.view">
+        <field name="name">lot.view.search.catalog</field>
+        <field name="model">stock.lot</field>
+        <field name="arch" type="xml">
+            <search string="Lot">
+                <field
+                    name="name"
+                    string="Lot"
+                    filter_domain="['|', ('name', 'ilike', self), ('ref', 'ilike', self)]"
+                />
+                <field
+                    name="location_id"
+                    filter_domain="[('location_id', 'child_of', raw_value)]"
+                />
+                <field
+                    name="product_id"
+                    string="Product"
+                    filter_domain="['|', '|', ('product_id.default_code', 'ilike', self), ('product_id.name', 'ilike', self), ('product_id.barcode', 'ilike', self)]"
+                />
+                <group expand="1" string="Group By">
+                    <filter
+                        string="Product"
+                        name="group_by_product_id"
+                        context="{'group_by':'product_id'}"
+                    />
+                </group>
+                <searchpanel>
+                    <field name="location_id" string="Location" icon="fa-th-list" />
+                    <field
+                        name="product_template_attribute_value_ids"
+                        string="Attributes"
+                        icon="fa-th-list"
+                        domain="[('ptav_active', '=', True), ('product_tmpl_id.active', '=', True)]"
+                        enable_counters="1"
+                        select="multi"
+                    />
+                </searchpanel>
+            </search>
+        </field>
+    </record>
+</odoo>
