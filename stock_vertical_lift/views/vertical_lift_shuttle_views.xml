@@ -12,18 +12,21 @@
                             name="switch_pick"
                             type="object"
                             string="Pick"
+                            barcode_trigger="switch-pick"
                             class="btn-primary btn btn-lg"
                         />
                         <button
                             name="switch_put"
                             type="object"
                             string="Put"
+                            barcode_trigger="switch-put"
                             class="btn-primary btn btn-lg"
                         />
                         <button
                             name="switch_inventory"
                             type="object"
                             string="Inventory"
+                            barcode_trigger="switch-inventory"
                             class="btn-primary btn btn-lg"
                         />
                     </div>

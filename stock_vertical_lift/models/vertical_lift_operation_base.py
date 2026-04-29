@@ -281,6 +281,15 @@ class VerticalLiftOperationBase(models.AbstractModel):
 
     def action_manual_barcode(self):
         return self.shuttle_id.action_manual_barcode()
+    
+    def switch_pick(self):
+        return self.shuttle_id.switch_pick()
+
+    def switch_put(self):
+        return self.shuttle_id.switch_put()
+
+    def switch_inventory(self):
+        return self.shuttle_id.switch_inventory()
 
     def process_current(self):
         """Process the action (pick, put, ...)

@@ -1,8 +1,37 @@
+import {BarcodeHandlerField} from "@barcodes/barcode_handler_field";
 import {FormController} from "@web/views/form/form_controller";
 import {KanbanController} from "@web/views/kanban/kanban_controller";
 import {onWillUnmount} from "@odoo/owl";
 import {patch} from "@web/core/utils/patch";
 import {useService} from "@web/core/utils/hooks";
+
+const SWITCH_BARCODE_METHODS = {
+    "OBTswitch-pick": "switch_pick",
+    "OBTswitch-put": "switch_put",
+    "OBTswitch-inventory": "switch_inventory",
+};
+
+// Intercept OBTswitch-* barcodes on vertical lift operation forms before the
+// standard barcode_handler forwards them to the model's on_barcode_scanned
+// (which would emit "No location found for barcode ...").
+patch(BarcodeHandlerField.prototype, {
+    setup() {
+        super.setup();
+        this.ormService = useService("orm");
+        this.actionService = useService("action");
+    },
+    async onBarcodeScanned(event) {
+        const method = SWITCH_BARCODE_METHODS[event.detail.barcode];
+        if (!method) {
+            return super.onBarcodeScanned(event);
+        }
+        const {resModel, resId} = this.props.record;
+        const action = await this.ormService.call(resModel, method, [resId]);
+        if (action) {
+            this.actionService.doAction(action);
+        }
+    },
+});
 
 patch(KanbanController.prototype, {
     async openRecord(record, mode) {
