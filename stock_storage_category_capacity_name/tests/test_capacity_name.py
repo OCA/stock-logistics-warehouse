@@ -1,10 +1,13 @@
 # Copyright 2023 ACSONE SA/NV
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo.tests.common import TransactionCase
+from odoo.tests import tagged
+
+from odoo.addons.base.tests.common import BaseCommon
 
 
-class TestStockStorageCategoryCapacity(TransactionCase):
+@tagged("post_install", "-at_install")
+class TestStockStorageCategoryCapacity(BaseCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
