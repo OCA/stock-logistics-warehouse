@@ -19,6 +19,7 @@
                         </h1>
                     </div>
                     <group>
+                        <field name="color" widget="color_picker" />
                         <field name="required_note" />
                     </group>
                     <group name="group_description">
@@ -36,6 +37,7 @@
                 <field name="sequence" widget="handle" />
                 <field name="name" />
                 <field name="description" optional="hide" />
+                <field name="color" widget="color_picker" />
             </list>
         </field>
     </record>
