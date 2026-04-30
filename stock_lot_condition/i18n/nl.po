@@ -38,6 +38,11 @@ msgid "As new"
 msgstr "Als nieuw"
 
 #. module: stock_lot_condition
+#: model:ir.model.fields,field_description:stock_lot_condition.field_stock_lot_condition__color
+msgid "Color"
+msgstr ""
+
+#. module: stock_lot_condition
 #: model:ir.model.fields,field_description:stock_lot_condition.field_stock_lot__condition_id
 #: model_terms:ir.ui.view,arch_db:stock_lot_condition.search_product_lot_filter
 msgid "Condition"

@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 {
     "name": "Stock Lot Condition",
-    "version": "18.0.1.0.0",
+    "version": "18.0.1.1.0",
     "category": "Stock",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "author": "Tecnativa, Odoo Community Association (OCA)",
