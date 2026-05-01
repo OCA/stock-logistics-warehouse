@@ -21,7 +21,8 @@ patch(BarcodeHandlerField.prototype, {
         this.actionService = useService("action");
     },
     async onBarcodeScanned(event) {
-        const method = SWITCH_BARCODE_METHODS[event.detail.barcode];
+        const barcode = event.detail.barcode;
+        const method = SWITCH_BARCODE_METHODS[barcode];
         if (!method) {
             return super.onBarcodeScanned(event);
         }

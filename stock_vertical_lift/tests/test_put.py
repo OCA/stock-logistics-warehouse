@@ -228,6 +228,15 @@ class TestPut(VerticalLiftCase):
         self.assertEqual(operation.state, "scan_source")
         self.assertFalse(operation.current_move_line_id)
 
+    @mute_logger(SHUTTLE_LOGGER)
+    def test_on_barcode_scanned_ignores_odoo_special_barcodes(self):
+        operation = self._open_screen("put")
+        special_barcodes = ("OBTsave", "OBTswitch-pick")
+        for barcode in special_barcodes:
+            operation.on_barcode_scanned(barcode)
+            self.assertEqual(operation.state, "scan_source")
+            self.assertFalse(operation.current_move_line_id)
+
     @mute_logger(SHUTTLE_LOGGER, "odoo.models.unlink")
     def test_put_package_with_multiple_move_lines(self):
         """Check moving a package linked to multiple move lines.

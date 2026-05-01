@@ -70,6 +70,9 @@ class VerticalLiftOperationPut(models.Model):
 
     def on_barcode_scanned(self, barcode):
         self.ensure_one()
+        # Ignore prefixed reserved by Odoo's barcode module
+        if self.is_action_barcode(barcode):
+            return
         if self.step() == "scan_source":
             self._scan_source_action(barcode)
         elif self.step() in ("scan_tray_type", "save"):

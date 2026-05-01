@@ -432,6 +432,10 @@ class VerticalLiftOperationTransfer(models.AbstractModel):
     )
     # TODO add a glue addon with product_expiry to add the field
 
+    def is_action_barcode(self, barcode):
+        """Detect if the barcode is a button or command barcode"""
+        return barcode.startswith(("OBT", "OCD"))
+
     def on_barcode_scanned(self, barcode):
         self.ensure_one()
         self.env.user.notify_info(

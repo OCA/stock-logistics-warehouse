@@ -53,6 +53,9 @@ class VerticalLiftOperationPick(models.Model):
 
     def on_barcode_scanned(self, barcode):
         self.ensure_one()
+        # Ignore prefixed reserved by Odoo's barcode module
+        if self.is_action_barcode(barcode):
+            return
         if not self.current_move_line_id or self.current_move_line_id.state == "done":
             return
         if self.step() == "scan_destination":
