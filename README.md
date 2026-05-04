@@ -1,4 +1,7 @@
 
+[![Support the OCA](https://odoo-community.org/readme-banner-image)](https://odoo-community.org/get-involved?utm_source=repo-readme)
+
+# stock-logistics-warehouse
 [![Runboat](https://img.shields.io/badge/runboat-Try%20me-875A7B.png)](https://runboat.odoo-community.org/builds?repo=OCA/stock-logistics-warehouse&target_branch=15.0)
 [![Pre-commit Status](https://github.com/OCA/stock-logistics-warehouse/actions/workflows/pre-commit.yml/badge.svg?branch=15.0)](https://github.com/OCA/stock-logistics-warehouse/actions/workflows/pre-commit.yml?query=branch%3A15.0)
 [![Build Status](https://github.com/OCA/stock-logistics-warehouse/actions/workflows/test.yml/badge.svg?branch=15.0)](https://github.com/OCA/stock-logistics-warehouse/actions/workflows/test.yml?query=branch%3A15.0)
@@ -7,9 +10,15 @@
 
 <!-- /!\ do not modify above this line -->
 
+<<<<<<< before updating
 # stock-logistics-warehouse
 
 This project aim to deal with modules related to the management of warehouses. You'll find modules that:
+=======
+This project aim to deal with modules related to the management of warehouses. Youll find modules that:\n - Ease inventory by adding various possibilities - Move all product from one location to another - Manage the product catalog (merge them,..)
+Please dont hesitate to suggest one of your module to this project. Also, you may want to have a look on those other projects here:
+- https://github.com/OCA/stock-logistics-tracking - https://github.com/OCA/stock-logistics-barcode - https://github.com/OCA/stock-logistics-workflow
+>>>>>>> after updating
 
 <!-- /!\ do not modify below this line -->
 
