@@ -6,7 +6,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-def pre_init_hook(env):
+def pre_init_hook(cr):
     """
     The objective of this hook is to speed up the installation
     of the module on an existing Odoo instance.
@@ -14,8 +14,8 @@ def pre_init_hook(env):
     Without this script, big databases can take a long time to install this
     module.
     """
-    set_stock_location_removal_priority_default(env.cr)
-    set_stock_quant_removal_priority_default(env.cr)
+    set_stock_location_removal_priority_default(cr)
+    set_stock_quant_removal_priority_default(cr)
 
 
 def set_stock_location_removal_priority_default(cr):

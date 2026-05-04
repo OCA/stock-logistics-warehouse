@@ -94,7 +94,7 @@ class TestStockRemovalLocationByPriority(TransactionCase):
                 "picking_type_id": picking_type.id,
                 "location_id": location.id,
                 "location_dest_id": location_dest.id,
-                "move_ids": [
+                "move_lines": [
                     Command.create(
                         {
                             "name": "Test move",
@@ -125,7 +125,7 @@ class TestStockRemovalLocationByPriority(TransactionCase):
         picking_1 = self._create_picking(
             self.picking_internal, self.stock, self.stock_2, 5
         )
-        picking_1.flush_model()
+        picking_1.flush()
         picking_1.action_confirm()
         picking_1.action_assign()
 
@@ -150,7 +150,7 @@ class TestStockRemovalLocationByPriority(TransactionCase):
         picking_1 = self._create_picking(
             self.picking_internal, self.stock, self.stock_2, 5
         )
-        picking_1.flush_model()
+        picking_1.flush()
         picking_1.action_confirm()
         picking_1.action_assign()
 
