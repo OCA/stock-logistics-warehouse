@@ -11,7 +11,7 @@
                 <setting id="group_removal_priority" string="Removal Priority">
                     <field name="group_removal_priority" />
                     <div class="text-muted"> Use <i
-                        >Removal Priority</i> in Locations </div>
+                    >Removal Priority</i> in Locations </div>
                 </setting>
             </xpath>
         </field>
