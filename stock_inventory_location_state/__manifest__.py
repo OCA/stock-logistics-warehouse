@@ -2,17 +2,18 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 {
     "name": "Stock Inventory Location State",
-    "summary": "Add list of all inventory sub locations to verify all locations are counted.",
-    "version": "14.0.1.0.1",
-    "development_status": "Mature",
+    "summary": "Verify that all locations are counted.",
+    "version": "18.0.1.0.0",
+    "development_status": "Beta",
     "author": "Akretion, Odoo Community Association (OCA)",
     "maintainers": ["bguillot"],
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "category": "Warehouse",
-    "depends": ["stock"],
+    "depends": ["stock_inventory"],
     "data": [
-        "views/stock_inventory.xml",
         "security/ir.model.access.csv",
+        "views/stock_inventory.xml",
+        "views/stock_inventory_location.xml",
     ],
     "license": "AGPL-3",
     "installable": True,

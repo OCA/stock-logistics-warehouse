@@ -10,9 +10,9 @@ Stock Inventory Location State
    !! source digest: sha256:2c0e9300259266b71b80e74385fb9140b870cb572d4b93302b3bf995dd4ddec9
    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-.. |badge1| image:: https://img.shields.io/badge/maturity-Mature-brightgreen.png
+.. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
-    :alt: Mature
+    :alt: Beta
 .. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
@@ -59,11 +59,7 @@ Contributors
 ------------
 
 - Benoît GUILLOT <benoit.guillot@akretion.com>
-
-Other credits
--------------
-
-
+- Sébastien Alix <sebastien.alix@akretion.com>
 
 Maintainers
 -----------
