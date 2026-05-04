@@ -1,1 +1,0 @@
-from . import vertical_lift_shuttle_manual_barcode

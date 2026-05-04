@@ -43,28 +43,6 @@
             </form>
         </field>
     </record>
-    <record id="vertical_lift_shuttle_manual_barcode_form" model="ir.ui.view">
-        <field name="name">vertical.lift.shuttle.manual.barcode.view.form</field>
-        <field name="model">vertical.lift.shuttle.manual.barcode</field>
-        <field name="arch" type="xml">
-            <form string="Shuttle">
-                <div class="row o_vlift_shuttle_popup">
-                    <div class="col-8">
-                        <field name="barcode" />
-                    </div>
-                    <div class="col-2">
-                        <button
-                            name="button_save"
-                            string="Confirm"
-                            type="object"
-                            class="btn-primary"
-                        />
-                    </div>
-                </div>
-                <footer />
-            </form>
-        </field>
-    </record>
     <record id="vertical_lift_shuttle_view_form" model="ir.ui.view">
         <field name="name">vertical.lift.shuttle.view.form</field>
         <field name="model">vertical.lift.shuttle</field>

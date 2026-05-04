@@ -225,11 +225,9 @@ class VerticalLiftShuttle(models.Model):
 
     def action_manual_barcode(self):
         return {
-            "type": "ir.actions.act_window",
-            "res_model": "vertical.lift.shuttle.manual.barcode",
-            "view_mode": "form",
+            "type": "ir.actions.client",
+            "tag": "vertical_lift_manual_barcode",
             "name": self.env._("Barcode"),
-            "target": "new",
         }
 
     # TODO: should the mode be changed on all the shuttles at the same time?
