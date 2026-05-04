@@ -9,7 +9,7 @@ from odoo.tests.common import TransactionCase
 @tagged("post_install", "-at_install")
 class TestStockInventoryLocationState(TransactionCase):
     def setUp(self):
-        super(TestStockInventoryLocationState, self).setUp()
+        super().setUp()
         self.location = self.env.ref("stock.warehouse0").lot_stock_id
         self.child_loc = self.env["stock.location"].search(
             [("id", "child_of", self.location.id), ("child_ids", "=", False)]

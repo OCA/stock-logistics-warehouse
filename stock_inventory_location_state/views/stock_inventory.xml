@@ -21,15 +21,15 @@
                     <div class="o_field_widget o_stat_info">
                         <span class="o_stat_value">
                             <field
-                                name="done_location_count"
-                                widget="statinfo"
-                                nolabel="1"
-                                class="mr4"
-                            /> / <field
-                                name="location_count"
-                                widget="statinfo"
-                                nolabel="1"
-                            />
+                            name="done_location_count"
+                            widget="statinfo"
+                            nolabel="1"
+                            class="mr4"
+                        /> / <field
+                            name="location_count"
+                            widget="statinfo"
+                            nolabel="1"
+                        />
                         </span>
                         <span class="o_stat_text">Locations</span>
                     </div>
@@ -111,5 +111,4 @@
             </tree>
         </field>
     </record>
-
 </odoo>
