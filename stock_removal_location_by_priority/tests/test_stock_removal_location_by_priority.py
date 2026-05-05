@@ -65,7 +65,7 @@ class TestStockRemovalLocationByPriority(TransactionCase):
 
         # Create a product:
         self.product_1 = self.product_model.create(
-            {"name": "Test Product 1", "type": "product"}
+            {"name": "Test Product 1", "type": "consu", "is_storable": True}
         )
 
         # Create quants:
