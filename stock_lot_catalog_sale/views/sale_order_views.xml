@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_order_form" model="ir.ui.view">
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form" />
+        <field name="arch" type="xml">
+            <control position="inside">
+                <button
+                    name="action_add_from_stock_lot_catalog"
+                    context="{'order_id': parent.id}"
+                    string="Lots"
+                    type="object"
+                    class="btn-link"
+                />
+            </control>
+        </field>
+    </record>
+</odoo>
