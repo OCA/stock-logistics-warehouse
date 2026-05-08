@@ -10,6 +10,7 @@ msgstr ""
 "PO-Revision-Date: 2025-11-04 15:17+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -35,6 +36,11 @@ msgstr "Archivado"
 #: model:stock.lot.condition,name:stock_lot_condition.condition_as_new
 msgid "As new"
 msgstr "Como nuevo"
+
+#. module: stock_lot_condition
+#: model:ir.model.fields,field_description:stock_lot_condition.field_stock_lot_condition__color
+msgid "Color"
+msgstr ""
 
 #. module: stock_lot_condition
 #: model:ir.model.fields,field_description:stock_lot_condition.field_stock_lot__condition_id
@@ -153,7 +159,8 @@ msgstr ""
 msgid ""
 "The item is intact and works perfectly, but the packaging may be damaged."
 msgstr ""
-"El artículo está intacto y funciona perfectamente, el embalaje puede estar dañado."
+"El artículo está intacto y funciona perfectamente, el embalaje puede estar "
+"dañado."
 
 #. module: stock_lot_condition
 #: model:stock.lot.condition,name:stock_lot_condition.condition_very_good
