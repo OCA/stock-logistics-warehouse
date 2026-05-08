@@ -3,7 +3,7 @@
 
 {
     "name": "Stock Lot Catalog Condition",
-    "version": "18.0.1.0.0",
+    "version": "18.0.1.1.0",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "author": "Tecnativa, Odoo Community Association (OCA)",
     "category": "Warehouse",
