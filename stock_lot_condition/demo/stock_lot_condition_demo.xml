@@ -2,6 +2,7 @@
 <odoo noupdate="1">
     <record id="condition_as_new" model="stock.lot.condition">
         <field name="name">As new</field>
+        <field name="color" eval="2" />
         <field
             name="description"
         >The item is intact and works perfectly, but the packaging may be damaged.</field>
@@ -9,11 +10,13 @@
     </record>
     <record id="condition_very_good" model="stock.lot.condition">
         <field name="name">Very good</field>
+        <field name="color" eval="3" />
         <field name="description">Minimal use, with minor cosmetic signs.</field>
         <field name="sequence">20</field>
     </record>
     <record id="condition_good" model="stock.lot.condition">
         <field name="name">Good</field>
+        <field name="color" eval="4" />
         <field
             name="description"
         >Works perfectly, but with visible wear from normal use.</field>
@@ -21,6 +24,7 @@
     </record>
     <record id="condition_acceptable" model="stock.lot.condition">
         <field name="name">Acceptable</field>
+        <field name="color" eval="5" />
         <field
             name="description"
         >May have cosmetic imperfections, scratches, dents, etc., but is still functional.</field>
