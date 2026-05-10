@@ -7,27 +7,28 @@ msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-01-16 09:20+0000\n"
-"PO-Revision-Date: 2025-03-10 19:26+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"PO-Revision-Date: 2026-05-10 18:15+0000\n"
+"Last-Translator: Ed-Spain <eduamoros@gmail.com>\n"
 "Language-Team: \n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.10.2\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: stock_quant_cost_info
 #: model:ir.model.fields,help:stock_quant_cost_info.field_stock_quant__adjustment_cost
 msgid "(Real Quantity - Theoretical Quantity) multiplied by the Product Cost"
 msgstr ""
+"(Cantidad real - Cantidad teórica) multiplicado por el costo del producto"
 
 #. module: stock_quant_cost_info
 #: model:ir.model.fields,field_description:stock_quant_cost_info.field_stock_quant__adjustment_cost
 #: model_terms:ir.ui.view,arch_db:stock_quant_cost_info.report_inventory_cost_info
 #: model_terms:ir.ui.view,arch_db:stock_quant_cost_info.view_stock_quant_tree_inventory_editable
 msgid "Adjustment Cost"
-msgstr ""
+msgstr "Costo de ajuste"
 
 #. module: stock_quant_cost_info
 #: model:ir.model.fields,field_description:stock_quant_cost_info.field_stock_quant__currency_id
