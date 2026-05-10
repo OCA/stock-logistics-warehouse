@@ -9,15 +9,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-11-30 03:53+0000\n"
-"PO-Revision-Date: 2023-07-26 22:10+0000\n"
-"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
+"PO-Revision-Date: 2026-05-10 18:15+0000\n"
+"Last-Translator: Ed-Spain <eduamoros@gmail.com>\n"
 "Language-Team: Spanish (https://www.transifex.com/oca/teams/23907/es/)\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.17\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: stock_inventory_discrepancy
 #: model_terms:ir.ui.view,arch_db:stock_inventory_discrepancy.confirm_discrepancy_wizard
@@ -32,6 +32,8 @@ msgid ""
 "Block validation of the inventory adjustment if discrepancy exceeds the "
 "threshold."
 msgstr ""
+"Bloquear la validación del ajuste de inventario si la discrepancia supera el "
+"umbral."
 
 #. module: stock_inventory_discrepancy
 #: model_terms:ir.ui.view,arch_db:stock_inventory_discrepancy.confirm_discrepancy_wizard
@@ -41,12 +43,12 @@ msgstr "Cancelar"
 #. module: stock_inventory_discrepancy
 #: model:ir.model,name:stock_inventory_discrepancy.model_res_company
 msgid "Companies"
-msgstr ""
+msgstr "Empresas"
 
 #. module: stock_inventory_discrepancy
 #: model:ir.model,name:stock_inventory_discrepancy.model_res_config_settings
 msgid "Config Settings"
-msgstr ""
+msgstr "Ajustes de configuración"
 
 #. module: stock_inventory_discrepancy
 #: model:ir.model,name:stock_inventory_discrepancy.model_confirm_discrepancy_wiz
@@ -101,13 +103,13 @@ msgstr "ID (identificación)"
 #. module: stock_inventory_discrepancy
 #: model_terms:ir.ui.view,arch_db:stock_inventory_discrepancy.view_location_form
 msgid "Inventory Discrepancy"
-msgstr ""
+msgstr "Discrepancia de inventario"
 
 #. module: stock_inventory_discrepancy
 #: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_res_company__inventory_discrepancy_enable
 #: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_res_config_settings__inventory_discrepancy_enable
 msgid "Inventory Discrepancy Control"
-msgstr ""
+msgstr "Control de discrepancia de inventario"
 
 #. module: stock_inventory_discrepancy
 #: model:ir.model,name:stock_inventory_discrepancy.model_stock_location
@@ -161,7 +163,7 @@ msgstr "Sólo un gestor de existencias puede validar un ajuste de inventario."
 #. module: stock_inventory_discrepancy
 #: model_terms:ir.ui.view,arch_db:stock_inventory_discrepancy.quant_search_last_has_over_discrepancy
 msgid "Over Discrepancy"
-msgstr ""
+msgstr "Discrepancia excesiva"
 
 #. module: stock_inventory_discrepancy
 #: model:ir.model.fields,help:stock_inventory_discrepancy.field_stock_location__propagate_discrepancy_threshold
@@ -199,7 +201,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/stock_inventory_discrepancy/models/stock_quant.py:0
 msgid "This operator is not supported"
-msgstr ""
+msgstr "Este operador no está soportado"
 
 #. module: stock_inventory_discrepancy
 #: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_stock_quant__discrepancy_threshold
@@ -220,7 +222,7 @@ msgstr "Validar Ajustes de Inventario umbral superado"
 #. odoo-python
 #: code:addons/stock_inventory_discrepancy/models/stock_quant.py:0
 msgid "Value should be True or False (not %s)"
-msgstr ""
+msgstr "El valor debe ser True o False (no %s)"
 
 #. module: stock_inventory_discrepancy
 #: model:ir.model,name:stock_inventory_discrepancy.model_stock_warehouse
