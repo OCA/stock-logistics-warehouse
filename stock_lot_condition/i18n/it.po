@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-11-14 16:48+0000\n"
+"PO-Revision-Date: 2026-05-12 08:45+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.10.4\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: stock_lot_condition
 #: model:stock.lot.condition,name:stock_lot_condition.condition_acceptable
@@ -40,7 +40,7 @@ msgstr "Come nuovo"
 #. module: stock_lot_condition
 #: model:ir.model.fields,field_description:stock_lot_condition.field_stock_lot_condition__color
 msgid "Color"
-msgstr ""
+msgstr "Colore"
 
 #. module: stock_lot_condition
 #: model:ir.model.fields,field_description:stock_lot_condition.field_stock_lot__condition_id
