@@ -87,7 +87,7 @@ class StockLot(models.Model):
         self._set_vendor_warranty(
             start_date=line.date.date() or fields.Date.context_today(self),
             vendor=line.move_id.partner_id,
-            quantity=line.qty_done,
+            quantity=line.quantity,
         )
 
     def _reset_vendor_warranty_on_return(self, line):

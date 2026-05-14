@@ -141,7 +141,7 @@ class TestStockLotWarranty(TransactionCase):
                 "lot_id": self.lot_serial.id,
                 "location_id": self.stock_loc.id,
                 "location_dest_id": self.customer_loc.id,
-                "qty_done": 1,
+                "quantity": 1,
                 "date": date,
             }
         )
@@ -179,7 +179,7 @@ class TestStockLotWarranty(TransactionCase):
                 "lot_id": self.lot_serial.id,
                 "location_id": self.customer_loc.id,
                 "location_dest_id": self.stock_loc.id,
-                "qty_done": 1,
+                "quantity": 1,
                 "date": date,
             }
         )
@@ -214,7 +214,7 @@ class TestStockLotWarranty(TransactionCase):
                 "lot_id": self.lot_serial.id,
                 "location_id": self.supplier_loc.id,
                 "location_dest_id": self.stock_loc.id,
-                "qty_done": 1,
+                "quantity": 1,
                 "date": date,
             }
         )
@@ -252,7 +252,7 @@ class TestStockLotWarranty(TransactionCase):
                 "lot_id": self.lot_serial.id,
                 "location_id": self.stock_loc.id,
                 "location_dest_id": self.supplier_loc.id,
-                "qty_done": 1,
+                "quantity": 1,
                 "date": date,
             }
         )
@@ -287,7 +287,7 @@ class TestStockLotWarranty(TransactionCase):
                 "lot_id": self.lot_lot.id,
                 "location_id": self.stock_loc.id,
                 "location_dest_id": self.customer_loc.id,
-                "qty_done": 1,
+                "quantity": 1,
                 "date": fields.Date.context_today(self),
             }
         )
