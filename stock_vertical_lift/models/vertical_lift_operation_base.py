@@ -214,7 +214,8 @@ class VerticalLiftOperationBase(models.AbstractModel):
 
     def next_step(self, direct_eval=False):
         current_state = self.state
-        for transition in self._transitions():
+        all_transitions = self._transitions()
+        for transition in all_transitions:
             if direct_eval and not transition.direct_eval:
                 continue
             if transition.current_state != current_state:
@@ -228,11 +229,7 @@ class VerticalLiftOperationBase(models.AbstractModel):
                 self.state = transition.next_state
                 break
         # reevaluate the transitions if we have a new state with direct_eval transitions
-        if self.state != current_state and any(
-            transition.direct_eval
-            for transition in self._transitions()
-            if transition.current_state == self.state
-        ):
+        if self.state != current_state:
             self.next_step(direct_eval=True)
 
     def reset_steps(self):
