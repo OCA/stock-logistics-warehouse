@@ -17,44 +17,48 @@ class VerticalLiftOperationPut(models.Model):
 
     def _transitions(self):
         transitions = super()._transitions()
-        updated_transitions = []
-        for transition in transitions:
-            states = (transition.current_state, transition.next_state)
-            if states == ("scan_tray_type", "save"):
-                # insert new transitions just before the normal transition
-                # scanning the tray type, that will bypass it when we have
-                # a storage type
-                updated_transitions.append(
-                    self.Transition(
-                        "scan_tray_type",
-                        "save",
-                        lambda self: self._has_storage_type()
-                        and self._putaway_with_storage_type(),
-                        # this is the trick that makes the transition applies
-                        # its function and directly jumps to save
-                        direct_eval=True,
-                    )
-                )
-                updated_transitions.append(
-                    self.Transition(
-                        "scan_tray_type",
-                        "scan_source",
-                        # the transition above returned False because it could
-                        # not find a free space, in that case, abort the
-                        # put-away for this line in this shuttle
-                        lambda self: self._has_storage_type()
-                        and self._put_away_with_storage_type_failed()
-                        and self.clear_current_move_line(),
-                        # this is the trick that makes the transition applies
-                        # its function and directly jumps to save
-                        direct_eval=True,
-                    )
-                )
-                # if none of the 2 transitions above is applied (because
-                # self._has_storage_type() is False), the state remains
-                # `scan_tray_type`, for the base transition doesn't have
-                # `direct_eval=True`
-            updated_transitions.append(transition)
+        to_prepend_indexes = [
+            idx
+            for idx, transition in enumerate(transitions)
+            if (transition.current_state, transition.next_state)
+            == ("scan_tray_type", "save")
+        ]
+        if not to_prepend_indexes:
+            return transitions
+        # We only need to insert before the first one
+        idx = to_prepend_indexes[0]
+        # insert new transitions just before the normal transition
+        # scanning the tray type, that will bypass it when we have
+        # a storage type
+        updated_transitions = list(transitions)
+        updated_transitions[idx:idx] = (
+            self.Transition(
+                "scan_tray_type",
+                "save",
+                lambda self: self._has_storage_type()
+                and self._putaway_with_storage_type(),
+                # this is the trick that makes the transition applies
+                # its function and directly jumps to save
+                direct_eval=True,
+            ),
+            self.Transition(
+                "scan_tray_type",
+                "scan_source",
+                # the transition above returned False because it could
+                # not find a free space, in that case, abort the
+                # put-away for this line in this shuttle
+                lambda self: self._has_storage_type()
+                and self._put_away_with_storage_type_failed()
+                and self.clear_current_move_line(),
+                # this is the trick that makes the transition applies
+                # its function and directly jumps to save
+                direct_eval=True,
+            ),
+        )
+        # if none of the 2 transitions above is applied (because
+        # self._has_storage_type() is False), the state remains
+        # `scan_tray_type`, for the base transition doesn't have
+        # `direct_eval=True`
 
         return tuple(updated_transitions)
 
