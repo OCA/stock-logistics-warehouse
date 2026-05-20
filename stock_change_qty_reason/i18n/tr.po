@@ -9,14 +9,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-06-03 01:23+0000\n"
-"PO-Revision-Date: 2017-06-03 01:23+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"PO-Revision-Date: 2026-05-20 10:28+0000\n"
+"Last-Translator: Betül Öğmen <betulo@eska.biz>\n"
 "Language-Team: Turkish (https://www.transifex.com/oca/teams/23907/tr/)\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: stock_change_qty_reason
 #: model_terms:ir.ui.view,arch_db:stock_change_qty_reason.view_preset_reason
@@ -25,37 +26,40 @@ msgid ""
 "                                Active\n"
 "                            </span>"
 msgstr ""
+"<span class=\"o_form_label\">\n"
+"                                Aktif\n"
+"                            </span>"
 
 #. module: stock_change_qty_reason
 #: model:ir.model.fields,field_description:stock_change_qty_reason.field_stock_quant_reason__active
 msgid "Active"
-msgstr ""
+msgstr "Aktif"
 
 #. module: stock_change_qty_reason
 #: model:ir.actions.act_window,name:stock_change_qty_reason.action_change_qty_reasons_list
 #: model:ir.ui.menu,name:stock_change_qty_reason.menu_reasons
 msgid "Change Qty Reasons"
-msgstr ""
+msgstr "Miktar Değişikliği Nedenleri"
 
 #. module: stock_change_qty_reason
 #: model:ir.model,name:stock_change_qty_reason.model_res_config_settings
 msgid "Config Settings"
-msgstr ""
+msgstr "Yapılandırma Ayarları"
 
 #. module: stock_change_qty_reason
 #: model:ir.model.fields,field_description:stock_change_qty_reason.field_stock_quant_reason__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Oluşturan"
 
 #. module: stock_change_qty_reason
 #: model:ir.model.fields,field_description:stock_change_qty_reason.field_stock_quant_reason__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Oluşturulma"
 
 #. module: stock_change_qty_reason
 #: model:ir.model.fields,field_description:stock_change_qty_reason.field_stock_quant_reason__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Görünen İsim"
 
 #. module: stock_change_qty_reason
 #: model:ir.model.fields,help:stock_change_qty_reason.field_res_config_settings__group_qty_reason_preset
@@ -63,6 +67,8 @@ msgid ""
 "Enable use of predefined Reasons to manage Inventory Adjustmentsand Product "
 "Update Quantities Wizard."
 msgstr ""
+"Envanter Düzeltmelerini ve Ürün Miktar Güncelleme Sihirbazını yönetmek için "
+"önceden tanımlanmış Nedenlerin kullanımını etkinleştirin."
 
 #. module: stock_change_qty_reason
 #: model:ir.model.fields,field_description:stock_change_qty_reason.field_stock_quant_reason__id
@@ -73,50 +79,49 @@ msgstr ""
 #: model:ir.ui.menu,name:stock_change_qty_reason.menu_inventory_adjustments_config
 #: model_terms:ir.ui.view,arch_db:stock_change_qty_reason.qty_reason_preset_selection
 msgid "Inventory Adjustment"
-msgstr ""
+msgstr "Envanter Düzenlemesi"
 
 #. module: stock_change_qty_reason
 #: model:ir.model.fields,field_description:stock_change_qty_reason.field_stock_quant_reason__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Son güncelleyen"
 
 #. module: stock_change_qty_reason
 #: model:ir.model.fields,field_description:stock_change_qty_reason.field_stock_quant_reason__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Son güncelleme"
 
 #. module: stock_change_qty_reason
 #: model:res.groups,name:stock_change_qty_reason.group_qty_reason_preset
 msgid "Manage Stock Change Qty Preset Reasons"
-msgstr ""
+msgstr "Stok Değişikliği Miktar Ön Tanımlı Nedenlerini Yönet"
 
 #. module: stock_change_qty_reason
 #: model_terms:ir.ui.view,arch_db:stock_change_qty_reason.qty_reason_preset_selection
 msgid "Manage predefined change quantity reasons"
-msgstr ""
+msgstr "Önceden tanımlanmış miktar değiştirme nedenlerini yönet"
 
 #. module: stock_change_qty_reason
 #: model:ir.model.fields,field_description:stock_change_qty_reason.field_res_config_settings__group_qty_reason_preset
 msgid "Preset Change Qty Reason"
-msgstr ""
+msgstr "Ön Ayar Değişikliği: Miktar ve Nedeni"
 
 #. module: stock_change_qty_reason
 #: model:ir.model.fields,field_description:stock_change_qty_reason.field_stock_move_line__preset_reason_id
 #: model:ir.model.fields,field_description:stock_change_qty_reason.field_stock_quant__preset_reason_id
 #: model_terms:ir.ui.view,arch_db:stock_change_qty_reason.view_preset_reason
-#, fuzzy
 msgid "Preset Reason"
-msgstr "Sebep"
+msgstr "Ön Ayar Sebebi"
 
 #. module: stock_change_qty_reason
 #: model:ir.model,name:stock_change_qty_reason.model_stock_move_line
 msgid "Product Moves (Stock Move Line)"
-msgstr ""
+msgstr "Ürün Hareketleri (Stok Hareket Satırları)"
 
 #. module: stock_change_qty_reason
 #: model:ir.model,name:stock_change_qty_reason.model_stock_quant
 msgid "Quants"
-msgstr ""
+msgstr "Miktarlar"
 
 #. module: stock_change_qty_reason
 #: model:ir.model.fields,field_description:stock_change_qty_reason.field_stock_move_line__reason
@@ -129,26 +134,25 @@ msgstr "Sebep"
 #. module: stock_change_qty_reason
 #: model:ir.model.fields,field_description:stock_change_qty_reason.field_stock_quant_reason__description
 msgid "Reason Description"
-msgstr ""
+msgstr "Sebep Açıklaması"
 
 #. module: stock_change_qty_reason
 #: model:ir.model.fields,field_description:stock_change_qty_reason.field_stock_quant_reason__name
-#, fuzzy
 msgid "Reason Name"
-msgstr "Sebep"
+msgstr "Sebep Adı"
 
 #. module: stock_change_qty_reason
 #: model:ir.model,name:stock_change_qty_reason.model_stock_quant_reason
 msgid "Stock Quant Reason"
-msgstr ""
+msgstr "Stok Miktarı Nedeni"
 
 #. module: stock_change_qty_reason
 #: model:ir.model.fields,help:stock_change_qty_reason.field_stock_move_line__reason
 #: model:ir.model.fields,help:stock_change_qty_reason.field_stock_quant__reason
 msgid "Type in a reason for the product quantity change"
-msgstr ""
+msgstr "Ürün miktar değişikliğinin nedenini girin"
 
 #. module: stock_change_qty_reason
 #: model:ir.model.constraint,message:stock_change_qty_reason.constraint_stock_quant_reason_name_unique
 msgid "You cannot have two reason with the same name."
-msgstr ""
+msgstr "Aynı isme sahip iki nedeniniz olamaz."
