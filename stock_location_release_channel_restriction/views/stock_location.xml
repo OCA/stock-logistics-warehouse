@@ -19,8 +19,21 @@
                         name="specific_release_channel_restriction"
                         class="oe_edit_only"
                     />
+                    <field name="current_release_channel_restriction_id" />
                 </group>
             </xpath>
+            <sheet position="before">
+                <div
+                    class="alert alert-warning"
+                    style="margin-bottom:0px;font-weight: bolder;text-align: center;"
+                    role="alert"
+                    attrs="{'invisible': [('current_release_channel_restriction_id', '=', False)]}"
+                >
+                                The location is restricted to <field
+                        name="current_release_channel_restriction_id"
+                    />
+                </div>
+            </sheet>
 
 
         </field>
@@ -48,7 +61,12 @@
         <field name="inherit_id" ref="stock.view_location_tree2" />
         <field name="arch" type="xml">
             <field name="storage_category_id" position="after">
-                <field name="current_release_channel_restriction_id" optional="hide" />
+                <field
+                    name="current_release_channel_restriction_id"
+                    widget="badge"
+                    decoration-warning="True"
+                    optional="hide"
+                />
             </field>
         </field>
     </record>

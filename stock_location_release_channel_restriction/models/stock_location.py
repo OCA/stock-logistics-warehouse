@@ -27,6 +27,7 @@ class StockLocation(models.Model):
 
     current_release_channel_restriction_id = fields.Many2one(
         comodel_name="stock.release.channel",
+        readonly=True,
         help="This is the current release channel that restrict this "
         "location for future incoming movements.",
     )
