@@ -85,16 +85,7 @@ class VerticalLiftOperationPut(models.Model):
         if self.state != "scan_tray_type":
             return False
         dest = self.location_dest_id
-        is_shuttle_sublocation = (
-            self.env["stock.location"].search_count(
-                [
-                    ("id", "=", dest.id),
-                    ("id", "child_of", self.shuttle_id.location_id.id),
-                ],
-                limit=1,
-            )
-            > 0
-        )
+        is_shuttle_sublocation = dest._child_of(self.shuttle_id.location_id)
         if not is_shuttle_sublocation:
             return False
         tray_type = dest.tray_type_id or dest.cell_in_tray_type_id

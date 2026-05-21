@@ -4,7 +4,7 @@ import logging
 import socket
 import ssl
 
-from odoo import fields, models
+from odoo import api, fields, models
 
 _logger = logging.getLogger(__name__)
 
@@ -40,6 +40,12 @@ class VerticalLiftShuttle(models.Model):
     )
     command_ids = fields.One2many(
         "vertical.lift.command", "shuttle_id", string="Hardware commands"
+    )
+    # TODO: move ownership here. Each operation has UNIQUE(shuttle_id),
+    # so operation's number_of_ops could be related="shuttle_id.number_of_ops".
+    number_of_ops = fields.Integer(
+        compute="_compute_number_of_ops",
+        string="Operations to Process",
     )
     _sql_constraints = [
         (
@@ -147,6 +153,63 @@ class VerticalLiftShuttle(models.Model):
         This method does nothing, override to match your communication
         protocol."""
         pass  # noqa
+
+    def _operation_for_mode_no_create(self):
+        self.ensure_one()
+        model = self._model_for_mode[self.mode]
+        return self.env[model].search(
+            [("shuttle_id", "=", self.id)], limit=1
+        ) or self.env[model].new({"shuttle_id": self.id})
+
+    @api.depends("mode", "location_id")
+    def _compute_number_of_ops(self):
+        for record in self:
+            operation = record._operation_for_mode_no_create()
+            if record.mode == "inventory":
+                record.number_of_ops = self.env["stock.quant"].search_count(
+                    operation._domain_stock_quant_to_do()
+                )
+            elif record.mode == "pick":
+                record.number_of_ops = self.env["stock.move.line"].search_count(
+                    operation._domain_move_lines_to_do()
+                )
+            elif record.mode == "put":
+                record.number_of_ops = self.env["stock.move.line"].search_count(
+                    operation._domain_move_lines_to_do_all()
+                )
+            else:
+                record.number_of_ops = 0
+
+    def action_open_operations(self):
+        self.ensure_one()
+        operation = self._operation_for_mode_no_create()
+        if self.mode == "inventory":
+            return {
+                "type": "ir.actions.act_window",
+                "name": self.env._("Quants"),
+                "res_model": "stock.quant",
+                "view_mode": "list,form",
+                "domain": operation._domain_stock_quant_to_do(),
+            }
+        if self.mode == "pick":
+            return {
+                "type": "ir.actions.act_window",
+                "name": self.env._("Move Lines"),
+                "res_model": "stock.move.line",
+                "view_mode": "list,form",
+                "domain": operation._domain_move_lines_to_do(),
+                "context": {"search_default_groupby_picking_id": 1},
+            }
+        if self.mode == "put":
+            return {
+                "type": "ir.actions.act_window",
+                "name": self.env._("Move Lines"),
+                "res_model": "stock.move.line",
+                "view_mode": "list,form",
+                "domain": operation._domain_move_lines_to_do_all(),
+                "context": {"search_default_groupby_picking_id": 1},
+            }
+        raise NotImplementedError()
 
     def _operation_for_mode(self):
         model = self._model_for_mode[self.mode]

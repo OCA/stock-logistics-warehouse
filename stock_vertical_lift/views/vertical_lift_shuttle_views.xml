@@ -78,7 +78,20 @@
                     />
                 </header>
                 <sheet>
-                    <div class="oe_button_box" name="button_box" />
+                    <div class="oe_button_box" name="button_box">
+                        <button
+                            class="oe_stat_button"
+                            type="object"
+                            name="action_open_operations"
+                            icon="fa-truck"
+                        >
+                            <field
+                                name="number_of_ops"
+                                widget="statinfo"
+                                string="Operations"
+                            />
+                        </button>
+                    </div>
                     <div class="oe_title">
                         <label class="oe_edit_only" for="name" />
                         <h1>
