@@ -24,10 +24,20 @@ class SaleOrder(models.Model):
             ),
         }
 
+    def _get_stock_lot_catalog_order_locations(self):
+        """This method retrieves the appropriate locations to use in the
+        _get_stock_lot_catalog_order_domain() method and is useful for extending
+        functionality in other modules (for example, if you do not want to use
+        warehouse_id.lot_stock_id because you want to use all of the
+        company's warehouses).
+        """
+        self.ensure_one()
+        return self.warehouse_id.lot_stock_id
+
     def _get_stock_lot_catalog_order_domain(self):
         extra_domain = [("product_id.sale_ok", "=", True)]
-        location = self.warehouse_id.lot_stock_id
-        extra_domain += [("location_id", "child_of", location.ids)]
+        locations = self._get_stock_lot_catalog_order_locations()
+        extra_domain += [("location_id", "child_of", locations.ids)]
         return extra_domain
 
     def _get_stock_lot_catalog_domain(self):
