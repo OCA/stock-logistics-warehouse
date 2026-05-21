@@ -24,10 +24,27 @@ class SaleOrder(models.Model):
             ),
         }
 
+    def _get_stock_lot_catalog_not_available_sol_domain(self):
+        self.ensure_one()
+        return [
+            ("state", "in", ("draft", "sent")),
+            ("lot_id", "!=", False),
+            ("product_uom_qty", ">", 0),
+            ("product_id.tracking", "=", "serial"),
+            ("order_id", "!=", self.id),
+        ]
+
     def _get_stock_lot_catalog_order_domain(self):
         extra_domain = [("product_id.sale_ok", "=", True)]
         location = self.warehouse_id.lot_stock_id
         extra_domain += [("location_id", "child_of", location.ids)]
+        # Exclude serials used in pending orders
+        if self.company_id.sale_order_lot_selection_exclude_pending_orders:
+            sol_model = self.env["sale.order.line"].sudo()
+            lots_to_exclude = sol_model.search(
+                self._get_stock_lot_catalog_not_available_sol_domain()
+            ).mapped("lot_id")
+            extra_domain += [("id", "not in", lots_to_exclude.ids)]
         return extra_domain
 
     def _get_stock_lot_catalog_domain(self):
