@@ -113,6 +113,9 @@ class VerticalLiftOperationBase(models.AbstractModel):
     )
     _initial_state = None  # to define in sub-classes
 
+    def action_open_operations(self):
+        raise NotImplementedError
+
     # if there is an action and it's returning True, the transition is done,
     # otherwise not
     Transition = namedtuple("Transition", "current_state next_state action direct_eval")

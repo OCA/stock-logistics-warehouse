@@ -159,6 +159,15 @@ class VerticalLiftOperationInventory(models.Model):
                 self._domain_inventory_lines_to_do_all()
             )
 
+    def action_open_operations(self):
+        return {
+            "type": "ir.actions.act_window",
+            "name": self.env._("Quants"),
+            "res_model": "stock.quant",
+            "view_mode": "list,form",
+            "domain": self._domain_stock_quant_to_do(),
+        }
+
     def _domain_stock_quant_to_do(self):
         return [
             ("location_id", "child_of", self.location_id.id),

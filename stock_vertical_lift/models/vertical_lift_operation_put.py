@@ -41,6 +41,16 @@ class VerticalLiftOperationPut(models.Model):
             ),
         )
 
+    def action_open_operations(self):
+        return {
+            "type": "ir.actions.act_window",
+            "name": self.env._("Move Lines"),
+            "res_model": "stock.move.line",
+            "view_mode": "list,form",
+            "domain": self._domain_move_lines_to_do_all(),
+            "context": {"search_default_groupby_picking_id": 1},
+        }
+
     def _domain_move_lines_to_do(self):
         domain = [
             ("state", "in", ("assigned", "partially_available")),

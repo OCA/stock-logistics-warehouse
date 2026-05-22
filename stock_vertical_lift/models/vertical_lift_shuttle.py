@@ -182,34 +182,7 @@ class VerticalLiftShuttle(models.Model):
 
     def action_open_operations(self):
         self.ensure_one()
-        operation = self._operation_for_mode_no_create()
-        if self.mode == "inventory":
-            return {
-                "type": "ir.actions.act_window",
-                "name": self.env._("Quants"),
-                "res_model": "stock.quant",
-                "view_mode": "list,form",
-                "domain": operation._domain_stock_quant_to_do(),
-            }
-        if self.mode == "pick":
-            return {
-                "type": "ir.actions.act_window",
-                "name": self.env._("Move Lines"),
-                "res_model": "stock.move.line",
-                "view_mode": "list,form",
-                "domain": operation._domain_move_lines_to_do(),
-                "context": {"search_default_groupby_picking_id": 1},
-            }
-        if self.mode == "put":
-            return {
-                "type": "ir.actions.act_window",
-                "name": self.env._("Move Lines"),
-                "res_model": "stock.move.line",
-                "view_mode": "list,form",
-                "domain": operation._domain_move_lines_to_do_all(),
-                "context": {"search_default_groupby_picking_id": 1},
-            }
-        raise NotImplementedError()
+        return self._operation_for_mode_no_create().action_open_operations()
 
     def _operation_for_mode(self):
         model = self._model_for_mode[self.mode]
