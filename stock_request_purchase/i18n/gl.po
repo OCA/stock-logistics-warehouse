@@ -6,62 +6,64 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2026-05-23 17:43+0000\n"
+"Last-Translator: Pablo Castelo <pablocv@gmx.es>\n"
 "Language-Team: none\n"
 "Language: gl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: stock_request_purchase
 #: model_terms:ir.ui.view,arch_db:stock_request_purchase.stock_request_order_form
 #: model_terms:ir.ui.view,arch_db:stock_request_purchase.view_stock_request_form
 msgid "Purchase"
-msgstr ""
+msgstr "Compra"
 
 #. module: stock_request_purchase
 #: model:ir.model.fields,field_description:stock_request_purchase.field_stock_request__purchase_count
 #: model:ir.model.fields,field_description:stock_request_purchase.field_stock_request_order__purchase_count
 msgid "Purchase Count"
-msgstr ""
+msgstr "Cálculo de compras"
 
 #. module: stock_request_purchase
 #: model:ir.model,name:stock_request_purchase.model_purchase_order
 msgid "Purchase Order"
-msgstr ""
+msgstr "Pedido de compra"
 
 #. module: stock_request_purchase
 #: model:ir.model,name:stock_request_purchase.model_purchase_order_line
 msgid "Purchase Order Line"
-msgstr ""
+msgstr "Liña de pedido de compra"
 
 #. module: stock_request_purchase
 #: model:ir.model.fields,field_description:stock_request_purchase.field_stock_request__purchase_line_ids
 #: model:ir.model.fields,field_description:stock_request_purchase.field_stock_request_order__purchase_line_ids
 msgid "Purchase Order Lines"
-msgstr ""
+msgstr "Liñas de pedido de compra"
 
 #. module: stock_request_purchase
 #: model:ir.model.fields,field_description:stock_request_purchase.field_stock_request__purchase_ids
 #: model:ir.model.fields,field_description:stock_request_purchase.field_stock_request_order__purchase_ids
 msgid "Purchase Orders"
-msgstr ""
+msgstr "Pedidos de compras"
 
 #. module: stock_request_purchase
 #: model:ir.model,name:stock_request_purchase.model_stock_request
 msgid "Stock Request"
-msgstr ""
+msgstr "Solicitude de existencias"
 
 #. module: stock_request_purchase
 #: model:ir.model.fields,field_description:stock_request_purchase.field_purchase_order__stock_request_count
 msgid "Stock Request #"
-msgstr ""
+msgstr "Solicitude de existencias #"
 
 #. module: stock_request_purchase
 #: model:ir.model,name:stock_request_purchase.model_stock_request_order
 msgid "Stock Request Order"
-msgstr ""
+msgstr "Pedido de existencias"
 
 #. module: stock_request_purchase
 #: model:ir.model.fields,field_description:stock_request_purchase.field_purchase_order__stock_request_ids
@@ -69,12 +71,12 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:stock_request_purchase.purchase_order_form
 #: model_terms:ir.ui.view,arch_db:stock_request_purchase.purchase_order_line_form2
 msgid "Stock Requests"
-msgstr ""
+msgstr "Solicitudes de existencias"
 
 #. module: stock_request_purchase
 #: model:ir.model,name:stock_request_purchase.model_stock_rule
 msgid "Stock Rule"
-msgstr ""
+msgstr "Regra de Abastecemento"
 
 #. module: stock_request_purchase
 #: code:addons/stock_request_purchase/models/purchase_order_line.py:0
@@ -83,6 +85,8 @@ msgid ""
 "You cannot link a purchase order line to a stock request that belongs to "
 "another company."
 msgstr ""
+"Non pode unir unha liña dun pedido de compras a unha solicitude de "
+"existencias que pertence a outra compañía."
 
 #. module: stock_request_purchase
 #: code:addons/stock_request_purchase/models/stock_request.py:0
@@ -90,3 +94,4 @@ msgstr ""
 msgid ""
 "You have linked to a purchase order line that belongs to another company."
 msgstr ""
+"Ha seleccionada unha liña de pedido de compras que pertence a outra compañía."
