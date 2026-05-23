@@ -6,13 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2026-05-23 17:43+0000\n"
+"Last-Translator: Pablo Castelo <pablocv@gmx.es>\n"
 "Language-Team: none\n"
 "Language: gl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__message_needaction
@@ -27,7 +29,7 @@ msgstr ""
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__count_stock_quants
 msgid "Adjustments"
-msgstr ""
+msgstr "Adaptacións"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__count_stock_quants_string
@@ -37,7 +39,7 @@ msgstr ""
 #. module: stock_inventory
 #: model:ir.model.fields.selection,name:stock_inventory.selection__stock_inventory__product_selection__all
 msgid "All Products"
-msgstr ""
+msgstr "Todos os Produtos"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__responsible_id
@@ -52,12 +54,12 @@ msgstr ""
 #. module: stock_inventory
 #: model_terms:ir.ui.view,arch_db:stock_inventory.view_inventory_group_form
 msgid "Back to Draft"
-msgstr ""
+msgstr "Volver a borrador"
 
 #. module: stock_inventory
 #: model_terms:ir.ui.view,arch_db:stock_inventory.view_inventory_group_form
 msgid "Begin Adjustments"
-msgstr ""
+msgstr "Inicio das adaptacións"
 
 #. module: stock_inventory
 #: model_terms:ir.ui.view,arch_db:stock_inventory.view_inventory_group_form
@@ -95,12 +97,12 @@ msgstr ""
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Creado por"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Creado o"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_quant__current_inventory_id
@@ -110,22 +112,22 @@ msgstr ""
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__date
 msgid "Date"
-msgstr ""
+msgstr "Data"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nome a mostrar"
 
 #. module: stock_inventory
 #: model:ir.model.fields.selection,name:stock_inventory.selection__stock_inventory__state__done
 msgid "Done"
-msgstr ""
+msgstr "Feito"
 
 #. module: stock_inventory
 #: model:ir.model.fields.selection,name:stock_inventory.selection__stock_inventory__state__draft
 msgid "Draft"
-msgstr ""
+msgstr "Borrador"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__exclude_sublocation
@@ -150,7 +152,7 @@ msgstr ""
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__id
 msgid "ID"
-msgstr ""
+msgstr "ID (identificación)"
 
 #. module: stock_inventory
 #: model:ir.model.fields,help:stock_inventory.field_stock_inventory__message_needaction
@@ -182,34 +184,34 @@ msgstr ""
 #. module: stock_inventory
 #: model:ir.model.fields.selection,name:stock_inventory.selection__stock_inventory__state__in_progress
 msgid "In Progress"
-msgstr ""
+msgstr "En curso"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__stock_quant_ids
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_move_line__inventory_adjustment_id
 msgid "Inventory Adjustment"
-msgstr ""
+msgstr "Axuste de inventario"
 
 #. module: stock_inventory
 #: model:ir.actions.act_window,name:stock_inventory.action_view_inventory_group_form
 #: model:ir.model,name:stock_inventory.model_stock_inventory
 msgid "Inventory Adjustment Group"
-msgstr ""
+msgstr "Grupo de Axuste de Inventario"
 
 #. module: stock_inventory
 #: model:ir.ui.menu,name:stock_inventory.menu_action_inventory_tree
 msgid "Inventory Adjustments"
-msgstr ""
+msgstr "Axustes de inventario"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__stock_move_ids
 msgid "Inventory Adjustments Done"
-msgstr ""
+msgstr "Axustes de inventario efectuados"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__name
 msgid "Inventory Reference"
-msgstr ""
+msgstr "Referencia de inventario"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__message_is_follower
@@ -219,33 +221,33 @@ msgstr ""
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Última Modificación o"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Actualizado por última vez por"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Última Actualización o"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__location_ids
 #: model_terms:ir.ui.view,arch_db:stock_inventory.view_inventory_group_form
 msgid "Locations"
-msgstr ""
+msgstr "Localizacións"
 
 #. module: stock_inventory
 #: model:ir.model.fields.selection,name:stock_inventory.selection__stock_inventory__product_selection__lot
 msgid "Lot/Serial Number"
-msgstr ""
+msgstr "Lote/Número de serie"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__lot_ids
 msgid "Lot/Serial Numbers"
-msgstr ""
+msgstr "Lote/Números de serie"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__message_main_attachment_id
@@ -255,7 +257,7 @@ msgstr ""
 #. module: stock_inventory
 #: model:ir.model.fields.selection,name:stock_inventory.selection__stock_inventory__product_selection__manual
 msgid "Manual Selection"
-msgstr ""
+msgstr "Selección manual"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__message_has_error
@@ -271,7 +273,7 @@ msgstr ""
 #: code:addons/stock_inventory/models/stock_quant.py:0
 #, python-format
 msgid "No move lines have been created"
-msgstr ""
+msgstr "Non se crearon liñas de movemento"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__message_needaction_counter
@@ -301,12 +303,12 @@ msgstr ""
 #. module: stock_inventory
 #: model:ir.model.fields.selection,name:stock_inventory.selection__stock_inventory__product_selection__one
 msgid "One Product"
-msgstr ""
+msgstr "Un produto"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__owner_id
 msgid "Owner"
-msgstr ""
+msgstr "Propietario"
 
 #. module: stock_inventory
 #: model_terms:ir.ui.view,arch_db:stock_inventory.stock_inventory_search_view
@@ -317,22 +319,22 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__category_id
 #: model:ir.model.fields.selection,name:stock_inventory.selection__stock_inventory__product_selection__category
 msgid "Product Category"
-msgstr ""
+msgstr "Categoría de Produto"
 
 #. module: stock_inventory
 #: model:ir.model,name:stock_inventory.model_stock_move_line
 msgid "Product Moves (Stock Move Line)"
-msgstr ""
+msgstr "Movementos de produtos (liña de movemento de existencias)"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__product_selection
 msgid "Product Selection"
-msgstr ""
+msgstr "Selección do produto"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__product_ids
 msgid "Products"
-msgstr ""
+msgstr "Produtos"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__products_under_review_ids
@@ -343,12 +345,12 @@ msgstr ""
 #. module: stock_inventory
 #: model:ir.model,name:stock_inventory.model_stock_quant
 msgid "Quants"
-msgstr ""
+msgstr "Cantidades"
 
 #. module: stock_inventory
 #: model_terms:ir.ui.view,arch_db:stock_inventory.view_inventory_group_form
 msgid "Set to Done"
-msgstr ""
+msgstr "Establecer como Feito"
 
 #. module: stock_inventory
 #: model:ir.model.fields,help:stock_inventory.field_stock_inventory__responsible_id
@@ -358,7 +360,7 @@ msgstr ""
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__state
 msgid "State"
-msgstr ""
+msgstr "Estado"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_quant__stock_inventory_ids
@@ -379,12 +381,12 @@ msgstr ""
 #. module: stock_inventory
 #: model:ir.actions.act_window,name:stock_inventory.action_view_stock_move_line_inventory_tree
 msgid "Stock Move Lines"
-msgstr ""
+msgstr "Liñas de Movemento de existencias"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__count_stock_moves
 msgid "Stock Moves Lines"
-msgstr ""
+msgstr "Liñas de Movementos de existencias"
 
 #. module: stock_inventory
 #: code:addons/stock_inventory/models/stock_inventory.py:0
@@ -405,13 +407,13 @@ msgstr ""
 #. module: stock_inventory
 #: model:ir.model.fields,help:stock_inventory.field_stock_inventory__owner_id
 msgid "This is the owner of the inventory adjustment"
-msgstr ""
+msgstr "Este é o propietario do axuste de inventario"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_quant__to_do
 #: model_terms:ir.ui.view,arch_db:stock_inventory.view_stock_quant_search_not_done
 msgid "To Do"
-msgstr ""
+msgstr "Para facer"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__message_unread
@@ -440,6 +442,8 @@ msgid ""
 "When 'Product Selection: Lot Serial Number' is selected you are only able to"
 " add one product."
 msgstr ""
+"Se selecciona 'Selección de produtos: Número de serie do lote' só pode "
+"engadir un produto."
 
 #. module: stock_inventory
 #: code:addons/stock_inventory/models/stock_inventory.py:0
@@ -448,12 +452,13 @@ msgid ""
 "When 'Product Selection: One Product' is selected you are only able to add "
 "one product."
 msgstr ""
+"Se selecciona 'Selección de produtos: Un produto' só pode engadir un produto."
 
 #. module: stock_inventory
 #: code:addons/stock_inventory/models/stock_inventory.py:0
 #, python-format
 msgid "You can only delete inventory adjustments groups in draft state."
-msgstr ""
+msgstr "Só pode eliminar grupos de axustes de inventario en estado borrador."
 
 #. module: stock_inventory
 #: code:addons/stock_inventory/models/stock_inventory.py:0
@@ -464,4 +469,4 @@ msgstr ""
 #. module: stock_inventory
 #: model_terms:ir.ui.view,arch_db:stock_inventory.view_inventory_group_form
 msgid "e.g. Annual inventory"
-msgstr ""
+msgstr "Por exemplo, inventario anual"
