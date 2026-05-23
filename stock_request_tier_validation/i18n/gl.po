@@ -6,109 +6,111 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2026-05-23 17:43+0000\n"
+"Last-Translator: Pablo Castelo <pablocv@gmx.es>\n"
 "Language-Team: none\n"
 "Language: gl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: stock_request_tier_validation
 #: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request__can_review
 #: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request_order__can_review
 msgid "Can Review"
-msgstr ""
+msgstr "Pode Revisar"
 
 #. module: stock_request_tier_validation
 #: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request__has_comment
 #: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request_order__has_comment
 msgid "Has Comment"
-msgstr ""
+msgstr "Ten Comentario"
 
 #. module: stock_request_tier_validation
 #: model:tier.definition,name:stock_request_tier_validation.stock_request_default_tier_definition
 #: model:tier.definition,name:stock_request_tier_validation.stock_request_order_default_tier_definition
 msgid "Manager review"
-msgstr ""
+msgstr "Revisión do xestor"
 
 #. module: stock_request_tier_validation
 #: model_terms:ir.ui.view,arch_db:stock_request_tier_validation.view_stock_request_order_filter
 msgid "My Stock Request Orders to review"
-msgstr ""
+msgstr "Os meus Pedidos de Stock para revisar"
 
 #. module: stock_request_tier_validation
 #: model_terms:ir.ui.view,arch_db:stock_request_tier_validation.view_stock_request_filter
 msgid "My Stock Requests to review"
-msgstr ""
+msgstr "As miñas solicitudes de existencias para revisar"
 
 #. module: stock_request_tier_validation
 #: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request__need_validation
 #: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request_order__need_validation
 msgid "Need Validation"
-msgstr ""
+msgstr "Necesita Validación"
 
 #. module: stock_request_tier_validation
 #: model_terms:ir.ui.view,arch_db:stock_request_tier_validation.view_stock_request_filter
 msgid "Need actions"
-msgstr ""
+msgstr "Acción necesaria"
 
 #. module: stock_request_tier_validation
 #: model_terms:ir.ui.view,arch_db:stock_request_tier_validation.view_stock_request_filter
 #: model_terms:ir.ui.view,arch_db:stock_request_tier_validation.view_stock_request_order_filter
 msgid "Needs my Review"
-msgstr ""
+msgstr "Necesita a miña revisión"
 
 #. module: stock_request_tier_validation
 #: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request__next_review
 #: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request_order__next_review
 msgid "Next Review"
-msgstr ""
+msgstr "Seguinte Revisión"
 
 #. module: stock_request_tier_validation
 #: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request__rejected
 #: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request_order__rejected
 msgid "Rejected"
-msgstr ""
+msgstr "Rexeitado"
 
 #. module: stock_request_tier_validation
 #: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request__rejected_message
 #: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request_order__rejected_message
 msgid "Rejected Message"
-msgstr ""
+msgstr "Mensaxe Rexeitada"
 
 #. module: stock_request_tier_validation
 #: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request__reviewer_ids
 #: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request_order__reviewer_ids
 msgid "Reviewers"
-msgstr ""
+msgstr "Revisores"
 
 #. module: stock_request_tier_validation
 #: model:ir.model,name:stock_request_tier_validation.model_stock_request
 msgid "Stock Request"
-msgstr ""
+msgstr "Solicitude de existencias"
 
 #. module: stock_request_tier_validation
 #: model:ir.model,name:stock_request_tier_validation.model_stock_request_order
 msgid "Stock Request Order"
-msgstr ""
+msgstr "Pedido de existencias"
 
 #. module: stock_request_tier_validation
 #: model_terms:ir.ui.view,arch_db:stock_request_tier_validation.view_stock_request_filter
 #: model_terms:ir.ui.view,arch_db:stock_request_tier_validation.view_stock_request_order_filter
 msgid "Stock Requests validated and ready to be confirmed"
-msgstr ""
+msgstr "Pedido de existencias validadas e preparadas para ser confirmadas"
 
 #. module: stock_request_tier_validation
 #: model:ir.model,name:stock_request_tier_validation.model_tier_definition
 msgid "Tier Definition"
-msgstr ""
+msgstr "Definición do nivel"
 
 #. module: stock_request_tier_validation
 #: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request__to_validate_message
 #: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request_order__to_validate_message
 msgid "To Validate Message"
-msgstr ""
+msgstr "Para validar a mensaxe"
 
 #. module: stock_request_tier_validation
 #: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request__validated
@@ -116,22 +118,22 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:stock_request_tier_validation.view_stock_request_filter
 #: model_terms:ir.ui.view,arch_db:stock_request_tier_validation.view_stock_request_order_filter
 msgid "Validated"
-msgstr ""
+msgstr "Validada"
 
 #. module: stock_request_tier_validation
 #: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request__validated_message
 #: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request_order__validated_message
 msgid "Validated Message"
-msgstr ""
+msgstr "Mensaxe Validada"
 
 #. module: stock_request_tier_validation
 #: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request__validation_status
 #: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request_order__validation_status
 msgid "Validation Status"
-msgstr ""
+msgstr "Estado da Validación"
 
 #. module: stock_request_tier_validation
 #: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request__review_ids
 #: model:ir.model.fields,field_description:stock_request_tier_validation.field_stock_request_order__review_ids
 msgid "Validations"
-msgstr ""
+msgstr "Validacións"
