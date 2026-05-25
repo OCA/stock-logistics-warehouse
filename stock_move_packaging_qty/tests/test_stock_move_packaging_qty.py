@@ -63,6 +63,15 @@ class TestStockMovePackagingQty(TransactionCase):
         self.env["stock.quant"]._update_available_quantity(
             self.product, self.stock_location, 10
         )
+        # Disable Automatic Done Packaging Calculation
+        picking.picking_type_id.automatic_done_packaging_calculation = False
+        picking.action_assign()
+        self.assertEqual(
+            picking.move_ids_without_package.product_packaging_quantity, 0.0
+        )
+        picking.do_unreserve()
+        # Re-Enable Automatic Done Packaging Calculation
+        picking.picking_type_id.automatic_done_packaging_calculation = True
         # Initial packaging quantity should be set
         picking.action_assign()
         self.assertEqual(

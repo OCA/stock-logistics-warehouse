@@ -18,11 +18,18 @@ class StockMoveLine(models.Model):
         help="Quantity done in Product Packaging",
     )
 
-    @api.depends("move_id.product_packaging_id", "product_uom_id", "quantity")
+    @api.depends(
+        "picking_type_id", "move_id.product_packaging_id", "product_uom_id", "quantity"
+    )
     def _compute_product_packaging_quantity(self):
         """Set product_packaging_quantity automatically."""
-        self.product_packaging_quantity = 0
-        for line in self:
+        auto_fill_ppq = self.filtered_domain(
+            [
+                ("picking_type_id.automatic_done_packaging_calculation", "=", True),
+            ]
+        )
+        auto_fill_ppq.product_packaging_quantity = 0
+        for line in auto_fill_ppq:
             if not line.move_id.product_packaging_id:
                 continue
             # Same as product_packaging_qty at the first time
