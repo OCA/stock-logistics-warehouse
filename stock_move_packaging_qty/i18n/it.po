@@ -28,6 +28,11 @@ msgid "<span>)</span>"
 msgstr "<span>)</span>"
 
 #. module: stock_move_packaging_qty
+#: model:ir.model.fields,field_description:stock_move_packaging_qty.field_stock_picking_type__automatic_done_packaging_calculation
+msgid "Automatically Calculate Done Packaging Quantity"
+msgstr ""
+
+#. module: stock_move_packaging_qty
 #: model:ir.model.fields,field_description:stock_move_packaging_qty.field_stock_move__product_packaging_quantity
 #: model:ir.model.fields,field_description:stock_move_packaging_qty.field_stock_move_line__product_packaging_quantity
 #: model_terms:ir.ui.view,arch_db:stock_move_packaging_qty.view_stock_move_line_operation_tree
@@ -51,6 +56,11 @@ msgstr "Imball. compl."
 #: model_terms:ir.ui.view,arch_db:stock_move_packaging_qty.view_stock_move_line_operation_tree
 msgid "Packaging"
 msgstr "Imballaggio"
+
+#. module: stock_move_packaging_qty
+#: model:ir.model,name:stock_move_packaging_qty.model_stock_picking_type
+msgid "Picking Type"
+msgstr ""
 
 #. module: stock_move_packaging_qty
 #: model:ir.model,name:stock_move_packaging_qty.model_stock_move_line
@@ -77,6 +87,13 @@ msgstr "Imball. ris."
 #: model:ir.model,name:stock_move_packaging_qty.model_stock_move
 msgid "Stock Move"
 msgstr "Movimento di magazzino"
+
+#. module: stock_move_packaging_qty
+#: model:ir.model.fields,help:stock_move_packaging_qty.field_stock_picking_type__automatic_done_packaging_calculation
+msgid ""
+"The system calculates Done Packaging Automatically on Stock Move Lines.\n"
+"Disable this to prevent automatic calculation."
+msgstr ""
 
 #. module: stock_move_packaging_qty
 #. odoo-python

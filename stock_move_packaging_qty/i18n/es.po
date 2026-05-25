@@ -94,8 +94,8 @@ msgid ""
 "The system calculates Done Packaging Automatically on Stock Move Lines.\n"
 "Disable this to prevent automatic calculation."
 msgstr ""
-"El sistema calcula la Cantidad de Envases Hechos en las Línea de "
-"movimientos de stock.\n"
+"El sistema calcula la Cantidad de Envases Hechos en las Línea de movimientos "
+"de stock.\n"
 "Desactiva esta opción para prevenir el cálculo automático."
 
 #. module: stock_move_packaging_qty
