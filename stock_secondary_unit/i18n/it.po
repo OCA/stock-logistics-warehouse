@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2026-04-16 11:45+0000\n"
-"Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
+"PO-Revision-Date: 2026-05-26 07:12+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
@@ -85,7 +85,7 @@ msgstr "Quantità disponibile (2 unità)"
 #: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_move__secondary_uom_id
 #: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_move_line__secondary_uom_id
 msgid "Second unit"
-msgstr "Unità secondaria"
+msgstr "Seconda unità"
 
 #. module: stock_secondary_unit
 #: model:ir.model.fields,field_description:stock_secondary_unit.field_product_product__stock_secondary_uom_id
