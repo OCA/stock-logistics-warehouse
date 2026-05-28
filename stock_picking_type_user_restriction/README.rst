@@ -21,19 +21,19 @@ Stock picking type - Restrict users
     :target: http://www.gnu.org/licenses/lgpl-3.0-standalone.html
     :alt: License: LGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fstock--logistics--warehouse-lightgray.png?logo=github
-    :target: https://github.com/OCA/stock-logistics-warehouse/tree/14.0/stock_picking_type_user_restriction
+    :target: https://github.com/OCA/stock-logistics-warehouse/tree/19.0/stock_picking_type_user_restriction
     :alt: OCA/stock-logistics-warehouse
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/stock-logistics-warehouse-14-0/stock-logistics-warehouse-14-0-stock_picking_type_user_restriction
+    :target: https://translation.odoo-community.org/projects/stock-logistics-warehouse-19-0/stock-logistics-warehouse-19-0-stock_picking_type_user_restriction
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/stock-logistics-warehouse&target_branch=14.0
+    :target: https://runboat.odoo-community.org/builds?repo=OCA/stock-logistics-warehouse&target_branch=19.0
     :alt: Try me on Runboat
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-Restrict some users to only access their assigned operation types. Other ones
-would not be visible for them.
+Restrict some users to only access their assigned operation types. Other
+ones would not be visible for them.
 
 **Table of contents**
 
@@ -43,9 +43,11 @@ would not be visible for them.
 Configuration
 =============
 
-With a Stock Manager, open an operation type (picking type) and set "Assigned users" field.
+With a Stock Manager, open an operation type (picking type) and set
+"Assigned users" field.
 
-Then, assign "User: Assigned Operation Types Only" group to users who should be able to access to their assigned operation types only.
+Then, assign "User: Assigned Operation Types Only" group to users who
+should be able to access to their assigned operation types only.
 
 Bug Tracker
 ===========
@@ -53,7 +55,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/stock-logistics-warehouse/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/stock-logistics-warehouse/issues/new?body=module:%20stock_picking_type_user_restriction%0Aversion:%2014.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/stock-logistics-warehouse/issues/new?body=module:%20stock_picking_type_user_restriction%0Aversion:%2019.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -61,20 +63,20 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * Xtendoo
 * TAKOBI
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* Lorenzo Battistini (https://takobi.online)
-* Daniel Domínguez - https://xtendoo.es <dani.xtendoo@gmail.com>
-* Denis Roussel <denis.roussel@acsone.eu>
+- Lorenzo Battistini (https://takobi.online)
+- Daniel Domínguez - https://xtendoo.es <dani.xtendoo@gmail.com>
+- Denis Roussel <denis.roussel@acsone.eu>
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is maintained by the OCA.
 
@@ -94,6 +96,6 @@ Current `maintainer <https://odoo-community.org/page/maintainer-role>`__:
 
 |maintainer-eLBati| 
 
-This module is part of the `OCA/stock-logistics-warehouse <https://github.com/OCA/stock-logistics-warehouse/tree/14.0/stock_picking_type_user_restriction>`_ project on GitHub.
+This module is part of the `OCA/stock-logistics-warehouse <https://github.com/OCA/stock-logistics-warehouse/tree/19.0/stock_picking_type_user_restriction>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.

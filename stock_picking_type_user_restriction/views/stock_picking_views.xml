@@ -22,10 +22,16 @@
             </xpath>
         </field>
     </record>
-    <record id="stock.all_picking" model="ir.ui.menu">
+    <record id="stock.in_picking" model="ir.ui.menu">
         <field
-            name="groups_id"
-            eval="[(4, ref('group_assigned_picking_types_user'))]"
+            name="group_ids"
+            eval="[Command.link(ref('group_assigned_picking_types_user'))]"
+        />
+    </record>
+    <record id="stock.out_picking" model="ir.ui.menu">
+        <field
+            name="group_ids"
+            eval="[Command.link(ref('group_assigned_picking_types_user'))]"
         />
     </record>
 </odoo>

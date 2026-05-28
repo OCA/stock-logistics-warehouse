@@ -1,7 +1,8 @@
-from odoo.tests.common import SavepointCase
+from odoo.fields import Command
+from odoo.tests.common import TransactionCase
 
 
-class TestUserRestriction(SavepointCase):
+class TestUserRestriction(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -16,17 +17,15 @@ class TestUserRestriction(SavepointCase):
             {
                 "login": "stock_user",
                 "name": "stock_user",
-                "groups_id": [(6, 0, [cls.env.ref("stock.group_stock_user").id])],
+                "group_ids": [Command.set([cls.env.ref("stock.group_stock_user").id])],
             }
         )
         cls.stock_user_assigned_type = cls.env["res.users"].create(
             {
                 "login": "stock_user_assigned_type",
                 "name": "stock_user_assigned_type",
-                "groups_id": [
-                    (
-                        6,
-                        0,
+                "group_ids": [
+                    Command.set(
                         [
                             cls.env.ref(
                                 "stock_picking_type_user_restriction."
@@ -56,7 +55,7 @@ class TestUserRestriction(SavepointCase):
 
         # Assign delivery picking type to assigned user
         self.picking_type_out.assigned_user_ids = [
-            (6, 0, [self.stock_user_assigned_type.id])
+            Command.set([self.stock_user_assigned_type.id])
         ]
         # assigned_user_ids is set with stock_user_assigned_type: both users can read
         pick_types = self.picking_type_model.with_user(self.stock_user.id).search(
@@ -68,7 +67,7 @@ class TestUserRestriction(SavepointCase):
         ).search([("name", "=", "Delivery Orders")])
         self.assertTrue(self.picking_type_out in pick_types)
 
-        self.picking_type_out.assigned_user_ids = [(6, 0, [self.stock_user.id])]
+        self.picking_type_out.assigned_user_ids = [Command.set([self.stock_user.id])]
         # assigned_user_ids is set with stock_user: only stock_user can read
         pick_types = self.picking_type_model.with_user(self.stock_user.id).search(
             [("name", "=", "Delivery Orders")]
