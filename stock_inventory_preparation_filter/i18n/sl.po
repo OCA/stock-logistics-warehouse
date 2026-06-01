@@ -9,36 +9,36 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-02-27 11:37+0000\n"
-"PO-Revision-Date: 2018-02-27 11:37+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2018\n"
+"PO-Revision-Date: 2026-06-01 07:25+0000\n"
+"Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: Slovenian (https://www.transifex.com/oca/teams/23907/sl/)\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
-"n%100==4 ? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
+"n%100==4 ? 2 : 3;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: stock_inventory_preparation_filter
 #: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__product_domain
 msgid "Domain"
-msgstr ""
+msgstr "Domena"
 
 #. module: stock_inventory_preparation_filter
 #: model:ir.model.fields.selection,name:stock_inventory_preparation_filter.selection__stock_inventory__product_selection__domain
-#, fuzzy
 msgid "Filtered Products"
-msgstr "Izbrani proizvodi"
+msgstr "Filtrirani proizvodi"
 
 #. module: stock_inventory_preparation_filter
 #: model:ir.model,name:stock_inventory_preparation_filter.model_stock_inventory
 msgid "Inventory Adjustment Group"
-msgstr ""
+msgstr "Skupina popravkov inventarja"
 
 #. module: stock_inventory_preparation_filter
 #: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__product_selection
 msgid "Product Selection"
-msgstr ""
+msgstr "Izbor proizvoda"
 
 #, fuzzy, python-format
 #~ msgid "All products"
