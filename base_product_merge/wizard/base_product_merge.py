@@ -51,7 +51,7 @@ class BaseProductMerge(models.Model):
         "product_tmpl_id",
         string="Products Template to merge",
     )
-    merge_method = fields.Selection([("sql", "SQL"), ("orm", "ORM")], default="sql")
+    merge_method = fields.Selection([("sql", "SQL"), ("orm", "ORM")], default="orm")
 
     def action_merge(self):
         if self.ptype == "product.product":
