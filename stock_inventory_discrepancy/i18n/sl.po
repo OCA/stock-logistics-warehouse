@@ -9,20 +9,21 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-11-30 03:53+0000\n"
-"PO-Revision-Date: 2017-11-30 03:53+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"PO-Revision-Date: 2026-06-03 06:48+0000\n"
+"Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: Slovenian (https://www.transifex.com/oca/teams/23907/sl/)\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
-"n%100==4 ? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
+"n%100==4 ? 2 : 3;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: stock_inventory_discrepancy
 #: model_terms:ir.ui.view,arch_db:stock_inventory_discrepancy.confirm_discrepancy_wizard
 msgid "Apply"
-msgstr ""
+msgstr "Uveljavi"
 
 #. module: stock_inventory_discrepancy
 #: model:ir.model.fields,help:stock_inventory_discrepancy.field_res_company__inventory_discrepancy_enable
@@ -31,105 +32,105 @@ msgstr ""
 msgid ""
 "Block validation of the inventory adjustment if discrepancy exceeds the "
 "threshold."
-msgstr ""
+msgstr "Prepreči potrditev popravka zalog, če odstopanje presega prag."
 
 #. module: stock_inventory_discrepancy
 #: model_terms:ir.ui.view,arch_db:stock_inventory_discrepancy.confirm_discrepancy_wizard
 msgid "Cancel"
-msgstr ""
+msgstr "Prekliči"
 
 #. module: stock_inventory_discrepancy
 #: model:ir.model,name:stock_inventory_discrepancy.model_res_company
 msgid "Companies"
-msgstr ""
+msgstr "Družbe"
 
 #. module: stock_inventory_discrepancy
 #: model:ir.model,name:stock_inventory_discrepancy.model_res_config_settings
 msgid "Config Settings"
-msgstr ""
+msgstr "Nastavitve"
 
 #. module: stock_inventory_discrepancy
 #: model:ir.model,name:stock_inventory_discrepancy.model_confirm_discrepancy_wiz
 msgid "Confim discrepancy wizard"
-msgstr ""
+msgstr "Čarovnik za potrjevanje odstopanj"
 
 #. module: stock_inventory_discrepancy
 #: model:ir.actions.act_window,name:stock_inventory_discrepancy.confirm_discrepancy_action
 msgid "Confirm discrepancy"
-msgstr ""
+msgstr "Potrdi odstopanje"
 
 #. module: stock_inventory_discrepancy
 #: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_confirm_discrepancy_wiz__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Ustvaril"
 
 #. module: stock_inventory_discrepancy
 #: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_confirm_discrepancy_wiz__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Ustvarjeno"
 
 #. module: stock_inventory_discrepancy
 #: model_terms:ir.ui.view,arch_db:stock_inventory_discrepancy.confirm_discrepancy_wizard
 msgid "Dates does not match"
-msgstr ""
+msgstr "Datumi se ne ujemajo"
 
 #. module: stock_inventory_discrepancy
 #: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_confirm_discrepancy_wiz__discrepancy_quant_ids
 msgid "Discrepancy Quant"
-msgstr ""
+msgstr "Kvant z odstopanjem"
 
 #. module: stock_inventory_discrepancy
 #: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_stock_quant__discrepancy_percent
 msgid "Discrepancy percent (%)"
-msgstr ""
+msgstr "Odstotek odstopanja (%)"
 
 #. module: stock_inventory_discrepancy
 #: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_confirm_discrepancy_wiz__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Prikazani naziv"
 
 #. module: stock_inventory_discrepancy
 #: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_stock_quant__has_over_discrepancy
 msgid "Has Over Discrepancy"
-msgstr ""
+msgstr "Preveliko odstopanje"
 
 #. module: stock_inventory_discrepancy
 #: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_confirm_discrepancy_wiz__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: stock_inventory_discrepancy
 #: model_terms:ir.ui.view,arch_db:stock_inventory_discrepancy.view_location_form
 msgid "Inventory Discrepancy"
-msgstr ""
+msgstr "Inventurno odstopanje"
 
 #. module: stock_inventory_discrepancy
 #: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_res_company__inventory_discrepancy_enable
 #: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_res_config_settings__inventory_discrepancy_enable
 msgid "Inventory Discrepancy Control"
-msgstr ""
+msgstr "Nadzor inventurnih odstopanj"
 
 #. module: stock_inventory_discrepancy
 #: model:ir.model,name:stock_inventory_discrepancy.model_stock_location
 msgid "Inventory Locations"
-msgstr ""
+msgstr "Lokacije inventarja"
 
 #. module: stock_inventory_discrepancy
 #: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_confirm_discrepancy_wiz__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Zadnji posodobil"
 
 #. module: stock_inventory_discrepancy
 #: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_confirm_discrepancy_wiz__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Zadnjič posodobljeno"
 
 #. module: stock_inventory_discrepancy
 #: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_stock_location__discrepancy_threshold
 #: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_stock_warehouse__discrepancy_threshold
 #: model:ir.model.fields,help:stock_inventory_discrepancy.field_stock_quant__discrepancy_threshold
 msgid "Maximum Discrepancy Rate Threshold"
-msgstr ""
+msgstr "Najvišja dovoljena meja odstopanja"
 
 #. module: stock_inventory_discrepancy
 #: model:ir.model.fields,help:stock_inventory_discrepancy.field_stock_warehouse__discrepancy_threshold
@@ -137,6 +138,8 @@ msgid ""
 "Maximum Discrepancy Rate allowed for any product when doing an Inventory "
 "Adjustment. Threshold defined in involved Location has preference."
 msgstr ""
+"Najvišja dovoljena stopnja odstopanja za kateri koli izdelek pri "
+"popravljanju zalog. Prednost ima prag, določen v zadevni lokaciji."
 
 #. module: stock_inventory_discrepancy
 #: model:ir.model.fields,help:stock_inventory_discrepancy.field_stock_location__discrepancy_threshold
@@ -145,37 +148,40 @@ msgid ""
 "Adjustment. Thresholds defined in Locations have preference over Warehouse's "
 "ones."
 msgstr ""
+"Najvišja dovoljena stopnja odstopanja za kateri koli izdelek pri "
+"popravljanju zalog. Meje, določene na lokacijah, imajo prednost pred mejami, "
+"določenimi v skladišču."
 
 #. module: stock_inventory_discrepancy
 #. odoo-python
 #: code:addons/stock_inventory_discrepancy/models/stock_quant.py:0
 msgid "Only a stock manager can validate an inventory adjustment."
-msgstr ""
+msgstr "Samo skrbnik zalog lahko potrdi popravek zalog."
 
 #. module: stock_inventory_discrepancy
 #: model_terms:ir.ui.view,arch_db:stock_inventory_discrepancy.quant_search_last_has_over_discrepancy
 msgid "Over Discrepancy"
-msgstr ""
+msgstr "Preveliko odstopanje"
 
 #. module: stock_inventory_discrepancy
 #: model:ir.model.fields,help:stock_inventory_discrepancy.field_stock_location__propagate_discrepancy_threshold
 msgid "Propagate Maximum Discrepancy Rate Threshold to child locations"
-msgstr ""
+msgstr "Prenos zgornje meje odstopanja na podrejene lokacije"
 
 #. module: stock_inventory_discrepancy
 #: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_stock_location__propagate_discrepancy_threshold
 msgid "Propagate discrepancy threshold"
-msgstr ""
+msgstr "Razširi prag odstopanja"
 
 #. module: stock_inventory_discrepancy
 #: model:ir.model,name:stock_inventory_discrepancy.model_stock_quant
 msgid "Quants"
-msgstr ""
+msgstr "Kvanti"
 
 #. module: stock_inventory_discrepancy
 #: model:ir.model.fields,help:stock_inventory_discrepancy.field_stock_quant__discrepancy_percent
 msgid "The discrepancy expressed in percent with theoretical quantity as basis"
-msgstr ""
+msgstr "Odstopanje, izraženo v odstotkih, glede na teoretično količino"
 
 #. module: stock_inventory_discrepancy
 #: model_terms:ir.ui.view,arch_db:stock_inventory_discrepancy.confirm_discrepancy_wizard
@@ -183,33 +189,35 @@ msgid ""
 "The following products have exceeded the discrepancy threshold.\n"
 "                    Are you sure you want to proceed?"
 msgstr ""
+"Naslednji izdelki so presegli prag odstopanja.\n"
+"                    Ali ste prepričani, da želite nadaljevati?"
 
 #. module: stock_inventory_discrepancy
 #. odoo-python
 #: code:addons/stock_inventory_discrepancy/models/stock_quant.py:0
 msgid "This operator is not supported"
-msgstr ""
+msgstr "Ta operator ni podprt"
 
 #. module: stock_inventory_discrepancy
 #: model:ir.model.fields,field_description:stock_inventory_discrepancy.field_stock_quant__discrepancy_threshold
 msgid "Threshold (%)"
-msgstr ""
+msgstr "Prag (%)"
 
 #. module: stock_inventory_discrepancy
 #: model:res.groups,name:stock_inventory_discrepancy.group_stock_inventory_validation
 msgid "Validate Inventory Adjustments"
-msgstr ""
+msgstr "Potrdi popravke zalog"
 
 #. module: stock_inventory_discrepancy
 #: model:res.groups,name:stock_inventory_discrepancy.group_stock_inventory_validation_always
 msgid "Validate Inventory Adjustments excceded threshold"
-msgstr ""
+msgstr "Potrdi spremembe zalog, ki so presegle prag"
 
 #. module: stock_inventory_discrepancy
 #. odoo-python
 #: code:addons/stock_inventory_discrepancy/models/stock_quant.py:0
 msgid "Value should be True or False (not %s)"
-msgstr ""
+msgstr "Vrednost bi morala biti True ali False (ne %s)"
 
 #. module: stock_inventory_discrepancy
 #: model:ir.model,name:stock_inventory_discrepancy.model_stock_warehouse
@@ -223,6 +231,8 @@ msgid ""
 "You cannot apply inventory adjustments if there are products that exceed the "
 "discrepancy threshold. Only users with rights to apply them can proceed."
 msgstr ""
+"Popravkov zalog ni mogoče izvesti, če obstajajo izdelki, ki presegajo prag "
+"odstopanja. Le uporabniki s pravicami za njihovo potrditev lahko nadaljujejo."
 
 #. module: stock_inventory_discrepancy
 #: model_terms:ir.ui.view,arch_db:stock_inventory_discrepancy.confirm_discrepancy_wizard
@@ -232,6 +242,10 @@ msgid ""
 "threshold.\n"
 "                    Only users with permissions to apply them can proceed."
 msgstr ""
+"Popravka zaloge ni mogoče potrditi,\n"
+"                    saj so naslednji izdelki presegli prag odstopanja.\n"
+"                   Samo uporabniki z ustreznimi pooblastili lahko "
+"nadaljujejo."
 
 #~ msgid "Inventory"
 #~ msgstr "Inventar"
