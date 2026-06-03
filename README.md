@@ -24,7 +24,7 @@ addon | version | maintainers | summary
 --- | --- | --- | ---
 [account_move_line_product](account_move_line_product/) | 16.0.1.0.0 |  | Displays the product in the journal entries and items
 [account_move_line_stock_info](account_move_line_stock_info/) | 16.0.1.1.2 |  | Account Move Line Stock Info
-[base_product_merge](base_product_merge/) | 16.0.1.0.2 | <a href='https://github.com/JasminSForgeFlow'><img src='https://github.com/JasminSForgeFlow.png' width='32' height='32' style='border-radius:50%;' alt='JasminSForgeFlow'/></a> | Merge duplicate products
+[base_product_merge](base_product_merge/) | 16.0.1.0.3 | <a href='https://github.com/JasminSForgeFlow'><img src='https://github.com/JasminSForgeFlow.png' width='32' height='32' style='border-radius:50%;' alt='JasminSForgeFlow'/></a> | Merge duplicate products
 [procurement_auto_create_group](procurement_auto_create_group/) | 16.0.1.1.0 |  | Allows to configure the system to propose automatically new procurement groups during the procurement run.
 [product_packaging_usability](product_packaging_usability/) | 16.0.1.0.1 |  | Add sugar to Product Packaging
 [product_route_profile](product_route_profile/) | 16.0.1.0.0 | <a href='https://github.com/Kev-Roche'><img src='https://github.com/Kev-Roche.png' width='32' height='32' style='border-radius:50%;' alt='Kev-Roche'/></a> | Add Route profile concept on product
@@ -53,7 +53,7 @@ addon | version | maintainers | summary
 [stock_location_zone](stock_location_zone/) | 16.0.1.0.2 |  | Classify locations with zones.
 [stock_lot_multi_image](stock_lot_multi_image/) | 16.0.1.0.1 |  | This module implements the possibility to have multiple images for a stock lot
 [stock_move_auto_assign](stock_move_auto_assign/) | 16.0.1.1.3 |  | Try to reserve moves when goods enter in a location
-[stock_move_auto_assign_auto_release](stock_move_auto_assign_auto_release/) | 16.0.1.2.1 |  | Auto release moves after auto assign
+[stock_move_auto_assign_auto_release](stock_move_auto_assign_auto_release/) | 16.0.1.2.2 |  | Auto release moves after auto assign
 [stock_move_auto_assign_auto_release_exclude_location](stock_move_auto_assign_auto_release_exclude_location/) | 16.0.1.0.1 |  | Exclude locations from auto release moves after auto assign
 [stock_move_common_dest](stock_move_common_dest/) | 16.0.1.0.2 |  | Adds field for common destination moves
 [stock_move_location](stock_move_location/) | 16.0.1.4.3 |  | This module allows to move all stock in a stock location to an other one.
