@@ -15,7 +15,6 @@
     ],
     "assets": {
         "web.assets_backend": [
-            "stock_lot_catalog/static/src/js/**/*",
             "stock_lot_catalog/static/src/stock_lot_catalog/**/*.js",
             "stock_lot_catalog/static/src/stock_lot_catalog/**/*.xml",
             "stock_lot_catalog/static/src/stock_lot_catalog/**/*.scss",
