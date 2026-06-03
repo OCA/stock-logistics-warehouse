@@ -108,7 +108,7 @@ class TestAssignAutoRelease(PromiseReleaseCommonCase):
                 self.unreleased_move.picking_id.auto_release_available_to_promise,
             )
             job.perform()
-        self.assertFalse(self.unreleased_move.need_release)
+        self.assertFalse(self.picking.move_ids.need_release)
         self.assertEqual(1, len(self.picking.move_ids))
         self.assertEqual(10, self.picking.move_ids.product_qty)
 
