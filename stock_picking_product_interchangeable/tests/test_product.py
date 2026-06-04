@@ -17,7 +17,7 @@ class TestProduct(StockPickingProductInterchangeableCommon):
         with self.assertRaises(AssertionError):
             with Form(
                 self.product_tmpl_napkin,
-                view="stock_picking_product_interchangeable.product_template_interchangeable_form_view",  # noqa
+                view="stock_picking_product_interchangeable.product_template_only_form_view_inherit",  # noqa
             ) as form:
                 form.product_tmpl_interchangeable_ids.add(self.product_tmpl_plate)
 
@@ -29,7 +29,7 @@ class TestProduct(StockPickingProductInterchangeableCommon):
         self.assertEqual(len(self.product_tmpl_plate.product_variant_ids), 1)
         with Form(
             self.product_tmpl_plate,
-            view="stock_picking_product_interchangeable.product_template_interchangeable_form_view",  # noqa
+            view="stock_picking_product_interchangeable.product_template_only_form_view_inherit",  # noqa
         ) as form:
             form.product_tmpl_interchangeable_ids.add(self.product_chopsticks)
         self.assertEqual(

@@ -12,17 +12,23 @@ class StockMove(models.Model):
         :return: list of tuple [(product_obj, count), ...]
         """
         qty = for_qty
+        products_info = []
+
         if qty >= 0:
             return False
-        products_info = []
-        for product in self.product_id.product_interchangeable_ids:
-            available_qty = product.immediately_usable_qty
+
+        for product_id in self.product_id.product_interchangeable_ids:
+            available_qty = product_id.immediately_usable_qty
+
             if available_qty > 0 > qty:
                 product_qty = abs(qty) if available_qty + qty >= 0 else available_qty
-                products_info.append((product, product_qty))
+
+                products_info.append((product_id, product_qty))
                 qty += product_qty
-        if (mode == "all" and qty == 0) or mode == "any":
+
+        if mode == "any" or (mode == "all" and qty == 0):
             return products_info
+
         return False
 
     def _create_stock_move_interchangeable_products(self, products_info):
@@ -31,21 +37,21 @@ class StockMove(models.Model):
         :param products_info: struct list of tuple [(product_obj, count), ...]
         :return: Stock Move object
         """
-        stock_move_obj = self.env["stock.move"]
         if not products_info:
-            return stock_move_obj
-        return stock_move_obj.create(
+            return self.env["stock.move"]
+
+        return self.env["stock.move"].create(
             [
                 {
                     "picking_id": self.picking_id.id,
-                    "name": product.display_name,
-                    "product_id": product.id,
+                    "name": product_id.display_name,
+                    "product_id": product_id.id,
                     "product_uom_qty": qty,
                     "location_id": self.location_id.id,
                     "location_dest_id": self.location_dest_id.id,
                     "company_id": self.company_id.id,
                 }
-                for product, qty in products_info
+                for product_id, qty in products_info
             ]
         )
 
@@ -54,53 +60,71 @@ class StockMove(models.Model):
         Filter for applying interchangeable behavior for stock.move
         :return: True/False
         """
-        type_ = self.picking_type_id
-        mode = type_.substitute_products_mode
-        skip_behavior = not (mode and type_.code == "outgoing")
-        return not (skip_behavior or self.picking_id.pass_interchangeable)
+        picking_type_id = self.picking_type_id
 
-    def _add_note_interchangeable_picking_note(self, products_info, qty):
-        """
-        Add note for product with interchangeable products
-        :param list products_info: struct list of tuple [(product_obj, count), ...]
-        """
+        return not (
+            not (
+                picking_type_id.substitute_products_mode
+                and picking_type_id.code == "outgoing"
+            )
+            or self.picking_id.pass_interchangeable
+        )
+
+    def _add_note_interchangeable_picking_note(
+        self,
+        products_info,
+        qty,
+    ):
+        """Add interchangeable products note to picking."""
         self.ensure_one()
-        product = self.product_id
-        qty = abs(qty)
-        note = rf"<b>{product.display_name}</b> missing qty <i>{qty}</i> was replaced with:<br\>"  # noqa
-        lines = [
+
+        lines = "".join(
             f"<li><b>{product.display_name}</b> <i>{qty}</i></li>"
             for product, qty in products_info
-        ]
-        note += f"<ul>{''.join(lines)}</ul><br/>"
-        picking = self.picking_id
-        if not picking.note:
-            picking.note = note
-        else:
-            picking.note += note
+        )
+
+        self.picking_id.note = (
+            f'{self.picking_id.note or ""}'
+            rf'<b>{self.product_id.display_name}</b> missing qty '
+            rf'<i>{abs(qty)}</i> was replaced with:<br\>'
+            f'<ul>{lines}</ul><br/>'
+        )
 
     def _action_confirm(self, merge=True, merge_into=False):
-        moves = super()._action_confirm(merge=merge, merge_into=merge_into)
-        inter_moves = moves.filtered(
-            lambda move: move._interchangeable_stock_move_filter()
+        move_ids = super()._action_confirm(
+            merge=merge,
+            merge_into=merge_into,
         )
-        if not inter_moves:
-            return moves
-        other_moves = moves - inter_moves
-        move_ids = inter_moves.filtered(
-            lambda m: m.product_id.product_interchangeable_ids
+
+        inter_move_ids = move_ids.filtered(
+            lambda m_id: m_id._interchangeable_stock_move_filter()
         )
-        new_moves = self.env["stock.move"]
-        for move in move_ids:
-            mode = move.picking_type_id.substitute_products_mode
-            qty = move.product_id.immediately_usable_qty
-            products_info = move._prepare_interchangeable_products(mode, qty)
-            if products_info:
-                products_qty = sum(map(lambda item: item[1], products_info))
-                new_moves = move._create_stock_move_interchangeable_products(
+
+        if not inter_move_ids:
+            return move_ids
+
+        new_move_ids = self.env["stock.move"]
+
+        for move_id in inter_move_ids.filtered(
+            lambda m_id: m_id.product_id.product_interchangeable_ids
+        ):
+            qty = move_id.product_id.immediately_usable_qty
+
+            if products_info := move_id._prepare_interchangeable_products(
+                move_id.picking_type_id.substitute_products_mode,
+                qty,
+            ):
+                new_move_ids = move_id._create_stock_move_interchangeable_products(
                     products_info
                 )
-                new_moves |= new_moves._action_confirm(merge, merge_into)
-                move.product_uom_qty -= products_qty
-                move._add_note_interchangeable_picking_note(products_info, qty)
-        return inter_moves | new_moves | other_moves
+                new_move_ids |= new_move_ids._action_confirm(
+                    merge,
+                    merge_into,
+                )
+                move_id.product_uom_qty -= sum(map(lambda item: item[1], products_info))
+                move_id._add_note_interchangeable_picking_note(
+                    products_info,
+                    qty,
+                )
+
+        return inter_move_ids | new_move_ids | move_ids - inter_move_ids

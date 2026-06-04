@@ -1,36 +1,12 @@
 from odoo import fields, models
 
 
-class ProductTemplate(models.Model):
-    _inherit = "product.template"
-
-    product_tmpl_interchangeable_ids = fields.Many2many(
-        comodel_name="product.product",
-        compute="_compute_product_tmpl_interchangeable_ids",
-        inverse="_inverse_product_tmpl_interchangeable_ids",
-    )
-
-    def _compute_product_tmpl_interchangeable_ids(self):
-        """Compute interchangeable products"""
-        for rec in self:
-            rec.product_tmpl_interchangeable_ids = (
-                rec.product_variant_ids.product_interchangeable_ids
-            )
-
-    def _inverse_product_tmpl_interchangeable_ids(self):
-        """Set new interchangeable product"""
-        for rec in self:
-            rec.product_variant_id.product_replaces_ids = (
-                rec.product_tmpl_interchangeable_ids
-            )
-
-
 class Product(models.Model):
     _inherit = "product.product"
 
     product_interchangeable_ids = fields.Many2many(
         comodel_name="product.product",
-        string="Replaces",
+        string="Interchangeable Products",
         help="Products that can be substituted by current product",
         inverse="_inverse_product_interchangeable_ids",
         compute="_compute_product_interchangeable_ids",
@@ -46,7 +22,7 @@ class Product(models.Model):
     )
     product_replaced_by_ids = fields.Many2many(
         comodel_name="product.product",
-        string="Replaces",
+        string="Replaced By",
         relation="product_substitute_rel",
         column1="product_replaced_id",
         column2="product_id",
@@ -55,12 +31,12 @@ class Product(models.Model):
 
     def _compute_product_interchangeable_ids(self):
         """Compute interchangeable products"""
-        for rec in self:
-            rec.product_interchangeable_ids = (
-                rec.product_replaces_ids | rec.product_replaced_by_ids
-            ) - rec
+        for product_id in self:
+            product_id.product_interchangeable_ids = (
+                product_id.product_replaces_ids | product_id.product_replaced_by_ids
+            ) - product_id
 
     def _inverse_product_interchangeable_ids(self):
         """Set new interchangeable product"""
-        for rec in self:
-            rec.product_replaces_ids = rec.product_interchangeable_ids
+        for product_id in self:
+            product_id.product_replaces_ids = product_id.product_interchangeable_ids

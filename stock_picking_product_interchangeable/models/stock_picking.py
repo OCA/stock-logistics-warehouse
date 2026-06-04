@@ -9,8 +9,10 @@ class StockPicking(models.Model):
 
     @api.onchange("picking_type_id")
     def _onchange_available_pass_interchangeable(self):
-        """Compute available to showing pass_interchangeable field"""
-        type_ = self.picking_type_id
+        """Compute available pass interchangeable field."""
+        picking_type_id = self.picking_type_id
+
         self.available_pass_interchangeable = (
-            type_.substitute_products_mode and type_.code == "outgoing"
+            picking_type_id.substitute_products_mode
+            and picking_type_id.code == "outgoing"
         )

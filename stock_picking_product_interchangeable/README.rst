@@ -1,7 +1,3 @@
-.. image:: https://odoo-community.org/readme-banner-image
-   :target: https://odoo-community.org/get-involved?utm_source=readme
-   :alt: Odoo Community Association
-
 =====================================
 Stock Picking Product Interchangeable
 =====================================
@@ -17,17 +13,17 @@ Stock Picking Product Interchangeable
 .. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
     :alt: Beta
-.. |badge2| image:: https://img.shields.io/badge/license-AGPL--3-blue.png
+.. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fstock--logistics--warehouse-lightgray.png?logo=github
-    :target: https://github.com/OCA/stock-logistics-warehouse/tree/16.0/stock_picking_product_interchangeable
+    :target: https://github.com/OCA/stock-logistics-warehouse/tree/18.0/stock_picking_product_interchangeable
     :alt: OCA/stock-logistics-warehouse
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/stock-logistics-warehouse-16-0/stock-logistics-warehouse-16-0-stock_picking_product_interchangeable
+    :target: https://translation.odoo-community.org/projects/stock-logistics-warehouse-18-0/stock-logistics-warehouse-18-0-stock_picking_product_interchangeable
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/stock-logistics-warehouse&target_branch=16.0
+    :target: https://runboat.odoo-community.org/builds?repo=OCA/stock-logistics-warehouse&target_branch=18.0
     :alt: Try me on Runboat
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
@@ -70,12 +66,13 @@ feature.
 
 Select **Substitute Products** mode:
 
-- "If all available". Interchangeable products will be added products
-  will be added only if it is possible to reserve all requested amount.
-- "If any available". Interchangeable products will be added if there is
-  at least a single one available.
+-  "If all available". Interchangeable products will be added products
+   will be added only if it is possible to reserve all requested amount.
+-  "If any available". Interchangeable products will be added if there
+   is at least a single one available.
 
-|Operation Type|
+.. image:: https://raw.githubusercontent.com/OCA/stock-logistics-warehouse/18.0/stock_picking_product_interchangeable/static/img/op_type_setting.png
+   :alt: Operation Type
 
 **Product Settings**
 
@@ -85,26 +82,24 @@ be used as a substitute.
 **Important**: if you are using product variants Interchangeable
 products must be defined for each variant separately.
 
-|Product form|
-
-.. |Operation Type| image:: https://raw.githubusercontent.com/OCA/stock-logistics-warehouse/16.0/stock_picking_product_interchangeable/static/img/op_type_setting.png
-.. |Product form| image:: https://raw.githubusercontent.com/OCA/stock-logistics-warehouse/16.0/stock_picking_product_interchangeable/static/img/product_form.png
+.. image:: https://raw.githubusercontent.com/OCA/stock-logistics-warehouse/18.0/stock_picking_product_interchangeable/static/img/product_form.png
+   :alt: Product form
 
 Usage
 =====
 
-- Create a new quotation with some interchangeable product(s) in it |New
-  quotation|
+-  Create a new quotation with some interchangeable product(s) in it
+   |New quotation|
 
-- Confirm the quotation
+-  Confirm the quotation
 
-- If there is not enough stock of the product available its substitute
-  will be added to complete the delivery order
+-  If there is not enough stock of the product available its substitute
+   will be added to complete the delivery order
 
-|Picking|
+.. image:: https://raw.githubusercontent.com/OCA/stock-logistics-warehouse/18.0/stock_picking_product_interchangeable/static/img/picking_with_substitutes.png
+   :alt: Picking
 
-.. |New quotation| image:: https://raw.githubusercontent.com/OCA/stock-logistics-warehouse/16.0/stock_picking_product_interchangeable/static/img/new_quotation.png
-.. |Picking| image:: https://raw.githubusercontent.com/OCA/stock-logistics-warehouse/16.0/stock_picking_product_interchangeable/static/img/picking_with_substitutes.png
+.. |New quotation| image:: https://raw.githubusercontent.com/OCA/stock-logistics-warehouse/18.0/stock_picking_product_interchangeable/static/img/new_quotation.png
 
 Known issues / Roadmap
 ======================
@@ -114,10 +109,10 @@ created from Sales Orders.
 
 **TODO:**
 
-- Add interchangeable products to pickings created directly from the
-  "Inventory/Operations" menu
-- Use interchangeable products in other operation types. Eg "Internal
-  Transfer"
+-  Add interchangeable products to pickings created directly from the
+   "Inventory/Operations" menu
+-  Use interchangeable products in other operation types. Eg "Internal
+   Transfer"
 
 Bug Tracker
 ===========
@@ -125,7 +120,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/stock-logistics-warehouse/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/stock-logistics-warehouse/issues/new?body=module:%20stock_picking_product_interchangeable%0Aversion:%2016.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/stock-logistics-warehouse/issues/new?body=module:%20stock_picking_product_interchangeable%0Aversion:%2018.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -163,6 +158,6 @@ Current `maintainer <https://odoo-community.org/page/maintainer-role>`__:
 
 |maintainer-CetmixGitDrone| 
 
-This module is part of the `OCA/stock-logistics-warehouse <https://github.com/OCA/stock-logistics-warehouse/tree/16.0/stock_picking_product_interchangeable>`_ project on GitHub.
+This module is part of the `OCA/stock-logistics-warehouse <https://github.com/OCA/stock-logistics-warehouse/tree/18.0/stock_picking_product_interchangeable>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.

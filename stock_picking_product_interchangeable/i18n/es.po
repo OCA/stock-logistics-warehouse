@@ -4,17 +4,16 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: Odoo Server 18.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-11-11 18:37+0000\n"
-"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
-"Language-Team: none\n"
-"Language: es\n"
+"POT-Creation-Date: 2026-05-22 12:01+0000\n"
+"PO-Revision-Date: 2026-05-22 12:01+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.17\n"
+"Plural-Forms: \n"
 
 #. module: stock_picking_product_interchangeable
 #: model:ir.model.fields,field_description:stock_picking_product_interchangeable.field_stock_picking__available_pass_interchangeable
@@ -42,10 +41,15 @@ msgid "If any available"
 msgstr "Si hay alguno/a disponible"
 
 #. module: stock_picking_product_interchangeable
-#: model_terms:ir.ui.view,arch_db:stock_picking_product_interchangeable.product_normal_form_view
-#: model_terms:ir.ui.view,arch_db:stock_picking_product_interchangeable.product_template_interchangeable_form_view
+#: model_terms:ir.ui.view,arch_db:stock_picking_product_interchangeable.product_normal_form_view_inherit
+#: model_terms:ir.ui.view,arch_db:stock_picking_product_interchangeable.product_template_only_form_view_inherit
 msgid "Interchangeable"
 msgstr "Intercambiable"
+
+#. module: stock_picking_product_interchangeable
+#: model:ir.model.fields,field_description:stock_picking_product_interchangeable.field_product_product__product_interchangeable_ids
+msgid "Interchangeable Products"
+msgstr ""
 
 #. module: stock_picking_product_interchangeable
 #: model:product.template,name:stock_picking_product_interchangeable.product_product_knife_product_template
@@ -65,7 +69,7 @@ msgstr "Pase Intercambiable"
 #. module: stock_picking_product_interchangeable
 #: model:ir.model,name:stock_picking_product_interchangeable.model_stock_picking_type
 msgid "Picking Type"
-msgstr "Tipo de Recogida"
+msgstr "Tipo de albarán"
 
 #. module: stock_picking_product_interchangeable
 #: model:product.template,name:stock_picking_product_interchangeable.product_template_plate
@@ -86,7 +90,7 @@ msgstr "Producto Plantilla Intercambiable"
 #. module: stock_picking_product_interchangeable
 #: model:ir.model,name:stock_picking_product_interchangeable.model_product_product
 msgid "Product Variant"
-msgstr "Variante del Producto"
+msgstr "Variante de producto"
 
 #. module: stock_picking_product_interchangeable
 #: model:ir.model.fields,help:stock_picking_product_interchangeable.field_product_product__product_interchangeable_ids
@@ -100,8 +104,11 @@ msgid "Products that can substitute current current product"
 msgstr "Productos que pueden sustituir al producto actual"
 
 #. module: stock_picking_product_interchangeable
-#: model:ir.model.fields,field_description:stock_picking_product_interchangeable.field_product_product__product_interchangeable_ids
 #: model:ir.model.fields,field_description:stock_picking_product_interchangeable.field_product_product__product_replaced_by_ids
+msgid "Replaced By"
+msgstr ""
+
+#. module: stock_picking_product_interchangeable
 #: model:ir.model.fields,field_description:stock_picking_product_interchangeable.field_product_product__product_replaces_ids
 msgid "Replaces"
 msgstr "Sustituye a"
@@ -114,7 +121,7 @@ msgstr "Cuchara"
 #. module: stock_picking_product_interchangeable
 #: model:ir.model,name:stock_picking_product_interchangeable.model_stock_move
 msgid "Stock Move"
-msgstr "Movimiento de Existencias"
+msgstr "Movimiento de stock"
 
 #. module: stock_picking_product_interchangeable
 #: model:ir.model.fields,field_description:stock_picking_product_interchangeable.field_stock_picking_type__substitute_products_mode
@@ -124,4 +131,4 @@ msgstr "Productos sustitutivos"
 #. module: stock_picking_product_interchangeable
 #: model:ir.model,name:stock_picking_product_interchangeable.model_stock_picking
 msgid "Transfer"
-msgstr "Transferencia"
+msgstr "Traslado"
