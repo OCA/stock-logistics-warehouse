@@ -15,7 +15,7 @@ class StockMoveLine(models.Model):
                 raise ValidationError(
                     self.env._(
                         "The location %(location)s is blocked for outbound and "
-                        "stock cannot be moved out of it.",
+                        "goods cannot be moved out of it.",
                         location=line.location_id.display_name,
                     )
                 )
