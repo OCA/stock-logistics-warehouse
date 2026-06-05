@@ -14,7 +14,7 @@ class StockLocation(models.Model):
         "aggregation."
     )
     block_stock_exit = fields.Boolean(
-        help="If checked, taking stock out of this location won't be allowed. "
+        help="If checked, moving goods out of this location won't be allowed. "
         "Quants on this location are treated as if reserved and won't be "
         "available for picking. Propagates to descendant locations through "
         "the outbound block aggregation."
