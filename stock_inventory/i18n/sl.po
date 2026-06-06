@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2026-06-01 07:25+0000\n"
+"PO-Revision-Date: 2026-06-06 08:46+0000\n"
 "Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: none\n"
 "Language: sl\n"
@@ -278,7 +278,7 @@ msgstr "Postavke premikov niso bile ustvarjene"
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__message_needaction_counter
 msgid "Number of Actions"
-msgstr "Število aktivnosti"
+msgstr "Število ukrepov"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__message_has_error_counter
@@ -288,7 +288,7 @@ msgstr "Število napak"
 #. module: stock_inventory
 #: model:ir.model.fields,help:stock_inventory.field_stock_inventory__message_needaction_counter
 msgid "Number of messages requiring action"
-msgstr "Število sporočil, kjer je potrebno ukrepati"
+msgstr "Število sporočil, ki zahtevajo ukrepanje"
 
 #. module: stock_inventory
 #: model:ir.model.fields,help:stock_inventory.field_stock_inventory__message_has_error_counter
@@ -417,7 +417,7 @@ msgstr "Za opraviti"
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__website_message_ids
 msgid "Website Messages"
-msgstr "Sporočila iz spletne strani"
+msgstr "Sporočila spletne strani"
 
 #. module: stock_inventory
 #: model:ir.model.fields,help:stock_inventory.field_stock_inventory__website_message_ids
