@@ -1,0 +1,1 @@
+This module adds support for analytic tags on stock requests. Analytic tags can be used to classify and track stock requests by different cost centers, departments, or projects. The tags are automatically propagated to the related stock moves.
