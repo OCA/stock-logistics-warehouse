@@ -147,7 +147,8 @@ class StockLocation(models.Model):
                 family_locations = self.browse()
             locations = family_locations | location
             if not (locations.pending_out_move_line_ids - lines) or force:
-                locations.current_release_channel_restriction_id = False
+                # users may not have write access on locations
+                locations.sudo().current_release_channel_restriction_id = False
 
     def action_reset_release_channel(self):
         view_id = self.env.ref(
