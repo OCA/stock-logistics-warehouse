@@ -1,7 +1,7 @@
 # Copyright 2020 Camptocamp SA
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl)
 from odoo import api, fields, models
-from odoo.osv.expression import FALSE_DOMAIN
+from odoo.fields import Command
 
 
 class StockMove(models.Model):
@@ -45,7 +45,7 @@ class StockMove(models.Model):
     )
     def _compute_common_dest_move_ids(self):
         if not self.ids:
-            self.common_dest_move_ids = [(5, 0, 0)]
+            self.common_dest_move_ids = [Command.clear()]
             return
         self._flush_common_dest_move_query()
         sql = self._common_dest_move_query()
@@ -57,14 +57,14 @@ class StockMove(models.Model):
         for move in self:
             common_move_ids = res.get(move.id)
             if common_move_ids:
-                move.common_dest_move_ids = [(6, 0, common_move_ids)]
+                move.common_dest_move_ids = [Command.set(common_move_ids)]
             else:
-                move.common_dest_move_ids = [(5, 0, 0)]
+                move.common_dest_move_ids = [Command.clear()]
 
     def _search_compute_dest_move_ids(self, operator, value):
         moves = self.search([("id", operator, value)])
         if not moves:
-            return FALSE_DOMAIN
+            return fields.Domain.FALSE
         self._flush_common_dest_move_query()
         sql = self._common_dest_move_query()
         self.env.cr.execute(sql, (tuple(moves.ids),))

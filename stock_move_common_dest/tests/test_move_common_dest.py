@@ -1,21 +1,25 @@
 # Copyright 2020 Camptocamp SA
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl)
-from odoo.tests import TransactionCase
+from odoo.fields import Command
+
+from odoo.addons.base.tests.common import BaseCommon
 
 
-class TestCommonMoveDest(TransactionCase):
+class TestCommonMoveDest(BaseCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
-        cls.partner_delta = cls.env.ref("base.res_partner_4")
         cls.warehouse = cls.env.ref("stock.warehouse0")
         cls.warehouse.write({"delivery_steps": "pick_pack_ship"})
         cls.customers_location = cls.env.ref("stock.stock_location_customers")
-        cls.output_location = cls.env.ref("stock.stock_location_output")
-        cls.packing_location = cls.env.ref("stock.location_pack_zone")
-        cls.stock_shelf_location = cls.env.ref("stock.stock_location_components")
-        cls.stock_shelf_2_location = cls.env.ref("stock.stock_location_14")
+        cls.output_location = cls.warehouse.wh_output_stock_loc_id
+        cls.packing_location = cls.warehouse.wh_pack_stock_loc_id
+        cls.stock_shelf_location = cls.env["stock.location"].create(
+            {"name": "Shelf A", "location_id": cls.warehouse.lot_stock_id.id}
+        )
+        cls.stock_shelf_2_location = cls.env["stock.location"].create(
+            {"name": "Shelf B", "location_id": cls.warehouse.lot_stock_id.id}
+        )
 
         cls.out_type = cls.warehouse.out_type_id
         cls.pack_type = cls.warehouse.pack_type_id
@@ -28,9 +32,7 @@ class TestCommonMoveDest(TransactionCase):
             {"name": "Product 2", "is_storable": True}
         )
 
-        cls.procurement_group_1 = cls.env["procurement.group"].create(
-            {"name": "Test 1"}
-        )
+        cls.reference_1 = cls.env["stock.reference"].create({"name": "Test 1"})
 
     def _init_inventory(self):
         # Product 1 on shelf 1
@@ -54,7 +56,7 @@ class TestCommonMoveDest(TransactionCase):
         # Create delivery order
         ship_order = self.env["stock.picking"].create(
             {
-                "partner_id": self.partner_delta.id,
+                "partner_id": self.partner.id,
                 "location_id": self.output_location.id,
                 "location_dest_id": self.customers_location.id,
                 "picking_type_id": self.out_type.id,
@@ -62,7 +64,7 @@ class TestCommonMoveDest(TransactionCase):
         )
         pack_order = self.env["stock.picking"].create(
             {
-                "partner_id": self.partner_delta.id,
+                "partner_id": self.partner.id,
                 "location_id": self.packing_location.id,
                 "location_dest_id": self.output_location.id,
                 "picking_type_id": self.pack_type.id,
@@ -70,7 +72,7 @@ class TestCommonMoveDest(TransactionCase):
         )
         pick_order = self.env["stock.picking"].create(
             {
-                "partner_id": self.partner_delta.id,
+                "partner_id": self.partner.id,
                 "location_id": self.stock_shelf_location.id,
                 "location_dest_id": self.packing_location.id,
                 "picking_type_id": self.pick_type.id,
@@ -78,7 +80,7 @@ class TestCommonMoveDest(TransactionCase):
         )
         pick_order_2 = self.env["stock.picking"].create(
             {
-                "partner_id": self.partner_delta.id,
+                "partner_id": self.partner.id,
                 "location_id": self.stock_shelf_2_location.id,
                 "location_dest_id": self.packing_location.id,
                 "picking_type_id": self.pick_type.id,
@@ -95,7 +97,6 @@ class TestCommonMoveDest(TransactionCase):
         move_dest=None,
     ):
         move_vals = {
-            "name": product.name,
             "product_id": product.id,
             "product_uom_qty": 2.0,
             "product_uom": product.uom_id.id,
@@ -104,10 +105,10 @@ class TestCommonMoveDest(TransactionCase):
             "location_dest_id": picking.location_dest_id.id,
             "state": state,
             "procure_method": procure_method,
-            "group_id": self.procurement_group_1.id,
+            "reference_ids": [Command.set(self.reference_1.ids)],
         }
         if move_dest:
-            move_vals["move_dest_ids"] = [(4, move_dest.id, False)]
+            move_vals["move_dest_ids"] = [Command.link(move_dest.id)]
         return self.env["stock.move"].create(move_vals)
 
     def test_packing_sub_location(self):
