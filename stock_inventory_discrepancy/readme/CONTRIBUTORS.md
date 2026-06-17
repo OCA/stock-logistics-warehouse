@@ -5,3 +5,5 @@
 - [Tecnativa](https://www.tecnativa.com):
   - Ernesto Tejeda
   - Carolina Fernandez
+- [Tradesolutions.Digital](https://www.tradesolutions.digital/)
+  - Prabakaran Ranganathan
