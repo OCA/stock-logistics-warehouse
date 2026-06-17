@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-01-29 11:36+0000\n"
+"PO-Revision-Date: 2026-06-17 12:46+0000\n"
 "Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -14,27 +14,27 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.17\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: sale_stock_on_hand_popup
 #: model_terms:ir.ui.view,arch_db:sale_stock_on_hand_popup.product_quant_wizard_view_form
 msgid "Close"
-msgstr ""
+msgstr "Chiudi"
 
 #. module: sale_stock_on_hand_popup
 #: model:ir.model,name:sale_stock_on_hand_popup.model_res_config_settings
 msgid "Config Settings"
-msgstr ""
+msgstr "Impostazioni configurazione"
 
 #. module: sale_stock_on_hand_popup
 #: model:ir.model.fields,field_description:sale_stock_on_hand_popup.field_product_quant_wizard__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Creato da"
 
 #. module: sale_stock_on_hand_popup
 #: model:ir.model.fields,field_description:sale_stock_on_hand_popup.field_product_quant_wizard__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Creato il"
 
 #. module: sale_stock_on_hand_popup
 #: model:ir.model.fields,field_description:sale_stock_on_hand_popup.field_product_product__display_name
@@ -47,11 +47,13 @@ msgstr "Nome visualizzato"
 #: model:ir.model.fields,field_description:sale_stock_on_hand_popup.field_res_config_settings__group_show_transit_location_stock_wizard
 msgid "Display also transit location lines in sale line stock popup."
 msgstr ""
+"Mostra anche le righe ubicazioni di transito nel popup giacenze su righe "
+"ordine di vendita."
 
 #. module: sale_stock_on_hand_popup
 #: model:res.groups,name:sale_stock_on_hand_popup.group_show_transit_location_stock_wizard
 msgid "Display transit location lines in sale line stock popup"
-msgstr ""
+msgstr "Mostra righe ubicazioni transito nel popup giacenza riga ordine"
 
 #. module: sale_stock_on_hand_popup
 #: model:ir.model.fields,field_description:sale_stock_on_hand_popup.field_product_product__id
@@ -70,12 +72,12 @@ msgstr "Ultima modifica il"
 #. module: sale_stock_on_hand_popup
 #: model:ir.model.fields,field_description:sale_stock_on_hand_popup.field_product_quant_wizard__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Ultimo aggiornamento di"
 
 #. module: sale_stock_on_hand_popup
 #: model:ir.model.fields,field_description:sale_stock_on_hand_popup.field_product_quant_wizard__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Ultimo aggiornamento il"
 
 #. module: sale_stock_on_hand_popup
 #: model:ir.model,name:sale_stock_on_hand_popup.model_product_product
@@ -86,17 +88,17 @@ msgstr "Prodotto"
 #. module: sale_stock_on_hand_popup
 #: model:ir.model,name:sale_stock_on_hand_popup.model_product_quant_wizard
 msgid "Product Quant Wizard"
-msgstr ""
+msgstr "Procedura guidata quanti prodotto"
 
 #. module: sale_stock_on_hand_popup
 #: model_terms:ir.ui.view,arch_db:sale_stock_on_hand_popup.view_stock_configuration
 msgid "Sale Stock on Hand"
-msgstr ""
+msgstr "Giacenza vendita disponibile"
 
 #. module: sale_stock_on_hand_popup
 #: model:ir.model.fields,field_description:sale_stock_on_hand_popup.field_product_quant_wizard__stock_quant_ids
 msgid "Stock Quant"
-msgstr ""
+msgstr "Quanto di magazzino"
 
 #, python-format
 #~ msgid "Stock Lines"
