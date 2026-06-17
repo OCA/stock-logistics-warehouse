@@ -25,18 +25,20 @@ class ProductTemplate(models.Model):
         store=False,
     )
 
+    def _get_routes(self):
+        self.ensure_one()
+        if self.force_route_profile_id:
+            return self.force_route_profile_id.route_ids
+        elif self.route_profile_id:
+            return self.route_profile_id.route_ids
+        else:
+            return self.env["stock.route"].browse()
+
     @api.depends("route_profile_id", "force_route_profile_id")
     @api.depends_context("company")
     def _compute_route_ids(self):
-        for rec in self.sudo():
-            if rec.force_route_profile_id:
-                rec.route_ids = [
-                    fields.Command.set(rec.force_route_profile_id.route_ids.ids)
-                ]
-            elif rec.route_profile_id:
-                rec.route_ids = [fields.Command.set(rec.route_profile_id.route_ids.ids)]
-            else:
-                rec.route_ids = False
+        for rec in self:
+            rec.route_ids = rec._get_routes()
 
     def _search_route_ids(self, operator, value):
         return [
@@ -47,23 +49,29 @@ class ProductTemplate(models.Model):
             ("route_profile_id.route_ids", operator, value),
         ]
 
+    def _get_or_create_profile(self, profiles, routes):
+        self.ensure_one()
+        if not routes:
+            return self.env["route.profile"].browse()
+        for profile in profiles:
+            if routes == profile.route_ids:
+                return profile
+        vals = self._prepare_profile(routes)
+        return self.env["route.profile"].create(vals)
+
     def _inverse_route_ids(self):
         if self._context.get("skip_inverse_route_ids"):
             return
-        profiles = self.env["route.profile"].search([])
+        profiles = self.env["route.profile"].search(
+            [("route_ids", "in", self.mapped("route_ids").ids)]
+        )
         for rec in self:
-            for profile in profiles:
-                if rec.route_ids == profile.route_ids:
-                    rec.route_profile_id = profile
-                    break
-            else:
-                vals = rec._prepare_profile()
-                rec.route_profile_id = self.env["route.profile"].create(vals)
+            rec.route_profile_id = rec._get_or_create_profile(profiles, rec.route_ids)
 
-    def _prepare_profile(self):
+    def _prepare_profile(self, routes):
         return {
-            "name": " / ".join(self.route_ids.mapped("name")),
-            "route_ids": [fields.Command.set(self.route_ids.ids)],
+            "name": " / ".join(routes.mapped("name")),
+            "route_ids": [fields.Command.set(routes.ids)],
         }
 
     @api.model_create_multi
