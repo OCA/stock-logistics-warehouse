@@ -9,6 +9,9 @@ class RouteProfile(models.Model):
     _name = "route.profile"
     _description = "Route Profile"
 
+    def _domain_route_ids(self):
+        return [("product_selectable", "=", True)]
+
     name = fields.Char()
     company_id = fields.Many2one(
         comodel_name="res.company",
@@ -18,7 +21,7 @@ class RouteProfile(models.Model):
     route_ids = fields.Many2many(
         comodel_name="stock.route",
         string="Routes",
-        domain=[("product_selectable", "=", True)],
+        domain=lambda self: self._domain_route_ids(),
     )
     product_ids = fields.One2many(
         comodel_name="product.template",
