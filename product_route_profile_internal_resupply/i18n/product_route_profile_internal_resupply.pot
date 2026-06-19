@@ -4,56 +4,42 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 14.0\n"
+"Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-11 13:17+0000\n"
-"PO-Revision-Date: 2022-11-11 14:18+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
-"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
-"X-Generator: Poedit 3.2.1\n"
 
 #. module: product_route_profile_internal_resupply
 #: model:ir.model.fields,field_description:product_route_profile_internal_resupply.field_stock_route__internal_supply
 msgid "Internal Supply"
-msgstr "Réapprovisionnement Interne"
+msgstr ""
 
 #. module: product_route_profile_internal_resupply
 #: model:ir.model,name:product_route_profile_internal_resupply.model_stock_route
 msgid "Inventory Routes"
-msgstr "Routes logistiques"
+msgstr ""
 
 #. module: product_route_profile_internal_resupply
 #: model:ir.model,name:product_route_profile_internal_resupply.model_product_template
-#, fuzzy
 msgid "Product"
-msgstr "Modèle de produit"
+msgstr ""
 
 #. module: product_route_profile_internal_resupply
 #: model:ir.model,name:product_route_profile_internal_resupply.model_route_profile
 msgid "Route Profile"
-msgstr "Profil de routes"
+msgstr ""
 
 #. module: product_route_profile_internal_resupply
 #: model:ir.model,name:product_route_profile_internal_resupply.model_stock_warehouse
 msgid "Warehouse"
-msgstr "Entrepôt"
+msgstr ""
 
 #. module: product_route_profile_internal_resupply
 #: model:ir.model.fields,field_description:product_route_profile_internal_resupply.field_product_product__internal_supply_ids
 #: model:ir.model.fields,field_description:product_route_profile_internal_resupply.field_product_template__internal_supply_ids
 msgid "internal Supplies"
-msgstr "Réappro. Internes"
-
-#~ msgid "Display Name"
-#~ msgstr "Nom"
-
-#~ msgid "Last Modified on"
-#~ msgstr "Dernière modification le"
-
-#~ msgid "Routes"
-#~ msgstr "Routes"
+msgstr ""
