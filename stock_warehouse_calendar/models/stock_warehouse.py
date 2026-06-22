@@ -10,7 +10,7 @@ class StockWarehouse(models.Model):
     _inherit = "stock.warehouse"
 
     calendar_id = fields.Many2one(
-        comodel_name="resource.calendar", string="Working Hours"
+        comodel_name="resource.calendar", string="Working Hours", check_company=True
     )
 
     def wh_plan_days(self, date_from, delta):
