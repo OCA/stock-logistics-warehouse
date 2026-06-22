@@ -6,7 +6,9 @@ from odoo import models
 class Product(models.Model):
     _inherit = "product.product"
 
-    def _get_domain_locations_new(self, location_ids):
+    def _get_domain_locations_new(
+        self, location_ids, company_id=False, compute_child=True
+    ):
         if self.env.user.warehouse_ids:
             location_ids = set(
                 self.env["stock.location"]
@@ -18,4 +20,6 @@ class Product(models.Model):
                 )
                 .ids
             )
-        return super()._get_domain_locations_new(location_ids)
+        return super()._get_domain_locations_new(
+            location_ids, company_id=company_id, compute_child=compute_child
+        )

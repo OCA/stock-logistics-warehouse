@@ -1,6 +1,6 @@
 from decorator import decorator
 
-from odoo.tests.common import TransactionCase
+from odoo.tests.common import Form, SavepointCase
 
 
 def allowed_companies():
@@ -49,7 +49,7 @@ def allowed_companies():
     return wrapper
 
 
-class TestStockCommon(TransactionCase):
+class TestStockCommon(SavepointCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -130,6 +130,11 @@ class TestStockCommon(TransactionCase):
         cls.stock_picking_wh_3 = cls._create_picking(
             cls.warehouse_3, location_src=cls.suppliers_location
         )
+        cls.stock_pickings = (
+            cls.stock_picking_wh_1 | cls.stock_picking_wh_2 | cls.stock_picking_wh_3
+        )
+        cls.stock_pickings.action_confirm()
+        cls.stock_pickings.action_assign()
         for wh in cls.warehouses:
             cls.env["stock.warehouse.orderpoint"].with_company(wh.company_id).create(
                 {
@@ -165,26 +170,14 @@ class TestStockCommon(TransactionCase):
 
         location_src.ensure_one()
         location_dest.ensure_one()
-        picking = (
-            env["stock.picking"]
-            .with_company(warehouse.company_id)
-            .create(
-                {
-                    "picking_type_id": picking_type.id,
-                    "location_id": location_src.id,
-                    "location_dest_id": location_dest.id,
-                }
-            )
-        )
-        env["stock.move"].with_company(warehouse.company_id).create(
-            {
-                "name": "a move",
-                "product_id": cls.product.id,
-                "product_uom_qty": 5.0,
-                "product_uom": cls.product.uom_id.id,
-                "picking_id": picking.id,
-                "location_id": location_src.id,
-                "location_dest_id": location_dest.id,
-            }
-        )
-        return picking
+
+        picking_form = Form(env["stock.picking"].with_company(warehouse.company_id))
+        picking_form.picking_type_id = picking_type
+        picking_form.location_id = location_src
+        picking_form.location_dest_id = location_dest
+        with picking_form.move_ids_without_package.new() as move:
+            move.product_id = cls.product
+            move.product_uom_qty = 5
+            move.location_id = location_src
+            move.location_dest_id = location_dest
+        return picking_form.save()

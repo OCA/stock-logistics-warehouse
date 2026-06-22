@@ -88,7 +88,7 @@ class TestStockWarehouseAccess(TestStockCommon):
         )
         picking.action_assign()
         self.assertEqual(picking.state, "assigned")
-        picking.move_ids.write({"quantity_done": 5})
+        picking.move_lines.write({"quantity_done": 5})
         picking.button_validate()
         self.assertEqual(picking.state, "done")
 
@@ -97,7 +97,7 @@ class TestStockWarehouseAccess(TestStockCommon):
         "stock_user_c12_wh23",
     )
     def test_forbid_create_picking_other_warehouse(self):
-        with self.assertRaisesRegex(AccessError, ".*you are not allowed to create.*"):
+        with self.assertRaisesRegex(AccessError, ".*you are not allowed to.*"):
             self._create_picking(
                 self.warehouse_1,
                 location_src=self.suppliers_location,
@@ -203,7 +203,7 @@ class TestStockWarehouseAccessWithReceivedGoods(TestStockCommon):
             cls.stock_picking_wh_1 | cls.stock_picking_wh_2 | cls.stock_picking_wh_3
         )
         pickings.action_assign()
-        pickings.move_ids.write({"quantity_done": 5})
+        pickings.move_lines.write({"quantity_done": 5})
         pickings.button_validate()
 
     @users(
@@ -213,7 +213,7 @@ class TestStockWarehouseAccessWithReceivedGoods(TestStockCommon):
         self.assertEqual(
             self.env["stock.move.line"]
             .search([])
-            .mapped("picking_type_id.warehouse_id"),
+            .mapped("picking_id.picking_type_id.warehouse_id"),
             (self.warehouse_2),
         )
 
@@ -224,7 +224,7 @@ class TestStockWarehouseAccessWithReceivedGoods(TestStockCommon):
         self.assertEqual(
             self.env["stock.move.line"]
             .search([])
-            .mapped("picking_type_id.warehouse_id"),
+            .mapped("picking_id.picking_type_id.warehouse_id"),
             (self.warehouse_2 | self.warehouse_3),
         )
 
@@ -235,8 +235,10 @@ class TestStockWarehouseAccessWithReceivedGoods(TestStockCommon):
     def test_read_stock_move_line_wh12(self):
         self.assertEqual(
             self.env["stock.move.line"]
-            .search([("picking_type_id.warehouse_id", "!=", self.warehouse_0.id)])
-            .mapped("picking_type_id.warehouse_id"),
+            .search(
+                [("picking_id.picking_type_id.warehouse_id", "!=", self.warehouse_0.id)]
+            )
+            .mapped("picking_id.picking_type_id.warehouse_id"),
             (self.warehouse_1 | self.warehouse_2),
         )
 
@@ -245,7 +247,7 @@ class TestStockWarehouseAccessWithReceivedGoods(TestStockCommon):
     )
     def test_read_stock_quant_wh2_only(self):
         self.assertEqual(
-            self.env["stock.quant"].search([]).mapped("warehouse_id"),
+            self.env["stock.quant"].search([]).mapped("location_id.warehouse_id"),
             (self.warehouse_2),
         )
 
@@ -254,7 +256,7 @@ class TestStockWarehouseAccessWithReceivedGoods(TestStockCommon):
     )
     def test_read_stock_quant_wh23(self):
         self.assertEqual(
-            self.env["stock.quant"].search([]).mapped("warehouse_id"),
+            self.env["stock.quant"].search([]).mapped("location_id.warehouse_id"),
             (self.warehouse_2 | self.warehouse_3),
         )
 
@@ -265,8 +267,8 @@ class TestStockWarehouseAccessWithReceivedGoods(TestStockCommon):
     def test_read_stock_quant_wh12(self):
         self.assertEqual(
             self.env["stock.quant"]
-            .search([("warehouse_id", "!=", self.warehouse_0.id)])
-            .mapped("warehouse_id"),
+            .search([("location_id.warehouse_id", "!=", self.warehouse_0.id)])
+            .mapped("location_id.warehouse_id"),
             (self.warehouse_1 | self.warehouse_2),
         )
 
