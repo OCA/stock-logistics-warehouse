@@ -18,7 +18,6 @@ msgstr ""
 msgid "Lot/Serial"
 msgstr ""
 
-
 #. module: stock_lot_list_price
 #: model:ir.model.fields,field_description:stock_lot_list_price.field_stock_lot__lst_price
 msgid "Sales Price"
