@@ -4,7 +4,8 @@ import logging
 import socket
 import ssl
 
-from odoo import fields, models
+from odoo import api, fields, models
+from odoo.exceptions import ValidationError
 
 _logger = logging.getLogger(__name__)
 
@@ -41,6 +42,18 @@ class VerticalLiftShuttle(models.Model):
     command_ids = fields.One2many(
         "vertical.lift.command", "shuttle_id", string="Hardware commands"
     )
+    use_shared_storage_location = fields.Boolean(
+        default=False,
+        help="If enabled, allows defining a specific shared location for this shuttle.",
+    )
+    shared_storage_location_id = fields.Many2one(
+        comodel_name="stock.location",
+        index="btree_not_null",
+        compute="_compute_shared_storage_location_id",
+        readonly=False,
+        store=True,
+        help="The location used for shared storage operations.",
+    )
     _sql_constraints = [
         (
             "location_id_unique",
@@ -51,6 +64,27 @@ class VerticalLiftShuttle(models.Model):
 
     def _selection_hardware(self):
         return [("simulation", "Simulation")]
+
+    @api.depends("use_shared_storage_location", "location_id")
+    def _compute_shared_storage_location_id(self):
+        for record in self:
+            if not record.use_shared_storage_location:
+                # Rule: If False, always matches location_id
+                record.shared_storage_location_id = record.location_id
+
+    @api.constrains("use_shared_storage_location", "shared_storage_location_id")
+    def _check_shared_storage_location_id(self):
+        for record in self:
+            if (
+                record.use_shared_storage_location
+                and not record.shared_storage_location_id
+            ):
+                raise ValidationError(
+                    self.env._(
+                        "Shared Storage Location is required "
+                        "when 'Use Shared Storage' is enabled."
+                    )
+                )
 
     @property
     def _model_for_mode(self):

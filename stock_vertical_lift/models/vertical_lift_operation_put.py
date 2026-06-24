@@ -211,7 +211,9 @@ class VerticalLiftOperationPut(models.Model):
         return False
 
     def fetch_tray(self):
-        self.current_move_line_id.fetch_vertical_lift_tray_dest()
+        self.current_move_line_id.with_context(
+            shuttle_id=self.shuttle_id.id
+        ).fetch_vertical_lift_tray_dest()
 
     def button_release(self):
         res = super().button_release()
