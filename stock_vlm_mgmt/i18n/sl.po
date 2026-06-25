@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2026-06-25 09:56+0000\n"
+"PO-Revision-Date: 2026-06-25 13:30+0000\n"
 "Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: none\n"
 "Language: sl\n"
@@ -66,7 +66,7 @@ msgstr "Aktivno"
 #. module: stock_vlm_mgmt
 #: model_terms:ir.actions.act_window,help:stock_vlm_mgmt.action_stock_location_tray_type
 msgid "Add a Location Tray Type"
-msgstr "Dodaj vrsto preala za lokacijo"
+msgstr "Dodaj tip predala za lokacijo"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields,help:stock_vlm_mgmt.field_stock_location__vlm_address
