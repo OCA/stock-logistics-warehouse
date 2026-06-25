@@ -1,0 +1,71 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_picking_completion_info
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: sl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
+"n%100==4 ? 2 : 3;\n"
+
+#. module: stock_picking_completion_info
+#: model:ir.model.fields,field_description:stock_picking_completion_info.field_stock_picking__completion_info
+msgid "Completion Info"
+msgstr ""
+
+#. module: stock_picking_completion_info
+#: model:ir.model.fields,field_description:stock_picking_completion_info.field_stock_picking_type__display_completion_info
+msgid "Display Completion Info"
+msgstr ""
+
+#. module: stock_picking_completion_info
+#: model:ir.model.fields.selection,name:stock_picking_completion_info.selection__stock_picking__completion_info__full_order_picking
+msgid ""
+"Full order picking: You are processing a full order picking that will allow "
+"next operation to be processed"
+msgstr ""
+
+#. module: stock_picking_completion_info
+#: model:ir.model.fields,help:stock_picking_completion_info.field_stock_picking_type__display_completion_info
+msgid ""
+"Inform operator of a completed operation at processing and at completion"
+msgstr ""
+
+#. module: stock_picking_completion_info
+#: model:ir.model.fields.selection,name:stock_picking_completion_info.selection__stock_picking__completion_info__last_picking
+msgid ""
+"Last picking: Completion of this operation allows next operations to be "
+"processed."
+msgstr ""
+
+#. module: stock_picking_completion_info
+#: model:ir.model.fields.selection,name:stock_picking_completion_info.selection__stock_picking__completion_info__next_picking_ready
+msgid "Next operations are ready to be processed."
+msgstr ""
+
+#. module: stock_picking_completion_info
+#: model:ir.model.fields.selection,name:stock_picking_completion_info.selection__stock_picking__completion_info__no
+msgid "No"
+msgstr ""
+
+#. module: stock_picking_completion_info
+#: model:ir.model,name:stock_picking_completion_info.model_stock_picking_type
+msgid "Picking Type"
+msgstr ""
+
+#. module: stock_picking_completion_info
+#: model:ir.model,name:stock_picking_completion_info.model_stock_move
+msgid "Stock Move"
+msgstr ""
+
+#. module: stock_picking_completion_info
+#: model:ir.model,name:stock_picking_completion_info.model_stock_picking
+msgid "Transfer"
+msgstr ""
