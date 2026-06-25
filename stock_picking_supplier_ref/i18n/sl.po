@@ -6,7 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2026-06-25 10:26+0000\n"
+"Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: none\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
@@ -14,6 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
 "n%100==4 ? 2 : 3;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: stock_picking_supplier_ref
 #: model:ir.model.fields,help:stock_picking_supplier_ref.field_stock_picking__supplier_reference
@@ -22,13 +24,15 @@ msgid ""
 "receipt. This does not sync automatically with the supplier reference in the"
 " purchase order."
 msgstr ""
+"Vnesi dobavnico ali sklic pošiljke dobavitelja, povezano s tem potrdilom. To "
+"se ne samodejno sinhronizira s sklicem dobavitelja v nabavnem nalogu."
 
 #. module: stock_picking_supplier_ref
 #: model:ir.model.fields,field_description:stock_picking_supplier_ref.field_stock_picking__supplier_reference
 msgid "Supplier Delivery Reference"
-msgstr ""
+msgstr "Dobaviteljev sklic dobave"
 
 #. module: stock_picking_supplier_ref
 #: model:ir.model,name:stock_picking_supplier_ref.model_stock_picking
 msgid "Transfer"
-msgstr ""
+msgstr "Premestitev"
