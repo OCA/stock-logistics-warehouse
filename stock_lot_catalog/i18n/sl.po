@@ -6,7 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2026-06-25 11:42+0000\n"
+"Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: none\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
@@ -14,103 +15,104 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
 "n%100==4 ? 2 : 3;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: stock_lot_catalog
 #. odoo-javascript
 #: code:addons/stock_lot_catalog/static/src/stock_lot_catalog/order_line/order_line.xml:0
 msgid "Add"
-msgstr ""
+msgstr "Dodaj"
 
 #. module: stock_lot_catalog
 #: model:ir.model.fields,field_description:stock_lot_catalog.field_stock_lot__product_template_attribute_value_ids
 msgid "Attribute Values"
-msgstr ""
+msgstr "Vrednosti atributov"
 
 #. module: stock_lot_catalog
 #: model_terms:ir.ui.view,arch_db:stock_lot_catalog.lot_view_search_catalog
 msgid "Attributes"
-msgstr ""
+msgstr "Atributi"
 
 #. module: stock_lot_catalog
 #. odoo-javascript
 #: code:addons/stock_lot_catalog/static/src/stock_lot_catalog/kanban_controller.esm.js:0
 msgid "Back to Order"
-msgstr ""
+msgstr "Nazaj na nalog"
 
 #. module: stock_lot_catalog
 #. odoo-javascript
 #: code:addons/stock_lot_catalog/static/src/stock_lot_catalog/kanban_controller.esm.js:0
 msgid "Back to Quotation"
-msgstr ""
+msgstr "Nazaj na predračun"
 
 #. module: stock_lot_catalog
 #. odoo-javascript
 #: code:addons/stock_lot_catalog/static/src/stock_lot_catalog/kanban_renderer.xml:0
 msgid "Create a lot"
-msgstr ""
+msgstr "Ustvari lot"
 
 #. module: stock_lot_catalog
 #: model_terms:ir.ui.view,arch_db:stock_lot_catalog.lot_view_search_catalog
 msgid "Group By"
-msgstr ""
+msgstr "Združi po"
 
 #. module: stock_lot_catalog
 #: model:ir.model.fields,field_description:stock_lot_catalog.field_stock_lot__product_image_128
 msgid "Image 128"
-msgstr ""
+msgstr "Slika 128"
 
 #. module: stock_lot_catalog
 #: model_terms:ir.ui.view,arch_db:stock_lot_catalog.lot_view_search_catalog
 msgid "Location"
-msgstr ""
+msgstr "Lokacija"
 
 #. module: stock_lot_catalog
 #: model_terms:ir.ui.view,arch_db:stock_lot_catalog.lot_view_kanban_catalog
 #: model_terms:ir.ui.view,arch_db:stock_lot_catalog.lot_view_search_catalog
 msgid "Lot"
-msgstr ""
+msgstr "Lot"
 
 #. module: stock_lot_catalog
 #: model:ir.model,name:stock_lot_catalog.model_stock_lot
 msgid "Lot/Serial"
-msgstr ""
+msgstr "Lot/serijska št."
 
 #. module: stock_lot_catalog
 #. odoo-python
 #: code:addons/stock_lot_catalog/models/stock_lot_catalog_mixin.py:0
 msgid "Lots"
-msgstr ""
+msgstr "Loti"
 
 #. module: stock_lot_catalog
 #. odoo-javascript
 #: code:addons/stock_lot_catalog/static/src/stock_lot_catalog/kanban_renderer.xml:0
 msgid "No lots could be found."
-msgstr ""
+msgstr "Ni najdenih lotov."
 
 #. module: stock_lot_catalog
 #: model_terms:ir.ui.view,arch_db:stock_lot_catalog.lot_view_search_catalog
 msgid "Product"
-msgstr ""
+msgstr "Proizvod"
 
 #. module: stock_lot_catalog
 #. odoo-javascript
 #: code:addons/stock_lot_catalog/static/src/stock_lot_catalog/order_line/order_line.xml:0
 msgid "Remove"
-msgstr ""
+msgstr "Odstrani"
 
 #. module: stock_lot_catalog
 #: model:ir.model,name:stock_lot_catalog.model_stock_lot_catalog_mixin
 msgid "Stock Lot Catalog Mixin"
-msgstr ""
+msgstr "Mixin za katalog lotov"
 
 #. module: stock_lot_catalog
 #. odoo-javascript
 #: code:addons/stock_lot_catalog/static/src/stock_lot_catalog/order_line/order_line.xml:0
 msgid "Unit price:"
-msgstr ""
+msgstr "Cena enote:"
 
 #. module: stock_lot_catalog
 #. odoo-javascript
 #: code:addons/stock_lot_catalog/static/src/stock_lot_catalog/order_line/order_line.xml:0
 msgid "You can't edit this lot in the catalog."
-msgstr ""
+msgstr "Tega lota ne morete urejati v katalogu."
