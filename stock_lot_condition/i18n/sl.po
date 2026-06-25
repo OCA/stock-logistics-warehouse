@@ -6,7 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2026-06-25 11:55+0000\n"
+"Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: none\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
@@ -14,43 +15,44 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
 "n%100==4 ? 2 : 3;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: stock_lot_condition
 #: model:stock.lot.condition,name:stock_lot_condition.condition_acceptable
 msgid "Acceptable"
-msgstr ""
+msgstr "Sprejemljivo"
 
 #. module: stock_lot_condition
 #: model:ir.model.fields,field_description:stock_lot_condition.field_stock_lot_condition__active
 msgid "Active"
-msgstr ""
+msgstr "Aktivno"
 
 #. module: stock_lot_condition
 #: model_terms:ir.ui.view,arch_db:stock_lot_condition.stock_lot_condition_view_form
 #: model_terms:ir.ui.view,arch_db:stock_lot_condition.stock_lot_condition_view_search
 msgid "Archived"
-msgstr ""
+msgstr "Arhivirano"
 
 #. module: stock_lot_condition
 #: model:stock.lot.condition,name:stock_lot_condition.condition_as_new
 msgid "As new"
-msgstr ""
+msgstr "Kot novo"
 
 #. module: stock_lot_condition
 #: model:ir.model.fields,field_description:stock_lot_condition.field_stock_lot_condition__color
 msgid "Color"
-msgstr ""
+msgstr "Barva"
 
 #. module: stock_lot_condition
 #: model:ir.model.fields,field_description:stock_lot_condition.field_stock_lot__condition_id
 #: model_terms:ir.ui.view,arch_db:stock_lot_condition.search_product_lot_filter
 msgid "Condition"
-msgstr ""
+msgstr "Stanje"
 
 #. module: stock_lot_condition
 #: model:ir.model.fields,field_description:stock_lot_condition.field_stock_lot__condition_note
 msgid "Condition Note"
-msgstr ""
+msgstr "Opomba o stanju"
 
 #. module: stock_lot_condition
 #: model:ir.model.fields,field_description:stock_lot_condition.field_stock_lot__condition_required_note
@@ -60,37 +62,37 @@ msgstr ""
 #. module: stock_lot_condition
 #: model:ir.actions.act_window,name:stock_lot_condition.stock_lot_condition_action
 msgid "Conditions"
-msgstr ""
+msgstr "Stanja"
 
 #. module: stock_lot_condition
 #: model:ir.model.fields,field_description:stock_lot_condition.field_stock_lot_condition__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Ustvaril"
 
 #. module: stock_lot_condition
 #: model:ir.model.fields,field_description:stock_lot_condition.field_stock_lot_condition__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Ustvarjeno"
 
 #. module: stock_lot_condition
 #: model:ir.model.fields,field_description:stock_lot_condition.field_stock_lot_condition__description
 msgid "Description"
-msgstr ""
+msgstr "Opis"
 
 #. module: stock_lot_condition
 #: model:ir.model.fields,field_description:stock_lot_condition.field_stock_lot_condition__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Prikazani naziv"
 
 #. module: stock_lot_condition
 #: model:stock.lot.condition,name:stock_lot_condition.condition_good
 msgid "Good"
-msgstr ""
+msgstr "Dobro"
 
 #. module: stock_lot_condition
 #: model:ir.model.fields,field_description:stock_lot_condition.field_stock_lot_condition__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: stock_lot_condition
 #: model:ir.model.fields,help:stock_lot_condition.field_stock_lot_condition__required_note
@@ -102,22 +104,22 @@ msgstr ""
 #. module: stock_lot_condition
 #: model:ir.model.fields,field_description:stock_lot_condition.field_stock_lot_condition__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Zadnji posodobil"
 
 #. module: stock_lot_condition
 #: model:ir.model.fields,field_description:stock_lot_condition.field_stock_lot_condition__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Zadnjič posodobljeno"
 
 #. module: stock_lot_condition
 #: model:ir.ui.menu,name:stock_lot_condition.menu_stock_lot_condition
 msgid "Lot conditions"
-msgstr ""
+msgstr "Stanja lotov"
 
 #. module: stock_lot_condition
 #: model:ir.model,name:stock_lot_condition.model_stock_lot
 msgid "Lot/Serial"
-msgstr ""
+msgstr "Lot/serijska št."
 
 #. module: stock_lot_condition
 #: model:stock.lot.condition,description:stock_lot_condition.condition_acceptable
@@ -134,7 +136,7 @@ msgstr ""
 #. module: stock_lot_condition
 #: model:ir.model.fields,field_description:stock_lot_condition.field_stock_lot_condition__name
 msgid "Name"
-msgstr ""
+msgstr "Naziv"
 
 #. module: stock_lot_condition
 #: model:ir.model.fields,field_description:stock_lot_condition.field_stock_lot_condition__required_note
@@ -144,12 +146,12 @@ msgstr ""
 #. module: stock_lot_condition
 #: model:ir.model.fields,field_description:stock_lot_condition.field_stock_lot_condition__sequence
 msgid "Sequence"
-msgstr ""
+msgstr "Zaporedje"
 
 #. module: stock_lot_condition
 #: model:ir.model,name:stock_lot_condition.model_stock_lot_condition
 msgid "Stock Lot Condition"
-msgstr ""
+msgstr "Stanje lota"
 
 #. module: stock_lot_condition
 #: model:stock.lot.condition,description:stock_lot_condition.condition_as_new
@@ -160,7 +162,7 @@ msgstr ""
 #. module: stock_lot_condition
 #: model:stock.lot.condition,name:stock_lot_condition.condition_very_good
 msgid "Very good"
-msgstr ""
+msgstr "Zelo dobro"
 
 #. module: stock_lot_condition
 #: model:stock.lot.condition,description:stock_lot_condition.condition_good
