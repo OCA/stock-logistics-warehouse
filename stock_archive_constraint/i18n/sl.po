@@ -6,7 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2026-06-25 11:47+0000\n"
+"Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: none\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
@@ -14,11 +15,12 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
 "n%100==4 ? 2 : 3;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: stock_archive_constraint
 #: model:ir.model,name:stock_archive_constraint.model_stock_location
 msgid "Inventory Locations"
-msgstr ""
+msgstr "Lokacije inventarja"
 
 #. module: stock_archive_constraint
 #. odoo-python
@@ -27,6 +29,8 @@ msgid ""
 "It is not possible to archive location '%(display_name)s' which has "
 "associated picking lines."
 msgstr ""
+"Lokacije '%(display_name)s', ki ima povezane postavke dobavnic, ni mogoče "
+"arhivirati."
 
 #. module: stock_archive_constraint
 #. odoo-python
@@ -35,6 +39,8 @@ msgid ""
 "It is not possible to archive location '%(display_name)s' which has "
 "associated stock reservations."
 msgstr ""
+"Lokacije '%(display_name)s', ki ima povezane rezervacije zalog, ni mogoče "
+"arhivirati."
 
 #. module: stock_archive_constraint
 #. odoo-python
@@ -43,6 +49,8 @@ msgid ""
 "It is not possible to archive product '%(display_name)s' which has "
 "associated picking lines."
 msgstr ""
+"Proizvoda '%(display_name)s', ki ima povezane postavke dobavnic, ni mogoče "
+"arhivirati."
 
 #. module: stock_archive_constraint
 #. odoo-python
@@ -51,6 +59,8 @@ msgid ""
 "It is not possible to archive product '%(display_name)s' which has "
 "associated stock quantities."
 msgstr ""
+"Proizvoda '%(display_name)s', ki ima povezane količine zalog, ni mogoče "
+"arhivirati."
 
 #. module: stock_archive_constraint
 #. odoo-python
@@ -59,8 +69,10 @@ msgid ""
 "It is not possible to archive product '%(display_name)s' which has "
 "associated stock reservations."
 msgstr ""
+"Proizvoda '%(display_name)s', ki ima povezane rezervacije zalog, ni mogoče "
+"arhivirati."
 
 #. module: stock_archive_constraint
 #: model:ir.model,name:stock_archive_constraint.model_product_product
 msgid "Product Variant"
-msgstr ""
+msgstr "Različica proizvoda"
