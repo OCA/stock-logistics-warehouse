@@ -6,7 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2026-06-25 11:27+0000\n"
+"Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: none\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
@@ -14,21 +15,22 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
 "n%100==4 ? 2 : 3;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: product_route_profile
 #: model:ir.model.fields,field_description:product_route_profile.field_route_profile__company_id
 msgid "Company"
-msgstr ""
+msgstr "Družba"
 
 #. module: product_route_profile
 #: model:ir.model.fields,field_description:product_route_profile.field_route_profile__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Ustvaril"
 
 #. module: product_route_profile
 #: model:ir.model.fields,field_description:product_route_profile.field_route_profile__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Ustvarjeno"
 
 #. module: product_route_profile
 #: model:ir.model.fields,help:product_route_profile.field_product_product__route_ids
@@ -38,16 +40,18 @@ msgid ""
 "of the product: whether it will be bought, manufactured, replenished on "
 "order, etc."
 msgstr ""
+"Glede na nameščene module vam bo to omogočilo, da določite progo izdelka: "
+"ali bo kupljen, izdelan, dopolnjen po naročilu itd."
 
 #. module: product_route_profile
 #: model:ir.model.fields,field_description:product_route_profile.field_route_profile__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Prikazani naziv"
 
 #. module: product_route_profile
 #: model:ir.model.fields,field_description:product_route_profile.field_route_profile__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: product_route_profile
 #: model:ir.model.fields,help:product_route_profile.field_product_product__force_route_profile_id
@@ -56,73 +60,75 @@ msgid ""
 "If defined, the priority route profile will be used and will replace the "
 "route profile, only for this company."
 msgstr ""
+"Če je definiran, bo uporabljen profil prednostne proge, ki bo nadomestil "
+"profil proge, le za to družbo."
 
 #. module: product_route_profile
 #: model:ir.model,name:product_route_profile.model_stock_route
 msgid "Inventory Routes"
-msgstr ""
+msgstr "Proge inventarja"
 
 #. module: product_route_profile
 #: model:ir.model.fields,field_description:product_route_profile.field_route_profile__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Zadnji posodobil"
 
 #. module: product_route_profile
 #: model:ir.model.fields,field_description:product_route_profile.field_route_profile__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Zadnjič posodobljeno"
 
 #. module: product_route_profile
 #: model:ir.model.fields,field_description:product_route_profile.field_route_profile__name
 msgid "Name"
-msgstr ""
+msgstr "Naziv"
 
 #. module: product_route_profile
 #: model:ir.model.fields,field_description:product_route_profile.field_product_product__force_route_profile_id
 #: model:ir.model.fields,field_description:product_route_profile.field_product_template__force_route_profile_id
 msgid "Priority Route Profile"
-msgstr ""
+msgstr "Profil prednostne proge"
 
 #. module: product_route_profile
 #: model:ir.model,name:product_route_profile.model_product_template
 msgid "Product"
-msgstr ""
+msgstr "Proizvod"
 
 #. module: product_route_profile
 #: model:ir.model.fields,field_description:product_route_profile.field_stock_route__product_ids
 msgid "Products"
-msgstr ""
+msgstr "Proizvodi"
 
 #. module: product_route_profile
 #: model:ir.model.fields,field_description:product_route_profile.field_route_profile__product_ids
 msgid "Products (default)"
-msgstr ""
+msgstr "Proizvodi (privzeto)"
 
 #. module: product_route_profile
 #: model:ir.model,name:product_route_profile.model_route_profile
 #: model:ir.model.fields,field_description:product_route_profile.field_product_product__route_profile_id
 #: model:ir.model.fields,field_description:product_route_profile.field_product_template__route_profile_id
 msgid "Route Profile"
-msgstr ""
+msgstr "Profil proge"
 
 #. module: product_route_profile
 #: model:ir.model.fields,field_description:product_route_profile.field_stock_route__route_profile_ids
 msgid "Route Profiles"
-msgstr ""
+msgstr "Profili prog"
 
 #. module: product_route_profile
 #: model:ir.model.fields,field_description:product_route_profile.field_product_product__route_ids
 #: model:ir.model.fields,field_description:product_route_profile.field_product_template__route_ids
 #: model:ir.model.fields,field_description:product_route_profile.field_route_profile__route_ids
 msgid "Routes"
-msgstr ""
+msgstr "Proge"
 
 #. module: product_route_profile
 #: model:ir.actions.act_window,name:product_route_profile.action_route_profile_form
 #: model:ir.ui.menu,name:product_route_profile.menu_route_profile_config
 #: model_terms:ir.ui.view,arch_db:product_route_profile.route_profile_form
 msgid "Routes Profiles"
-msgstr ""
+msgstr "Profili prog"
 
 #. module: product_route_profile
 #: model_terms:ir.actions.act_window,help:product_route_profile.action_route_profile_form
@@ -131,3 +137,7 @@ msgid ""
 "                your warehouses and that define the flows of your products.\n"
 "                A route profile can be set on each product as \"Route Profile\" or \"Priority Route Profile\" (company dependent)."
 msgstr ""
+"Tukaj lahko določite profile prog, ki potekajo skozi vaša\n"
+"                skladišča in ki določajo tokove vaših proizvodov.\n"
+"                Profil proge je mogoče nastaviti za vsak proizvod kot »"
+"Profil proge« ali »Profil prednostne proge« (odvisno od podjetja)."
