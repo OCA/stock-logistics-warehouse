@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2026-06-25 13:30+0000\n"
+"PO-Revision-Date: 2026-06-25 13:50+0000\n"
 "Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: none\n"
 "Language: sl\n"
@@ -224,12 +224,12 @@ msgstr "Prikaži izvorni pladenj"
 #. module: stock_location_tray
 #: model:ir.model.fields,field_description:stock_location_tray.field_stock_move_line__show_tray_destination_location
 msgid "Show Tray Destination Location"
-msgstr ""
+msgstr "Prikaži ciljno lokacijo predala"
 
 #. module: stock_location_tray
 #: model:ir.model.fields,field_description:stock_location_tray.field_stock_move_line__show_tray_source_location
 msgid "Show Tray Source Location"
-msgstr ""
+msgstr "Prikaži izvorno lokacijo predala"
 
 #. module: stock_location_tray
 #: model_terms:ir.ui.view,arch_db:stock_location_tray.view_stock_location_tray_type_form
@@ -260,6 +260,10 @@ msgid ""
 "\n"
 "%(location_bullets)s"
 msgstr ""
+"Tip predala %(name)s uporabljajo naslednje lokacije in ga ni mogoče "
+"arhivirati:\n"
+"\n"
+"%(location_bullets)s"
 
 #. module: stock_location_tray
 #. odoo-python
@@ -269,6 +273,10 @@ msgid ""
 "\n"
 "%(location_bullets)s"
 msgstr ""
+"Tip predala %(name)s uporabljajo naslednje lokacije, zato njegove velikosti "
+"ni mogoče spremeniti:\n"
+"\n"
+"%(location_bullets)s"
 
 #. module: stock_location_tray
 #: model_terms:ir.ui.view,arch_db:stock_location_tray.view_location_form
@@ -299,7 +307,7 @@ msgstr "Tip predala"
 #. module: stock_location_tray
 #: model:ir.model.fields,help:stock_location_tray.field_stock_location__tray_cell_contains_stock
 msgid "Used to know if a cell of a Tray location is empty."
-msgstr ""
+msgstr "Uporablja se za ugotavljanje, ali je celica lokacije predala prazna."
 
 #. module: stock_location_tray
 #: model:ir.model.fields,field_description:stock_location_tray.field_stock_location_tray_type__width
@@ -320,7 +328,7 @@ msgstr "Širina predala v mm"
 #. odoo-python
 #: code:addons/stock_location_tray/tests/test_location.py:0
 msgid "You can't disable locations %s because they still contain products."
-msgstr ""
+msgstr "Lokacij %s ni mogoče onemogočiti, ker še vedno vsebujejo proizvode."
 
 #. module: stock_location_tray
 #: model_terms:ir.ui.view,arch_db:stock_location_tray.view_stock_location_tray_type_form
