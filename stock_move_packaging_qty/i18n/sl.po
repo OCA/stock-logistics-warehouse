@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2026-06-25 11:07+0000\n"
+"PO-Revision-Date: 2026-06-25 11:10+0000\n"
 "Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: none\n"
 "Language: sl\n"
@@ -70,18 +70,18 @@ msgstr "Premiki proizvoda (postavka premika zaloge)"
 #. module: stock_move_packaging_qty
 #: model:ir.model.fields,help:stock_move_packaging_qty.field_stock_move_line__product_packaging_quantity
 msgid "Quantity done in Product Packaging"
-msgstr ""
+msgstr "Opravljena količina v pakiranju proizvoda"
 
 #. module: stock_move_packaging_qty
 #: model_terms:ir.ui.view,arch_db:stock_move_packaging_qty.view_stock_move_line_operation_tree
 msgid "Reserved Packaging Quantity"
-msgstr ""
+msgstr "Rezervirana količina pakiranj"
 
 #. module: stock_move_packaging_qty
 #: model_terms:ir.ui.view,arch_db:stock_move_packaging_qty.view_stock_move_line_detailed_operation_tree
 #: model_terms:ir.ui.view,arch_db:stock_move_packaging_qty.view_stock_move_line_operation_tree
 msgid "Reserved Pkg."
-msgstr ""
+msgstr "Rezerv. pakir."
 
 #. module: stock_move_packaging_qty
 #: model:ir.model,name:stock_move_packaging_qty.model_stock_move
@@ -94,6 +94,9 @@ msgid ""
 "The system calculates Done Packaging Automatically on Stock Move Lines.\n"
 "Disable this to prevent automatic calculation."
 msgstr ""
+"Sistem samodejno izračuna količino končanih pakiranj na postavkah premika "
+"zaloge.\n"
+"Onemogočite to možnost, da preprečite samodejni izračun."
 
 #. module: stock_move_packaging_qty
 #. odoo-python
@@ -102,3 +105,5 @@ msgid ""
 "There are %d move lines involved. Please set their product packaging done "
 "qty directly."
 msgstr ""
+"Vključenih je %d postavk premika. Opravljeno količino pakiranja proizvoda "
+"nastavite neposredno na njih."
