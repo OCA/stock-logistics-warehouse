@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2026-06-25 13:01+0000\n"
+"PO-Revision-Date: 2026-06-25 13:05+0000\n"
 "Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: none\n"
 "Language: sl\n"
@@ -21,12 +21,14 @@ msgstr ""
 #. odoo-python
 #: code:addons/stock_vertical_lift/models/stock_location.py:0
 msgid "<br/>Laser pointer on x%(x)s y%(y)s (%(left)smm, %(bottom)smm)"
-msgstr ""
+msgstr "<br/>Laserski kazalnik na x%(x)s y%(y)s (%(left)s mm, %(bottom)s mm)"
 
 #. module: stock_vertical_lift
 #: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_shuttle_view_kanban
 msgid "<i class=\"fa fa-ellipsis-v\" role=\"img\" aria-label=\"Manage\" title=\"Manage\"/>"
 msgstr ""
+"<i class=\"fa fa-ellipsis-v\" role=\"img\" aria-label=\"Upravljaj\" "
+"title=\"Upravljaj\"/>"
 
 #. module: stock_vertical_lift
 #: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_operation_base_screen_view
@@ -47,17 +49,17 @@ msgstr "<span>: </span>"
 #. module: stock_vertical_lift
 #: model:ir.model,name:stock_vertical_lift.model_vertical_lift_shuttle_manual_barcode
 msgid "Action to input a barcode"
-msgstr ""
+msgstr "Dejanje za vnos črtne kode"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_command__answer
 msgid "Answer"
-msgstr ""
+msgstr "Odgovor"
 
 #. module: stock_vertical_lift
 #: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_shuttle_form_menu
 msgid "Back to settings"
-msgstr ""
+msgstr "Nazaj na nastavitve"
 
 #. module: stock_vertical_lift
 #. odoo-python
@@ -69,7 +71,7 @@ msgstr "Črtna koda"
 #. module: stock_vertical_lift
 #: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_operation_base_screen_view
 msgid "Barcode Input"
-msgstr ""
+msgstr "Vnos črtne kode"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_base___barcode_scanned
@@ -79,18 +81,18 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_transfer___barcode_scanned
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_shuttle___barcode_scanned
 msgid "Barcode Scanned"
-msgstr ""
+msgstr "Črtna koda skenirana"
 
 #. module: stock_vertical_lift
 #. odoo-python
 #: code:addons/stock_vertical_lift/models/stock_location.py:0
 msgid "Cannot fetch a vertical lift tray on location %s"
-msgstr ""
+msgstr "Predala vertikalnega skladišča ni mogoče priklicati na lokaciji %s"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields.selection,name:stock_vertical_lift.selection__stock_location__vertical_lift_kind__cell
 msgid "Cell"
-msgstr ""
+msgstr "Celica"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_inventory__tray_matrix
@@ -98,12 +100,14 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_put__tray_matrix
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_transfer__tray_matrix
 msgid "Cells"
-msgstr ""
+msgstr "Celice"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,help:stock_vertical_lift.field_stock_location__vertical_lift_location
 msgid "Check this box to use it as the view for Vertical Lift Shuttles."
 msgstr ""
+"Označite to polje, če jo želite uporabiti kot prikaz za dvigalne module "
+"vertikalnega skladišča."
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_command__command
@@ -126,7 +130,7 @@ msgstr "Potrdi"
 #: code:addons/stock_vertical_lift/tests/common.py:0
 #: code:addons/stock_vertical_lift/tests/test_inventory.py:0
 msgid "Congrats, you cleared the queue!"
-msgstr ""
+msgstr "Čestitamo, izpraznili ste čakalno vrsto!"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_pick__picking_partner_id
@@ -165,12 +169,12 @@ msgstr "Ustvarjeno"
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_put__current_move_line_id
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_transfer__current_move_line_id
 msgid "Current Move Line"
-msgstr ""
+msgstr "Trenutna postavka premika"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_inventory__quant_id
 msgid "Current Quant"
-msgstr ""
+msgstr "Trenutni kvant"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,help:stock_vertical_lift.field_vertical_lift_operation_inventory__product_uom_id
@@ -207,27 +211,27 @@ msgstr "Napaka"
 #. module: stock_vertical_lift
 #: model_terms:ir.ui.view,arch_db:stock_vertical_lift.view_stock_move_line_operation_tree
 msgid "Fetch Destination Tray"
-msgstr ""
+msgstr "Prikliči ciljni predal"
 
 #. module: stock_vertical_lift
 #: model_terms:ir.ui.view,arch_db:stock_vertical_lift.view_location_form
 msgid "Fetch Shuttle Tray"
-msgstr ""
+msgstr "Prikliči predal dvigalnega modula"
 
 #. module: stock_vertical_lift
 #: model_terms:ir.ui.view,arch_db:stock_vertical_lift.view_stock_move_line_operation_tree
 msgid "Fetch Source Tray"
-msgstr ""
+msgstr "Prikliči izvorni predal"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_shuttle__hardware
 msgid "Hardware"
-msgstr ""
+msgstr "Strojna oprema"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_shuttle__command_ids
 msgid "Hardware commands"
-msgstr ""
+msgstr "Ukazi strojne opreme"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_command__id
@@ -245,6 +249,8 @@ msgid ""
 "If this flag is set, it means that when the move was being processed in the "
 "Vertical Lift, the operator decided to skip its processing."
 msgstr ""
+"Če je ta zastavica nastavljena, pomeni, da se je operater med obdelavo "
+"premika v vertikalnem skladišču odločil preskočiti njegovo obdelavo."
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields.selection,name:stock_vertical_lift.selection__vertical_lift_shuttle__mode__inventory
@@ -261,22 +267,22 @@ msgstr "Lokacije inventarja"
 #: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_operation_inventory_button_view
 #: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_operation_inventory_screen_view
 msgid "Inventory Screen"
-msgstr ""
+msgstr "Zaslon inventarja"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_stock_location__inverse_vertical_lift_shuttle_ids
 msgid "Inverse Vertical Lift Shuttle"
-msgstr ""
+msgstr "Obratni dvigalni modul vertikalnega skladišča"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_stock_location__vertical_lift_location
 msgid "Is a Vertical Lift View Location?"
-msgstr ""
+msgstr "Je lokacija prikaza vertikalnega skladišča?"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_inventory__last_quantity_input
 msgid "Last Quantity Input"
-msgstr ""
+msgstr "Zadnji vnos količine"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_command__write_uid
@@ -302,7 +308,7 @@ msgstr "Zadnjič posodobljeno"
 #. odoo-python
 #: code:addons/stock_vertical_lift/models/vertical_lift_shuttle.py:0
 msgid "Lift Simulation"
-msgstr ""
+msgstr "Simulacija dvigala"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_base__location_id
@@ -363,25 +369,25 @@ msgstr "Omrežje"
 #. odoo-python
 #: code:addons/stock_vertical_lift/models/vertical_lift_operation_put.py:0
 msgid "No free space for tray type %(name)s in this shuttle."
-msgstr ""
+msgstr "V tem dvigalnem modulu ni prostega prostora za tip predala %(name)s."
 
 #. module: stock_vertical_lift
 #. odoo-python
 #: code:addons/stock_vertical_lift/models/vertical_lift_operation_pick.py:0
 msgid "No location found for barcode %(barcode)s"
-msgstr ""
+msgstr "Za črtno kodo %(barcode)s ni najdene lokacije"
 
 #. module: stock_vertical_lift
 #. odoo-python
 #: code:addons/stock_vertical_lift/models/vertical_lift_operation_put.py:0
 msgid "No move line found for barcode %(barcode)s"
-msgstr ""
+msgstr "Za črtno kodo %(barcode)s ni najdene postavke premika"
 
 #. module: stock_vertical_lift
 #. odoo-python
 #: code:addons/stock_vertical_lift/models/vertical_lift_operation_put.py:0
 msgid "No tray type found for barcode %(barcode)s"
-msgstr ""
+msgstr "Za črtno kodo %(barcode)s ni najdenega tipa predala"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_base__number_of_ops
@@ -390,7 +396,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_put__number_of_ops
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_transfer__number_of_ops
 msgid "Number of Operations"
-msgstr ""
+msgstr "Število operacij"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_base__number_of_ops_all
@@ -399,7 +405,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_put__number_of_ops_all
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_transfer__number_of_ops_all
 msgid "Number of Operations in all shuttles"
-msgstr ""
+msgstr "Število operacij v vseh dvigalnih modulih"
 
 #. module: stock_vertical_lift
 #: model:ir.model.constraint,message:stock_vertical_lift.constraint_vertical_lift_operation_base_shuttle_id_unique
@@ -408,18 +414,18 @@ msgstr ""
 #: model:ir.model.constraint,message:stock_vertical_lift.constraint_vertical_lift_operation_put_shuttle_id_unique
 #: model:ir.model.constraint,message:stock_vertical_lift.constraint_vertical_lift_operation_transfer_shuttle_id_unique
 msgid "One pick can be run at a time for a shuttle."
-msgstr ""
+msgstr "Za dvigalni modul se lahko hkrati izvaja samo en prevzem."
 
 #. module: stock_vertical_lift
 #: model_terms:ir.actions.act_window,help:stock_vertical_lift.vertical_lift_shuttle_action
 msgid "Open the Shuttle Interface."
-msgstr ""
+msgstr "Odprite vmesnik dvigalnega modula."
 
 #. module: stock_vertical_lift
 #. odoo-python
 #: code:addons/stock_vertical_lift/models/stock_location.py:0
 msgid "Opening tray %(name)s."
-msgstr ""
+msgstr "Odpiranje predala %(name)s."
 
 #. module: stock_vertical_lift
 #: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_operation_base_button_view
@@ -450,7 +456,7 @@ msgstr "Prevzem"
 #: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_operation_pick_button_view
 #: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_operation_pick_screen_view
 msgid "Pick Screen"
-msgstr ""
+msgstr "Zaslon prevzema"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_shuttle__port
@@ -480,7 +486,7 @@ msgstr "Vstavi"
 #: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_operation_put_button_view
 #: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_operation_put_screen_view
 msgid "Put-Away Screen"
-msgstr ""
+msgstr "Zaslon uskladiščenja"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_pick__quantity
@@ -494,7 +500,7 @@ msgstr "Količina"
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_inventory__quantity_input
 msgid "Quantity Input"
-msgstr ""
+msgstr "Vnos količine"
 
 #. module: stock_vertical_lift
 #: model:ir.model,name:stock_vertical_lift.model_stock_quant
@@ -504,7 +510,7 @@ msgstr "Kvanti"
 #. module: stock_vertical_lift
 #: model:product.template,name:stock_vertical_lift.product_recovery_socks_product_template
 msgid "Recovery Socks"
-msgstr ""
+msgstr "Nogavice za okrevanje"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,help:stock_vertical_lift.field_vertical_lift_operation_pick__picking_origin
@@ -521,28 +527,28 @@ msgstr "Izpusti"
 #. module: stock_vertical_lift
 #: model_terms:ir.ui.view,arch_db:stock_vertical_lift.view_location_form
 msgid "Release Shuttle Tray"
-msgstr ""
+msgstr "Sprosti predal dvigalnega modula"
 
 #. module: stock_vertical_lift
 #: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_shuttle_view_form
 msgid "Release tray"
-msgstr ""
+msgstr "Sprosti predal"
 
 #. module: stock_vertical_lift
 #. odoo-python
 #: code:addons/stock_vertical_lift/models/vertical_lift_shuttle.py:0
 msgid "Releasing tray"
-msgstr ""
+msgstr "Sproščanje predala"
 
 #. module: stock_vertical_lift
 #: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_operation_base_button_view
 msgid "Reopen Screen"
-msgstr ""
+msgstr "Ponovno odpri zaslon"
 
 #. module: stock_vertical_lift
 #: model:product.template,name:stock_vertical_lift.product_running_socks_product_template
 msgid "Running Socks"
-msgstr ""
+msgstr "Tekaške nogavice"
 
 #. module: stock_vertical_lift
 #: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_operation_base_screen_view
@@ -553,7 +559,7 @@ msgstr "Shrani"
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_res_config_settings__vertical_lift_secret
 #: model_terms:ir.ui.view,arch_db:stock_vertical_lift.res_config_settings_view_form
 msgid "Secret for Vertical Lift API"
-msgstr ""
+msgstr "Skrivnost za API vertikalnega skladišča"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_shuttle__server
@@ -577,12 +583,12 @@ msgstr "Nastavitve"
 #: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_shuttle_manual_barcode_form
 #: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_shuttle_view_form
 msgid "Shuttle"
-msgstr ""
+msgstr "Dvigalni modul"
 
 #. module: stock_vertical_lift
 #: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_shuttle_view_form
 msgid "Shuttle Name"
-msgstr ""
+msgstr "Naziv dvigalnega modula"
 
 #. module: stock_vertical_lift
 #: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_operation_pick_screen_view
@@ -592,7 +598,7 @@ msgstr "Preskoči"
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_stock_move_line__vertical_lift_skipped
 msgid "Skipped in Vertical Lift?"
-msgstr ""
+msgstr "Preskočeno v vertikalnem skladišču?"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_pick__picking_origin
@@ -634,6 +640,8 @@ msgid ""
 "The Shuttle source location for Pick operations and destination location for"
 " Put operations."
 msgstr ""
+"Izvorna lokacija dvigalnega modula za operacije prevzema in ciljna lokacija "
+"za operacije vstavljanja."
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,help:stock_vertical_lift.field_vertical_lift_operation_inventory__package_id
@@ -643,14 +651,14 @@ msgstr "Pakiranje, ki vsebuje ta kvant"
 #. module: stock_vertical_lift
 #: model:ir.model.fields,help:stock_vertical_lift.field_vertical_lift_operation_inventory__product_qty
 msgid "The product's counted quantity."
-msgstr ""
+msgstr "Prešteta količina proizvoda."
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,help:stock_vertical_lift.field_vertical_lift_operation_pick__picking_id
 #: model:ir.model.fields,help:stock_vertical_lift.field_vertical_lift_operation_put__picking_id
 #: model:ir.model.fields,help:stock_vertical_lift.field_vertical_lift_operation_transfer__picking_id
 msgid "The stock operation where the packing has been made"
-msgstr ""
+msgstr "Skladiščna operacija, pri kateri je bilo izvedeno pakiranje"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_pick__picking_id
@@ -708,7 +716,7 @@ msgstr "Enota mere"
 #. odoo-python
 #: code:addons/stock_vertical_lift/models/vertical_lift_command.py:0
 msgid "Unknown record %(name)s"
-msgstr ""
+msgstr "Neznan zapis %(name)s"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_shuttle__use_tls
@@ -723,27 +731,27 @@ msgstr "Uporabi TLS"
 #: model:ir.model.fields,help:stock_vertical_lift.field_vertical_lift_operation_transfer___barcode_scanned
 #: model:ir.model.fields,help:stock_vertical_lift.field_vertical_lift_shuttle___barcode_scanned
 msgid "Value of the last barcode scanned."
-msgstr ""
+msgstr "Vrednost zadnje skenirane črtne kode."
 
 #. module: stock_vertical_lift
 #: model_terms:ir.ui.view,arch_db:stock_vertical_lift.res_config_settings_view_form
 msgid "Vertical Lift"
-msgstr ""
+msgstr "Vertikalno skladišče"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_stock_quant__vertical_lift_done
 msgid "Vertical Lift Done"
-msgstr ""
+msgstr "Vertikalno skladišče končano"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_stock_location__vertical_lift_kind
 msgid "Vertical Lift Kind"
-msgstr ""
+msgstr "Vrsta vertikalnega skladišča"
 
 #. module: stock_vertical_lift
 #: model:ir.model,name:stock_vertical_lift.model_vertical_lift_operation_base
 msgid "Vertical Lift Operation - Base"
-msgstr ""
+msgstr "Operacija vertikalnega skladišča - osnova"
 
 #. module: stock_vertical_lift
 #: model:ir.model,name:stock_vertical_lift.model_vertical_lift_operation_transfer
@@ -753,34 +761,34 @@ msgstr "Operacija vertikalnega skladišča - transfer"
 #. module: stock_vertical_lift
 #: model:ir.model,name:stock_vertical_lift.model_vertical_lift_operation_inventory
 msgid "Vertical Lift Operation Inventory"
-msgstr ""
+msgstr "Operacija inventarja vertikalnega skladišča"
 
 #. module: stock_vertical_lift
 #: model:ir.model,name:stock_vertical_lift.model_vertical_lift_operation_pick
 msgid "Vertical Lift Operation Pick"
-msgstr ""
+msgstr "Operacija prevzema vertikalnega skladišča"
 
 #. module: stock_vertical_lift
 #: model:ir.model,name:stock_vertical_lift.model_vertical_lift_operation_put
 msgid "Vertical Lift Operation Put"
-msgstr ""
+msgstr "Operacija vstavljanja vertikalnega skladišča"
 
 #. module: stock_vertical_lift
 #: model:ir.model,name:stock_vertical_lift.model_vertical_lift_shuttle
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_stock_location__vertical_lift_shuttle_id
 msgid "Vertical Lift Shuttle"
-msgstr ""
+msgstr "Dvigalni modul vertikalnega skladišča"
 
 #. module: stock_vertical_lift
 #: model:ir.actions.act_window,name:stock_vertical_lift.vertical_lift_shuttle_action
 #: model:ir.ui.menu,name:stock_vertical_lift.vertical_lift_shuttle
 msgid "Vertical Lift Shuttles"
-msgstr ""
+msgstr "Dvigalni moduli vertikalnega skladišča"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_stock_quant__vertical_lift_tray_id
 msgid "Vertical Lift Tray"
-msgstr ""
+msgstr "Predal vertikalnega skladišča"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields.selection,name:stock_vertical_lift.selection__stock_location__vertical_lift_kind__view
@@ -806,24 +814,24 @@ msgstr "Y"
 #. module: stock_vertical_lift
 #: model:ir.model.constraint,message:stock_vertical_lift.constraint_vertical_lift_shuttle_location_id_unique
 msgid "You cannot have two shuttles using the same location."
-msgstr ""
+msgstr "Dva dvigalna modula ne moreta uporabljati iste lokacije."
 
 #. module: stock_vertical_lift
 #: model:ir.model,name:stock_vertical_lift.model_vertical_lift_command
 msgid "commands sent to the shuttle"
-msgstr ""
+msgstr "ukazi, poslani dvigalnemu modulu"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,help:stock_vertical_lift.field_vertical_lift_shuttle__server
 msgid "hostname or IP address of the server"
-msgstr ""
+msgstr "ime gostitelja ali IP-naslov strežnika"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,help:stock_vertical_lift.field_vertical_lift_shuttle__port
 msgid "network port of the server on which to send the message"
-msgstr ""
+msgstr "omrežna vrata strežnika, na katera se pošlje sporočilo"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,help:stock_vertical_lift.field_vertical_lift_shuttle__use_tls
 msgid "set this if the server expects TLS wrapped communication"
-msgstr ""
+msgstr "nastavite to, če strežnik pričakuje komunikacijo, ovito s TLS"
