@@ -6,7 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2026-06-25 13:19+0000\n"
+"Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: none\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
@@ -14,6 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
 "n%100==4 ? 2 : 3;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: stock_vertical_lift_storage_type
 #. odoo-python
@@ -22,6 +24,8 @@ msgid ""
 "Error creating '%(name)s': Location storage category must be set on the tray"
 " type"
 msgstr ""
+"Napaka pri ustvarjanju '%(name)s': na tipu pladnja mora biti nastavljena "
+"kategorija shranjevanja lokacije"
 
 #. module: stock_vertical_lift_storage_type
 #. odoo-python
@@ -30,11 +34,13 @@ msgid ""
 "Error updating '%(name)s': Location storage category must be set on the tray"
 " type"
 msgstr ""
+"Napaka pri posodobitvi '%(name)s': na tipu pladnja mora biti nastavljena "
+"kategorija shranjevanja lokacije"
 
 #. module: stock_vertical_lift_storage_type
 #: model:ir.model,name:stock_vertical_lift_storage_type.model_stock_location
 msgid "Inventory Locations"
-msgstr ""
+msgstr "Lokacije inventarja"
 
 #. module: stock_vertical_lift_storage_type
 #. odoo-python
@@ -43,28 +49,30 @@ msgid ""
 "No free space found for package type '%(package_type)s' in shuttle "
 "'%(name)s'"
 msgstr ""
+"Za tip paketa '%(package_type)s' v modulu '%(name)s' ni bilo najdenega "
+"prostega prostora"
 
 #. module: stock_vertical_lift_storage_type
 #: model_terms:ir.ui.view,arch_db:stock_vertical_lift_storage_type.view_stock_location_tray_type_form
 msgid "Put-Away"
-msgstr ""
+msgstr "Odlaganje"
 
 #. module: stock_vertical_lift_storage_type
 #: model:ir.model,name:stock_vertical_lift_storage_type.model_stock_quant
 msgid "Quants"
-msgstr ""
+msgstr "Kvanti"
 
 #. module: stock_vertical_lift_storage_type
 #: model:ir.model,name:stock_vertical_lift_storage_type.model_stock_location_tray_type
 msgid "Stock Location Tray Type"
-msgstr ""
+msgstr "Lokacija zaloge - tip predala"
 
 #. module: stock_vertical_lift_storage_type
 #: model:ir.model.fields,field_description:stock_vertical_lift_storage_type.field_stock_location_tray_type__storage_category_id
 msgid "Storage Category"
-msgstr ""
+msgstr "Kategorija shranjevanja"
 
 #. module: stock_vertical_lift_storage_type
 #: model:ir.model,name:stock_vertical_lift_storage_type.model_vertical_lift_operation_put
 msgid "Vertical Lift Operation Put"
-msgstr ""
+msgstr "Operacija vstavljanja vertikalnega skladišča"
