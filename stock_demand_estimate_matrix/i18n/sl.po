@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2026-06-25 11:18+0000\n"
+"PO-Revision-Date: 2026-06-25 11:22+0000\n"
 "Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: none\n"
 "Language: sl\n"
@@ -27,7 +27,7 @@ msgstr "Prekliči"
 #: model:ir.actions.act_window,name:stock_demand_estimate_matrix.stock_demand_estimate_wizard_action
 #: model:ir.ui.menu,name:stock_demand_estimate_matrix.stock_demand_estimate_wizard_menu
 msgid "Create Stock Demand Estimates"
-msgstr ""
+msgstr "Ustvari ocene potreb po zalogah"
 
 #. module: stock_demand_estimate_matrix
 #: model:ir.model.fields,field_description:stock_demand_estimate_matrix.field_stock_demand_estimate_sheet__create_uid
@@ -90,28 +90,28 @@ msgstr "Prikazani naziv"
 #. module: stock_demand_estimate_matrix
 #: model:ir.model.fields,field_description:stock_demand_estimate_matrix.field_stock_demand_estimate_sheet_line__estimate_id
 msgid "Estimate"
-msgstr ""
+msgstr "Ocena"
 
 #. module: stock_demand_estimate_matrix
 #. odoo-python
 #: code:addons/stock_demand_estimate_matrix/wizards/stock_demand_estimate_wizard.py:0
 msgid "Estimate Sheet"
-msgstr ""
+msgstr "Preglednica ocen"
 
 #. module: stock_demand_estimate_matrix
 #: model_terms:ir.ui.view,arch_db:stock_demand_estimate_matrix.stock_demand_estimate_sheet_view_form
 msgid "Estimated quantity"
-msgstr ""
+msgstr "Ocenjena količina"
 
 #. module: stock_demand_estimate_matrix
 #: model:ir.model.fields,field_description:stock_demand_estimate_matrix.field_stock_demand_estimate_sheet__line_ids
 msgid "Estimates"
-msgstr ""
+msgstr "Ocene"
 
 #. module: stock_demand_estimate_matrix
 #: model:ir.model.fields,field_description:stock_demand_estimate_matrix.field_stock_demand_estimate__date_range_id
 msgid "Estimating Period"
-msgstr ""
+msgstr "Obdobje ocenjevanja"
 
 #. module: stock_demand_estimate_matrix
 #: model:ir.model.fields,field_description:stock_demand_estimate_matrix.field_stock_demand_estimate_sheet__id
@@ -188,18 +188,18 @@ msgstr "Postavka ocene potreb po zalogah"
 #: model:ir.model,name:stock_demand_estimate_matrix.model_stock_demand_estimate_sheet
 #: model_terms:ir.ui.view,arch_db:stock_demand_estimate_matrix.stock_demand_estimate_sheet_view_form
 msgid "Stock Demand Estimate Sheet"
-msgstr ""
+msgstr "Preglednica ocen potreb po zalogah"
 
 #. module: stock_demand_estimate_matrix
 #: model:ir.model,name:stock_demand_estimate_matrix.model_stock_demand_estimate_sheet_line
 msgid "Stock Demand Estimate Sheet Line"
-msgstr ""
+msgstr "Postavka preglednice ocen potreb po zalogah"
 
 #. module: stock_demand_estimate_matrix
 #: model:ir.model,name:stock_demand_estimate_matrix.model_stock_demand_estimate_wizard
 #: model_terms:ir.ui.view,arch_db:stock_demand_estimate_matrix.demand_estimate_wizard_view_form
 msgid "Stock Demand Estimate Wizard"
-msgstr ""
+msgstr "Čarovnik za ocene potreb po zalogah"
 
 #. module: stock_demand_estimate_matrix
 #. odoo-python
@@ -222,7 +222,7 @@ msgstr "Začetni datum ne more biti poznejši od končnega datuma."
 #. odoo-python
 #: code:addons/stock_demand_estimate_matrix/wizards/stock_demand_estimate_sheet.py:0
 msgid "There is no ranges created."
-msgstr ""
+msgstr "Ustvarjen ni noben razpon."
 
 #. module: stock_demand_estimate_matrix
 #: model:ir.model.fields,field_description:stock_demand_estimate_matrix.field_stock_demand_estimate_sheet_line__product_uom
@@ -244,4 +244,4 @@ msgstr "Izbrati morate vsaj en proizvod."
 #: model_terms:ir.ui.view,arch_db:stock_demand_estimate_matrix.demand_estimate_wizard_view_form
 #: model_terms:ir.ui.view,arch_db:stock_demand_estimate_matrix.stock_demand_estimate_sheet_view_form
 msgid "to"
-msgstr ""
+msgstr "do"
