@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2026-06-25 11:55+0000\n"
+"PO-Revision-Date: 2026-06-25 11:57+0000\n"
 "Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: none\n"
 "Language: sl\n"
@@ -57,7 +57,7 @@ msgstr "Opomba o stanju"
 #. module: stock_lot_condition
 #: model:ir.model.fields,field_description:stock_lot_condition.field_stock_lot__condition_required_note
 msgid "Condition Required Note"
-msgstr ""
+msgstr "Zahtevana opomba o stanju"
 
 #. module: stock_lot_condition
 #: model:ir.actions.act_window,name:stock_lot_condition.stock_lot_condition_action
@@ -100,6 +100,7 @@ msgid ""
 "If this box is checked, it will be mandatory to indicate a text for this "
 "condition in lots."
 msgstr ""
+"Če je to polje označeno, bo za to stanje pri lotih obvezen vnos besedila."
 
 #. module: stock_lot_condition
 #: model:ir.model.fields,field_description:stock_lot_condition.field_stock_lot_condition__write_uid
@@ -127,11 +128,13 @@ msgid ""
 "May have cosmetic imperfections, scratches, dents, etc., but is still "
 "functional."
 msgstr ""
+"Lahko ima kozmetične pomanjkljivosti, praske, udrtine ipd., vendar še vedno "
+"deluje."
 
 #. module: stock_lot_condition
 #: model:stock.lot.condition,description:stock_lot_condition.condition_very_good
 msgid "Minimal use, with minor cosmetic signs."
-msgstr ""
+msgstr "Minimalna uporaba z manjšimi kozmetičnimi znaki."
 
 #. module: stock_lot_condition
 #: model:ir.model.fields,field_description:stock_lot_condition.field_stock_lot_condition__name
@@ -141,7 +144,7 @@ msgstr "Naziv"
 #. module: stock_lot_condition
 #: model:ir.model.fields,field_description:stock_lot_condition.field_stock_lot_condition__required_note
 msgid "Required note?"
-msgstr ""
+msgstr "Zahtevana opomba?"
 
 #. module: stock_lot_condition
 #: model:ir.model.fields,field_description:stock_lot_condition.field_stock_lot_condition__sequence
@@ -158,6 +161,8 @@ msgstr "Stanje lota"
 msgid ""
 "The item is intact and works perfectly, but the packaging may be damaged."
 msgstr ""
+"Artikel je nepoškodovan in deluje brezhibno, vendar je embalaža lahko "
+"poškodovana."
 
 #. module: stock_lot_condition
 #: model:stock.lot.condition,name:stock_lot_condition.condition_very_good
@@ -167,4 +172,4 @@ msgstr "Zelo dobro"
 #. module: stock_lot_condition
 #: model:stock.lot.condition,description:stock_lot_condition.condition_good
 msgid "Works perfectly, but with visible wear from normal use."
-msgstr ""
+msgstr "Deluje brezhibno, vendar z vidno obrabo zaradi običajne uporabe."
