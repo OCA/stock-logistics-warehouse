@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2026-06-25 11:01+0000\n"
+"PO-Revision-Date: 2026-06-25 11:05+0000\n"
 "Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: none\n"
 "Language: sl\n"
@@ -20,12 +20,12 @@ msgstr ""
 #. module: stock_picking_completion_info
 #: model:ir.model.fields,field_description:stock_picking_completion_info.field_stock_picking__completion_info
 msgid "Completion Info"
-msgstr ""
+msgstr "Informacije o dokončanju"
 
 #. module: stock_picking_completion_info
 #: model:ir.model.fields,field_description:stock_picking_completion_info.field_stock_picking_type__display_completion_info
 msgid "Display Completion Info"
-msgstr ""
+msgstr "Prikaži informacije o dokončanju"
 
 #. module: stock_picking_completion_info
 #: model:ir.model.fields.selection,name:stock_picking_completion_info.selection__stock_picking__completion_info__full_order_picking
@@ -33,12 +33,14 @@ msgid ""
 "Full order picking: You are processing a full order picking that will allow "
 "next operation to be processed"
 msgstr ""
+"Kompletno komisioniranje naročila: obdelujete kompletno komisioniranje "
+"naročila, ki bo omogočilo obdelavo naslednje operacije"
 
 #. module: stock_picking_completion_info
 #: model:ir.model.fields,help:stock_picking_completion_info.field_stock_picking_type__display_completion_info
 msgid ""
 "Inform operator of a completed operation at processing and at completion"
-msgstr ""
+msgstr "Obvesti operaterja o dokončani operaciji med obdelavo in ob dokončanju"
 
 #. module: stock_picking_completion_info
 #: model:ir.model.fields.selection,name:stock_picking_completion_info.selection__stock_picking__completion_info__last_picking
@@ -46,16 +48,18 @@ msgid ""
 "Last picking: Completion of this operation allows next operations to be "
 "processed."
 msgstr ""
+"Zadnje komisioniranje: dokončanje te operacije omogoča obdelavo naslednjih "
+"operacij."
 
 #. module: stock_picking_completion_info
 #: model:ir.model.fields.selection,name:stock_picking_completion_info.selection__stock_picking__completion_info__next_picking_ready
 msgid "Next operations are ready to be processed."
-msgstr ""
+msgstr "Naslednje operacije so pripravljene za obdelavo."
 
 #. module: stock_picking_completion_info
 #: model:ir.model.fields.selection,name:stock_picking_completion_info.selection__stock_picking__completion_info__no
 msgid "No"
-msgstr ""
+msgstr "Ne"
 
 #. module: stock_picking_completion_info
 #: model:ir.model,name:stock_picking_completion_info.model_stock_picking_type
