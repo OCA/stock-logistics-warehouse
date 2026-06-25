@@ -6,7 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2026-06-25 11:43+0000\n"
+"Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: none\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
@@ -14,34 +15,35 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
 "n%100==4 ? 2 : 3;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: product_route_profile_internal_resupply
 #: model:ir.model.fields,field_description:product_route_profile_internal_resupply.field_stock_route__internal_supply
 msgid "Internal Supply"
-msgstr ""
+msgstr "Interna oskrba"
 
 #. module: product_route_profile_internal_resupply
 #: model:ir.model,name:product_route_profile_internal_resupply.model_stock_route
 msgid "Inventory Routes"
-msgstr ""
+msgstr "Proge inventarja"
 
 #. module: product_route_profile_internal_resupply
 #: model:ir.model,name:product_route_profile_internal_resupply.model_product_template
 msgid "Product"
-msgstr ""
+msgstr "Proizvod"
 
 #. module: product_route_profile_internal_resupply
 #: model:ir.model,name:product_route_profile_internal_resupply.model_route_profile
 msgid "Route Profile"
-msgstr ""
+msgstr "Profil proge"
 
 #. module: product_route_profile_internal_resupply
 #: model:ir.model,name:product_route_profile_internal_resupply.model_stock_warehouse
 msgid "Warehouse"
-msgstr ""
+msgstr "Skladišče"
 
 #. module: product_route_profile_internal_resupply
 #: model:ir.model.fields,field_description:product_route_profile_internal_resupply.field_product_product__internal_supply_ids
 #: model:ir.model.fields,field_description:product_route_profile_internal_resupply.field_product_template__internal_supply_ids
 msgid "internal Supplies"
-msgstr ""
+msgstr "Interne dobave"
