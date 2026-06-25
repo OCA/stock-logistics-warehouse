@@ -6,7 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2026-06-25 13:30+0000\n"
+"Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: none\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
@@ -14,32 +15,33 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
 "n%100==4 ? 2 : 3;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: stock_location_tray
 #: model:ir.model.fields,field_description:stock_location_tray.field_stock_location_tray_type__active
 msgid "Active"
-msgstr ""
+msgstr "Aktivno"
 
 #. module: stock_location_tray
 #: model_terms:ir.actions.act_window,help:stock_location_tray.action_stock_location_tray_type
 msgid "Add a Location Tray Type"
-msgstr ""
+msgstr "Dodaj tip predala za lokacijo"
 
 #. module: stock_location_tray
 #: model_terms:ir.ui.view,arch_db:stock_location_tray.view_stock_location_tray_type_form
 #: model_terms:ir.ui.view,arch_db:stock_location_tray.view_stock_location_tray_type_search
 msgid "Archived"
-msgstr ""
+msgstr "Arhivirano"
 
 #. module: stock_location_tray
 #: model:ir.model.fields,field_description:stock_location_tray.field_stock_location__cell_in_tray_type_id
 msgid "Cell Tray Type"
-msgstr ""
+msgstr "Tip celice predala"
 
 #. module: stock_location_tray
 #: model:ir.model.fields,field_description:stock_location_tray.field_stock_location__tray_matrix
 msgid "Cells"
-msgstr ""
+msgstr "Celice"
 
 #. module: stock_location_tray
 #: model:ir.model.fields,help:stock_location_tray.field_stock_location__cell_name_format
@@ -50,31 +52,37 @@ msgid ""
 "formatting (such as padding, ...) can be done using the format specification"
 " at  https://docs.python.org/3/library/string.html#formatstrings"
 msgstr ""
+"Pod-lokacije celic, ustvarjene v pladnju, bodo poimenovane po tej obliki "
+"zapisa. Polja za zamenjavo med zavitimi oklepaji se uporabljajo za "
+"vstavljanje položajev. {x}, {y} in {z} bodo zamenjani z ustreznim položajem. "
+"Kompleksno oblikovanje (kot je odmikanje itd.) je mogoče izvesti z uporabo "
+"specifikacije oblike zapisa na https://docs.python.org/3/library/"
+"string.html#formatstrings"
 
 #. module: stock_location_tray
 #: model_terms:ir.ui.view,arch_db:stock_location_tray.view_stock_move_line_tray
 msgid "Close"
-msgstr ""
+msgstr "Zapri"
 
 #. module: stock_location_tray
 #: model:ir.model.fields,field_description:stock_location_tray.field_stock_location_tray_type__code
 msgid "Code"
-msgstr ""
+msgstr "Koda"
 
 #. module: stock_location_tray
 #: model:ir.model.fields,field_description:stock_location_tray.field_stock_location_tray_type__cols
 msgid "Cols"
-msgstr ""
+msgstr "Stolpci"
 
 #. module: stock_location_tray
 #: model:ir.model.fields,field_description:stock_location_tray.field_stock_location_tray_type__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Ustvaril"
 
 #. module: stock_location_tray
 #: model:ir.model.fields,field_description:stock_location_tray.field_stock_location_tray_type__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Ustvarjeno"
 
 #. module: stock_location_tray
 #: model_terms:ir.actions.act_window,help:stock_location_tray.action_stock_location_tray_type
@@ -82,77 +90,79 @@ msgid ""
 "Define the number of rows and cols on a tray, depending of the boxes\n"
 "size."
 msgstr ""
+"Določite število vrstic in stolpcev v predalu, odvisno od velikosti\n"
+"polja."
 
 #. module: stock_location_tray
 #: model:ir.model.fields,field_description:stock_location_tray.field_stock_location_tray_type__depth
 msgid "Depth"
-msgstr ""
+msgstr "Globina"
 
 #. module: stock_location_tray
 #: model:ir.model.fields,field_description:stock_location_tray.field_stock_location_tray_type__depth_per_cell
 msgid "Depth Per Cell"
-msgstr ""
+msgstr "Globina na celico"
 
 #. module: stock_location_tray
 #: model:ir.model.fields,help:stock_location_tray.field_stock_location_tray_type__depth
 msgid "Depth of the tray in mm"
-msgstr ""
+msgstr "Globina predala v mm"
 
 #. module: stock_location_tray
 #: model:ir.model.fields,field_description:stock_location_tray.field_stock_move_line__tray_dest_matrix
 msgid "Destination Cell"
-msgstr ""
+msgstr "Ciljna celica"
 
 #. module: stock_location_tray
 #. odoo-python
 #: code:addons/stock_location_tray/models/stock_move_line.py:0
 msgid "Destination Tray"
-msgstr ""
+msgstr "Ciljni pladenj"
 
 #. module: stock_location_tray
 #: model:ir.model.fields,field_description:stock_location_tray.field_stock_location_tray_type__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Prikazani naziv"
 
 #. module: stock_location_tray
 #: model_terms:ir.ui.view,arch_db:stock_location_tray.view_stock_location_tray_type_form
 msgid "Disposition"
-msgstr ""
+msgstr "Razporeditev"
 
 #. module: stock_location_tray
 #: model:ir.model.fields,field_description:stock_location_tray.field_stock_location_tray_type__height
 msgid "Height"
-msgstr ""
+msgstr "Višina"
 
 #. module: stock_location_tray
 #: model:ir.model.fields,help:stock_location_tray.field_stock_location_tray_type__height
 msgid "Height of the tray in mm"
-msgstr ""
+msgstr "Višina predala v mm"
 
 #. module: stock_location_tray
 #: model:ir.model.fields,field_description:stock_location_tray.field_stock_location_tray_type__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: stock_location_tray
 #: model:ir.model,name:stock_location_tray.model_stock_location
 msgid "Inventory Locations"
-msgstr ""
+msgstr "Lokacije inventarja"
 
 #. module: stock_location_tray
 #: model:ir.model.fields,field_description:stock_location_tray.field_stock_location_tray_type__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Zadnji posodobil"
 
 #. module: stock_location_tray
 #: model:ir.model.fields,field_description:stock_location_tray.field_stock_location_tray_type__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Zadnjič posodobljeno"
 
 #. module: stock_location_tray
 #: model:ir.model.fields,field_description:stock_location_tray.field_stock_location_tray_type__location_ids
 msgid "Location"
-msgstr ""
+msgstr "Lokacija"
 
 #. module: stock_location_tray
 #. odoo-python
@@ -161,53 +171,55 @@ msgid ""
 "Location %(display_name)s has sub-locations, it cannot be converted to a "
 "tray."
 msgstr ""
+"Lokacija %(display_name)s ima podlokacije, zato je ni mogoče pretvoriti v "
+"pladenj."
 
 #. module: stock_location_tray
 #: model_terms:ir.ui.view,arch_db:stock_location_tray.view_stock_location_tray_type_form
 #: model_terms:ir.ui.view,arch_db:stock_location_tray.view_stock_location_tray_type_search
 msgid "Location Tray Type"
-msgstr ""
+msgstr "Tip predala lokacije"
 
 #. module: stock_location_tray
 #: model:ir.actions.act_window,name:stock_location_tray.action_stock_location_tray_type
 #: model:ir.ui.menu,name:stock_location_tray.menu_stock_location_tray_type
 msgid "Location Tray Types"
-msgstr ""
+msgstr "Tipi predalov lokacij"
 
 #. module: stock_location_tray
 #: model_terms:ir.ui.view,arch_db:stock_location_tray.view_stock_location_tray_type_form
 msgid "Locations"
-msgstr ""
+msgstr "Lokacije"
 
 #. module: stock_location_tray
 #: model:ir.model.fields,field_description:stock_location_tray.field_stock_location_tray_type__name
 msgid "Name"
-msgstr ""
+msgstr "Naziv"
 
 #. module: stock_location_tray
 #: model:ir.model.fields,field_description:stock_location_tray.field_stock_location__cell_name_format
 msgid "Name Format for Cells"
-msgstr ""
+msgstr "Format naziva za celice"
 
 #. module: stock_location_tray
 #: model:ir.model,name:stock_location_tray.model_stock_move_line
 msgid "Product Moves (Stock Move Line)"
-msgstr ""
+msgstr "Premiki proizvoda (postavka premika zaloge)"
 
 #. module: stock_location_tray
 #: model:ir.model.fields,field_description:stock_location_tray.field_stock_location_tray_type__rows
 msgid "Rows"
-msgstr ""
+msgstr "Vrste"
 
 #. module: stock_location_tray
 #: model_terms:ir.ui.view,arch_db:stock_location_tray.view_stock_move_line_operation_tree
 msgid "Show Destination Tray"
-msgstr ""
+msgstr "Prikaži ciljni pladenj"
 
 #. module: stock_location_tray
 #: model_terms:ir.ui.view,arch_db:stock_location_tray.view_stock_move_line_operation_tree
 msgid "Show Source Tray"
-msgstr ""
+msgstr "Prikaži izvorni pladenj"
 
 #. module: stock_location_tray
 #: model:ir.model.fields,field_description:stock_location_tray.field_stock_move_line__show_tray_destination_location
@@ -222,23 +234,23 @@ msgstr ""
 #. module: stock_location_tray
 #: model_terms:ir.ui.view,arch_db:stock_location_tray.view_stock_location_tray_type_form
 msgid "Sizes"
-msgstr ""
+msgstr "Velikosti"
 
 #. module: stock_location_tray
 #: model:ir.model.fields,field_description:stock_location_tray.field_stock_move_line__tray_source_matrix
 msgid "Source Cell"
-msgstr ""
+msgstr "Izvorna celica"
 
 #. module: stock_location_tray
 #. odoo-python
 #: code:addons/stock_location_tray/models/stock_move_line.py:0
 msgid "Source Tray"
-msgstr ""
+msgstr "Izvorni pladenj"
 
 #. module: stock_location_tray
 #: model:ir.model,name:stock_location_tray.model_stock_location_tray_type
 msgid "Stock Location Tray Type"
-msgstr ""
+msgstr "Lokacija zaloge - tip predala"
 
 #. module: stock_location_tray
 #. odoo-python
@@ -262,27 +274,27 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:stock_location_tray.view_location_form
 #: model_terms:ir.ui.view,arch_db:stock_location_tray.view_stock_move_line_tray
 msgid "Tray"
-msgstr ""
+msgstr "Predal"
 
 #. module: stock_location_tray
 #: model:ir.model.fields,field_description:stock_location_tray.field_stock_location__tray_cell_contains_stock
 msgid "Tray Cell Contains Stock"
-msgstr ""
+msgstr "Celica predala vsebuje zalogo"
 
 #. module: stock_location_tray
 #: model_terms:ir.ui.view,arch_db:stock_location_tray.view_stock_location_tray_type_form
 msgid "Tray Configuration"
-msgstr ""
+msgstr "Konfiguracija predala"
 
 #. module: stock_location_tray
 #: model:ir.model.fields,field_description:stock_location_tray.field_stock_location_tray_type__tray_matrix
 msgid "Tray Matrix"
-msgstr ""
+msgstr "Matrika predala"
 
 #. module: stock_location_tray
 #: model:ir.model.fields,field_description:stock_location_tray.field_stock_location__tray_type_id
 msgid "Tray Type"
-msgstr ""
+msgstr "Tip predala"
 
 #. module: stock_location_tray
 #: model:ir.model.fields,help:stock_location_tray.field_stock_location__tray_cell_contains_stock
@@ -292,17 +304,17 @@ msgstr ""
 #. module: stock_location_tray
 #: model:ir.model.fields,field_description:stock_location_tray.field_stock_location_tray_type__width
 msgid "Width"
-msgstr ""
+msgstr "Širina"
 
 #. module: stock_location_tray
 #: model:ir.model.fields,field_description:stock_location_tray.field_stock_location_tray_type__width_per_cell
 msgid "Width Per Cell"
-msgstr ""
+msgstr "Širina na celico"
 
 #. module: stock_location_tray
 #: model:ir.model.fields,help:stock_location_tray.field_stock_location_tray_type__width
 msgid "Width of the tray in mm"
-msgstr ""
+msgstr "Širina predala v mm"
 
 #. module: stock_location_tray
 #. odoo-python
@@ -313,9 +325,9 @@ msgstr ""
 #. module: stock_location_tray
 #: model_terms:ir.ui.view,arch_db:stock_location_tray.view_stock_location_tray_type_form
 msgid "mm /"
-msgstr ""
+msgstr "mm /"
 
 #. module: stock_location_tray
 #: model_terms:ir.ui.view,arch_db:stock_location_tray.view_stock_location_tray_type_form
 msgid "mm per cell"
-msgstr ""
+msgstr "mm na celico"
