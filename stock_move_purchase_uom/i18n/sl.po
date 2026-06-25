@@ -6,7 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2026-06-25 11:01+0000\n"
+"Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: none\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
@@ -14,31 +15,32 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
 "n%100==4 ? 2 : 3;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: stock_move_purchase_uom
 #: model:ir.model.fields.selection,name:stock_move_purchase_uom.selection__stock_picking_type__purchase_uom_rounding_method__half-up
 msgid "Closest"
-msgstr ""
+msgstr "Najbližje"
 
 #. module: stock_move_purchase_uom
 #: model:ir.model,name:stock_move_purchase_uom.model_stock_picking_type
 msgid "Picking Type"
-msgstr ""
+msgstr "Tip dobavnice"
 
 #. module: stock_move_purchase_uom
 #: model:ir.model,name:stock_move_purchase_uom.model_stock_move_line
 msgid "Product Moves (Stock Move Line)"
-msgstr ""
+msgstr "Premiki proizvoda (postavka premika zaloge)"
 
 #. module: stock_move_purchase_uom
 #: model:ir.model.fields,field_description:stock_move_purchase_uom.field_stock_picking_type__purchase_uom_rounding_method
 msgid "Purchase Uom Rounding Method"
-msgstr ""
+msgstr "Nabavna EM - način zaokroževanja"
 
 #. module: stock_move_purchase_uom
 #: model:ir.model,name:stock_move_purchase_uom.model_stock_move
 msgid "Stock Move"
-msgstr ""
+msgstr "Premik zaloge"
 
 #. module: stock_move_purchase_uom
 #: model:ir.model.fields,help:stock_move_purchase_uom.field_stock_picking_type__purchase_uom_rounding_method
@@ -46,16 +48,18 @@ msgid ""
 "The tie-breaking rule used for float rounding operations when using the "
 "Purchase UoM"
 msgstr ""
+"Pravilo za odločanje o neodločenih primerih, ki se uporablja za operacije "
+"zaokroževanja polj 'Float' pri uporabi nabavne EM"
 
 #. module: stock_move_purchase_uom
 #: model:ir.model.fields.selection,name:stock_move_purchase_uom.selection__stock_picking_type__purchase_uom_rounding_method__up
 msgid "Up"
-msgstr ""
+msgstr "Navzgor"
 
 #. module: stock_move_purchase_uom
 #: model:ir.model.fields,field_description:stock_move_purchase_uom.field_stock_picking_type__use_purchase_uom
 msgid "Use Purchase Uom"
-msgstr ""
+msgstr "Uporabi nabavno EM"
 
 #. module: stock_move_purchase_uom
 #: model:ir.model.fields,help:stock_move_purchase_uom.field_stock_picking_type__use_purchase_uom
@@ -63,3 +67,5 @@ msgid ""
 "Use the product purchase UoM instead of the default UoM for the moves "
 "belonging to this operation type"
 msgstr ""
+"Uporabi nabavno EM proizvoda namesto privzete za premike v sklopu tega tipa "
+"operacije"
