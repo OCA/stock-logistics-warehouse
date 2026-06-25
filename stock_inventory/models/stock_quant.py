@@ -37,7 +37,7 @@ class StockQuant(models.Model):
                 lambda x, rec=rec: not x.company_id.id
                 or not rec.company_id.id
                 or rec.company_id.id == x.company_id.id
-            )
+            ).sorted(key=lambda m: (m.create_date or fields.Datetime.now(), m.id))
             if len(moves) == 0:
                 raise ValueError(_("No move lines have been created"))
             move = moves[len(moves) - 1]
