@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2026-06-25 10:30+0000\n"
+"PO-Revision-Date: 2026-06-25 10:33+0000\n"
 "Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: none\n"
 "Language: sl\n"
@@ -20,12 +20,12 @@ msgstr ""
 #. module: stock_lot_catalog_condition
 #: model_terms:ir.ui.view,arch_db:stock_lot_catalog_condition.lot_view_search_catalog
 msgid "Condition"
-msgstr ""
+msgstr "Stanje"
 
 #. module: stock_lot_catalog_condition
 #: model:ir.model.fields,field_description:stock_lot_catalog_condition.field_stock_lot__condition_color
 msgid "Condition color"
-msgstr ""
+msgstr "Barva stanja"
 
 #. module: stock_lot_catalog_condition
 #: model:ir.model,name:stock_lot_catalog_condition.model_stock_lot
