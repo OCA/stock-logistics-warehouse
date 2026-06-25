@@ -6,7 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2026-06-25 10:29+0000\n"
+"Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: none\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
@@ -14,6 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
 "n%100==4 ? 2 : 3;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: stock_location_bin_name
 #: model:ir.model.fields,help:stock_location_bin_name.field_stock_location__location_name_format
@@ -21,13 +23,16 @@ msgid ""
 "Format string that will compute the name of the location. Use location fields. Example: '{area}-{corridor:0>2}.{rack:0>3}.{level:0>2}'\n"
 "Missing fields are replaced by '~' and formatting errors by '!'."
 msgstr ""
+"Oblikujte niz, ki bo izračunal naziv lokacije. Uporabite polja za lokacijo. "
+"Primer: '{area}-{corridor:0>2}.{rack:0>3}.{level:0>2}'\n"
+"Manjkajoča polja so nadomeščena z '~', napake v oblikovanju pa z '!'."
 
 #. module: stock_location_bin_name
 #: model:ir.model,name:stock_location_bin_name.model_stock_location
 msgid "Inventory Locations"
-msgstr ""
+msgstr "Lokacije inventarja"
 
 #. module: stock_location_bin_name
 #: model:ir.model.fields,field_description:stock_location_bin_name.field_stock_location__location_name_format
 msgid "Location Name Format"
-msgstr ""
+msgstr "Format naziva lokacije"
