@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2026-06-25 08:30+0000\n"
+"PO-Revision-Date: 2026-06-25 09:43+0000\n"
 "Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: none\n"
 "Language: sl\n"
@@ -592,7 +592,7 @@ msgid ""
 "for hardware issues"
 msgstr ""
 "Naloge ni bilo mogoče izvesti. Poskusite znova ali preverite, ali ima modul "
-"za navpično dvigalo težave s strojno opremo."
+"za navpično dvigalo težave s strojno opremo"
 
 #. module: stock_vlm_mgmt
 #. odoo-python
@@ -604,7 +604,7 @@ msgstr "VLM je nalogo preklical"
 #. odoo-python
 #: code:addons/stock_vlm_mgmt/models/stock_vlm_task.py:0
 msgid "There are no pending tasks to perform"
-msgstr ""
+msgstr "Ni čakajočih nalog za izvedbo"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model,name:stock_vlm_mgmt.model_stock_picking
@@ -855,17 +855,17 @@ msgstr ""
 #: model:ir.model.fields.selection,name:stock_vlm_mgmt.selection__stock_vlm_task__state__waiting
 #: model:ir.model.fields.selection,name:stock_vlm_mgmt.selection__stock_vlm_task_action__state__waiting
 msgid "Waiting"
-msgstr ""
+msgstr "V čakanju"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task_action__warning
 msgid "Warning"
-msgstr ""
+msgstr "Opozorilo"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location_vlm_tray_type__width
 msgid "Width"
-msgstr ""
+msgstr "Širina"
 
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location_vlm_tray_type__width_per_cell
@@ -912,7 +912,7 @@ msgstr ""
 #. module: stock_vlm_mgmt
 #: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.vlm_task_action_form_view
 msgid "🡸 Previous"
-msgstr ""
+msgstr "🡸 Prejšnji"
 
 #~ msgid "Last Modified on"
 #~ msgstr "Zadnjič spremenjeno"
