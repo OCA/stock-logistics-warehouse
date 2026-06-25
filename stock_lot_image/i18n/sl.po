@@ -6,7 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2026-06-25 11:52+0000\n"
+"Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: none\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
@@ -14,122 +15,123 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
 "n%100==4 ? 2 : 3;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: stock_lot_image
 #: model_terms:ir.ui.view,arch_db:stock_lot_image.stock_lot_image_view_kanban
 msgid "#{record.name.value}"
-msgstr ""
+msgstr "#{record.name.value}"
 
 #. module: stock_lot_image
 #: model_terms:ir.ui.view,arch_db:stock_lot_image.stock_lot_image_view_form
 msgid "<span>Video Preview</span>"
-msgstr ""
+msgstr "<span>Predogled videoposnetka</span>"
 
 #. module: stock_lot_image
 #: model_terms:ir.ui.view,arch_db:stock_lot_image.stock_lot_image_view_kanban
 msgid "Acceptable file size"
-msgstr ""
+msgstr "Sprejemljiva velikost datoteke"
 
 #. module: stock_lot_image
 #: model_terms:ir.ui.view,arch_db:stock_lot_image.view_production_lot_form
 msgid "Add Media"
-msgstr ""
+msgstr "Dodaj medij"
 
 #. module: stock_lot_image
 #: model:ir.model.fields,field_description:stock_lot_image.field_stock_lot_image__can_image_1024_be_zoomed
 msgid "Can Image 1024 be zoomed"
-msgstr ""
+msgstr "Ali je mogoče sliko 1024 povečati"
 
 #. module: stock_lot_image
 #: model:ir.model.fields,field_description:stock_lot_image.field_stock_lot_image__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Ustvaril"
 
 #. module: stock_lot_image
 #: model:ir.model.fields,field_description:stock_lot_image.field_stock_lot_image__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Ustvarjeno"
 
 #. module: stock_lot_image
 #: model:ir.model.fields,field_description:stock_lot_image.field_stock_lot_image__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Prikazani naziv"
 
 #. module: stock_lot_image
 #: model:ir.model.fields,field_description:stock_lot_image.field_stock_lot_image__embed_code
 msgid "Embed Code"
-msgstr ""
+msgstr "Vgradi kodo"
 
 #. module: stock_lot_image
 #: model_terms:ir.ui.view,arch_db:stock_lot_image.stock_lot_image_view_kanban
 msgid "Huge file size. The image should be optimized/reduced."
-msgstr ""
+msgstr "Ogromna velikost datoteke. Sliko je treba optimizirati/zmanjšati."
 
 #. module: stock_lot_image
 #: model:ir.model.fields,field_description:stock_lot_image.field_stock_lot_image__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: stock_lot_image
 #: model:ir.model.fields,field_description:stock_lot_image.field_stock_lot_image__image_1920
 msgid "Image"
-msgstr ""
+msgstr "Slika"
 
 #. module: stock_lot_image
 #: model:ir.model.fields,field_description:stock_lot_image.field_stock_lot_image__image_1024
 msgid "Image 1024"
-msgstr ""
+msgstr "Slika 1024"
 
 #. module: stock_lot_image
 #: model:ir.model.fields,field_description:stock_lot_image.field_stock_lot_image__image_128
 msgid "Image 128"
-msgstr ""
+msgstr "Slika 128"
 
 #. module: stock_lot_image
 #: model:ir.model.fields,field_description:stock_lot_image.field_stock_lot_image__image_256
 msgid "Image 256"
-msgstr ""
+msgstr "Slika 256"
 
 #. module: stock_lot_image
 #: model:ir.model.fields,field_description:stock_lot_image.field_stock_lot_image__image_512
 msgid "Image 512"
-msgstr ""
+msgstr "Slika 512"
 
 #. module: stock_lot_image
 #: model_terms:ir.ui.view,arch_db:stock_lot_image.stock_lot_image_view_form
 msgid "Image Name"
-msgstr ""
+msgstr "Naziv slike"
 
 #. module: stock_lot_image
 #: model:ir.model.fields,field_description:stock_lot_image.field_stock_lot__image_ids
 #: model_terms:ir.ui.view,arch_db:stock_lot_image.view_production_lot_form
 msgid "Images"
-msgstr ""
+msgstr "Slike"
 
 #. module: stock_lot_image
 #: model:ir.model.fields,field_description:stock_lot_image.field_stock_lot_image__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Zadnji posodobil"
 
 #. module: stock_lot_image
 #: model:ir.model.fields,field_description:stock_lot_image.field_stock_lot_image__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Zadnjič posodobljeno"
 
 #. module: stock_lot_image
 #: model:ir.model.fields,field_description:stock_lot_image.field_stock_lot_image__lot_id
 msgid "Lot"
-msgstr ""
+msgstr "Lot"
 
 #. module: stock_lot_image
 #: model:ir.model,name:stock_lot_image.model_stock_lot
 msgid "Lot/Serial"
-msgstr ""
+msgstr "Lot/serijska št."
 
 #. module: stock_lot_image
 #: model:ir.model.fields,field_description:stock_lot_image.field_stock_lot_image__name
 msgid "Name"
-msgstr ""
+msgstr "Naziv"
 
 #. module: stock_lot_image
 #: model_terms:ir.ui.view,arch_db:stock_lot_image.stock_lot_image_view_kanban
@@ -137,11 +139,13 @@ msgid ""
 "Optimization required! Reduce the image size or increase your compression "
 "settings."
 msgstr ""
+"Potrebna je optimizacija! Zmanjšajte velikost slike ali zvišajte "
+"kompresijske nastavitve."
 
 #. module: stock_lot_image
 #: model_terms:ir.ui.view,arch_db:stock_lot_image.stock_lot_image_view_form
 msgid "Please enter a valid Video URL."
-msgstr ""
+msgstr "Vnesite veljaven URL videoposnetka."
 
 #. module: stock_lot_image
 #. odoo-python
@@ -149,24 +153,26 @@ msgstr ""
 msgid ""
 "Provided video URL for '%s' is not valid. Please enter a valid video URL."
 msgstr ""
+"Vneseni URL videoposnetka za '%s' ni veljaven. Vnesite veljaven URL "
+"videoposnetka."
 
 #. module: stock_lot_image
 #: model:ir.model.fields,field_description:stock_lot_image.field_stock_lot_image__sequence
 msgid "Sequence"
-msgstr ""
+msgstr "Zaporedje"
 
 #. module: stock_lot_image
 #: model:ir.model,name:stock_lot_image.model_stock_lot_image
 msgid "Stock Lot Image"
-msgstr ""
+msgstr "Slika lota"
 
 #. module: stock_lot_image
 #: model:ir.model.fields,help:stock_lot_image.field_stock_lot_image__video_url
 msgid "URL of a video for showcasing your lot."
-msgstr ""
+msgstr "URL videoposnetka za predstavitev vašega lota."
 
 #. module: stock_lot_image
 #: model:ir.model.fields,field_description:stock_lot_image.field_stock_lot_image__video_url
 #: model_terms:ir.ui.view,arch_db:stock_lot_image.stock_lot_image_view_form
 msgid "Video URL"
-msgstr ""
+msgstr "Video URL"
