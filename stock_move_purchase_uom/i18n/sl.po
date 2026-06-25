@@ -1,0 +1,65 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_move_purchase_uom
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: sl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
+"n%100==4 ? 2 : 3;\n"
+
+#. module: stock_move_purchase_uom
+#: model:ir.model.fields.selection,name:stock_move_purchase_uom.selection__stock_picking_type__purchase_uom_rounding_method__half-up
+msgid "Closest"
+msgstr ""
+
+#. module: stock_move_purchase_uom
+#: model:ir.model,name:stock_move_purchase_uom.model_stock_picking_type
+msgid "Picking Type"
+msgstr ""
+
+#. module: stock_move_purchase_uom
+#: model:ir.model,name:stock_move_purchase_uom.model_stock_move_line
+msgid "Product Moves (Stock Move Line)"
+msgstr ""
+
+#. module: stock_move_purchase_uom
+#: model:ir.model.fields,field_description:stock_move_purchase_uom.field_stock_picking_type__purchase_uom_rounding_method
+msgid "Purchase Uom Rounding Method"
+msgstr ""
+
+#. module: stock_move_purchase_uom
+#: model:ir.model,name:stock_move_purchase_uom.model_stock_move
+msgid "Stock Move"
+msgstr ""
+
+#. module: stock_move_purchase_uom
+#: model:ir.model.fields,help:stock_move_purchase_uom.field_stock_picking_type__purchase_uom_rounding_method
+msgid ""
+"The tie-breaking rule used for float rounding operations when using the "
+"Purchase UoM"
+msgstr ""
+
+#. module: stock_move_purchase_uom
+#: model:ir.model.fields.selection,name:stock_move_purchase_uom.selection__stock_picking_type__purchase_uom_rounding_method__up
+msgid "Up"
+msgstr ""
+
+#. module: stock_move_purchase_uom
+#: model:ir.model.fields,field_description:stock_move_purchase_uom.field_stock_picking_type__use_purchase_uom
+msgid "Use Purchase Uom"
+msgstr ""
+
+#. module: stock_move_purchase_uom
+#: model:ir.model.fields,help:stock_move_purchase_uom.field_stock_picking_type__use_purchase_uom
+msgid ""
+"Use the product purchase UoM instead of the default UoM for the moves "
+"belonging to this operation type"
+msgstr ""
