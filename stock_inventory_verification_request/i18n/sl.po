@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-01-16 14:36+0000\n"
-"PO-Revision-Date: 2026-06-25 09:56+0000\n"
+"PO-Revision-Date: 2026-06-25 10:07+0000\n"
 "Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: Slovenian (https://www.transifex.com/oca/teams/23907/sl/)\n"
 "Language: sl\n"
@@ -28,7 +28,7 @@ msgstr "Potrebno ukrepanje"
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_quant__allow_svr_creation
 msgid "Allow SVR Creation"
-msgstr ""
+msgstr "Dovoli ustvarjanje SVR"
 
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__responsible_id
@@ -109,7 +109,7 @@ msgstr "Sledilci (partnerji)"
 #. module: stock_inventory_verification_request
 #: model_terms:ir.ui.view,arch_db:stock_inventory_verification_request.view_stock_quant_tree
 msgid "Generate a slot verification request for this line"
-msgstr ""
+msgstr "Ustvari zahtevek za preverjanje skladiščnega mesta za to postavko"
 
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__has_message
@@ -158,7 +158,7 @@ msgstr "Skupina inventurnih popravkov"
 #. module: stock_inventory_verification_request
 #: model_terms:ir.ui.view,arch_db:stock_inventory_verification_request.stock_slot_verification_request_form_view
 msgid "Inventory Adjustments created from this SVR."
-msgstr ""
+msgstr "Inventurni popravki, ustvarjeni iz tega SVR."
 
 #. module: stock_inventory_verification_request
 #: model:ir.model,name:stock_inventory_verification_request.model_stock_location
@@ -168,22 +168,22 @@ msgstr "Lokacije inventarja"
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__involved_quant_ids
 msgid "Involved Inventory Quants"
-msgstr ""
+msgstr "Vključeni inventurni kvanti"
 
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__involved_move_line_count
 msgid "Involved Move Line Count"
-msgstr ""
+msgstr "Število vključenih postavk premika"
 
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__involved_quant_count
 msgid "Involved Quant Count"
-msgstr ""
+msgstr "Število vključenih kvantov"
 
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__involved_move_line_ids
 msgid "Involved Stock Moves"
-msgstr ""
+msgstr "Vključeni premiki zaloge"
 
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__message_is_follower
@@ -278,7 +278,7 @@ msgstr "Število neprebranih sporočil"
 #. module: stock_inventory_verification_request
 #: model:ir.actions.act_window,name:stock_inventory_verification_request.action_quant_line_tree
 msgid "Open Stock Lines"
-msgstr ""
+msgstr "Odprte postavke zaloge"
 
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__product_id
@@ -293,12 +293,12 @@ msgstr "Kvanti"
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_quant__requested_verification
 msgid "Requested Verification?"
-msgstr ""
+msgstr "Zahtevano preverjanje?"
 
 #. module: stock_inventory_verification_request
 #: model_terms:ir.ui.view,arch_db:stock_inventory_verification_request.view_stock_quant_tree
 msgid "SVR"
-msgstr ""
+msgstr "SVR"
 
 #. module: stock_inventory_verification_request
 #: model:ir.model,name:stock_inventory_verification_request.model_stock_slot_verification_request
@@ -307,12 +307,12 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:stock_inventory_verification_request.stock_slot_verification_request_form_view
 #: model_terms:ir.ui.view,arch_db:stock_inventory_verification_request.view_location_form
 msgid "Slot Verification Request"
-msgstr ""
+msgstr "Zahtevek za preverjanje skladiščnega mesta"
 
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_location__slot_verification_ids
 msgid "Slot Verification Requests"
-msgstr ""
+msgstr "Zahtevki za preverjanje skladiščnega mesta"
 
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields.selection,name:stock_inventory_verification_request.selection__stock_slot_verification_request__state__done
@@ -322,7 +322,7 @@ msgstr "Rešeno"
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_inventory__solving_slot_verification_request_id
 msgid "Solving Slot Verification Request"
-msgstr ""
+msgstr "Reševanje zahtevka za preverjanje skladiščnega mesta"
 
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__state
@@ -342,7 +342,7 @@ msgstr "Vpleteni premiki zalog"
 #. module: stock_inventory_verification_request
 #: model_terms:ir.ui.view,arch_db:stock_inventory_verification_request.stock_slot_verification_request_form_view
 msgid "Stock Moves related to the given location and product."
-msgstr ""
+msgstr "Premiki zaloge, povezani z dano lokacijo in proizvodom."
 
 #. module: stock_inventory_verification_request
 #: model_terms:ir.ui.view,arch_db:stock_inventory_verification_request.stock_slot_verification_request_form_view
@@ -352,22 +352,22 @@ msgstr "Zaloga pregledana"
 #. module: stock_inventory_verification_request
 #: model:ir.actions.act_window,name:stock_inventory_verification_request.action_slot_verification_request
 msgid "Stock Slot Verification Request"
-msgstr ""
+msgstr "Zahtevek za preverjanje skladiščnega mesta zaloge"
 
 #. module: stock_inventory_verification_request
 #: model_terms:ir.ui.view,arch_db:stock_inventory_verification_request.stock_slot_verification_request_form_view
 msgid "Stock related to the given location and product."
-msgstr ""
+msgstr "Zaloga, povezana z dano lokacijo in proizvodom."
 
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,help:stock_inventory_verification_request.field_stock_slot_verification_request__created_inventory_ids
 msgid "These inventory adjustment were created from this SVR."
-msgstr ""
+msgstr "Ti inventurni popravki so bili ustvarjeni iz tega SVR."
 
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,help:stock_inventory_verification_request.field_stock_inventory__solving_slot_verification_request_id
 msgid "This Inventory adjustment was created from the specified SVR."
-msgstr ""
+msgstr "Ta inventurni popravek je bil ustvarjen iz navedenega SVR."
 
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__message_unread
@@ -383,7 +383,7 @@ msgstr "Št. neprebranih sporočil"
 #: model:ir.model.fields.selection,name:stock_inventory_verification_request.selection__stock_slot_verification_request__state__wait
 #: model_terms:ir.ui.view,arch_db:stock_inventory_verification_request.stock_slot_verification_request_search_view
 msgid "Waiting Actions"
-msgstr ""
+msgstr "Čakajoča dejanja"
 
 #. module: stock_inventory_verification_request
 #: model:ir.model.fields,field_description:stock_inventory_verification_request.field_stock_slot_verification_request__website_message_ids
