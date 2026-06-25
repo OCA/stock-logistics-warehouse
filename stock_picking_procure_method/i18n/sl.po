@@ -6,7 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2026-06-25 10:19+0000\n"
+"Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: none\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
@@ -14,6 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
 "n%100==4 ? 2 : 3;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: stock_picking_procure_method
 #: model:ir.model.fields,help:stock_picking_procure_method.field_stock_picking__procure_method
@@ -24,13 +26,18 @@ msgid ""
 "current stock) to gather products. If we want to chain moves and have this "
 "one to wait for the previous, this second option should be chosen."
 msgstr ""
+"Privzeto sistem vzame iz zaloge na izvorni lokaciji in pasivno čaka na "
+"razpoložljivost. Druga možnost omogoči neposredno ustvariti oskrbovanje na "
+"izvorni lokaciji (in tako ignorirati trenutno zalogo) za zbiranje "
+"proizvodov. Ko želimo verižne premike in mora ta premik čakati na "
+"prejšnjega, se lahko izbere druga opcija."
 
 #. module: stock_picking_procure_method
 #: model:ir.model.fields,field_description:stock_picking_procure_method.field_stock_picking__procure_method
 msgid "Supply Method"
-msgstr ""
+msgstr "Metoda dobave"
 
 #. module: stock_picking_procure_method
 #: model:ir.model,name:stock_picking_procure_method.model_stock_picking
 msgid "Transfer"
-msgstr ""
+msgstr "Premestitev"
