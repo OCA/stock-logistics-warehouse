@@ -6,7 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2026-06-25 10:51+0000\n"
+"Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: none\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
@@ -14,28 +15,29 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
 "n%100==4 ? 2 : 3;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: stock_package_type_volume
 #: model:ir.model,name:stock_package_type_volume.model_stock_package_type
 msgid "Stock package type"
-msgstr ""
+msgstr "Tip pakiranja zalog"
 
 #. module: stock_package_type_volume
 #: model:ir.model.fields,help:stock_package_type_volume.field_stock_package_type__volume
 msgid "The Packaging volume"
-msgstr ""
+msgstr "Prostornina pakiranja"
 
 #. module: stock_package_type_volume
 #: model:ir.model.fields,field_description:stock_package_type_volume.field_stock_package_type__volume
 msgid "Volume"
-msgstr ""
+msgstr "Prostornina"
 
 #. module: stock_package_type_volume
 #: model:ir.model.fields,field_description:stock_package_type_volume.field_stock_package_type__volume_uom_id
 msgid "Volume Units of Measure"
-msgstr ""
+msgstr "Prostornina - enote mere"
 
 #. module: stock_package_type_volume
 #: model:ir.model.fields,field_description:stock_package_type_volume.field_stock_package_type__volume_uom_name
 msgid "Volume Uom Name"
-msgstr ""
+msgstr "Prostornina - naziv EM"
