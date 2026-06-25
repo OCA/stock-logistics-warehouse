@@ -6,7 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2026-06-25 13:01+0000\n"
+"Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: none\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
@@ -14,6 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
 "n%100==4 ? 2 : 3;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: stock_vertical_lift
 #. odoo-python
@@ -30,17 +32,17 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_operation_base_screen_view
 #: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_operation_transfer_screen_view
 msgid "<span>/</span>"
-msgstr ""
+msgstr "<span>/</span>"
 
 #. module: stock_vertical_lift
 #: model_terms:ir.ui.view,arch_db:stock_vertical_lift.packagings
 msgid "<span>1</span>"
-msgstr ""
+msgstr "<span>1</span>"
 
 #. module: stock_vertical_lift
 #: model_terms:ir.ui.view,arch_db:stock_vertical_lift.packagings
 msgid "<span>: </span>"
-msgstr ""
+msgstr "<span>: </span>"
 
 #. module: stock_vertical_lift
 #: model:ir.model,name:stock_vertical_lift.model_vertical_lift_shuttle_manual_barcode
@@ -62,7 +64,7 @@ msgstr ""
 #: code:addons/stock_vertical_lift/models/vertical_lift_shuttle.py:0
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_shuttle_manual_barcode__barcode
 msgid "Barcode"
-msgstr ""
+msgstr "Črtna koda"
 
 #. module: stock_vertical_lift
 #: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_operation_base_screen_view
@@ -106,17 +108,17 @@ msgstr ""
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_command__command
 msgid "Command"
-msgstr ""
+msgstr "Ukaz"
 
 #. module: stock_vertical_lift
 #: model:ir.model,name:stock_vertical_lift.model_res_config_settings
 msgid "Config Settings"
-msgstr ""
+msgstr "Nastavitve"
 
 #. module: stock_vertical_lift
 #: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_shuttle_manual_barcode_form
 msgid "Confirm"
-msgstr ""
+msgstr "Potrdi"
 
 #. module: stock_vertical_lift
 #. odoo-python
@@ -131,12 +133,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_put__picking_partner_id
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_transfer__picking_partner_id
 msgid "Contact"
-msgstr ""
+msgstr "Stik"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_inventory__product_qty
 msgid "Counted Quantity"
-msgstr ""
+msgstr "Prešteta količina"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_command__create_uid
@@ -146,7 +148,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_shuttle__create_uid
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_shuttle_manual_barcode__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Ustvaril"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_command__create_date
@@ -156,7 +158,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_shuttle__create_date
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_shuttle_manual_barcode__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Ustvarjeno"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_pick__current_move_line_id
@@ -173,14 +175,14 @@ msgstr ""
 #. module: stock_vertical_lift
 #: model:ir.model.fields,help:stock_vertical_lift.field_vertical_lift_operation_inventory__product_uom_id
 msgid "Default unit of measure used for all stock operations."
-msgstr ""
+msgstr "Privzeta enota mere pri operacijah z zalogami."
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_pick__location_dest_id
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_put__location_dest_id
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_transfer__location_dest_id
 msgid "Destination"
-msgstr ""
+msgstr "Cilj"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_command__display_name
@@ -190,17 +192,17 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_shuttle__display_name
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_shuttle_manual_barcode__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Prikazani naziv"
 
 #. module: stock_vertical_lift
 #: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_operation_base_screen_view
 msgid "Dropdown menu"
-msgstr ""
+msgstr "Spustni meni"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_command__error
 msgid "Error"
-msgstr ""
+msgstr "Napaka"
 
 #. module: stock_vertical_lift
 #: model_terms:ir.ui.view,arch_db:stock_vertical_lift.view_stock_move_line_operation_tree
@@ -235,7 +237,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_shuttle__id
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_shuttle_manual_barcode__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,help:stock_vertical_lift.field_stock_move_line__vertical_lift_skipped
@@ -248,12 +250,12 @@ msgstr ""
 #: model:ir.model.fields.selection,name:stock_vertical_lift.selection__vertical_lift_shuttle__mode__inventory
 #: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_shuttle_form_menu
 msgid "Inventory"
-msgstr ""
+msgstr "Inventar"
 
 #. module: stock_vertical_lift
 #: model:ir.model,name:stock_vertical_lift.model_stock_location
 msgid "Inventory Locations"
-msgstr ""
+msgstr "Lokacije inventarja"
 
 #. module: stock_vertical_lift
 #: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_operation_inventory_button_view
@@ -284,7 +286,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_shuttle__write_uid
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_shuttle_manual_barcode__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Zadnji posodobil"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_command__write_date
@@ -294,7 +296,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_shuttle__write_date
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_shuttle_manual_barcode__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Zadnjič posodobljeno"
 
 #. module: stock_vertical_lift
 #. odoo-python
@@ -310,7 +312,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_transfer__location_id
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_shuttle__location_id
 msgid "Location"
-msgstr ""
+msgstr "Lokacija"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_inventory__lot_id
@@ -318,13 +320,13 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_put__lot_id
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_transfer__lot_id
 msgid "Lot/Serial Number"
-msgstr ""
+msgstr "Lot/serijska številka"
 
 #. module: stock_vertical_lift
 #. odoo-python
 #: code:addons/stock_vertical_lift/models/vertical_lift_shuttle.py:0
 msgid "Menu"
-msgstr ""
+msgstr "Meni"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_base__mode
@@ -334,12 +336,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_transfer__mode
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_shuttle__mode
 msgid "Mode"
-msgstr ""
+msgstr "Način"
 
 #. module: stock_vertical_lift
 #: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_shuttle_view_kanban
 msgid "Mode:"
-msgstr ""
+msgstr "Način:"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_command__name
@@ -350,12 +352,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_transfer__name
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_shuttle__name
 msgid "Name"
-msgstr ""
+msgstr "Naziv"
 
 #. module: stock_vertical_lift
 #: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_shuttle_view_form
 msgid "Network"
-msgstr ""
+msgstr "Omrežje"
 
 #. module: stock_vertical_lift
 #. odoo-python
@@ -423,12 +425,12 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_operation_base_button_view
 #: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_operation_base_screen_view
 msgid "Operations"
-msgstr ""
+msgstr "Operacije"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_inventory__package_id
 msgid "Package"
-msgstr ""
+msgstr "Pakiranje"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_inventory__product_packagings
@@ -436,13 +438,13 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_put__product_packagings
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_transfer__product_packagings
 msgid "Packaging"
-msgstr ""
+msgstr "Pakiranje"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields.selection,name:stock_vertical_lift.selection__vertical_lift_shuttle__mode__pick
 #: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_shuttle_form_menu
 msgid "Pick"
-msgstr ""
+msgstr "Prevzem"
 
 #. module: stock_vertical_lift
 #: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_operation_pick_button_view
@@ -453,7 +455,7 @@ msgstr ""
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_shuttle__port
 msgid "Port"
-msgstr ""
+msgstr "Vrata"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_inventory__product_id
@@ -461,18 +463,18 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_put__product_id
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_transfer__product_id
 msgid "Product"
-msgstr ""
+msgstr "Proizvod"
 
 #. module: stock_vertical_lift
 #: model:ir.model,name:stock_vertical_lift.model_stock_move_line
 msgid "Product Moves (Stock Move Line)"
-msgstr ""
+msgstr "Premiki proizvoda (postavka premika zaloge)"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields.selection,name:stock_vertical_lift.selection__vertical_lift_shuttle__mode__put
 #: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_shuttle_form_menu
 msgid "Put"
-msgstr ""
+msgstr "Vstavi"
 
 #. module: stock_vertical_lift
 #: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_operation_put_button_view
@@ -487,7 +489,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_operation_inventory_screen_view
 #: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_operation_transfer_screen_view
 msgid "Quantity"
-msgstr ""
+msgstr "Količina"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_inventory__quantity_input
@@ -497,7 +499,7 @@ msgstr ""
 #. module: stock_vertical_lift
 #: model:ir.model,name:stock_vertical_lift.model_stock_quant
 msgid "Quants"
-msgstr ""
+msgstr "Kvanti"
 
 #. module: stock_vertical_lift
 #: model:product.template,name:stock_vertical_lift.product_recovery_socks_product_template
@@ -509,12 +511,12 @@ msgstr ""
 #: model:ir.model.fields,help:stock_vertical_lift.field_vertical_lift_operation_put__picking_origin
 #: model:ir.model.fields,help:stock_vertical_lift.field_vertical_lift_operation_transfer__picking_origin
 msgid "Reference of the document"
-msgstr ""
+msgstr "Sklic dokumenta"
 
 #. module: stock_vertical_lift
 #: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_operation_base_screen_view
 msgid "Release"
-msgstr ""
+msgstr "Izpusti"
 
 #. module: stock_vertical_lift
 #: model_terms:ir.ui.view,arch_db:stock_vertical_lift.view_location_form
@@ -545,7 +547,7 @@ msgstr ""
 #. module: stock_vertical_lift
 #: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_operation_base_screen_view
 msgid "Save"
-msgstr ""
+msgstr "Shrani"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_res_config_settings__vertical_lift_secret
@@ -556,12 +558,12 @@ msgstr ""
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_shuttle__server
 msgid "Server"
-msgstr ""
+msgstr "Strežnik"
 
 #. module: stock_vertical_lift
 #: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_shuttle_view_kanban
 msgid "Settings"
-msgstr ""
+msgstr "Nastavitve"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_command__shuttle_id
@@ -585,7 +587,7 @@ msgstr ""
 #. module: stock_vertical_lift
 #: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_operation_pick_screen_view
 msgid "Skip"
-msgstr ""
+msgstr "Preskoči"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_stock_move_line__vertical_lift_skipped
@@ -597,7 +599,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_put__picking_origin
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_transfer__picking_origin
 msgid "Source Document"
-msgstr ""
+msgstr "Izvorni dokument"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_base__state
@@ -606,12 +608,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_put__state
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_transfer__state
 msgid "State"
-msgstr ""
+msgstr "Stanje"
 
 #. module: stock_vertical_lift
 #: model:ir.model,name:stock_vertical_lift.model_stock_move
 msgid "Stock Move"
-msgstr ""
+msgstr "Premik zaloge"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_inventory__tray_qty
@@ -619,7 +621,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_put__tray_qty
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_transfer__tray_qty
 msgid "Stock Quantity"
-msgstr ""
+msgstr "Količina zaloge"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,help:stock_vertical_lift.field_vertical_lift_operation_base__location_id
@@ -636,7 +638,7 @@ msgstr ""
 #. module: stock_vertical_lift
 #: model:ir.model.fields,help:stock_vertical_lift.field_vertical_lift_operation_inventory__package_id
 msgid "The package containing this quant"
-msgstr ""
+msgstr "Pakiranje, ki vsebuje ta kvant"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,help:stock_vertical_lift.field_vertical_lift_operation_inventory__product_qty
@@ -655,12 +657,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_put__picking_id
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_transfer__picking_id
 msgid "Transfer"
-msgstr ""
+msgstr "Premestitev"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields.selection,name:stock_vertical_lift.selection__stock_location__vertical_lift_kind__tray
 msgid "Tray"
-msgstr ""
+msgstr "Predal"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_inventory__tray_type_code
@@ -668,7 +670,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_put__tray_type_code
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_transfer__tray_type_code
 msgid "Tray Code"
-msgstr ""
+msgstr "Koda predala"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_inventory__tray_location_id
@@ -676,7 +678,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_put__tray_location_id
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_transfer__tray_location_id
 msgid "Tray Location"
-msgstr ""
+msgstr "Lokacija predala"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_inventory__tray_name
@@ -684,7 +686,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_put__tray_name
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_transfer__tray_name
 msgid "Tray Name"
-msgstr ""
+msgstr "Naziv predala"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_inventory__tray_type_id
@@ -692,7 +694,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_put__tray_type_id
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_transfer__tray_type_id
 msgid "Tray Type"
-msgstr ""
+msgstr "Tip predala"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_inventory__product_uom_id
@@ -700,7 +702,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_put__product_uom_id
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_transfer__product_uom_id
 msgid "Unit of Measure"
-msgstr ""
+msgstr "Enota mere"
 
 #. module: stock_vertical_lift
 #. odoo-python
@@ -711,7 +713,7 @@ msgstr ""
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_shuttle__use_tls
 msgid "Use Tls"
-msgstr ""
+msgstr "Uporabi TLS"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,help:stock_vertical_lift.field_vertical_lift_operation_base___barcode_scanned
@@ -746,7 +748,7 @@ msgstr ""
 #. module: stock_vertical_lift
 #: model:ir.model,name:stock_vertical_lift.model_vertical_lift_operation_transfer
 msgid "Vertical Lift Operation - Transfer"
-msgstr ""
+msgstr "Operacija vertikalnega skladišča - transfer"
 
 #. module: stock_vertical_lift
 #: model:ir.model,name:stock_vertical_lift.model_vertical_lift_operation_inventory
@@ -783,7 +785,7 @@ msgstr ""
 #. module: stock_vertical_lift
 #: model:ir.model.fields.selection,name:stock_vertical_lift.selection__stock_location__vertical_lift_kind__view
 msgid "View"
-msgstr ""
+msgstr "Prikaz"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_inventory__tray_x
@@ -791,7 +793,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_put__tray_x
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_transfer__tray_x
 msgid "X"
-msgstr ""
+msgstr "X"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_inventory__tray_y
@@ -799,7 +801,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_put__tray_y
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_transfer__tray_y
 msgid "Y"
-msgstr ""
+msgstr "Y"
 
 #. module: stock_vertical_lift
 #: model:ir.model.constraint,message:stock_vertical_lift.constraint_vertical_lift_shuttle_location_id_unique
