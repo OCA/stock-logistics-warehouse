@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2026-06-25 11:31+0000\n"
+"PO-Revision-Date: 2026-06-25 11:38+0000\n"
 "Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: none\n"
 "Language: sl\n"
@@ -20,12 +20,12 @@ msgstr ""
 #. module: stock_picking_product_assortment
 #: model:ir.model.fields,field_description:stock_picking_product_assortment.field_stock_picking__assortment_product_ids
 msgid "Assortment Products"
-msgstr ""
+msgstr "Izdelki v asortimanu"
 
 #. module: stock_picking_product_assortment
 #: model:ir.model.fields,field_description:stock_picking_product_assortment.field_stock_picking__has_assortment
 msgid "Has Assortment"
-msgstr ""
+msgstr "Ima asortiman"
 
 #. module: stock_picking_product_assortment
 #: model:ir.model,name:stock_picking_product_assortment.model_stock_picking
