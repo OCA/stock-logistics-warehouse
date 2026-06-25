@@ -6,7 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2026-06-25 10:20+0000\n"
+"Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: none\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
@@ -14,20 +15,21 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
 "n%100==4 ? 2 : 3;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: stock_move_line_lot_link
 #: model_terms:ir.ui.view,arch_db:stock_move_line_lot_link.view_stock_move_line_detailed_operation_tree
 #: model_terms:ir.ui.view,arch_db:stock_move_line_lot_link.view_stock_move_line_operation_tree
 msgid "Lot/Serial Number Link"
-msgstr ""
+msgstr "Povezava do lota/serijske št."
 
 #. module: stock_move_line_lot_link
 #. odoo-python
 #: code:addons/stock_move_line_lot_link/models/stock_move_line.py:0
 msgid "No lot or serial number linked to this move line!"
-msgstr ""
+msgstr "Ta postavka nima povezanega lota/serijske številke!"
 
 #. module: stock_move_line_lot_link
 #: model:ir.model,name:stock_move_line_lot_link.model_stock_move_line
 msgid "Product Moves (Stock Move Line)"
-msgstr ""
+msgstr "Premiki proizvoda (postavka premika zaloge)"
