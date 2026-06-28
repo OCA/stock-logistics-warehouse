@@ -6,7 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2026-06-28 05:45+0000\n"
+"Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: none\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
@@ -14,49 +15,50 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
 "n%100==4 ? 2 : 3;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: stock_picking_volume
 #: model:ir.model.fields,field_description:stock_picking_volume.field_product_product__display_name
 #: model:ir.model.fields,field_description:stock_picking_volume.field_stock_move__display_name
 #: model:ir.model.fields,field_description:stock_picking_volume.field_stock_picking__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Prikazani naziv"
 
 #. module: stock_picking_volume
 #: model:ir.model.fields,field_description:stock_picking_volume.field_product_product__id
 #: model:ir.model.fields,field_description:stock_picking_volume.field_stock_move__id
 #: model:ir.model.fields,field_description:stock_picking_volume.field_stock_picking__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: stock_picking_volume
 #: model_terms:ir.ui.view,arch_db:stock_picking_volume.stock_picking_form_view
 msgid "Logistics"
-msgstr ""
+msgstr "Logistika"
 
 #. module: stock_picking_volume
 #: model:ir.model,name:stock_picking_volume.model_product_product
 msgid "Product Variant"
-msgstr ""
+msgstr "Različica proizvoda"
 
 #. module: stock_picking_volume
 #: model:ir.model,name:stock_picking_volume.model_stock_move
 msgid "Stock Move"
-msgstr ""
+msgstr "Premik zaloge"
 
 #. module: stock_picking_volume
 #: model:ir.model,name:stock_picking_volume.model_stock_picking
 msgid "Transfer"
-msgstr ""
+msgstr "Premestitev"
 
 #. module: stock_picking_volume
 #: model:ir.model.fields,field_description:stock_picking_volume.field_stock_move__volume
 #: model:ir.model.fields,field_description:stock_picking_volume.field_stock_picking__volume
 msgid "Volume"
-msgstr ""
+msgstr "Prostornina"
 
 #. module: stock_picking_volume
 #: model:ir.model.fields,field_description:stock_picking_volume.field_stock_move__volume_uom_name
 #: model:ir.model.fields,field_description:stock_picking_volume.field_stock_picking__volume_uom_name
 msgid "Volume unit of measure label"
-msgstr ""
+msgstr "Oznaka merske enote za prostornino"
