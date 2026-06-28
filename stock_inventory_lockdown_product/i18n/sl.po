@@ -6,7 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2026-06-28 08:46+0000\n"
+"Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: none\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
@@ -14,16 +15,17 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
 "n%100==4 ? 2 : 3;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: stock_inventory_lockdown_product
 #: model:ir.model,name:stock_inventory_lockdown_product.model_res_company
 msgid "Companies"
-msgstr ""
+msgstr "Družbe"
 
 #. module: stock_inventory_lockdown_product
 #: model:ir.model,name:stock_inventory_lockdown_product.model_res_config_settings
 msgid "Config Settings"
-msgstr ""
+msgstr "Nastavitve"
 
 #. module: stock_inventory_lockdown_product
 #: model:ir.model.fields,field_description:stock_inventory_lockdown_product.field_res_company__display_name
@@ -31,7 +33,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_inventory_lockdown_product.field_stock_inventory__display_name
 #: model:ir.model.fields,field_description:stock_inventory_lockdown_product.field_stock_move_line__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Prikazani naziv"
 
 #. module: stock_inventory_lockdown_product
 #: model:ir.model.fields,field_description:stock_inventory_lockdown_product.field_res_company__id
@@ -39,12 +41,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_inventory_lockdown_product.field_stock_inventory__id
 #: model:ir.model.fields,field_description:stock_inventory_lockdown_product.field_stock_move_line__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: stock_inventory_lockdown_product
 #: model:ir.model,name:stock_inventory_lockdown_product.model_stock_inventory
 msgid "Inventory Adjustment Group"
-msgstr ""
+msgstr "Skupina inventurnih popravkov"
 
 #. module: stock_inventory_lockdown_product
 #. odoo-python
@@ -54,18 +56,22 @@ msgid ""
 "- %(locations)s\n"
 "Product '%(product)s' is included in the inventory. Moving it to/from these locations is not allowed until the adjustment is complete."
 msgstr ""
+"Inventura poteka na naslednjih lokacijah:\n"
+"- %(locations)s\n"
+"Proizvod '%(product)s' je vključen v zalogo. Premikanje na te lokacije/iz "
+"njih ni dovoljeno, dokler inventura ni končana."
 
 #. module: stock_inventory_lockdown_product
 #: model:ir.model,name:stock_inventory_lockdown_product.model_stock_move_line
 msgid "Product Moves (Stock Move Line)"
-msgstr ""
+msgstr "Premiki proizvoda (postavka premika zaloge)"
 
 #. module: stock_inventory_lockdown_product
 #: model:ir.model.fields,field_description:stock_inventory_lockdown_product.field_res_company__use_soft_inventory_lock
 #: model:ir.model.fields,field_description:stock_inventory_lockdown_product.field_res_config_settings__use_soft_inventory_lock
 #: model_terms:ir.ui.view,arch_db:stock_inventory_lockdown_product.res_config_settings_view_form_inherit_soft_inventory_lock
 msgid "Use Product-Aware Inventory Lock"
-msgstr ""
+msgstr "Uporabi zaklepanje zalog glede na proizvod"
 
 #. module: stock_inventory_lockdown_product
 #: model_terms:ir.ui.view,arch_db:stock_inventory_lockdown_product.res_config_settings_view_form_inherit_soft_inventory_lock
@@ -73,6 +79,8 @@ msgid ""
 "When enabled, inventory locks only restrict stock moves involving products "
 "that are part of an active inventory adjustment."
 msgstr ""
+"Ko je omogočeno, zaklepanje zalog omejuje le premike zalog, ki vključujejo "
+"proizvode, ki so del aktivne inventure."
 
 #. module: stock_inventory_lockdown_product
 #: model:ir.model.fields,help:stock_inventory_lockdown_product.field_res_company__use_soft_inventory_lock
@@ -81,3 +89,5 @@ msgid ""
 "When enabled, only restrict stock moves if the product is part of an ongoing"
 " inventory adjustment at the location."
 msgstr ""
+"Ko je omogočeno, omeji premike zalog le, če je proizvod del tekoče inventure "
+"na lokaciji."
