@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2026-06-28 05:43+0000\n"
+"PO-Revision-Date: 2026-06-28 08:46+0000\n"
 "Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: none\n"
 "Language: sl\n"
@@ -20,42 +20,42 @@ msgstr ""
 #. module: stock_location_position
 #: model:ir.model.fields,field_description:stock_location_position.field_stock_location__posx
 msgid "Box (X)"
-msgstr ""
+msgstr "Škatla (X)"
 
 #. module: stock_location_position
 #: model:ir.model.fields,field_description:stock_location_position.field_stock_location__posy
 msgid "Box (Y)"
-msgstr ""
+msgstr "Škatla (Y)"
 
 #. module: stock_location_position
 #: model:ir.model.fields,field_description:stock_location_position.field_stock_location__posz
 msgid "Box (Z)"
-msgstr ""
+msgstr "Škatla (Z)"
 
 #. module: stock_location_position
 #: model:ir.model.fields,field_description:stock_location_position.field_stock_location__corridor
 msgid "Corridor"
-msgstr ""
+msgstr "Hodnik"
 
 #. module: stock_location_position
 #: model:ir.model.fields,help:stock_location_position.field_stock_location__level
 msgid "Define as the floor of the house"
-msgstr ""
+msgstr "Definiraj kot nadstropje hiše"
 
 #. module: stock_location_position
 #: model:ir.model.fields,help:stock_location_position.field_stock_location__rack
 msgid "Define as the house number within the street"
-msgstr ""
+msgstr "Definiraj kot hišno številko znotraj ulice"
 
 #. module: stock_location_position
 #: model:ir.model.fields,help:stock_location_position.field_stock_location__row
 msgid "Define as the side within the street"
-msgstr ""
+msgstr "Definiraj kot stran znotraj ulice"
 
 #. module: stock_location_position
 #: model:ir.model.fields,help:stock_location_position.field_stock_location__corridor
 msgid "Define as the street"
-msgstr ""
+msgstr "Definiraj kot ulico"
 
 #. module: stock_location_position
 #: model:ir.model.fields,field_description:stock_location_position.field_stock_location__display_name
@@ -83,6 +83,8 @@ msgid ""
 "Optional (X) coordinate of the bin if the location is split in several "
 "parts. (e.g. drawer storage)"
 msgstr ""
+"Neobvezna (X) koordinata zabojnika, če je lokacija razdeljena na več delov. "
+"(npr. predalniki)"
 
 #. module: stock_location_position
 #: model:ir.model.fields,help:stock_location_position.field_stock_location__posy
@@ -90,6 +92,8 @@ msgid ""
 "Optional (Y) coordinate of the bin if the location is split in several "
 "parts. (e.g. drawer storage)"
 msgstr ""
+"Neobvezna (Y) koordinata zabojnika, če je lokacija razdeljena na več delov. "
+"(npr. predalniki)"
 
 #. module: stock_location_position
 #: model:ir.model.fields,help:stock_location_position.field_stock_location__posz
@@ -97,6 +101,8 @@ msgid ""
 "Optional (Z) coordinate of the bin if the location is split in several "
 "parts. (e.g. storage tray)"
 msgstr ""
+"Neobvezna (Z) koordinata zabojnika, če je lokacija razdeljena na več delov. "
+"(npr. predalniki)"
 
 #. module: stock_location_position
 #: model_terms:ir.ui.view,arch_db:stock_location_position.stock_location_form_inherit
@@ -106,7 +112,7 @@ msgstr "Pozicija"
 #. module: stock_location_position
 #: model:ir.model.fields,field_description:stock_location_position.field_stock_location__rack
 msgid "Rack"
-msgstr ""
+msgstr "Regal"
 
 #. module: stock_location_position
 #: model:ir.model.fields,field_description:stock_location_position.field_stock_location__row
