@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <template id="report_inventory_cost_info" inherit_id="stock.report_inventory">
-        <xpath expr="//table[.//span[@t-field='line.quantity']]/thead/tr" position="inside">
+        <xpath
+            expr="//table[.//span[@t-field='line.quantity']]/thead/tr"
+            position="inside"
+        >
             <th class="text-end">
                 <strong>Adjustment cost</strong>
             </th>
