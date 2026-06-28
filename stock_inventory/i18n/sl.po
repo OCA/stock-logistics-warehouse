@@ -6,7 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2026-06-28 05:41+0000\n"
+"Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: none\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
@@ -14,66 +15,67 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
 "n%100==4 ? 2 : 3;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__count_stock_quants
 msgid "# Adjustments"
-msgstr ""
+msgstr "Št. popravkov"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__message_needaction
 msgid "Action Needed"
-msgstr ""
+msgstr "Potrebno ukrepanje"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__action_state_to_cancel_allowed
 msgid "Action State To Cancel Allowed"
-msgstr ""
+msgstr "Dovoljeno preklicati stanje dejanja"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__count_stock_quants_string
 msgid "Adjustments"
-msgstr ""
+msgstr "Popravki"
 
 #. module: stock_inventory
 #: model:ir.model.fields.selection,name:stock_inventory.selection__stock_inventory__product_selection__all
 msgid "All Products"
-msgstr ""
+msgstr "Vsi proizvodi"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__responsible_id
 msgid "Assigned to"
-msgstr ""
+msgstr "Dodeljeno"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__message_attachment_count
 msgid "Attachment Count"
-msgstr ""
+msgstr "Št. priponk"
 
 #. module: stock_inventory
 #: model_terms:ir.ui.view,arch_db:stock_inventory.res_config_settings_view_form
 msgid "Auto Complete Inventory Adjustment"
-msgstr ""
+msgstr "Samodejno zaključi popravek inventarja"
 
 #. module: stock_inventory
 #: model_terms:ir.ui.view,arch_db:stock_inventory.view_inventory_group_form
 msgid "Back to Draft"
-msgstr ""
+msgstr "Vrni v osnutek"
 
 #. module: stock_inventory
 #: model_terms:ir.ui.view,arch_db:stock_inventory.view_inventory_group_form
 msgid "Begin Adjustments"
-msgstr ""
+msgstr "Začni popravke"
 
 #. module: stock_inventory
 #: model_terms:ir.ui.view,arch_db:stock_inventory.view_inventory_group_form
 msgid "Cancel"
-msgstr ""
+msgstr "Prekliči"
 
 #. module: stock_inventory
 #: model:ir.model.fields.selection,name:stock_inventory.selection__stock_inventory__state__cancel
 msgid "Cancelled"
-msgstr ""
+msgstr "Preklicano"
 
 #. module: stock_inventory
 #. odoo-python
@@ -82,41 +84,43 @@ msgid ""
 "Cannot have more than one in-progress inventory adjustment affecting the "
 "same location or product at the same time."
 msgstr ""
+"Ni mogoče imeti več kot enega popravka inventarja v teku, ki hkrati vpliva "
+"na isto lokacijo ali proizvod."
 
 #. module: stock_inventory
 #: model:ir.model,name:stock_inventory.model_res_company
 msgid "Companies"
-msgstr ""
+msgstr "Družbe"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__company_id
 msgid "Company"
-msgstr ""
+msgstr "Družba"
 
 #. module: stock_inventory
 #: model:ir.model,name:stock_inventory.model_res_config_settings
 msgid "Config Settings"
-msgstr ""
+msgstr "Nastavitve"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Ustvaril"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Ustvarjeno"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_quant__current_inventory_id
 msgid "Current Inventory"
-msgstr ""
+msgstr "Trenutni inventar"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__date
 msgid "Date"
-msgstr ""
+msgstr "Datum"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_res_company__display_name
@@ -125,37 +129,37 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_move_line__display_name
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_quant__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Prikazani naziv"
 
 #. module: stock_inventory
 #: model:ir.model.fields.selection,name:stock_inventory.selection__stock_inventory__state__done
 msgid "Done"
-msgstr ""
+msgstr "Opravljeno"
 
 #. module: stock_inventory
 #: model:ir.model.fields.selection,name:stock_inventory.selection__stock_inventory__state__draft
 msgid "Draft"
-msgstr ""
+msgstr "Osnutek"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__exclude_sublocation
 msgid "Exclude Sublocation"
-msgstr ""
+msgstr "Izključi podlokacije"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__message_follower_ids
 msgid "Followers"
-msgstr ""
+msgstr "Sledilci"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__message_partner_ids
 msgid "Followers (Partners)"
-msgstr ""
+msgstr "Sledilci (partnerji)"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__has_message
 msgid "Has Message"
-msgstr ""
+msgstr "Vsebuje sporočilo"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_res_company__id
@@ -164,17 +168,19 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_move_line__id
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_quant__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: stock_inventory
 #: model:ir.model.fields,help:stock_inventory.field_stock_inventory__message_needaction
 msgid "If checked, new messages require your attention."
-msgstr ""
+msgstr "Če je označeno, nova sporočila zahtevajo vašo pozornost."
 
 #. module: stock_inventory
 #: model:ir.model.fields,help:stock_inventory.field_stock_inventory__message_has_error
 msgid "If checked, some messages have a delivery error."
 msgstr ""
+"Kadar je označeno, pomeni, da je pri nekaterih sporočilih prišlo do napake "
+"pri dostavi."
 
 #. module: stock_inventory
 #: model:ir.model.fields,help:stock_inventory.field_stock_inventory__exclude_sublocation
@@ -182,6 +188,7 @@ msgid ""
 "If enabled, it will only take into account the locations selected, and not "
 "their children."
 msgstr ""
+"Če je omogočeno, bo upoštevalo le izbrane lokacije in ne njihovih podlokacij."
 
 #. module: stock_inventory
 #: model:ir.model.fields,help:stock_inventory.field_res_company__stock_inventory_auto_complete
@@ -191,198 +198,200 @@ msgid ""
 "If enabled, when all the quants prepared for the adjustment are done, the "
 "adjustment is automatically set to done."
 msgstr ""
+"Če je omogočeno, ko so vsi kvanti pripravljeni za popravek opravljeni, se "
+"popravek samodejno nastavi kot opravljen."
 
 #. module: stock_inventory
 #: model:ir.model.fields.selection,name:stock_inventory.selection__stock_inventory__state__in_progress
 msgid "In Progress"
-msgstr ""
+msgstr "V teku"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__stock_quant_ids
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_move_line__inventory_adjustment_id
 msgid "Inventory Adjustment"
-msgstr ""
+msgstr "Inventurni popravek"
 
 #. module: stock_inventory
 #: model:ir.actions.act_window,name:stock_inventory.action_view_inventory_group_form
 #: model:ir.model,name:stock_inventory.model_stock_inventory
 msgid "Inventory Adjustment Group"
-msgstr ""
+msgstr "Skupina inventurnih popravkov"
 
 #. module: stock_inventory
 #: model:ir.ui.menu,name:stock_inventory.menu_action_inventory_tree
 msgid "Inventory Adjustments"
-msgstr ""
+msgstr "Inventurni popravki"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__stock_move_ids
 msgid "Inventory Adjustments Done"
-msgstr ""
+msgstr "Opravljeni popravki inventarja"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__name
 msgid "Inventory Reference"
-msgstr ""
+msgstr "Sklic inventarja"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__message_is_follower
 msgid "Is Follower"
-msgstr ""
+msgstr "Je sledilec"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Zadnji posodobil"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Zadnjič posodobljeno"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__location_ids
 #: model_terms:ir.ui.view,arch_db:stock_inventory.view_inventory_group_form
 msgid "Locations"
-msgstr ""
+msgstr "Lokacije"
 
 #. module: stock_inventory
 #: model:ir.model.fields.selection,name:stock_inventory.selection__stock_inventory__product_selection__lot
 msgid "Lot/Serial Number"
-msgstr ""
+msgstr "Lot/serijska številka"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__lot_ids
 msgid "Lot/Serial Numbers"
-msgstr ""
+msgstr "Lot/serijske številke"
 
 #. module: stock_inventory
 #: model:ir.model.fields.selection,name:stock_inventory.selection__stock_inventory__product_selection__manual
 msgid "Manual Selection"
-msgstr ""
+msgstr "Ročna izbira"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__message_has_error
 msgid "Message Delivery error"
-msgstr ""
+msgstr "Napaka ob dostavi sporočila"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__message_ids
 msgid "Messages"
-msgstr ""
+msgstr "Sporočila"
 
 #. module: stock_inventory
 #. odoo-python
 #: code:addons/stock_inventory/models/stock_quant.py:0
 msgid "No move lines have been created"
-msgstr ""
+msgstr "Postavke premikov niso bile ustvarjene"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__message_needaction_counter
 msgid "Number of Actions"
-msgstr ""
+msgstr "Število ukrepov"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__message_has_error_counter
 msgid "Number of errors"
-msgstr ""
+msgstr "Število napak"
 
 #. module: stock_inventory
 #: model:ir.model.fields,help:stock_inventory.field_stock_inventory__message_needaction_counter
 msgid "Number of messages requiring action"
-msgstr ""
+msgstr "Število sporočil, ki zahtevajo ukrepanje"
 
 #. module: stock_inventory
 #: model:ir.model.fields,help:stock_inventory.field_stock_inventory__message_has_error_counter
 msgid "Number of messages with delivery error"
-msgstr ""
+msgstr "Število sporočil, ki niso bila pravilno dostavljena"
 
 #. module: stock_inventory
 #: model:ir.model.fields.selection,name:stock_inventory.selection__stock_inventory__product_selection__one
 msgid "One Product"
-msgstr ""
+msgstr "En proizvod"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__owner_id
 msgid "Owner"
-msgstr ""
+msgstr "Lastnik"
 
 #. module: stock_inventory
 #: model_terms:ir.ui.view,arch_db:stock_inventory.stock_inventory_search_view
 msgid "Product"
-msgstr ""
+msgstr "Proizvod"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__category_id
 #: model:ir.model.fields.selection,name:stock_inventory.selection__stock_inventory__product_selection__category
 msgid "Product Category"
-msgstr ""
+msgstr "Kategorija proizvoda"
 
 #. module: stock_inventory
 #: model:ir.model,name:stock_inventory.model_stock_move_line
 msgid "Product Moves (Stock Move Line)"
-msgstr ""
+msgstr "Premiki proizvoda (postavka premika zaloge)"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__product_selection
 msgid "Product Selection"
-msgstr ""
+msgstr "Izbor proizvoda"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__product_ids
 msgid "Products"
-msgstr ""
+msgstr "Proizvodi"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__products_under_review_ids
 #: model_terms:ir.ui.view,arch_db:stock_inventory.stock_inventory_search_view
 msgid "Products Under Review"
-msgstr ""
+msgstr "Proizvodi v pregledu"
 
 #. module: stock_inventory
 #: model:ir.model,name:stock_inventory.model_stock_quant
 msgid "Quants"
-msgstr ""
+msgstr "Kvanti"
 
 #. module: stock_inventory
 #: model_terms:ir.ui.view,arch_db:stock_inventory.view_inventory_group_form
 msgid "Set to Done"
-msgstr ""
+msgstr "Nastavi kot opravljeno"
 
 #. module: stock_inventory
 #: model:ir.model.fields,help:stock_inventory.field_stock_inventory__responsible_id
 msgid "Specific responsible of Inventory Adjustment."
-msgstr ""
+msgstr "Določena odgovorna oseba za popravek inventarja."
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__state
 msgid "State"
-msgstr ""
+msgstr "Stanje"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_quant__stock_inventory_ids
 msgid "Stock Inventories"
-msgstr ""
+msgstr "Skladiščni inventarji"
 
 #. module: stock_inventory
 #: model_terms:ir.ui.view,arch_db:stock_inventory.res_config_settings_view_form
 msgid "Stock Inventory"
-msgstr ""
+msgstr "Skladiščni inventar"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_res_company__stock_inventory_auto_complete
 #: model:ir.model.fields,field_description:stock_inventory.field_res_config_settings__stock_inventory_auto_complete
 msgid "Stock Inventory Auto Complete"
-msgstr ""
+msgstr "Samodejno dokončanje skladiščnega inventarja"
 
 #. module: stock_inventory
 #: model:ir.actions.act_window,name:stock_inventory.action_view_stock_move_line_inventory_tree
 msgid "Stock Move Lines"
-msgstr ""
+msgstr "Postavke premikov zaloge"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__count_stock_moves
 msgid "Stock Moves Lines"
-msgstr ""
+msgstr "Postavke premikov zaloge"
 
 #. module: stock_inventory
 #. odoo-python
@@ -391,6 +400,8 @@ msgid ""
 "There are active adjustments for the requested products: %(names)s. Blocking"
 " adjustments: %(blocking_names)s"
 msgstr ""
+"Za zahtevane proizvode so aktivni popravki: %(names)s. Blokirajoči popravki: "
+"%(blocking_names)s"
 
 #. module: stock_inventory
 #. odoo-python
@@ -399,27 +410,29 @@ msgid ""
 "There's already an Adjustment in Process using one requested Location: "
 "%(names)s. Blocking adjustments: %(blocking_names)s"
 msgstr ""
+"Že obstaja popravek v teku za eno izmed zahtevanih lokacij: %(names)s. "
+"Blokirajoči popravki: %(blocking_names)s"
 
 #. module: stock_inventory
 #: model:ir.model.fields,help:stock_inventory.field_stock_inventory__owner_id
 msgid "This is the owner of the inventory adjustment"
-msgstr ""
+msgstr "To je lastnik popravka inventarja"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_quant__to_do
 #: model_terms:ir.ui.view,arch_db:stock_inventory.view_stock_quant_search_not_done
 msgid "To Do"
-msgstr ""
+msgstr "Za opraviti"
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__website_message_ids
 msgid "Website Messages"
-msgstr ""
+msgstr "Sporočila spletne strani"
 
 #. module: stock_inventory
 #: model:ir.model.fields,help:stock_inventory.field_stock_inventory__website_message_ids
 msgid "Website communication history"
-msgstr ""
+msgstr "Kronologija komunikacij spletne strani"
 
 #. module: stock_inventory
 #. odoo-python
@@ -428,6 +441,8 @@ msgid ""
 "When 'Product Selection: Lot Serial Number' is selected you are only able to"
 " add one product."
 msgstr ""
+"Ko je izbrano 'Izbor proizvoda: Lot/serijska številka', lahko dodate le en "
+"proizvod."
 
 #. module: stock_inventory
 #. odoo-python
@@ -436,20 +451,21 @@ msgid ""
 "When 'Product Selection: One Product' is selected you are only able to add "
 "one product."
 msgstr ""
+"Ko je izbrano 'Izbor proizvoda: En proizvod', lahko dodate le en proizvod."
 
 #. module: stock_inventory
 #. odoo-python
 #: code:addons/stock_inventory/models/stock_inventory.py:0
 msgid "You can only delete inventory adjustments groups in draft state."
-msgstr ""
+msgstr "Skupine popravkov inventarja lahko brišete le v stanju osnutka."
 
 #. module: stock_inventory
 #. odoo-python
 #: code:addons/stock_inventory/models/stock_inventory.py:0
 msgid "You can't cancel this inventory %(display_name)s."
-msgstr ""
+msgstr "Tega inventarja %(display_name)s ni mogoče preklicati."
 
 #. module: stock_inventory
 #: model_terms:ir.ui.view,arch_db:stock_inventory.view_inventory_group_form
 msgid "e.g. Annual inventory"
-msgstr ""
+msgstr "npr. letni inventar"
