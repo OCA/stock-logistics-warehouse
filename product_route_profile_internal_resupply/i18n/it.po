@@ -6,41 +6,43 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2026-06-30 09:12+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: product_route_profile_internal_resupply
 #: model:ir.model.fields,field_description:product_route_profile_internal_resupply.field_stock_route__internal_supply
 msgid "Internal Supply"
-msgstr ""
+msgstr "Rifornimento interno"
 
 #. module: product_route_profile_internal_resupply
 #: model:ir.model,name:product_route_profile_internal_resupply.model_stock_route
 msgid "Inventory Routes"
-msgstr ""
+msgstr "Percorsi di inventario"
 
 #. module: product_route_profile_internal_resupply
 #: model:ir.model,name:product_route_profile_internal_resupply.model_product_template
 msgid "Product"
-msgstr ""
+msgstr "Prodotto"
 
 #. module: product_route_profile_internal_resupply
 #: model:ir.model,name:product_route_profile_internal_resupply.model_route_profile
 msgid "Route Profile"
-msgstr ""
+msgstr "Profilo percorso"
 
 #. module: product_route_profile_internal_resupply
 #: model:ir.model,name:product_route_profile_internal_resupply.model_stock_warehouse
 msgid "Warehouse"
-msgstr ""
+msgstr "Magazzino"
 
 #. module: product_route_profile_internal_resupply
 #: model:ir.model.fields,field_description:product_route_profile_internal_resupply.field_product_product__internal_supply_ids
 #: model:ir.model.fields,field_description:product_route_profile_internal_resupply.field_product_template__internal_supply_ids
 msgid "internal Supplies"
-msgstr ""
+msgstr "Fornitore interno"
