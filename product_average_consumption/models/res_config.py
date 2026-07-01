@@ -69,23 +69,48 @@ class StockConfigSettings(models.TransientModel):
             ]
         return values
 
-    def update_consumption_info_for_products(self, changed_vals):
+    def update_consumption_info_for_products(self, changed_vals, current_values=None):
         values_consumption = self._prepare_values_consumption_to_update_product_tmpl(
             changed_vals
         )
         ProductTemplateSudo = self.env["product.template"].sudo()
         if values_consumption:
-            ProductTemplateSudo.search([]).write(values_consumption)
+            if current_values is not None:
+                # Filter values_consumption by comparing with current_values to
+                # avoid unnecessary writes
+                filtered_values = {
+                    key: value
+                    for key, value in values_consumption.items()
+                    if current_values.get(f"default_{key}") != value
+                }
+                if filtered_values:
+                    ProductTemplateSudo.search([]).write(filtered_values)
+            else:
+                ProductTemplateSudo.search([]).write(values_consumption)
 
     @api.model_create_multi
     def create(self, vals_list):
+        current_values = self._get_current_setting_values(vals_list)
         res = super().create(vals_list)
         res.update_consumption_info_for_products(
-            len(vals_list) > 0 and vals_list[0] or {}
+            len(vals_list) > 0 and vals_list[0] or {}, current_values=current_values
         )
         return res
 
     def write(self, vals):
+        current_values = self._get_current_setting_values(vals)
         res = super().write(vals)
-        self.update_consumption_info_for_products(vals)
+        self.update_consumption_info_for_products(vals, current_values=current_values)
         return res
+
+    def _get_current_setting_values(self, vals):
+        # Return current values of the fields in field_names for the current settings
+        avals = dict({})
+        if isinstance(vals, list):
+            if len(vals) > 0:
+                avals = vals[0]
+        elif isinstance(vals, dict):
+            avals = vals
+        field_names = avals.keys()
+        current_values = self.default_get(field_names)
+        return current_values
