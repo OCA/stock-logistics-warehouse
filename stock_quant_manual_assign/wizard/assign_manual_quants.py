@@ -58,11 +58,54 @@ class AssignManualQuants(models.TransientModel):
         string="Move",
     )
 
+    def _get_discrepancies(self):
+        """Get discrepancies between quant lines and move lines.
+
+        This is so that we can work on the minimum sets of records to unlink or assign.
+
+        :return: two recordsets, one with move lines to unlink and the other with quant
+            lines to assign.
+        """
+        self.ensure_one()
+        ml_to_unlink = self.env["stock.move.line"].browse()
+        ql_to_assign = self.env["assign.manual.quants.lines"].browse()
+        ml_dict = {
+            ml: [
+                ml.location_id.id,
+                ml.lot_id.id,
+                ml.package_id.id,
+                ml.owner_id.id,
+                ml.quantity_product_uom,
+            ]
+            for ml in self.move_id.move_line_ids
+        }
+        quant_lines = self.quants_lines.filtered(lambda x: x.qty > 0)
+        ql_dict = {
+            ql: [
+                ql.location_id.id,
+                ql.lot_id.id,
+                ql.package_id.id,
+                ql.owner_id.id,
+                ql.qty,
+            ]
+            for ql in quant_lines
+        }
+        ml_vals = {tuple(v) for v in ml_dict.values()}
+        ql_vals = {tuple(v) for v in ql_dict.values()}
+        for k, v in ml_dict.items():
+            if tuple(v) not in ql_vals:
+                ml_to_unlink |= k
+        for k, v in ql_dict.items():
+            if tuple(v) not in ml_vals:
+                ql_to_assign |= k
+        return ml_to_unlink, ql_to_assign
+
     def assign_quants(self):
-        move = self.move_id
-        self.move_id.move_line_ids.unlink()
-        for line in self.quants_lines:
+        move_lines, quant_lines = self._get_discrepancies()
+        move_lines.unlink()
+        for line in quant_lines:
             line._assign_quant_line()
+        move = self.move_id
         move._recompute_state()
         move.mapped("picking_id")._compute_state()
         return {}
