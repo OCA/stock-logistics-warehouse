@@ -9,30 +9,30 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-01-16 14:35+0000\n"
-"PO-Revision-Date: 2025-03-10 19:26+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"PO-Revision-Date: 2026-07-01 16:46+0000\n"
+"Last-Translator: Laura V <laura.valls@forgeflow.com>\n"
 "Language-Team: Danish (https://www.transifex.com/oca/teams/23907/da/)\n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.10.2\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__active
 msgid "Active"
-msgstr ""
+msgstr "Aktiv"
 
 #. module: stock_demand_estimate
 #: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_search
 msgid "All (Active/Inactive)"
-msgstr ""
+msgstr "Alle (Aktive/Inaktive)"
 
 #. module: stock_demand_estimate
 #: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_form
 msgid "Archived"
-msgstr ""
+msgstr "Arkiveret"
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__company_id
@@ -52,24 +52,24 @@ msgstr "Oprettet den"
 #. module: stock_demand_estimate
 #: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_search
 msgid "Date (From)"
-msgstr ""
+msgstr "Dato (fra)"
 
 #. module: stock_demand_estimate
 #: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_form
 #: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_list
 msgid "Date From"
-msgstr ""
+msgstr "Dato fra"
 
 #. module: stock_demand_estimate
 #: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_form
 #: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_list
 msgid "Date To"
-msgstr ""
+msgstr "Dato til"
 
 #. module: stock_demand_estimate
 #: model:ir.ui.menu,name:stock_demand_estimate.stock_demand_planning_menu
 msgid "Demand Planning"
-msgstr ""
+msgstr "Efterspørgselsplanlægning"
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__display_name
@@ -79,39 +79,38 @@ msgstr "Vist navn"
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__manual_duration
 #: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_form
-#, fuzzy
 msgid "Duration"
-msgstr "Postnr/by "
+msgstr "Varighed"
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__duration
 msgid "Duration (computed))"
-msgstr ""
+msgstr "Varighed (beregnet))"
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,help:stock_demand_estimate.field_stock_demand_estimate__manual_duration
 msgid "Duration (in days)"
-msgstr ""
+msgstr "Varighed (i dage)"
 
 #. module: stock_demand_estimate
 #: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_search
 msgid "Expired"
-msgstr ""
+msgstr "Udløbet"
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__manual_date_from
 msgid "From"
-msgstr ""
+msgstr "Fra"
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__date_from
 msgid "From (computed)"
-msgstr ""
+msgstr "Fra (beregnet)"
 
 #. module: stock_demand_estimate
 #: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_search
 msgid "Group By"
-msgstr ""
+msgstr "Gruppér efter"
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__id
@@ -137,54 +136,54 @@ msgstr "Postnr/by "
 #. module: stock_demand_estimate
 #: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_search
 msgid "Not Expired"
-msgstr ""
+msgstr "Ikke udløbet"
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__product_id
 #: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_search
 msgid "Product"
-msgstr ""
+msgstr "Produkt"
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__product_uom_qty
 msgid "Quantity"
-msgstr ""
+msgstr "Antal"
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__product_qty
 msgid "Quantity (Product UoM)"
-msgstr ""
+msgstr "Antal (produktets måleenhed)"
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__daily_qty
 msgid "Quantity / Day"
-msgstr ""
+msgstr "Antal / dag"
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,help:stock_demand_estimate.field_stock_demand_estimate__product_qty
 msgid "Quantity in the default UoM of the product"
-msgstr ""
+msgstr "Antal i produktets standardmåleenhed"
 
 #. module: stock_demand_estimate
 #: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_search
 msgid "Search Stock Demand Estimates"
-msgstr ""
+msgstr "Søg i lagerefterspørgselsestimater"
 
 #. module: stock_demand_estimate
 #: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_pivot
 msgid "Stock Demand Estimate"
-msgstr ""
+msgstr "Lagerefterspørgselsestimat"
 
 #. module: stock_demand_estimate
 #: model:ir.model,name:stock_demand_estimate.model_stock_demand_estimate
 msgid "Stock Demand Estimate Line"
-msgstr ""
+msgstr "Lagerefterspørgselsestimat-linje"
 
 #. module: stock_demand_estimate
 #: model:ir.actions.act_window,name:stock_demand_estimate.stock_demand_estimate_action
 #: model:ir.ui.menu,name:stock_demand_estimate.stock_demand_estimate_menu
 msgid "Stock Demand Estimates"
-msgstr ""
+msgstr "Lagerefterspørgselsestimater"
 
 #. module: stock_demand_estimate
 #. odoo-python
@@ -193,21 +192,23 @@ msgid ""
 "The requested operation cannot be processed because of a programming error "
 "setting the `product_qty` field instead of the `product_uom_qty`."
 msgstr ""
+"Den anmodede handling kan ikke behandles på grund af en programmeringsfejl, "
+"der angiver feltet `product_qty` i stedet for `product_uom_qty`."
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__manual_date_to
 msgid "To"
-msgstr ""
+msgstr "Til"
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__date_to
 msgid "To (computed)"
-msgstr ""
+msgstr "Til (beregnet)"
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__product_uom
 msgid "Unit of measure"
-msgstr ""
+msgstr "Måleenhed"
 
 #~ msgid "Last Modified on"
 #~ msgstr "Sidst ændret den"
