@@ -1,9 +1,15 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+import logging
+from collections import defaultdict
 
 from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 from odoo.osv import expression
 from odoo.tools import float_compare, float_is_zero
+
+from odoo.addons.stock.models.stock_rule import ProcurementException
+
+_logger = logging.getLogger(__name__)
 
 
 class StockRule(models.Model):
@@ -16,21 +22,23 @@ class StockRule(models.Model):
     mts_rule_id = fields.Many2one("stock.rule", string="MTS Rule", check_company=True)
     mto_rule_id = fields.Many2one("stock.rule", string="MTO Rule", check_company=True)
 
-    def _run_subrule_action(self, procurement, subrule):
-        """Shortcut to run a subrule for a single procurement."""
-        self.ensure_one()
-        run_subrule = getattr(self.env["stock.rule"], f"_run_{subrule.action}")
-        return run_subrule([(procurement, subrule)])
-
-    def _run_mts_action(self, procurement):
-        """Shortcut to run the MTS rule linked to this MTS+MTO rule."""
+    def _add_mts_action(self, actions_to_run, procurement):
         self.mts_rule_id.ensure_one()
-        return self._run_subrule_action(procurement, self.mts_rule_id)
+        action = (
+            "pull"
+            if self.mts_rule_id.action == "pull_push"
+            else self.mts_rule_id.action
+        )
+        actions_to_run[action].append((procurement, self.mts_rule_id))
 
-    def _run_mto_action(self, procurement):
-        """Shortcut to run the MTO rule linked to this MTS+MTO rule."""
+    def _add_mto_action(self, actions_to_run, procurement):
         self.mto_rule_id.ensure_one()
-        return self._run_subrule_action(procurement, self.mto_rule_id)
+        action = (
+            "pull"
+            if self.mto_rule_id.action == "pull_push"
+            else self.mto_rule_id.action
+        )
+        actions_to_run[action].append((procurement, self.mto_rule_id))
 
     @api.constrains("action", "mts_rule_id", "mto_rule_id")
     def _check_mts_mto_rule(self):
@@ -76,6 +84,7 @@ class StockRule(models.Model):
         precision = self.env["decimal.precision"].precision_get(
             "Product Unit of Measure"
         )
+        actions_to_run = defaultdict(list)
         for procurement, rule in procurements:
             domain = self.env["procurement.group"]._get_moves_to_assign_domain(
                 procurement.company_id.id
@@ -89,7 +98,7 @@ class StockRule(models.Model):
             )
             # Enough stock, only MTS
             if float_is_zero(needed_qty, precision_digits=precision):
-                rule._run_mts_action(procurement)
+                rule._add_mts_action(actions_to_run, procurement)
             # No stock, only MTO
             elif (
                 float_compare(
@@ -97,12 +106,12 @@ class StockRule(models.Model):
                 )
                 == 0.0
             ):
-                rule._run_mto_action(procurement)
+                rule._add_mto_action(actions_to_run, procurement)
             # Partial stock, split between MTS and MTO
             else:
                 mts_qty = procurement.product_qty - needed_qty
                 mts_procurement = procurement._replace(product_qty=mts_qty)
-                rule._run_mts_action(mts_procurement)
+                rule._add_mts_action(actions_to_run, mts_procurement)
 
                 # Search all confirmed stock_moves of mts_procurement and assign them
                 # to adjust the product's free qty
@@ -118,5 +127,21 @@ class StockRule(models.Model):
                     moves_to_assign._action_assign()
 
                 mto_procurement = procurement._replace(product_qty=needed_qty)
-                rule._run_mto_action(mto_procurement)
+                rule._add_mto_action(actions_to_run, mto_procurement)
+        procurement_errors = []
+        for action, procurements in actions_to_run.items():
+            if hasattr(self.env["stock.rule"], f"_run_{action}"):
+                try:
+                    getattr(self.env["stock.rule"], f"_run_{action}")(procurements)
+                except ProcurementException as e:
+                    procurement_errors += e.procurement_exceptions
+            else:
+                _logger.error(
+                    "The method _run_%(action)s doesn't exist on the "
+                    "procurement rules",
+                    action,
+                )
+
+        if procurement_errors:
+            raise ProcurementException(procurement_errors)
         return True
