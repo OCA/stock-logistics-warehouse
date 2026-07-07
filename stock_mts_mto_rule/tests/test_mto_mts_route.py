@@ -1,34 +1,13 @@
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+# Copyright 2015 Akretion
+# Author: Florian da Costa
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo import Command, exceptions
-from odoo.tests.common import TransactionCase
+
+from .common import MtoMtsRouteCommon
 
 
-class TestMtoMtsRoute(TransactionCase):
-    def _get_common_procurement_for_customer(self, product_qty=2.0, values=None):
-        if values is None:
-            values = self.procurement_vals
-        return self.env["procurement.group"].Procurement(
-            self.product,
-            product_qty,
-            self.uom,
-            self.customer_loc,
-            self.product.name,
-            "test",
-            self.warehouse.company_id,
-            values,
-        )
-
-    def _create_quant(self, qty):
-        self.quant = self.env["stock.quant"].create(
-            {
-                "owner_id": self.company_partner.id,
-                "location_id": self.env.ref("stock.stock_location_stock").id,
-                "product_id": self.product.id,
-                "quantity": qty,
-            }
-        )
-
+class TestMtoMtsRoute(MtoMtsRouteCommon):
     def test_standard_mto_route(self):
         mto_route = self.env.ref("stock.route_warehouse0_mto")
         mto_route.active = True
