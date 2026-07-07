@@ -24,6 +24,14 @@ class TestMtoMtsInternal(MtoMtsRouteCommon):
             }
         )
 
+        cls.zone_b = cls.location_obj.create(
+            {
+                "name": "ZONE B",
+                "location_id": cls.warehouse.lot_stock_id.id,
+                "usage": "view",
+            }
+        )
+
         cls.reserve_a = cls.location_obj.create(
             {
                 "name": "Reserve A",
@@ -32,10 +40,26 @@ class TestMtoMtsInternal(MtoMtsRouteCommon):
             }
         )
 
+        cls.reserve_b = cls.location_obj.create(
+            {
+                "name": "Reserve B",
+                "location_id": cls.zone_b.id,
+                "usage": "view",
+            }
+        )
+
         cls.pickable_a = cls.location_obj.create(
             {
                 "name": "Pickable A",
                 "location_id": cls.zone_a.id,
+                "usage": "view",
+            }
+        )
+
+        cls.pickable_b = cls.location_obj.create(
+            {
+                "name": "Pickable B",
+                "location_id": cls.zone_b.id,
                 "usage": "view",
             }
         )
@@ -51,6 +75,21 @@ class TestMtoMtsInternal(MtoMtsRouteCommon):
             {
                 "name": "Reserve A-2",
                 "location_id": cls.reserve_a.id,
+                "usage": "internal",
+            }
+        )
+
+        cls.reserve_b_1 = cls.location_obj.create(
+            {
+                "name": "Reserve B-1",
+                "location_id": cls.reserve_b.id,
+                "usage": "internal",
+            }
+        )
+        cls.reserve_b_2 = cls.location_obj.create(
+            {
+                "name": "Reserve B-2",
+                "location_id": cls.reserve_b.id,
                 "usage": "internal",
             }
         )
@@ -71,9 +110,25 @@ class TestMtoMtsInternal(MtoMtsRouteCommon):
             }
         )
 
+        cls.pickable_b_1 = cls.location_obj.create(
+            {
+                "name": "Pickable B-1",
+                "location_id": cls.pickable_b.id,
+                "usage": "internal",
+            }
+        )
+
+        cls.pickable_b_2 = cls.location_obj.create(
+            {
+                "name": "Pickable B-2",
+                "location_id": cls.pickable_b.id,
+                "usage": "internal",
+            }
+        )
+
         cls.route_reserve = cls.route_obj.create(
             {
-                "name": "Reserve A -> Pickable A",
+                "name": "Reserve -> Pickable",
             }
         )
         cls.pick_type_reserve = cls.picking_type_obj.create(
@@ -124,6 +179,54 @@ class TestMtoMtsInternal(MtoMtsRouteCommon):
             }
         )
 
+        cls.pick_type_reserve_b = cls.picking_type_obj.create(
+            {
+                "name": "Reserve B -> Pickable B",
+                "sequence_code": "RESB/",
+                "default_location_src_id": cls.reserve_b.id,
+                "default_location_dest_id": cls.pickable_b.id,
+            }
+        )
+        cls.rule_mts_reserve_b = cls.rule_obj.create(
+            {
+                "name": "MTS Reserve B -> Stock",
+                "action": "pull",
+                "sequence": 1,
+                "procure_method": "make_to_stock",
+                "picking_type_id": cls.pick_type_reserve_b.id,
+                "location_dest_id": cls.pickable_b.id,
+                "location_src_id": cls.reserve_b.id,
+                "route_id": cls.route_reserve.id,
+            }
+        )
+
+        cls.rule_mto_reserve_b = cls.rule_obj.create(
+            {
+                "name": "MTO Reserve B -> Stock",
+                "action": "pull",
+                "sequence": 1,
+                "procure_method": "make_to_order",
+                "picking_type_id": cls.pick_type_reserve_b.id,
+                "location_dest_id": cls.pickable_b.id,
+                "location_src_id": cls.reserve_b.id,
+                "route_id": cls.route_reserve.id,
+            }
+        )
+
+        cls.rule_split_reserve_b = cls.rule_obj.create(
+            {
+                "name": "Split Reserve B -> Stock",
+                "action": "split_procurement",
+                "sequence": 0,
+                "picking_type_id": cls.pick_type_reserve_b.id,
+                "location_dest_id": cls.pickable_b.id,
+                "location_src_id": cls.reserve_b.id,
+                "mto_rule_id": cls.rule_mto_reserve_b.id,
+                "mts_rule_id": cls.rule_mts_reserve_b.id,
+                "route_id": cls.route_reserve.id,
+            }
+        )
+
         cls.product_1 = cls.product.create(
             {
                 "name": "Product 1",
@@ -136,6 +239,14 @@ class TestMtoMtsInternal(MtoMtsRouteCommon):
                 "inventory_quantity": 100.0,
                 "product_id": cls.product_1.id,
                 "location_id": cls.reserve_a_1.id,
+            }
+        )._apply_inventory()
+
+        cls.env["stock.quant"].with_context(inventory_mode=True).create(
+            {
+                "inventory_quantity": 10.0,
+                "product_id": cls.product_1.id,
+                "location_id": cls.reserve_b_2.id,
             }
         )._apply_inventory()
 
@@ -192,6 +303,85 @@ class TestMtoMtsInternal(MtoMtsRouteCommon):
         self.assertEqual(100.0, sum_qty)
         moves_waiting = moves.filtered(lambda m: m.state == "waiting")
         self.assertEqual(moves_waiting.product_uom_qty, 50.0)
+        self.assertEqual(
+            moves_waiting.move_orig_ids.location_id,
+            self.env.ref("stock.stock_location_suppliers"),
+        )
+
+    def test_mto_mts_other_location(self):
+        """
+        Create two needs on Pickable stock location of 75.0 each
+        and one on Stock location for 75.0 too.
+
+        One move of 75.0 is created from Reserve -> Pickable
+        One move of 25.0 is created from Reserve -> Pickable
+        One move of 50.0 is created from Reserve -> Pickable
+        One move of 50.0 is created from Suppliers -> Reserve
+        """
+        self.group_1 = self.env["procurement.group"].create({"name": "Group 1"})
+        self.group_2 = self.env["procurement.group"].create({"name": "Group 2"})
+        values_1 = {"route_ids": self.route_reserve, "group_id": self.group_1}
+        values_2 = {"route_ids": self.route_reserve, "group_id": self.group_2}
+        values_3 = {"route_ids": self.route_reserve, "group_id": self.group_2}
+        procurements = [
+            ProcurementGroup.Procurement(
+                self.product_1,
+                75.0,
+                self.product_1.uom_id,
+                self.pickable_a,
+                "Test",
+                "Test",
+                self.warehouse.company_id,
+                values_1,
+            ),
+            ProcurementGroup.Procurement(
+                self.product_1,
+                75.0,
+                self.product_1.uom_id,
+                self.pickable_a,
+                "Test",
+                "Test",
+                self.warehouse.company_id,
+                values_2,
+            ),
+            ProcurementGroup.Procurement(
+                self.product_1,
+                75.0,
+                self.product_1.uom_id,
+                self.pickable_b,
+                "Test",
+                "Test",
+                self.warehouse.company_id,
+                values_3,
+            ),
+        ]
+
+        self.env["procurement.group"].run(procurements)
+
+        moves = self.env["stock.move"].search(
+            [
+                ("product_id", "=", self.product_1.id),
+                ("location_dest_id", "=", self.pickable_a.id),
+            ]
+        )
+        self.assertEqual(len(moves), 3)
+        moves_b = self.env["stock.move"].search(
+            [
+                ("product_id", "=", self.product_1.id),
+                ("location_dest_id", "=", self.pickable_b.id),
+            ]
+        )
+        self.assertEqual(len(moves_b), 2)
+        moves_assigned = moves.filtered(
+            lambda m: m.state == "assigned" and m.location_dest_id == self.pickable_a
+        )
+        sum_qty = 0
+        for move in moves_assigned:
+            sum_qty += move.quantity
+            self.assertEqual(move.location_dest_id, self.pickable_a)
+        self.assertEqual(100.0, sum_qty)
+        moves_waiting = moves.filtered(lambda m: m.state == "waiting")
+        self.assertEqual(moves_waiting.mapped("product_uom_qty"), [50.0])
         self.assertEqual(
             moves_waiting.move_orig_ids.location_id,
             self.env.ref("stock.stock_location_suppliers"),
