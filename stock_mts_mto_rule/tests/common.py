@@ -11,6 +11,10 @@ class MtoMtsRouteCommon(BaseCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+        cls.location_obj = cls.env["stock.location"]
+        cls.route_obj = cls.env["stock.route"]
+        cls.rule_obj = cls.env["stock.rule"]
+        cls.picking_type_obj = cls.env["stock.picking.type"]
         cls.move_obj = cls.env["stock.move"]
         cls.warehouse = cls.env.ref("stock.warehouse0")
         cls.uom = cls.env["uom.uom"].browse(1)

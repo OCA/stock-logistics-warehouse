@@ -80,25 +80,41 @@ class StockRule(models.Model):
                 return product_qty - qty_available
         return product_qty
 
+    def _get_procured_qty_mto_mts_keys(self, procurement):
+        return (
+            procurement.product_id,
+            procurement.location_id,
+            procurement.product_uom,
+        )
+
     def _run_split_procurement(self, procurements):
         precision = self.env["decimal.precision"].precision_get(
             "Product Unit of Measure"
         )
         actions_to_run = defaultdict(list)
+        procured_qty = defaultdict(lambda: 0)
         for procurement, rule in procurements:
             domain = self.env["procurement.group"]._get_moves_to_assign_domain(
                 procurement.company_id.id
             )
             # Determine the quantity to order as MTO
+            key = self._get_procured_qty_mto_mts_keys(procurement)
+            already_procured_qty = (
+                procured_qty[self._get_procured_qty_mto_mts_keys(procurement)]
+                if key in procured_qty
+                else 0.0
+            )
+            to_procure_qty = procurement.product_qty + already_procured_qty
             needed_qty = rule.get_mto_qty_to_order(
                 procurement.product_id,
-                procurement.product_qty,
+                to_procure_qty,
                 procurement.product_uom,
                 procurement.values,
             )
             # Enough stock, only MTS
             if float_is_zero(needed_qty, precision_digits=precision):
                 rule._add_mts_action(actions_to_run, procurement)
+                procured_qty[key] += procurement.product_qty
             # No stock, only MTO
             elif (
                 float_compare(
