@@ -52,6 +52,7 @@ setuptools.setup(
         'odoo-addon-stock_quant_manual_assign>=15.0dev,<15.1dev',
         'odoo-addon-stock_quant_reservation_info>=15.0dev,<15.1dev',
         'odoo-addon-stock_quant_reservation_info_mrp>=15.0dev,<15.1dev',
+        'odoo-addon-stock_removal_location_by_priority>=15.0dev,<15.1dev',
         'odoo-addon-stock_request>=15.0dev,<15.1dev',
         'odoo-addon-stock_request_analytic>=15.0dev,<15.1dev',
         'odoo-addon-stock_request_bom>=15.0dev,<15.1dev',
