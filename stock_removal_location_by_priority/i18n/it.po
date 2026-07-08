@@ -1,0 +1,72 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * stock_removal_location_by_priority
+#
+# Translators:
+# Paolo Valier <paolo.valier@hotmail.it>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 9.0c\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-05-31 02:38+0000\n"
+"PO-Revision-Date: 2024-03-12 13:36+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
+
+#. module: stock_removal_location_by_priority
+#: model:ir.model,name:stock_removal_location_by_priority.model_res_config_settings
+msgid "Config Settings"
+msgstr "Impostazioni configurazione"
+
+#. module: stock_removal_location_by_priority
+#: model:ir.model,name:stock_removal_location_by_priority.model_stock_location
+msgid "Inventory Locations"
+msgstr "Ubicazioni di inventario"
+
+#. module: stock_removal_location_by_priority
+#: model:ir.model,name:stock_removal_location_by_priority.model_stock_quant
+msgid "Quants"
+msgstr "Quanti"
+
+#. module: stock_removal_location_by_priority
+#: model:ir.model.fields,field_description:stock_removal_location_by_priority.field_res_config_settings__group_removal_priority
+#: model:ir.model.fields,field_description:stock_removal_location_by_priority.field_stock_location__removal_priority
+#: model:ir.model.fields,field_description:stock_removal_location_by_priority.field_stock_quant__removal_priority
+#: model:res.groups,name:stock_removal_location_by_priority.group_removal_priority
+msgid "Removal Priority"
+msgstr "Priorità rimozione"
+
+#. module: stock_removal_location_by_priority
+#: model:ir.model.fields,help:stock_removal_location_by_priority.field_res_config_settings__group_removal_priority
+msgid ""
+"Removal priority that applies when the incoming dates are equal in both "
+"locations."
+msgstr ""
+"Priorità di rimozione che si applica quando le date di entrata sono uguali "
+"in entrambe le ubicazioni."
+
+#. module: stock_removal_location_by_priority
+#. odoo-python
+#: code:addons/stock_removal_location_by_priority/models/stock_quant.py:0
+#, python-format
+msgid "Removal strategy %s not implemented."
+msgstr "Strategia di rimozione %s non implementata."
+
+#. module: stock_removal_location_by_priority
+#: model:ir.model.fields,help:stock_removal_location_by_priority.field_stock_location__removal_priority
+#: model:ir.model.fields,help:stock_removal_location_by_priority.field_stock_quant__removal_priority
+msgid "This priority applies when removing stock and incoming dates are equal."
+msgstr ""
+"Questa priorità si applica quando le date di rimozione giacenza e ingresso "
+"sono uguali."
+
+#. module: stock_removal_location_by_priority
+#: model_terms:ir.ui.view,arch_db:stock_removal_location_by_priority.view_stock_config_settings
+msgid "Use <i>Removal Priority</i> in Locations"
+msgstr "Usare <i>Priorità rimozione</i> nelle ubicazioni"
