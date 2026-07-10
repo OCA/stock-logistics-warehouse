@@ -2,6 +2,7 @@
 # Copyright 2025 Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+from odoo import fields
 from odoo.tests import RecordCapturer
 from odoo.tools import mute_logger
 
@@ -46,6 +47,61 @@ class TestInventory(VerticalLiftCase):
         self.assertEqual(action["type"], "ir.actions.client")
         self.assertEqual(action["tag"], "vertical_lift_manual_barcode")
         self.assertEqual(action["name"], "Barcode")
+
+    @mute_logger(SHUTTLE_LOGGER)
+    def test_scheduled_count_without_value_is_queued(self):
+        # A count scheduled with "Leave Empty" has no inventory quantity set yet
+        # but must still show up in the queue (the bug this fixes).
+        stock_quant = self._create_stock_quants(
+            [(self.location_1a_x1y1, self.product_socks)]
+        )[0]
+        self.assertFalse(stock_quant.inventory_quantity_set)
+        operation = self._open_screen("inventory")
+        self.assertEqual(operation.number_of_ops, 1)
+        self.assertEqual(operation.quant_id, stock_quant)
+
+    @mute_logger(SHUTTLE_LOGGER)
+    def test_set_value_scheduled_later_is_not_queued(self):
+        # A count scheduled for a later date must NOT be queued yet, even when
+        # its value is already set: `inventory_quantity_set` is no longer a
+        # criteria, only the scheduled date is.
+        stock_quant = self.env["stock.quant"].create(
+            {
+                "product_id": self.product_socks.id,
+                "location_id": self.location_1a_x1y1.id,
+                "product_uom_id": self.product_socks.uom_id.id,
+            }
+        )
+        stock_quant.action_set_inventory_quantity()
+        tomorrow = fields.Date.add(fields.Date.context_today(stock_quant), days=1)
+        stock_quant.with_context(inventory_mode=True).write(
+            {"inventory_date": tomorrow}
+        )
+        self.assertTrue(stock_quant.inventory_quantity_set)
+        operation = self._open_screen("inventory")
+        self.assertEqual(operation.number_of_ops, 0)
+        self.assertFalse(operation.quant_id)
+
+    @mute_logger(SHUTTLE_LOGGER)
+    def test_reschedule_requeues_done_quant(self):
+        # Once counted on the shuttle a quant is flagged done; rescheduling a new
+        # count must clear that flag so it is queued again.
+        stock_quant = self._create_stock_quants(
+            [(self.location_1a_x1y1, self.product_socks)]
+        )[0]
+        self._update_qty_in_location(self.location_1a_x1y1, self.product_socks, 10)
+        operation = self._open_screen("inventory")
+        operation.quantity_input = 10.0
+        operation.button_save()
+        self.assertTrue(stock_quant.vertical_lift_done)
+
+        # schedule a new count
+        stock_quant.with_context(inventory_mode=True).write(
+            {"inventory_date": fields.Date.context_today(stock_quant)}
+        )
+        self.assertFalse(stock_quant.vertical_lift_done)
+        operation = self._open_screen("inventory")
+        self.assertEqual(operation.quant_id, stock_quant)
 
     @mute_logger(SHUTTLE_LOGGER)
     def test_inventory_count_ops(self):
@@ -116,7 +172,9 @@ class TestInventory(VerticalLiftCase):
             self.assertEqual(move.state, "done")
             self.assertEqual(move.quantity, 2.0)
         self.assertFalse(operation.quant_id)
-        self.assertTrue(quant.vertical_lift_done)
+        # applying the count reschedules the quant to a future date, which
+        # clears the done marker (new count campaign)
+        self.assertFalse(quant.vertical_lift_done)
         self.assertEqual(quant.quantity, 12.0)
         self.assertFalse(operation.quant_id)
 

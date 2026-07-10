@@ -2,6 +2,8 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 
+from odoo import fields
+
 from odoo.addons.stock_location_tray.tests import common
 
 
@@ -130,9 +132,13 @@ class VerticalLiftCase(common.LocationTrayTypeCase):
 
     @classmethod
     def _create_stock_quants(cls, products):
-        """Create a stock.quant to adjust inventory.
+        """Create a stock.quant and schedule an inventory count for it.
 
         Products is a list of tuples (bin location, product).
+
+        The count is scheduled ("Request a Count" with "Leave Empty") without
+        setting the inventory quantity, so `inventory_quantity_set` stays False.
+        This is what puts the quant in the vertical lift inventory queue.
         """
         stock_quants = []
         for location, product in products:
@@ -143,7 +149,9 @@ class VerticalLiftCase(common.LocationTrayTypeCase):
                     "product_uom_id": product.uom_id.id,
                 }
             )
-            current_stock_quant.action_set_inventory_quantity()
+            current_stock_quant.with_context(inventory_mode=True).write(
+                {"inventory_date": fields.Date.context_today(current_stock_quant)}
+            )
             stock_quants.append(current_stock_quant)
         return stock_quants
 

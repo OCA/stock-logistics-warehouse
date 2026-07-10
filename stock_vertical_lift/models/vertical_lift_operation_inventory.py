@@ -168,22 +168,22 @@ class VerticalLiftOperationInventory(models.Model):
             "domain": self._domain_stock_quant_to_do(),
         }
 
-    def _domain_stock_quant_to_do(self):
+    def _base_domain_stock_quant_to_do(self, location_ids):
+        # Mimic Odoo's `to_count` filter
         return [
-            ("location_id", "child_of", self.location_id.id),
-            ("inventory_quantity_set", "=", True),
+            ("location_id", "child_of", location_ids),
+            ("inventory_date", "<=", fields.Date.context_today(self)),
             ("vertical_lift_done", "=", False),
         ]
+
+    def _domain_stock_quant_to_do(self):
+        return self._base_domain_stock_quant_to_do(self.location_id.id)
 
     def _domain_inventory_lines_to_do_all(self):
         shuttle_locations = self.env["stock.location"].search(
             [("vertical_lift_kind", "=", "view")]
         )
-        return [
-            ("location_id", "child_of", shuttle_locations.ids),
-            ("inventory_quantity_set", "=", True),
-            ("vertical_lift_done", "=", False),
-        ]
+        return self._base_domain_stock_quant_to_do(shuttle_locations.ids)
 
     def reset_steps(self):
         self.clear_current_inventory_line()
