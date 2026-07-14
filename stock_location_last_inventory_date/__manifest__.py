@@ -3,7 +3,7 @@
 {
     "name": "Stock Location Last Inventory Date",
     "summary": "Show the last inventory date for a leaf location",
-    "version": "14.0.2.0.0",
+    "version": "14.0.2.1.0",
     "development_status": "Alpha",
     "category": "Warehouse",
     "website": "https://github.com/OCA/stock-logistics-warehouse",

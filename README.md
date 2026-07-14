@@ -60,7 +60,7 @@ addon | version | maintainers | summary
 [stock_location_bin_name](stock_location_bin_name/) | 14.0.1.0.1 |  | Compute bin stock location name automatically
 [stock_location_children](stock_location_children/) | 14.0.1.0.0 |  | Add relation between stock location and all its children
 [stock_location_empty](stock_location_empty/) | 14.0.1.0.1 |  | Adds a filter for empty stock location
-[stock_location_last_inventory_date](stock_location_last_inventory_date/) | 14.0.2.0.0 |  | Show the last inventory date for a leaf location
+[stock_location_last_inventory_date](stock_location_last_inventory_date/) | 14.0.2.1.0 |  | Show the last inventory date for a leaf location
 [stock_location_lockdown](stock_location_lockdown/) | 14.0.1.0.0 |  | Prevent to add stock on locked locations
 [stock_location_orderpoint](stock_location_orderpoint/) | 14.0.1.1.2 | <a href='https://github.com/mt-software-de'><img src='https://github.com/mt-software-de.png' width='32' height='32' style='border-radius:50%;' alt='mt-software-de'/></a> | Declare orderpoint on a location allowing to replenish any product with the same criteria.
 [stock_location_orderpoint_source_relocate](stock_location_orderpoint_source_relocate/) | 14.0.1.0.3 | <a href='https://github.com/mt-software-de'><img src='https://github.com/mt-software-de.png' width='32' height='32' style='border-radius:50%;' alt='mt-software-de'/></a> <a href='https://github.com/jbaudoux'><img src='https://github.com/jbaudoux.png' width='32' height='32' style='border-radius:50%;' alt='jbaudoux'/></a> | Run an auto location orderpoint replenishment after the move relocation done by Stock Move Source Relocate
