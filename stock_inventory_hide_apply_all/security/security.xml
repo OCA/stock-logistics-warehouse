@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="group_stock_apply_all" model="res.groups">
+        <field name="name">Apply All Inventory Adjustments</field>
+        <field
+            name="comment"
+        >Users in this group can bulk-apply inventory adjustments using the "Apply All" button on the inventory adjustment list.</field>
+    </record>
+</odoo>
