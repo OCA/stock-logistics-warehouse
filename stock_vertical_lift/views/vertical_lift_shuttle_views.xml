@@ -12,18 +12,21 @@
                             name="switch_pick"
                             type="object"
                             string="Pick"
+                            barcode_trigger="switch-pick"
                             class="btn-primary btn btn-lg"
                         />
                         <button
                             name="switch_put"
                             type="object"
                             string="Put"
+                            barcode_trigger="switch-put"
                             class="btn-primary btn btn-lg"
                         />
                         <button
                             name="switch_inventory"
                             type="object"
                             string="Inventory"
+                            barcode_trigger="switch-inventory"
                             class="btn-primary btn btn-lg"
                         />
                     </div>
@@ -33,28 +36,6 @@
                             type="object"
                             string="Back to settings"
                             class="btn-danger btn-block btn-lg"
-                        />
-                    </div>
-                </div>
-                <footer />
-            </form>
-        </field>
-    </record>
-    <record id="vertical_lift_shuttle_manual_barcode_form" model="ir.ui.view">
-        <field name="name">vertical.lift.shuttle.manual.barcode.view.form</field>
-        <field name="model">vertical.lift.shuttle.manual.barcode</field>
-        <field name="arch" type="xml">
-            <form string="Shuttle">
-                <div class="row o_vlift_shuttle_popup">
-                    <div class="col-8">
-                        <field name="barcode" />
-                    </div>
-                    <div class="col-2">
-                        <button
-                            name="button_save"
-                            string="Confirm"
-                            type="object"
-                            class="btn-primary"
                         />
                     </div>
                 </div>
@@ -75,7 +56,20 @@
                     />
                 </header>
                 <sheet>
-                    <div class="oe_button_box" name="button_box" />
+                    <div class="oe_button_box" name="button_box">
+                        <button
+                            class="oe_stat_button"
+                            type="object"
+                            name="action_open_operations"
+                            icon="fa-truck"
+                        >
+                            <field
+                                name="number_of_ops"
+                                widget="statinfo"
+                                string="Operations"
+                            />
+                        </button>
+                    </div>
                     <div class="oe_title">
                         <label class="oe_edit_only" for="name" />
                         <h1>

@@ -113,6 +113,9 @@ class VerticalLiftOperationBase(models.AbstractModel):
     )
     _initial_state = None  # to define in sub-classes
 
+    def action_open_operations(self):
+        raise NotImplementedError
+
     # if there is an action and it's returning True, the transition is done,
     # otherwise not
     Transition = namedtuple("Transition", "current_state next_state action direct_eval")
@@ -214,7 +217,8 @@ class VerticalLiftOperationBase(models.AbstractModel):
 
     def next_step(self, direct_eval=False):
         current_state = self.state
-        for transition in self._transitions():
+        all_transitions = self._transitions()
+        for transition in all_transitions:
             if direct_eval and not transition.direct_eval:
                 continue
             if transition.current_state != current_state:
@@ -228,11 +232,7 @@ class VerticalLiftOperationBase(models.AbstractModel):
                 self.state = transition.next_state
                 break
         # reevaluate the transitions if we have a new state with direct_eval transitions
-        if self.state != current_state and any(
-            transition.direct_eval
-            for transition in self._transitions()
-            if transition.current_state == self.state
-        ):
+        if self.state != current_state:
             self.next_step(direct_eval=True)
 
     def reset_steps(self):
@@ -249,19 +249,19 @@ class VerticalLiftOperationBase(models.AbstractModel):
         """Called when the screen is opened"""
         self.reset_steps()
 
-    def onchange(self, values, field_name, field_onchange):
-        if field_name == "_barcode_scanned":
-            # _barcode_scanner is implemented (in the barcodes module) as an
-            # onchange, which is really annoying when we want it to act as a
-            # normal button and actually have side effect in the database
-            # (update line, go to the next step, ...). This override shorts the
-            # onchange call and calls the scanner method as a normal method.
-            self.on_barcode_scanned(values["_barcode_scanned"])
-            # We can't know which fields on_barcode_scanned changed, refresh
-            # everything.
-            return {"value": self.read()[0]}
-        else:
-            return super().onchange(values, field_name, field_onchange)
+    def onchange(self, values, field_names, field_onchange):
+        if "_barcode_scanned" not in field_names:
+            return super().onchange(values, field_names, field_onchange)
+
+        # _barcode_scanner is implemented (in the barcodes module) as an
+        # onchange, which is really annoying when we want it to act as a
+        # normal button and actually have side effect in the database
+        # (update line, go to the next step, ...). This override shorts the
+        # onchange call and calls the scanner method as a normal method.
+        self.on_barcode_scanned(values["_barcode_scanned"])
+        # We can't know which fields on_barcode_scanned changed, refresh
+        # everything.
+        return {"value": self.read()[0]}
 
     @api.depends()
     def _compute_number_of_ops(self):
@@ -282,6 +282,15 @@ class VerticalLiftOperationBase(models.AbstractModel):
     def action_manual_barcode(self):
         return self.shuttle_id.action_manual_barcode()
 
+    def switch_pick(self):
+        return self.shuttle_id.switch_pick()
+
+    def switch_put(self):
+        return self.shuttle_id.switch_put()
+
+    def switch_inventory(self):
+        return self.shuttle_id.switch_inventory()
+
     def process_current(self):
         """Process the action (pick, put, ...)
 
@@ -294,7 +303,7 @@ class VerticalLiftOperationBase(models.AbstractModel):
         self.ensure_one()
         if not self.step() == "save":
             return
-        self.next_step()
+        return self.next_step()
 
     def button_release(self):
         """Release the operation, go to the next"""
@@ -302,6 +311,18 @@ class VerticalLiftOperationBase(models.AbstractModel):
         if not self.step() == "release":
             return
         return self.next_step()
+
+    def button_save_and_release(self):
+        """Confirm the operation (set move to done, ...)"""
+        self.ensure_one()
+        if not self.step() == "save":
+            return
+        res = self.button_save()
+        if isinstance(res, dict):
+            return res
+        if not self.step() == "release":
+            return
+        return self.button_release()
 
     def _render_product_packagings(self, product):
         if not product:
@@ -410,6 +431,10 @@ class VerticalLiftOperationTransfer(models.AbstractModel):
         readonly=False,
     )
     # TODO add a glue addon with product_expiry to add the field
+
+    def is_action_barcode(self, barcode):
+        """Detect if the barcode is a button or command barcode"""
+        return barcode.startswith(("OBT", "OCD"))
 
     def on_barcode_scanned(self, barcode):
         self.ensure_one()

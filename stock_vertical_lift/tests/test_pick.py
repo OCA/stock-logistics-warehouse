@@ -1,6 +1,7 @@
 # Copyright 2019 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import logging
+from unittest.mock import patch
 
 from odoo.tools import mute_logger
 
@@ -139,6 +140,20 @@ class TestPick(VerticalLiftCase):
         self.assertEqual(operation.product_uom_id, ml.product_uom_id)
         self.assertEqual(operation.quantity, ml.quantity)
         self.assertEqual(operation.lot_id, ml.lot_id)
+
+    @mute_logger(SHUTTLE_LOGGER)
+    def test_on_barcode_scanned_ignores_odoo_special_barcodes(self):
+        operation = self._open_screen("pick")
+        # If the early-return for OBT/OCD doesn't fire, on_barcode_scanned
+        # falls through to a location lookup that emits notify_warning.
+        with patch.object(type(self.env.user), "notify_warning") as mock_notify:
+            for barcode in ("OBTsave", "OBTswitch-put"):
+                operation.on_barcode_scanned(barcode)
+            mock_notify.assert_not_called()
+
+        with patch.object(type(self.env.user), "notify_warning") as mock_notify:
+            operation.on_barcode_scanned("fake-barcode-that-does-not-exist")
+            mock_notify.assert_called()
 
     @mute_logger(SHUTTLE_LOGGER, "odoo.models.unlink")
     def test_pick_count_move_lines(self):

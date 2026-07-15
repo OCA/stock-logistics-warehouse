@@ -53,6 +53,9 @@ class VerticalLiftOperationPick(models.Model):
 
     def on_barcode_scanned(self, barcode):
         self.ensure_one()
+        # Ignore prefixed reserved by Odoo's barcode module
+        if self.is_action_barcode(barcode):
+            return
         if not self.current_move_line_id or self.current_move_line_id.state == "done":
             return
         if self.step() == "scan_destination":
@@ -67,6 +70,16 @@ class VerticalLiftOperationPick(models.Model):
                     ),
                     params=self._get_user_notification_params(),
                 )
+
+    def action_open_operations(self):
+        return {
+            "type": "ir.actions.act_window",
+            "name": self.env._("Move Lines"),
+            "res_model": "stock.move.line",
+            "view_mode": "list,form",
+            "domain": self._domain_move_lines_to_do(),
+            "context": {"search_default_groupby_picking_id": 1},
+        }
 
     def _domain_move_lines_to_do(self):
         domain = [

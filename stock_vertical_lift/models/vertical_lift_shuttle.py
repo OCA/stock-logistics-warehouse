@@ -4,7 +4,7 @@ import logging
 import socket
 import ssl
 
-from odoo import fields, models
+from odoo import api, fields, models
 
 _logger = logging.getLogger(__name__)
 
@@ -40,6 +40,12 @@ class VerticalLiftShuttle(models.Model):
     )
     command_ids = fields.One2many(
         "vertical.lift.command", "shuttle_id", string="Hardware commands"
+    )
+    # TODO: move ownership here. Each operation has UNIQUE(shuttle_id),
+    # so operation's number_of_ops could be related="shuttle_id.number_of_ops".
+    number_of_ops = fields.Integer(
+        compute="_compute_number_of_ops",
+        string="Operations to Process",
     )
     _sql_constraints = [
         (
@@ -148,6 +154,36 @@ class VerticalLiftShuttle(models.Model):
         protocol."""
         pass  # noqa
 
+    def _operation_for_mode_no_create(self):
+        self.ensure_one()
+        model = self._model_for_mode[self.mode]
+        return self.env[model].search(
+            [("shuttle_id", "=", self.id)], limit=1
+        ) or self.env[model].new({"shuttle_id": self.id})
+
+    @api.depends("mode", "location_id")
+    def _compute_number_of_ops(self):
+        for record in self:
+            operation = record._operation_for_mode_no_create()
+            if record.mode == "inventory":
+                record.number_of_ops = self.env["stock.quant"].search_count(
+                    operation._domain_stock_quant_to_do()
+                )
+            elif record.mode == "pick":
+                record.number_of_ops = self.env["stock.move.line"].search_count(
+                    operation._domain_move_lines_to_do()
+                )
+            elif record.mode == "put":
+                record.number_of_ops = self.env["stock.move.line"].search_count(
+                    operation._domain_move_lines_to_do_all()
+                )
+            else:
+                record.number_of_ops = 0
+
+    def action_open_operations(self):
+        self.ensure_one()
+        return self._operation_for_mode_no_create().action_open_operations()
+
     def _operation_for_mode(self):
         model = self._model_for_mode[self.mode]
         record = self.env[model].search([("shuttle_id", "=", self.id)])
@@ -189,11 +225,9 @@ class VerticalLiftShuttle(models.Model):
 
     def action_manual_barcode(self):
         return {
-            "type": "ir.actions.act_window",
-            "res_model": "vertical.lift.shuttle.manual.barcode",
-            "view_mode": "form",
+            "type": "ir.actions.client",
+            "tag": "vertical_lift_manual_barcode",
             "name": self.env._("Barcode"),
-            "target": "new",
         }
 
     # TODO: should the mode be changed on all the shuttles at the same time?

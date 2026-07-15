@@ -2,7 +2,7 @@
 # Copyright 2025 Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo.tests import Form, RecordCapturer
+from odoo.tests import RecordCapturer
 from odoo.tools import mute_logger
 
 from .common import VerticalLiftCase
@@ -43,34 +43,9 @@ class TestInventory(VerticalLiftCase):
         self.assertEqual(action["res_id"], 0)
 
         action = self.shuttle.action_manual_barcode()
-        self.assertEqual(action["type"], "ir.actions.act_window")
-        self.assertEqual(action["res_model"], "vertical.lift.shuttle.manual.barcode")
+        self.assertEqual(action["type"], "ir.actions.client")
+        self.assertEqual(action["tag"], "vertical_lift_manual_barcode")
         self.assertEqual(action["name"], "Barcode")
-
-        operation = self._open_screen("put")
-        self.assertEqual(operation._name, "vertical.lift.operation.put")
-        self.assertEqual(operation.state, "scan_source")
-        VerticalLiftShuttleManualBarcode = self.env[action["res_model"]]
-
-        ClassWithContextOnlyModel = VerticalLiftShuttleManualBarcode.with_context(
-            active_model=operation._name,
-        )
-        vls_manual_form = Form(ClassWithContextOnlyModel)
-        rec_id = vls_manual_form._values.get("id")
-        vls_manual = ClassWithContextOnlyModel.browse(rec_id)
-        vls_manual.button_save()
-
-        ClassWithContext = VerticalLiftShuttleManualBarcode.with_context(
-            active_ids=operation.ids,
-            active_id=operation.ids[0],
-            active_model=operation._name,
-        )
-        vls_manual_form = Form(ClassWithContext)
-        vls_manual_form.barcode = self.product_socks.barcode
-        vls_manual_form.save()
-        rec_id = vls_manual_form._values.get("id")
-        vls_manual = ClassWithContext.browse(rec_id)
-        vls_manual.button_save()
 
     @mute_logger(SHUTTLE_LOGGER)
     def test_inventory_count_ops(self):
