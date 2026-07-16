@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2019 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <!--STOCK INVENTORY JUSTIFICATION READER-->
+    <record model="ir.model.access" id="stock_inventory_justification_reader">
+        <field name="name">stock.inventory.justification reader access</field>
+        <field name="model_id" ref="model_stock_inventory_justification" />
+        <field name="group_id" ref="stock.group_stock_user" />
+        <field name="perm_read" eval="1" />
+        <field name="perm_create" eval="0" />
+        <field name="perm_write" eval="0" />
+        <field name="perm_unlink" eval="0" />
+    </record>
+    <!--STOCK INVENTORY JUSTIFICATION MANAGER-->
+    <record model="ir.model.access" id="stock_inventory_justification_manager_access">
+        <field name="name">stock.inventory.justification manager access</field>
+        <field
+            name="model_id"
+            ref="stock_inventory_justification.model_stock_inventory_justification"
+        />
+        <field name="group_id" ref="stock.group_stock_manager" />
+        <field name="perm_read" eval="1" />
+        <field name="perm_create" eval="1" />
+        <field name="perm_write" eval="1" />
+        <field name="perm_unlink" eval="1" />
+    </record>
+</odoo>
