@@ -4,7 +4,10 @@ from odoo.fields import Command
 
 from odoo.addons.base.tests.common import BaseCommon
 
-from ..models.exception import ReleaseChannelLocationRestrictionError
+from ..models.exception import (
+    ReleaseChannelLocationPickingRestrictionError,
+    ReleaseChannelLocationRestrictionError,
+)
 
 
 class TestReleaseChannelRestriction(BaseCommon):
@@ -126,6 +129,12 @@ class TestReleaseChannelRestriction(BaseCommon):
                 ("group_id", "=", self.group_1.id),
             ]
         )
+        # Check if destination is valid
+        self.assertTrue(
+            self.picking_1.move_line_ids._valid_location_release_channel_restriction(
+                self.out_1
+            )
+        )
 
         self.picking_1.move_line_ids.location_dest_id = self.out_1
         self.picking_1.move_line_ids.qty_done = (
@@ -134,6 +143,74 @@ class TestReleaseChannelRestriction(BaseCommon):
 
         self.picking_1._action_done()
         self.assertEqual("done", self.picking_1.state)
+        self.assertTrue(self.out_1.current_release_channel_restriction_id)
+
+        self.assertEqual("assigned", self.delivery_1.state)
+
+        self.picking_2 = self.env["stock.picking"].search(
+            [
+                ("move_ids.location_id", "=", self.warehouse.lot_stock_id.id),
+                ("product_id", "=", self.product.id),
+                ("group_id", "=", self.group_2.id),
+            ]
+        )
+        # Check if destination is valid
+        self.assertFalse(
+            self.picking_2.move_line_ids._valid_location_release_channel_restriction(
+                self.out_1
+            )
+        )
+
+        # Do it anyway
+        self.picking_2.move_line_ids.location_dest_id = self.out_1
+        self.picking_2.move_line_ids.qty_done = (
+            self.picking_2.move_line_ids.reserved_qty
+        )
+
+        with self.assertRaises(ReleaseChannelLocationPickingRestrictionError):
+            self.picking_2._action_done()
+
+    def test_release_channel_restriction_removal(self):
+        """
+
+        Assign the channel to both deliveries
+        Transfer the linked picking
+        """
+        self.delivery_1 = self.env["stock.picking"].search(
+            [
+                ("move_ids.location_id", "=", self.out.id),
+                ("product_id", "=", self.product.id),
+                ("group_id", "=", self.group_1.id),
+            ]
+        )
+        self.delivery_1.assign_release_channel()
+        self.assertEqual(self.default_channel, self.delivery_1.release_channel_id)
+
+        self.delivery_2 = self.env["stock.picking"].search(
+            [
+                ("move_ids.location_id", "=", self.out.id),
+                ("product_id", "=", self.product.id),
+                ("group_id", "=", self.group_2.id),
+            ]
+        )
+        self.delivery_2.assign_release_channel()
+        self.assertEqual(self.default_channel, self.delivery_2.release_channel_id)
+        self.picking_1 = self.env["stock.picking"].search(
+            [
+                ("move_ids.location_id", "=", self.warehouse.lot_stock_id.id),
+                ("product_id", "=", self.product.id),
+                ("group_id", "=", self.group_1.id),
+            ]
+        )
+
+        self.picking_1.move_line_ids.location_dest_id = self.out_1
+        self.picking_1.move_line_ids.qty_done = (
+            self.picking_1.move_line_ids.reserved_qty
+        )
+
+        self.picking_1._action_done()
+        self.assertEqual("done", self.picking_1.state)
+        self.assertTrue(self.out_1.current_release_channel_restriction_id)
 
         self.assertEqual("assigned", self.delivery_1.state)
 
@@ -149,8 +226,24 @@ class TestReleaseChannelRestriction(BaseCommon):
             self.picking_2.move_line_ids.reserved_qty
         )
 
-        with self.assertRaises(ReleaseChannelLocationRestrictionError):
-            self.picking_2._action_done()
+        self.picking_2._action_done()
+
+        self.delivery_1.move_line_ids.qty_done = (
+            self.delivery_1.move_line_ids.reserved_qty
+        )
+        self.delivery_1._action_done()
+
+        # Check the release channel still restricts the out
+        self.assertEqual(
+            self.default_channel, self.out_1.current_release_channel_restriction_id
+        )
+
+        # Do the second delivery
+        self.delivery_2.move_line_ids.qty_done = (
+            self.delivery_2.move_line_ids.reserved_qty
+        )
+        self.delivery_2._action_done()
+        self.assertFalse(self.out_1.current_release_channel_restriction_id)
 
     def test_release_channel_no_restriction(self):
         """
@@ -199,14 +292,17 @@ class TestReleaseChannelRestriction(BaseCommon):
         )
 
         self.picking_2._action_done()
+        self.assertFalse(self.out_1.current_release_channel_restriction_id)
 
-    def test_release_channel_restriction_pending_incoming(self):
+    def test_release_channel_restriction_children(self):
         """
+        Check that a restriction on a location in the same family
+        applies.
 
-        Assign the channel to the first delivery
-        Transfer the linked picking
+                        OUT
+
+                OUT1            OUT2
         """
-        self.out_1.release_channel_restriction_in_move = True
         self.delivery_1 = self.env["stock.picking"].search(
             [
                 ("move_ids.location_id", "=", self.out.id),
@@ -223,13 +319,79 @@ class TestReleaseChannelRestriction(BaseCommon):
                 ("group_id", "=", self.group_1.id),
             ]
         )
-        self.picking_1.release_channel_id = self.default_channel
+
         self.picking_1.move_line_ids.location_dest_id = self.out_1
         self.picking_1.move_line_ids.qty_done = (
             self.picking_1.move_line_ids.reserved_qty
         )
 
-        # Set the second delivery in the second channel
+        self.picking_1._action_done()
+        self.assertEqual("done", self.picking_1.state)
+
+        self.assertEqual("assigned", self.delivery_1.state)
+
+        self.picking_2 = self.env["stock.picking"].search(
+            [
+                ("move_ids.location_id", "=", self.warehouse.lot_stock_id.id),
+                ("product_id", "=", self.product.id),
+                ("group_id", "=", self.group_2.id),
+            ]
+        )
+        # Use another sub-location
+        self.picking_2.move_line_ids.location_dest_id = self.out_2
+        self.picking_2.move_line_ids.qty_done = (
+            self.picking_2.move_line_ids.reserved_qty
+        )
+
+        with self.assertRaises(ReleaseChannelLocationPickingRestrictionError):
+            self.picking_2._action_done()
+
+    def test_release_channel_restriction_family_different(self):
+        """
+        Check that a restriction on a location in the same family
+        applies with a different channel on the brother.
+
+                        OUT
+
+                OUT1            OUT2
+        """
+
+        self.delivery_1 = self.env["stock.picking"].search(
+            [
+                ("move_ids.location_id", "=", self.out.id),
+                ("product_id", "=", self.product.id),
+                ("group_id", "=", self.group_1.id),
+            ]
+        )
+        self.delivery_1.assign_release_channel()
+        self.assertEqual(self.default_channel, self.delivery_1.release_channel_id)
+        self.picking_1 = self.env["stock.picking"].search(
+            [
+                ("move_ids.location_id", "=", self.warehouse.lot_stock_id.id),
+                ("product_id", "=", self.product.id),
+                ("group_id", "=", self.group_1.id),
+            ]
+        )
+
+        self.picking_1.move_line_ids.location_dest_id = self.out_1
+        self.picking_1.move_line_ids.qty_done = (
+            self.picking_1.move_line_ids.reserved_qty
+        )
+
+        self.picking_1._action_done()
+        self.assertEqual("done", self.picking_1.state)
+
+        self.assertEqual("assigned", self.delivery_1.state)
+
+        self.channel_2 = self.env["stock.release.channel"].create(
+            {
+                "name": "CH 2",
+            }
+        )
+
+        with self.assertRaises(ReleaseChannelLocationRestrictionError):
+            self.out_2.current_release_channel_restriction_id = self.channel_2
+
         self.delivery_2 = self.env["stock.picking"].search(
             [
                 ("move_ids.location_id", "=", self.out.id),
@@ -245,18 +407,24 @@ class TestReleaseChannelRestriction(BaseCommon):
                 ("group_id", "=", self.group_2.id),
             ]
         )
-        self.picking_2.release_channel_id = self.channel_2
 
-        with self.assertRaises(ReleaseChannelLocationRestrictionError):
-            self.picking_1._action_done()
+        self.picking_2.move_line_ids.location_dest_id = self.out_2
+        self.picking_2.move_line_ids.qty_done = (
+            self.picking_2.move_line_ids.reserved_qty
+        )
 
-    def test_release_channel_restriction_pending_incoming_done(self):
+        with self.assertRaises(ReleaseChannelLocationPickingRestrictionError):
+            self.picking_2._action_done()
+
+    def test_remove_release_channel_restriction_family_different(self):
         """
-        Set both deliveries and pickings in same channel
-        Transfer the first picking
-        No error should be raised
+        Check the restriction is removed after all pending moves are done.
+
+                        OUT
+
+                OUT1            OUT2
         """
-        self.out_1.release_channel_restriction_in_move = True
+
         self.delivery_1 = self.env["stock.picking"].search(
             [
                 ("move_ids.location_id", "=", self.out.id),
@@ -273,13 +441,22 @@ class TestReleaseChannelRestriction(BaseCommon):
                 ("group_id", "=", self.group_1.id),
             ]
         )
-        self.picking_1.release_channel_id = self.default_channel
+
         self.picking_1.move_line_ids.location_dest_id = self.out_1
         self.picking_1.move_line_ids.qty_done = (
             self.picking_1.move_line_ids.reserved_qty
         )
 
-        # Set the second delivery in the second channel
+        self.picking_1._action_done()
+        self.assertEqual("done", self.picking_1.state)
+
+        self.assertEqual("assigned", self.delivery_1.state)
+
+        # Check the OUT 2 is also restricted
+        self.assertEqual(
+            self.default_channel, self.out_2.current_release_channel_restriction_id
+        )
+
         self.delivery_2 = self.env["stock.picking"].search(
             [
                 ("move_ids.location_id", "=", self.out.id),
@@ -287,7 +464,9 @@ class TestReleaseChannelRestriction(BaseCommon):
                 ("group_id", "=", self.group_2.id),
             ]
         )
-        self.delivery_2.release_channel_id = self.default_channel
+        self.delivery_2.assign_release_channel()
+        self.assertEqual(self.default_channel, self.delivery_2.release_channel_id)
+
         self.picking_2 = self.env["stock.picking"].search(
             [
                 ("move_ids.location_id", "=", self.warehouse.lot_stock_id.id),
@@ -295,5 +474,92 @@ class TestReleaseChannelRestriction(BaseCommon):
                 ("group_id", "=", self.group_2.id),
             ]
         )
-        self.picking_2.release_channel_id = self.default_channel
+
+        self.picking_2.move_line_ids.location_dest_id = self.out_2
+        self.picking_2.move_line_ids.qty_done = (
+            self.picking_2.move_line_ids.reserved_qty
+        )
+        self.picking_2._action_done()
+
+        # Deliver the first picking
+        self.delivery_1.move_line_ids.qty_done = (
+            self.delivery_1.move_line_ids.reserved_qty
+        )
+        self.delivery_1._action_done()
+
+        self.assertEqual(
+            self.default_channel, self.out_1.current_release_channel_restriction_id
+        )
+        self.assertEqual(
+            self.default_channel, self.out_2.current_release_channel_restriction_id
+        )
+
+        self.delivery_2.move_line_ids.qty_done = (
+            self.delivery_2.move_line_ids.reserved_qty
+        )
+        self.delivery_2._action_done()
+        self.assertFalse(self.out_1.current_release_channel_restriction_id)
+        self.assertFalse(self.out_2.current_release_channel_restriction_id)
+
+    def test_release_channel_restriction_reset_wizard(self):
+        """
+
+        Assign the channel to the first delivery
+        Transfer the linked picking
+        """
+        self.delivery_1 = self.env["stock.picking"].search(
+            [
+                ("move_ids.location_id", "=", self.out.id),
+                ("product_id", "=", self.product.id),
+                ("group_id", "=", self.group_1.id),
+            ]
+        )
+        self.delivery_1.assign_release_channel()
+        self.assertEqual(self.default_channel, self.delivery_1.release_channel_id)
+        self.picking_1 = self.env["stock.picking"].search(
+            [
+                ("move_ids.location_id", "=", self.warehouse.lot_stock_id.id),
+                ("product_id", "=", self.product.id),
+                ("group_id", "=", self.group_1.id),
+            ]
+        )
+        # Check if destination is valid
+        self.assertTrue(
+            self.picking_1.move_line_ids._valid_location_release_channel_restriction(
+                self.out_1
+            )
+        )
+
+        self.picking_1.move_line_ids.location_dest_id = self.out_1
+        self.picking_1.move_line_ids.qty_done = (
+            self.picking_1.move_line_ids.reserved_qty
+        )
+
         self.picking_1._action_done()
+        self.assertEqual("done", self.picking_1.state)
+        self.assertTrue(self.out_1.current_release_channel_restriction_id)
+        self.assertTrue(self.out_2.current_release_channel_restriction_id)
+
+        action = self.out_1.action_reset_release_channel()
+        context = action.get("context")
+        wizard = (
+            self.env["stock.location.reset.release.channel"]
+            .with_context(**context)
+            .create({})
+        )
+        wizard.reset()
+        self.assertFalse(self.out_1.current_release_channel_restriction_id)
+        self.assertTrue(self.out_2.current_release_channel_restriction_id)
+
+        wizard = (
+            self.env["stock.location.reset.release.channel"]
+            .with_context(**context)
+            .create(
+                {
+                    "reset_family": True,
+                }
+            )
+        )
+        wizard.reset()
+        self.assertFalse(self.out_1.current_release_channel_restriction_id)
+        self.assertFalse(self.out_2.current_release_channel_restriction_id)

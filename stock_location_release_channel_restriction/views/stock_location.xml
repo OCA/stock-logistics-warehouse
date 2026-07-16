@@ -19,14 +19,55 @@
                         name="specific_release_channel_restriction"
                         class="oe_edit_only"
                     />
-                    <field
-                        name="release_channel_restriction_in_move"
-                        attrs="{'invisible': [('release_channel_restriction', '!=', 'same')]}"
-                    />
+                    <field name="current_release_channel_restriction_id" />
                 </group>
             </xpath>
+            <sheet position="before">
+                <div
+                    class="alert alert-warning"
+                    style="margin-bottom:0px;font-weight: bolder;text-align: center;"
+                    role="alert"
+                    attrs="{'invisible': [('current_release_channel_restriction_id', '=', False)]}"
+                >
+                                The location is restricted to <field
+                        name="current_release_channel_restriction_id"
+                    />
+                </div>
+            </sheet>
 
 
+        </field>
+    </record>
+
+    <record id="view_location_search" model="ir.ui.view">
+        <field name="name">stock.location.search</field>
+        <field name="model">stock.location</field>
+        <field name="inherit_id" ref="stock.view_location_search" />
+        <field name="arch" type="xml">
+            <filter name="inactive" position="after">
+                <separator />
+                <filter
+                    string="Has Release Channel Restriction"
+                    name="release_channel_restriction"
+                    domain="[('current_release_channel_restriction_id','!=',False)]"
+                />
+            </filter>
+        </field>
+    </record>
+
+    <record id="view_location_tree2" model="ir.ui.view">
+        <field name="name">stock.location.tree</field>
+        <field name="model">stock.location</field>
+        <field name="inherit_id" ref="stock.view_location_tree2" />
+        <field name="arch" type="xml">
+            <field name="storage_category_id" position="after">
+                <field
+                    name="current_release_channel_restriction_id"
+                    widget="badge"
+                    decoration-warning="True"
+                    optional="hide"
+                />
+            </field>
         </field>
     </record>
 
