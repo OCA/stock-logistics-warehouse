@@ -14,25 +14,53 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: stock_location_release_channel_restriction
-#: model:ir.model.fields,help:stock_location_release_channel_restriction.field_stock_location__release_channel_restriction_in_move
+#: model_terms:ir.ui.view,arch_db:stock_location_release_channel_restriction.stock_location_reset_release_channel_form_view
+msgid "Cancel"
+msgstr ""
+
+#. module: stock_location_release_channel_restriction
+#: model:ir.model.fields,help:stock_location_release_channel_restriction.field_stock_location_reset_release_channel__reset_family
 msgid ""
-"Check this box if you want to take into account all pending incoming "
-"movements to restrict the future movements to be in the same release "
-"channel."
+"Check this in order to reset the blocking release channel on other locations"
+" from the same family."
 msgstr ""
 
 #. module: stock_location_release_channel_restriction
-#: model:ir.model.fields,field_description:stock_location_release_channel_restriction.field_stock_move_line__for_restriction_destination_location_channel_id
-msgid "For Restriction Destination Location Channel"
+#: model:ir.model.fields,field_description:stock_location_release_channel_restriction.field_stock_location_reset_release_channel__create_uid
+msgid "Created by"
 msgstr ""
 
 #. module: stock_location_release_channel_restriction
-#: model:ir.model.fields,field_description:stock_location_release_channel_restriction.field_stock_move_line__for_restriction_incoming_location_channel_ids
-msgid "For Restriction Incoming Location Channel"
+#: model:ir.model.fields,field_description:stock_location_release_channel_restriction.field_stock_location_reset_release_channel__create_date
+msgid "Created on"
 msgstr ""
 
 #. module: stock_location_release_channel_restriction
-#: model:ir.model.fields,help:stock_location_release_channel_restriction.field_stock_location__parent_release_channel_restriction
+#: model:ir.model.fields,field_description:stock_location_release_channel_restriction.field_stock_location__current_release_channel_restriction_id
+msgid "Current Release Channel Restriction"
+msgstr ""
+
+#. module: stock_location_release_channel_restriction
+#: model:ir.model.fields,field_description:stock_location_release_channel_restriction.field_stock_location_reset_release_channel__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: stock_location_release_channel_restriction
+#: model:ir.model.fields,field_description:stock_location_release_channel_restriction.field_stock_move_line__has_location_destination_release_channel_restriction
+msgid "Has Location Destination Release Channel Restriction"
+msgstr ""
+
+#. module: stock_location_release_channel_restriction
+#: model_terms:ir.ui.view,arch_db:stock_location_release_channel_restriction.view_location_search
+msgid "Has Release Channel Restriction"
+msgstr ""
+
+#. module: stock_location_release_channel_restriction
+#: model:ir.model.fields,field_description:stock_location_release_channel_restriction.field_stock_location_reset_release_channel__id
+msgid "ID"
+msgstr ""
+
+#. module: stock_location_release_channel_restriction
 #: model:ir.model.fields,help:stock_location_release_channel_restriction.field_stock_location__release_channel_restriction
 msgid ""
 "If 'same' is selected the system will prevent to put items of different "
@@ -52,20 +80,34 @@ msgid "Inventory Locations"
 msgstr ""
 
 #. module: stock_location_release_channel_restriction
-#. odoo-python
-#: code:addons/stock_location_release_channel_restriction/models/stock_location.py:0
+#: model:ir.model.fields,field_description:stock_location_release_channel_restriction.field_stock_location_reset_release_channel____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: stock_location_release_channel_restriction
+#: model:ir.model.fields,field_description:stock_location_release_channel_restriction.field_stock_location_reset_release_channel__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: stock_location_release_channel_restriction
+#: model:ir.model.fields,field_description:stock_location_release_channel_restriction.field_stock_location_reset_release_channel__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: stock_location_release_channel_restriction
+#: model:ir.model.fields,field_description:stock_location_release_channel_restriction.field_stock_location_reset_release_channel__location_ids
+msgid "Location"
+msgstr ""
+
+#. module: stock_location_release_channel_restriction
 #: model:ir.model.fields.selection,name:stock_location_release_channel_restriction.selection__stock_location__release_channel_restriction__mixed
 #: model:ir.model.fields.selection,name:stock_location_release_channel_restriction.selection__stock_location__specific_release_channel_restriction__mixed
-#, python-format
 msgid "Movements of different release channels are allowed into the location"
 msgstr ""
 
 #. module: stock_location_release_channel_restriction
-#. odoo-python
-#: code:addons/stock_location_release_channel_restriction/models/stock_location.py:0
 #: model:ir.model.fields.selection,name:stock_location_release_channel_restriction.selection__stock_location__release_channel_restriction__same
 #: model:ir.model.fields.selection,name:stock_location_release_channel_restriction.selection__stock_location__specific_release_channel_restriction__same
-#, python-format
 msgid ""
 "Only movements of the same release channel are allowed into the location"
 msgstr ""
@@ -86,13 +128,30 @@ msgid "Release Channel Restriction"
 msgstr ""
 
 #. module: stock_location_release_channel_restriction
-#: model:ir.model.fields,field_description:stock_location_release_channel_restriction.field_stock_location__release_channel_restriction_in_move
-msgid "Release Channel Restriction For Incoming Moves"
+#: model_terms:ir.ui.view,arch_db:stock_location_release_channel_restriction.stock_location_form_view
+msgid "Release Channel Restrictions"
 msgstr ""
 
 #. module: stock_location_release_channel_restriction
-#: model_terms:ir.ui.view,arch_db:stock_location_release_channel_restriction.stock_location_form_view
-msgid "Release Channel Restrictions"
+#: model:ir.actions.server,name:stock_location_release_channel_restriction.action_stock_location_reset_release_channel
+msgid "Remove Release Channel"
+msgstr ""
+
+#. module: stock_location_release_channel_restriction
+#: model_terms:ir.ui.view,arch_db:stock_location_release_channel_restriction.stock_location_reset_release_channel_form_view
+msgid "Reset"
+msgstr ""
+
+#. module: stock_location_release_channel_restriction
+#: model:ir.model.fields,field_description:stock_location_release_channel_restriction.field_stock_location_reset_release_channel__reset_family
+msgid "Reset Family"
+msgstr ""
+
+#. module: stock_location_release_channel_restriction
+#. odoo-python
+#: code:addons/stock_location_release_channel_restriction/models/stock_location.py:0
+#, python-format
+msgid "Reset Release Channel"
 msgstr ""
 
 #. module: stock_location_release_channel_restriction
@@ -101,17 +160,44 @@ msgid "Specific Release Channel Restriction"
 msgstr ""
 
 #. module: stock_location_release_channel_restriction
-#: model:ir.model.fields,help:stock_location_release_channel_restriction.field_stock_move_line__for_restriction_incoming_location_channel_ids
+#. odoo-python
+#: code:addons/stock_location_release_channel_restriction/models/exception.py:0
+#, python-format
 msgid ""
-"Technical field in order to retrieve the release channel of pending incoming"
-" moves on destination location."
+"The location %(location_name)s is already restricted to "
+"%(release_channel_name)s release channel and you try to modify it to "
+"%(incoming_channel_names)s."
 msgstr ""
 
 #. module: stock_location_release_channel_restriction
-#: model:ir.model.fields,help:stock_location_release_channel_restriction.field_stock_move_line__for_restriction_destination_location_channel_id
+#: model_terms:ir.ui.view,arch_db:stock_location_release_channel_restriction.stock_location_form_view
+msgid "The location is restricted to"
+msgstr ""
+
+#. module: stock_location_release_channel_restriction
+#: model:ir.model.fields,help:stock_location_release_channel_restriction.field_stock_location__parent_release_channel_restriction
 msgid ""
-"Technical field in order to retrieve the release channel of pending moveson "
-"destination location."
+"This field is used to compute recursively the restriction parameter from "
+"parent hierarchy."
+msgstr ""
+
+#. module: stock_location_release_channel_restriction
+#: model:ir.model.fields,help:stock_location_release_channel_restriction.field_stock_location__current_release_channel_restriction_id
+msgid ""
+"This is the current release channel that restrict this location for future "
+"incoming movements."
+msgstr ""
+
+#. module: stock_location_release_channel_restriction
+#: model:ir.model.fields,help:stock_location_release_channel_restriction.field_stock_move_line__has_location_destination_release_channel_restriction
+msgid ""
+"This is used to easily check if the move line has a restriction for currrent"
+" destination location on release channel."
+msgstr ""
+
+#. module: stock_location_release_channel_restriction
+#: model:ir.model,name:stock_location_release_channel_restriction.model_stock_location_reset_release_channel
+msgid "Wizard to reset Release Channel on Locations"
 msgstr ""
 
 #. module: stock_location_release_channel_restriction
