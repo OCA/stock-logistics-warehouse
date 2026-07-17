@@ -34,10 +34,24 @@ Stock Inventory Justification
 
 This module allows to set justifications on inventories.
 
+|Resulting moves|
+
+.. |Resulting moves| image:: https://raw.githubusercontent.com/OCA/stock-logistics-warehouse/19.0/stock_inventory_justification/static/description/moves.png
+
 **Table of contents**
 
 .. contents::
    :local:
+
+Configuration
+=============
+
+- Go to Inventory > Configuration > Inventory justifications
+- Create as much justifications you need (only a name is necessary).
+
+|Configure justifications|
+
+.. |Configure justifications| image:: https://raw.githubusercontent.com/OCA/stock-logistics-warehouse/19.0/stock_inventory_justification/static/description/configuration.png
 
 Usage
 =====
@@ -45,6 +59,10 @@ Usage
 - In the stock inventory list view, fill in justification(s)
 - Validate the inventory, the justifications will be added to the stock
   moves and displayed on the move lines
+
+|Loss|
+
+.. |Loss| image:: https://raw.githubusercontent.com/OCA/stock-logistics-warehouse/19.0/stock_inventory_justification/static/description/loss.png
 
 Bug Tracker
 ===========
