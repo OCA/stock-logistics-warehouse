@@ -53,7 +53,7 @@
                             <div class="o_setting_right_pane">
                                 <label
                                     string="Enable Submitted State"
-                                    for="module_stock_request_purchase"
+                                    for="module_stock_request_submit"
                                 />
                                 <div class="text-muted">
                                     Add State to Stock Request and Stock Request Orders if activated.
@@ -115,7 +115,7 @@
                     <h2>Kanban</h2>
                     <div
                         class="row mt16 o_settings_container"
-                        id="stock_request_purchase"
+                        id="stock_request_kanban"
                     >
                         <div class="col-xs-12 col-md-6 o_setting_box">
                             <div class="o_setting_left_pane">
@@ -124,7 +124,7 @@
                             <div class="o_setting_right_pane">
                                 <label
                                     string="Enable Stock Requests Kanban cards"
-                                    for="module_stock_request_purchase"
+                                    for="module_stock_request_kanban"
                                 />
                                 <div class="text-muted">
                                     Use Kanban cards for consumable products
