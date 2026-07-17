@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--Copyright 2022 ForgeFlow S.L. (https://www.forgeflow.com)
+    License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html)-->
+<odoo>
+    <record id="stock_picking_show_linked_form_inherit" model="ir.ui.view">
+        <field name="name">stock_picking_show_linked.form</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form" />
+        <field name="arch" type="xml">
+            <button name="action_next_transfer" position="before">
+                <button
+                    class="oe_stat_button"
+                    type="object"
+                    name="action_stock_picking_origin"
+                    icon="fa-exchange"
+                    invisible="origin_picking_count == 0"
+                >
+                    <div class="o_form_field o_stat_info">
+                        <span class="o_stat_text">Previous Transfer</span>
+                    </div>
+                </button>
+            </button>
+        </field>
+    </record>
+</odoo>
