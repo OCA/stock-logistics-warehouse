@@ -53,11 +53,6 @@ msgid "Group By"
 msgstr ""
 
 #. module: stock_lot_catalog
-#: model:ir.model.fields,field_description:stock_lot_catalog.field_stock_lot__product_image_128
-msgid "Image 128"
-msgstr ""
-
-#. module: stock_lot_catalog
 #: model_terms:ir.ui.view,arch_db:stock_lot_catalog.lot_view_search_catalog
 msgid "Location"
 msgstr ""
@@ -88,6 +83,11 @@ msgstr ""
 #. module: stock_lot_catalog
 #: model_terms:ir.ui.view,arch_db:stock_lot_catalog.lot_view_search_catalog
 msgid "Product"
+msgstr ""
+
+#. module: stock_lot_catalog
+#: model:ir.model.fields,field_description:stock_lot_catalog.field_stock_lot__product_image_128
+msgid "Product Image 128"
 msgstr ""
 
 #. module: stock_lot_catalog
