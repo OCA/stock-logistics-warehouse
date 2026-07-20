@@ -56,11 +56,6 @@ msgid "Group By"
 msgstr "Raggruppa per"
 
 #. module: stock_lot_catalog
-#: model:ir.model.fields,field_description:stock_lot_catalog.field_stock_lot__product_image_128
-msgid "Image 128"
-msgstr "Immagine 128"
-
-#. module: stock_lot_catalog
 #: model_terms:ir.ui.view,arch_db:stock_lot_catalog.lot_view_search_catalog
 msgid "Location"
 msgstr "Località"
@@ -94,6 +89,11 @@ msgid "Product"
 msgstr "Prodotto"
 
 #. module: stock_lot_catalog
+#: model:ir.model.fields,field_description:stock_lot_catalog.field_stock_lot__product_image_128
+msgid "Product Image 128"
+msgstr ""
+
+#. module: stock_lot_catalog
 #. odoo-javascript
 #: code:addons/stock_lot_catalog/static/src/stock_lot_catalog/order_line/order_line.xml:0
 msgid "Remove"
@@ -115,3 +115,6 @@ msgstr "Prezzo unitario:"
 #: code:addons/stock_lot_catalog/static/src/stock_lot_catalog/order_line/order_line.xml:0
 msgid "You can't edit this lot in the catalog."
 msgstr "Non si può modificare questo lotto nel catalogo."
+
+#~ msgid "Image 128"
+#~ msgstr "Immagine 128"
