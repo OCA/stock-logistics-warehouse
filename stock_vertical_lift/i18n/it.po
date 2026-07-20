@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2026-04-20 16:45+0000\n"
+"PO-Revision-Date: 2026-07-20 07:47+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -343,7 +343,7 @@ msgstr "Modo:"
 #: code:addons/stock_vertical_lift/models/vertical_lift_operation_pick.py:0
 #: code:addons/stock_vertical_lift/models/vertical_lift_operation_put.py:0
 msgid "Move Lines"
-msgstr ""
+msgstr "Righe movimento"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_command__name
@@ -434,7 +434,7 @@ msgstr "Operazioni"
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_shuttle__number_of_ops
 msgid "Operations to Process"
-msgstr ""
+msgstr "Operazioni da elaborare"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_inventory__package_id
@@ -563,7 +563,7 @@ msgstr "Salva"
 #. module: stock_vertical_lift
 #: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_operation_base_screen_view
 msgid "Save & Release"
-msgstr ""
+msgstr "Salva e rilascia"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_res_config_settings__vertical_lift_secret
