@@ -10,7 +10,9 @@ class StockLot(models.Model):
     product_template_attribute_value_ids = fields.Many2many(
         related="product_id.product_template_attribute_value_ids"
     )
-    product_image_128 = fields.Image(related="product_id.image_128")
+    product_image_128 = fields.Image(
+        string="Product Image 128", related="product_id.image_128"
+    )
 
     def _get_lst_price(self):
         self.ensure_one()
