@@ -1,0 +1,48 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_picking_type_user_restriction
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-07-07 04:53+0000\n"
+"PO-Revision-Date: 2020-07-07 04:53+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_picking_type_user_restriction
+#: model:ir.model.fields,field_description:stock_picking_type_user_restriction.field_stock_picking_type__assigned_user_ids
+msgid "Assigned users"
+msgstr "Utenti assegnati"
+
+#. module: stock_picking_type_user_restriction
+#: model:ir.model,name:stock_picking_type_user_restriction.model_stock_picking_type
+msgid "Picking Type"
+msgstr "Tipo di prelievo"
+
+#. module: stock_picking_type_user_restriction
+#: model:ir.model.fields,help:stock_picking_type_user_restriction.field_stock_picking_type__assigned_user_ids
+msgid ""
+"Restrict some users to only access their assigned operation types. In order "
+"to apply the restriction, the user needs the 'User: Assigned Operation Types "
+"Only' group"
+msgstr ""
+"Limitare alcuni utenti ad accedere solamente ai loro tipi di operazioni "
+"assegnati. Per applicare la restrizione, l'utente necessita il gruppo "
+"'Utente: solamente tipi di operazioni assegnati'"
+
+#. module: stock_picking_type_user_restriction
+#: model:res.groups,comment:stock_picking_type_user_restriction.group_assigned_picking_types_user
+msgid "The user will have access to her assigned operation types."
+msgstr "L'utente avrà accesso ai propri tipi di operazioni assegnati."
+
+#. module: stock_picking_type_user_restriction
+#: model:res.groups,name:stock_picking_type_user_restriction.group_assigned_picking_types_user
+msgid "User: Assigned Operation Types Only"
+msgstr "Utente: solamente tipi di operazioni assegnati"
