@@ -52,6 +52,7 @@ setuptools.setup(
         'odoo-addon-stock_picking_batch_packaging_qty>=16.0dev,<16.1dev',
         'odoo-addon-stock_picking_commercial_partner>=16.0dev,<16.1dev',
         'odoo-addon-stock_picking_dock>=16.0dev,<16.1dev',
+        'odoo-addon-stock_picking_location_check>=16.0dev,<16.1dev',
         'odoo-addon-stock_picking_procure_method>=16.0dev,<16.1dev',
         'odoo-addon-stock_picking_product_interchangeable>=16.0dev,<16.1dev',
         'odoo-addon-stock_picking_show_linked>=16.0dev,<16.1dev',
