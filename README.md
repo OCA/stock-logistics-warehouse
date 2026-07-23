@@ -59,6 +59,7 @@ addon | version | maintainers | summary
 [stock_lot_condition](stock_lot_condition/) | 18.0.1.1.0 | <a href='https://github.com/victoralmau'><img src='https://github.com/victoralmau.png' width='32' height='32' style='border-radius:50%;' alt='victoralmau'/></a> | Stock Lot Condition
 [stock_lot_image](stock_lot_image/) | 18.0.1.0.0 | <a href='https://github.com/victoralmau'><img src='https://github.com/victoralmau.png' width='32' height='32' style='border-radius:50%;' alt='victoralmau'/></a> | Stock Lot Image
 [stock_lot_list_price](stock_lot_list_price/) | 18.0.1.0.0 | <a href='https://github.com/victoralmau'><img src='https://github.com/victoralmau.png' width='32' height='32' style='border-radius:50%;' alt='victoralmau'/></a> | Stock Lot List Price
+[stock_lot_multi_image](stock_lot_multi_image/) | 18.0.1.0.0 |  | This module implements the possibility to have multiple images for a stock lot
 [stock_lot_warehouse](stock_lot_warehouse/) | 18.0.1.0.0 | <a href='https://github.com/victoralmau'><img src='https://github.com/victoralmau.png' width='32' height='32' style='border-radius:50%;' alt='victoralmau'/></a> | Stock Lot Warehouse
 [stock_move_common_dest](stock_move_common_dest/) | 18.0.1.0.1 |  | Adds field for common destination moves
 [stock_move_line_lot_link](stock_move_line_lot_link/) | 18.0.1.0.0 |  | Display Lot/SN column on Detailed Operations to allow navigation.
