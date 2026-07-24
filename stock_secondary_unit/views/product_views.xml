@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2018 Tecnativa - Sergio Teruel
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="view_template_property_form" model="ir.ui.view">
+        <field name="name">Product template Secondary Unit</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="stock.view_template_property_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='inventory']" position="inside">
+                <group string="Secondary unit" groups="stock.group_stock_user">
+                    <field
+                        name="stock_secondary_uom_id"
+                        options="{'no_create': True}"
+                    />
+                </group>
+            </xpath>
+            <xpath expr="//field[@name='qty_available']/parent::div" position="after">
+                <label
+                    for="secondary_unit_qty_available"
+                    string="Secondary Quantity"
+                    invisible="not is_storable or  not stock_secondary_uom_id "
+                    groups="stock.group_stock_user"
+                />
+
+                <div
+                    class="o_row"
+                    invisible="not is_storable or  not stock_secondary_uom_id "
+                    groups="stock.group_stock_user"
+                >
+                    <a
+                        type="object"
+                        name="action_open_quants"
+                        invisible="not show_qty_update_button"
+                        groups="stock.group_stock_manager"
+                    >
+                        <field name="secondary_unit_qty_available" readonly="True" />
+                    </a>
+                    <field
+                        name="secondary_unit_qty_available"
+                        invisible="show_qty_update_button"
+                        style="max-width: fit-content;"
+                    />
+                    <field
+                        name="secondary_unit_qty_available"
+                        readonly="True"
+                        groups="!stock.group_stock_manager"
+                        style="max-width: fit-content;"
+                    />
+                    <span name="secondary_uom_span" groups="uom.group_uom">
+                        <field name="secondary_uom_name" class="oe_inline" />
+                    </span>
+                </div>
+            </xpath>
+        </field>
+    </record>
+    <record id="product_template_tree_view" model="ir.ui.view">
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_tree_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='uom_id']" position="after">
+                <field
+                    name="secondary_unit_qty_available"
+                    groups="stock.group_stock_user"
+                />
+                <field
+                    name="stock_secondary_uom_id"
+                    options="{'no_open': True, 'no_create': True}"
+                    groups="stock.group_stock_user"
+                />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="product_product_tree_view" model="ir.ui.view">
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_product_tree_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='uom_id']" position="after">
+                <field
+                    name="secondary_unit_qty_available"
+                    groups="stock.group_stock_user"
+                />
+                <field
+                    name="stock_secondary_uom_id"
+                    options="{'no_open': True, 'no_create': True}"
+                    groups="stock.group_stock_user"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>
