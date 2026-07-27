@@ -8,6 +8,14 @@ class StockQuant(models.Model):
     _inherit = "stock.quant"
 
     vertical_lift_done = fields.Boolean()
+
+    def write(self, vals):
+        # A new inventory date invalidates vertical_lift_done,
+        # even if inventory_date=False
+        if "inventory_date" in vals and "vertical_lift_done" not in vals:
+            vals["vertical_lift_done"] = False
+        return super().write(vals)
+
     # Field used to sort lines by tray on the inventory scan screen, so entire
     # trays are processed one after the other
     vertical_lift_tray_id = fields.Many2one(
