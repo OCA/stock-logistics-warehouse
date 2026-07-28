@@ -6,13 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2026-07-28 08:46+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: stock_picking_location_check
 #. odoo-python
@@ -20,11 +22,12 @@ msgstr ""
 #, python-format
 msgid "A move line location is not related to that of the picking: %s"
 msgstr ""
+"Una ubicazione della riga movimento non è relativa a quella del prelievo: %s"
 
 #. module: stock_picking_location_check
 #: model:ir.model.fields,field_description:stock_picking_location_check.field_stock_picking__allow_location_inconsistency
 msgid "Allow Location Inconsistency"
-msgstr ""
+msgstr "Consente inconsistenza ubicazione"
 
 #. module: stock_picking_location_check
 #: model:ir.model.fields,help:stock_picking_location_check.field_stock_picking__allow_location_inconsistency
@@ -32,8 +35,10 @@ msgid ""
 "If enabled, no error is raised for location inconsistency between picking "
 "and its move lines at the time of validation."
 msgstr ""
+"Se abilitata, non viene evidenziato un errore per inconsistenza ubicazione "
+"tra prelievo e righe movimento al momento della validazione."
 
 #. module: stock_picking_location_check
 #: model:ir.model,name:stock_picking_location_check.model_stock_picking
 msgid "Transfer"
-msgstr ""
+msgstr "Trasferimento"
