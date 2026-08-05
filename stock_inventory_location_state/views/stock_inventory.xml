@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2022 Akretion (https://www.akretion.com).
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="view_inventory_group_form" model="ir.ui.view">
+        <field name="name">stock.inventory.form.inherit</field>
+        <field name="model">stock.inventory</field>
+        <field name="inherit_id" ref="stock_inventory.view_inventory_group_form" />
+        <field name="arch" type="xml">
+            <div name="button_box" position="inside">
+                <button
+                    name="action_open_inventory_locations"
+                    invisible="state not in ('in_progress', 'done')"
+                    type="object"
+                    groups="stock.group_stock_user"
+                    icon="fa-list"
+                    class="oe_stat_button"
+                >
+                    <div class="o_field_widget o_stat_info">
+                        <span class="o_stat_value">
+                            <field
+                            name="done_location_count"
+                            nolabel="1"
+                            class="mr4"
+                        /> / <field name="location_count" nolabel="1" />
+                        </span>
+                        <span class="o_stat_text">Locations</span>
+                    </div>
+                </button>
+            </div>
+        </field>
+    </record>
+</odoo>
