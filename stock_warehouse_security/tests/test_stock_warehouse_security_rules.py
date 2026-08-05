@@ -285,7 +285,7 @@ class TestStockWarehouseAccessWithReceivedPackedGoods(TestStockCommon):
             warehouse = picking.picking_type_id.warehouse_id.name
             picking.move_line_ids.write(
                 {
-                    "result_package_id": cls.env["stock.quant.package"]
+                    "result_package_id": cls.env["stock.package"]
                     .create({"name": f"Dest Pack {warehouse}"})
                     .id,
                     "quantity": 5,
@@ -298,9 +298,7 @@ class TestStockWarehouseAccessWithReceivedPackedGoods(TestStockCommon):
     )
     def test_read_stock_quant_wh2_only(self):
         self.assertEqual(
-            self.env["stock.quant.package"]
-            .search([])
-            .mapped("location_id.warehouse_id"),
+            self.env["stock.package"].search([]).mapped("location_id.warehouse_id"),
             (self.warehouse_2),
         )
 
@@ -309,9 +307,7 @@ class TestStockWarehouseAccessWithReceivedPackedGoods(TestStockCommon):
     )
     def test_read_stock_quant_package_wh23(self):
         self.assertEqual(
-            self.env["stock.quant.package"]
-            .search([])
-            .mapped("location_id.warehouse_id"),
+            self.env["stock.package"].search([]).mapped("location_id.warehouse_id"),
             (self.warehouse_2 | self.warehouse_3),
         )
 
@@ -321,7 +317,7 @@ class TestStockWarehouseAccessWithReceivedPackedGoods(TestStockCommon):
     @allowed_companies()
     def test_read_stock_quant_package_wh12(self):
         self.assertEqual(
-            self.env["stock.quant.package"]
+            self.env["stock.package"]
             .search([("location_id.warehouse_id", "!=", self.warehouse_0.id)])
             .mapped("location_id.warehouse_id"),
             (self.warehouse_1 | self.warehouse_2),

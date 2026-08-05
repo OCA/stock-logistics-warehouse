@@ -1,5 +1,3 @@
-from decorator import decorator
-
 from odoo.tests.common import TransactionCase
 
 
@@ -24,29 +22,31 @@ def allowed_companies():
         self.env["some.model"].search([])
     """
 
-    @decorator
-    def wrapper(func, *args, **kwargs):
-        self = args[0]
+    def decorator(func):
+        def wrapper(*args, **kwargs):
+            self = args[0]
 
-        previous_allowed_company_ids = self.env.context.get("allowed_company_ids")
-        try:
-            self.env = self.env(
-                context=dict(
-                    self.env.context,
-                    # company_id=self.env.user.company_ids[0].id,
-                    allowed_company_ids=self.env.user.company_ids.ids,
+            previous_allowed_company_ids = self.env.context.get("allowed_company_ids")
+            try:
+                self.env = self.env(
+                    context=dict(
+                        self.env.context,
+                        # company_id=self.env.user.company_ids[0].id,
+                        allowed_company_ids=self.env.user.company_ids.ids,
+                    )
                 )
-            )
-            func(*args, **kwargs)
-        finally:
-            self.env = self.env(
-                context=dict(
-                    self.env.context,
-                    allowed_company_ids=previous_allowed_company_ids,
+                func(*args, **kwargs)
+            finally:
+                self.env = self.env(
+                    context=dict(
+                        self.env.context,
+                        allowed_company_ids=previous_allowed_company_ids,
+                    )
                 )
-            )
 
-    return wrapper
+        return wrapper
+
+    return decorator
 
 
 class TestStockCommon(TransactionCase):
@@ -92,7 +92,7 @@ class TestStockCommon(TransactionCase):
             {
                 "name": "unlimited multi warehouse user",
                 "login": "stock_user_c1_wh12",
-                "groups_id": [(6, 0, [cls.env.ref("stock.group_stock_user").id])],
+                "group_ids": [(6, 0, [cls.env.ref("stock.group_stock_user").id])],
                 "warehouse_ids": [],
                 "company_ids": [(6, 0, cls.company_1.ids)],
             }
@@ -101,7 +101,7 @@ class TestStockCommon(TransactionCase):
             {
                 "name": "Limited warehouse user",
                 "login": "stock_user_c12_wh2",
-                "groups_id": [(6, 0, [cls.env.ref("stock.group_stock_user").id])],
+                "group_ids": [(6, 0, [cls.env.ref("stock.group_stock_user").id])],
                 "warehouse_ids": [(6, 0, cls.warehouse_2.ids)],
                 "company_ids": [(6, 0, (cls.company_1 | cls.company_2).ids)],
             }
@@ -110,7 +110,7 @@ class TestStockCommon(TransactionCase):
             {
                 "name": "Limited warehouse user",
                 "login": "stock_user_c12_wh23",
-                "groups_id": [(6, 0, [cls.env.ref("stock.group_stock_user").id])],
+                "group_ids": [(6, 0, [cls.env.ref("stock.group_stock_user").id])],
                 "warehouse_ids": [(6, 0, (cls.warehouse_2 | cls.warehouse_3).ids)],
                 "company_ids": [(6, 0, (cls.company_1 | cls.company_2).ids)],
             }
@@ -179,7 +179,6 @@ class TestStockCommon(TransactionCase):
         )
         env["stock.move"].with_company(warehouse.company_id).create(
             {
-                "name": "a move",
                 "product_id": cls.product.id,
                 "product_uom_qty": 5.0,
                 "product_uom": cls.product.uom_id.id,
