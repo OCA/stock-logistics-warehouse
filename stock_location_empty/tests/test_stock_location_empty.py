@@ -14,16 +14,30 @@ class TestStockLocationChildren(BaseCommon):
                 "usage": "internal",
             }
         )
-        cls.stock_quant1 = cls.env["stock.quant"].create(
+        product_1 = cls.env["product.product"].create(
             {
-                "product_id": cls.env.ref("product.product_delivery_01").id,
+                "name": "Test Product 1",
+                "type": "consu",
+                "is_storable": True,
+            }
+        )
+        product_2 = cls.env["product.product"].create(
+            {
+                "name": "Test Product 2",
+                "type": "consu",
+                "is_storable": True,
+            }
+        )
+        cls.env["stock.quant"].create(
+            {
+                "product_id": product_1.id,
                 "location_id": cls.stock_input.id,
                 "quantity": 60,
             }
         )
-        cls.stock_quant1 = cls.env["stock.quant"].create(
+        cls.env["stock.quant"].create(
             {
-                "product_id": cls.env.ref("product.product_delivery_02").id,
+                "product_id": product_2.id,
                 "location_id": cls.stock_input.id,
                 "quantity": 50,
             }
@@ -38,5 +52,4 @@ class TestStockLocationChildren(BaseCommon):
         record_search = self.env["stock.location"].search(
             [("stock_amount", "in", [110, 111])]
         )
-        all_record = self.env["stock.location"].search([])
-        self.assertEqual(record_search, all_record)
+        self.assertEqual(record_search, self.stock_input)

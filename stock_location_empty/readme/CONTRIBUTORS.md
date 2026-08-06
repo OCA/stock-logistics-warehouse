@@ -6,3 +6,5 @@
 - [Trobz](https://trobz.com):
 
   > - Son Ho \<<sonhd@trobz.com>\>
+
+- Alejandro Parrales \<<alejandro17parrales@gmail.com>\>

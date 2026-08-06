@@ -1,6 +1,7 @@
 # Copyright 2018 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from odoo import fields, models
+from odoo.fields import Domain
 from odoo.tools import SQL
 
 
@@ -13,7 +14,7 @@ class StockLocation(models.Model):
 
     def _search_location_amount(self, operator, value):
         if operator not in ("=", "!=", "<", "<=", ">", ">="):
-            return []
+            return NotImplemented
         self.env.cr.execute(
             SQL(
                 """
@@ -28,7 +29,7 @@ class StockLocation(models.Model):
         )
         res = self.env.cr.fetchall()
         ids = [row[0] for row in res]
-        return [("id", "in", ids)]
+        return Domain("id", "in", ids)
 
     def _compute_location_amount(self):
         self.env.cr.execute(
