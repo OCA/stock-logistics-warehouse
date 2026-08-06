@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2022 Akretion (https://www.akretion.com).
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="view_stock_inventory_location_search" model="ir.ui.view">
+        <field name="name">stock.inventory.location.search</field>
+        <field name="model">stock.inventory.location</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="location_id" />
+                <separator />
+                <filter
+                    name="pending"
+                    string="Pending"
+                    domain="[('state', '=', 'pending')]"
+                />
+                <filter
+                    name="started"
+                    string="Started"
+                    domain="[('state', '=', 'started')]"
+                />
+                <filter name="done" string="Done" domain="[('state', '=', 'done')]" />
+                <group name="groupby">
+                    <filter
+                        name="state_groupby"
+                        string="State"
+                        context="{'group_by': 'state'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+    <record id="view_stock_inventory_location_tree" model="ir.ui.view">
+        <field name="name">stock.inventory.location.list</field>
+        <field name="model">stock.inventory.location</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="inventory_id" />
+                <field name="location_id" />
+                <button
+                    type="object"
+                    name="action_view_inventory_adjustment"
+                    string="Inventory Lines"
+                    invisible="state not in ('started', 'done')"
+                    icon="fa-eye"
+                />
+                <button
+                    type="object"
+                    name="action_start"
+                    string="Start"
+                    invisible="state != 'pending'"
+                    icon="fa-play"
+                />
+                <button
+                    type="object"
+                    name="action_done"
+                    string="Done"
+                    invisible="state != 'started'"
+                    icon="fa-check"
+                />
+                <button
+                    type="object"
+                    name="action_reopen"
+                    string="Re-open"
+                    invisible="state != 'done'"
+                    icon="fa-undo"
+                />
+                <field
+                    name="state"
+                    widget="badge"
+                    decoration-info="state == 'pending'"
+                    decoration-warning="state == 'started'"
+                    decoration-success="state == 'done'"
+                />
+            </list>
+        </field>
+    </record>
+</odoo>
