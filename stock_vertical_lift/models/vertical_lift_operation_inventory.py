@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import api, fields, models
-from odoo.tools import float_compare, float_is_zero
+from odoo.tools import float_is_zero
 
 # TODO handle autofocus + easy way to validate for the input field
 
@@ -237,16 +237,11 @@ class VerticalLiftOperationInventory(models.Model):
         quant = self.quant_id
         if quant and not quant.vertical_lift_done:
             quant.vertical_lift_done = True
-            if (
-                float_compare(
-                    self.quantity_input,
-                    quant.quantity,
-                    precision_rounding=quant.product_uom_id.rounding,
-                )
-                != 0
-            ):
-                quant.inventory_quantity = self.quantity_input
-                quant._apply_inventory()
+            # Apply even when the count matches the on-hand quantity: this is
+            # what reschedules `inventory_date` and leaves a trace in the
+            # inventory history, exactly like Odoo's own Physical Inventory.
+            quant.inventory_quantity = self.quantity_input
+            quant._apply_inventory()
             self.quantity_input = self.last_quantity_input = 0.0
         return True
 
