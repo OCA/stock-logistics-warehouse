@@ -33,22 +33,30 @@ Stock Lot Warranty
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
 This module extends the stock.lot model to manage customer and vendor
-warranty dates for serial-tracked products.
+warranty dates on lots and serial numbers.
 
-- Vendor warranty: When a product is received from a vendor, the vendor
-  warranty start and end dates are automatically computed based on the
-  receipt date and the vendor warranty settings on the product. If the
-  product is returned to the vendor, the warranty dates are cleared.
+The warranty dates are automatically computed for serial-tracked
+products only, since a lot can be received or delivered on several
+different dates and there is no single date the whole lot could derive
+its warranty from. For any other tracking type the dates are still shown
+on the lot, so that they can be filled in manually.
 
-- Customer warranty: When a product is delivered to a customer, the
-  customer warranty start and end dates are automatically computed based
-  on the delivery date and the product’s customer warranty settings. If
-  the product is returned by the customer, the warranty dates are
-  cleared, and they are recalculated if the product is sold again.
+- Vendor warranty: When a serial-tracked product is received from a
+  vendor, the vendor warranty start and end dates are automatically
+  computed based on the receipt date and the vendor warranty settings on
+  the product. If the product is returned to the vendor, the warranty
+  dates are cleared.
 
-This module also allows users to manually edit warranty dates directly
-on the lot/serial form, with all changes logged in the chatter for full
-traceability.
+- Customer warranty: When a serial-tracked product is delivered to a
+  customer, the customer warranty start and end dates are automatically
+  computed based on the delivery date and the product’s customer
+  warranty settings. If the product is returned by the customer, the
+  warranty dates are cleared, and they are recalculated if the product
+  is sold again.
+
+Users can always edit the warranty dates manually on the lot/serial
+form, whatever the tracking type, with all changes logged in the chatter
+for full traceability.
 
 The logic is the most basic logic for warranty management, and has been
 implemented in different hook methods, allowing other modules to easily

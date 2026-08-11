@@ -295,3 +295,51 @@ class TestStockLotWarranty(TransactionCase):
         move_line._action_done()
         self.assertFalse(self.lot_lot.customer_warranty_start_date)
         self.assertFalse(self.lot_lot.customer_warranty_end_date)
+
+    def test_manual_warranty_dates_on_non_serial_lot(self):
+        """Dates entered by hand on a lot are kept, and a delivery does not
+        touch them: the automatic computation is limited to serial numbers."""
+        start_date = date(2026, 1, 1)
+        end_date = date(2029, 1, 1)
+        self.lot_lot.write(
+            {
+                "customer_warranty_start_date": start_date,
+                "customer_warranty_end_date": end_date,
+            }
+        )
+        self.assertEqual(self.lot_lot.customer_warranty_start_date, start_date)
+        self.assertEqual(self.lot_lot.customer_warranty_end_date, end_date)
+
+        picking = self.Picking.create(
+            {
+                "partner_id": self.partner.id,
+                "picking_type_id": self.env.ref("stock.picking_type_out").id,
+                "location_id": self.stock_loc.id,
+                "location_dest_id": self.customer_loc.id,
+            }
+        )
+        move = self.Move.create(
+            {
+                "product_id": self.product_lot.id,
+                "product_uom_qty": 1,
+                "product_uom": self.Uom.id,
+                "picking_id": picking.id,
+                "location_id": self.stock_loc.id,
+                "location_dest_id": self.customer_loc.id,
+            }
+        )
+        move_line = self.MoveLine.create(
+            {
+                "move_id": move.id,
+                "product_id": self.product_lot.id,
+                "lot_id": self.lot_lot.id,
+                "location_id": self.stock_loc.id,
+                "location_dest_id": self.customer_loc.id,
+                "quantity": 1,
+                "date": fields.Date.context_today(self),
+            }
+        )
+        move_line._action_done()
+
+        self.assertEqual(self.lot_lot.customer_warranty_start_date, start_date)
+        self.assertEqual(self.lot_lot.customer_warranty_end_date, end_date)
