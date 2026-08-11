@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2026-06-25 11:42+0000\n"
+"PO-Revision-Date: 2026-08-11 05:13+0000\n"
 "Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: none\n"
 "Language: sl\n"
@@ -92,7 +92,7 @@ msgstr "Proizvod"
 #. module: stock_lot_catalog
 #: model:ir.model.fields,field_description:stock_lot_catalog.field_stock_lot__product_image_128
 msgid "Product Image 128"
-msgstr ""
+msgstr "Slika proizvoda 128"
 
 #. module: stock_lot_catalog
 #. odoo-javascript
