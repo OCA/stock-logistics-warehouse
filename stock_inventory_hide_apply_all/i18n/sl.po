@@ -6,7 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2026-08-11 07:46+0000\n"
+"Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: none\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
@@ -14,11 +15,12 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
 "n%100==4 ? 2 : 3;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: stock_inventory_hide_apply_all
 #: model:res.groups,name:stock_inventory_hide_apply_all.group_stock_apply_all
 msgid "Apply All Inventory Adjustments"
-msgstr ""
+msgstr "Uveljavi vse popravke zalog"
 
 #. module: stock_inventory_hide_apply_all
 #: model:res.groups,comment:stock_inventory_hide_apply_all.group_stock_apply_all
@@ -26,3 +28,5 @@ msgid ""
 "Users in this group can bulk-apply inventory adjustments using the \"Apply "
 "All\" button on the inventory adjustment list."
 msgstr ""
+"Uporabniki v tej skupini lahko popravke zaloge uporabijo v večjem obsegu s "
+"pomočjo gumba \"Uveljavi vse\" na seznamu popravkov zaloge."
