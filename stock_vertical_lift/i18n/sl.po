@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2026-06-25 13:05+0000\n"
+"PO-Revision-Date: 2026-08-11 05:13+0000\n"
 "Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: none\n"
 "Language: sl\n"
@@ -341,7 +341,7 @@ msgstr "Način:"
 #: code:addons/stock_vertical_lift/models/vertical_lift_operation_pick.py:0
 #: code:addons/stock_vertical_lift/models/vertical_lift_operation_put.py:0
 msgid "Move Lines"
-msgstr ""
+msgstr "Postavke"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_command__name
@@ -431,7 +431,7 @@ msgstr "Operacije"
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_shuttle__number_of_ops
 msgid "Operations to Process"
-msgstr ""
+msgstr "Operacije za obdelavo"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_inventory__package_id
@@ -560,7 +560,7 @@ msgstr "Shrani"
 #. module: stock_vertical_lift
 #: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_operation_base_screen_view
 msgid "Save & Release"
-msgstr ""
+msgstr "Shrani in sprosti"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_res_config_settings__vertical_lift_secret
