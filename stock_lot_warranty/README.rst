@@ -35,28 +35,31 @@ Stock Lot Warranty
 This module extends the stock.lot model to manage customer and vendor
 warranty dates on lots and serial numbers.
 
-The warranty dates are automatically computed for serial-tracked
-products only, since a lot can be received or delivered on several
-different dates and there is no single date the whole lot could derive
-its warranty from. For any other tracking type the dates are still shown
-on the lot, so that they can be filled in manually.
+The dates are shown and editable on every lot, whatever the tracking
+type of its product. The automatic computation below only runs for
+serial-tracked products, since a lot can be received or delivered on
+several different dates and there is no single date the whole lot could
+derive its warranty from.
 
 - Vendor warranty: When a serial-tracked product is received from a
   vendor, the vendor warranty start and end dates are automatically
   computed based on the receipt date and the vendor warranty settings on
-  the product. If the product is returned to the vendor, the warranty
+  the product. If no warranty duration is configured, nothing is
+  computed and no date is written, so previous manual values, if any,
+  are preserved. If the product is returned to the vendor, the warranty
   dates are cleared.
 
 - Customer warranty: When a serial-tracked product is delivered to a
   customer, the customer warranty start and end dates are automatically
   computed based on the delivery date and the product’s customer
-  warranty settings. If the product is returned by the customer, the
+  warranty settings. If no warranty duration is configured, nothing is
+  computed and no date is written, so previous manual values, if any,
+  are preserved. If the product is returned by the customer, the
   warranty dates are cleared, and they are recalculated if the product
   is sold again.
 
 Users can always edit the warranty dates manually on the lot/serial
-form, whatever the tracking type, with all changes logged in the chatter
-for full traceability.
+form, with all changes logged in the chatter for full traceability.
 
 The logic is the most basic logic for warranty management, and has been
 implemented in different hook methods, allowing other modules to easily

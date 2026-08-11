@@ -42,10 +42,16 @@ class StockLot(models.Model):
         warranty duration on the product."""
         self.ensure_one()
         product = self.product_id
-        self.customer_warranty_start_date = start_date
-        self.customer_warranty_end_date = self._compute_warranty_end_date(
+        end_date = self._compute_warranty_end_date(
             start_date, product.warranty, product.warranty_type
         )
+        if not end_date:
+            # No warranty duration configured on the product: there is nothing to
+            # compute, so leave the lot alone instead of clearing dates that may
+            # have been filled in by hand.
+            return
+        self.customer_warranty_start_date = start_date
+        self.customer_warranty_end_date = end_date
 
     def _set_vendor_warranty(self, start_date, vendor, quantity):
         """Set the vendor warranty dates based on the start date and the vendor
@@ -57,13 +63,17 @@ class StockLot(models.Model):
             quantity=quantity,
             date=start_date,
         )
-        self.vendor_warranty_start_date = start_date
+        end_date = False
         if seller and seller.warranty_duration:
-            self.vendor_warranty_end_date = self._compute_warranty_end_date(
+            end_date = self._compute_warranty_end_date(
                 start_date, seller.warranty_duration, "month"
             )
-        else:
-            self.vendor_warranty_end_date = False
+        if not end_date:
+            # No warranty duration on the supplier info: same as above, keep any
+            # dates already on the lot rather than replacing them with nothing.
+            return
+        self.vendor_warranty_start_date = start_date
+        self.vendor_warranty_end_date = end_date
 
     def _update_customer_warranty_on_delivery(self, line):
         """Hook called when the lot is delivered to a customer.

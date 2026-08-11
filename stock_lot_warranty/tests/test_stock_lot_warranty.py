@@ -343,3 +343,54 @@ class TestStockLotWarranty(TransactionCase):
 
         self.assertEqual(self.lot_lot.customer_warranty_start_date, start_date)
         self.assertEqual(self.lot_lot.customer_warranty_end_date, end_date)
+
+    def test_manual_dates_kept_when_no_duration_configured(self):
+        """A delivery must not wipe dates entered by hand when the product has no
+        warranty duration: the computation yields nothing, so there is nothing to
+        write and the existing dates are left untouched."""
+        product = self.Product.create(
+            {
+                "name": "Serial Product Without Warranty Duration",
+                "type": "consu",
+                "tracking": "serial",
+                "uom_id": self.Uom.id,
+                "warranty": 0,
+            }
+        )
+        lot = self.Lot.create({"product_id": product.id, "name": "SN-NO-DURATION"})
+        end_date = date(2029, 3, 2)
+        lot.write({"customer_warranty_end_date": end_date})
+
+        picking = self.Picking.create(
+            {
+                "partner_id": self.partner.id,
+                "picking_type_id": self.env.ref("stock.picking_type_out").id,
+                "location_id": self.stock_loc.id,
+                "location_dest_id": self.customer_loc.id,
+            }
+        )
+        move = self.Move.create(
+            {
+                "product_id": product.id,
+                "product_uom_qty": 1,
+                "product_uom": self.Uom.id,
+                "picking_id": picking.id,
+                "location_id": self.stock_loc.id,
+                "location_dest_id": self.customer_loc.id,
+            }
+        )
+        move_line = self.MoveLine.create(
+            {
+                "move_id": move.id,
+                "product_id": product.id,
+                "lot_id": lot.id,
+                "location_id": self.stock_loc.id,
+                "location_dest_id": self.customer_loc.id,
+                "quantity": 1,
+                "date": fields.Date.context_today(self),
+            }
+        )
+        move_line._action_done()
+
+        self.assertEqual(lot.customer_warranty_end_date, end_date)
+        self.assertFalse(lot.customer_warranty_start_date)

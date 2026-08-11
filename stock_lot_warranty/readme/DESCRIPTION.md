@@ -8,10 +8,14 @@ could derive its warranty from.
 
 * Vendor warranty: When a serial-tracked product is received from a vendor, the vendor warranty start and end dates
 are automatically computed based on the receipt date and the vendor warranty settings on the product.
+If no warranty duration is configured, nothing is computed and no date is written, so previous
+manual values, if any, are preserved.
 If the product is returned to the vendor, the warranty dates are cleared.
 
 * Customer warranty: When a serial-tracked product is delivered to a customer, the customer warranty start and end
 dates are automatically computed based on the delivery date and the product’s customer warranty settings.
+If no warranty duration is configured, nothing is computed and no date is written, so previous
+manual values, if any, are preserved.
 If the product is returned by the customer, the warranty dates are cleared, and they are recalculated if
 the product is sold again.
 
