@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-03-31 08:35+0000\n"
-"PO-Revision-Date: 2026-07-14 04:35+0000\n"
+"PO-Revision-Date: 2026-08-11 05:13+0000\n"
 "Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: Slovenian (https://www.transifex.com/oca/teams/23907/sl/)\n"
 "Language: sl\n"
@@ -23,7 +23,7 @@ msgstr ""
 #. module: stock_mts_mto_rule
 #: model:ir.model.fields,field_description:stock_mts_mto_rule.field_stock_rule__action
 msgid "Action"
-msgstr ""
+msgstr "Ukrep"
 
 #. module: stock_mts_mto_rule
 #: model:ir.model.fields.selection,name:stock_mts_mto_rule.selection__stock_rule__action__split_procurement
@@ -49,6 +49,8 @@ msgid ""
 "Inconsistency between the source locations of the mts and mto rules linked "
 "to the procurement rule: %s! It should be the same."
 msgstr ""
+"Nedoslednost med izvornimi lokacijami MTS in MTO pravil povezanih s tem "
+"oskrbovalnim pravilom: %s! Morale bi biti iste."
 
 #. module: stock_mts_mto_rule
 #: model:ir.model.fields,field_description:stock_mts_mto_rule.field_stock_rule__mto_rule_id
@@ -85,7 +87,7 @@ msgstr "Naredi po naročilu + Naredi na zalogo"
 #: code:addons/stock_mts_mto_rule/models/stock_rule.py:0
 #, python-format
 msgid "No MTS or MTO rule configured on procurement rule: %s!"
-msgstr ""
+msgstr "Ni nastavljenega MTS ali MTO pravila za oskrbovalno pravilo: %s!"
 
 #. module: stock_mts_mto_rule
 #: model:ir.model,name:stock_mts_mto_rule.model_stock_rule
