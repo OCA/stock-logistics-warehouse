@@ -84,8 +84,8 @@ class TestInventory(VerticalLiftCase):
 
     @mute_logger(SHUTTLE_LOGGER)
     def test_reschedule_requeues_done_quant(self):
-        # Once counted on the shuttle a quant is flagged done; rescheduling a new
-        # count must clear that flag so it is queued again.
+        # Counting reschedules the quant to a later date, so it leaves the
+        # queue; scheduling a new count for today must put it back.
         stock_quant = self._create_stock_quants(
             [(self.location_1a_x1y1, self.product_socks)]
         )[0]
@@ -93,7 +93,7 @@ class TestInventory(VerticalLiftCase):
         operation = self._open_screen("inventory")
         operation.quantity_input = 10.0
         operation.button_save()
-        self.assertTrue(stock_quant.vertical_lift_done)
+        self.assertEqual(operation.number_of_ops, 0)
 
         # schedule a new count
         stock_quant.with_context(inventory_mode=True).write(
@@ -136,7 +136,7 @@ class TestInventory(VerticalLiftCase):
         # noop because we have no further lines
         self.assertEqual(operation.state, "noop")
         self.assertFalse(operation.quant_id)
-        self.assertTrue(stock_quant.vertical_lift_done)
+        self.assertEqual(operation.number_of_ops, 0)
         expected_result = {
             "effect": {
                 "fadeout": "slow",
@@ -146,6 +146,27 @@ class TestInventory(VerticalLiftCase):
             }
         }
         self.assertEqual(result, expected_result)
+
+    @mute_logger(SHUTTLE_LOGGER)
+    def test_identical_quantity_is_applied(self):
+        # Counting the same quantity as the on-hand one is still a count: it
+        # must reschedule `inventory_date` and leave a move in the history.
+        stock_quant = self._create_stock_quants(
+            [(self.location_1a_x1y1, self.product_socks)]
+        )[0]
+        self._update_qty_in_location(self.location_1a_x1y1, self.product_socks, 10)
+        today = fields.Date.context_today(stock_quant)
+        operation = self._open_screen("inventory")
+        operation.quantity_input = 10.0
+        with RecordCapturer(self.env["stock.move"], []) as capt:
+            operation.button_save()
+        move = capt.records
+        self.assertEqual(move.state, "done")
+        self.assertEqual(move.quantity, 0.0)
+        self.assertEqual(stock_quant.quantity, 10.0)
+        self.assertFalse(stock_quant.inventory_quantity_set)
+        self.assertGreater(stock_quant.inventory_date, today)
+        self.assertEqual(self.location_1a_x1y1.last_inventory_date, today)
 
     @mute_logger(SHUTTLE_LOGGER)
     def test_wrong_quantity(self):
