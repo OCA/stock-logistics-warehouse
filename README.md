@@ -41,6 +41,7 @@ addon | version | maintainers | summary
 [stock_location_position](stock_location_position/) | 17.0.1.0.0 |  | Add coordinate attributes on stock location.
 [stock_location_zone](stock_location_zone/) | 17.0.1.0.0 |  | Classify locations with zones.
 [stock_move_location](stock_move_location/) | 17.0.1.0.0 |  | This module allows to move all stock in a stock location to an other one.
+[stock_mts_mto_mrp_rule](stock_mts_mto_mrp_rule/) | 17.0.1.0.0 | <a href='https://github.com/geomer198'><img src='https://github.com/geomer198.png' width='32' height='32' style='border-radius:50%;' alt='geomer198'/></a> <a href='https://github.com/CetmixGitDrone'><img src='https://github.com/CetmixGitDrone.png' width='32' height='32' style='border-radius:50%;' alt='CetmixGitDrone'/></a> | Stock MTS+MTO MRP Rule
 [stock_mts_mto_rule](stock_mts_mto_rule/) | 17.0.1.0.1 |  | Add a MTS+MTO route
 [stock_packaging_calculator](stock_packaging_calculator/) | 17.0.1.1.0 |  | Compute product quantity to pick by packaging
 [stock_picking_procure_method](stock_picking_procure_method/) | 17.0.1.0.0 |  | Allows to force the procurement method from the picking
