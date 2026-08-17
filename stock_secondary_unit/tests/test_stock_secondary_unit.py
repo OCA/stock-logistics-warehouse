@@ -12,7 +12,7 @@ class TestProductSecondaryUnit(BaseCommon):
     def setUpClass(cls):
         super().setUpClass()
         # Active multiple units of measure security group for user
-        cls.env.user.groups_id = [(4, cls.env.ref("uom.group_uom").id)]
+        cls.env.user.group_ids = [Command.link(cls.env.ref("uom.group_uom").id)]
         cls.StockPicking = cls.env["stock.picking"]
         cls.warehouse = cls.env.ref("stock.warehouse0")
         cls.location_supplier = cls.env.ref("stock.stock_location_suppliers")
@@ -37,7 +37,6 @@ class TestProductSecondaryUnit(BaseCommon):
             {
                 "name": "test",
                 "uom_id": cls.product_uom_kg.id,
-                "uom_po_id": cls.product_uom_kg.id,
                 "type": "consu",
                 "is_storable": True,
                 "secondary_uom_ids": [
@@ -115,7 +114,6 @@ class TestProductSecondaryUnit(BaseCommon):
         product1 = self.product_template.product_variant_ids[0]
         move_vals = {
             "product_id": product1.id,
-            "name": product1.display_name,
             "secondary_uom_id": product1.product_tmpl_id.secondary_uom_ids[0].id,
             "product_uom": product1.uom_id.id,
             "product_uom_qty": 10.0,
@@ -126,9 +124,9 @@ class TestProductSecondaryUnit(BaseCommon):
             "location_id": self.location_supplier.id,
             "location_dest_id": self.location_stock.id,
             "picking_type_id": self.picking_type_in.id,
-            "move_ids_without_package": [
-                (0, None, move_vals),
-                (0, None, move_vals),
+            "move_ids": [
+                Command.create(move_vals),
+                Command.create(move_vals),
             ],  # 2 moves
         }
         delivery_order = StockPicking.create(do_vals)
@@ -152,7 +150,7 @@ class TestProductSecondaryUnit(BaseCommon):
                 default_picking_type_id=self.picking_type_out.id,
             )
         ) as picking_form:
-            with picking_form.move_ids_without_package.new() as move:
+            with picking_form.move_ids.new() as move:
                 move.product_id = product
                 move.secondary_uom_qty = 1
                 move.secondary_uom_id = product.product_tmpl_id.secondary_uom_ids[0]
@@ -172,7 +170,7 @@ class TestProductSecondaryUnit(BaseCommon):
 
         picking = picking_form.save()
         picking.action_confirm()
-        stock_move_line = picking.move_line_ids_without_package
+        stock_move_line = picking.move_line_ids
         stock_move_line.product_id = product
         stock_move_line.product_uom_id = stock_move_line.product_id.uom_id.id
         stock_move_line.secondary_uom_qty = 1
@@ -193,11 +191,11 @@ class TestProductSecondaryUnit(BaseCommon):
                 default_picking_type_id=self.picking_type_out.id,
             )
         ) as picking_form:
-            with picking_form.move_ids_without_package.new() as move:
+            with picking_form.move_ids.new() as move:
                 move.product_id = product
                 move.secondary_uom_qty = 1
                 move.secondary_uom_id = product.product_tmpl_id.secondary_uom_ids[0]
-            with picking_form.move_ids_without_package.new() as move:
+            with picking_form.move_ids.new() as move:
                 move.product_id = product
                 move.secondary_uom_qty = 1
                 move.secondary_uom_id = product.product_tmpl_id.secondary_uom_ids[1]
@@ -213,11 +211,11 @@ class TestProductSecondaryUnit(BaseCommon):
                 default_picking_type_id=self.picking_type_out.id,
             )
         ) as picking_form:
-            with picking_form.move_ids_without_package.new() as move:
+            with picking_form.move_ids.new() as move:
                 move.product_id = product
                 move.secondary_uom_qty = 1
                 move.secondary_uom_id = product.product_tmpl_id.secondary_uom_ids[0]
-            with picking_form.move_ids_without_package.new() as move:
+            with picking_form.move_ids.new() as move:
                 move.product_id = product
                 move.secondary_uom_qty = 1
                 move.secondary_uom_id = product.product_tmpl_id.secondary_uom_ids[0]

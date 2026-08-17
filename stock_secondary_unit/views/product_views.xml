@@ -25,13 +25,14 @@
         />
         <field name="arch" type="xml">
             <xpath
-                expr="//div[@name='button_box']//button[@name='action_update_quantity_on_hand']"
+                expr="//div[@name='button_box']//button[@name='action_product_tmpl_forecast_report']"
                 position="after"
             >
                 <button
                     type="object"
-                    name="action_update_quantity_on_hand"
-                    invisible="not is_storable"
+                    name="action_product_tmpl_forecast_report"
+                    invisible="not show_forecasted_qty_status_button"
+                    context="{'default_product_tmpl_id': id}"
                     class="oe_stat_button"
                     icon="fa-building-o"
                     groups="stock.group_stock_user"
@@ -63,17 +64,17 @@
         <field name="inherit_id" ref="stock.product_form_view_procurement_button" />
         <field name="arch" type="xml">
             <xpath
-                expr="//div[@name='button_box']//button[@name='action_update_quantity_on_hand']"
+                expr="//div[@name='button_box']//button[@name='action_product_forecast_report']"
                 position="after"
             >
                 <button
                     type="object"
-                    name="action_update_quantity_on_hand"
-                    invisible="not is_storable"
+                    name="action_product_forecast_report"
+                    invisible="not show_forecasted_qty_status_button"
                     class="oe_stat_button"
                     icon="fa-building-o"
                     groups="stock.group_stock_user"
-                    context="{'product_variant': True}"
+                    context="{'product_variant': True, 'default_product_id': id}"
                 >
                     <div class="o_field_widget o_stat_info">
                         <span class="o_stat_value d-flex gap-1">
@@ -105,11 +106,13 @@
                 <field
                     name="secondary_unit_qty_available"
                     groups="stock.group_stock_user"
+                    optional="show"
                 />
                 <field
                     name="stock_secondary_uom_id"
                     options="{'no_open': True, 'no_create': True}"
                     groups="stock.group_stock_user"
+                    optional="show"
                 />
             </xpath>
         </field>
@@ -123,11 +126,13 @@
                 <field
                     name="secondary_unit_qty_available"
                     groups="stock.group_stock_user"
+                    optional="show"
                 />
                 <field
                     name="stock_secondary_uom_id"
                     options="{'no_open': True, 'no_create': True}"
                     groups="stock.group_stock_user"
+                    optional="show"
                 />
             </xpath>
         </field>
