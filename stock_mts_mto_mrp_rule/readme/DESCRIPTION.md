@@ -1,0 +1,1 @@
+This module enhances the procurement management for Manufacturing Order (MRP) components when stock is partial. It extends the functionality of the base stock_mts_mto_rule module to automatically split a component's stock move into two: one Make to Stock (MTS) for the available quantity and another Make to Order (MTO) for the missing quantity.
