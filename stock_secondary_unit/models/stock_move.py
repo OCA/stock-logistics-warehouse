@@ -18,6 +18,7 @@ class StockMove(models.Model):
         copy=True,
         precompute=True,
     )
+    secondary_uom_qty = fields.Float(copy=False)
 
     @api.depends("secondary_uom_qty", "secondary_uom_id")
     def _compute_product_uom_qty(self):
