@@ -1,13 +1,12 @@
 # Copyright 2020 Camptocamp SA
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl)
-from odoo.tests import TransactionCase
+from odoo.addons.base.tests.common import BaseCommon
 
 
-class TestCommonMoveDest(TransactionCase):
+class TestCommonMoveDest(BaseCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
         cls.partner_delta = cls.env.ref("base.res_partner_4")
         cls.warehouse = cls.env.ref("stock.warehouse0")
         cls.warehouse.write({"delivery_steps": "pick_pack_ship"})
