@@ -19,4 +19,4 @@ class StockRequestCount(models.TransientModel):
                 self._get_values_to_write()
             )
         else:
-            return super(StockRequestCount, self).action_request_count()
+            return super().action_request_count()
