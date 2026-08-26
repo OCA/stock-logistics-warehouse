@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 from odoo import api, fields, models
 from odoo.exceptions import except_orm
-from odoo.tools import float_compare
+from odoo.tools import float_compare, split_every
 from odoo.tools.translate import _
 
 
@@ -218,7 +218,33 @@ class StockReservation(models.Model):
 
     @api.model
     def assign_waiting_confirmed_reserve_moves(self):
-        reservations_to_assign = self.search(self._get_reservations_to_assign_domain())
-        for reservation in reservations_to_assign:
-            reservation.reserve()
+        """Assign the pending reservations in batches.
+
+        Reserving them one by one in a single transaction is both slow --N
+        rounds of quant queries instead of one per batch-- and fragile: a
+        single failing reservation aborts the whole transaction, so none of
+        them ends up assigned, not even the ones already processed, and
+        there is no retry until the next run.
+
+        Each batch runs in its own savepoint, so a batch that fails is
+        skipped and the sweep goes on with the next one.
+
+        The batch size comes from the ``stock_reserve.assign_batch_size``
+        system parameter, and is 50 when it is not set.
+        """
+        batch_size = int(
+            self.env["ir.config_parameter"]
+            .sudo()
+            .get_param("stock_reserve.assign_batch_size", 50)
+            or 50
+        )
+        # A batch size of 0 would make split_every loop forever.
+        batch_size = max(batch_size, 1)
+        reservations = self.search(self._get_reservations_to_assign_domain())
+        for batch_ids in split_every(batch_size, reservations.ids):
+            try:
+                with self.env.cr.savepoint():
+                    self.browse(batch_ids).reserve()
+            except Exception:  # noqa: BLE001 # pylint: disable=broad-except
+                continue
         return True
