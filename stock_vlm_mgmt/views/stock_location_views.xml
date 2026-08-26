@@ -11,7 +11,7 @@
                     icon="fa-inbox"
                     name="action_view_vlm_tray"
                     type="object"
-                    attrs="{'invisible': [('is_vlm', '=', False)]}"
+                    invisible="not is_vlm"
                 />
                 <button
                     string="VLM Structure"
@@ -19,7 +19,7 @@
                     icon="fa-table"
                     name="action_view_vlm_quants"
                     type="object"
-                    attrs="{'invisible': [('is_vlm', '=', False)]}"
+                    invisible="not is_vlm"
                 />
                 <button
                     string="Release trays"
@@ -27,47 +27,29 @@
                     icon="fa-outdent"
                     name="action_release_vlm_trays"
                     type="object"
-                    attrs="{'invisible': [('is_vlm', '=', False)]}"
+                    invisible="not is_vlm"
                 />
             </div>
             <group name="additional_info" position="inside">
                 <field
                     name="is_vlm"
-                    attrs="{'invisible': [('usage', 'not in', ('inventory', 'internal'))]}"
+                    invisible="usage not in ('inventory', 'internal')"
                 />
-                <field
-                    name="vlm_vendor"
-                    attrs="{'invisible': [('is_vlm', '=', False)]}"
-                />
+                <field name="vlm_vendor" invisible="not is_vlm" />
             </group>
             <xpath expr="//group[@name='additional_info']/.." position="inside">
                 <group
                     string="VLM backend configuration"
                     name="vlm_config"
-                    attrs="{'invisible': [('is_vlm', '=', False)]}"
+                    invisible="not is_vlm"
                 >
-                    <field
-                        name="vlm_hostname"
-                        attrs="{'required': [('is_vlm', '=', True)]}"
-                    />
-                    <field
-                        name="vlm_port"
-                        attrs="{'required': [('is_vlm', '=', True)]}"
-                    />
-                    <field
-                        name="vlm_address"
-                        attrs="{'required': [('is_vlm', '=', True)]}"
-                    />
+                    <field name="vlm_hostname" required="is_vlm" />
+                    <field name="vlm_port" required="is_vlm" />
+                    <field name="vlm_address" required="is_vlm" />
                     <field name="vlm_user" />
                     <field name="vlm_password" password="True" />
-                    <field
-                        name="vlm_removal_strategy"
-                        attrs="{'required': [('is_vlm', '=', True)]}"
-                    />
-                    <field
-                        name="vlm_sequence_id"
-                        attrs="{'required': [('is_vlm', '=', True)]}"
-                    />
+                    <field name="vlm_removal_strategy" required="is_vlm" />
+                    <field name="vlm_sequence_id" required="is_vlm" />
                 </group>
             </xpath>
         </field>

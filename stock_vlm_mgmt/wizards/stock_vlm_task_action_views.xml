@@ -13,18 +13,18 @@
                         name="web_ribbon"
                         title="Done"
                         bg_color="bg-success"
-                        attrs="{'invisible': [('state', '!=', 'done')]}"
+                        invisible="state != 'done'"
                     />
                     <widget
                         name="web_ribbon"
                         title="Skipped"
                         bg_color="bg-warning"
-                        attrs="{'invisible': [('state', '!=', 'skipped')]}"
+                        invisible="state != 'skipped'"
                     />
                     <div
                         class="alert alert-warning"
                         role="alert"
-                        attrs="{'invisible': [('warning', '=', False)]}"
+                        invisible="not warning"
                     >
                         <i class="fa fa-exclamation-triangle" />&amp;nbsp;
                         <field name="warning" />
@@ -32,7 +32,7 @@
                     <div
                         class="alert alert-info"
                         role="alert"
-                        attrs="{'invisible': [('splitted_vlm_task_id', '=', False)]}"
+                        invisible="not splitted_vlm_task_id"
                     >
                         <i class="fa fa-info-circle" />&amp;nbsp;Splitted from&amp;nbsp;
                         <field name="splitted_vlm_task_id" widget="selection" />
@@ -43,7 +43,7 @@
                             string="Start task"
                             type="object"
                             class="btn btn-primary btn-lg"
-                            attrs="{'invisible': [('state', '=', 'done')]}"
+                            invisible="state == 'done'"
                         />&amp;nbsp;
                         <i class="fa fa-info-circle" />&amp;nbsp;
                         <field name="vlm_task_id" readonly="1" widget="selection" />
@@ -51,56 +51,53 @@
                     <group>
                         <group name="quantity">
                             <field name="quantity_pending" />
-                            <field
-                                name="quantity_done"
-                                attrs="{'readonly': [('state', '=', 'done')]}"
-                            />
+                            <field name="quantity_done" readonly="state == 'done'" />
                         </group>
                         <group name="tray">
                             <field name="location_id" widget="selection" />
                             <field
                                 name="tray_id"
                                 domain="[('location_id', '=', location_id)]"
-                                attrs="{'readonly': [('state', '=', 'done')]}"
+                                readonly="state == 'done'"
+                                required="1"
                                 widget="selection"
                             />
                             <field name="pos_x" invisible="1" force_save="1" />
                             <field name="pos_y" invisible="1" force_save="1" />
-                        </group>
-                    </group>
-                    <group>
-                        <group name="position" col="1">
-                            <field
-                                name="tray_matrix"
-                                widget="location_tray_matrix"
-                                options="{'live_cell_edit': True}"
-                                nolabel="1"
-                                attrs="{'readonly': [('state', '=', 'done')]}"
-                            />
-                        </group>
-                        <group name="image">
                             <field
                                 nolabel="1"
                                 name="image_512"
                                 widget="image"
-                                class="vlm_task_image"
+                                class="oe_inline"
                             />
                         </group>
                     </group>
+                    <group>
+                        <group name="position" colspan="2">
+                            <field
+                                name="tray_matrix"
+                                widget="stock_vlm_mgmt_location_tray_matrix"
+                                options="{'live_cell_edit': True}"
+                                nolabel="1"
+                                readonly="state == 'done'"
+                            />
+                        </group>
+                    </group>
+
                     <footer>
                         <button
                             name="action_skip_task"
                             string="Skip"
                             type="object"
                             class="btn btn-secondary"
-                            attrs="{'invisible': [('state', 'in', ['done','skipped'])]}"
+                            invisible="state in ['done','skipped']"
                         />
                         <button
                             name="action_manual_set"
                             string="Manual set"
                             type="object"
                             class="btn btn-secondary"
-                            attrs="{'invisible': [('state', '=', 'done')]}"
+                            invisible="state == 'done'"
                         />
                         <!-- Navigation buttons -->
                         <button
@@ -108,33 +105,19 @@
                             string="🡸 Previous"
                             type="object"
                             class="btn btn-secondary"
-                            attrs="{'invisible': [('previous_vlm_task_id', '=', False)]}"
-                        />
-                        <button
-                            string="🡸 Previous"
-                            disabled="1"
-                            class="btn btn-secondary"
-                            attrs="{'invisible': [('previous_vlm_task_id', '!=', False)]}"
+                            invisible="not previous_vlm_task_id"
                         />
                         <button
                             name="action_next_task"
                             string="Next 🡺"
                             type="object"
                             class="btn btn-primary"
-                            attrs="{'invisible': ['|', ('next_vlm_task_id', '=', False), ('state', 'not in', ['done', 'skipped'])]}"
+                            invisible="not next_vlm_task_id"
                         />
                         <button
-                            name="action_next_task"
-                            string="Next 🡺"
-                            type="object"
+                            string="Close"
                             class="btn btn-secondary"
-                            attrs="{'invisible': ['|', ('next_vlm_task_id', '=', False), ('state', 'in', ['done', 'skipped'])]}"
-                        />
-                        <button
-                            string="Next 🡺"
-                            disabled="1"
-                            class="btn btn-secondary"
-                            attrs="{'invisible': ['|', ('next_vlm_task_id', '!=', False), ('state', '=', 'done')]}"
+                            special="cancel"
                         />
                     </footer>
                 </sheet>

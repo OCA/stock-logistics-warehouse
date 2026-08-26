@@ -15,14 +15,14 @@
                     name="action_open_vlm_task"
                     class="oe_stat_button"
                     icon="fa-rocket"
-                    attrs="{'invisible': [('vlm_task_ids', '=', [])]}"
+                    invisible="not vlm_task_ids"
                 />
             </xpath>
             <xpath expr="//div[hasclass('oe_title')]" position="before">
                 <div
                     class="alert alert-warning h4"
                     role="alert"
-                    attrs="{'invisible': [('has_pending_vlm_tasks', '=', False)]}"
+                    invisible="not has_pending_vlm_tasks"
                 >
 
                     <i class="fa fa-rocket" />&amp;nbsp;

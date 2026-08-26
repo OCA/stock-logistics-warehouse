@@ -57,7 +57,7 @@ class VlmTrayCellPositionMixin(models.AbstractModel):
             )
             tray_matrix = {
                 "selected": [record.pos_x, record.pos_y],
-                "cells": record.tray_type_id._generate_cells_matrix(),
+                "cells": record.tray_id.tray_type_id._generate_cells_matrix(),
                 "first_empty_cell": False,
             }
             for position in cell_not_empty:

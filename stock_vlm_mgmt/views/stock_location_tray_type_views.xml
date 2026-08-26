@@ -11,7 +11,7 @@
                     name="web_ribbon"
                     title="Archived"
                     bg_color="bg-danger"
-                    attrs="{'invisible': [('active', '=', True)]}"
+                    invisible="active"
                 />
                 <label for="name" class="oe_edit_only" />
                 <h1>
@@ -40,7 +40,7 @@
                     <group string="Layout" name="tray_layout">
                         <field
                             name="tray_matrix"
-                            widget="location_tray_matrix"
+                            widget="stock_vlm_mgmt_location_tray_matrix"
                             nolabel="1"
                         />
                     </group>

@@ -1,18 +1,33 @@
 /** @odoo-module **/
 /* Copyright 2024 Tecnativa - David Vidal
    License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).*/
-import {Component, useState} from "@odoo/owl";
+import {Component, useEffect, useState} from "@odoo/owl";
 
-import {_lt} from "@web/core/l10n/translation";
 import {registry} from "@web/core/registry";
 import {standardFieldProps} from "@web/views/fields/standard_field_props";
 import {useService} from "@web/core/utils/hooks";
 
 export class LocationTrayMatrixField extends Component {
+    static template = "stock_vlm_mgmt.location_tray_matrix";
+    static props = {
+        ...standardFieldProps,
+        click_action: {
+            type: String,
+            optional: true,
+        },
+    };
+
     setup() {
-        this.state = useState(this.props.value);
+        super.setup();
+        this.state = useState({matrix: this.props.record.data[this.props.name]});
         this.orm = useService("orm");
         this.action = useService("action");
+        useEffect(
+            () => {
+                this.state.matrix = this.props.record.data[this.props.name];
+            },
+            () => [this.props.record.data[this.props.name]]
+        );
     }
     /**
      *
@@ -26,37 +41,31 @@ export class LocationTrayMatrixField extends Component {
                 return parseInt(x, 10);
             });
         if (this.props.click_action) {
-            const action = this.orm.call(
+            const action = await this.orm.call(
                 this.props.record.resModel,
                 this.props.click_action,
-                [[this.props.record.data.id]],
-                {pos_x: coordinates[0], pos_y: coordinates[1]}
+                [this.props.record.resId],
+                {
+                    context: this.props.record.context || {},
+                    pos_x: coordinates[0],
+                    pos_y: coordinates[1],
+                }
             );
             return this.action.doAction(action);
         }
         // This is for responsiveness
-        this.state.selected = coordinates;
+        this.state.matrix.selected = coordinates;
         // And here we propagate the changes to the field
-        this.props.value.selected = coordinates;
-        this.props.update(this.props.value);
+        const currentValue = this.props.record.data[this.props.name] || {};
+        const updatedValue = {...currentValue, selected: coordinates};
+        this.props.record.update({[this.props.name]: updatedValue});
     }
 }
 
-LocationTrayMatrixField.template = "stock_vlm_mgmt.location_tray_matrix";
-LocationTrayMatrixField.props = {
-    ...standardFieldProps,
-    click_action: {
-        type: String,
-        optional: true,
-    },
-};
-LocationTrayMatrixField.extractProps = ({attrs}) => {
-    if ("click_action" in attrs.options) {
-        return {click_action: attrs.options.click_action};
-    }
-};
-
-LocationTrayMatrixField.displayName = _lt("Tray storage layout");
-LocationTrayMatrixField.supportedTypes = ["serialized"];
-
-registry.category("fields").add("location_tray_matrix", LocationTrayMatrixField);
+registry.category("fields").add("stock_vlm_mgmt_location_tray_matrix", {
+    component: LocationTrayMatrixField,
+    supportedTypes: ["serialized"],
+    extractProps: ({options}) => ({
+        click_action: options.click_action,
+    }),
+});

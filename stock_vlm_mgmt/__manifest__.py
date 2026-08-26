@@ -3,7 +3,7 @@
 {
     "name": "Vertical Lift Module management",
     "summary": "Light self contained alternative for VLM integrations",
-    "version": "16.0.1.0.3",
+    "version": "17.0.1.0.0",
     "author": "Tecnativa, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "maintainers": ["chienandalu"],

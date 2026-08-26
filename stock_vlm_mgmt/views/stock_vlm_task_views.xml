@@ -21,7 +21,7 @@
                             icon="fa-rocket"
                             name="action_do_tasks"
                             type="object"
-                            states="pending,waiting"
+                            invisible="state not in ['pending', 'waiting']"
                         />
                     </div>
                     <group>
@@ -68,7 +68,7 @@
                     title="Do tasks"
                     type="object"
                     icon="fa-rocket"
-                    attrs="{'invisible': [('state', '=', 'done')]}"
+                    invisible="state == 'done'"
                 />
             </tree>
         </field>

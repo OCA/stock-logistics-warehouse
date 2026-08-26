@@ -16,6 +16,7 @@
                             <field
                                 name="tray_id"
                                 domain="[('location_id', '=', location_id)]"
+                                readonly="1"
                             />
                             <field name="tray_type_id" invisible="1" />
                             <field name="pos_x" readonly="1" force_save="1" />
@@ -24,7 +25,7 @@
                         <group>
                             <field
                                 name="tray_matrix"
-                                widget="location_tray_matrix"
+                                widget="stock_vlm_mgmt_location_tray_matrix"
                                 options="{'live_cell_edit': True}"
                                 nolabel="1"
                             />
@@ -37,7 +38,7 @@
     <record id="view_stock_quant_vlm_tree" model="ir.ui.view">
         <field name="model">stock.quant.vlm</field>
         <field name="arch" type="xml">
-            <tree>
+            <tree create="0">
                 <field name="tray_id" domain="[('location_id', '=', location_id)]" />
                 <field name="quant_id" optional="hide" readonly="1" />
                 <field name="location_id" optional="show" readonly="1" />
@@ -61,6 +62,7 @@
         <field name="arch" type="xml">
             <tree position="attributes">
                 <attribute name="editable">top</attribute>
+                <attribute name="create">1</attribute>
             </tree>
             <field name="location_id" position="attributes">
                 <attribute name="optional">hide</attribute>
