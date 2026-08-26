@@ -1,7 +1,3 @@
-.. image:: https://odoo-community.org/readme-banner-image
-   :target: https://odoo-community.org/get-involved?utm_source=readme
-   :alt: Odoo Community Association
-
 ===============================
 Vertical Lift Module management
 ===============================
@@ -17,24 +13,24 @@ Vertical Lift Module management
 .. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
     :alt: Beta
-.. |badge2| image:: https://img.shields.io/badge/license-AGPL--3-blue.png
+.. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fstock--logistics--warehouse-lightgray.png?logo=github
-    :target: https://github.com/OCA/stock-logistics-warehouse/tree/16.0/stock_vlm_mgmt
+    :target: https://github.com/OCA/stock-logistics-warehouse/tree/17.0/stock_vlm_mgmt
     :alt: OCA/stock-logistics-warehouse
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/stock-logistics-warehouse-16-0/stock-logistics-warehouse-16-0-stock_vlm_mgmt
+    :target: https://translation.odoo-community.org/projects/stock-logistics-warehouse-17-0/stock-logistics-warehouse-17-0-stock_vlm_mgmt
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/stock-logistics-warehouse&target_branch=16.0
+    :target: https://runboat.odoo-community.org/builds?repo=OCA/stock-logistics-warehouse&target_branch=17.0
     :alt: Try me on Runboat
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-This module adds basic a management system for Vertical Lift Modules. It's thought as
-a simpler alternative attemp to stock_vertical_lift and all the dependencies that
-come with it.
+This module adds basic a management system for Vertical Lift Modules.
+It's thought as a simpler alternative attemp to stock_vertical_lift and
+all the dependencies that come with it.
 
 **Table of contents**
 
@@ -44,23 +40,26 @@ come with it.
 Known issues / Roadmap
 ======================
 
-* Launch the tasks in batches so we don't have to send them to the VLM one by one. In
-  the case of Kardex, we'll be dealing with the connection limitations. If we send a
-  list of tasks, right now we're closing the connection once we receive a response (Kardex).
-  We need to keep listening until all the ids are received, but that locks our thread...
-  We also need to respond to operation issues on every task, like full trays, changes
-  of quantity, etc... and we can't lock many threads as we could put down the instance.
-  Something along the lines of queue_job maybe would need to push to the bus the tasks
-  updates (hard?) Or maybe the kardex proxy from c2c where we use a controller to send
-  the tasks? This should rely on js, if we want a proper UX.
-* Confirming the VLM tasks after the picking is confirmed makes not much sense, but
-  we're dealing with the quants limitations. Anyway we shouldn't allow to leave
-  operations on halt and after a real VLM task is done, the picking should be validated.
-  What to do with the non existing quants (inputs)... maybe we could leave the vlm task
-  pending assignation, so when we finally validate the picking we just have to perform
-  the proper links.
-* Not a requiste right now, but we could need to support batch pickings. Let's deal
-  with the basics for now anyway.
+- Launch the tasks in batches so we don't have to send them to the VLM
+  one by one. In the case of Kardex, we'll be dealing with the
+  connection limitations. If we send a list of tasks, right now we're
+  closing the connection once we receive a response (Kardex). We need to
+  keep listening until all the ids are received, but that locks our
+  thread... We also need to respond to operation issues on every task,
+  like full trays, changes of quantity, etc... and we can't lock many
+  threads as we could put down the instance. Something along the lines
+  of queue_job maybe would need to push to the bus the tasks updates
+  (hard?) Or maybe the kardex proxy from c2c where we use a controller
+  to send the tasks? This should rely on js, if we want a proper UX.
+- Confirming the VLM tasks after the picking is confirmed makes not much
+  sense, but we're dealing with the quants limitations. Anyway we
+  shouldn't allow to leave operations on halt and after a real VLM task
+  is done, the picking should be validated. What to do with the non
+  existing quants (inputs)... maybe we could leave the vlm task pending
+  assignation, so when we finally validate the picking we just have to
+  perform the proper links.
+- Not a requiste right now, but we could need to support batch pickings.
+  Let's deal with the basics for now anyway.
 
 Bug Tracker
 ===========
@@ -68,7 +67,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/stock-logistics-warehouse/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/stock-logistics-warehouse/issues/new?body=module:%20stock_vlm_mgmt%0Aversion:%2016.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/stock-logistics-warehouse/issues/new?body=module:%20stock_vlm_mgmt%0Aversion:%2017.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -76,20 +75,20 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * Tecnativa
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* `Tecnativa <https://www.tecnativa.com>`_:
+- `Tecnativa <https://www.tecnativa.com>`__:
 
-  * David Vidal
-  * Pedro M. Baeza
+  - David Vidal
+  - Pedro M. Baeza
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is maintained by the OCA.
 
@@ -109,6 +108,6 @@ Current `maintainer <https://odoo-community.org/page/maintainer-role>`__:
 
 |maintainer-chienandalu| 
 
-This module is part of the `OCA/stock-logistics-warehouse <https://github.com/OCA/stock-logistics-warehouse/tree/16.0/stock_vlm_mgmt>`_ project on GitHub.
+This module is part of the `OCA/stock-logistics-warehouse <https://github.com/OCA/stock-logistics-warehouse/tree/17.0/stock_vlm_mgmt>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.
