@@ -223,7 +223,8 @@ class TestStockDemandEstimate(TransactionCase):
         )
         self.assertEqual(estimate.display_name, estimate_name)
 
-    def test_05_onchange_date_range_type_id(self):
+    def test_05_date_range_type_company_must_match(self):
+        """A date range type of another company cannot be used in the wizard."""
         company = self.env["res.company"].create({"name": "Test Company"})
         date_range_type = self.env["date.range.type"].create(
             {
@@ -232,21 +233,20 @@ class TestStockDemandEstimate(TransactionCase):
                 "company_id": company.id,
             }
         )
+        wizard_vals = {
+            "date_start": "1943-01-01",
+            "date_end": "1943-12-31",
+            "location_id": self.location.id,
+            "product_ids": [(6, 0, [self.product_1.id])],
+        }
+        with self.assertRaises(UserError):
+            self.env["stock.demand.estimate.wizard"].create(
+                dict(wizard_vals, date_range_type_id=date_range_type.id)
+            )
         wizard = self.env["stock.demand.estimate.wizard"].create(
-            {
-                "date_start": "1943-01-01",
-                "date_end": "1943-12-31",
-                "location_id": self.location.id,
-                "date_range_type_id": date_range_type.id,
-                "product_ids": [(6, 0, [self.product_1.id])],
-            }
+            dict(wizard_vals, date_range_type_id=self.drt_monthly.id)
         )
-        result = wizard._onchange_date_range_type_id()
-        location_domain = result.get("domain", {}).get("location_id", [])
-        expected_domain = [
-            ("company_id", "=", company.id),
-        ]
-        self.assertEqual(location_domain, expected_domain)
+        self.assertEqual(wizard.company_id, self.company)
 
     def test_06_prepare_demand_estimate_sheet(self):
         wizard = self.env["stock.demand.estimate.wizard"].create(
@@ -264,6 +264,7 @@ class TestStockDemandEstimate(TransactionCase):
             "date_end": datetime.strptime("2023-12-31", "%Y-%m-%d").date(),
             "date_range_type_id": self.drt_monthly.id,
             "location_id": self.location.id,
+            "company_id": self.company.id,
         }
         self.assertEqual(sheet_values, expected_values)
 
