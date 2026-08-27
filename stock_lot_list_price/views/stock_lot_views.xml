@@ -4,7 +4,7 @@
         <field name="model">stock.lot</field>
         <field name="inherit_id" ref="stock.view_production_lot_form" />
         <field name="arch" type="xml">
-            <xpath expr="//group[@name='main_group']/group[2]" position="inside">
+            <xpath expr="//group[@name='inventory_group']" position="inside">
                 <!-- The company_currency_id field is added by stock_account,
                  but it exists due to dependencies. !-->
                 <field name="company_currency_id" invisible="1" />
