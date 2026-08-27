@@ -14,6 +14,7 @@
                 </group>
                 <group>
                     <group name="attributes" colspan="2">
+                        <field name="company_id" />
                         <field name="date_range_type_id" />
                         <field name="location_id" />
                     </group>
@@ -66,6 +67,7 @@
                     </group>
                     <group>
                         <group name="attributes">
+                            <field name="company_id" />
                             <field name="date_range_type_id" />
                             <field name="location_id" />
                         </group>

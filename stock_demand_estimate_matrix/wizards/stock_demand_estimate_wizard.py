@@ -8,6 +8,7 @@ from odoo.exceptions import UserError, ValidationError
 class DemandEstimateWizard(models.TransientModel):
     _name = "stock.demand.estimate.wizard"
     _description = "Stock Demand Estimate Wizard"
+    _check_company_auto = True
 
     date_start = fields.Date(
         string="Date From",
@@ -21,28 +22,25 @@ class DemandEstimateWizard(models.TransientModel):
         string="Date Range Type",
         comodel_name="date.range.type",
         required=True,
+        check_company=True,
     )
     location_id = fields.Many2one(
         comodel_name="stock.location",
         string="Location",
         required=True,
+        check_company=True,
     )
     product_ids = fields.Many2many(
         comodel_name="product.product",
         string="Products",
+        check_company=True,
     )
-
-    @api.onchange("date_range_type_id")
-    def _onchange_date_range_type_id(self):
-        if self.date_range_type_id.company_id:
-            return {
-                "domain": {
-                    "location_id": [
-                        ("company_id", "=", self.date_range_type_id.company_id.id)
-                    ]
-                }
-            }
-        return {}
+    company_id = fields.Many2one(
+        comodel_name="res.company",
+        string="Company",
+        required=True,
+        default=lambda self: self.env.company,
+    )
 
     @api.constrains("date_start", "date_end")
     def _check_start_end_dates(self):
@@ -59,6 +57,7 @@ class DemandEstimateWizard(models.TransientModel):
             "date_end": self.date_end,
             "date_range_type_id": self.date_range_type_id.id,
             "location_id": self.location_id.id,
+            "company_id": self.company_id.id,
         }
 
     def create_sheet(self):
@@ -68,13 +67,10 @@ class DemandEstimateWizard(models.TransientModel):
 
         # 2d matrix widget need real records to work
         sheet = self.env["stock.demand.estimate.sheet"].create(
-            {
-                "date_start": self.date_start,
-                "date_end": self.date_end,
-                "date_range_type_id": self.date_range_type_id.id,
-                "location_id": self.location_id.id,
-                "product_ids": [(6, 0, self.product_ids.ids)],
-            }
+            dict(
+                self._prepare_demand_estimate_sheet(),
+                product_ids=[(6, 0, self.product_ids.ids)],
+            )
         )
         sheet._onchange_dates()
 

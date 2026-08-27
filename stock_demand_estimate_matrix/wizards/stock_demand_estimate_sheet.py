@@ -9,6 +9,7 @@ from odoo.osv import expression
 class StockDemandEstimateSheet(models.TransientModel):
     _name = "stock.demand.estimate.sheet"
     _description = "Stock Demand Estimate Sheet"
+    _check_company_auto = True
 
     date_start = fields.Date(
         string="Date From",
@@ -22,11 +23,13 @@ class StockDemandEstimateSheet(models.TransientModel):
         string="Date Range Type",
         comodel_name="date.range.type",
         readonly=True,
+        check_company=True,
     )
     location_id = fields.Many2one(
         comodel_name="stock.location",
         string="Location",
         readonly=True,
+        check_company=True,
     )
     line_ids = fields.Many2many(
         string="Estimates",
@@ -36,6 +39,13 @@ class StockDemandEstimateSheet(models.TransientModel):
     product_ids = fields.Many2many(
         string="Products",
         comodel_name="product.product",
+        check_company=True,
+    )
+    company_id = fields.Many2one(
+        comodel_name="res.company",
+        string="Company",
+        required=True,
+        default=lambda self: self.env.company,
     )
 
     @api.onchange(
@@ -129,7 +139,6 @@ class StockDemandEstimateSheet(models.TransientModel):
         }
         return values
 
-    @api.model
     def _prepare_estimate_data(self, line):
         return {
             "date_range_id": line.date_range_id.id,
@@ -137,6 +146,7 @@ class StockDemandEstimateSheet(models.TransientModel):
             "location_id": line.location_id.id,
             "product_uom_qty": line.product_uom_qty,
             "product_uom": line.product_id.uom_id.id,
+            "company_id": self.company_id.id,
         }
 
     def button_validate(self):
