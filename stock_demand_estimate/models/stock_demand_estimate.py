@@ -11,6 +11,7 @@ from odoo.exceptions import UserError
 class StockDemandEstimate(models.Model):
     _name = "stock.demand.estimate"
     _description = "Stock Demand Estimate Line"
+    _check_company_auto = True
 
     active = fields.Boolean(default=True)
     date_from = fields.Date(
@@ -26,11 +27,17 @@ class StockDemandEstimate(models.Model):
         compute="_compute_dates", string="Duration (computed))", store=True
     )
     product_id = fields.Many2one(
-        comodel_name="product.product", string="Product", required=True
+        comodel_name="product.product",
+        string="Product",
+        required=True,
+        check_company=True,
     )
     product_uom = fields.Many2one(comodel_name="uom.uom", string="Unit of measure")
     location_id = fields.Many2one(
-        comodel_name="stock.location", string="Location", required=True
+        comodel_name="stock.location",
+        string="Location",
+        required=True,
+        check_company=True,
     )
     product_uom_qty = fields.Float(string="Quantity", digits="Product Unit of Measure")
     product_qty = fields.Float(
