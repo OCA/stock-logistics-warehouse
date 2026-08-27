@@ -2,7 +2,7 @@
 # Copyright 2021 ForgeFlow, S.L.
 # Copyright 2024 Moduon Team S.L.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl).
-from odoo import api, exceptions, fields, models
+from odoo import exceptions, fields, models
 
 
 class StockMove(models.Model):
@@ -10,9 +10,15 @@ class StockMove(models.Model):
 
     product_packaging_quantity = fields.Float(
         inverse="_inverse_product_packaging_quantity",
+        # Explicit dependencies may drift from core, but avoid storing the field or
+        # overriding writes while preserving manual package counts on quantity changes.
+        depends=(
+            "product_uom",
+            "product_packaging_id",
+            "move_line_ids.product_packaging_quantity",
+        ),
     )
 
-    @api.depends("product_packaging_id", "move_line_ids.product_packaging_quantity")
     def _compute_product_packaging_quantity(self):
         for move in self:
             if not move.product_packaging_id:
