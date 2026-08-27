@@ -14,6 +14,18 @@
                     >
                         <field name="vertical_lift_secret" />
                     </setting>
+                    <setting
+                        id="vertical_lift_pick_by_priority"
+                        title="Propose the move lines of the most urgent transfers first"
+                    >
+                        <field name="vertical_lift_pick_by_priority" />
+                    </setting>
+                    <setting
+                        id="vertical_lift_pick_skipped_last"
+                        title="Propose skipped move lines once the others are done"
+                    >
+                        <field name="vertical_lift_pick_skipped_last" />
+                    </setting>
                 </block>
             </block>
         </field>
