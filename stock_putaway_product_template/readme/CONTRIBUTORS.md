@@ -1,0 +1,8 @@
+- [Akretion](https://www.akretion.com):
+  - Kevin Khao \<<kevin.khao@akretion.com>\>
+- [Tecnativa](https://www.tecnativa.com):
+  - Sergio Teruel
+  - Víctor Martínez
+  - César A. Sánchez
+  - Carolina Fernandez
+  - Carlos Roca

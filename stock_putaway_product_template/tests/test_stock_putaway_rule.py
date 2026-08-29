@@ -1,0 +1,110 @@
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+# Copyright 2020 Tecnativa - Sergio Teruel
+# Copyright 2020-2021 Víctor Martínez - Tecnativa
+# Copyright 2025 Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
+
+from odoo.tests import common
+
+
+class TestStockPutawayRule(common.TransactionCase):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.putawayRuleObj = cls.env["stock.putaway.rule"]
+        ProductTemplate = cls.env["product.template"]
+        ProductAttribute = cls.env["product.attribute"]
+        ProductAttributeValue = cls.env["product.attribute.value"]
+        TemplateAttributeLine = cls.env["product.template.attribute.line"]
+        cls.categ = cls.env["product.category"].create({"name": "Putaway Test"})
+        cls.template = ProductTemplate.create(
+            {"name": "Product test", "type": "consu", "categ_id": cls.categ.id}
+        )
+        cls.size_attribute = ProductAttribute.create(
+            {"name": "Test size", "sequence": 1}
+        )
+        cls.size_m = ProductAttributeValue.create(
+            {"name": "Size M", "attribute_id": cls.size_attribute.id, "sequence": 1}
+        )
+        cls.size_l = ProductAttributeValue.create(
+            {"name": "Size L", "attribute_id": cls.size_attribute.id, "sequence": 2}
+        )
+        cls.size_xl = ProductAttributeValue.create(
+            {"name": "Size XL", "attribute_id": cls.size_attribute.id, "sequence": 3}
+        )
+        cls.template_attribute_lines = TemplateAttributeLine.create(
+            {
+                "product_tmpl_id": cls.template.id,
+                "attribute_id": cls.size_attribute.id,
+                "value_ids": [(6, 0, [cls.size_m.id, cls.size_l.id, cls.size_xl.id])],
+            }
+        )
+        cls.template._create_variant_ids()
+        cls.view_id = cls.env.ref("stock.stock_putaway_list").id
+        cls.location = cls.env.ref("stock.stock_location_stock")
+
+    def _stock_putaway_rule_product(self, location, product):
+        rule = self.putawayRuleObj.create(
+            {
+                "company_id": location.company_id.id,
+                "product_id": product.id,
+                "location_in_id": self.location.id,
+                "location_out_id": location.id,
+            }
+        )
+        self.assertEqual(rule.product_tmpl_id, product.product_tmpl_id)
+        self.assertEqual(rule.product_id, product)
+        return rule
+
+    def _get_product_rules(self, product):
+        return self.putawayRuleObj.search(
+            product.action_view_related_putaway_rules()["domain"]
+        )
+
+    def test_apply_putaway(self):
+        # Create one strategy line for product template and other with a
+        # specific variant
+        location1 = self.location.copy(
+            {"name": "Location test 1", "location_id": self.location.id}
+        )
+        location2 = self.location.copy(
+            {"name": "Location test 2", "location_id": self.location.id}
+        )
+        # Create rule according to product_tmpl_id
+        rule_product = self.putawayRuleObj.create(
+            {
+                "company_id": location1.company_id.id,
+                "product_tmpl_id": self.template.id,
+                "location_in_id": location1.id,
+                "location_out_id": location1.id,
+            }
+        )
+        self.assertEqual(rule_product.location_in_id, location1)
+        self.assertEqual(rule_product.product_tmpl_id, self.template)
+        self.assertEqual(rule_product.product_id.id, False)
+        # Create rules related to variants and diferente locations
+        variant1 = self.template.product_variant_ids[0]
+        variant2 = self.template.product_variant_ids[1]
+        variant3 = self.template.product_variant_ids[2]
+        self._stock_putaway_rule_product(location1, variant1)
+        self._stock_putaway_rule_product(location2, variant2)
+        # Create rule according to category
+        rule_category = self.putawayRuleObj.create(
+            {
+                "company_id": location1.company_id.id,
+                "category_id": self.template.categ_id.id,
+                "location_in_id": self.location.id,
+                "location_out_id": location1.id,
+            }
+        )
+        self.assertEqual(rule_category.category_id, self.template.categ_id)
+        self.assertEqual(rule_category.product_tmpl_id.id, False)
+        self.assertEqual(rule_category.product_id.id, False)
+        # Check rules related
+        self.assertEqual(len(self._get_product_rules(self.template)), 4)
+        self.assertEqual(len(self._get_product_rules(variant1)), 2)
+        self.assertEqual(len(self._get_product_rules(variant2)), 2)
+        self.assertEqual(len(self._get_product_rules(variant3)), 1)
+        # Check _get_putaway_strategy
+        self.assertEqual(self.location._get_putaway_strategy(variant1), location1)
+        self.assertEqual(self.location._get_putaway_strategy(variant2), location2)
+        self.assertEqual(self.location._get_putaway_strategy(variant3), location1)
