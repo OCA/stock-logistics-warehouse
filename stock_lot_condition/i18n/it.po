@@ -1,0 +1,170 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_lot_condition
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2025-11-14 16:48+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.10.4\n"
+
+#. module: stock_lot_condition
+#: model:stock.lot.condition,name:stock_lot_condition.condition_acceptable
+msgid "Acceptable"
+msgstr "Accettabile"
+
+#. module: stock_lot_condition
+#: model:ir.model.fields,field_description:stock_lot_condition.field_stock_lot_condition__active
+msgid "Active"
+msgstr "Attivo"
+
+#. module: stock_lot_condition
+#: model_terms:ir.ui.view,arch_db:stock_lot_condition.stock_lot_condition_view_form
+#: model_terms:ir.ui.view,arch_db:stock_lot_condition.stock_lot_condition_view_search
+msgid "Archived"
+msgstr "In archivio"
+
+#. module: stock_lot_condition
+#: model:stock.lot.condition,name:stock_lot_condition.condition_as_new
+msgid "As new"
+msgstr "Come nuovo"
+
+#. module: stock_lot_condition
+#: model:ir.model.fields,field_description:stock_lot_condition.field_stock_lot__condition_id
+#: model_terms:ir.ui.view,arch_db:stock_lot_condition.search_product_lot_filter
+msgid "Condition"
+msgstr "Condizione"
+
+#. module: stock_lot_condition
+#: model:ir.model.fields,field_description:stock_lot_condition.field_stock_lot__condition_note
+msgid "Condition Note"
+msgstr "Nota condizione"
+
+#. module: stock_lot_condition
+#: model:ir.model.fields,field_description:stock_lot_condition.field_stock_lot__condition_required_note
+msgid "Condition Required Note"
+msgstr "Nota condizione richiesta"
+
+#. module: stock_lot_condition
+#: model:ir.actions.act_window,name:stock_lot_condition.stock_lot_condition_action
+msgid "Conditions"
+msgstr "Condizioni"
+
+#. module: stock_lot_condition
+#: model:ir.model.fields,field_description:stock_lot_condition.field_stock_lot_condition__create_uid
+msgid "Created by"
+msgstr "Creato da"
+
+#. module: stock_lot_condition
+#: model:ir.model.fields,field_description:stock_lot_condition.field_stock_lot_condition__create_date
+msgid "Created on"
+msgstr "Creato il"
+
+#. module: stock_lot_condition
+#: model:ir.model.fields,field_description:stock_lot_condition.field_stock_lot_condition__description
+msgid "Description"
+msgstr "Descrizione"
+
+#. module: stock_lot_condition
+#: model:ir.model.fields,field_description:stock_lot_condition.field_stock_lot_condition__display_name
+msgid "Display Name"
+msgstr "Nome visualizzato"
+
+#. module: stock_lot_condition
+#: model:stock.lot.condition,name:stock_lot_condition.condition_good
+msgid "Good"
+msgstr "Buono"
+
+#. module: stock_lot_condition
+#: model:ir.model.fields,field_description:stock_lot_condition.field_stock_lot_condition__id
+msgid "ID"
+msgstr "ID"
+
+#. module: stock_lot_condition
+#: model:ir.model.fields,help:stock_lot_condition.field_stock_lot_condition__required_note
+msgid ""
+"If this box is checked, it will be mandatory to indicate a text for this "
+"condition in lots."
+msgstr ""
+"Se questa opzione è selezionata, sarà obbligatorio indicare un testo per "
+"questa condizione in lotti."
+
+#. module: stock_lot_condition
+#: model:ir.model.fields,field_description:stock_lot_condition.field_stock_lot_condition__write_uid
+msgid "Last Updated by"
+msgstr "Ultimo aggiornamento di"
+
+#. module: stock_lot_condition
+#: model:ir.model.fields,field_description:stock_lot_condition.field_stock_lot_condition__write_date
+msgid "Last Updated on"
+msgstr "Ultimo aggiornamento il"
+
+#. module: stock_lot_condition
+#: model:ir.ui.menu,name:stock_lot_condition.menu_stock_lot_condition
+msgid "Lot conditions"
+msgstr "Condizioni lotto"
+
+#. module: stock_lot_condition
+#: model:ir.model,name:stock_lot_condition.model_stock_lot
+msgid "Lot/Serial"
+msgstr "Lotto/seriale"
+
+#. module: stock_lot_condition
+#: model:stock.lot.condition,description:stock_lot_condition.condition_acceptable
+msgid ""
+"May have cosmetic imperfections, scratches, dents, etc., but is still "
+"functional."
+msgstr ""
+"Potrebbe avere imperfezioni estetiche, graffi, ammaccature, ecc., ma è "
+"ancora funzionante."
+
+#. module: stock_lot_condition
+#: model:stock.lot.condition,description:stock_lot_condition.condition_very_good
+msgid "Minimal use, with minor cosmetic signs."
+msgstr "Uso minimo, con segni estetici minori."
+
+#. module: stock_lot_condition
+#: model:ir.model.fields,field_description:stock_lot_condition.field_stock_lot_condition__name
+msgid "Name"
+msgstr "Nome"
+
+#. module: stock_lot_condition
+#: model:ir.model.fields,field_description:stock_lot_condition.field_stock_lot_condition__required_note
+msgid "Required note?"
+msgstr "Nota richiesta?"
+
+#. module: stock_lot_condition
+#: model:ir.model.fields,field_description:stock_lot_condition.field_stock_lot_condition__sequence
+msgid "Sequence"
+msgstr "Sequenza"
+
+#. module: stock_lot_condition
+#: model:ir.model,name:stock_lot_condition.model_stock_lot_condition
+msgid "Stock Lot Condition"
+msgstr "Condizione lotto magazzino"
+
+#. module: stock_lot_condition
+#: model:stock.lot.condition,description:stock_lot_condition.condition_as_new
+msgid ""
+"The item is intact and works perfectly, but the packaging may be damaged."
+msgstr ""
+"L'oggetto è intatto e funziona perfettamente, ma l'imballaggio può essere "
+"danneggiato."
+
+#. module: stock_lot_condition
+#: model:stock.lot.condition,name:stock_lot_condition.condition_very_good
+msgid "Very good"
+msgstr "Molto buono"
+
+#. module: stock_lot_condition
+#: model:stock.lot.condition,description:stock_lot_condition.condition_good
+msgid "Works perfectly, but with visible wear from normal use."
+msgstr "Funziona perfettamente, ma con usura visibile da uso normale."
