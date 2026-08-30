@@ -1,0 +1,22 @@
+<odoo>
+    <record id="view_stock_move_line_reserved_info_tree" model="ir.ui.view">
+        <field name="name">stock.move.line.tree.reserved.info</field>
+        <field name="model">stock.move.line</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="move_id" />
+                <field name="picking_id" />
+                <button
+                    name="action_view_picking_from_reserved"
+                    type="object"
+                    class="btn btn-link text-info"
+                    icon="fa-arrow-right"
+                    title="Related Document"
+                    invisible="not picking_id"
+                />
+                <field name="origin" />
+                <field name="quantity_product_uom" />
+            </list>
+        </field>
+    </record>
+</odoo>
