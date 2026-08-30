@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record model="ir.ui.view" id="stock_picking_form_view">
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//label[@for='scheduled_date']/parent::group" position="after">
+                <group
+                    string="Additional Reservation Rate"
+                    name="additional_reservation_rate"
+                >
+                    <field
+                        name="additional_picking_type_group_id"
+                        invisible="not additional_picking_type_group_id"
+                    />
+                    <field
+                        name="additional_type_group_reservation_rate"
+                        widget="progressbar_gradient"
+                        invisible="not additional_picking_type_group_id"
+                    />
+                </group>
+            </xpath>
+            <field name="products_availability" position="after">
+                <field
+                    name="type_group_reservation_rate"
+                    widget="progressbar_gradient"
+                    invisible="not picking_type_group_id"
+                />
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="stock_picking_search_view">
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_internal_search" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//filter[@name='late_availability']/following-sibling::separator"
+                position="after"
+            >
+                <filter
+                    name="type_group_reservation_rate_0_50"
+                    string="Group Reservation Rate  0-50 %"
+                    help="Group reservation rate between 0 and 50%"
+                    domain="[('type_group_reservation_rate', '&lt;=', 75.0)]"
+                />
+                <filter
+                    name="type_group_reservation_rate_50"
+                    string="Group reservation Rate > 50%"
+                    help="Group reservation rate over 50%"
+                    domain="[('type_group_reservation_rate', '>', 50.0)]"
+                />
+                <filter
+                    name="type_group_reservation_rate_75"
+                    string="Group reservation Rate > 75%"
+                    help="Group reservation rate over 75%"
+                    domain="[('type_group_reservation_rate', '>', 75.0)]"
+                />
+                <filter
+                    name="type_group_reservation_rate_100"
+                    string="Group reservation Rate > 100%"
+                    help="Group reservation rate equals 100%"
+                    domain="[('type_group_reservation_rate', '=', 100.0)]"
+                />
+                <separator />
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="stock_picking_tree_view">
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.vpicktree" />
+        <field name="arch" type="xml">
+            <field name="state" position="after">
+                <field
+                    name="type_group_reservation_rate"
+                    widget="progressbar_gradient"
+                    optional="hide"
+                    invisible="not picking_type_group_id"
+                />
+            </field>
+        </field>
+    </record>
+</odoo>
