@@ -1,5 +1,5 @@
 // Widget in form view
-.o_field_location_tray_matrix {
+.o_field_stock_vlm_mgmt_location_tray_matrix {
     table {
         height: 200px;
         tr {
@@ -10,8 +10,8 @@
     }
 }
 // Widget in list view
-.o_location_tray_matrix_cell {
-    .o_field_location_tray_matrix {
+.o_stock_vlm_mgmt_location_tray_matrix_cell {
+    .o_field_stock_vlm_mgmt_location_tray_matrix {
         table {
             height: 70px;
             tr {

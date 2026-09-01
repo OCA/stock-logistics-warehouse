@@ -63,7 +63,7 @@
                         <group name="position" col="1">
                             <field
                                 name="tray_matrix"
-                                widget="location_tray_matrix"
+                                widget="stock_vlm_mgmt_location_tray_matrix"
                                 options="{'live_cell_edit': True}"
                                 nolabel="1"
                                 readonly="state == 'done'"

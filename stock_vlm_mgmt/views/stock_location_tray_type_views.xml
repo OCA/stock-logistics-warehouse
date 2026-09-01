@@ -39,7 +39,7 @@
                     <group string="Layout" name="tray_layout">
                         <field
                             name="tray_matrix"
-                            widget="location_tray_matrix"
+                            widget="stock_vlm_mgmt_location_tray_matrix"
                             nolabel="1"
                         />
                     </group>
