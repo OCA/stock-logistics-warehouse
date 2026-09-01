@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -81,6 +81,11 @@ msgstr ""
 #. module: stock_vlm_mgmt
 #: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.view_location_vlm_tray_form
 msgid "Call tray"
+msgstr ""
+
+#. module: stock_vlm_mgmt
+#: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.vlm_task_action_form_view
+msgid "Close"
 msgstr ""
 
 #. module: stock_vlm_mgmt
@@ -263,15 +268,6 @@ msgstr ""
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields.selection,name:stock_vlm_mgmt.selection__stock_location__vlm_removal_strategy__lifo
 msgid "LIFO"
-msgstr ""
-
-#. module: stock_vlm_mgmt
-#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location_vlm_tray____last_update
-#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_location_vlm_tray_type____last_update
-#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_quant_vlm____last_update
-#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task____last_update
-#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task_action____last_update
-msgid "Last Modified on"
 msgstr ""
 
 #. module: stock_vlm_mgmt
@@ -657,13 +653,6 @@ msgid "Tray position helpers"
 msgstr ""
 
 #. module: stock_vlm_mgmt
-#. odoo-javascript
-#: code:addons/stock_vlm_mgmt/static/src/js/location_tray_matrix/stock_location_tray.esm.js:0
-#, python-format
-msgid "Tray storage layout"
-msgstr ""
-
-#. module: stock_vlm_mgmt
 #: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.view_location_form
 #: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.vlm_quant_search_view
 #: model_terms:ir.ui.view,arch_db:stock_vlm_mgmt.vlm_task_search_view
@@ -875,6 +864,22 @@ msgstr ""
 #. module: stock_vlm_mgmt
 #: model:ir.model.fields,help:stock_vlm_mgmt.field_stock_location_vlm_tray_type__width
 msgid "Width of the tray in mm"
+msgstr ""
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_quant_vlm__human_pos_x
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task__human_pos_x
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task_action__human_pos_x
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_vlm_tray_cell_position_mixin__human_pos_x
+msgid "X"
+msgstr ""
+
+#. module: stock_vlm_mgmt
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_quant_vlm__human_pos_y
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task__human_pos_y
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task_action__human_pos_y
+#: model:ir.model.fields,field_description:stock_vlm_mgmt.field_vlm_tray_cell_position_mixin__human_pos_y
+msgid "Y"
 msgstr ""
 
 #. module: stock_vlm_mgmt
