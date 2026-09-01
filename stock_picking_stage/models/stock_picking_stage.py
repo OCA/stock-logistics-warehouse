@@ -15,4 +15,6 @@ class StockPickingStage(models.Model):
 
     name = fields.Char(required=True, copy=False)
     code = fields.Char(copy=False)
-    color = fields.Integer("Color Index", default=_get_default_color, copy=False)
+    color = fields.Integer(
+        "Color Index", default=lambda self: self._get_default_color(), copy=False
+    )

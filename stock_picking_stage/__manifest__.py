@@ -4,7 +4,7 @@
 
 {
     "name": "Stock Picking Stages",
-    "version": "18.0.1.0.0",
+    "version": "19.0.1.0.0",
     "author": "Camptocamp, BCIM, Odoo Community Association (OCA)",
     "category": "Warehouse Management",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
