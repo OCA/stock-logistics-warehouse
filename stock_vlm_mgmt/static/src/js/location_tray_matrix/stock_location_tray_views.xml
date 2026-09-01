@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <templates>
-    <t t-name="stock_vlm_mgmt.location_tray_matrix" owl="1">
+    <t t-name="stock_vlm_mgmt.stock_vlm_mgmt_location_tray_matrix" owl="1">
         <t
             t-set="cell_min_width"
             t-value="state.cells.length and (100 / state.cells[0].length) or 0"
