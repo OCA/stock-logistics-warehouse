@@ -1,3 +1,7 @@
+.. image:: https://odoo-community.org/readme-banner-image
+   :target: https://odoo-community.org/get-involved?utm_source=readme
+   :alt: Odoo Community Association
+
 ====================
 Stock Picking Stages
 ====================
@@ -13,7 +17,7 @@ Stock Picking Stages
 .. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
     :alt: Beta
-.. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
+.. |badge2| image:: https://img.shields.io/badge/license-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fstock--logistics--warehouse-lightgray.png?logo=github
@@ -42,22 +46,22 @@ Use Cases / Context
 This module has been created to be able to track operations running on a
 picking. We can consider that as a substate of the picking:
 
--  By default, we have some states on a picking:
+- By default, we have some states on a picking:
 
-   -  draft
-   -  waiting
-   -  confirmed
-   -  assigned
-   -  done
-   -  cancelled
+  - draft
+  - waiting
+  - confirmed
+  - assigned
+  - done
+  - cancelled
 
--  Using this module, we can add some substate to the picking:
+- Using this module, we can add some substate to the picking:
 
-   -  ``stock.picking.state`` --> ``assigned``:
+  - ``stock.picking.state`` --> ``assigned``:
 
-      -  ``stock.picking.stage_id`` --> ``new order``
-      -  ``stock.picking.stage_id`` --> ``preparing``
-      -  ``stock.picking.stage_id`` --> ``processed``
+    - ``stock.picking.stage_id`` --> ``new order``
+    - ``stock.picking.stage_id`` --> ``preparing``
+    - ``stock.picking.stage_id`` --> ``processed``
 
 This approach is more flexible than using only the ``state`` field of
 the picking.
@@ -84,9 +88,9 @@ Authors
 Contributors
 ------------
 
--  `Camptocamp <https://www.camptocamp.com>`__:
+- `Camptocamp <https://www.camptocamp.com>`__:
 
-      -  Italo LOPES <italo.lopes@camptocamp.com>
+     - Italo LOPES <italo.lopes@camptocamp.com>
 
 Maintainers
 -----------
