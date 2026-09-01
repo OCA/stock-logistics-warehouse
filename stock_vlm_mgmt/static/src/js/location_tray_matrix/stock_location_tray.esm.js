@@ -7,7 +7,7 @@ import {standardFieldProps} from "@web/views/fields/standard_field_props";
 import {useService} from "@web/core/utils/hooks";
 
 export class LocationTrayMatrixField extends Component {
-    static template = "stock_vlm_mgmt.location_tray_matrix";
+    static template = "stock_vlm_mgmt.stock_vlm_mgmt_location_tray_matrix";
     static props = {
         ...standardFieldProps,
         click_action: {
@@ -62,4 +62,6 @@ export const locationTrayMatrixField = {
     }),
 };
 
-registry.category("fields").add("location_tray_matrix", locationTrayMatrixField);
+registry
+    .category("fields")
+    .add("stock_vlm_mgmt_location_tray_matrix", locationTrayMatrixField);
