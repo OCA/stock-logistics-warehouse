@@ -1,4 +1,5 @@
 from odoo import api, fields, models
+from odoo.tools.float_utils import float_compare, float_is_zero
 
 
 class StockMove(models.Model):
@@ -21,15 +22,27 @@ class StockMove(models.Model):
         The same serials cannot be selected more than once.
         """
         self.ensure_one()
+        rounding = self.product_id.uom_id.rounding
         # Lines added in the view do not have a Lot,
         # but they have a quant to avoid duplicates.
         # See `stock.move.line.quant_id`
         view_lots = self.move_line_ids.quant_id.lot_id
         current_lots = self.move_line_ids.mapped("lot_id") | view_lots
-        product_quants = self.load_products_from_package_id.quant_ids.filtered(
-            lambda q, lots=current_lots, product=self.product_id: (
-                q.lot_id not in lots and q.product_id == product
+        lots_to_qty = {}
+        for current_lot in current_lots:
+            move_lines = self.move_line_ids.filtered(
+                lambda line, lot=current_lot: line.lot_id == lot
             )
+            if not move_lines:
+                # The line has been added using `quant_id`
+                # and does not have a Lot yet, search it by quant's Lot
+                move_lines = self.move_line_ids.filtered(
+                    lambda line, lot=current_lot: line.quant_id.lot_id == lot
+                )
+            lots_to_qty[current_lot] = sum(move_lines.mapped("quantity"), 0)
+
+        product_quants = self.load_products_from_package_id.quant_ids.filtered(
+            lambda q, product=self.product_id: q.product_id == product
         )
         common_line_data = {
             "move_id": self.id,
@@ -42,13 +55,23 @@ class StockMove(models.Model):
         }
         command_list = []
         for quant in product_quants:
+            lot = quant.lot_id
+            quantity = quant.quantity
+            # Remove already selected quantity for this lot
+            already_selected_qty = lots_to_qty.get(lot, 0)
+            if not float_is_zero(already_selected_qty, precision_rounding=rounding):
+                quantity -= already_selected_qty
+                if float_compare(quantity, 0, precision_rounding=rounding) <= 0:
+                    # Skip negative quantities or exhausted lots
+                    continue
+
             data = common_line_data.copy()
             data.update(
                 {
                     "quant_id": quant.id,
-                    "quantity": quant.quantity,
+                    "quantity": quantity,
                     "product_uom_id": quant.product_uom_id.id,
-                    "lot_id": quant.lot_id.id,
+                    "lot_id": lot.id,
                 }
             )
             command_list.append(fields.Command.create(data))

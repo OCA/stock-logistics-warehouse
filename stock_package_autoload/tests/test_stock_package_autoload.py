@@ -29,6 +29,7 @@ class TestStockPackageAutoload(TransactionCase):
             {
                 "name": "Test Other Product for Package",
                 "is_storable": True,
+                "tracking": "lot",
             }
         )
 
@@ -42,6 +43,13 @@ class TestStockPackageAutoload(TransactionCase):
                 }
                 for i in range(1, n_lots + 1)
             ]
+        )
+        cls.other_lot = cls.StockProductionLot.create(
+            {
+                "name": "Test other lot",
+                "product_id": cls.other_product.id,
+                "company_id": cls.company.id,
+            }
         )
 
         cls.package = cls.StockQuantPackage.create(
@@ -63,9 +71,10 @@ class TestStockPackageAutoload(TransactionCase):
                     fields.Command.create(
                         {
                             "product_id": cls.other_product.id,
-                            "quantity": 1,
+                            "quantity": 5,
                             "product_uom_id": cls.uom_unit,
                             "location_id": cls.location.id,
+                            "lot_id": cls.other_lot.id,
                         },
                     )
                 ],
@@ -101,14 +110,13 @@ class TestStockPackageAutoload(TransactionCase):
 
         self.assertFalse(move.load_products_from_package_id)
         n_move_lines = len(move.move_line_ids)
-        self.assertEqual(
-            move.move_line_ids.mapped("lot_id"), self.package.quant_ids.mapped("lot_id")
-        )
+        package_lots = self.package.quant_ids.filtered(
+            lambda quant: quant.product_id == self.product
+        ).mapped("lot_id")
+        self.assertEqual(move.move_line_ids.mapped("lot_id"), package_lots)
         # delete a line
         move.move_line_ids[1].unlink()
-        self.assertNotEqual(
-            move.move_line_ids.mapped("lot_id"), self.package.quant_ids.mapped("lot_id")
-        )
+        self.assertNotEqual(move.move_line_ids.mapped("lot_id"), package_lots)
         self.assertLess(len(move.move_line_ids), n_move_lines)
         # by selecting the same package again, only the missing serial will be added to
         # the move lines
@@ -119,6 +127,57 @@ class TestStockPackageAutoload(TransactionCase):
             move_f.load_products_from_package_id = self.package
 
         self.assertEqual(n_move_lines, len(move.move_line_ids))
-        self.assertEqual(
-            move.move_line_ids.mapped("lot_id"), self.package.quant_ids.mapped("lot_id")
+        self.assertEqual(move.move_line_ids.mapped("lot_id"), package_lots)
+
+    def test_track_already_included(self):
+        """If some quantity of a package is already included,
+        do not include it again"""
+        # Arrange
+        lot = self.other_lot
+        package = self.package
+        product = self.other_product
+        picking_form = Form(self.StockPicking)
+        picking_form.partner_id = self.env.ref("base.res_partner_address_15")
+        picking_form.picking_type_id = self.env.ref("stock.picking_type_out")
+        with picking_form.move_ids_without_package.new() as move_f:
+            move_f.product_id = product
+            move_f.product_uom_qty = 3.0
+        picking = picking_form.save()
+        picking.action_confirm()
+        picking.move_ids.move_line_ids.unlink()
+        picking.move_ids.move_line_ids = [
+            fields.Command.create(
+                {
+                    "lot_id": lot.id,
+                    "package_id": package.id,
+                    "product_id": product.id,
+                    "quantity": 3.0,
+                }
+            )
+        ]
+
+        # Act
+        with Form(
+            picking.move_ids,
+            view=self.env.ref("stock.view_stock_move_operations"),
+        ) as move_form:
+            move_form.load_products_from_package_id = package
+
+        # Assert
+        self.assertRecordValues(
+            picking.move_ids.move_line_ids.sorted("quantity"),
+            [
+                {
+                    "lot_id": lot.id,
+                    "package_id": package.id,
+                    "product_id": product.id,
+                    "quantity": 2.0,
+                },
+                {
+                    "lot_id": lot.id,
+                    "package_id": package.id,
+                    "product_id": product.id,
+                    "quantity": 3.0,
+                },
+            ],
         )
