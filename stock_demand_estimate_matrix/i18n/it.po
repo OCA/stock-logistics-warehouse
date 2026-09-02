@@ -23,6 +23,12 @@ msgid "Cancel"
 msgstr "Annulla"
 
 #. module: stock_demand_estimate_matrix
+#: model:ir.model.fields,field_description:stock_demand_estimate_matrix.field_stock_demand_estimate_sheet__company_id
+#: model:ir.model.fields,field_description:stock_demand_estimate_matrix.field_stock_demand_estimate_wizard__company_id
+msgid "Company"
+msgstr ""
+
+#. module: stock_demand_estimate_matrix
 #: model:ir.actions.act_window,name:stock_demand_estimate_matrix.stock_demand_estimate_wizard_action
 #: model:ir.ui.menu,name:stock_demand_estimate_matrix.stock_demand_estimate_wizard_menu
 msgid "Create Stock Demand Estimates"
@@ -94,7 +100,6 @@ msgstr "Stime"
 #. module: stock_demand_estimate_matrix
 #. odoo-python
 #: code:addons/stock_demand_estimate_matrix/wizards/stock_demand_estimate_wizard.py:0
-#, python-format
 msgid "Estimate Sheet"
 msgstr "Foglio stima"
 
@@ -204,7 +209,6 @@ msgstr "Procedura guidata stima richiesta giacenza"
 #. module: stock_demand_estimate_matrix
 #. odoo-python
 #: code:addons/stock_demand_estimate_matrix/wizards/stock_demand_estimate_sheet.py:0
-#, python-format
 msgid "Stock Demand Estimates"
 msgstr "Stime richiesta giacenza"
 
@@ -216,14 +220,12 @@ msgstr "Ubicazione giacenza"
 #. module: stock_demand_estimate_matrix
 #. odoo-python
 #: code:addons/stock_demand_estimate_matrix/wizards/stock_demand_estimate_wizard.py:0
-#, python-format
 msgid "The start date cannot be later than the end date."
 msgstr "La data di inizio non può essere successiva alla data di fine."
 
 #. module: stock_demand_estimate_matrix
 #. odoo-python
 #: code:addons/stock_demand_estimate_matrix/wizards/stock_demand_estimate_sheet.py:0
-#, python-format
 msgid "There is no ranges created."
 msgstr "Non ci sono intervalli definiti."
 
@@ -240,7 +242,6 @@ msgstr "Valida"
 #. module: stock_demand_estimate_matrix
 #. odoo-python
 #: code:addons/stock_demand_estimate_matrix/wizards/stock_demand_estimate_wizard.py:0
-#, python-format
 msgid "You must select at least one product."
 msgstr "Bisogna selezionare almeno un prodotto."
 
