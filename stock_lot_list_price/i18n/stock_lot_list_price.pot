@@ -1,0 +1,24 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_lot_list_price
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_lot_list_price
+#: model:ir.model,name:stock_lot_list_price.model_stock_lot
+msgid "Lot/Serial"
+msgstr ""
+
+#. module: stock_lot_list_price
+#: model:ir.model.fields,field_description:stock_lot_list_price.field_stock_lot__lst_price
+msgid "Sales Price"
+msgstr ""
