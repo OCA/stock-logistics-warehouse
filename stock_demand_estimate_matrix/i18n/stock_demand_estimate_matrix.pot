@@ -20,6 +20,12 @@ msgid "Cancel"
 msgstr ""
 
 #. module: stock_demand_estimate_matrix
+#: model:ir.model.fields,field_description:stock_demand_estimate_matrix.field_stock_demand_estimate_sheet__company_id
+#: model:ir.model.fields,field_description:stock_demand_estimate_matrix.field_stock_demand_estimate_wizard__company_id
+msgid "Company"
+msgstr ""
+
+#. module: stock_demand_estimate_matrix
 #: model:ir.actions.act_window,name:stock_demand_estimate_matrix.stock_demand_estimate_wizard_action
 #: model:ir.ui.menu,name:stock_demand_estimate_matrix.stock_demand_estimate_wizard_menu
 msgid "Create Stock Demand Estimates"
