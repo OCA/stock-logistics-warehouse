@@ -1,8 +1,7 @@
 # Do NOT update manually; changes here will be overwritten by Copier
-_commit: v1.29
+_commit: v1.44
 _src_path: gh:oca/oca-addons-repo-template
 additional_ruff_rules: []
-ci: GitHub
 convert_readme_fragments_to_markdown: true
 enable_checklog_odoo: false
 generate_requirements_txt: true
@@ -17,7 +16,10 @@ odoo_test_flavor: Both
 odoo_version: 17.0
 org_name: Odoo Community Association (OCA)
 org_slug: OCA
-rebel_module_groups: []
+postgres_image: ''
+rebel_module_groups:
+- base_product_merge
+- stock_exception
 repo_description: 'TODO: add repo description.'
 repo_name: stock-logistics-warehouse
 repo_slug: stock-logistics-warehouse
