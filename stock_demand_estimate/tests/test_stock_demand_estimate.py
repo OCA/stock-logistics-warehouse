@@ -174,3 +174,64 @@ class TestStockDemandEstimate(TransactionCase):
         estimate.product_uom = False
         estimate._compute_product_quantity()
         self.assertEqual(estimate.product_qty, 0)
+
+    def test_06_company_consistency(self):
+        """An estimate cannot mix a product and a location restricted to
+        different companies."""
+        other_company = self.env["res.company"].create({"name": "Other Company"})
+        other_location = self.stock_location_model.create(
+            {
+                "name": "Other Place",
+                "usage": "production",
+                "company_id": other_company.id,
+            }
+        )
+        other_product = self.product_model.create(
+            {
+                "name": "Other Company Product",
+                "type": "product",
+                "default_code": "PRODO",
+                "uom_id": self.uom_unit.id,
+                "company_id": other_company.id,
+            }
+        )
+        restricted_product = self.product_model.create(
+            {
+                "name": "Company Restricted Product",
+                "type": "product",
+                "default_code": "PRODC",
+                "uom_id": self.uom_unit.id,
+                "company_id": self.company.id,
+            }
+        )
+        estimate_vals = {
+            "manual_date_from": date.today(),
+            "manual_duration": 1,
+            "product_uom_qty": 10.0,
+        }
+        with self.assertRaises(UserError):
+            self.estimate_model.create(
+                dict(
+                    estimate_vals,
+                    product_id=restricted_product.id,
+                    location_id=other_location.id,
+                )
+            )
+        with self.assertRaises(UserError):
+            self.estimate_model.create(
+                dict(
+                    estimate_vals,
+                    product_id=other_product.id,
+                    location_id=self.location.id,
+                )
+            )
+        estimate = self.estimate_model.create(
+            dict(
+                estimate_vals,
+                product_id=restricted_product.id,
+                location_id=self.location.id,
+            )
+        )
+        self.assertEqual(estimate.company_id, self.company)
+        with self.assertRaises(UserError):
+            estimate.location_id = other_location

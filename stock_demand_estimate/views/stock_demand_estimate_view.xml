@@ -13,6 +13,7 @@
                 <field name="product_uom" />
                 <field name="product_qty" />
                 <field name="daily_qty" />
+                <field name="company_id" optional="show" />
                 <field name="active" invisible="1" />
             </tree>
         </field>
@@ -41,6 +42,7 @@
                             <field name="manual_duration" string="Duration" />
                         </group>
                         <group>
+                            <field name="company_id" />
                             <field name="product_id" />
                             <field name="location_id" />
                             <field name="product_uom_qty" />
@@ -119,6 +121,13 @@
                         name="groupby_date_from"
                         domain="[]"
                         context="{'group_by':'date_from'}"
+                    />
+                    <filter
+                        string="Company"
+                        name="groupby_company"
+                        domain="[]"
+                        context="{'group_by':'company_id'}"
+                        groups="base.group_multi_company"
                     />
                 </group>
             </search>
