@@ -1,0 +1,20 @@
+- Mathieu Vatel \<<mathieu@julius.fr>\>
+- Mykhailo Panarin \<<m.panarin@mobilunity.com>\>
+- Joan Sisquella \<<joan.sisquella@forgeflow.com>\>
+- Jordi Ballester Alomar \<<jordi.ballester@forgeflow.com>\>
+- Lois Rilo \<<lois.rilo@forgeflow.com>\>
+- Héctor Villarreal \<<hector.villarreal@forgeflow.com>\>
+- Tecnativa \<tecnativa.com\>
+  - Sergio Teruel
+  - João Marques
+  - Carlos Roca
+- Jacques-Etienne Baudoux \<<je@bcim.be>\>
+- Iryna Vyshnevska \<<i.vyshnevska@mobilunity.com>\>
+- Alexei Rivera \<<arivera@archeti.com>\>
+- Abraham Anes \<<abraham@studio73.es>\>
+- Quartile \<<https://www.quartile.co>\>
+  - Aung Ko Ko Lin
+- Laurent Mignon \<<laurent.mignon@acsone.eu>\>
+- Maksym Yankin \<<maksym.yankin@camptocamp.com>\>
+- Open Source Integrators \<<https://www.opensourceintegrators.com>\>
+  - Daniel Reis <<dreis@opensourceintegrators.com>>
