@@ -77,8 +77,10 @@ class TestStockMovePackagingQty(TransactionCase):
         self.assertEqual(
             picking.move_ids_without_package.product_packaging_quantity, 0.2
         )
+        picking.picking_type_id.automatic_done_packaging_calculation = False
         # Allow to modify the packaging quantity
         picking.move_ids_without_package.write({"product_packaging_quantity": 1.0})
+        picking.move_ids_without_package.write({"quantity": 2.0})
         self.assertRecordValues(
             picking.move_ids_without_package,
             [
@@ -88,6 +90,7 @@ class TestStockMovePackagingQty(TransactionCase):
                     "product_packaging_qty": 0.2,
                     "product_packaging_quantity": 1.0,
                     "product_uom_qty": 1,
+                    "quantity": 2.0,
                 }
             ],
         )
