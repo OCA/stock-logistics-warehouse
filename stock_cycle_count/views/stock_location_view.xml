@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2017 ForgeFlow S.L.
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="view_location_form" model="ir.ui.view">
+        <field name="name">Location form - cycle count extension</field>
+        <field name="model">stock.location</field>
+        <field name="inherit_id" ref="stock.view_location_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button
+                    string="Accuracy Stats"
+                    class="oe_stat_button"
+                    icon="fa-line-chart"
+                    name="action_accuracy_stats"
+                    context="{'location_id': active_ids}"
+                    type="object"
+                />
+            </xpath>
+            <group name="additional_info" position="before">
+                <group name="cycle_count" string="Cycle Count">
+                    <field name="zero_confirmation_disabled" />
+                    <field name="cycle_count_disabled" />
+                    <label for="loc_accuracy" />
+                    <div>
+                        <field name="loc_accuracy" class="oe_inline" /> %
+                    </div>
+                </group>
+            </group>
+        </field>
+    </record>
+</odoo>
