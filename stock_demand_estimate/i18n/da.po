@@ -36,6 +36,7 @@ msgstr "Arkiveret"
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__company_id
+#: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_search
 msgid "Company"
 msgstr "Virksomhed"
 
@@ -106,11 +107,6 @@ msgstr "Fra"
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__date_from
 msgid "From (computed)"
 msgstr "Fra (beregnet)"
-
-#. module: stock_demand_estimate
-#: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_search
-msgid "Group By"
-msgstr "Gruppér efter"
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__id
@@ -209,6 +205,9 @@ msgstr "Til (beregnet)"
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__product_uom
 msgid "Unit of measure"
 msgstr "Måleenhed"
+
+#~ msgid "Group By"
+#~ msgstr "Gruppér efter"
 
 #~ msgid "Last Modified on"
 #~ msgstr "Sidst ændret den"

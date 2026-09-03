@@ -37,6 +37,7 @@ msgstr "Arhivirano"
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__company_id
+#: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_search
 msgid "Company"
 msgstr "Družba"
 
@@ -107,11 +108,6 @@ msgstr "Od"
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__date_from
 msgid "From (computed)"
 msgstr "Od (izračunano)"
-
-#. module: stock_demand_estimate
-#: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_search
-msgid "Group By"
-msgstr "Združi po"
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__id
@@ -210,6 +206,9 @@ msgstr "Do (izračunano)"
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__product_uom
 msgid "Unit of measure"
 msgstr "Enota mere"
+
+#~ msgid "Group By"
+#~ msgstr "Združi po"
 
 #~ msgid "Last Modified on"
 #~ msgstr "Zadnjič spremenjeno"
