@@ -31,8 +31,8 @@ addon | version | maintainers | summary
 [product_view_inventory_no_search_default_my_count](product_view_inventory_no_search_default_my_count/) | 16.0.1.0.0 |  | Product View Inventory No Search Default My Count
 [scrap_reason_code](scrap_reason_code/) | 16.0.1.1.1 | <a href='https://github.com/bodedra'><img src='https://github.com/bodedra.png' width='32' height='32' style='border-radius:50%;' alt='bodedra'/></a> | Reason code for scrapping
 [stock_cycle_count](stock_cycle_count/) | 16.0.2.2.1 | <a href='https://github.com/LoisRForgeFlow'><img src='https://github.com/LoisRForgeFlow.png' width='32' height='32' style='border-radius:50%;' alt='LoisRForgeFlow'/></a> | Adds the capability to schedule cycle counts in a warehouse through different rules defined by the user.
-[stock_demand_estimate](stock_demand_estimate/) | 16.0.1.2.1 |  | Allows to create demand estimates.
-[stock_demand_estimate_matrix](stock_demand_estimate_matrix/) | 16.0.1.0.1 |  | Allows to create demand estimates.
+[stock_demand_estimate](stock_demand_estimate/) | 16.0.1.3.0 |  | Allows to create demand estimates.
+[stock_demand_estimate_matrix](stock_demand_estimate_matrix/) | 16.0.1.1.0 |  | Allows to create demand estimates.
 [stock_exception](stock_exception/) | 16.0.1.1.1 |  | Custom exceptions on stock picking
 [stock_helper](stock_helper/) | 16.0.1.1.0 |  | Add methods shared between various stock modules
 [stock_inventory](stock_inventory/) | 16.0.3.0.0 |  | Allows to do an easier follow up of the Inventory Adjustments
