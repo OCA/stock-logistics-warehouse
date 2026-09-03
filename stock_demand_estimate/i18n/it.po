@@ -36,6 +36,7 @@ msgstr "In archivio"
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__company_id
+#: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_search
 msgid "Company"
 msgstr "Azienda"
 
@@ -106,11 +107,6 @@ msgstr "Dal"
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__date_from
 msgid "From (computed)"
 msgstr "Dal (calcolato)"
-
-#. module: stock_demand_estimate
-#: model_terms:ir.ui.view,arch_db:stock_demand_estimate.stock_demand_estimate_view_search
-msgid "Group By"
-msgstr "Raggruppa per"
 
 #. module: stock_demand_estimate
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__id
@@ -210,6 +206,9 @@ msgstr "A (calcolato)"
 #: model:ir.model.fields,field_description:stock_demand_estimate.field_stock_demand_estimate__product_uom
 msgid "Unit of measure"
 msgstr "Unità di misura"
+
+#~ msgid "Group By"
+#~ msgstr "Raggruppa per"
 
 #~ msgid "Last Modified on"
 #~ msgstr "Ultima modifica il"
