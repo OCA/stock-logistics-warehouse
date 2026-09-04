@@ -43,6 +43,33 @@ class StockMove(models.Model):
             move.onchange_product_uom_for_secondary()
         return res
 
+    @api.model
+    def action_generate_lot_line_vals(self, context, mode, first_lot, count, lot_text):
+        vals_list = super().action_generate_lot_line_vals(
+            context, mode, first_lot, count, lot_text
+        )
+        product_id = context.get("default_product_id")
+        picking_id = context.get("default_picking_id")
+        move = self.env["stock.move"].search(
+            [
+                ("picking_id", "=", picking_id),
+                ("product_id", "=", product_id),
+                ("secondary_uom_id", "!=", False),
+            ],
+            limit=1,
+        )
+        if not move or move.secondary_uom_id.dependency_type == "independent":
+            return vals_list
+        for vals in vals_list:
+            vals["secondary_uom_qty"] = move._convert_qty_to_secondary_uom(
+                vals["quantity"]
+            )
+            vals["secondary_uom_id"] = {
+                "id": move.secondary_uom_id.id,
+                "display_name": move.secondary_uom_id.display_name,
+            }
+        return vals_list
+
 
 class StockMoveLine(models.Model):
     _inherit = ["stock.move.line", "product.secondary.unit.mixin"]
@@ -52,6 +79,16 @@ class StockMoveLine(models.Model):
     quantity = fields.Float(
         store=True, readonly=False, compute="_compute_quantity", precompute=True
     )
+
+    @api.model
+    def default_get(self, fields_list):
+        res = super().default_get(fields_list)
+        move_id = self.env.context.get("default_move_id") or res.get("move_id")
+        if move_id and not res.get("secondary_uom_id"):
+            move = self.env["stock.move"].browse(move_id)
+            if move.secondary_uom_id:
+                res["secondary_uom_id"] = move.secondary_uom_id.id
+        return res
 
     @api.model_create_multi
     def create(self, vals_list):
