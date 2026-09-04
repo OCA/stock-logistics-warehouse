@@ -292,6 +292,61 @@ class TestProductSecondaryUnit(BaseCommon):
         self.assertEqual(quant.secondary_uom_id, secondary_uom_2)
         self.assertEqual(quant.secondary_uom_qty, 40)
 
+    def test_stock_quant_secondary_uom_inventory_quantity(self):
+        quant = self.quant_white
+        self.assertEqual(quant.secondary_uom_id.factor, 0.5)
+        # Counting in the secondary unit fills in the counted quantity
+        quant.secondary_uom_inventory_quantity = 30
+        self.assertEqual(quant.inventory_quantity, 15)
+        self.assertTrue(quant.inventory_quantity_set)
+        self.assertEqual(quant.inventory_diff_quantity, 5)
+        # Setting the counted quantity converts back to the secondary unit
+        quant.inventory_quantity = 20
+        self.assertEqual(quant.secondary_uom_inventory_quantity, 40)
+        # The Clear and Set buttons keep the secondary counted quantity in sync
+        quant.action_clear_inventory_quantity()
+        self.assertEqual(quant.secondary_uom_inventory_quantity, 0)
+        quant.action_set_inventory_quantity()
+        self.assertEqual(quant.secondary_uom_inventory_quantity, 20)
+        # Applying a count entered in the secondary unit updates the quantity
+        quant.secondary_uom_inventory_quantity = 50
+        quant.action_apply_inventory()
+        self.assertEqual(quant.quantity, 25)
+        self.assertEqual(quant.secondary_uom_qty, 50)
+
+    def test_stock_quant_create_secondary_uom_inventory_quantity(self):
+        self.env.user.groups_id = [
+            Command.link(self.env.ref("stock.group_stock_manager").id)
+        ]
+        product = self.product_template.product_variant_ids[0]
+        # In inventory mode the counted quantity is resolved before creation, so
+        # the existing quant is updated instead of a new one being created
+        quant = (
+            self.env["stock.quant"]
+            .with_context(inventory_mode=True)
+            .create(
+                {
+                    "product_id": product.id,
+                    "location_id": self.warehouse.lot_stock_id.id,
+                    "secondary_uom_inventory_quantity": 8,
+                }
+            )
+        )
+        self.assertEqual(quant, self.quant_white)
+        self.assertEqual(quant.inventory_quantity, 4)
+        self.assertEqual(quant.secondary_uom_inventory_quantity, 8)
+
+    def test_stock_quant_independent_secondary_uom_inventory_quantity(self):
+        product = self.product_template.product_variant_ids[0]
+        product.stock_secondary_uom_id.dependency_type = "independent"
+        quant = self.quant_white
+        # An independent secondary unit has no factor relation to the product
+        # unit, so it cannot be used to count
+        quant.secondary_uom_inventory_quantity = 30
+        self.assertEqual(quant.inventory_quantity, 0)
+        quant.invalidate_recordset()
+        self.assertEqual(quant.secondary_uom_inventory_quantity, 0)
+
     def test_action_generate_lot_line_vals(self):
         picking = self.env["stock.picking"].create(
             {
