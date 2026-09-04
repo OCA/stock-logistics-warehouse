@@ -2,7 +2,7 @@
 
 from odoo import api, fields, models
 from odoo.exceptions import ValidationError
-from odoo.osv import expression
+from odoo.fields import Domain
 from odoo.tools import float_compare, float_is_zero
 
 
@@ -38,8 +38,9 @@ class StockRule(models.Model):
             if rule.action == "split_procurement":
                 if not rule.mts_rule_id or not rule.mto_rule_id:
                     msg = self.env._(
-                        "No MTS or MTO rule configured on procurement rule: %s!"
-                    ) % (rule.name,)
+                        "No MTS or MTO rule configured on procurement rule: %s!",
+                        rule.name,
+                    )
                     raise ValidationError(msg)
                 if (
                     rule.mts_rule_id.location_src_id.id
@@ -48,8 +49,9 @@ class StockRule(models.Model):
                     msg = self.env._(
                         "Inconsistency between the source locations of "
                         "the mts and mto rules linked to the procurement "
-                        "rule: %s! It should be the same."
-                    ) % (rule.name,)
+                        "rule: %s! It should be the same.",
+                        rule.name,
+                    )
                     raise ValidationError(msg)
 
     def get_mto_qty_to_order(self, product, product_qty, product_uom, values):
@@ -76,7 +78,7 @@ class StockRule(models.Model):
             "Product Unit of Measure"
         )
         for procurement, rule in procurements:
-            domain = self.env["procurement.group"]._get_moves_to_assign_domain(
+            domain = self.env["stock.rule"]._get_moves_to_assign_domain(
                 procurement.company_id.id
             )
             # Determine the quantity to order as MTO
@@ -105,9 +107,9 @@ class StockRule(models.Model):
 
                 # Search all confirmed stock_moves of mts_procurement and assign them
                 # to adjust the product's free qty
-                group_id = mts_procurement.values.get("group_id")
-                if group_id:
-                    domain = expression.AND([domain, [("group_id", "=", group_id.id)]])
+                reference_ids = mts_procurement.values.get("reference_ids")
+                if reference_ids:
+                    domain &= Domain("reference_ids", "in", reference_ids.ids)
                 moves_to_assign = self.env["stock.move"].search(
                     domain, order="priority desc, date asc"
                 )
