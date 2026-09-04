@@ -63,3 +63,11 @@ start without one.
 The delivery slip report shows the secondary quantity and unit next to
 the primary one for every line, both for a picking still being
 processed and once it is done.
+
+## Counting an inventory adjustment in a secondary unit
+
+1.  Go to *Inventory \> Operations \> Physical Inventory*.
+2.  Fill in the "Counted Quantity (Secondary Unit)" column for a product having a
+    second unit of measure. The "Counted Quantity" column is filled in
+    accordingly, and both stay in sync.
+3.  Apply the adjustment as usual.
