@@ -753,3 +753,88 @@ class TestReserveRule(common.TransactionCase):
             ],
         )
         picking.action_assign()
+
+    def test_reserve_no_negative(self):
+        # We want to test the reservation rules don't select a negative
+        # quant as it can lead to a negative move line and a positive
+        # move line for the rest of demand + the abs(quantity) of the negative one
+
+        # The conditions to reproduce the problem are:
+        # - A demand of a X quantity
+        # - A positive quant with a big quantity > X (recent)
+        # - A positive quant with a little quantity > X but with all quantities reserved
+        # - A negative quant of a quantity < 0 and abs(quantity) < X
+
+        # The move reservation should lead to one move line creation
+
+        # Create a simple rule on stock
+        self._create_rule(
+            {},
+            [
+                {"location_id": self.wh.lot_stock_id.id, "sequence": 2},
+            ],
+        )
+
+        # Create a positive quant and reserve it for a move
+        quant_0 = (
+            self.env["stock.quant"]
+            .with_context(inventory_mode=True)
+            .create(
+                {
+                    "location_id": self.loc_zone1_bin2.id,
+                    "product_id": self.product1.id,
+                    "inventory_quantity": 3.0,
+                }
+            )
+        )
+        quant_0._apply_inventory()
+
+        move = self.env["stock.move"].create(
+            {
+                "name": self.product1.name,
+                "location_id": self.wh.lot_stock_id.id,
+                "location_dest_id": self.env.ref("stock.stock_location_customers").id,
+                "product_uom_qty": 3.0,
+                "product_id": self.product1.id,
+            }
+        )
+        move._action_confirm()
+        self.assertFalse(move.move_line_ids)
+        move._action_assign()
+        self.assertEqual(3.0, quant_0.reserved_quantity)
+
+        # Create it without inventory mode as it could merge it with the other one
+        self.env["stock.quant"].with_context(inventory_mode=True).create(
+            {
+                "location_id": self.loc_zone1_bin2.id,
+                "product_id": self.product1.id,
+                "quantity": -1.0,
+            }
+        )
+
+        quant_2 = (
+            self.env["stock.quant"]
+            .with_context(inventory_mode=True)
+            .create(
+                {
+                    "location_id": self.loc_zone1_bin1.id,
+                    "product_id": self.product1.id,
+                    "inventory_quantity": 30.0,
+                }
+            )
+        )
+        quant_2._apply_inventory()
+
+        move = self.env["stock.move"].create(
+            {
+                "name": self.product1.name,
+                "location_id": self.wh.lot_stock_id.id,
+                "location_dest_id": self.env.ref("stock.stock_location_customers").id,
+                "product_uom_qty": 2.0,
+                "product_id": self.product1.id,
+            }
+        )
+        move._action_confirm()
+        self.assertFalse(move.move_line_ids)
+        move._action_assign()
+        self.assertEqual(1, len(move.move_line_ids))
