@@ -77,4 +77,5 @@ re-derived from the primary quantity and losing precision or meaning:
   re-derive that sum ad hoc every time.
 
 It also introduces a secondary UoM on stock quants and displays the
-corresponding converted quantity.
+corresponding converted quantity, and allows to enter the counted quantity
+of an inventory adjustment in the secondary unit.
