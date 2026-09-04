@@ -14,6 +14,16 @@
                 />
                 <field name="secondary_uom_id" groups="uom.group_uom" optional="show" />
             </field>
+            <field name="inventory_quantity" position="after">
+                <field name="secondary_uom_dependency_type" column_invisible="True" />
+                <field
+                    name="secondary_uom_inventory_quantity"
+                    widget="counted_quantity_widget"
+                    readonly="not secondary_uom_id or secondary_uom_dependency_type == 'independent'"
+                    groups="uom.group_uom"
+                    optional="show"
+                />
+            </field>
         </field>
     </record>
     <record id="view_stock_quant_tree_editable" model="ir.ui.view">

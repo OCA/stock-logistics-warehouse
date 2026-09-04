@@ -2,6 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo import api, fields, models
+from odoo.tools.float_utils import float_round
 
 
 class StockQuant(models.Model):
@@ -17,7 +18,89 @@ class StockQuant(models.Model):
     # Need precompute=False since secondary_uom_id is not precompute field and we
     # shouldn't depend for compute method of precompute field.
     secondary_uom_qty = fields.Float(precompute=False)
+    secondary_uom_inventory_quantity = fields.Float(
+        string="Counted Quantity (Secondary Unit)",
+        digits="Product Unit of Measure",
+        compute="_compute_secondary_uom_inventory_quantity",
+        readonly=False,
+        help="The product's counted quantity, expressed in the secondary unit. "
+        "Filling it in sets the counted quantity accordingly.",
+    )
+    secondary_uom_dependency_type = fields.Selection(
+        related="secondary_uom_id.dependency_type"
+    )
 
     @api.model
     def _get_secondary_uom_qty_depends(self):
         return super()._get_secondary_uom_qty_depends() + ["secondary_uom_id"]
+
+    @api.depends("inventory_quantity", "secondary_uom_id")
+    def _compute_secondary_uom_inventory_quantity(self):
+        for quant in self:
+            if not quant._is_convertible_secondary_uom(quant.secondary_uom_id):
+                quant.secondary_uom_inventory_quantity = 0.0
+                continue
+            quant.secondary_uom_inventory_quantity = (
+                quant._convert_qty_to_secondary_uom(quant.inventory_quantity)
+            )
+
+    @api.onchange("secondary_uom_inventory_quantity")
+    def _onchange_secondary_uom_inventory_quantity(self):
+        self._set_inventory_quantity_from_secondary(
+            self.secondary_uom_inventory_quantity
+        )
+
+    def _set_inventory_quantity_from_secondary(self, secondary_uom_qty):
+        for quant in self:
+            if not quant._is_convertible_secondary_uom(quant.secondary_uom_id):
+                continue
+            quant.inventory_quantity = self._convert_secondary_uom_qty_to_qty(
+                quant.secondary_uom_id, secondary_uom_qty, quant.product_uom_id
+            )
+
+    @api.model
+    def _is_driven_by_secondary_uom(self, vals):
+        return (
+            "inventory_quantity" not in vals
+            and "secondary_uom_inventory_quantity" in vals
+        )
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            driven = self._is_driven_by_secondary_uom(vals)
+            secondary_uom_qty = vals.pop("secondary_uom_inventory_quantity", 0.0)
+            if not driven:
+                continue
+            product = self.env["product.product"].browse(vals.get("product_id"))
+            secondary_uom = product.stock_secondary_uom_id
+            if not self._is_convertible_secondary_uom(secondary_uom):
+                continue
+            vals["inventory_quantity"] = self._convert_secondary_uom_qty_to_qty(
+                secondary_uom, secondary_uom_qty, product.uom_id
+            )
+        return super().create(vals_list)
+
+    def write(self, vals):
+        res = super().write(vals)
+        if self._is_driven_by_secondary_uom(vals):
+            self._set_inventory_quantity_from_secondary(
+                vals["secondary_uom_inventory_quantity"]
+            )
+        return res
+
+    @api.model
+    def _get_inventory_fields_write(self):
+        return super()._get_inventory_fields_write() + [
+            "secondary_uom_inventory_quantity"
+        ]
+
+    @api.model
+    def _is_convertible_secondary_uom(self, secondary_uom):
+        return bool(secondary_uom) and secondary_uom.dependency_type != "independent"
+
+    @api.model
+    def _convert_secondary_uom_qty_to_qty(self, secondary_uom, secondary_uom_qty, uom):
+        return float_round(
+            secondary_uom_qty * secondary_uom.factor, precision_rounding=uom.rounding
+        )
