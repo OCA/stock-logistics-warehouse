@@ -39,12 +39,7 @@ class StockRule(models.Model):
             # send a piece count downstream that never physically existed
             # (22 kg shipped as 40 pieces), and a later merge would add it
             # on top of the next push.
-            done_secondary_qty = move_to_copy.secondary_uom_qty_done
-            # Nothing counted at all - the operator validated straight from
-            # the reservation without touching the secondary unit. Fall
-            # back to the demand, same as
-            # _onchange_helper_product_uom_for_secondary() does.
-            vals["secondary_uom_qty"] = (
-                done_secondary_qty or move_to_copy.secondary_uom_qty
-            )
+            # Without a measured count, only propagate the processed share
+            # of the demand, including when the backorder was cancelled.
+            vals["secondary_uom_qty"] = move_to_copy._get_secondary_qty_to_process()
         return vals
