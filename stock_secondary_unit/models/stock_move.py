@@ -1,6 +1,9 @@
 # Copyright 2018 Tecnativa - Sergio Teruel
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+from collections import defaultdict
+
 from odoo import api, fields, models
+from odoo.tools.float_utils import float_compare
 
 # Secondary unit dependency types that must survive a split/backorder as an
 # exact count, never a proportional recompute from the primary quantity.
@@ -98,6 +101,20 @@ class StockMove(models.Model):
             self.invalidate_recordset(fnames=["secondary_uom_qty"])
         return vals
 
+    def _prepare_procurement_values(self):
+        # Called on make-to-order moves to build the vals a downstream
+        # stock.rule uses to create the next move in a pull chain (e.g. a
+        # 2-step reception, or an internal MTO replenishment) - core has no
+        # notion of the secondary unit, so without this the new move is
+        # created without one at all. stock.rule only actually copies these
+        # keys when a _get_custom_move_fields() override whitelists them
+        # (e.g. sale_stock_secondary_unit's), so this alone is a no-op
+        # unless such a module is also installed.
+        res = super()._prepare_procurement_values()
+        res["secondary_uom_id"] = self.secondary_uom_id.id
+        res["secondary_uom_qty"] = self.secondary_uom_qty
+        return res
+
     @api.model
     def _prepare_merge_moves_distinct_fields(self):
         """Don't merge moves with distinct secondary units"""
@@ -125,6 +142,60 @@ class StockMove(models.Model):
                 else self[0].secondary_uom_qty
             )
         return vals
+
+    def _merge_moves(self, merge_into=False):
+        # Absorbing a negative move (e.g. a return) into a positive one is
+        # a separate code path in core from a regular positive-move merge:
+        # core only rebalances product_uom_qty there
+        # (stock.move._merge_moves, the neg_qty_moves loop) -
+        # _merge_moves_fields() above is never called for it. Mirror that
+        # rebalancing for the secondary unit: snapshot each negative move's
+        # secondary qty by its merge key before the real merge runs (core
+        # mutates/unlinks the negative moves in place), then apply it to
+        # whichever move key survives.
+        distinct_fields = self._prepare_merge_moves_distinct_fields()
+        excluded_fields = self._prepare_merge_negative_moves_excluded_distinct_fields()
+        neg_key = self._merge_move_itemgetter(distinct_fields, excluded_fields)
+        neg_secondary_qty_by_key = defaultdict(float)
+        for move in self:
+            if move.secondary_uom_id and (
+                float_compare(
+                    move.secondary_uom_qty,
+                    0.0,
+                    precision_rounding=move.secondary_uom_id.uom_id.rounding or 0.01,
+                )
+                < 0
+            ):
+                neg_secondary_qty_by_key[neg_key(move)] += move.secondary_uom_qty
+        res = super()._merge_moves(merge_into=merge_into)
+        if not neg_secondary_qty_by_key:
+            return res
+        for move in res:
+            secondary_uom_qty = neg_secondary_qty_by_key.get(neg_key(move))
+            if secondary_uom_qty is None:
+                continue
+            if (
+                move.product_uom_qty >= 0.0
+                and move.secondary_uom_id.dependency_type
+                in COUNT_PRESERVING_DEPENDENCY_TYPES
+            ):
+                # The positive move absorbed the negative one and survived
+                # (core added the, negative, neg_move.product_uom_qty onto
+                # it) - do the same exact-count addition here, never a
+                # factor-based recompute.
+                new_secondary_uom_qty = move.secondary_uom_qty + secondary_uom_qty
+            else:
+                # Either a "dependent" secondary unit, or the negative move
+                # itself survived (absorbed the positive one and stayed
+                # negative) - re-derive from the now-merged product_uom_qty,
+                # same as the ordinary dependent-mode computation.
+                new_secondary_uom_qty = move._convert_qty_to_secondary_uom(
+                    move._get_quantity_from_line()
+                )
+            # Use _write to avoid retriggering the product_uom_qty compute.
+            move._write({"secondary_uom_qty": new_secondary_uom_qty})
+            move.invalidate_recordset(fnames=["secondary_uom_qty"])
+        return res
 
     def _recompute_state(self):
         # Override when creating backorder
@@ -172,8 +243,13 @@ class StockMoveLine(models.Model):
         aggregated_move_lines = super()._get_aggregated_product_quantities(**kwargs)
         for move_line in self:
             line_key = self._get_aggregated_properties(move_line=move_line)["line_key"]
+            # Several move lines (e.g. different lots of the same product)
+            # can share the same aggregation key - accumulate, don't
+            # overwrite, or only the last line processed would survive on
+            # the delivery slip report.
             aggregated_move_lines[line_key]["secondary_uom_qty"] = (
-                move_line.secondary_uom_qty
+                aggregated_move_lines[line_key].get("secondary_uom_qty", 0.0)
+                + move_line.secondary_uom_qty
             )
             aggregated_move_lines[line_key]["secondary_uom_id"] = (
                 move_line.secondary_uom_id

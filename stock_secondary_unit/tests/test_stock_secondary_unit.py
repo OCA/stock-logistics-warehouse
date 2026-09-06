@@ -535,3 +535,202 @@ class TestProductSecondaryUnit(BaseCommon):
         picking.action_confirm()
         self.assertEqual(len(picking.move_ids), 1)
         self.assertEqual(picking.move_ids.secondary_uom_qty, 2)
+
+    def test_secondary_unit_merge_negative_move(self):
+        """Absorbing a negative move (e.g. a return) into a positive one is
+        a separate code path in core from the ordinary positive-move merge
+        above - it only rebalances product_uom_qty
+        (stock.move._merge_moves' own neg_qty_moves loop), so without a
+        matching override here the secondary unit count would be silently
+        left stale instead of absorbing the negative move's own count.
+        """
+        product = self.product_template.product_variant_ids[0]
+        secondary_unit = self.env["product.secondary.unit"].create(
+            {
+                "product_tmpl_id": product.product_tmpl_id.id,
+                "code": "PZ",
+                "name": "piece",
+                "uom_id": self.product_uom_unit.id,
+                "factor": 0.7,
+                "dependency_type": "secondary_priority",
+            }
+        )
+        picking = self.StockPicking.create(
+            {
+                "location_id": self.location_stock.id,
+                "location_dest_id": self.env.ref("stock.stock_location_customers").id,
+                "picking_type_id": self.picking_type_out.id,
+            }
+        )
+        pos_move = self.env["stock.move"].create(
+            {
+                "product_id": product.id,
+                "name": product.display_name,
+                "secondary_uom_id": secondary_unit.id,
+                "secondary_uom_qty": 20.0,
+                "product_uom": product.uom_id.id,
+                "product_uom_qty": 14.0,
+                "location_id": picking.location_id.id,
+                "location_dest_id": picking.location_dest_id.id,
+                "picking_id": picking.id,
+            }
+        )
+        picking.action_confirm()
+        neg_move = self.env["stock.move"].create(
+            {
+                "product_id": product.id,
+                "name": product.display_name,
+                "secondary_uom_id": secondary_unit.id,
+                "secondary_uom_qty": -3.0,
+                "product_uom": product.uom_id.id,
+                "product_uom_qty": -2.0,
+                "location_id": picking.location_id.id,
+                "location_dest_id": picking.location_dest_id.id,
+                "picking_id": picking.id,
+            }
+        )
+        neg_move._action_confirm()
+        self.assertEqual(len(picking.move_ids), 1)
+        self.assertEqual(picking.move_ids, pos_move)
+        self.assertEqual(pos_move.product_uom_qty, 12.0)
+        self.assertEqual(pos_move.secondary_uom_qty, 17.0)
+
+    def test_prepare_procurement_values_propagates_secondary_unit(self):
+        """A move-triggered procurement (a pull chain, e.g. a 2-step
+        reception or an internal MTO replenishment) must carry the
+        secondary unit forward into the values used to create the next
+        move - stock.rule only actually copies keys a
+        _get_custom_move_fields() override whitelists (e.g.
+        sale_stock_secondary_unit's), but the base values dict itself
+        must offer them regardless of which downstream module is
+        installed.
+        """
+        product = self.product_template.product_variant_ids[0]
+        secondary_unit = self.env["product.secondary.unit"].create(
+            {
+                "product_tmpl_id": product.product_tmpl_id.id,
+                "code": "PZ",
+                "name": "piece",
+                "uom_id": self.product_uom_unit.id,
+                "factor": 0.7,
+                "dependency_type": "secondary_priority",
+            }
+        )
+        move = self.env["stock.move"].create(
+            {
+                "product_id": product.id,
+                "name": product.display_name,
+                "secondary_uom_id": secondary_unit.id,
+                "secondary_uom_qty": 12.0,
+                "product_uom": product.uom_id.id,
+                "product_uom_qty": 8.4,
+                "location_id": self.location_supplier.id,
+                "location_dest_id": self.location_stock.id,
+            }
+        )
+        values = move._prepare_procurement_values()
+        self.assertEqual(values["secondary_uom_id"], secondary_unit.id)
+        self.assertEqual(values["secondary_uom_qty"], 12.0)
+
+    def test_merge_moves_fields_merge_extra_keeps_single_demand(self):
+        """When a PO/SO line's primary quantity is increased on an
+        already-confirmed order, core creates a second, incremental move
+        for just the delta and merges it into the existing one via
+        merge_into with a merge_extra context flag -
+        _merge_moves_fields() must then keep the surviving move's own
+        secondary_uom_qty (already the full, correct demand), not sum
+        both moves' secondary_uom_qty together (which would
+        double-count). This regressed once in production (TT59838:
+        "secondary uom qty is accumulated when only product_uom_qty is
+        changed") - the merge_extra guard here is what prevents it from
+        happening again.
+        """
+        product = self.product_template.product_variant_ids[0]
+        secondary_unit = self.env["product.secondary.unit"].create(
+            {
+                "product_tmpl_id": product.product_tmpl_id.id,
+                "code": "PZ",
+                "name": "piece",
+                "uom_id": self.product_uom_unit.id,
+                "factor": 0.7,
+                "dependency_type": "secondary_priority",
+            }
+        )
+        move_vals = {
+            "product_id": product.id,
+            "name": product.display_name,
+            "secondary_uom_id": secondary_unit.id,
+            "secondary_uom_qty": 20.0,
+            "product_uom": product.uom_id.id,
+            "product_uom_qty": 14.0,
+            "location_id": self.location_supplier.id,
+            "location_dest_id": self.location_stock.id,
+        }
+        existing_move = self.env["stock.move"].create(move_vals)
+        delta_move = self.env["stock.move"].create(move_vals)
+        moves = existing_move | delta_move
+        vals = moves.with_context(merge_extra=True)._merge_moves_fields()
+        self.assertEqual(vals["secondary_uom_qty"], moves[0].secondary_uom_qty)
+        self.assertEqual(vals["secondary_uom_qty"], 20.0)
+
+    def test_get_aggregated_product_quantities_sums_secondary_uom_qty(self):
+        """Core's own aggregation key purposely ignores lots/SNs ("these
+        are expected to already be properly grouped by line") - several
+        move lines of the same product/uom (e.g. different lots) commonly
+        share one key on a delivery slip report. The secondary unit qty
+        must accumulate across them the same way the primary quantity
+        does, not just keep whichever line was processed last.
+        """
+        product = self.product_template.product_variant_ids[0]
+        secondary_unit = self.env["product.secondary.unit"].create(
+            {
+                "product_tmpl_id": product.product_tmpl_id.id,
+                "code": "PZ",
+                "name": "piece",
+                "uom_id": self.product_uom_unit.id,
+                "factor": 0.7,
+                "dependency_type": "secondary_priority",
+            }
+        )
+        picking = self.StockPicking.create(
+            {
+                "location_id": self.location_supplier.id,
+                "location_dest_id": self.location_stock.id,
+                "picking_type_id": self.picking_type_in.id,
+                "move_ids_without_package": [
+                    Command.create(
+                        {
+                            "product_id": product.id,
+                            "name": product.display_name,
+                            "secondary_uom_id": secondary_unit.id,
+                            "secondary_uom_qty": 20.0,
+                            "product_uom": product.uom_id.id,
+                            "product_uom_qty": 14.0,
+                            "location_id": self.location_supplier.id,
+                            "location_dest_id": self.location_stock.id,
+                        }
+                    ),
+                    Command.create(
+                        {
+                            "product_id": product.id,
+                            "name": product.display_name,
+                            "secondary_uom_id": secondary_unit.id,
+                            "secondary_uom_qty": 10.0,
+                            "product_uom": product.uom_id.id,
+                            "product_uom_qty": 7.0,
+                            "location_id": self.location_supplier.id,
+                            "location_dest_id": self.location_stock.id,
+                        }
+                    ),
+                ],
+            }
+        )
+        picking.action_confirm()
+        # "secondary_priority" move lines are never auto-derived from the
+        # quantity done - set what was actually counted on each line, same
+        # as an operator would.
+        for move in picking.move_ids:
+            move.move_line_ids.secondary_uom_qty = move.secondary_uom_qty
+        aggregated = picking.move_line_ids._get_aggregated_product_quantities()
+        self.assertEqual(len(aggregated), 1)
+        self.assertEqual(list(aggregated.values())[0]["secondary_uom_qty"], 30.0)
