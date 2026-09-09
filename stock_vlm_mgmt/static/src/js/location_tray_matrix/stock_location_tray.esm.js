@@ -1,7 +1,6 @@
 /* Copyright 2024 Tecnativa - David Vidal
    License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).*/
-import {Component, useState} from "@odoo/owl";
-
+import {Component, useEffect, useState} from "@odoo/owl";
 import {registry} from "@web/core/registry";
 import {standardFieldProps} from "@web/views/fields/standard_field_props";
 import {useService} from "@web/core/utils/hooks";
@@ -17,9 +16,15 @@ export class LocationTrayMatrixField extends Component {
     };
     setup() {
         super.setup();
-        this.state = useState(this.props.record.data[this.props.name]);
+        this.state = useState({matrix: this.props.record.data[this.props.name]});
         this.orm = useService("orm");
         this.action = useService("action");
+        useEffect(
+            () => {
+                this.state.matrix = this.props.record.data[this.props.name];
+            },
+            () => [this.props.record.data[this.props.name]]
+        );
     }
     /**
      *
