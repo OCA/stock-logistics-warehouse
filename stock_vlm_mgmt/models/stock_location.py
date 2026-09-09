@@ -2,6 +2,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from odoo import fields, models
 from odoo.exceptions import UserError
+from odoo.fields import Domain
 
 
 class StockLocation(models.Model):
@@ -125,7 +126,7 @@ class StockLocation(models.Model):
         action = self.env["ir.actions.act_window"]._for_xml_id(
             "stock_vlm_mgmt.location_vlm_tray_action"
         )
-        action["domain"] = [("id", "in", self.vlm_tray_ids.ids)]
+        action["domain"] = Domain([("id", "in", self.vlm_tray_ids.ids)])
         action["context"] = dict(self.env.context, default_location_id=self.id)
         return action
 
@@ -133,7 +134,7 @@ class StockLocation(models.Model):
         action = self.env["ir.actions.act_window"]._for_xml_id(
             "stock_vlm_mgmt.location_quant_vlm_action"
         )
-        action["domain"] = [("location_id", "=", self.id)]
+        action["domain"] = Domain([("location_id", "=", self.id)])
         action["context"] = dict(
             self.env.context,
             vlm_inventory_mode=True,

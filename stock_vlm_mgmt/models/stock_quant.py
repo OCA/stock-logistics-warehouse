@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from odoo import api, fields, models
 from odoo.exceptions import UserError
-from odoo.osv import expression
+from odoo.fields import Domain
 from odoo.tools.float_utils import float_compare, float_round
 
 
@@ -16,7 +16,7 @@ class StockQuant(models.Model):
     def action_view_in_vlm_structure(self):
         """Open the VLM structure filtering by this product to locate it easily"""
         action = self.location_id.action_view_vlm_quants()
-        action["domain"] = expression.AND(
+        action["domain"] = Domain.AND(
             [action["domain"], [("product_id", "=", self.product_id.id)]]
         )
         return action

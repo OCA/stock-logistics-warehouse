@@ -1,6 +1,7 @@
 # Copyright 2023 Tecnativa - David Vidal
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from odoo import api, fields, models
+from odoo.fields import Domain
 
 
 class StockPicking(models.Model):
@@ -80,6 +81,6 @@ class StockPicking(models.Model):
         )
         vlm_tasks = get_tasks + put_tasks
         action["name"] = f"SVM tasks for {self.name}"
-        action["domain"] = [("id", "in", vlm_tasks.ids)]
+        action["domain"] = Domain([("id", "in", vlm_tasks.ids)])
         action["context"] = dict(self.env.context, search_default_pending=1)
         return action
