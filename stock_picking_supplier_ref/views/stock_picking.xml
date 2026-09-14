@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2017 Trey -->
+<odoo>
+    <record id="view_picking_form_reference" model="ir.ui.view">
+        <field name="name">view.picking.form.inherited</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form" />
+        <field name="arch" type="xml">
+            <field name="origin" position="after">
+                <field
+                    name="supplier_reference"
+                    invisible="picking_type_code != 'incoming'"
+                />
+            </field>
+        </field>
+    </record>
+    <record id="vpicktree_reference" model="ir.ui.view">
+        <field name="name">stock.picking.tree.view.inherited</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.vpicktree" />
+        <field name="arch" type="xml">
+            <field name="origin" position="after">
+                <field name="supplier_reference" optional="show" />
+            </field>
+        </field>
+    </record>
+    <record id="view_picking_internal_search_reference" model="ir.ui.view">
+        <field name="name">view.picking.internal.search.inherited</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_internal_search" />
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="supplier_reference" />
+            </field>
+        </field>
+    </record>
+</odoo>
