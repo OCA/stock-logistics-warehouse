@@ -66,6 +66,10 @@
                                     string="UoM"
                                     groups="uom.group_uom"
                                 />
+                                <!-- Preserve the field as invisible to avoid errors
+                                when the UoM is used in _constraint_max_move_quantity
+                                to compare values using the rounding,
+                                and the user does not have the group_uom group. -->
                                 <field
                                     name="product_uom_id"
                                     string="UoM"
@@ -92,10 +96,15 @@
                                     name="package_id"
                                     domain="[('location_id', '=', origin_location_id)]"
                                     options="{'no_create': True}"
+                                    groups="stock.group_tracking_lot"
                                 />
-                                <field name="owner_id" options="{'no_create': True}" />
+                                <field
+                                    name="owner_id"
+                                    options="{'no_create': True}"
+                                    groups="stock.group_tracking_owner"
+                                />
                                 <field name="move_quantity" />
-                                <field name="custom" invisible="1" />
+                                <field name="custom" column_invisible="1" />
                                 <field
                                     name="max_quantity"
                                     readonly="not custom"

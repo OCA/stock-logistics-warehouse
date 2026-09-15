@@ -110,9 +110,7 @@ class StockMoveLocationWizard(models.TransientModel):
         res = []
         if not self.exclude_reserved_qty:
             res = [
-                (
-                    0,
-                    0,
+                Command.create(
                     {
                         "product_id": quant.product_id.id,
                         "move_quantity": quant.quantity,
@@ -141,9 +139,7 @@ class StockMoveLocationWizard(models.TransientModel):
                 )
                 if qty:
                     res.append(
-                        (
-                            0,
-                            0,
+                        Command.create(
                             {
                                 "product_id": quant.product_id.id,
                                 "move_quantity": qty,
@@ -160,9 +156,6 @@ class StockMoveLocationWizard(models.TransientModel):
                         )
                     )
         return res
-
-    def _clear_lines(self):
-        self.stock_move_location_line_ids = False
 
     def _get_locations_domain(self):
         return [
@@ -352,7 +345,3 @@ class StockMoveLocationWizard(models.TransientModel):
                 if line_vals.get("max_quantity", 0.0) > 0.0
             ]
             self.update({"stock_move_location_line_ids": lines})
-
-    def clear_lines(self):
-        self._clear_lines()
-        return {"type": "ir.action.do_nothing"}

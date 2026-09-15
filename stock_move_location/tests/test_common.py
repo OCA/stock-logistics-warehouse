@@ -1,6 +1,7 @@
 # Copyright (C) 2011 Julius Network Solutions SARL <contact@julius.fr>
 # Copyright 2018 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
+from odoo import Command
 from odoo.tests import Form
 
 from odoo.addons.base.tests.common import BaseCommon
@@ -10,15 +11,11 @@ class TestsCommon(BaseCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        # Disable tracking for tests as recommended in Odoo 19.0 migration guide
-        cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
         cls.location_obj = cls.env["stock.location"]
         cls.product_obj = cls.env["product.product"]
         cls.wizard_obj = cls.env["wiz.stock.move.location"]
         cls.quant_obj = cls.env["stock.quant"]
         cls.company = cls.env.ref("base.main_company")
-        cls.partner = cls.env["res.partner"].create({"name": "Test Partner"})
-
         cls.internal_loc_1 = cls.location_obj.create(
             {
                 "name": "INT_1",
@@ -184,4 +181,4 @@ class TestsCommon(BaseCommon):
                 "location_out_id": loc_out.id,
             }
         )
-        loc_in.write({"putaway_rule_ids": [(4, putaway.id, 0)]})
+        loc_in.write({"putaway_rule_ids": [Command.link(putaway.id)]})

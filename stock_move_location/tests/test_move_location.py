@@ -79,18 +79,6 @@ class TestMoveLocation(TestsCommon):
         self.check_product_amount(self.product_no_lots, self.internal_loc_2, 123)
         self.check_product_amount(self.product_lots, self.internal_loc_2, 1, self.lot1)
 
-    def test_wizard_clear_lines(self):
-        """Test lines getting cleared properly."""
-        wizard = self._create_wizard(self.internal_loc_1, self.internal_loc_2)
-        wizard.onchange_origin_location()
-        self.assertEqual(len(wizard.stock_move_location_line_ids), 7)
-        dest_location_line = wizard.stock_move_location_line_ids.mapped(
-            "destination_location_id"
-        )
-        self.assertEqual(dest_location_line, wizard.destination_location_id)
-        wizard.clear_lines()
-        self.assertEqual(len(wizard.stock_move_location_line_ids), 0)
-
     def test_wizard_onchange_origin_location(self):
         """Test a product that have existing quants with undefined quantity."""
 
