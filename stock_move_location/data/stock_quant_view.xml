@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    <!--  To move quants directly from qants views  -->
+    <!--  To move quants directly from quants views  -->
     <record id="wiz_stock_quant_location_action" model="ir.actions.act_window">
         <field name="name">Move to location...</field>
         <field name="res_model">wiz.stock.move.location</field>

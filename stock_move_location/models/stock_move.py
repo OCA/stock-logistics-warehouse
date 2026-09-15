@@ -9,6 +9,7 @@ class StockMove(models.Model):
 
     location_move = fields.Boolean(
         string="Part of move location",
+        copy=False,
         help="Whether this move is a part of stock_location moves",
     )
 
