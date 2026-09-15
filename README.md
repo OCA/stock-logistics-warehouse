@@ -33,6 +33,7 @@ addon | version | maintainers | summary
 [stock_inventory_lockdown_product](stock_inventory_lockdown_product/) | 19.0.1.0.0 |  | Lock down stock locations during inventories for inventoried products
 [stock_location_is_sublocation](stock_location_is_sublocation/) | 19.0.1.0.0 |  | Add method to check stock location is sublocation
 [stock_location_position](stock_location_position/) | 19.0.1.0.0 |  | Add coordinate attributes on stock location.
+[stock_move_location](stock_move_location/) | 19.0.1.0.0 |  | This module allows to move all stock in a stock location to an other one.
 [stock_move_quantity_product_uom](stock_move_quantity_product_uom/) | 19.0.1.0.0 |  | computes stock.move's quantity in the uom of the product.
 [stock_picking_show_linked](stock_picking_show_linked/) | 19.0.1.0.0 |  | This addon allows to easily access related pickings (in the case of chained routes) through a button in the parent picking view.
 [stock_picking_type_user_restriction](stock_picking_type_user_restriction/) | 19.0.1.0.0 | <a href='https://github.com/eLBati'><img src='https://github.com/eLBati.png' width='32' height='32' style='border-radius:50%;' alt='eLBati'/></a> | Restrict some users to see and use only certain picking types
