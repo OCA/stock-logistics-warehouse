@@ -242,26 +242,20 @@ class VerticalLiftOperationBase(models.AbstractModel):
         self.next_step()
 
     def on_barcode_scanned(self, barcode):
+        """React to a barcode scanned on the shuttle screen
+
+        Called as a plain RPC by the ``barcode_handler`` widget patched in
+        ``vertical_lift.esm.js``, not through the onchange of the
+        ``barcodes.barcode_events_mixin``: the method has side effects in the
+        database (update line, go to the next step, ...) and must not leave
+        pending changes on the form.
+        """
         self.ensure_one()
         # to implement in sub-classes
 
     def on_screen_open(self):
         """Called when the screen is opened"""
         self.reset_steps()
-
-    def onchange(self, values, field_names, field_onchange):
-        if "_barcode_scanned" not in field_names:
-            return super().onchange(values, field_names, field_onchange)
-
-        # _barcode_scanner is implemented (in the barcodes module) as an
-        # onchange, which is really annoying when we want it to act as a
-        # normal button and actually have side effect in the database
-        # (update line, go to the next step, ...). This override shorts the
-        # onchange call and calls the scanner method as a normal method.
-        self.on_barcode_scanned(values["_barcode_scanned"])
-        # We can't know which fields on_barcode_scanned changed, refresh
-        # everything.
-        return {"value": self.read()[0]}
 
     @api.depends()
     def _compute_number_of_ops(self):

@@ -1,13 +1,26 @@
-import {Component, onMounted, onWillUnmount, useRef, useState, xml} from "@odoo/owl";
+/* global document, InputEvent */
+import {
+    Component,
+    onMounted,
+    onPatched,
+    onWillUnmount,
+    useRef,
+    useState,
+    xml,
+} from "@odoo/owl";
 import {BarcodeHandlerField} from "@barcodes/barcode_handler_field";
 import {Dialog} from "@web/core/dialog/dialog";
 import {FormController} from "@web/views/form/form_controller";
 import {KanbanController} from "@web/views/kanban/kanban_controller";
+import {Mutex} from "@web/core/utils/concurrency";
 import {_t} from "@web/core/l10n/translation";
 import {browser} from "@web/core/browser/browser";
 import {patch} from "@web/core/utils/patch";
 import {registry} from "@web/core/registry";
+import {useHotkey} from "@web/core/hotkeys/hotkey_hook";
 import {useService} from "@web/core/utils/hooks";
+
+const OPERATION_MODEL_PREFIX = "vertical.lift.operation.";
 
 const SWITCH_BARCODE_METHODS = {
     "OBTswitch-pick": "switch_pick",
@@ -15,9 +28,47 @@ const SWITCH_BARCODE_METHODS = {
     "OBTswitch-inventory": "switch_inventory",
 };
 
-// Intercept OBTswitch-* barcodes on vertical lift operation forms before the
-// standard barcode_handler forwards them to the model's on_barcode_scanned
-// (which would emit "No location found for barcode ...").
+// Button (OBT) and command (OCD) barcodes are handled by the generic
+// handlers of the barcodes module, the operation must not receive them.
+const ACTION_BARCODE_RE = /^(OBT|OCD)/;
+
+// A scan must wait for the previous one to be processed and reloaded,
+// otherwise two scans could be evaluated against the same operation step.
+// record.update() had this queuing through the form model mutex.
+const scanMutex = new Mutex();
+
+function isOperationModel(resModel) {
+    return resModel.startsWith(OPERATION_MODEL_PREFIX);
+}
+
+function blurActiveElement() {
+    const el = document.activeElement;
+    if (el && el !== document.body) {
+        el.blur();
+    }
+}
+
+// The scanner keys typed into the focused input stay in its value: remove
+// them once the barcode service confirmed they were a barcode.
+function stripScannedBarcode(ev) {
+    const input = ev.target;
+    const barcode = ev.detail.barcode;
+    if (input.value.endsWith(barcode)) {
+        input.value = input.value.slice(0, -barcode.length);
+        input.dispatchEvent(new InputEvent("input", {bubbles: true}));
+    }
+}
+
+// Barcode_service.js ignores keys typed while an <input> has the focus unless
+// the input carries these attributes, so a scan would be lost.
+function enableBarcodeOnInputs(root) {
+    for (const input of root.querySelectorAll("input:not([barcode_events])")) {
+        input.setAttribute("barcode_events", "true");
+        input.dataset.enableBarcode = "true";
+        input.addEventListener("barcode_scanned", stripScannedBarcode);
+    }
+}
+
 patch(BarcodeHandlerField.prototype, {
     setup() {
         super.setup();
@@ -26,15 +77,33 @@ patch(BarcodeHandlerField.prototype, {
     },
     async onBarcodeScanned(event) {
         const barcode = event.detail.barcode;
+        const {resModel, resId} = this.props.record;
+        // Intercept OBTswitch-* barcodes on vertical lift operation forms before
+        // the standard barcode_handler forwards them to the model's
+        // on_barcode_scanned (which would emit "No location found for barcode").
         const method = SWITCH_BARCODE_METHODS[barcode];
-        if (!method) {
+        if (method) {
+            const action = await this.ormService.call(resModel, method, [resId]);
+            if (action) {
+                this.actionService.doAction(action);
+            }
+            return;
+        }
+        if (!isOperationModel(resModel)) {
             return super.onBarcodeScanned(event);
         }
-        const {resModel, resId} = this.props.record;
-        const action = await this.ormService.call(resModel, method, [resId]);
-        if (action) {
-            this.actionService.doAction(action);
+        if (ACTION_BARCODE_RE.test(barcode)) {
+            return;
         }
+        // Plain RPC + reload instead of record.update(): an update marks the
+        // form dirty and its pending values (state...) get auto-saved later.
+        await scanMutex.exec(async () => {
+            await this.ormService.call(resModel, "on_barcode_scanned", [
+                resId,
+                barcode,
+            ]);
+            await this.props.record.load();
+        });
     },
 });
 
@@ -61,7 +130,7 @@ patch(FormController.prototype, {
     setup() {
         super.setup();
         this.busService = useService("bus_service");
-        if (this.props.resModel.startsWith("vertical.lift.operation.")) {
+        if (isOperationModel(this.props.resModel)) {
             this.busService.addChannel("notify_vertical_lift_screen");
             this.busService.addEventListener("notification", (notifications) => {
                 notifications.forEach(([channel, message]) => {
@@ -73,6 +142,13 @@ patch(FormController.prototype, {
                     }
                 });
             });
+            // Enter leaves the focused input (e.g. the inventory quantity).
+            useHotkey("enter", () => blurActiveElement(), {
+                bypassEditableProtection: true,
+            });
+            const enableBarcode = () => enableBarcodeOnInputs(this.rootRef.el);
+            onMounted(enableBarcode);
+            onPatched(enableBarcode);
         }
 
         onWillUnmount(() => {
