@@ -1,0 +1,14 @@
+// Product image hint in the wizard
+.o_form_view {
+    .vlm_task_image {
+        float: right;
+        margin-bottom: 10px;
+
+        > img {
+            max-width: 200px;
+            max-height: 200px;
+            margin: auto;
+            display: block;
+        }
+    }
+}
