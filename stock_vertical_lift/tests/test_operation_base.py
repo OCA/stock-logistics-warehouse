@@ -1,6 +1,8 @@
 # Copyright 2026 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+from unittest.mock import patch
+
 from odoo.tools import mute_logger
 
 from .common import VerticalLiftCase
@@ -69,3 +71,31 @@ class TestVerticalLiftOperationBase(VerticalLiftCase):
         # button_save_and_release
         self.assertIsNone(operation.button_save_and_release())
         self.assertEqual(operation.state, previous_state)
+
+    @mute_logger(SHUTTLE_LOGGER)
+    def test_send_notification_refresh_broadcasts_on_plain_channel(self):
+        """The refresh notification must be sent on the plain channel string.
+
+        It has to match exactly what the webclient subscribes to via
+        ``busService.addChannel("notify_vertical_lift_screen")`` in
+        vertical_lift.esm.js. Sending it through
+        ``self.env.user._bus_send(..., subchannel=channel)`` would target the
+        composite channel ``(self.env.user.partner_id, channel)``, which the
+        webclient never subscribes to, and would anyway be scoped to
+        whichever user/context triggered the call (e.g. the public user for
+        hardware callbacks), not the operator's browser session.
+        """
+        operation = self._open_screen("pick")
+        expected_params = operation._get_user_notification_params()
+
+        with patch.object(
+            type(self.env["bus.bus"]), "_sendone", autospec=True
+        ) as sendone:
+            operation._send_notification_refresh()
+
+        sendone.assert_called_once_with(
+            self.env["bus.bus"],
+            "notify_vertical_lift_screen",
+            "notification",
+            {"action": "refresh", "params": expected_params},
+        )

@@ -68,26 +68,26 @@ patch(FormController.prototype, {
         this.busService = useService("bus_service");
         if (this.props.resModel.startsWith("vertical.lift.operation.")) {
             this.busService.addChannel("notify_vertical_lift_screen");
-            this.busService.addEventListener("notification", (notifications) => {
-                notifications.forEach(([channel, message]) => {
-                    if (
-                        channel === "notify_vertical_lift_screen" &&
-                        message.action === "refresh"
-                    ) {
-                        this.vlift_bus_action_refresh(message.params);
-                    }
-                });
+            this.busService.subscribe("notification", (payload) => {
+                if (payload.action === "refresh") {
+                    this.vlift_bus_action_refresh(payload.params);
+                }
             });
         }
 
         onWillUnmount(() => {
-            this.busService.deleteChannel("notify_vertical_lift_screen");
+            if (this.props.resModel.startsWith("vertical.lift.operation.")) {
+                this.busService.deleteChannel("notify_vertical_lift_screen");
+            }
         });
     },
 
     vlift_bus_action_refresh(params) {
         if (params.id === this.props.resId && params.model === this.props.resModel) {
-            this.model.root.load();
+            this.env.services.action.doAction({
+                type: "ir.actions.client",
+                tag: "soft_reload",
+            });
         }
     },
 });
