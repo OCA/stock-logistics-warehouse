@@ -28,6 +28,11 @@ patch(BarcodeHandlerField.prototype, {
         const barcode = event.detail.barcode;
         const method = SWITCH_BARCODE_METHODS[barcode];
         if (!method) {
+            if (this.props.record.resModel.startsWith("vertical.lift.operation.")) {
+                // Force saving the form to avoid client record being left dirty
+                await this.props.record.update({[this.props.name]: barcode});
+                return this.props.record.save();
+            }
             return super.onBarcodeScanned(event);
         }
         const {resModel, resId} = this.props.record;
