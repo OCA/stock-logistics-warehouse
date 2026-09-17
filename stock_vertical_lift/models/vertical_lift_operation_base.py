@@ -371,7 +371,11 @@ class VerticalLiftOperationBase(models.AbstractModel):
             "action": "refresh",
             "params": self._get_user_notification_params(),
         }
-        self.env.user._bus_send("notification", bus_message, subchannel=channel)
+        _logger.debug(
+            "Refresh notification sent on channel %s: ", (channel, bus_message)
+        )
+        # Broadcast directly on the plain channel string
+        self.env["bus.bus"]._sendone(channel, "notification", bus_message)
 
     def _get_user_notification_params(self):
         return {
