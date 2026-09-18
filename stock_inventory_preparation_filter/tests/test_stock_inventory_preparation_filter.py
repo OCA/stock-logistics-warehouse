@@ -146,3 +146,32 @@ class TestStockInventoryPreparationFilterCategories(common.TransactionCase):
         line1 = inventory.stock_quant_ids[0]
         self.assertEqual(line1.product_id, self.product1)
         self.assertEqual(line1.quantity, 2.0)
+
+    def test_inventory_domain_filter_excludes_virtual_locations(self):
+        """Test that domain filter does not include quants from virtual locations."""
+
+        virtual_location = self.env.ref("stock.stock_location_customers")
+        self.env["stock.quant"].create(
+            {
+                "product_id": self.product1.id,
+                "product_uom_id": self.product1.uom_id.id,
+                "location_id": virtual_location.id,
+                "quantity": 5.0,
+            }
+        )
+
+        inventory = self.inventory_model.create(
+            {
+                "name": "Domain inventory excluding virtual locations",
+                "product_selection": "domain",
+                "product_domain": [("id", "=", self.product1.id)],
+                "location_ids": self.env.ref("stock.stock_location_stock"),
+            }
+        )
+        inventory.action_state_to_in_progress()
+
+        self.assertEqual(len(inventory.stock_quant_ids), 1)
+        self.assertEqual(
+            inventory.stock_quant_ids.location_id,
+            self.env.ref("stock.stock_location_stock"),
+        )
