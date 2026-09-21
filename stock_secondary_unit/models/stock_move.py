@@ -69,6 +69,8 @@ class StockMoveLine(models.Model):
         aggregated_move_lines = super()._get_aggregated_product_quantities(**kwargs)
         for move_line in self:
             line_key = self._get_aggregated_properties(move_line=move_line)["line_key"]
+            if line_key not in aggregated_move_lines:
+                continue
             aggregated_move_lines[line_key]["secondary_uom_qty"] = (
                 move_line.secondary_uom_qty
             )
