@@ -41,6 +41,7 @@ addon | version | maintainers | summary
 [stock_inventory_location_state](stock_inventory_location_state/) | 18.0.1.0.0 | <a href='https://github.com/bguillot'><img src='https://github.com/bguillot.png' width='32' height='32' style='border-radius:50%;' alt='bguillot'/></a> | Verify that all locations are counted.
 [stock_inventory_lockdown](stock_inventory_lockdown/) | 18.0.1.0.1 |  | Lock down stock locations during inventories.
 [stock_inventory_preparation_filter](stock_inventory_preparation_filter/) | 18.0.1.0.0 |  | More filters for inventory adjustments
+[stock_inventory_restriction](stock_inventory_restriction/) | 18.0.1.0.0 |  | Restrict inventory modifications to assigned users
 [stock_inventory_verification_request](stock_inventory_verification_request/) | 18.0.1.2.0 | <a href='https://github.com/LoisRForgeFlow'><img src='https://github.com/LoisRForgeFlow.png' width='32' height='32' style='border-radius:50%;' alt='LoisRForgeFlow'/></a> | Adds the capability to request a Slot Verification when a inventory is Pending to Approve
 [stock_location_bin_name](stock_location_bin_name/) | 18.0.1.0.1 |  | Compute bin stock location name automatically
 [stock_location_children](stock_location_children/) | 18.0.1.0.0 |  | Add relation between stock location and all its children
