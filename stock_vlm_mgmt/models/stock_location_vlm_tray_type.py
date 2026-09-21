@@ -25,7 +25,7 @@ class StockLocationVlmTrayType(models.Model):
     def _compute_width_per_cell(self):
         for record in self:
             width = record.width
-            if not width:
+            if not width or not record.cols:
                 record.width_per_cell = 0.0
                 continue
             record.width_per_cell = width / record.cols
@@ -34,7 +34,7 @@ class StockLocationVlmTrayType(models.Model):
     def _compute_depth_per_cell(self):
         for record in self:
             depth = record.depth
-            if not depth:
+            if not depth or not record.rows:
                 record.depth_per_cell = 0.0
                 continue
             record.depth_per_cell = depth / record.rows
