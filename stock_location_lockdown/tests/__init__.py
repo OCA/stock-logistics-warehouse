@@ -2,3 +2,6 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from . import test_block_stock_location_entrance
+from . import test_block_stock_location_exit
+from . import test_block_stock_location_reservation
+from . import test_block_stock_location_routing
