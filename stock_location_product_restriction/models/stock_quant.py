@@ -2,12 +2,52 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 from collections import defaultdict
 
-from odoo import _, api, models
+from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 
 
 class StockQuant(models.Model):
     _inherit = "stock.quant"
+
+    being_filled_before_done_location_ids = fields.One2many(
+        comodel_name="stock.location",
+        compute="_compute_being_filled_before_done_location_ids",
+        help="Technical field to compute locations with their fill state"
+        "at 'Being Filled' before they'll be filled with an incoming move.",
+    )
+
+    @api.depends_context("being_filled_locations_before_update")
+    @api.depends("location_id")
+    def _compute_being_filled_before_done_location_ids(self):
+        self.being_filled_before_done_location_ids = self.env["stock.location"].browse(
+            self.env.context.get("being_filled_locations_before_update", [])
+        )
+
+    @api.model
+    def _update_available_quantity(
+        self,
+        product_id,
+        location_id,
+        quantity,
+        lot_id=None,
+        package_id=None,
+        owner_id=None,
+        in_date=None,
+    ):
+        new_self = self.with_context(
+            being_filled_locations_before_update=location_id.filtered(
+                lambda location: location.fill_state == "being_filled"
+            ).ids
+        )
+        return super(StockQuant, new_self)._update_available_quantity(
+            product_id=product_id,
+            location_id=location_id,
+            quantity=quantity,
+            lot_id=lot_id,
+            package_id=package_id,
+            owner_id=owner_id,
+            in_date=in_date,
+        )
 
     @api.constrains("location_id", "product_id")
     def _check_location_product_restriction(self):
@@ -29,6 +69,8 @@ class StockQuant(models.Model):
         for quant in quants_to_check:
             product_ids_location_id[quant.location_id.id].add(quant.product_id.id)
         for location_id, product_ids in product_ids_location_id.items():
+            if location_id in self.being_filled_before_done_location_ids.ids:
+                continue
             if len(product_ids) > 1:
                 location = StockLocation.browse(location_id)
                 products = ProductProduct.browse(list(product_ids))
@@ -55,21 +97,29 @@ class StockQuant(models.Model):
                 "inventory_quantity",
             ]
         )
+        self.env["stock.location"].flush_model(
+            [
+                "fill_state",
+            ]
+        )
         SQL = """
             SELECT
-                location_id,
+                stock_quant.location_id,
                 array_agg(distinct(product_id))
             FROM
-                stock_quant
+                stock_quant,
+                stock_location
             WHERE
-                location_id in %s
+                stock_quant.location_id in %s
+                and stock_quant.location_id = stock_location.id
+                and stock_location.fill_state NOT IN ('being_filled', 'being_emptied')
             /* Mimic the _unlink_zero_quant() query in Odoo */
             AND (NOT (round(quantity::numeric, %s) = 0 OR quantity IS NULL)
             OR NOT round(reserved_quantity::numeric, %s) = 0
             OR NOT (round(inventory_quantity::numeric, %s) = 0
                     OR inventory_quantity IS NULL))
             GROUP BY
-                location_id
+                stock_quant.location_id
         """
         self.env.cr.execute(
             SQL,
@@ -86,6 +136,8 @@ class StockQuant(models.Model):
             location_id,
             existing_product_ids,
         ) in existing_product_ids_by_location_id.items():
+            if location_id in self.being_filled_before_done_location_ids.ids:
+                continue
             product_ids_to_add = product_ids_location_id[location_id]
             if set(existing_product_ids).symmetric_difference(product_ids_to_add):
                 location = StockLocation.browse(location_id)
