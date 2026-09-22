@@ -1,0 +1,42 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_request_count_to_zero
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-07-26 21:52+0000\n"
+"PO-Revision-Date: 2023-07-26 21:52+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_request_count_to_zero
+#: model:ir.model.fields,field_description:stock_request_count_to_zero.field_stock_request_count__set_count
+msgid "Count"
+msgstr ""
+
+#. module: stock_request_count_to_zero
+#: code:addons/stock_request_count_to_zero/models/stock_quant.py:0
+#, python-format
+msgid "Quantities Already Set"
+msgstr ""
+
+#. module: stock_request_count_to_zero
+#: model:ir.model,name:stock_request_count_to_zero.model_stock_quant
+msgid "Quants"
+msgstr ""
+
+#. module: stock_request_count_to_zero
+#: model:ir.model.fields.selection,name:stock_request_count_to_zero.selection__stock_request_count__set_count__zero
+msgid "Set to zero"
+msgstr ""
+
+#. module: stock_request_count_to_zero
+#: model:ir.model,name:stock_request_count_to_zero.model_stock_request_count
+msgid "Stock Request an Inventory Count"
+msgstr ""
