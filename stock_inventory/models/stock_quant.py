@@ -39,6 +39,10 @@ class StockQuant(models.Model):
                 or rec.company_id.id == x.company_id.id
             )
             if len(moves) == 0:
+                # Core skips the move when a quant is applied from
+                # product.qty_available's inverse with a zero difference.
+                if self.env.context.get("from_inverse_qty"):
+                    continue
                 raise ValueError(self.env._("No move lines have been created"))
             move = moves[len(moves) - 1]
             adjustment.stock_move_ids |= move
