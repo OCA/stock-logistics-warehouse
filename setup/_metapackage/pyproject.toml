@@ -1,6 +1,6 @@
 [project]
 name = "odoo-addons-oca-stock-logistics-warehouse"
-version = "19.0.20260917.0"
+version = "19.0.20260922.0"
 dependencies = [
     "odoo-addon-stock_demand_estimate==19.0.*",
     "odoo-addon-stock_inventory==19.0.*",
@@ -20,6 +20,7 @@ dependencies = [
     "odoo-addon-stock_vlm_mgmt==19.0.*",
     "odoo-addon-stock_vlm_mgmt_kardex==19.0.*",
     "odoo-addon-stock_warehouse_calendar==19.0.*",
+    "odoo-addon-stock_warehouse_security==19.0.*",
 ]
 classifiers=[
     "Programming Language :: Python",
