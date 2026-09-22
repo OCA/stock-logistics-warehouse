@@ -590,3 +590,31 @@ class TestStockInventory(BaseCommon):
             ).current_inventory_id,
             inventory2,
         )
+
+    def test_14_product_qty_available_no_difference(self):
+        product = self.env["product.product"].create(
+            {
+                "name": "Product 3 test",
+                "type": "consu",
+                "is_storable": True,
+                "qty_available": 0.0,
+            }
+        )
+        self.assertEqual(product.qty_available, 0.0)
+        self.assertFalse(
+            self.move_model.search([("product_id", "=", product.id)]),
+        )
+
+    def test_15_product_qty_available_with_difference(self):
+        product = self.env["product.product"].create(
+            {
+                "name": "Product 4 test",
+                "type": "consu",
+                "is_storable": True,
+                "qty_available": 7.0,
+            }
+        )
+        self.assertEqual(product.qty_available, 7.0)
+        self.assertTrue(
+            self.move_model.search([("product_id", "=", product.id)]),
+        )
