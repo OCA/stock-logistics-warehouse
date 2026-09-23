@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2022 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo noupdate="1">
+    <record id="stock.route_warehouse0_mto" model='stock.route'>
+        <field name="is_mto" eval="True" />
+    </record>
+</odoo>
