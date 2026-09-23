@@ -42,5 +42,10 @@ class StockInventory(models.Model):
         if self.product_selection == "domain":
             domain = safe_eval(self.product_domain)
             products = self.env["product.product"].search(domain)
-            return self.env["stock.quant"].search([("product_id", "in", products.ids)])
+            return self.env["stock.quant"].search(
+                [
+                    ("product_id", "in", products.ids),
+                    ("location_id", "in", locations.ids),
+                ]
+            )
         return super()._get_quants(locations)
