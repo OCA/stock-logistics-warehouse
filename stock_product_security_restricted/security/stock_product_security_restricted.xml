@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <!-- Module Category -->
+    <record id="module_category_product_security" model="ir.module.category">
+        <field name="name">Product Security</field>
+        <field name="description">Product and BOM Access Control</field>
+        <field name="sequence">10</field>
+    </record>
+
+    <!-- Security Groups -->
+    <record id="group_product_creation" model="res.groups">
+        <field name="name">Product Creation</field>
+        <field name="category_id" ref="base.module_category_inventory_inventory" />
+        <field name="implied_ids" eval="[(4, ref('stock.group_stock_user'))]" />
+    </record>
+
+    <record id="group_product_creation_restricted" model="res.groups">
+        <field name="name">Product Creation - Restricted</field>
+        <field name="category_id" ref="base.module_category_inventory_inventory" />
+        <field
+            name="implied_ids"
+            eval="[(4, ref('stock_product_security_restricted.group_product_creation'))]"
+        />
+    </record>
+
+</odoo>
