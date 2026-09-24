@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_average_consumption_config_settings" model="ir.ui.view">
+        <field name="name">Average Consumption settings</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="stock.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//app[@name='stock']/block[@name='operations_setting_container']"
+                position="inside"
+            >
+                <setting id="consumption_calculation_method">
+                    <field
+                        name="default_consumption_calculation_method"
+                        widget="radio"
+                    />
+                    <div invisible="default_consumption_calculation_method != 'moves'">
+                        <label for="default_calculation_range" />
+                        <span class="ml16">
+                            <field name="default_calculation_range" />
+                        </span>
+                    </div>
+                </setting>
+                <setting id="module_product_history">
+                    <field name="module_product_history" />
+                </setting>
+                <setting id="display_range">
+                    <field name="default_display_range" />
+                </setting>
+            </xpath>
+        </field>
+    </record>
+</odoo>
