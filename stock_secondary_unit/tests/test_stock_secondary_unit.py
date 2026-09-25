@@ -225,3 +225,53 @@ class TestProductSecondaryUnit(BaseCommon):
         picking.action_confirm()
         self.assertEqual(len(picking.move_ids), 1)
         self.assertEqual(picking.move_ids.secondary_uom_qty, 2)
+
+    def test_aggregated_secondary_qty(self):
+        """The delivery slip sums the secondary qty per secondary unit."""
+        product = self.product_template.product_variant_ids[0]
+        secondary_units = product.secondary_uom_ids
+        customers = self.env.ref("stock.stock_location_customers")
+        picking = self.StockPicking.create(
+            {
+                "picking_type_id": self.picking_type_out.id,
+                "location_id": self.location_stock.id,
+                "location_dest_id": customers.id,
+                "move_ids": [
+                    Command.create(
+                        {
+                            "name": product.display_name,
+                            "product_id": product.id,
+                            "product_uom": product.uom_id.id,
+                            "product_uom_qty": qty,
+                            "secondary_uom_id": secondary_unit.id,
+                            "location_id": self.location_stock.id,
+                            "location_dest_id": customers.id,
+                        }
+                    )
+                    for qty, secondary_unit in [
+                        (3.0, secondary_units[0]),
+                        (1.8, secondary_units[1]),
+                    ]
+                ],
+            }
+        )
+        picking.action_assign()
+        self.env["stock.move.line"].create(
+            {
+                "move_id": picking.move_ids[0].id,
+                "picking_id": picking.id,
+                "product_id": product.id,
+                "product_uom_id": product.uom_id.id,
+                "location_id": self.location_stock.id,
+                "location_dest_id": customers.id,
+                "secondary_uom_qty": 2.0,
+            }
+        )
+        aggregated = picking.move_line_ids._get_aggregated_product_quantities()
+        self.assertEqual(
+            {
+                v["secondary_uom_id"]: v["secondary_uom_qty"]
+                for v in aggregated.values()
+            },
+            {secondary_units[0]: 8.0, secondary_units[1]: 2.0},
+        )
