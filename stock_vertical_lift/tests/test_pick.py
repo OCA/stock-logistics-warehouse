@@ -49,6 +49,50 @@ class TestPick(VerticalLiftCase):
         )
         self.assertEqual(operation.state, "scan_destination")
 
+    def _create_normal_and_urgent_pickings(self):
+        """Two ready transfers on the shuttle, the urgent one created last"""
+        self.picking_out.action_cancel()
+        product = self.env.ref("stock_vertical_lift.product_running_socks")
+        cell = self.env.ref(
+            "stock_vertical_lift.stock_location_vertical_lift_demo_tray_1a_x3y2"
+        )
+        self._update_quantity_in_cell(cell, product, 50)
+        normal = self._create_simple_picking_out(product, 1)
+        urgent = self._create_simple_picking_out(product, 1)
+        urgent.priority = "1"
+        pickings = normal | urgent
+        pickings.action_confirm()
+        pickings.action_assign()
+        return normal, urgent
+
+    @mute_logger(SHUTTLE_LOGGER)
+    def test_pick_select_next_move_line_urgent_first(self):
+        """An urgent picking is proposed before an older normal one"""
+        normal, urgent = self._create_normal_and_urgent_pickings()
+
+        operation = self._open_screen("pick")
+        self.assertEqual(operation.current_move_line_id.picking_id, urgent)
+
+    @mute_logger(SHUTTLE_LOGGER)
+    def test_pick_select_next_move_line_skipped_urgent_last(self):
+        """A skipped line waits for the others, even when it is the urgent one"""
+        normal, urgent = self._create_normal_and_urgent_pickings()
+        urgent.move_line_ids.vertical_lift_skipped = True
+
+        operation = self._open_screen("pick")
+        self.assertEqual(operation.current_move_line_id.picking_id, normal)
+        operation.select_next_move_line()
+        self.assertEqual(operation.current_move_line_id.picking_id, urgent)
+
+    @mute_logger(SHUTTLE_LOGGER)
+    def test_pick_select_next_move_line_priority_disabled(self):
+        """Without the priority setting, lines keep their creation order"""
+        normal, urgent = self._create_normal_and_urgent_pickings()
+        self.env.company.vertical_lift_pick_by_priority = False
+
+        operation = self._open_screen("pick")
+        self.assertEqual(operation.current_move_line_id.picking_id, normal)
+
     @mute_logger(SHUTTLE_LOGGER)
     def test_pick_select_next_move_line_was_skipped(self):
         """Previously skipped moves can be reprocessed"""

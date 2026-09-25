@@ -118,12 +118,27 @@ class VerticalLiftOperationPick(models.Model):
         )
         return get_next(move_lines, self.current_move_line_id)
 
+    def _next_move_line_order_fields(self):
+        """Return the stock.move.line fields deciding which line comes next."""
+        self.ensure_one()
+        company = self.location_id.company_id or self.env.company
+        order_fields = []
+        if company.vertical_lift_pick_skipped_last:
+            # Must outrank urgency: an urgent line kept on top would be
+            # proposed again right away, so the operator could never skip it.
+            order_fields.append("vertical_lift_skipped")
+        if company.vertical_lift_pick_by_priority:
+            # "picking_id.priority" is not accepted.
+            # Luckily, a many2one delegates to the target model's _order
+            # (see BaseModel._order_field_to_sql)
+            # `picking_id` injects priority, then scheduled date.
+            order_fields.append("picking_id")
+        order_fields.append("id")
+        return order_fields
+
     def select_next_move_line(self):
         self.ensure_one()
-        next_move_line_order = "vertical_lift_skipped"
-        if self._order:
-            # If there already exists an order, keep it.
-            next_move_line_order += "," + self._order
+        next_move_line_order = ", ".join(self._next_move_line_order_fields())
         next_move_line = self._get_next_move_line(next_move_line_order)
         self.current_move_line_id = next_move_line
         if next_move_line:
