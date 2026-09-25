@@ -2,7 +2,7 @@
 # Copyright 2018 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 
-from odoo.exceptions import ValidationError
+from odoo.exceptions import UserError, ValidationError
 
 from .test_common import TestsCommon
 
@@ -339,3 +339,23 @@ class TestMoveLocation(TestsCommon):
         self.assertEqual(len(delivery_move.move_line_ids), 1)
         self.assertEqual(delivery_move.move_line_ids.quantity, 20.0)
         self.assertEqual(delivery_move.move_line_ids.location_id, wh_stock_shelf_3)
+
+    def test_immediate_transfer_allowed_by_default(self):
+        """Immediate transfer stays available unless the company disables it."""
+        self.assertTrue(self.company.move_location_allow_immediate_transfer)
+        wizard = self._create_wizard(self.internal_loc_1, self.internal_loc_2)
+        self.assertTrue(wizard.allow_immediate_transfer)
+
+    def test_immediate_transfer_not_allowed(self):
+        """Only planned transfers are possible when the company disallows
+        immediate transfers."""
+        self.company.move_location_allow_immediate_transfer = False
+        wizard = self._create_wizard(self.internal_loc_1, self.internal_loc_2)
+        wizard.onchange_origin_location()
+        self.assertFalse(wizard.allow_immediate_transfer)
+        with self.assertRaises(UserError):
+            wizard.action_move_location()
+        self.assertFalse(wizard.picking_id)
+        self.check_product_amount(self.product_no_lots, self.internal_loc_1, 123)
+        wizard.with_context(planned=True).action_move_location()
+        self.assertEqual(wizard.picking_id.state, "assigned")

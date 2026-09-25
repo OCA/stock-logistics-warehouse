@@ -8,6 +8,8 @@
   only the available quantity at the button press
 - Products will be moved and a form view of picking that did that will show up
 - If "PLANNED TRANSFER" is used - the picking won't be validated automatically
+- "IMMEDIATE TRANSFER" is not available if it is disallowed in the settings (see
+  Configuration)
 
 If you want to transfer a full quant:
 
