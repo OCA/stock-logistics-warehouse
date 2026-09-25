@@ -83,3 +83,17 @@ class TestFillwithStock(BaseCommon):
             ).product_uom_qty,
             5.0,
         )
+
+    def test_fillwithstock_immediate_transfer_not_allowed(self):
+        """Fill with stock creates planned moves, so it keeps working when
+        immediate transfers are disallowed."""
+        self.env.company.move_location_allow_immediate_transfer = False
+        picking_stock_pack = self.env["stock.picking"].create(
+            {
+                "location_id": self.shelf1_location.id,
+                "location_dest_id": self.pack_location.id,
+                "picking_type_id": self.env.ref("stock.picking_type_internal").id,
+            }
+        )
+        picking_stock_pack.button_fillwithstock()
+        self.assertEqual(len(picking_stock_pack.move_ids), 2)

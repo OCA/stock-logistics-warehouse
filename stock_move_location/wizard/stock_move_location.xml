@@ -43,6 +43,7 @@
                             readonly="destination_location_disable"
                         />
                         <field name="company_id" invisible="1" />
+                        <field name="allow_immediate_transfer" invisible="1" />
                     </group>
                     <group name="lines">
                         <field
@@ -164,6 +165,7 @@
                             string="Immediate Transfer"
                             type="object"
                             class="btn-primary"
+                            invisible="not allow_immediate_transfer"
                         />
                         <button
                             name="action_move_location"

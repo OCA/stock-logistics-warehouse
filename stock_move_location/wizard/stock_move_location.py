@@ -5,6 +5,7 @@
 
 
 from odoo import Command, api, fields, models
+from odoo.exceptions import UserError
 from odoo.fields import Domain
 
 
@@ -38,6 +39,9 @@ class StockMoveLocationWizard(models.TransientModel):
         string="Move Location lines",
     )
     company_id = fields.Many2one("res.company", default=lambda self: self.env.company)
+    allow_immediate_transfer = fields.Boolean(
+        related="company_id.move_location_allow_immediate_transfer"
+    )
     picking_type_id = fields.Many2one(
         compute="_compute_picking_type_id",
         comodel_name="stock.picking.type",
@@ -265,6 +269,14 @@ class StockMoveLocationWizard(models.TransientModel):
 
     def action_move_location(self):
         self.ensure_one()
+        if not self.env.context.get("planned") and not self.allow_immediate_transfer:
+            raise UserError(
+                self.env._(
+                    "Immediate transfers are not allowed for company %s. "
+                    "Please use a planned transfer instead.",
+                    self.company_id.display_name,
+                )
+            )
         picking = self.picking_id if self.picking_id else self._create_picking()
         self._create_moves(picking)
         if not self.env.context.get("planned"):
