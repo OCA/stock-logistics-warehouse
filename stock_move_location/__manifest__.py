@@ -19,6 +19,7 @@
     "data": [
         "data/stock_quant_view.xml",
         "security/ir.model.access.csv",
+        "views/res_config_settings_view.xml",
         "views/stock_picking_type_views.xml",
         "views/stock_picking.xml",
         "wizard/stock_move_location.xml",
