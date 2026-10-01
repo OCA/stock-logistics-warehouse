@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<template>
+    <t t-name="picking.Ribbon">
+        <div class="ribbon ribbon-top-right">
+            <span t-att-class="classes" t-att-title="props.title">
+                <t t-esc="props.record.data[props.field_name]" />
+            </span>
+        </div>
+    </t>
+</template>
