@@ -1,7 +1,7 @@
 # Copyright 2026 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import fields, models
+from odoo import api, fields, models
 
 
 class VerticalLiftSelectShuttle(models.TransientModel):
@@ -16,7 +16,7 @@ class VerticalLiftSelectShuttle(models.TransientModel):
     method_name = fields.Char(required=True, readonly=True)
     allowed_shuttle_ids = fields.One2many(
         comodel_name="vertical.lift.shuttle",
-        related="location_id.inverse_vertical_lift_shuttle_ids",
+        compute="_compute_allowed_shuttle_ids",
     )
     shuttle_id = fields.Many2one(
         comodel_name="vertical.lift.shuttle",
@@ -25,6 +25,26 @@ class VerticalLiftSelectShuttle(models.TransientModel):
         domain="[('id', 'in', allowed_shuttle_ids)]",
         help="Select the specific shuttle to perform this operation.",
     )
+
+    @api.depends("location_id")
+    def _compute_allowed_shuttle_ids(self):
+        for record in self:
+            if not record.location_id:
+                record.allowed_shuttle_ids = False
+                continue
+            location = record.location_id
+            allowed_shuttles = self.env["vertical.lift.shuttle"].search(
+                [
+                    "|",
+                    "&",
+                    ("use_shared_storage_location", "=", True),
+                    ("shared_storage_location_id", "parent_of", location.id),
+                    "&",
+                    ("use_shared_storage_location", "=", False),
+                    ("location_id", "parent_of", location.id),
+                ]
+            )
+            record.allowed_shuttle_ids = allowed_shuttles
 
     def action_confirm(self):
         self.ensure_one()
