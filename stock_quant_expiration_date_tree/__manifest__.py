@@ -5,7 +5,7 @@
     "name": "Stock Quant Expiration Date Tree",
     "summary": """
         Allows to display expirations dates on stock quant tree view""",
-    "version": "16.0.1.1.0",
+    "version": "18.0.1.0.0",
     "license": "AGPL-3",
     "author": "Xtendoo, Odoo Community Association (OCA)",
     "maintainers": ["manuelcalerosolis"],
