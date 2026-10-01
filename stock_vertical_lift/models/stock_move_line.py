@@ -34,7 +34,7 @@ class StockMoveLine(models.Model):
                 line.vertical_lift_skipped_date = line.vertical_lift_skipped_date or now
             else:
                 line.vertical_lift_skipped_date = False
-    
+
     def _get_shuttles(self, location):
         self.ensure_one()
         # Reached the top of hierarchy without finding a shuttle
