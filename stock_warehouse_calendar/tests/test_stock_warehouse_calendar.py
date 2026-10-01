@@ -9,6 +9,8 @@ from odoo.addons.base.tests.common import BaseCommon
 
 
 class TestStockWarehouseCalendar(BaseCommon):
+    _test_user_groups = ("stock.group_stock_manager",)
+
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -220,7 +222,7 @@ class TestStockWarehouseCalendar(BaseCommon):
                         0,
                         {
                             "product_id": self.product.id,
-                            "product_uom": self.product.uom_id.id,
+                            "uom_id": self.product.uom_id.id,
                             "product_uom_qty": 10,
                             "location_id": self.warehouse_2.wh_input_stock_loc_id.id,
                             "location_dest_id": self.warehouse_2.lot_stock_id.id,
@@ -262,7 +264,7 @@ class TestStockWarehouseCalendar(BaseCommon):
         move = self.move_obj.create(
             {
                 "product_id": self.product.id,
-                "product_uom": self.product.uom_id.id,
+                "uom_id": self.product.uom_id.id,
                 "product_uom_qty": 10,
                 "location_id": self.warehouse_3.lot_stock_id.id,
                 "location_dest_id": self.warehouse.lot_stock_id.id,
@@ -291,7 +293,7 @@ class TestStockWarehouseCalendar(BaseCommon):
         move = self.move_obj.create(
             {
                 "product_id": self.product.id,
-                "product_uom": self.product.uom_id.id,
+                "uom_id": self.product.uom_id.id,
                 "product_uom_qty": 10,
                 "location_id": self.warehouse_2.lot_stock_id.id,
                 "location_dest_id": self.warehouse.lot_stock_id.id,

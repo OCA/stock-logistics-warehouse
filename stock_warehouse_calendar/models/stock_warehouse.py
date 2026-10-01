@@ -1,7 +1,7 @@
 # Copyright 2018-19 ForgeFlow S.L. (https://www.forgeflow.com)
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
-from datetime import datetime, timedelta
+from datetime import UTC, datetime, timedelta
 
 from odoo import fields, models
 
@@ -37,7 +37,15 @@ class StockWarehouse(models.Model):
             else:
                 # We force the date planned at the end of the day.
                 dt_planned = date_from.replace(hour=23)
-            date_result = self.calendar_id.plan_days(delta, dt_planned)
+            # In 20.0, plan_days() converts the reference date to the
+            # company timezone with astimezone(); a naive datetime would be
+            # interpreted as server local time, so localize it as UTC
+            # explicitly and return a naive UTC datetime.
+            date_result = self.calendar_id.plan_days(
+                delta, dt_planned.replace(tzinfo=UTC)
+            )
+            if date_result:
+                date_result = date_result.astimezone(UTC).replace(tzinfo=None)
         else:
             date_result = date_from + timedelta(days=delta)
         return date_result
