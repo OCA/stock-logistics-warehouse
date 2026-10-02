@@ -72,7 +72,7 @@ def post_load_hook():
         }
         for quant in self:
             quant.inventory_date = date_by_location[quant.location_id]
-        self.write({"inventory_quantity": 0, "user_id": False})
+        self.action_clear_inventory_quantity()
         self.write({"inventory_diff_quantity": 0})
 
     StockQuant._apply_inventory = _apply_inventory_discrepancy

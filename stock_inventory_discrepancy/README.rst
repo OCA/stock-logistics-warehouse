@@ -86,14 +86,18 @@ Authors
 Contributors
 ------------
 
--  Lois Rilo <lois.rilo@forgeflow.com>
--  Andreas Dian Sukarno Putro <andreasdian777@gmail.com>
--  Bhavesh Odedra <bodedra@opensourceintegrators.com>
--  Héctor Villarreal <hector.villarreal@forgeflow.com>
--  `Tecnativa <https://www.tecnativa.com>`__:
+- Lois Rilo <lois.rilo@forgeflow.com>
+- Andreas Dian Sukarno Putro <andreasdian777@gmail.com>
+- Bhavesh Odedra <bodedra@opensourceintegrators.com>
+- Héctor Villarreal <hector.villarreal@forgeflow.com>
+- `Tecnativa <https://www.tecnativa.com>`__:
 
-   -  Ernesto Tejeda
-   -  Carolina Fernandez
+  - Ernesto Tejeda
+  - Carolina Fernandez
+
+- `Tradesolutions.Digital <https://www.tradesolutions.digital/>`__
+
+  - Prabakaran Ranganathan
 
 Maintainers
 -----------
