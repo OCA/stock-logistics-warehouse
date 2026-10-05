@@ -15,3 +15,9 @@ class ProductProduct(models.Model):
         "'&', ('product_tmpl_id', '=', product_tmpl_id),"
         "     ('product_id', '=', False)]",
     )
+
+    def _get_stock_secondary_uom(self):
+        # Also called on an empty product (a line without product yet)
+        return (
+            self.stock_secondary_uom_id or self.product_tmpl_id.stock_secondary_uom_id
+        )
