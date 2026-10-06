@@ -590,3 +590,64 @@ class TestStockInventory(BaseCommon):
             ).current_inventory_id,
             inventory2,
         )
+
+    def test_14_product_qty_available_no_difference(self):
+        product = self.env["product.product"].create(
+            {
+                "name": "Product 3 test",
+                "type": "consu",
+                "is_storable": True,
+                "qty_available": 0.0,
+            }
+        )
+        self.assertEqual(product.qty_available, 0.0)
+        self.assertFalse(
+            self.move_model.search([("product_id", "=", product.id)]),
+        )
+
+    def test_15_product_qty_available_with_difference(self):
+        product = self.env["product.product"].create(
+            {
+                "name": "Product 4 test",
+                "type": "consu",
+                "is_storable": True,
+                "qty_available": 7.0,
+            }
+        )
+        self.assertEqual(product.qty_available, 7.0)
+        self.assertTrue(
+            self.move_model.search([("product_id", "=", product.id)]),
+        )
+
+    def test_16_product_qty_available_keeps_previous_adjustment(self):
+        warehouse = self.env["stock.warehouse"].search(
+            [("company_id", "=", self.env.company.id)], limit=1
+        )
+        product = self.env["product.product"].create(
+            {"name": "Product 5 test", "type": "consu", "is_storable": True}
+        )
+        quant = self.quant_model.sudo().create(
+            {
+                "product_id": product.id,
+                "quantity": 0.0,
+                "location_id": warehouse.lot_stock_id.id,
+            }
+        )
+        inventory = self.inventory_model.create(
+            {
+                "name": "Inventory_Test_16",
+                "product_selection": "manual",
+                "product_ids": [(6, 0, [product.id])],
+                "location_ids": [(6, 0, [warehouse.lot_stock_id.id])],
+            }
+        )
+        inventory.action_state_to_in_progress()
+        quant.inventory_quantity = 12
+        quant.action_apply_inventory()
+        move_line = inventory.stock_move_ids
+        self.assertEqual(move_line.inventory_adjustment_id, inventory)
+
+        product.qty_available = 12.0
+        product.flush_recordset()
+
+        self.assertEqual(move_line.inventory_adjustment_id, inventory)
