@@ -1,7 +1,3 @@
-.. image:: https://odoo-community.org/readme-banner-image
-   :target: https://odoo-community.org/get-involved?utm_source=readme
-   :alt: Odoo Community Association
-
 ===================
 Stock Packaging Qty
 ===================
@@ -17,7 +13,7 @@ Stock Packaging Qty
 .. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
     :alt: Beta
-.. |badge2| image:: https://img.shields.io/badge/license-LGPL--3-blue.png
+.. |badge2| image:: https://img.shields.io/badge/licence-LGPL--3-blue.png
     :target: http://www.gnu.org/licenses/lgpl-3.0-standalone.html
     :alt: License: LGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fstock--logistics--warehouse-lightgray.png?logo=github
@@ -45,6 +41,11 @@ Known issues / Roadmap
 - Since we store done product packaging quantities in the stock move
   lines, we should be able to use this information in quants to provide
   real packaging-based stock data.
+- For Odoo 19:
+
+  - Remove t-options="{'widget': 'float'}" in
+    ``stock_report_delivery_has_serial_move_line`` and
+    ``report_picking views`` because are already a Float number.
 
 Bug Tracker
 ===========

@@ -3,6 +3,20 @@
      License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0) -->
 <data>
     <template id="report_picking" inherit_id="stock.report_picking">
+        <!-- TODO: Remove t-options="{'widget': 'float'}" in Odoo 19 -->
+        <xpath
+            expr="//span[@t-if='ml.move_id.product_packaging_id']/span[1]/span[@t-field='ml.product_packaging_qty']"
+            position="attributes"
+        >
+            <attribute name="t-options">{'widget': 'float'}</attribute>
+        </xpath>
+        <xpath
+            expr="//span[@t-if='ml.move_id.product_packaging_id']/span[2]/span[@t-field='ml.product_packaging_qty']"
+            position="attributes"
+        >
+            <attribute name="t-options">{'widget': 'float'}</attribute>
+        </xpath>
+
         <xpath
             expr="//span[@t-if='ml.move_id.product_packaging_id']/span[2]/span[@t-field='ml.product_packaging_qty']"
             position="attributes"
@@ -15,6 +29,14 @@
         id="stock_report_delivery_has_serial_move_line"
         inherit_id="stock.stock_report_delivery_has_serial_move_line"
     >
+        <!-- TODO: Remove t-options="{'widget': 'float'}" in Odoo 19 -->
+        <xpath
+            expr="//span[@t-field='move_line.product_packaging_qty']"
+            position="attributes"
+        >
+            <attribute name="t-options">{'widget': 'float'}</attribute>
+        </xpath>
+
         <xpath
             expr="//span[@t-field='move_line.product_packaging_qty']"
             position="attributes"
