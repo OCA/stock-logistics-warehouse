@@ -375,24 +375,92 @@ ul.auto-toc {
 !! source digest: sha256:26907e041c69c5504d50cd4900316b6a663bca73bd831ad16ce5e511497c80d9
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 <p><a class="reference external image-reference" href="https://odoo-community.org/page/development-status"><img alt="Production/Stable" src="https://img.shields.io/badge/maturity-Production%2FStable-green.png" /></a> <a class="reference external image-reference" href="http://www.gnu.org/licenses/lgpl-3.0-standalone.html"><img alt="License: LGPL-3" src="https://img.shields.io/badge/license-LGPL--3-blue.png" /></a> <a class="reference external image-reference" href="https://github.com/OCA/stock-logistics-warehouse/tree/19.0/stock_demand_estimate"><img alt="OCA/stock-logistics-warehouse" src="https://img.shields.io/badge/github-OCA%2Fstock--logistics--warehouse-lightgray.png?logo=github" /></a> <a class="reference external image-reference" href="https://translation.odoo-community.org/projects/stock-logistics-warehouse-19-0/stock-logistics-warehouse-19-0-stock_demand_estimate"><img alt="Translate me on Weblate" src="https://img.shields.io/badge/weblate-Translate%20me-F47D42.png" /></a> <a class="reference external image-reference" href="https://runboat.odoo-community.org/builds?repo=OCA/stock-logistics-warehouse&amp;target_branch=19.0"><img alt="Try me on Runboat" src="https://img.shields.io/badge/runboat-Try%20me-875A7B.png" /></a></p>
-<p>This module allows to create demand estimates for a given product and
-location, on configurable time periods.</p>
-<p>The module does not provide in itself any specific usage of the
-estimates.</p>
+<p>Manually record demand estimates: the quantity of a product that is
+expected to be consumed or shipped from a given stock location over a
+period of time.</p>
+<p>Each estimate defines:</p>
+<ul class="simple">
+<li>A product and a stock location.</li>
+<li>A time period, expressed either as an explicit date range or as a
+start date plus a duration in days.</li>
+<li>An expected quantity, which can be entered in any unit of measure
+compatible with the product.</li>
+</ul>
+<p>Estimates are stored together with their equivalent daily quantity, so
+the expected demand can be evenly distributed or aggregated over any
+sub-period. They are also multi-company aware: each estimate belongs to
+a single company and its product and location must be consistent with
+it.</p>
+<p>No specific usage of the estimates is provided out of the box — the data
+model, a user interface to maintain them, and a small API
+(<tt class="docutils literal">get_quantity_by_date_range</tt>) are included so that other modules can
+consume them. For example, <tt class="docutils literal">mrp_multi_level_estimate</tt>
+(OCA/manufacture) feeds these estimates into the MRP multi-level
+calculation.</p>
 <p><strong>Table of contents</strong></p>
 <div class="contents local topic" id="contents">
 <ul class="simple">
-<li><a class="reference internal" href="#bug-tracker" id="toc-entry-1">Bug Tracker</a></li>
-<li><a class="reference internal" href="#credits" id="toc-entry-2">Credits</a><ul>
-<li><a class="reference internal" href="#authors" id="toc-entry-3">Authors</a></li>
-<li><a class="reference internal" href="#contributors" id="toc-entry-4">Contributors</a></li>
-<li><a class="reference internal" href="#maintainers" id="toc-entry-5">Maintainers</a></li>
+<li><a class="reference internal" href="#usage" id="toc-entry-1">Usage</a></li>
+<li><a class="reference internal" href="#bug-tracker" id="toc-entry-2">Bug Tracker</a></li>
+<li><a class="reference internal" href="#credits" id="toc-entry-3">Credits</a><ul>
+<li><a class="reference internal" href="#authors" id="toc-entry-4">Authors</a></li>
+<li><a class="reference internal" href="#contributors" id="toc-entry-5">Contributors</a></li>
+<li><a class="reference internal" href="#maintainers" id="toc-entry-6">Maintainers</a></li>
 </ul>
 </li>
 </ul>
 </div>
+<div class="section" id="usage">
+<h2><a class="toc-backref" href="#toc-entry-1">Usage</a></h2>
+<p>Estimates can be recorded one by one or, when the
+<tt class="docutils literal">stock_demand_estimate_matrix</tt> addon is installed, entered in bulk
+through a products × periods wizard (see that module’s documentation).</p>
+<p>To create or review demand estimates, go to <em>Inventory &gt; Demand Planning
+&gt; Stock Demand Estimates</em>. By default only the estimates that have not
+expired are shown; use the <em>Expired</em> or <em>All (Active/Inactive)</em> filters
+to change this.</p>
+<p>To create an estimate:</p>
+<ol class="arabic simple">
+<li>Click <em>New</em> and select the product and the stock location the
+estimate applies to.</li>
+<li>Define the period, either by entering a <em>Date From</em> and a <em>Date To</em>,
+or a <em>Date From</em> and a <em>Duration</em> in days; the missing value is
+filled in automatically. If no start date is set, the current date is
+assumed.</li>
+<li>Enter the expected <em>Quantity</em> and, optionally, a <em>Unit of measure</em>
+different from the product’s default one. The quantity is always
+stored in the product’s unit of measure.</li>
+<li>The <em>Quantity / Day</em> field shows the estimate evenly distributed over
+the period.</li>
+</ol>
+<p>Estimates can be analyzed from the same menu using the pivot and graph
+views, and grouped by product, location, period start or company. Once a
+period is over, estimates can be archived instead of deleted, so that
+historical expectations are kept.</p>
+<p>Inventory users can read estimates; only inventory managers can create,
+modify or delete them.</p>
+<p><strong>Example.</strong> You expect to sell about 120 units of the product “Office
+Chair” from location WH/Stock during October 2026:</p>
+<ol class="arabic simple">
+<li>Create an estimate with product <em>Office Chair</em> and location
+<em>WH/Stock</em>.</li>
+<li>Set <em>Date From</em> to 10/01/2026 and <em>Duration</em> to 31 days — <em>Date To</em>
+is filled in as 10/31/2026. Entering the <em>Date To</em> directly works the
+same way: the <em>Duration</em> is then computed from the two dates.</li>
+<li>Set <em>Quantity</em> to 120 Units. If your forecast was made in dozens you
+can instead enter 10 with <em>Dozen</em> as the unit of measure — the stored
+quantity is the same either way.</li>
+</ol>
+<p>The estimate then shows a <em>Quantity / Day</em> of about 3.87. Other modules
+can ask how much of that demand falls inside any sub-period: for the
+range 10/10/2026 – 10/20/2026 they get 11 days × 3.87 ≈ 42.6 units.</p>
+<p>For developers:
+<tt class="docutils literal">estimate.get_quantity_by_date_range(date_start, date_end)</tt> returns
+the proportional part of the estimate that overlaps the given range (≈
+42.6 units in the example above), or 0 when the periods do not overlap.</p>
+</div>
 <div class="section" id="bug-tracker">
-<h2><a class="toc-backref" href="#toc-entry-1">Bug Tracker</a></h2>
+<h2><a class="toc-backref" href="#toc-entry-2">Bug Tracker</a></h2>
 <p>Bugs are tracked on <a class="reference external" href="https://github.com/OCA/stock-logistics-warehouse/issues">GitHub Issues</a>.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
@@ -400,22 +468,22 @@ If you spotted it first, help us to smash it by providing a detailed and welcome
 <p>Do not contact contributors directly about support or help with technical issues.</p>
 </div>
 <div class="section" id="credits">
-<h2><a class="toc-backref" href="#toc-entry-2">Credits</a></h2>
+<h2><a class="toc-backref" href="#toc-entry-3">Credits</a></h2>
 <div class="section" id="authors">
-<h3><a class="toc-backref" href="#toc-entry-3">Authors</a></h3>
+<h3><a class="toc-backref" href="#toc-entry-4">Authors</a></h3>
 <ul class="simple">
 <li>ForgeFlow</li>
 </ul>
 </div>
 <div class="section" id="contributors">
-<h3><a class="toc-backref" href="#toc-entry-4">Contributors</a></h3>
+<h3><a class="toc-backref" href="#toc-entry-5">Contributors</a></h3>
 <ul class="simple">
 <li>Jordi Ballester Alomar &lt;<a class="reference external" href="mailto:jordi.ballester&#64;forgeflow.com">jordi.ballester&#64;forgeflow.com</a>&gt;</li>
 <li>Lois Rilo &lt;<a class="reference external" href="mailto:lois.rilo&#64;forgeflow.com">lois.rilo&#64;forgeflow.com</a>&gt;</li>
 </ul>
 </div>
 <div class="section" id="maintainers">
-<h3><a class="toc-backref" href="#toc-entry-5">Maintainers</a></h3>
+<h3><a class="toc-backref" href="#toc-entry-6">Maintainers</a></h3>
 <p>This module is maintained by the OCA.</p>
 <a class="reference external image-reference" href="https://odoo-community.org">
 <img alt="Odoo Community Association" src="https://odoo-community.org/logo.png" />
