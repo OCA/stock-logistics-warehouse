@@ -1,7 +1,3 @@
-.. image:: https://odoo-community.org/readme-banner-image
-   :target: https://odoo-community.org/get-involved?utm_source=readme
-   :alt: Odoo Community Association
-
 ============================
 Stock Demand Estimate Matrix
 ============================
@@ -17,7 +13,7 @@ Stock Demand Estimate Matrix
 .. |badge1| image:: https://img.shields.io/badge/maturity-Production%2FStable-green.png
     :target: https://odoo-community.org/page/development-status
     :alt: Production/Stable
-.. |badge2| image:: https://img.shields.io/badge/license-AGPL--3-blue.png
+.. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fstock--logistics--warehouse-lightgray.png?logo=github
@@ -32,11 +28,16 @@ Stock Demand Estimate Matrix
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-This module allows to create demand estimates for a given product and
-location, on configurable time periods.
+Bulk entry of stock demand estimates through a spreadsheet-like wizard:
+a matrix with one row per product and one column per estimating period,
+where each cell holds the expected quantity.
 
-The module does not provide in itself any specific usage of the
-estimates.
+The estimating periods are ``date.range`` records grouped under a *Date
+Range Type* (provided by the ``date_range`` addon), such as "monthly" or
+"weekly". Estimates created through the wizard are linked to their range
+and take their dates and duration from it; they can be reviewed and
+edited like any other demand estimate, and the list view becomes
+editable for quick corrections.
 
 **Table of contents**
 
@@ -46,25 +47,65 @@ estimates.
 Installation
 ============
 
-This module relies on:
+Depends on the OCA modules:
 
-- The OCA module '2D matrix for x2many fields', and can be downloaded
-  from Github:
-  https://github.com/OCA/web/tree/13.0/web_widget_x2many_2d_matrix
-- The OCA module 'Date Range', and can be downloaded from Github:
-  https://github.com/OCA/server-ux/tree/13.0/date_range
+- ``web_widget_x2many_2d_matrix`` (OCA/web), which provides the products
+  × periods matrix widget used by the wizard sheet.
+- ``date_range`` (OCA/server-ux), which provides the estimating periods.
+
+Configuration
+=============
+
+The estimating periods are ``date.range`` records and must be generated
+before the wizard is used — ``date_range`` ships no default ranges.
+
+1. Go to *Settings > Technical > Date ranges > Date Range Types* and
+   create a type, e.g. *Monthly*. This step can also be done from the
+   generator below by creating the type on the fly.
+2. Go to *Settings > Technical > Date ranges > Generate Date Ranges*:
+   select the type, the unit of time (e.g. months), a start date, and
+   either an end date or a number of entries, then click *Generate*.
+3. The generated ranges can be reviewed in *Inventory > Configuration >
+   Date Ranges*.
+
+Repeat the generation whenever estimates have to cover a period not yet
+included in the existing ranges — otherwise the wizard raises "There is
+no ranges created." when preparing the sheet.
 
 Usage
 =====
 
-Go to *Inventory > Configuration > Date Ranges* and define your
-estimating periods.
+Make sure the estimating periods exist first — see the Configuration
+section. If *Prepare* raises "There is no ranges created.", no range of
+the selected *Date Range Type* overlaps the selected period; generate
+them and try again.
 
-Go to *Inventory > Demand Planning > Create Demand Estimates* to create
-or update your demand estimates.
+To create or update estimates in bulk:
 
-Go to *Inventory > Demand Planning > Demand Estimates* to review the
-estimates created.
+1. Go to *Inventory > Demand Planning > Create Stock Demand Estimates*.
+2. Select the *Period* to estimate, the *Date Range Type*, the
+   *Location* and the *Products* (at least one is required).
+3. Click *Prepare*: a sheet opens as a matrix with one row per product
+   and one column per range of the selected type overlapping the period,
+   pre-filled with the existing estimates for that location.
+4. Enter the expected quantity of each product in each period — in the
+   product's unit of measure — and click *Validate*. One estimate per
+   product and range is created, linked to the corresponding period;
+   estimates that already exist are updated in place.
+
+The resulting estimates are listed in *Inventory > Demand Planning >
+Stock Demand Estimates* like manually created ones, with the estimating
+period shown instead of manually entered dates. The list view is
+editable, so single cells can still be corrected without reopening the
+wizard.
+
+**Example.** With a "Monthly" date range type and ranges generated for
+January–March 2026, preparing a sheet for the period 01/01/2026 –
+03/31/2026 with products *Office Chair* and *Desk* at location
+*WH/Stock* opens a 2 × 3 matrix. Entering 100, 120 and 140 in the Office
+Chair row and 50, 50 and 60 in the Desk row, then validating, creates
+six estimates — e.g. "Jan 2026 - Office Chair - WH/Stock" for 100 units,
+taking its dates and duration from the January range.
 
 Bug Tracker
 ===========
