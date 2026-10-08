@@ -9,6 +9,10 @@
         <field name="arch" type="xml">
             <field name="company_id" position="after">
                 <field name="calendar_id" options="{'no_create': True}" />
+                <field
+                    name="calendar_compute_leaves"
+                    attrs="{'invisible': [('calendar_id', '=', False)]}"
+                />
             </field>
         </field>
     </record>
