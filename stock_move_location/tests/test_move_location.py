@@ -2,7 +2,7 @@
 # Copyright 2018 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 
-from odoo.exceptions import ValidationError
+from odoo.exceptions import UserError, ValidationError
 
 from .test_common import TestsCommon
 
@@ -339,3 +339,14 @@ class TestMoveLocation(TestsCommon):
         self.assertEqual(len(delivery_move.move_line_ids), 1)
         self.assertEqual(delivery_move.move_line_ids.quantity, 20.0)
         self.assertEqual(delivery_move.move_line_ids.location_id, wh_stock_shelf_3)
+
+    def test_immediate_transfer_restricted(self):
+        """Only planned transfers are possible when the company restricts
+        immediate transfers."""
+        self.company.move_location_restrict_immediate_transfer = True
+        wizard = self._create_wizard(self.internal_loc_1, self.internal_loc_2)
+        wizard.onchange_origin_location()
+        with self.assertRaises(UserError):
+            wizard.action_move_location()
+        wizard.with_context(planned=True).action_move_location()
+        self.assertEqual(wizard.picking_id.state, "assigned")

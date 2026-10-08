@@ -1,7 +1,8 @@
 - A new menu item Operations \> Move from location... opens a wizard where 2 locations
   can be specified.
 - Select origin and destination locations and press "IMMEDIATE TRANSFER" or "PLANNED
-  TRANSFER"
+  TRANSFER". The "IMMEDIATE TRANSFER" button is hidden when immediate transfer is
+  restricted in the settings (see Configuration)
 - Those lines can be edited. Move quantity can't be more than a max available quantity
 - Move doesn't care about the reservations and will move stuff anyway
 - If during your operation with the wizard the real quantity will change it will move
