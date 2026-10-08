@@ -100,6 +100,7 @@ addon | version | maintainers | summary
 [stock_vertical_lift](stock_vertical_lift/) | 18.0.1.5.2 |  | Provides the core for integration with Vertical Lifts
 [stock_vertical_lift_empty_tray_check](stock_vertical_lift_empty_tray_check/) | 18.0.1.1.0 |  | Checks if the tray is actually empty.
 [stock_vertical_lift_packaging_level](stock_vertical_lift_packaging_level/) | 18.0.1.0.0 |  | Provides integration with Vertical Lifts and packaging levels
+[stock_vertical_lift_pick_priority](stock_vertical_lift_pick_priority/) | 18.0.1.0.0 |  | Pick first the goods awaited by the most urgent deliveries
 [stock_vertical_lift_qty_by_packaging](stock_vertical_lift_qty_by_packaging/) | 18.0.1.0.0 |  | Glue module for `stock_product_qty_by_packaging` and `stock_vertical_lift`.
 [stock_vertical_lift_server_env](stock_vertical_lift_server_env/) | 18.0.1.0.0 |  | Server Environment layer for Vertical Lift
 [stock_vertical_lift_storage_type](stock_vertical_lift_storage_type/) | 18.0.1.1.0 |  | Compatibility layer for storage types on vertical lifts
