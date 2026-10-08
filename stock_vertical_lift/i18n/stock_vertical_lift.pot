@@ -103,6 +103,11 @@ msgid "Command"
 msgstr ""
 
 #. module: stock_vertical_lift
+#: model:ir.model,name:stock_vertical_lift.model_res_company
+msgid "Companies"
+msgstr ""
+
+#. module: stock_vertical_lift
 #: model:ir.model,name:stock_vertical_lift.model_res_config_settings
 msgid "Config Settings"
 msgstr ""
@@ -332,6 +337,14 @@ msgid "Move Lines"
 msgstr ""
 
 #. module: stock_vertical_lift
+#: model:ir.model.fields,help:stock_vertical_lift.field_res_company__vertical_lift_pick_skipped_last
+#: model:ir.model.fields,help:stock_vertical_lift.field_res_config_settings__vertical_lift_pick_skipped_last
+msgid ""
+"Move lines skipped by the operator are proposed again only once the other "
+"move lines have been processed."
+msgstr ""
+
+#. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_command__name
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_base__name
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_inventory__name
@@ -447,6 +460,18 @@ msgid "Pick Screen"
 msgstr ""
 
 #. module: stock_vertical_lift
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_res_company__vertical_lift_pick_skipped_last
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_res_config_settings__vertical_lift_pick_skipped_last
+msgid "Pick skipped lines last"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_res_company__vertical_lift_pick_by_priority
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_res_config_settings__vertical_lift_pick_by_priority
+msgid "Pick urgent transfers first"
+msgstr ""
+
+#. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_shuttle__port
 msgid "Port"
 msgstr ""
@@ -462,6 +487,24 @@ msgstr ""
 #. module: stock_vertical_lift
 #: model:ir.model,name:stock_vertical_lift.model_stock_move_line
 msgid "Product Moves (Stock Move Line)"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model_terms:ir.ui.view,arch_db:stock_vertical_lift.res_config_settings_view_form
+msgid "Propose skipped move lines once the others are done"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model_terms:ir.ui.view,arch_db:stock_vertical_lift.res_config_settings_view_form
+msgid "Propose the move lines of the most urgent transfers first"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model.fields,help:stock_vertical_lift.field_res_company__vertical_lift_pick_by_priority
+#: model:ir.model.fields,help:stock_vertical_lift.field_res_config_settings__vertical_lift_pick_by_priority
+msgid ""
+"Propose the move lines of the most urgent transfers first, using the "
+"transfer's priority and scheduled date."
 msgstr ""
 
 #. module: stock_vertical_lift
@@ -587,6 +630,11 @@ msgstr ""
 #. module: stock_vertical_lift
 #: model_terms:ir.ui.view,arch_db:stock_vertical_lift.vertical_lift_operation_pick_screen_view
 msgid "Skip"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model.fields,field_description:stock_vertical_lift.field_stock_move_line__vertical_lift_skipped_date
+msgid "Skipped in Vertical Lift on"
 msgstr ""
 
 #. module: stock_vertical_lift
@@ -785,6 +833,14 @@ msgstr ""
 #. module: stock_vertical_lift
 #: model:ir.model.fields.selection,name:stock_vertical_lift.selection__stock_location__vertical_lift_kind__view
 msgid "View"
+msgstr ""
+
+#. module: stock_vertical_lift
+#: model:ir.model.fields,help:stock_vertical_lift.field_stock_move_line__vertical_lift_skipped_date
+msgid ""
+"When the operator decided to skip this move line while it was being "
+"processed in the Vertical Lift. Skipped lines are proposed again once the "
+"other lines are processed, oldest skip first."
 msgstr ""
 
 #. module: stock_vertical_lift
