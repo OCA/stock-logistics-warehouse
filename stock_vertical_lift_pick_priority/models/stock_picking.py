@@ -20,7 +20,9 @@ class StockPicking(models.Model):
             and int(picking.priority or "0") > int(priority_before[picking] or "0")
         )
         if raised_priority:
-            operations = self.env["vertical.lift.operation.pick"].search([])
+            # Bookkeeping of the shuttle: whoever raises the priority may not
+            # have access to the vertical lift operations nor to the moves.
+            operations = self.env["vertical.lift.operation.pick"].sudo().search([])
             for operation in operations:
-                operation._unskip_lines_awaited_by(raised_priority)
+                operation._unskip_lines_awaited_by(raised_priority.sudo())
         return res
