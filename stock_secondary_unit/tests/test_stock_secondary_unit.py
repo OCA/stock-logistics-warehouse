@@ -225,3 +225,79 @@ class TestProductSecondaryUnit(BaseCommon):
         picking.action_confirm()
         self.assertEqual(len(picking.move_ids), 1)
         self.assertEqual(picking.move_ids.secondary_uom_qty, 2)
+
+    def _create_move(self, product, **vals):
+        return self.env["stock.move"].create(
+            {
+                "name": product.display_name,
+                "product_id": product.id,
+                "product_uom_qty": 10.0,
+                "location_id": self.location_stock.id,
+                "location_dest_id": self.env.ref("stock.stock_location_customers").id,
+                **vals,
+            }
+        )
+
+    def test_default_secondary_unit_form(self):
+        product = self.product_template.product_variant_ids[0]
+        with Form(
+            self.StockPicking.with_context(
+                default_picking_type_id=self.picking_type_out.id,
+            )
+        ) as picking_form:
+            with picking_form.move_ids_without_package.new() as move:
+                move.product_id = product
+                self.assertEqual(move.secondary_uom_id, product.stock_secondary_uom_id)
+                self.assertEqual(move.secondary_uom_qty, 1)
+                self.assertEqual(move.product_uom_qty, 0.5)
+        picking = picking_form.save()
+        self.assertEqual(
+            picking.move_ids.secondary_uom_id, product.stock_secondary_uom_id
+        )
+
+    def test_default_secondary_unit_create(self):
+        product = self.product_template.product_variant_ids[0]
+        move = self._create_move(product)
+        self.assertEqual(move.secondary_uom_id, product.stock_secondary_uom_id)
+        self.assertEqual(move.product_uom_qty, 10)
+        self.assertEqual(move.secondary_uom_qty, 20)
+
+    def test_default_secondary_unit_create_from_template(self):
+        product = self.product_template.product_variant_ids[1]
+        product.stock_secondary_uom_id = False
+        self.product_template.stock_secondary_uom_id = (
+            self.product_template.secondary_uom_ids[2]
+        )
+        move = self._create_move(product)
+        self.assertEqual(
+            move.secondary_uom_id, self.product_template.secondary_uom_ids[2]
+        )
+        self.assertEqual(move.secondary_uom_qty, 1)
+
+    def test_default_secondary_unit_keep_given_value(self):
+        product = self.product_template.product_variant_ids[0]
+        # An empty secondary unit passed explicitly (e.g. from a purchase line
+        # without one) is kept
+        move = self._create_move(product, secondary_uom_id=False)
+        self.assertFalse(move.secondary_uom_id)
+        other_uom = self.product_template.secondary_uom_ids[1]
+        move = self._create_move(product, secondary_uom_id=other_uom.id)
+        self.assertEqual(move.secondary_uom_id, other_uom)
+
+    def test_default_secondary_unit_keeps_demand(self):
+        product = self.product_template.product_variant_ids[0]
+        # 10 kg is 1.43 units of 7 kg once rounded, i.e. 10.01 kg
+        product.stock_secondary_uom_id = self.env["product.secondary.unit"].create(
+            {
+                "name": "box 7",
+                "product_tmpl_id": self.product_template.id,
+                "uom_id": self.product_uom_unit.id,
+                "factor": 7,
+            }
+        )
+        move = self._create_move(product)
+        self.assertEqual(move.secondary_uom_qty, 1.43)
+        move._action_confirm()
+        move._action_assign()
+        self.assertEqual(move.product_uom_qty, 10)
+        self.assertEqual(move.quantity, 10)
