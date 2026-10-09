@@ -3,6 +3,7 @@
 from datetime import timedelta
 
 from odoo import fields
+from odoo.tests import new_test_user
 from odoo.tools import mute_logger
 
 from odoo.addons.stock_vertical_lift.tests.common import VerticalLiftCase
@@ -181,6 +182,41 @@ class TestPickPriority(VerticalLiftCase):
         self.assertFalse(socks.move_line_ids.vertical_lift_skipped_date)
         operation.select_next_move_line()
         self.assertEqual(operation.current_move_line_id.picking_id, socks)
+
+    @mute_logger(SHUTTLE_LOGGER)
+    def test_priority_raise_without_vertical_lift_access(self):
+        """A user without access to the shuttle can raise a delivery's priority"""
+        socks, recovery = self._create_replenishments()
+        delivery = self._create_delivery(self.product_socks)
+        operation = self._open_screen("pick")
+        operation.button_skip()
+        self.assertTrue(socks.move_line_ids.vertical_lift_skipped_date)
+        group = self.env["res.groups"].create(
+            {
+                "name": "Transfers only",
+                "model_access": [
+                    (
+                        0,
+                        0,
+                        {
+                            "name": "Transfers only",
+                            "model_id": self.env.ref("stock.model_stock_picking").id,
+                            "perm_read": True,
+                            "perm_write": True,
+                        },
+                    )
+                ],
+            }
+        )
+        user = new_test_user(
+            self.env,
+            login="transfers_only",
+            groups_id=[self.env.ref("base.group_user").id, group.id],
+        )
+        self.assertFalse(user.has_group("stock.group_stock_user"))
+
+        delivery.with_user(user).priority = "1"
+        self.assertFalse(socks.move_line_ids.vertical_lift_skipped_date)
 
     @mute_logger(SHUTTLE_LOGGER)
     def test_priority_decrease_keeps_skip(self):
