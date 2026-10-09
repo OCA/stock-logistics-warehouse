@@ -33,6 +33,25 @@ class TestProductSecondaryUnit(BaseCommon):
         cls.attribute_value_black = ProductAttributeValue.create(
             {"name": "test_black", "attribute_id": cls.attribute_color.id}
         )
+        cls.serial_product = cls.env["product.product"].create(
+            {
+                "name": "Serial Product",
+                "uom_id": cls.product_uom_unit.id,
+                "type": "consu",
+                "is_storable": True,
+                "tracking": "serial",
+                "secondary_uom_ids": [
+                    Command.create(
+                        {
+                            "code": "A",
+                            "name": "Double",
+                            "uom_id": cls.product_uom_unit.id,
+                            "factor": 2,
+                        },
+                    )
+                ],
+            }
+        )
         cls.product_template = cls.env["product.template"].create(
             {
                 "name": "test",
@@ -225,3 +244,79 @@ class TestProductSecondaryUnit(BaseCommon):
         picking.action_confirm()
         self.assertEqual(len(picking.move_ids), 1)
         self.assertEqual(picking.move_ids.secondary_uom_qty, 2)
+
+    def test_action_generate_lot_line_vals(self):
+        picking = self.env["stock.picking"].create(
+            {
+                "location_id": self.location_supplier.id,
+                "location_dest_id": self.location_stock.id,
+                "picking_type_id": self.picking_type_in.id,
+            }
+        )
+        move = self.env["stock.move"].create(
+            {
+                "name": "Test Move",
+                "product_id": self.serial_product.id,
+                "product_uom_qty": 2.0,
+                "picking_id": picking.id,
+                "location_id": self.location_supplier.id,
+                "location_dest_id": self.location_stock.id,
+                "secondary_uom_id": self.serial_product.secondary_uom_ids[0].id,
+            }
+        )
+        # Import serials
+        vals = self.env["stock.move"].action_generate_lot_line_vals(
+            {
+                "default_tracking": "serial",
+                "default_product_id": move.product_id.id,
+                "default_picking_id": picking.id,
+                "default_location_dest_id": self.location_stock.id,
+            },
+            "import",
+            "",
+            0,
+            "001\n002",
+        )
+        self.assertEqual(len(vals), 2)
+        self.assertEqual(vals[0]["lot_name"], "001")
+        self.assertEqual(
+            vals[0]["secondary_uom_id"]["id"],
+            self.serial_product.secondary_uom_ids[0].id,
+        )
+        self.assertEqual(vals[0]["quantity"], 1)
+        self.assertEqual(vals[0]["secondary_uom_qty"], 0.5)
+        self.assertEqual(vals[1]["lot_name"], "002")
+        self.assertEqual(
+            vals[1]["secondary_uom_id"]["id"],
+            self.serial_product.secondary_uom_ids[0].id,
+        )
+        self.assertEqual(vals[1]["quantity"], 1)
+        self.assertEqual(vals[1]["secondary_uom_qty"], 0.5)
+        # Generate serials
+        vals = self.env["stock.move"].action_generate_lot_line_vals(
+            {
+                "default_tracking": "serial",
+                "default_product_id": move.product_id.id,
+                "default_picking_id": picking.id,
+                "default_location_dest_id": self.location_stock.id,
+            },
+            "generate",
+            "001",
+            2,
+            False,
+        )
+        self.assertEqual(len(vals), 2)
+        self.assertEqual(vals[0]["lot_name"], "001")
+        self.assertEqual(
+            vals[0]["secondary_uom_id"]["id"],
+            self.serial_product.secondary_uom_ids[0].id,
+        )
+        self.assertEqual(vals[0]["quantity"], 1)
+        self.assertEqual(vals[0]["secondary_uom_qty"], 0.5)
+        self.assertEqual(vals[1]["lot_name"], "002")
+        self.assertEqual(
+            vals[1]["secondary_uom_id"]["id"],
+            self.serial_product.secondary_uom_ids[0].id,
+        )
+        self.assertEqual(vals[1]["quantity"], 1)
+        self.assertEqual(vals[1]["secondary_uom_qty"], 0.5)
