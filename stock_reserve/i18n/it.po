@@ -130,9 +130,24 @@ msgid "Amount of product packagings done."
 msgstr "Quantità di confezioni prodotto completate."
 
 #. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__analytic_distribution
+msgid "Analytic"
+msgstr ""
+
+#. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__analytic_account_line_id
 msgid "Analytic Account Line"
 msgstr "Riga conto analitico"
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__analytic_distribution_search
+msgid "Analytic Distribution Search"
+msgstr ""
+
+#. module: stock_reserve
+#: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__analytic_precision
+msgid "Analytic Precision"
+msgstr ""
 
 #. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation__ordered_available_to_promise_qty
