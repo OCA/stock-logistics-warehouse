@@ -90,6 +90,13 @@ class InventoryAdjustmentsGroup(models.Model):
         readonly=True,
     )
 
+    category_include_subcategories = fields.Boolean(
+        string="Include Subcategories",
+        default=True,
+        help="If enabled, products from subcategories of the selected category "
+        "will be included in the inventory adjustment.",
+    )
+
     lot_ids = fields.Many2many(
         "stock.lot",
         string="Lot/Serial Numbers",
@@ -258,16 +265,15 @@ class InventoryAdjustmentsGroup(models.Model):
 
     def _get_domain_category_quants(self, base_domain):
         self.ensure_one()
-        return expression.AND(
-            [
-                base_domain,
-                [
-                    "|",
-                    ("product_id.categ_id", "=", self.category_id.id),
-                    ("product_id.categ_id", "in", self.category_id.child_id.ids),
-                ],
+        if self.category_include_subcategories:
+            categ_domain = [("product_id.categ_id", "child_of", self.category_id.id)]
+        else:
+            categ_domain = [
+                "|",
+                ("product_id.categ_id", "=", self.category_id.id),
+                ("product_id.categ_id", "in", self.category_id.child_id.ids),
             ]
-        )
+        return expression.AND([base_domain, categ_domain])
 
     def refresh_stock_quant_ids(self):
         for rec in self:

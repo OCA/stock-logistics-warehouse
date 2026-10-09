@@ -108,6 +108,33 @@ class TestStockInventory(BaseCommon):
             }
         )
 
+    def _create_category_hierarchy_with_quants(self):
+        child_categ = self.env["product.category"].create(
+            {"name": "Child", "parent_id": self.product_categ.id}
+        )
+        grandchild_categ = self.env["product.category"].create(
+            {"name": "Grandchild", "parent_id": child_categ.id}
+        )
+        product_fields = {"type": "consu", "is_storable": True}
+        product_child = self.env["product.product"].create(
+            {"name": "Product in Child", "categ_id": child_categ.id, **product_fields}
+        )
+        product_grandchild = self.env["product.product"].create(
+            {
+                "name": "Product in Grandchild",
+                "categ_id": grandchild_categ.id,
+                **product_fields,
+            }
+        )
+        quant_fields = {"quantity": 10.0, "location_id": self.location3.id}
+        quant_child = self.quant_model.create(
+            {"product_id": product_child.id, **quant_fields}
+        )
+        quant_grandchild = self.quant_model.create(
+            {"product_id": product_grandchild.id, **quant_fields}
+        )
+        return self.quant4, quant_child, quant_grandchild
+
     def test_01_all_locations(self):
         inventory1 = self.inventory_model.create(
             {
@@ -592,3 +619,45 @@ class TestStockInventory(BaseCommon):
             ).current_inventory_id,
             inventory2,
         )
+
+    def test_14_category_include_subcategories_default(self):
+        quant_parent, quant_child, quant_grandchild = (
+            self._create_category_hierarchy_with_quants()
+        )
+        inventory = self.inventory_model.create(
+            {
+                "name": "Inventory_Test_Subcateg_Include",
+                "product_selection": "category",
+                "location_ids": [self.location3.id],
+                "exclude_sublocation": True,
+                "category_id": self.product_categ.id,
+            }
+        )
+        self.assertTrue(inventory.category_include_subcategories)
+        inventory.action_state_to_in_progress()
+        found_ids = set(inventory.stock_quant_ids.ids)
+        self.assertEqual(inventory.count_stock_quants, 3)
+        self.assertIn(quant_parent.id, found_ids)
+        self.assertIn(quant_child.id, found_ids)
+        self.assertIn(quant_grandchild.id, found_ids)
+
+    def test_15_category_exclude_subcategories(self):
+        quant_parent, quant_child, quant_grandchild = (
+            self._create_category_hierarchy_with_quants()
+        )
+        inventory = self.inventory_model.create(
+            {
+                "name": "Inventory_Test_Subcateg_Exclude",
+                "product_selection": "category",
+                "location_ids": [self.location3.id],
+                "exclude_sublocation": True,
+                "category_id": self.product_categ.id,
+                "category_include_subcategories": False,
+            }
+        )
+        inventory.action_state_to_in_progress()
+        found_ids = set(inventory.stock_quant_ids.ids)
+        self.assertEqual(inventory.count_stock_quants, 2)
+        self.assertIn(quant_parent.id, found_ids)
+        self.assertIn(quant_child.id, found_ids)
+        self.assertNotIn(quant_grandchild.id, found_ids)
