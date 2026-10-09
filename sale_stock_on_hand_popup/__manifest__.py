@@ -13,6 +13,8 @@
         "views/assets.xml",
         "views/res_config_settings_views.xml",
         "views/sale_order_views.xml",
+        "views/stock_move_line_views.xml",
+        "views/stock_picking_views.xml",
         "wizards/product_quant_wizard_views.xml",
     ],
     "qweb": ["static/src/xml/stock_on_hand_widget.xml"],
