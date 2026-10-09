@@ -83,6 +83,7 @@ addon | version | maintainers | summary
 [stock_quant_reservation_info_mrp](stock_quant_reservation_info_mrp/) | 16.0.1.0.1 |  | Allows to see the manufacturing order related to the reserved info of Products
 [stock_quant_safe_inventory](stock_quant_safe_inventory/) | 16.0.1.0.1 |  | Prevents the quantity on the quant from being updated if quantities have already been picked but not validated in pickings in progress.
 [stock_removal_location_by_priority](stock_removal_location_by_priority/) | 16.0.1.0.1 |  | Establish a removal priority on stock locations.
+[stock_request_analytic](stock_request_analytic/) | 16.0.1.0.0 | <a href='https://github.com/AaronHForgeFlow'><img src='https://github.com/AaronHForgeFlow.png' width='32' height='32' style='border-radius:50%;' alt='AaronHForgeFlow'/></a> | Internal request for stock
 [stock_request_purchase_request](stock_request_purchase_request/) | 16.0.1.0.0 | <a href='https://github.com/marcelsavegnago'><img src='https://github.com/marcelsavegnago.png' width='32' height='32' style='border-radius:50%;' alt='marcelsavegnago'/></a> | Stock Request Purchase Request
 [stock_reservation_date_show](stock_reservation_date_show/) | 16.0.1.0.0 |  | Display reservation date of stock moves
 [stock_reserve](stock_reserve/) | 16.0.1.3.1 |  | Stock reservations on products
