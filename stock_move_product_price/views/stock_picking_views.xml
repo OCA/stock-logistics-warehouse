@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<odoo>
+    <record id="view_picking_form" model="ir.ui.view">
+        <field name="name">stock_move_product_price</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//field[@name='move_ids_without_package']/list/field[@name='product_id']"
+                position="after"
+            >
+                <field
+                    name="product_lst_price"
+                    column_invisible="parent.picking_type_code != 'incoming'"
+                    decoration-danger="product_lst_price &lt;= 0 or product_lst_price == 1.0"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>
