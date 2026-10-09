@@ -1,0 +1,31 @@
+<odoo>
+    <record id="stock_location_stage_empty" model="stock.location.stage">
+        <field name="name">Empty</field>
+        <field name="sequence">10</field>
+        <field name="is_default">True</field>
+        <field name="description">Location is empty.</field>
+    </record>
+
+    <record id="stock_location_stage_ready" model="stock.location.stage">
+        <field name="name">Ready</field>
+        <field name="sequence">20</field>
+        <field name="validation">True</field>
+        <field name="description">Location has been cleaned and is ready to
+            receive a new lot.</field>
+    </record>
+
+    <record id="stock_location_stage_occupied" model="stock.location.stage">
+        <field name="name">Occupied</field>
+        <field name="sequence">30</field>
+        <field name="validation">True</field>
+        <field name="description">Location is occupied and contains a lot.</field>
+    </record>
+
+    <record id="stock_location_stage_retired" model="stock.location.stage">
+        <field name="name">Retired</field>
+        <field name="sequence">90</field>
+        <field name="is_closed">True</field>
+        <field name="fold">True</field>
+        <field name="description">Location has been retired.</field>
+    </record>
+</odoo>
