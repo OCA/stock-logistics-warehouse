@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo noupdate="1">
+    <function model="stock.picking.type" name="write">
+        <value eval="[ref('stock.picking_type_out')]" />
+        <value eval="{'substitute_products_mode': 'all'}" />
+    </function>
+
+    <function model="stock.quant" name="unlink">
+        <function
+            model="stock.quant"
+            name="search"
+            eval="[[(
+                'product_id',
+                'in',
+                (
+                    ref('product_product_fork'),
+                    ref('product_product_spoon'),
+                    ref('product_product_knife'),
+                ),
+            )]]"
+        />
+    </function>
+
+    <function
+        model="stock.quant"
+        name="_update_available_quantity"
+        eval="[
+            obj().env['product.product'].browse(
+                ref('product_product_fork')
+            ),
+            obj().env.ref('stock.warehouse0').lot_stock_id,
+            20.0,
+        ]"
+    />
+
+    <function
+        model="stock.quant"
+        name="_update_available_quantity"
+        eval="[
+            obj().env['product.product'].browse(
+                ref('product_product_spoon')
+            ),
+            obj().env.ref('stock.warehouse0').lot_stock_id,
+            8.0,
+        ]"
+    />
+
+    <function
+        model="stock.quant"
+        name="_update_available_quantity"
+        eval="[
+            obj().env['product.product'].browse(
+                ref('product_product_knife')
+            ),
+            obj().env.ref('stock.warehouse0').lot_stock_id,
+            3.0,
+        ]"
+    />
+</odoo>

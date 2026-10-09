@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="product_normal_form_view_inherit" model="ir.ui.view">
+        <field name="name">
+            Stock Picking Product Interchangeable Product Form
+        </field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page name="interchangeable" string="Interchangeable">
+                    <field name="product_interchangeable_ids" nolabel="1" />
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
