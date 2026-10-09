@@ -1,0 +1,18 @@
+// Center-align the ignore/unignore button column
+.o_product_history_list {
+    button.text-success,
+    button.text-success .fa {
+        color: var(--bs-success, #28a745) !important;
+    }
+    button.text-danger,
+    button.text-danger .fa {
+        color: var(--bs-danger, #dc3545) !important;
+    }
+}
+
+// Widen dialog to fit all columns
+.o_dialog:has(.o_product_history_list) {
+    .modal-dialog {
+        max-width: 90vw;
+    }
+}
