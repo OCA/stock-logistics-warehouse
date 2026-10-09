@@ -65,15 +65,19 @@ class StockMoveLine(models.Model):
     def _compute_quantity(self):
         self._compute_helper_target_field_qty()
 
+    def _get_aggregated_properties(self, move_line=False, move=False):
+        properties = super()._get_aggregated_properties(move_line=move_line, move=move)
+        properties["line_key"] += f"_{properties['move'].secondary_uom_id.id or ''}"
+        return properties
+
     def _get_aggregated_product_quantities(self, **kwargs):
         aggregated_move_lines = super()._get_aggregated_product_quantities(**kwargs)
         for move_line in self:
             line_key = self._get_aggregated_properties(move_line=move_line)["line_key"]
-            aggregated_move_lines[line_key]["secondary_uom_qty"] = (
-                move_line.secondary_uom_qty
+            line = aggregated_move_lines[line_key]
+            line["secondary_uom_qty"] = (
+                line.get("secondary_uom_qty", 0.0) + move_line.secondary_uom_qty
             )
-            aggregated_move_lines[line_key]["secondary_uom_id"] = (
-                move_line.secondary_uom_id
-            )
+            line["secondary_uom_id"] = move_line.secondary_uom_id
 
         return aggregated_move_lines
