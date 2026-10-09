@@ -71,3 +71,31 @@ class TestSafeInventory(BaseCommon):
         self.picking.action_assign()
         self.env.company.stock_quant_no_inventory_if_being_picked = True
         self._make_inventory(self.product, self.location, 5.0)
+
+    def test_set_inventory_quantity_being_picked(self):
+        # setting a counted quantity is allowed, only applying it is blocked
+        self.picking.action_assign()
+        self.picking.move_line_ids.write({"qty_done": 5.0})
+        self.env.company.stock_quant_no_inventory_if_being_picked = True
+        self.quant.inventory_quantity = 0.0
+        self.assertTrue(self.quant.inventory_quantity_set)
+        with self.assertRaisesRegex(
+            UserError,
+            "You cannot update the quantity of a quant that is currently being picked",
+        ):
+            self.quant.action_apply_inventory()
+
+    def test_is_being_picked(self):
+        self.picking.action_assign()
+        self.assertFalse(self.quant.is_being_picked)
+        self.picking.move_line_ids.write({"qty_done": 5.0})
+        self.quant.invalidate_recordset(["is_being_picked"])
+        self.assertTrue(self.quant.is_being_picked)
+        action = self.quant.action_view_current_move_lines()
+        self.assertEqual(
+            self.env["stock.move.line"].search(action["domain"]),
+            self.picking.move_line_ids,
+        )
+        self.picking._action_done()
+        self.quant.invalidate_recordset(["is_being_picked"])
+        self.assertFalse(self.quant.is_being_picked)
