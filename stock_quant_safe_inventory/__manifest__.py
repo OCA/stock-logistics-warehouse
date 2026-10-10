@@ -15,6 +15,7 @@
     ],
     "data": [
         "views/res_config_settings.xml",
+        "views/stock_quant.xml",
     ],
     "demo": [],
     "installable": True,
