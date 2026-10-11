@@ -62,6 +62,17 @@ class TestMoveLocation(TestsCommon):
         with self.assertRaises(ValidationError):
             wizard.stock_move_location_line_ids[0].move_quantity += 1
 
+    def test_move_location_line_uom_precision(self):
+        """The line quantities use the 'Product Unit' decimal precision."""
+        self.env.ref("uom.decimal_product_uom").sudo().digits = 4
+        wizard = self._create_wizard(self.internal_loc_1, self.internal_loc_2)
+        wizard.onchange_origin_location()
+        line = wizard.stock_move_location_line_ids.filtered(
+            lambda line: line.product_id == self.product_no_lots
+        )
+        line.move_quantity = 1.2345
+        self.assertEqual(line.move_quantity, 1.2345)
+
     def test_move_location_wizard_ignore_reserved(self):
         """Can't move more than exists."""
         wizard = self._create_wizard(self.internal_loc_1, self.internal_loc_2)
