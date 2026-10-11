@@ -40,16 +40,14 @@ class StockMoveLocationWizardLine(models.TransientModel):
         domain="[('location_id', '=', origin_location_id)]",
     )
     owner_id = fields.Many2one(comodel_name="res.partner", string="From Owner")
-    move_quantity = fields.Float(
-        string="Quantity to move", digits="Product Unit of Measure"
-    )
+    move_quantity = fields.Float(string="Quantity to move", digits="Product Unit")
     max_quantity = fields.Float(
-        string="Maximum available quantity", digits="Product Unit of Measure"
+        string="Maximum available quantity", digits="Product Unit"
     )
     total_quantity = fields.Float(
-        string="Total existence quantity", digits="Product Unit of Measure"
+        string="Total existence quantity", digits="Product Unit"
     )
-    reserved_quantity = fields.Float(digits="Product Unit of Measure")
+    reserved_quantity = fields.Float(digits="Product Unit")
     custom = fields.Boolean(string="Custom line", default=True)
 
     @api.depends("move_location_wizard_id.destination_location_id")
