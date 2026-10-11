@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-12-01 11:42+0000\n"
+"PO-Revision-Date: 2026-10-11 10:46+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.10.4\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: stock_vertical_lift_storage_type
 #: model:ir.model.fields,field_description:stock_vertical_lift_storage_type.field_stock_location__display_name
@@ -99,4 +99,4 @@ msgstr "Tipo vassoio ubicazione di magazzino"
 #. module: stock_vertical_lift_storage_type
 #: model:ir.model,name:stock_vertical_lift_storage_type.model_vertical_lift_operation_put
 msgid "Vertical Lift Operation Put"
-msgstr "Scarico operazione sollevamento verticale"
+msgstr "Scarico operazione magazzino verticale"
