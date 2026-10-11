@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-05-06 11:24+0000\n"
+"PO-Revision-Date: 2026-10-11 08:18+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.10.4\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: stock_vertical_lift_kardex
 #: code:addons/stock_vertical_lift_kardex/models/stock_location.py:0
@@ -58,4 +58,4 @@ msgstr "La navetta vassoio %s non ha il livello. Correggere la configurazione"
 #. module: stock_vertical_lift_kardex
 #: model:ir.model,name:stock_vertical_lift_kardex.model_vertical_lift_shuttle
 msgid "Vertical Lift Shuttle"
-msgstr "Navetta sollevamento verticale"
+msgstr "Navetta magazzino verticale"
