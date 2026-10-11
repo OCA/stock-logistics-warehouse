@@ -4,7 +4,6 @@
 
 from odoo import api, fields, models
 from odoo.exceptions import ValidationError
-from odoo.tools import float_compare
 
 
 class StockMoveLocationWizardLine(models.TransientModel):
@@ -15,14 +14,9 @@ class StockMoveLocationWizardLine(models.TransientModel):
         string="Move location Wizard",
         comodel_name="wiz.stock.move.location",
     )
-    product_id = fields.Many2one(
-        string="Product", comodel_name="product.product", required=True
-    )
-    origin_location_id = fields.Many2one(
-        string="Origin Location", comodel_name="stock.location"
-    )
+    product_id = fields.Many2one(comodel_name="product.product", required=True)
+    origin_location_id = fields.Many2one(comodel_name="stock.location")
     destination_location_id = fields.Many2one(
-        string="Destination Location",
         comodel_name="stock.location",
         compute="_compute_destination_location_id",
     )
@@ -57,18 +51,14 @@ class StockMoveLocationWizardLine(models.TransientModel):
                 record.move_location_wizard_id.destination_location_id
             )
 
-    @staticmethod
-    def _compare(qty1, qty2, precision_rounding):
-        return float_compare(qty1, qty2, precision_rounding=precision_rounding)
-
     @api.constrains("max_quantity", "move_quantity")
     def _constraint_max_move_quantity(self):
         for record in self:
-            rounding = record.product_uom_id.rounding
+            uom = record.product_uom_id
             move_qty_gt_max_qty = (
-                self._compare(record.move_quantity, record.max_quantity, rounding) == 1
+                uom.compare(record.move_quantity, record.max_quantity) == 1
             )
-            move_qty_lt_0 = self._compare(record.move_quantity, 0.0, rounding) == -1
+            move_qty_lt_0 = uom.compare(record.move_quantity, 0.0) == -1
             if move_qty_gt_max_qty or move_qty_lt_0:
                 raise ValidationError(
                     self.env._(
@@ -101,7 +91,7 @@ class StockMoveLocationWizardLine(models.TransientModel):
             "location_id": self.origin_location_id.id,
             "location_dest_id": location_dest_id,
             "quantity": qty_done,
-            "product_uom_id": self.product_uom_id.id,
+            "uom_id": self.product_uom_id.id,
             "picking_id": picking.id,
             "move_id": move.id,
         }
@@ -149,8 +139,7 @@ class StockMoveLocationWizardLine(models.TransientModel):
             # if it is immediate transfer and product doesn't exist in that
             # location -> make the transfer of 0.
             return 0
-        rounding = self.product_uom_id.rounding
         available_qty_lt_move_qty = (
-            self._compare(available_qty, self.move_quantity, rounding) == -1
+            self.product_uom_id.compare(available_qty, self.move_quantity) == -1
         )
         return available_qty if available_qty_lt_move_qty else self.move_quantity

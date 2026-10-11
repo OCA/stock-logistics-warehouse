@@ -66,10 +66,9 @@
                                     string="UoM"
                                     groups="uom.group_uom"
                                 />
-                                <!-- Preserve the field as invisible to avoid errors
-                                when the UoM is used in _constraint_max_move_quantity
-                                to compare values using the rounding,
-                                and the user does not have the group_uom group. -->
+                                <!-- Keep product_uom_id in the record so uom.compare()
+                                in _constraint_max_move_quantity gets a unit
+                                when the user lacks the group_uom group. -->
                                 <field
                                     name="product_uom_id"
                                     string="UoM"

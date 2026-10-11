@@ -3,6 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 
 from odoo.exceptions import ValidationError
+from odoo.tests import new_test_user
 
 from .test_common import TestsCommon
 
@@ -55,6 +56,18 @@ class TestMoveLocation(TestsCommon):
             self.partner,
         )
 
+    def test_move_location_wizard_stock_user(self):
+        """A plain Inventory User (without uom.group_uom) can use the wizard."""
+        stock_user = new_test_user(
+            self.env, login="stock_user", groups="stock.group_stock_user"
+        )
+        wizard = self._create_wizard(self.internal_loc_1, self.internal_loc_2)
+        wizard = wizard.with_env(self.env(user=stock_user))
+        wizard.onchange_origin_location()
+        wizard.action_move_location()
+        self.check_product_amount(self.product_no_lots, self.internal_loc_1, 0)
+        self.check_product_amount(self.product_no_lots, self.internal_loc_2, 123)
+
     def test_move_location_wizard_amount(self):
         """Can't move more than exists."""
         wizard = self._create_wizard(self.internal_loc_1, self.internal_loc_2)
@@ -94,7 +107,7 @@ class TestMoveLocation(TestsCommon):
         """Test a product that have existing quants with undefined quantity."""
 
         product_not_available = self.env["product.product"].create(
-            {"name": "Mango", "is_storable": True, "tracking": "none"}
+            {"name": "Mango", "is_storable": True, "tracking": False}
         )
         self.quant_obj.create(
             {
@@ -298,7 +311,7 @@ class TestMoveLocation(TestsCommon):
             {
                 "product_id": self.product_lots.id,
                 "product_uom_qty": 20.0,
-                "product_uom": self.product_lots.uom_id.id,
+                "uom_id": self.product_lots.uom_id.id,
                 "location_id": delivery_picking.location_id.id,
                 "location_dest_id": delivery_picking.location_dest_id.id,
                 "picking_id": delivery_picking.id,
@@ -325,7 +338,7 @@ class TestMoveLocation(TestsCommon):
             {
                 "product_id": self.product_lots.id,
                 "product_uom_qty": 100.0,
-                "product_uom": self.product_lots.uom_id.id,
+                "uom_id": self.product_lots.uom_id.id,
                 "location_id": internal_picking.location_id.id,
                 "location_dest_id": internal_picking.location_dest_id.id,
                 "picking_id": internal_picking.id,

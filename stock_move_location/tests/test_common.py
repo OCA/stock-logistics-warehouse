@@ -8,6 +8,8 @@ from odoo.addons.base.tests.common import BaseCommon
 
 
 class TestsCommon(BaseCommon):
+    _test_user_groups = ("stock.group_stock_manager", "product.group_product_manager")
+
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -43,7 +45,7 @@ class TestsCommon(BaseCommon):
         )
         cls.uom_unit = cls.env.ref("uom.product_uom_unit")
         cls.product_no_lots = cls.product_obj.create(
-            {"name": "Pineapple", "is_storable": True, "tracking": "none"}
+            {"name": "Pineapple", "is_storable": True, "tracking": False}
         )
         cls.product_lots = cls.product_obj.create(
             {"name": "Apple", "is_storable": True, "tracking": "lot"}

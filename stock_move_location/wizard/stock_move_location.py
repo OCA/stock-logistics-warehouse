@@ -17,7 +17,6 @@ class StockMoveLocationWizard(models.TransientModel):
         help="technical field to disable the edition of origin location.",
     )
     origin_location_id = fields.Many2one(
-        string="Origin Location",
         comodel_name="stock.location",
         required=True,
         domain=lambda self: self._get_locations_domain(),
@@ -27,7 +26,6 @@ class StockMoveLocationWizard(models.TransientModel):
         help="technical field to disable the edition of destination location.",
     )
     destination_location_id = fields.Many2one(
-        string="Destination Location",
         comodel_name="stock.location",
         required=True,
         domain=lambda self: self._get_locations_domain(),
@@ -121,7 +119,7 @@ class StockMoveLocationWizard(models.TransientModel):
                         "lot_id": quant.lot_id.id,
                         "package_id": quant.package_id.id,
                         "owner_id": quant.owner_id.id,
-                        "product_uom_id": quant.product_uom_id.id,
+                        "product_uom_id": quant.uom_id.id,
                         "custom": False,
                     },
                 )
@@ -150,7 +148,7 @@ class StockMoveLocationWizard(models.TransientModel):
                                 "lot_id": quant.lot_id.id,
                                 "package_id": quant.package_id.id,
                                 "owner_id": quant.owner_id.id,
-                                "product_uom_id": quant.product_uom_id.id,
+                                "product_uom_id": quant.uom_id.id,
                                 "custom": False,
                             },
                         )
@@ -201,7 +199,7 @@ class StockMoveLocationWizard(models.TransientModel):
             "location_id": location_from_id,
             "location_dest_id": location_to_id,
             "product_id": product.id,
-            "product_uom": product_uom_id,
+            "uom_id": product_uom_id,
             "product_uom_qty": qty,
             "picking_id": picking.id,
             "location_move": True,

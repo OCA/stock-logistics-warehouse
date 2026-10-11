@@ -6,6 +6,8 @@ from odoo.addons.base.tests.common import BaseCommon
 
 
 class TestFillwithStock(BaseCommon):
+    _test_user_groups = ("stock.group_stock_manager", "product.group_product_manager")
+
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
