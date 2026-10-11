@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-12-24 17:33+0000\n"
+"PO-Revision-Date: 2026-10-11 10:46+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.17\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: stock_vertical_lift_qty_by_packaging
 #: model:ir.model.fields,field_description:stock_vertical_lift_qty_by_packaging.field_vertical_lift_operation_transfer__display_name
@@ -41,4 +41,4 @@ msgstr "Visualizza q.tà prodotto per imballaggio"
 #. module: stock_vertical_lift_qty_by_packaging
 #: model:ir.model,name:stock_vertical_lift_qty_by_packaging.model_vertical_lift_operation_transfer
 msgid "Vertical Lift Operation - Transfer"
-msgstr "Operazione sollevamento verticale - trasferimento"
+msgstr "Operazione magazzino verticale - trasferimento"
