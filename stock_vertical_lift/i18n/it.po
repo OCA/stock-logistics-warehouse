@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2026-07-20 07:47+0000\n"
+"PO-Revision-Date: 2026-10-11 10:46+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -85,8 +85,7 @@ msgstr "Codice a barre letto"
 #: code:addons/stock_vertical_lift/models/stock_location.py:0
 msgid "Cannot fetch a vertical lift tray on location %s"
 msgstr ""
-"Impossibile recuperare un vassoio di sollevamento verticale nella posizione "
-"%s"
+"Impossibile recuperare un vassoio di magazzino verticale nella posizione %s"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields.selection,name:stock_vertical_lift.selection__stock_location__vertical_lift_kind__cell
@@ -106,7 +105,7 @@ msgstr "Celle"
 msgid "Check this box to use it as the view for Vertical Lift Shuttles."
 msgstr ""
 "Seleziona questa opzione per utilizzarla come vista per le navette a "
-"sollevamento verticale."
+"magazzino verticale."
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_command__command
@@ -116,7 +115,7 @@ msgstr "Comando"
 #. module: stock_vertical_lift
 #: model:ir.model,name:stock_vertical_lift.model_res_company
 msgid "Companies"
-msgstr ""
+msgstr "Aziende"
 
 #. module: stock_vertical_lift
 #: model:ir.model,name:stock_vertical_lift.model_res_config_settings
@@ -245,8 +244,7 @@ msgid ""
 "Vertical Lift, the operator decided to skip its processing."
 msgstr ""
 "Se questa opzione è impostata, significa che quando il movimento è stato "
-"elaborato nel sollevamento verticale, l'operatore ha deciso di non "
-"elaborarlo."
+"elaborato nel magazzino verticale, l'operatore ha deciso di non elaborarlo."
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields.selection,name:stock_vertical_lift.selection__vertical_lift_shuttle__mode__inventory
@@ -268,12 +266,12 @@ msgstr "Schermata inventario"
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_stock_location__inverse_vertical_lift_shuttle_ids
 msgid "Inverse Vertical Lift Shuttle"
-msgstr "Inverti navetta sollevamento verticale"
+msgstr "Inverti navetta magazzino verticale"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_stock_location__vertical_lift_location
 msgid "Is a Vertical Lift View Location?"
-msgstr "È una ubicazione della vista sollevamento verticale?"
+msgstr "È una ubicazione della vista magazzino verticale?"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_inventory__last_quantity_input
@@ -357,6 +355,8 @@ msgid ""
 "Move lines skipped by the operator are proposed again only once the other "
 "move lines have been processed."
 msgstr ""
+"Le righe di movimentazione saltate dall'operatore vengono riproposte solo "
+"dopo che le altre righe di movimentazione sono state elaborate."
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_command__name
@@ -478,13 +478,13 @@ msgstr "Schermata prelievo"
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_res_company__vertical_lift_pick_skipped_last
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_res_config_settings__vertical_lift_pick_skipped_last
 msgid "Pick skipped lines last"
-msgstr ""
+msgstr "Selezionare per ultime le righe saltate"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_res_company__vertical_lift_pick_by_priority
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_res_config_settings__vertical_lift_pick_by_priority
 msgid "Pick urgent transfers first"
-msgstr ""
+msgstr "Selezionare prima i trasferimenti urgenti"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_shuttle__port
@@ -507,12 +507,13 @@ msgstr "Movimenti prodotto (riga movimento di magazzino)"
 #. module: stock_vertical_lift
 #: model_terms:ir.ui.view,arch_db:stock_vertical_lift.res_config_settings_view_form
 msgid "Propose skipped move lines once the others are done"
-msgstr ""
+msgstr "Suggerire le righe di movimento saltate una volta completate le altre"
 
 #. module: stock_vertical_lift
 #: model_terms:ir.ui.view,arch_db:stock_vertical_lift.res_config_settings_view_form
 msgid "Propose the move lines of the most urgent transfers first"
 msgstr ""
+"Proporre per prime le sequenze di spostamento dei trasferimenti più urgenti"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,help:stock_vertical_lift.field_res_company__vertical_lift_pick_by_priority
@@ -521,6 +522,8 @@ msgid ""
 "Propose the move lines of the most urgent transfers first, using the "
 "transfer's priority and scheduled date."
 msgstr ""
+"Proporre per prime le linee di movimentazione relative ai trasferimenti più "
+"urgenti, basandosi sulla priorità e sulla data programmata del trasferimento."
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields.selection,name:stock_vertical_lift.selection__vertical_lift_shuttle__mode__put
@@ -612,7 +615,7 @@ msgstr "Salva e rilascia"
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_res_config_settings__vertical_lift_secret
 #: model_terms:ir.ui.view,arch_db:stock_vertical_lift.res_config_settings_view_form
 msgid "Secret for Vertical Lift API"
-msgstr "Segreto per API sollevamento verticale"
+msgstr "Segreto per API magazzino verticale"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_shuttle__server
@@ -650,12 +653,12 @@ msgstr "Salta"
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_stock_move_line__vertical_lift_skipped_date
 msgid "Skipped in Vertical Lift on"
-msgstr ""
+msgstr "Saltato nel magazzino verticale su"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_stock_move_line__vertical_lift_skipped
 msgid "Skipped in Vertical Lift?"
-msgstr "Saltato nel sollevamento verticale?"
+msgstr "Saltato nel magazzino verticale?"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_pick__picking_origin
@@ -793,59 +796,59 @@ msgstr "Valore dell'ultimo codice a barre letto."
 #. module: stock_vertical_lift
 #: model_terms:ir.ui.view,arch_db:stock_vertical_lift.res_config_settings_view_form
 msgid "Vertical Lift"
-msgstr "Sollevamento verticale"
+msgstr "Magazzino verticale"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_stock_quant__vertical_lift_done
 msgid "Vertical Lift Done"
-msgstr "Sollevamento verticale eseguito"
+msgstr "Magazzino verticale eseguito"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_stock_location__vertical_lift_kind
 msgid "Vertical Lift Kind"
-msgstr "Tipo sollevamento verticale"
+msgstr "Tipo magazzino verticale"
 
 #. module: stock_vertical_lift
 #: model:ir.model,name:stock_vertical_lift.model_vertical_lift_operation_base
 msgid "Vertical Lift Operation - Base"
-msgstr "Operazione sollevamento verticale - Base"
+msgstr "Operazione magazzino verticale - Base"
 
 #. module: stock_vertical_lift
 #: model:ir.model,name:stock_vertical_lift.model_vertical_lift_operation_transfer
 msgid "Vertical Lift Operation - Transfer"
-msgstr "Operazione sollevamento verticale - trasferimento"
+msgstr "Operazione magazzino verticale - trasferimento"
 
 #. module: stock_vertical_lift
 #: model:ir.model,name:stock_vertical_lift.model_vertical_lift_operation_inventory
 msgid "Vertical Lift Operation Inventory"
-msgstr "Inventario operazione sollevamento verticale"
+msgstr "Inventario operazione magazzino verticale"
 
 #. module: stock_vertical_lift
 #: model:ir.model,name:stock_vertical_lift.model_vertical_lift_operation_pick
 msgid "Vertical Lift Operation Pick"
-msgstr "Prelievo operazione sollevamento verticale"
+msgstr "Prelievo operazione magazzino  verticale"
 
 #. module: stock_vertical_lift
 #: model:ir.model,name:stock_vertical_lift.model_vertical_lift_operation_put
 msgid "Vertical Lift Operation Put"
-msgstr "Scarico operazione sollevamento verticale"
+msgstr "Scarico operazione magazzino verticale"
 
 #. module: stock_vertical_lift
 #: model:ir.model,name:stock_vertical_lift.model_vertical_lift_shuttle
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_stock_location__vertical_lift_shuttle_id
 msgid "Vertical Lift Shuttle"
-msgstr "Navetta sollevamento verticale"
+msgstr "Navetta magazzino verticale"
 
 #. module: stock_vertical_lift
 #: model:ir.actions.act_window,name:stock_vertical_lift.vertical_lift_shuttle_action
 #: model:ir.ui.menu,name:stock_vertical_lift.vertical_lift_shuttle
 msgid "Vertical Lift Shuttles"
-msgstr "Navette sollevamento verticale"
+msgstr "Navette magazzino verticale"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_stock_quant__vertical_lift_tray_id
 msgid "Vertical Lift Tray"
-msgstr "Vassoio sollevamento verticale"
+msgstr "Vassoio magazzino verticale"
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields.selection,name:stock_vertical_lift.selection__stock_location__vertical_lift_kind__view
@@ -859,6 +862,10 @@ msgid ""
 "processed in the Vertical Lift. Skipped lines are proposed again once the "
 "other lines are processed, oldest skip first."
 msgstr ""
+"Quando l'operatore ha deciso di saltare questa riga di movimentazione mentre "
+"era in fase di elaborazione nel magazzino verticale, le righe saltate "
+"vengono riproposte una volta completata l'elaborazione delle altre, dando "
+"priorità a quella saltata per prima."
 
 #. module: stock_vertical_lift
 #: model:ir.model.fields,field_description:stock_vertical_lift.field_vertical_lift_operation_inventory__tray_x
