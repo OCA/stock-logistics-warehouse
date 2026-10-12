@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-11-30 03:53+0000\n"
-"PO-Revision-Date: 2026-07-21 06:11+0000\n"
+"PO-Revision-Date: 2026-10-12 11:46+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -132,7 +132,7 @@ msgstr "Quantità di confezioni prodotto completate."
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__analytic_distribution
 msgid "Analytic"
-msgstr ""
+msgstr "Analitica"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__analytic_account_line_id
@@ -142,12 +142,12 @@ msgstr "Riga conto analitico"
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__analytic_distribution_search
 msgid "Analytic Distribution Search"
-msgstr ""
+msgstr "Ricerca distribuzione analitica"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__analytic_precision
 msgid "Analytic Precision"
-msgstr ""
+msgstr "Precisione analitica"
 
 #. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation__ordered_available_to_promise_qty
