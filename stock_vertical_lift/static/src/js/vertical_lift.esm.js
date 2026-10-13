@@ -67,19 +67,20 @@ patch(FormController.prototype, {
         super.setup();
         this.busService = useService("bus_service");
         if (this.props.resModel.startsWith("vertical.lift.operation.")) {
-            this.busService.addChannel("notify_vertical_lift_screen");
-            this.busService.subscribe("notification", (payload) => {
+            const onNotification = (payload) => {
                 if (payload.action === "refresh") {
                     this.vlift_bus_action_refresh(payload.params);
                 }
+            };
+            this.busService.addChannel("notify_vertical_lift_screen");
+            this.busService.subscribe("notification", onNotification);
+            onWillUnmount(() => {
+                // The refresh remounts the form: without this, every remount
+                // would leave a listener behind that keeps firing reloads.
+                this.busService.unsubscribe("notification", onNotification);
+                this.busService.deleteChannel("notify_vertical_lift_screen");
             });
         }
-
-        onWillUnmount(() => {
-            if (this.props.resModel.startsWith("vertical.lift.operation.")) {
-                this.busService.deleteChannel("notify_vertical_lift_screen");
-            }
-        });
     },
 
     vlift_bus_action_refresh(params) {
