@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Camptocamp SA
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field
+            name="name"
+        >res.config.settings.form.inherit.stock.location.lockdown</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="stock.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//block[@name='warehouse_setting_container']"
+                position="inside"
+            >
+                <setting
+                    id="allow_lockdown_on_stocked_location_setting"
+                    help="Allow blocking stock entrance on internal locations that already contain stock."
+                >
+                    <field name="allow_lockdown_on_stocked_location" />
+                </setting>
+                <setting
+                    id="block_location_on_inventory_setting"
+                    help="Treat a location (and its descendants) as blocked for both inbound and outbound while an inventory is in progress on it."
+                >
+                    <field name="block_location_on_inventory" />
+                </setting>
+            </xpath>
+        </field>
+    </record>
+</odoo>
