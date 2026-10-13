@@ -3,7 +3,7 @@
 {
     "name": "Vertical Lift Pick Priority",
     "summary": "Pick first the goods awaited by the most urgent deliveries",
-    "version": "18.0.1.0.0",
+    "version": "18.0.1.0.1",
     "category": "Stock",
     "author": "Camptocamp, Odoo Community Association (OCA)",
     "license": "AGPL-3",
