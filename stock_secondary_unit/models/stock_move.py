@@ -78,14 +78,17 @@ class StockMove(models.Model):
         for move in res:
             secondary_uom_qty = neg_qty_moves_dic.get(neg_key(move))
             if secondary_uom_qty is not None:
-                if move.product_uom_qty >= 0.0:
+                if (
+                    move.product_uom_qty >= 0.0
+                    and move.secondary_uom_id.dependency_type == "independent"
+                ):
                     new_secondary_uom_qty = move.secondary_uom_qty + secondary_uom_qty
                 else:
                     # Alternatively we must get values from candidate moves before
                     # merge for all cases and it has poor performance.
                     # Don't use _compute_secondary_uom_qty() because it is needed for
                     # any dependency_type
-                    new_secondary_uom_qty = self._get_secondary_uom_qty_from_uom_qty()
+                    new_secondary_uom_qty = move._get_secondary_uom_qty_from_uom_qty()
                 # Use _write to avoid recompute product_uom_qty
                 move._write({"secondary_uom_qty": new_secondary_uom_qty})
                 move.invalidate_cache(fnames=["secondary_uom_qty"])
