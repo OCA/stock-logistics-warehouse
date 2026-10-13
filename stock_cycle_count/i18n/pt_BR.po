@@ -9,22 +9,23 @@ msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-06-10 05:35+0000\n"
-"PO-Revision-Date: 2017-06-10 05:35+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
-"Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/"
-"teams/23907/pt_BR/)\n"
+"PO-Revision-Date: 2026-10-13 21:46+0000\n"
+"Last-Translator: \"Rodrigo A. Madureira\" <rodrigomadu85@gmail.com>\n"
+"Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/teams/"
+"23907/pt_BR/)\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: stock_cycle_count
 #. odoo-python
 #: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:0
 #, python-format
 msgid "(No description provided.)"
-msgstr ""
+msgstr "(Sem descrição fornecida.)"
 
 #. module: stock_cycle_count
 #: model_terms:ir.ui.view,arch_db:stock_cycle_count.res_config_settings_view_form_cycle_adjustment
@@ -33,49 +34,53 @@ msgid ""
 "specific.\" aria-label=\"Values set here are company-specific.\" "
 "groups=\"base.group_multi_company\" role=\"img\"/>"
 msgstr ""
+"<span class=\"fa fa-lg fa-building-o\" title=\"Valores configurados aqui são "
+"da empresa específica.\" aria-label=\"Valores configurados aqui são da "
+"empresa específica.\" groups=\"base.group_multi_company\" role=\"img\"/>"
 
 #. module: stock_cycle_count
 #: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_location_accuracy
+#, fuzzy
 msgid "<span>%</span>"
-msgstr ""
+msgstr "<span>%</span>"
 
 #. module: stock_cycle_count
 #: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_location_accuracy
 msgid "<span>Location:</span>"
-msgstr ""
+msgstr "<span>Localização:</span>"
 
 #. module: stock_cycle_count
 #: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_location_accuracy
 msgid "<strong>Complete Name:</strong>"
-msgstr ""
+msgstr "<strong>Nome Completo:</strong>"
 
 #. module: stock_cycle_count
 #: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_location_accuracy
 msgid "<strong>Current Accuracy:</strong>"
-msgstr ""
+msgstr "<strong>Precisão Atual:</strong>"
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_location__qty_variance_inventory_threshold
 msgid "Acceptable Inventory Quantity Variance Threshold"
-msgstr ""
+msgstr "Limite Aceitável de Variação da Quantidade de Inventário"
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_inventory__inventory_accuracy
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_move_line__line_accuracy
 #: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_location_accuracy
 msgid "Accuracy"
-msgstr ""
+msgstr "Precisão"
 
 #. module: stock_cycle_count
 #: model:ir.actions.report,name:stock_cycle_count.action_report_stock_location_accuracy
 msgid "Accuracy Report"
-msgstr ""
+msgstr "Relatório de Precisão"
 
 #. module: stock_cycle_count
 #: model:ir.actions.act_window,name:stock_cycle_count.act_accuracy_stats
 #: model_terms:ir.ui.view,arch_db:stock_cycle_count.view_location_form
 msgid "Accuracy Stats"
-msgstr ""
+msgstr "Status de Precisão"
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__message_needaction
@@ -93,6 +98,8 @@ msgid ""
 "Allows to start with a pre-filled counted quantity for each lines or with "
 "all counted quantities set to zero."
 msgstr ""
+"Permite começar com uma quantidade contada preenchida para cada linha ou com "
+"todas as quantidades contadas definidas como zero."
 
 #. module: stock_cycle_count
 #. odoo-python
@@ -100,16 +107,17 @@ msgstr ""
 #, python-format
 msgid "An adjustment linked to a cycle count should exclude the sublocations."
 msgstr ""
+"Um ajuste vinculado a uma contagem de ciclo deve excluir as sublocalizações."
 
 #. module: stock_cycle_count
 #: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_rule_form_view
 msgid "Applied in:"
-msgstr ""
+msgstr "Aplicado em:"
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule__apply_in
 msgid "Apply this rule in:"
-msgstr ""
+msgstr "Aplicar esta regra em:"
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__responsible_id
@@ -123,23 +131,24 @@ msgstr "Atribuído à"
 #. module: stock_cycle_count
 #: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_search_view
 msgid "Assigned to me"
-msgstr ""
+msgstr "Atribuído a mim"
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__message_attachment_count
 msgid "Attachment Count"
-msgstr ""
+msgstr "Contagem de Anexos"
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_res_company__auto_start_inventory_from_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_res_config_settings__auto_start_inventory_from_cycle_count
 msgid "Auto Start Inventory Adjustment from Cycle Count"
 msgstr ""
+"Iniciar automaticamente o ajuste de estoque a partir da contagem cíclica"
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__automatic_deadline_date
 msgid "Automatic Required Date"
-msgstr ""
+msgstr "Data de Requisição Automática"
 
 #. module: stock_cycle_count
 #: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_form_view
@@ -155,7 +164,7 @@ msgstr "Cancelada"
 #. module: stock_cycle_count
 #: model:ir.model,name:stock_cycle_count.model_res_company
 msgid "Companies"
-msgstr ""
+msgstr "Empresas"
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__company_id
@@ -165,12 +174,12 @@ msgstr "Empresa"
 #. module: stock_cycle_count
 #: model:ir.actions.server,name:stock_cycle_count.action_server_warehouse_execute_cycle_count
 msgid "Compute Cycle Count Rules"
-msgstr ""
+msgstr "Calcular Regras de Contagem de Ciclos"
 
 #. module: stock_cycle_count
 #: model:ir.model,name:stock_cycle_count.model_res_config_settings
 msgid "Config Settings"
-msgstr ""
+msgstr "Configurar Parâmetros"
 
 #. module: stock_cycle_count
 #: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_form_view
@@ -180,22 +189,22 @@ msgstr "Confirmar"
 #. module: stock_cycle_count
 #: model:ir.actions.server,name:stock_cycle_count.action_server_cycle_count_confirm
 msgid "Confirm Cycle Counts"
-msgstr ""
+msgstr "Configurar Contagens de Ciclos"
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_inventory__prefill_counted_quantity
 msgid "Counted Quantities"
-msgstr ""
+msgstr "Quantidades Contadas"
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_move_line__counted_qty
 msgid "Counted Quantity"
-msgstr ""
+msgstr "Quantidade Contada"
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule__periodic_qty_per_period
 msgid "Counts per period"
-msgstr ""
+msgstr "Contagens por período"
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__create_uid
@@ -221,34 +230,34 @@ msgstr "Moeda"
 #: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_search_view
 #: model_terms:ir.ui.view,arch_db:stock_cycle_count.view_location_form
 msgid "Cycle Count"
-msgstr ""
+msgstr "Contagem de Ciclos"
 
 #. module: stock_cycle_count
 #: model_terms:ir.ui.view,arch_db:stock_cycle_count.report_cyclecount
 msgid "Cycle Count #"
-msgstr ""
+msgstr "Contagem de Ciclo #"
 
 #. module: stock_cycle_count
 #: model:ir.ui.menu,name:stock_cycle_count.menu_report_accuracy_stats
 msgid "Cycle Count Accuracy"
-msgstr ""
+msgstr "Precisão da Contagem de Ciclos"
 
 #. module: stock_cycle_count
 #: model:ir.actions.server,name:stock_cycle_count.ir_cron_compute_cycle_count_action_ir_actions_server
 #: model:ir.cron,cron_name:stock_cycle_count.ir_cron_compute_cycle_count_action
 msgid "Cycle Count Planner Computation"
-msgstr ""
+msgstr "Cálculo do planejador de contagem de ciclos"
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_warehouse__cycle_count_planning_horizon
 msgid "Cycle Count Planning Horizon (in days)"
-msgstr ""
+msgstr "Horizonte de Planejamento de Contagem Cíclica (em dias)"
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_warehouse__cycle_count_rule_ids
 #: model:ir.ui.menu,name:stock_cycle_count.menu_stock_cycle_count_rule
 msgid "Cycle Count Rules"
-msgstr ""
+msgstr "Regras de Contagem Cíclica"
 
 #. module: stock_cycle_count
 #: model_terms:ir.ui.view,arch_db:stock_cycle_count.view_warehouse_form
@@ -256,6 +265,8 @@ msgid ""
 "Cycle Count Rules\n"
 "                    applied in this Warehouse:"
 msgstr ""
+"Regras de Contagem Cíclica \n"
+"                    aplicadas neste Armazem:"
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,help:stock_cycle_count.field_stock_warehouse__cycle_count_planning_horizon
