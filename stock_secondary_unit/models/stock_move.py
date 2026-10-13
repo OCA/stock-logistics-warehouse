@@ -4,7 +4,7 @@ from collections import defaultdict
 from operator import itemgetter
 
 from odoo import api, fields, models
-from odoo.tools import float_compare, float_round
+from odoo.tools import float_compare, float_is_zero, float_round
 
 
 class StockMove(models.Model):
@@ -62,8 +62,10 @@ class StockMove(models.Model):
             *[field for field in distinct_fields if field not in excluded_fields]
         )
         neg_qty_moves_dic = defaultdict(float)
+        # Dependent secondary units are recomputed by core when product_uom_qty
+        # of the absorbing move is updated, so only independent ones are needed.
         for move in self:
-            if move.secondary_uom_id and (
+            if move.secondary_uom_id.dependency_type == "independent" and (
                 float_compare(
                     move.secondary_uom_qty,
                     0.0,
@@ -72,27 +74,61 @@ class StockMove(models.Model):
                 < 0
             ):
                 neg_qty_moves_dic[neg_key(move)] += move.secondary_uom_qty
-        res = super()._merge_moves(merge_into=merge_into)
         if not neg_qty_moves_dic:
-            return res
+            return super()._merge_moves(merge_into=merge_into)
+        # Positive moves fully consumed by negative ones are left with zero quantity
+        # and are not returned by super, so we have to keep them to reset them.
+        candidate_moves_list = []
+        if merge_into:
+            candidate_moves_list.append(merge_into | self)
+        else:
+            self._update_candidate_moves_list(candidate_moves_list)
+        pos_moves = self.browse()
+        for candidate_moves in candidate_moves_list:
+            pos_moves |= candidate_moves.filtered(
+                lambda m: neg_key(m) in neg_qty_moves_dic
+                and float_compare(
+                    m.product_uom_qty, 0.0, precision_rounding=m.product_uom.rounding
+                )
+                > 0
+            )
+        res = super()._merge_moves(merge_into=merge_into)
         for move in res:
             secondary_uom_qty = neg_qty_moves_dic.get(neg_key(move))
             if secondary_uom_qty is not None:
-                if (
-                    move.product_uom_qty >= 0.0
-                    and move.secondary_uom_id.dependency_type == "independent"
-                ):
+                if move.product_uom_qty >= 0.0:
                     new_secondary_uom_qty = move.secondary_uom_qty + secondary_uom_qty
                 else:
                     # Alternatively we must get values from candidate moves before
                     # merge for all cases and it has poor performance.
-                    # Don't use _compute_secondary_uom_qty() because it is needed for
-                    # any dependency_type
+                    # Don't use _compute_secondary_uom_qty() because it skips
+                    # independent secondary units
                     new_secondary_uom_qty = move._get_secondary_uom_qty_from_uom_qty()
                 # Use _write to avoid recompute product_uom_qty
                 move._write({"secondary_uom_qty": new_secondary_uom_qty})
                 move.invalidate_cache(fnames=["secondary_uom_qty"])
+        zero_qty_moves = pos_moves.exists().filtered(
+            lambda m: m.secondary_uom_qty
+            and float_is_zero(
+                m.product_uom_qty, precision_rounding=m.product_uom.rounding
+            )
+        )
+        zero_qty_moves._write({"secondary_uom_qty": 0.0})
+        zero_qty_moves.invalidate_cache(fnames=["secondary_uom_qty"])
         return res
+
+    def _action_confirm(self, merge=True, merge_into=False):
+        moves = super()._action_confirm(merge=merge, merge_into=merge_into)
+        # Core turns the remaining negative moves into returns flipping only the sign
+        # of product_uom_qty, so independent secondary quantities keep the old sign.
+        for move in moves.filtered(
+            lambda m: m.secondary_uom_id.dependency_type == "independent"
+            and m.secondary_uom_qty < 0.0 < m.product_uom_qty
+        ):
+            # Use _write to avoid recompute product_uom_qty
+            move._write({"secondary_uom_qty": -move.secondary_uom_qty})
+            move.invalidate_cache(fnames=["secondary_uom_qty"])
+        return moves
 
     # Update secondary quantity in moves when backorder is created
     def _split(self, qty, restrict_partner_id=False):
