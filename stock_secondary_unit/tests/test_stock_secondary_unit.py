@@ -240,3 +240,66 @@ class TestProductSecondaryUnit(TransactionCase):
         picking.action_confirm()
         self.assertEqual(len(picking.move_lines), 1)
         self.assertEqual(picking.move_lines.secondary_uom_qty, 2)
+
+    def _create_confirmed_picking_out(self, secondary_uom, secondary_uom_qty, qty):
+        product = self.product_template.product_variant_ids[0]
+        with Form(
+            self.StockPicking.with_context(
+                planned_picking=True,
+                default_picking_type_id=self.picking_type_out.id,
+            )
+        ) as picking_form:
+            with picking_form.move_ids_without_package.new() as move:
+                move.product_id = product
+                move.secondary_uom_id = secondary_uom
+                move.secondary_uom_qty = secondary_uom_qty
+                move.product_uom_qty = qty
+        picking = picking_form.save()
+        picking.action_confirm()
+        return picking
+
+    def _add_moves_to_picking(self, picking, secondary_uom, quantities):
+        """Lines added to a confirmed picking are confirmed when it is saved"""
+        product = self.product_template.product_variant_ids[0]
+        StockMove = self.env["stock.move"]
+        previous_moves = StockMove.search([("product_id", "=", product.id)])
+        with Form(picking) as picking_form:
+            for secondary_uom_qty, qty in quantities:
+                with picking_form.move_ids_without_package.new() as move:
+                    move.product_id = product
+                    move.secondary_uom_id = secondary_uom
+                    move.secondary_uom_qty = secondary_uom_qty
+                    move.product_uom_qty = qty
+        # Absorbed negative moves are removed, the remaining ones are returned
+        return StockMove.search([("product_id", "=", product.id)]) - previous_moves
+
+    def test_secondary_unit_merge_negative_move_dependent(self):
+        secondary_uom = self.product_template.secondary_uom_ids[0]
+        picking = self._create_confirmed_picking_out(secondary_uom, 10, 5)
+        # Decrease demand as a confirmed sale order line does
+        self._add_moves_to_picking(picking, secondary_uom, [(-2, -1)])
+        self.assertEqual(len(picking.move_lines), 1)
+        self.assertEqual(picking.move_lines.product_uom_qty, 4)
+        self.assertEqual(picking.move_lines.secondary_uom_qty, 8)
+
+    def test_secondary_unit_merge_negative_moves_independent(self):
+        secondary_uom = self.product_template.secondary_uom_ids[0]
+        secondary_uom.dependency_type = "independent"
+        picking = self._create_confirmed_picking_out(secondary_uom, 10, 5)
+        self._add_moves_to_picking(picking, secondary_uom, [(-3, -1), (-1, -1)])
+        self.assertEqual(len(picking.move_lines), 1)
+        self.assertEqual(picking.move_lines.product_uom_qty, 3)
+        self.assertEqual(picking.move_lines.secondary_uom_qty, 6)
+
+    def test_secondary_unit_negative_move_independent_return(self):
+        secondary_uom = self.product_template.secondary_uom_ids[0]
+        secondary_uom.dependency_type = "independent"
+        picking = self._create_confirmed_picking_out(secondary_uom, 10, 5)
+        # Decrease more than the pending demand, so the remaining is returned
+        return_move = self._add_moves_to_picking(picking, secondary_uom, [(-12, -6)])
+        self.assertEqual(picking.move_lines.product_uom_qty, 0)
+        self.assertEqual(picking.move_lines.secondary_uom_qty, 0)
+        self.assertNotEqual(return_move.picking_id, picking)
+        self.assertEqual(return_move.location_dest_id, self.location_stock)
+        self.assertEqual(return_move.product_uom_qty, 1)
+        self.assertEqual(return_move.secondary_uom_qty, 2)
