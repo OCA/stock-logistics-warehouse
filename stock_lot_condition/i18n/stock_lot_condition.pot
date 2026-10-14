@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 18.0\n"
+"Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -12,11 +12,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
-
-#. module: stock_lot_condition
-#: model:stock.lot.condition,name:stock_lot_condition.condition_acceptable
-msgid "Acceptable"
-msgstr ""
 
 #. module: stock_lot_condition
 #: model:ir.model.fields,field_description:stock_lot_condition.field_stock_lot_condition__active
@@ -27,11 +22,6 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:stock_lot_condition.stock_lot_condition_view_form
 #: model_terms:ir.ui.view,arch_db:stock_lot_condition.stock_lot_condition_view_search
 msgid "Archived"
-msgstr ""
-
-#. module: stock_lot_condition
-#: model:stock.lot.condition,name:stock_lot_condition.condition_as_new
-msgid "As new"
 msgstr ""
 
 #. module: stock_lot_condition
@@ -76,16 +66,13 @@ msgid "Description"
 msgstr ""
 
 #. module: stock_lot_condition
+#: model:ir.model.fields,field_description:stock_lot_condition.field_stock_lot__display_name
 #: model:ir.model.fields,field_description:stock_lot_condition.field_stock_lot_condition__display_name
 msgid "Display Name"
 msgstr ""
 
 #. module: stock_lot_condition
-#: model:stock.lot.condition,name:stock_lot_condition.condition_good
-msgid "Good"
-msgstr ""
-
-#. module: stock_lot_condition
+#: model:ir.model.fields,field_description:stock_lot_condition.field_stock_lot__id
 #: model:ir.model.fields,field_description:stock_lot_condition.field_stock_lot_condition__id
 msgid "ID"
 msgstr ""
@@ -118,18 +105,6 @@ msgid "Lot/Serial"
 msgstr ""
 
 #. module: stock_lot_condition
-#: model:stock.lot.condition,description:stock_lot_condition.condition_acceptable
-msgid ""
-"May have cosmetic imperfections, scratches, dents, etc., but is still "
-"functional."
-msgstr ""
-
-#. module: stock_lot_condition
-#: model:stock.lot.condition,description:stock_lot_condition.condition_very_good
-msgid "Minimal use, with minor cosmetic signs."
-msgstr ""
-
-#. module: stock_lot_condition
 #: model:ir.model.fields,field_description:stock_lot_condition.field_stock_lot_condition__name
 msgid "Name"
 msgstr ""
@@ -147,20 +122,4 @@ msgstr ""
 #. module: stock_lot_condition
 #: model:ir.model,name:stock_lot_condition.model_stock_lot_condition
 msgid "Stock Lot Condition"
-msgstr ""
-
-#. module: stock_lot_condition
-#: model:stock.lot.condition,description:stock_lot_condition.condition_as_new
-msgid ""
-"The item is intact and works perfectly, but the packaging may be damaged."
-msgstr ""
-
-#. module: stock_lot_condition
-#: model:stock.lot.condition,name:stock_lot_condition.condition_very_good
-msgid "Very good"
-msgstr ""
-
-#. module: stock_lot_condition
-#: model:stock.lot.condition,description:stock_lot_condition.condition_good
-msgid "Works perfectly, but with visible wear from normal use."
 msgstr ""
