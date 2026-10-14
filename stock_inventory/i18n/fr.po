@@ -185,6 +185,13 @@ msgid ""
 msgstr ""
 
 #. module: stock_inventory
+#: model:ir.model.fields,help:stock_inventory.field_stock_inventory__category_include_subcategories
+msgid ""
+"If enabled, products from subcategories of the selected category will be "
+"included in the inventory adjustment."
+msgstr ""
+
+#. module: stock_inventory
 #: model:ir.model.fields,help:stock_inventory.field_res_company__stock_inventory_auto_complete
 #: model:ir.model.fields,help:stock_inventory.field_res_config_settings__stock_inventory_auto_complete
 #: model_terms:ir.ui.view,arch_db:stock_inventory.res_config_settings_view_form
@@ -197,6 +204,11 @@ msgstr ""
 #: model:ir.model.fields.selection,name:stock_inventory.selection__stock_inventory__state__in_progress
 msgid "In Progress"
 msgstr "En cours"
+
+#. module: stock_inventory
+#: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__category_include_subcategories
+msgid "Include Subcategories"
+msgstr ""
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__stock_quant_ids

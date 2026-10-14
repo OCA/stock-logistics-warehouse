@@ -191,6 +191,13 @@ msgstr ""
 "Če je omogočeno, bo upoštevalo le izbrane lokacije in ne njihovih podlokacij."
 
 #. module: stock_inventory
+#: model:ir.model.fields,help:stock_inventory.field_stock_inventory__category_include_subcategories
+msgid ""
+"If enabled, products from subcategories of the selected category will be "
+"included in the inventory adjustment."
+msgstr ""
+
+#. module: stock_inventory
 #: model:ir.model.fields,help:stock_inventory.field_res_company__stock_inventory_auto_complete
 #: model:ir.model.fields,help:stock_inventory.field_res_config_settings__stock_inventory_auto_complete
 #: model_terms:ir.ui.view,arch_db:stock_inventory.res_config_settings_view_form
@@ -205,6 +212,11 @@ msgstr ""
 #: model:ir.model.fields.selection,name:stock_inventory.selection__stock_inventory__state__in_progress
 msgid "In Progress"
 msgstr "V teku"
+
+#. module: stock_inventory
+#: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__category_include_subcategories
+msgid "Include Subcategories"
+msgstr ""
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__stock_quant_ids
@@ -397,8 +409,8 @@ msgstr "Postavke premikov zaloge"
 #. odoo-python
 #: code:addons/stock_inventory/models/stock_inventory.py:0
 msgid ""
-"There are active adjustments for the requested products: %(names)s. Blocking"
-" adjustments: %(blocking_names)s"
+"There are active adjustments for the requested products: %(names)s. Blocking "
+"adjustments: %(blocking_names)s"
 msgstr ""
 "Za zahtevane proizvode so aktivni popravki: %(names)s. Blokirajoči popravki: "
 "%(blocking_names)s"
@@ -407,8 +419,8 @@ msgstr ""
 #. odoo-python
 #: code:addons/stock_inventory/models/stock_inventory.py:0
 msgid ""
-"There's already an Adjustment in Process using one requested Location: "
-"%(names)s. Blocking adjustments: %(blocking_names)s"
+"There's already an Adjustment in Process using one requested Location: %"
+"(names)s. Blocking adjustments: %(blocking_names)s"
 msgstr ""
 "Že obstaja popravek v teku za eno izmed zahtevanih lokacij: %(names)s. "
 "Blokirajoči popravki: %(blocking_names)s"
@@ -438,8 +450,8 @@ msgstr "Kronologija komunikacij spletne strani"
 #. odoo-python
 #: code:addons/stock_inventory/models/stock_inventory.py:0
 msgid ""
-"When 'Product Selection: Lot Serial Number' is selected you are only able to"
-" add one product."
+"When 'Product Selection: Lot Serial Number' is selected you are only able to "
+"add one product."
 msgstr ""
 "Ko je izbrano 'Izbor proizvoda: Lot/serijska številka', lahko dodate le en "
 "proizvod."
