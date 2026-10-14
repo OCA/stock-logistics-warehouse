@@ -125,6 +125,11 @@
                                 readonly="state != 'draft'"
                             />
                             <field
+                                name="category_include_subcategories"
+                                invisible="product_selection != 'category'"
+                                readonly="state != 'draft'"
+                            />
+                            <field
                                 name="lot_ids"
                                 widget="many2many_tags"
                                 domain="[('product_id', 'in', product_ids)]"

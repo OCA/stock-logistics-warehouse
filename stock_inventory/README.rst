@@ -1,7 +1,3 @@
-.. image:: https://odoo-community.org/readme-banner-image
-   :target: https://odoo-community.org/get-involved?utm_source=readme
-   :alt: Odoo Community Association
-
 ==========================
 Stock Inventory Adjustment
 ==========================
@@ -17,7 +13,7 @@ Stock Inventory Adjustment
 .. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
     :alt: Beta
-.. |badge2| image:: https://img.shields.io/badge/license-LGPL--3-blue.png
+.. |badge2| image:: https://img.shields.io/badge/licence-LGPL--3-blue.png
     :target: http://www.gnu.org/licenses/lgpl-3.0-standalone.html
     :alt: License: LGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fstock--logistics--warehouse-lightgray.png?logo=github
@@ -49,11 +45,12 @@ choose 2 types of product selection: - All Products (all products from
 theselected locations). - Manual Selection (choose manually each product
 in location). - One Product (choose only one product in locations). -
 Lot Serial Number (choose one product, any lots and locations). -
-Product Category (choose one product category [childs also taken into
-account]). When you start the adjustment (only one at a time) clicking
-on adjustments gets you to the view where adjustments are made. From the
-group view, if you click on Stock Moves you can see the movements done
-(includes the 0 qty moves).
+Product Category (choose one product category; enable *Include
+Subcategories* to also include products from nested subcategories). When
+you start the adjustment (only one at a time) clicking on adjustments
+gets you to the view where adjustments are made. From the group view, if
+you click on Stock Moves you can see the movements done (includes the 0
+qty moves).
 
 Bug Tracker
 ===========
