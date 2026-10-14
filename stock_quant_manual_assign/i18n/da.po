@@ -21,17 +21,17 @@ msgstr ""
 #. module: stock_quant_manual_assign
 #: model:ir.model,name:stock_quant_manual_assign.model_assign_manual_quants
 msgid "Assign Manual Quants"
-msgstr ""
+msgstr "Tildel quants manuelt"
 
 #. module: stock_quant_manual_assign
 #: model:ir.model,name:stock_quant_manual_assign.model_assign_manual_quants_lines
 msgid "Assign Manual Quants Lines"
-msgstr ""
+msgstr "Linjer for manuel tildeling af quants"
 
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_stock_picking_type__auto_fill_qty_done
 msgid "Auto-fill Quantity Done"
-msgstr ""
+msgstr "Udfyld automatisk udført antal"
 
 #. module: stock_quant_manual_assign
 #: model_terms:ir.ui.view,arch_db:stock_quant_manual_assign.assign_manual_quants_form_view
@@ -88,90 +88,90 @@ msgstr "Sidst opdateret den"
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines__location_id
 msgid "Location"
-msgstr "Postnr/by "
+msgstr "Lokation"
 
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines__lot_id
 msgid "Lot"
-msgstr ""
+msgstr "Lot"
 
 #. module: stock_quant_manual_assign
 #: model_terms:ir.ui.view,arch_db:stock_quant_manual_assign.stock_picking_manual_quants_form_view
 msgid "Manual Quants"
-msgstr ""
+msgstr "Manuelle quants"
 
 #. module: stock_quant_manual_assign
 #: model:ir.actions.act_window,name:stock_quant_manual_assign.assign_manual_quants_action
 msgid "Manual assignment"
-msgstr ""
+msgstr "Manuel tildeling"
 
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants__move_id
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines__assign_wizard
 msgid "Move"
-msgstr ""
+msgstr "Flytning"
 
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines__on_hand
 msgid "On Hand"
-msgstr ""
+msgstr "På lager"
 
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines__reserved
 msgid "Others Reserved"
-msgstr ""
+msgstr "Reserveret af andre"
 
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines__owner_id
 msgid "Owner"
-msgstr ""
+msgstr "Ejer"
 
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines__package_id
 msgid "Package"
-msgstr ""
+msgstr "Pakke"
 
 #. module: stock_quant_manual_assign
 #: model:ir.model,name:stock_quant_manual_assign.model_stock_picking_type
 msgid "Picking Type"
-msgstr ""
+msgstr "Pluk type"
 
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines__qty
 msgid "QTY"
-msgstr ""
+msgstr "ANTAL"
 
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines__quant_id
 msgid "Quant"
-msgstr ""
+msgstr "Kvant"
 
 #. module: stock_quant_manual_assign
 #. odoo-python
 #: code:addons/stock_quant_manual_assign/wizard/assign_manual_quants.py:0
 #, python-format
 msgid "Quantity is higher than the needed one"
-msgstr ""
+msgstr "Antallet er højere end det nødvendige"
 
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants__quants_lines
 msgid "Quants"
-msgstr ""
+msgstr "Kvantum"
 
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants__move_qty
 msgid "Remaining qty"
-msgstr ""
+msgstr "Resterende antal"
 
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants__lines_qty
 msgid "Reserved qty"
-msgstr ""
+msgstr "Reserveret antal"
 
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,field_description:stock_quant_manual_assign.field_assign_manual_quants_lines__selected
 msgid "Select"
-msgstr ""
+msgstr "Vælg"
 
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,help:stock_quant_manual_assign.field_stock_picking_type__auto_fill_qty_done
@@ -179,6 +179,8 @@ msgid ""
 "Select this in case done quantity of the stock move line should be auto-"
 "filled when quants are manually assigned."
 msgstr ""
+"Vælg denne, hvis udført antal på lagerflytningslinjen skal udfyldes "
+"automatisk, når quants tildeles manuelt."
 
 #. module: stock_quant_manual_assign
 #. odoo-python
@@ -189,21 +191,24 @@ msgid ""
 "with this product has been done meanwhile or you have manually increased the "
 "suggested value."
 msgstr ""
+"Det valgte linjeantal er højere end det tilgængelige. Måske er der i "
+"mellemtiden udført en operation med dette produkt, eller du har manuelt "
+"forøget den foreslåede værdi."
 
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,help:stock_quant_manual_assign.field_assign_manual_quants_lines__package_id
 msgid "The package containing this quant"
-msgstr ""
+msgstr "Pakken med denne mængde"
 
 #. module: stock_quant_manual_assign
 #: model:ir.model.fields,help:stock_quant_manual_assign.field_assign_manual_quants_lines__owner_id
 msgid "This is the owner of the quant"
-msgstr ""
+msgstr "Dette er ejeren af mængden"
 
 #. module: stock_quant_manual_assign
 #: model_terms:ir.ui.view,arch_db:stock_quant_manual_assign.assign_manual_quants_form_view
 msgid "qty"
-msgstr ""
+msgstr "antal"
 
 #~ msgid "Name"
 #~ msgstr "Navn"
