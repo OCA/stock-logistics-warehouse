@@ -1,6 +1,6 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import fields, models
+from odoo import _, fields, models
 
 
 class StockWarehouse(models.Model):
@@ -57,7 +57,7 @@ class StockWarehouse(models.Model):
                         "propagate_cancel": True,
                         "route_id": self._find_or_create_global_route(
                             "stock_mts_mto_rule.route_mto_mts",
-                            self.env._("Make To Order + Make To Stock"),
+                            _("Make To Order + Make To Stock"),
                             create=False,  # ignored when raise_if_not_found enabled
                             raise_if_not_found=True,
                         ).id,
