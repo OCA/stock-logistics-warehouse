@@ -18,13 +18,18 @@ msgstr ""
 "X-Generator: Weblate 5.15.2\n"
 
 #. module: stock_secondary_unit
+#: model_terms:ir.ui.view,arch_db:stock_secondary_unit.product_form_view_procurement_button
+#: model_terms:ir.ui.view,arch_db:stock_secondary_unit.product_template_form_view_procurement_button
+msgid "<span class=\"o_stat_text\">Secondary Unit</span>"
+msgstr ""
+
+#. module: stock_secondary_unit
 #: model_terms:ir.ui.view,arch_db:stock_secondary_unit.report_delivery_document
 msgid "<strong>Secondary Qty</strong>"
 msgstr "<strong>Cantidad secundaria</strong>"
 
 #. module: stock_secondary_unit
 #: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_move__product_uom_qty
-#: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_reservation__product_uom_qty
 msgid "Demand"
 msgstr "Demanda"
 
@@ -44,9 +49,9 @@ msgid "Product Variant"
 msgstr "Variante de producto"
 
 #. module: stock_secondary_unit
-#: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_move_line__qty_done
-msgid "Qty Done"
-msgstr "Cantidad realizada"
+#: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_move_line__quantity
+msgid "Quantity"
+msgstr ""
 
 #. module: stock_secondary_unit
 #: model:ir.model.fields,field_description:stock_secondary_unit.field_product_product__secondary_unit_qty_available
@@ -74,6 +79,11 @@ msgid "Secondary Qty"
 msgstr "Cantd Secundaria"
 
 #. module: stock_secondary_unit
+#: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_move__secondary_uom_qty_done
+msgid "Secondary Uom Qty Done"
+msgstr ""
+
+#. module: stock_secondary_unit
 #: model_terms:ir.ui.view,arch_db:stock_secondary_unit.view_template_property_form
 msgid "Secondary unit"
 msgstr "Unidad Secundaria"
@@ -89,8 +99,12 @@ msgid "Stock Product Secondary Unit Mixin"
 msgstr "Mixin de unidad secundaria de producto de stock"
 
 #. module: stock_secondary_unit
+#: model:ir.model,name:stock_secondary_unit.model_stock_rule
+msgid "Stock Rule"
+msgstr ""
+
+#. module: stock_secondary_unit
 #: model:ir.model.fields,help:stock_secondary_unit.field_stock_move__product_uom_qty
-#: model:ir.model.fields,help:stock_secondary_unit.field_stock_reservation__product_uom_qty
 msgid ""
 "This is the quantity of product that is planned to be moved.Lowering this "
 "quantity does not generate a backorder.Changing this quantity on assigned "
@@ -100,6 +114,9 @@ msgstr ""
 "esta cantidad no genera una entrega pendiente. Cambiar esta cantidad en "
 "movimientos asignados afecta la reserva del producto y debe hacerse con "
 "cuidado."
+
+#~ msgid "Qty Done"
+#~ msgstr "Cantidad realizada"
 
 #~ msgid "Done"
 #~ msgstr "Hecho"

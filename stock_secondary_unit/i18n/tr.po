@@ -78,6 +78,11 @@ msgid "Secondary Qty"
 msgstr "İkincil Miktar"
 
 #. module: stock_secondary_unit
+#: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_move__secondary_uom_qty_done
+msgid "Secondary Uom Qty Done"
+msgstr ""
+
+#. module: stock_secondary_unit
 #: model_terms:ir.ui.view,arch_db:stock_secondary_unit.view_template_property_form
 msgid "Secondary unit"
 msgstr "İkincil birim"
@@ -91,6 +96,11 @@ msgstr "Stok Hareketi"
 #: model:ir.model,name:stock_secondary_unit.model_stock_product_secondary_unit_mixin
 msgid "Stock Product Secondary Unit Mixin"
 msgstr "Stok Ürün İkincil Birim Karışımı"
+
+#. module: stock_secondary_unit
+#: model:ir.model,name:stock_secondary_unit.model_stock_rule
+msgid "Stock Rule"
+msgstr ""
 
 #. module: stock_secondary_unit
 #: model:ir.model.fields,help:stock_secondary_unit.field_stock_move__product_uom_qty
