@@ -1,0 +1,1 @@
+This module adds the concept of "Condition" to lot so that this information can be indicated (for example: Good or Defects).
