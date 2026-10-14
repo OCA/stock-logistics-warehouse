@@ -181,6 +181,13 @@ msgstr ""
 "sus hijos."
 
 #. module: stock_inventory
+#: model:ir.model.fields,help:stock_inventory.field_stock_inventory__category_include_subcategories
+msgid ""
+"If enabled, products from subcategories of the selected category will be "
+"included in the inventory adjustment."
+msgstr ""
+
+#. module: stock_inventory
 #: model:ir.model.fields,help:stock_inventory.field_res_company__stock_inventory_auto_complete
 #: model:ir.model.fields,help:stock_inventory.field_res_config_settings__stock_inventory_auto_complete
 #: model_terms:ir.ui.view,arch_db:stock_inventory.res_config_settings_view_form
@@ -195,6 +202,11 @@ msgstr ""
 #: model:ir.model.fields.selection,name:stock_inventory.selection__stock_inventory__state__in_progress
 msgid "In Progress"
 msgstr "En progreso"
+
+#. module: stock_inventory
+#: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__category_include_subcategories
+msgid "Include Subcategories"
+msgstr ""
 
 #. module: stock_inventory
 #: model:ir.model.fields,field_description:stock_inventory.field_stock_inventory__stock_quant_ids
@@ -397,8 +409,8 @@ msgstr ""
 #. odoo-python
 #: code:addons/stock_inventory/models/stock_inventory.py:0
 msgid ""
-"There's already an Adjustment in Process using one requested Location: "
-"%(names)s. Blocking adjustments: %(blocking_names)s"
+"There's already an Adjustment in Process using one requested Location: %"
+"(names)s. Blocking adjustments: %(blocking_names)s"
 msgstr ""
 "Ya hay un ajuste en proceso utilizando una ubicación solicitada: %(names)s. "
 "Ajustes bloqueantes: %(blocking_names)s"
@@ -448,7 +460,8 @@ msgstr ""
 #. odoo-python
 #: code:addons/stock_inventory/models/stock_inventory.py:0
 msgid "You can only delete inventory adjustments groups in draft state."
-msgstr "Solo puede eliminar grupos de ajustes de inventario en estado borrador."
+msgstr ""
+"Solo puede eliminar grupos de ajustes de inventario en estado borrador."
 
 #. module: stock_inventory
 #. odoo-python
