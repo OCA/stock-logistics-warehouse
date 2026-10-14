@@ -10,7 +10,7 @@
     "author": "ACSONE SA/NV,Odoo Community Association (OCA)",
     "maintainers": ["lmignon", "rousseldenis"],
     "website": "https://github.com/OCA/stock-logistics-warehouse",
-    "depends": ["stock"],
+    "depends": ["stock", "stock_location_fill_state"],
     "data": ["views/stock_location.xml"],
     "pre_init_hook": "pre_init_hook",
 }
