@@ -32,7 +32,7 @@ Sale Stock On Hand Popup
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-This module allows user to check from sale order line all inventory lines related to that product.
+This module allows user to check from sale order line and picking's line all inventory lines related to that product.
 
 **Table of contents**
 
@@ -49,6 +49,8 @@ To use this module, you need to:
 #. Click on the icon in the line and you will
    see in the popover the '-> View Stock' button that will redirect
    the user to a 'Stock Lines' page for the specific product.
+
+The same widget can also be opened from any picking's line.
 
 Bug Tracker
 ===========
@@ -75,6 +77,7 @@ Contributors
 * `PyTech SRL <https://www.pytech.it>`__:
 
   * Alessio Renda
+  * Simone Rubino <simone.rubino@pytech.it>
 
 * `Ooops404 <https://www.ooops404.com>`__:
 
