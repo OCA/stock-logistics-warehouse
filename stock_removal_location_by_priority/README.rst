@@ -1,7 +1,3 @@
-.. image:: https://odoo-community.org/readme-banner-image
-   :target: https://odoo-community.org/get-involved?utm_source=readme
-   :alt: Odoo Community Association
-
 ==================================
 Stock Removal Location by Priority
 ==================================
@@ -17,7 +13,7 @@ Stock Removal Location by Priority
 .. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
     :alt: Beta
-.. |badge2| image:: https://img.shields.io/badge/license-AGPL--3-blue.png
+.. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fstock--logistics--warehouse-lightgray.png?logo=github
@@ -35,6 +31,11 @@ Stock Removal Location by Priority
 This module adds a removal priority field on stock locations. This
 priority applies when removing a product from different stock locations
 and the incoming dates are equal in both locations.
+
+The removal priority is only taken into account with the FIFO and LIFO
+removal strategies. Any other strategy (Closest Location, Least
+Packages, FEFO...) keeps its standard behaviour and ignores the removal
+priority.
 
 **Table of contents**
 
@@ -67,6 +68,12 @@ Usage
 After configure your locations properly, the system will select the
 quant at the location with more priority in case of equal date, no
 matter if you use FIFO or LIFO removal strategy.
+
+Known issues / Roadmap
+======================
+
+- Support the removal priority in the FEFO removal strategy through a
+  glue module with ``product_expiry``.
 
 Bug Tracker
 ===========
