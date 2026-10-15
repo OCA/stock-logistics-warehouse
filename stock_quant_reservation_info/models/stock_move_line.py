@@ -3,7 +3,7 @@
 from odoo import models
 
 
-class StockQuant(models.Model):
+class StockMoveLine(models.Model):
     _inherit = "stock.move.line"
 
     def action_view_picking_from_reserved(self):
