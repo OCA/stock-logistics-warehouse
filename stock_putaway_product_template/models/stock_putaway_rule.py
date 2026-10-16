@@ -33,8 +33,9 @@ class StockPutawayRule(models.Model):
         self, product, quantity=0, package=None, packaging=None, qty_by_location=None
     ):
         rules = self.filtered(
-            lambda r: not r.product_tmpl_id
-            or r.product_tmpl_id == product.product_tmpl_id
+            lambda r: (
+                not r.product_tmpl_id or r.product_tmpl_id == product.product_tmpl_id
+            )
         )
         return super(StockPutawayRule, rules)._get_putaway_location(
             product, quantity, package, packaging, qty_by_location=qty_by_location
