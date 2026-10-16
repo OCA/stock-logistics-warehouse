@@ -32,6 +32,11 @@ This module adds a removal priority field on stock locations. This
 priority applies when removing a product from different stock locations
 and the incoming dates are equal in both locations.
 
+The removal priority is only taken into account with the FIFO and LIFO
+removal strategies. Any other strategy (Closest Location, Least
+Packages, FEFO...) keeps its standard behaviour and ignores the removal
+priority.
+
 **Table of contents**
 
 .. contents::
@@ -64,6 +69,12 @@ After configure your locations properly, the system will select the
 quant at the location with more priority in case of equal date, no
 matter if you use FIFO or LIFO removal strategy.
 
+Known issues / Roadmap
+======================
+
+- Support the removal priority in the FEFO removal strategy through a
+  glue module with ``product_expiry``.
+
 Bug Tracker
 ===========
 
@@ -85,10 +96,10 @@ Authors
 Contributors
 ------------
 
--  Miquel Raïch <miquel.raich@forgeflow.com>
--  Lois Rilo <lois.rilo@forgeflow.com>
--  Pimolnat Suntian <pimolnats@ecosoft.co.th>
--  Aritz Olea <aritz.olea@factorlibre.com>
+- Miquel Raïch <miquel.raich@forgeflow.com>
+- Lois Rilo <lois.rilo@forgeflow.com>
+- Pimolnat Suntian <pimolnats@ecosoft.co.th>
+- Aritz Olea <aritz.olea@factorlibre.com>
 
 Maintainers
 -----------
