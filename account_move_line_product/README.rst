@@ -32,10 +32,20 @@ Account Move Line Product
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-This module enhances the views associated to account moves and account
-move lines to display the product that is associated to the move line.
+In Odoo 19.0, product information is already available on journal items,
+but grouping by product is not provided out of the box, and product and
+quantity fields are either hidden by default or not displayed on journal
+entry lines.
 
-This will be relevant in perpetual inventory, for inventory-related
+This module:
+
+-  Adds a "Group By Product" filter in the Journal Items search view.
+-  Displays product and quantity by default in the Journal Items list
+   view.
+-  Displays product and quantity on the Journal Items tab of Journal
+   Entries.
+
+This is especially relevant in perpetual inventory for inventory-related
 account moves.
 
 **Table of contents**

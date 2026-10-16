@@ -3,8 +3,8 @@
 
 {
     "name": "Account Move Line Product",
-    "version": "18.0.1.0.0",
-    "summary": "Displays the product in the journal entries and items",
+    "version": "19.0.1.0.0",
+    "summary": "Group journal items by product and display product and quantity",
     "author": "ForgeFlow, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "category": "Generic",
