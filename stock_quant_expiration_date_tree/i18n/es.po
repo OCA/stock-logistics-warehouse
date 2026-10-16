@@ -1,0 +1,65 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_quant_expiration_date_tree
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-07-17 12:31+0000\n"
+"PO-Revision-Date: 2024-09-02 15:06+0000\n"
+"Last-Translator: Rodrigo <rodrigo.bonilla@factorlibre.com>\n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.6.2\n"
+
+#. module: stock_quant_expiration_date_tree
+#: model:ir.model.fields,field_description:stock_quant_expiration_date_tree.field_stock_quant__alert_date
+msgid "Alert Date"
+msgstr "Fecha Alerta"
+
+#. module: stock_quant_expiration_date_tree
+#: model:ir.model.fields,field_description:stock_quant_expiration_date_tree.field_stock_quant__use_date
+msgid "Best before Date"
+msgstr "Consumir Preferentemente"
+
+#. module: stock_quant_expiration_date_tree
+#: model:ir.model.fields,help:stock_quant_expiration_date_tree.field_stock_quant__alert_date
+msgid ""
+"Date to determine the expired lots and serial numbers using the filter "
+"\"Expiration Alerts\"."
+msgstr ""
+"Fecha para determinar los lotes caducados y los números de serie mediante el "
+"filtro\"Alertas de caducidad\"."
+
+#. module: stock_quant_expiration_date_tree
+#: model:ir.model.fields,field_description:stock_quant_expiration_date_tree.field_stock_quant__expiration_date
+msgid "Expiration Date"
+msgstr "Fecha de caducidad"
+
+#. module: stock_quant_expiration_date_tree
+#: model:ir.model,name:stock_quant_expiration_date_tree.model_stock_quant
+msgid "Quants"
+msgstr ""
+
+#. module: stock_quant_expiration_date_tree
+#: model:ir.model.fields,help:stock_quant_expiration_date_tree.field_stock_quant__expiration_date
+msgid ""
+"This is the date on which the goods with this Serial Number may become "
+"dangerous and must not be consumed."
+msgstr ""
+"Esta es la fecha en la que las mercancías con este Número de Serie pueden "
+"volverse peligrosas y no deben consumirse."
+
+#. module: stock_quant_expiration_date_tree
+#: model:ir.model.fields,help:stock_quant_expiration_date_tree.field_stock_quant__use_date
+msgid ""
+"This is the date on which the goods with this Serial Number start "
+"deteriorating, without being dangerous yet."
+msgstr ""
+"Ésta es la fecha en la que los bienes con este nº de serie empiezan a "
+"deteriorarse, pero sin ser peligroso aún."
