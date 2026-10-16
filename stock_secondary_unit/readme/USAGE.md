@@ -63,3 +63,10 @@ start without one.
 The delivery slip report shows the secondary quantity and unit next to
 the primary one for every line, both for a picking still being
 processed and once it is done.
+
+## Default secondary unit on transfer lines
+
+When a transfer line is created, it gets the product's second unit of
+measure for inventory (from the variant, or else from the template) by
+default. A secondary unit passed by the document that creates the line,
+such as a purchase order line, is kept.
