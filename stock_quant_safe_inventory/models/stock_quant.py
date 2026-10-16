@@ -1,13 +1,43 @@
 # Copyright 2024 ACSONE SA/NV
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, models
+from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 from odoo.tools import groupby
 
 
 class StockQuant(models.Model):
     _inherit = "stock.quant"
+
+    is_being_picked = fields.Boolean(
+        compute="_compute_is_being_picked",
+        help="Some quantities have already been picked from this quant but the "
+        "related transfers are not yet validated. The on hand quantity doesn't "
+        "reflect the quantity physically present in the location.",
+    )
+
+    def _compute_is_being_picked(self):
+        current_move_lines = self._get_current_move_lines()
+        for quant in self:
+            quant.is_being_picked = quant.id in current_move_lines
+
+    def action_view_current_move_lines(self):
+        self.ensure_one()
+        move_lines = self.env["stock.move.line"].union(
+            *self._get_current_move_lines().get(self.id, [])
+        )
+        action = self.env["ir.actions.actions"]._for_xml_id(
+            "stock.stock_move_line_action"
+        )
+        action.update(
+            {
+                "name": _("Operations in progress"),
+                "display_name": _("Operations in progress"),
+                "domain": [("id", "in", move_lines.ids)],
+                "context": {"create": 0},
+            }
+        )
+        return action
 
     @api.model
     def _quant_move_common_keys(self):
@@ -33,12 +63,16 @@ class StockQuant(models.Model):
         its quantity done is positive for the same product, location, lot
         and package as the quant.
         """
+        ret = {}
         quants = self.filtered("reserved_quantity")
+        if not quants:
+            return ret
         quant_selection_keys = self._quant_move_common_keys()
         move_lines = self.env["stock.move.line"].search(
             [
                 ("state", "not in", ("done", "cancel")),
-                ("location_id", "in", quants.mapped("location_id").ids),
+                ("location_id", "in", quants.location_id.ids),
+                ("product_id", "in", quants.product_id.ids),
                 ("qty_done", ">", 0.0),
             ]
         )
@@ -48,7 +82,6 @@ class StockQuant(models.Model):
                 lambda ml: tuple([ml[quant_key] for quant_key in quant_selection_keys]),
             )
         )
-        ret = {}
         for quant in quants:
             key = tuple([quant[quant_key] for quant_key in quant_selection_keys])
             move_lines = move_lines_by_location_by_product.get(key, [])
@@ -73,16 +106,11 @@ class StockQuant(models.Model):
                         )
                 raise UserError(
                     _(
-                        "You cannot update the quantity of a quant that is "
+                        "You cannot apply the inventory of a quant that is "
                         "currently being picked.\n %(details)s",
                         details="\n".join(details),
                     )
                 )
-
-    def write(self, vals):
-        if "inventory_quantity" in vals:
-            self._check_update_quantity_allowed()
-        return super().write(vals)
 
     def _apply_inventory(self):
         self.filtered("inventory_diff_quantity")._check_update_quantity_allowed()
