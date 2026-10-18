@@ -77,3 +77,13 @@ class TestUserRestriction(TransactionCase):
             self.stock_user_assigned_type.id
         ).search([("name", "=", "Delivery Orders")])
         self.assertFalse(self.picking_type_out in pick_types)
+
+    def test_assigned_user_is_internal_and_sees_inventory_menu(self):
+        # The group must imply base.group_user, otherwise a user having only
+        # this group is a portal-like user (share=True) that cannot read
+        # ir.ui.menu and never sees the Inventory app
+        user = self.stock_user_assigned_type
+        self.assertFalse(user.share)
+        self.assertTrue(user.has_group("base.group_user"))
+        menu_ids = self.env["ir.ui.menu"].with_user(user)._visible_menu_ids()
+        self.assertIn(self.env.ref("stock.menu_stock_root").id, menu_ids)
