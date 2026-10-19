@@ -17,6 +17,11 @@ msgstr ""
 "X-Generator: Weblate 4.17\n"
 
 #. module: stock_location_product_restriction
+#: model:ir.model.fields,field_description:stock_location_product_restriction.field_stock_quant__being_filled_before_done_location_ids
+msgid "Being Filled Before Done Location"
+msgstr ""
+
+#. module: stock_location_product_restriction
 #: model:ir.model.fields,field_description:stock_location_product_restriction.field_stock_location__has_restriction_violation
 msgid "Has Restriction Violation"
 msgstr "Ha violado una restricción"
@@ -74,6 +79,13 @@ msgstr "Restricciones"
 #: model:ir.model.fields,field_description:stock_location_product_restriction.field_stock_location__specific_product_restriction
 msgid "Specific Product Restriction"
 msgstr "Restricción específica de producto"
+
+#. module: stock_location_product_restriction
+#: model:ir.model.fields,help:stock_location_product_restriction.field_stock_quant__being_filled_before_done_location_ids
+msgid ""
+"Technical field to compute locations with their fill stateat 'Being Filled' "
+"before they'll be filled with an incoming move."
+msgstr ""
 
 #. module: stock_location_product_restriction
 #. odoo-python
