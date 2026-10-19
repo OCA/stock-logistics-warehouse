@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-06-10 05:35+0000\n"
-"PO-Revision-Date: 2026-10-19 03:56+0000\n"
+"PO-Revision-Date: 2026-10-19 06:30+0000\n"
 "Last-Translator: \"Rodrigo A. Madureira\" <rodrigomadu85@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/teams/"
 "23907/pt_BR/)\n"
@@ -733,22 +733,22 @@ msgstr "Pesquisar contagem cíclica"
 #. module: stock_cycle_count
 #: model:ir.model.fields.selection,name:stock_cycle_count.selection__stock_cycle_count_rule__apply_in__location
 msgid "Selected Location Zones."
-msgstr ""
+msgstr "Zonas de localização selecionadas."
 
 #. module: stock_cycle_count
 #: model:ir.model.fields.selection,name:stock_cycle_count.selection__stock_cycle_count_rule__apply_in__warehouse
 msgid "Selected warehouses"
-msgstr ""
+msgstr "Armazéns selecionados"
 
 #. module: stock_cycle_count
 #: model_terms:ir.ui.view,arch_db:stock_cycle_count.res_config_settings_view_form_cycle_adjustment
 msgid "Sets default counted quanities in Inventory Adjustments"
-msgstr ""
+msgstr "Define quantidades contadas padrão em Ajustes de Inventário"
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,help:stock_cycle_count.field_stock_inventory__responsible_id
 msgid "Specific responsible of Inventory Adjustment."
-msgstr ""
+msgstr "Define quantidades contadas padrão em Ajustes de Inventário."
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__state
@@ -766,22 +766,22 @@ msgstr "Estado"
 #: model:ir.actions.act_window,name:stock_cycle_count.action_stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_inventory__cycle_count_id
 msgid "Stock Cycle Count"
-msgstr ""
+msgstr "Contagem cíclica de estoque"
 
 #. module: stock_cycle_count
 #: model:ir.actions.act_window,name:stock_cycle_count.action_stock_cycle_count_rules
 msgid "Stock Cycle Count Rules"
-msgstr ""
+msgstr "Regras de Contagem cíclica de estoque"
 
 #. module: stock_cycle_count
 #: model:ir.model,name:stock_cycle_count.model_stock_cycle_count
 msgid "Stock Cycle Counts"
-msgstr ""
+msgstr "Contagens cíclicas de estoque"
 
 #. module: stock_cycle_count
 #: model:ir.model,name:stock_cycle_count.model_stock_cycle_count_rule
 msgid "Stock Cycle Counts Rules"
-msgstr ""
+msgstr "Regras de Contagens cíclicas de estoque"
 
 #. module: stock_cycle_count
 #: model:ir.model,name:stock_cycle_count.model_stock_move
@@ -796,13 +796,15 @@ msgid ""
 "The Inventory Adjustment is inconsistent with the Cycle Count:\n"
 "%(message)s"
 msgstr ""
+"O ajuste de inventário é inconsistente com a contagem cíclica:\n"
+"%(message)s"
 
 #. module: stock_cycle_count
 #. odoo-python
 #: code:addons/stock_cycle_count/models/stock_inventory.py:0
 #, python-format
 msgid "The adjustment should be done for all products in the location."
-msgstr ""
+msgstr "O ajuste deve ser realizado para todos os produtos no local."
 
 #. module: stock_cycle_count
 #. odoo-python
@@ -811,36 +813,36 @@ msgstr ""
 msgid ""
 "The company of the adjustment does not match with the company in the cycle "
 "count."
-msgstr ""
+msgstr "A empresa do ajuste não coincide com a empresa da contagem cíclica."
 
 #. module: stock_cycle_count
 #. odoo-python
 #: code:addons/stock_cycle_count/models/stock_inventory.py:0
 #, python-format
 msgid "The location in the inventory does not match with the cycle count."
-msgstr ""
+msgstr "A localização no inventário não coincide com a contagem cíclica."
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_move_line__theoretical_qty
 msgid "Theoretical Quantity"
-msgstr ""
+msgstr "Quantidade teórica"
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule__turnover_inventory_value_threshold
 msgid "Turnover Inventory Value Threshold"
-msgstr ""
+msgstr "Limite de Valor de Estoque para Giro"
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule__rule_type
 msgid "Type of rule"
-msgstr ""
+msgstr "Tipo de regra"
 
 #. module: stock_cycle_count
 #. odoo-python
 #: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:0
 #, python-format
 msgid "Value Turnover"
-msgstr ""
+msgstr "Giro de valor"
 
 #. module: stock_cycle_count
 #: model:ir.model,name:stock_cycle_count.model_stock_warehouse
@@ -850,7 +852,7 @@ msgstr "Armazém"
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule__warehouse_ids
 msgid "Warehouses where applied"
-msgstr ""
+msgstr "Armazéns onde foi aplicado"
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__website_message_ids
@@ -861,7 +863,7 @@ msgstr "Mensagens"
 #. module: stock_cycle_count
 #: model:ir.model.fields,help:stock_cycle_count.field_stock_cycle_count__website_message_ids
 msgid "Website communication history"
-msgstr ""
+msgstr "Histórico de comunicações no site"
 
 #. module: stock_cycle_count
 #: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_rule_form_view
@@ -870,20 +872,23 @@ msgid ""
 "                        warehouses or specific zones. A zone it is\n"
 "                        understood as a location and all its children."
 msgstr ""
+"Você pode aplicar as regras de contagem cíclica de forma completa \n"
+"armazéns ou zonas específicas. Uma zona é \n"
+"entendido como um local e todos os seus filhos."
 
 #. module: stock_cycle_count
 #. odoo-python
 #: code:addons/stock_cycle_count/models/stock_cycle_count.py:0
 #, python-format
 msgid "You can only confirm cycle counts in state 'Planned'."
-msgstr ""
+msgstr "Você só pode confirmar contagens cíclicas no status 'Planejado'."
 
 #. module: stock_cycle_count
 #. odoo-python
 #: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:0
 #, python-format
 msgid "You can only have one zero confirmation rule per warehouse."
-msgstr ""
+msgstr "Você só pode ter uma regra de confirmação zero por armazém."
 
 #. module: stock_cycle_count
 #. odoo-python
@@ -891,38 +896,39 @@ msgstr ""
 #, python-format
 msgid "You cannot define a negative or null number of counts per period."
 msgstr ""
+"Não é possível definir um número negativo ou nulo de contagens por período."
 
 #. module: stock_cycle_count
 #. odoo-python
 #: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:0
 #, python-format
 msgid "You cannot define a negative period."
-msgstr ""
+msgstr "Não é possível definir um período negativo."
 
 #. module: stock_cycle_count
 #. odoo-python
 #: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:0
 #, python-format
 msgid "Zero Confirmation"
-msgstr ""
+msgstr "Zero confirmações"
 
 #. module: stock_cycle_count
 #. odoo-python
 #: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:0
 #, python-format
 msgid "Zero confirmation rules can only have one warehouse assigned."
-msgstr ""
+msgstr "Regras de confirmação zero podem ter apenas um armazém atribuído."
 
 #. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule__location_ids
 msgid "Zones where applied"
-msgstr ""
+msgstr "Zonas onde serão aplicadas"
 
 #. module: stock_cycle_count
 #: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_form_view
 #: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_rule_form_view
 msgid "cycle counts test:"
-msgstr ""
+msgstr "teste de contagem de ciclos:"
 
 #~ msgid "Number of messages which requires an action"
 #~ msgstr "Número de mensagens que requer uma ação"
