@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_production_lot_form_warranty" model="ir.ui.view">
+        <field name="name">stock.lot.form.warranty</field>
+        <field name="model">stock.lot</field>
+        <field name="inherit_id" ref="stock.view_production_lot_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='main_group']" position="inside">
+                <group string="Warranty">
+                    <field name="customer_warranty_start_date" />
+                    <field name="customer_warranty_end_date" />
+                    <field name="vendor_warranty_start_date" />
+                    <field name="vendor_warranty_end_date" />
+                </group>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_production_lot_tree_warranty" model="ir.ui.view">
+        <field name="name">stock.lot.tree.warranty</field>
+        <field name="model">stock.lot</field>
+        <field name="inherit_id" ref="stock.view_production_lot_tree" />
+        <field name="arch" type="xml">
+            <field name="create_date" position="after">
+                <field name="customer_warranty_start_date" />
+                <field name="customer_warranty_end_date" />
+                <field name="vendor_warranty_start_date" />
+                <field name="vendor_warranty_end_date" />
+            </field>
+        </field>
+    </record>
+</odoo>
