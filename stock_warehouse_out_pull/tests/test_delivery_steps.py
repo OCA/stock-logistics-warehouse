@@ -28,19 +28,16 @@ class TestDeliverySteps(BaseCommon):
 
     def _run_procurement(self, product, qty):
         moves_before = self.env["stock.move"].search([])
-        proc_group = self.env["procurement.group"]
         uom = product.uom_id
         proc_qty, proc_uom = uom._adjust_uom_quantities(qty, uom)
         today = fields.Date.today()
-        proc_group = self.env["procurement.group"].create({})
         values = {
-            "group_id": proc_group,
             "date_planned": today,
             "date_deadline": today,
             "warehouse_id": self.warehouse or False,
             "company_id": self.company,
         }
-        procurement = proc_group.Procurement(
+        procurement = self.env["stock.rule"].Procurement(
             product,
             proc_qty,
             proc_uom,
@@ -50,7 +47,7 @@ class TestDeliverySteps(BaseCommon):
             self.company,
             values,
         )
-        proc_group.run([procurement])
+        self.env["stock.rule"].run([procurement])
         moves_after = self.env["stock.move"].search([])
         return moves_after - moves_before
 
