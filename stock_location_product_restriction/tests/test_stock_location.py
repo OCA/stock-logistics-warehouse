@@ -283,3 +283,33 @@ class TestStockLocation(TransactionCase):
         self.loc_lvl_1_1_1.product_restriction = "same"
         self.assertFalse(self.loc_lvl_1_1_1.has_restriction_violation)
         self.assertFalse(self.loc_lvl_1_1_1.restriction_violation_message)
+
+    def test_check_product(self):
+        """
+          Data:
+            * Location level_1_1_1 with 2 different products no restriction
+        Test Case:
+            1. Check restriction message
+            2. Change product 1 quant to 0.0
+            3. Set restriction 'same' on location level_1_1_1
+            4. Check restriction message
+        Expected result:
+            1. No restriction message
+        """
+        self.loc_lvl_1_1_1.product_restriction = "any"
+        self.assertFalse(self.loc_lvl_1_1_1.has_restriction_violation)
+        self.assertFalse(self.loc_lvl_1_1_1.restriction_violation_message)
+        self.quant_1_lvl_1_1_1.inventory_quantity = 0.0
+        self.quant_1_lvl_1_1_1._apply_inventory()
+        self.loc_lvl_1_1_1.product_restriction = "same"
+        self.assertFalse(self.loc_lvl_1_1_1.has_restriction_violation)
+        self.assertFalse(self.loc_lvl_1_1_1.restriction_violation_message)
+
+        # Check for product_2
+        self.assertFalse(
+            self.loc_lvl_1_1_1._check_has_location_product_restriction(self.product_2)
+        )
+        # Check for product_1
+        self.assertTrue(
+            self.loc_lvl_1_1_1._check_has_location_product_restriction(self.product_1)
+        )
