@@ -26,6 +26,7 @@ addon | version | maintainers | summary
 [account_move_line_stock_info](account_move_line_stock_info/) | 16.0.1.1.2 |  | Account Move Line Stock Info
 [base_product_merge](base_product_merge/) | 16.0.1.0.3 | <a href='https://github.com/JasminSForgeFlow'><img src='https://github.com/JasminSForgeFlow.png' width='32' height='32' style='border-radius:50%;' alt='JasminSForgeFlow'/></a> | Merge duplicate products
 [procurement_auto_create_group](procurement_auto_create_group/) | 16.0.1.1.0 |  | Allows to configure the system to propose automatically new procurement groups during the procurement run.
+[procurement_auto_create_group_by_product](procurement_auto_create_group_by_product/) | 16.0.1.0.0 |  | Generate one picking per product on the procurement run.
 [product_packaging_usability](product_packaging_usability/) | 16.0.1.0.1 |  | Add sugar to Product Packaging
 [product_route_profile](product_route_profile/) | 16.0.1.0.0 | <a href='https://github.com/Kev-Roche'><img src='https://github.com/Kev-Roche.png' width='32' height='32' style='border-radius:50%;' alt='Kev-Roche'/></a> | Add Route profile concept on product
 [product_view_inventory_no_search_default_my_count](product_view_inventory_no_search_default_my_count/) | 16.0.1.0.0 |  | Product View Inventory No Search Default My Count

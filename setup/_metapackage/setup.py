@@ -12,6 +12,7 @@ setuptools.setup(
         'odoo-addon-account_move_line_stock_info>=16.0dev,<16.1dev',
         'odoo-addon-base_product_merge>=16.0dev,<16.1dev',
         'odoo-addon-procurement_auto_create_group>=16.0dev,<16.1dev',
+        'odoo-addon-procurement_auto_create_group_by_product>=16.0dev,<16.1dev',
         'odoo-addon-product_packaging_usability>=16.0dev,<16.1dev',
         'odoo-addon-product_route_profile>=16.0dev,<16.1dev',
         'odoo-addon-product_view_inventory_no_search_default_my_count>=16.0dev,<16.1dev',
