@@ -8,6 +8,6 @@ the quantity you are updating is not the actual quantity in the location for the
 system and when the picking will be validated, the system will decrease the
 quantity you just updated by the quantity that was picked by the other user.
 
-This module prevents this by preventing the user from updating the quantity on
+This module prevents this by preventing the user from applying an inventory on
 a quant if some quantity has been put as done on a move line not yet validated
 for the same product, location, lot and package.
