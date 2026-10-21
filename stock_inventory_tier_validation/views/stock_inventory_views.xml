@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_inventory_group_tree" model="ir.ui.view">
+        <field name="model">stock.inventory</field>
+        <field name="inherit_id" ref="stock_inventory.view_inventory_group_tree" />
+        <field name="arch" type="xml">
+            <field name="state" position="after">
+                <field
+                    name="validation_status"
+                    widget="badge"
+                    optional="show"
+                    decoration-info="validation_status == 'pending'"
+                    decoration-danger="validation_status == 'rejected'"
+                    decoration-success="validation_status == 'validated'"
+                />
+            </field>
+        </field>
+    </record>
+    <record id="stock_inventory_search_view" model="ir.ui.view">
+        <field name="model">stock.inventory</field>
+        <field name="inherit_id" ref="stock_inventory.stock_inventory_search_view" />
+        <field name="arch" type="xml">
+            <field name="products_under_review_ids" position="after">
+                <field name="reviewer_ids" />
+                <separator />
+                <filter
+                    name="needs_review"
+                    string="Needs my Review"
+                    domain="[('reviewer_ids', 'in', uid), ('state', '=', 'in_progress')]"
+                />
+                <filter
+                    name="tier_validated"
+                    string="Validated"
+                    domain="[('validation_status', '=', 'validated')]"
+                />
+            </field>
+        </field>
+    </record>
+</odoo>
