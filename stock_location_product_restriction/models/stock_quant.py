@@ -83,54 +83,9 @@ class StockQuant(models.Model):
                         products=", ".join(products.mapped("name")),
                     )
                 )
-        # Get existing product already in the locations
-        precision_digits = max(
-            6, self.sudo().env.ref("product.decimal_product_uom").digits * 2
+        existing_product_ids_by_location_id = (
+            quants_to_check.location_id._get_product_ids_by_locations()
         )
-        self.flush_model(
-            [
-                "product_id",
-                "location_id",
-                "quantity",
-                "reserved_quantity",
-                "available_quantity",
-                "inventory_quantity",
-            ]
-        )
-        self.env["stock.location"].flush_model(
-            [
-                "fill_state",
-            ]
-        )
-        SQL = """
-            SELECT
-                stock_quant.location_id,
-                array_agg(distinct(product_id))
-            FROM
-                stock_quant,
-                stock_location
-            WHERE
-                stock_quant.location_id in %s
-                and stock_quant.location_id = stock_location.id
-                and stock_location.fill_state NOT IN ('being_filled', 'being_emptied')
-            /* Mimic the _unlink_zero_quant() query in Odoo */
-            AND (NOT (round(quantity::numeric, %s) = 0 OR quantity IS NULL)
-            OR NOT round(reserved_quantity::numeric, %s) = 0
-            OR NOT (round(inventory_quantity::numeric, %s) = 0
-                    OR inventory_quantity IS NULL))
-            GROUP BY
-                stock_quant.location_id
-        """
-        self.env.cr.execute(
-            SQL,
-            (
-                tuple(quants_to_check.mapped("location_id").ids),
-                precision_digits,
-                precision_digits,
-                precision_digits,
-            ),
-        )
-        existing_product_ids_by_location_id = dict(self.env.cr.fetchall())
 
         for (
             location_id,
