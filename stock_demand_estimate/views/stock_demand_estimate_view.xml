@@ -1,4 +1,4 @@
-<?xml version="1.0" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <record id="stock_demand_estimate_view_list" model="ir.ui.view">
         <field name="name">stock.demand.estimate.list</field>
