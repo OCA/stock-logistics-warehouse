@@ -5,7 +5,7 @@ import logging
 
 from openupgradelib import openupgrade_merge_records
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError
 
 _logger = logging.getLogger(__name__)
@@ -42,14 +42,14 @@ class BaseProductMerge(models.Model):
         [("product.product", "Product"), ("product.template", "Template")]
     )
     dst_product_tmpl_id = fields.Many2one(
-        "product.template", string="Destination product"
+        "product.template", string="Destination product template"
     )
     product_tmpl_ids = fields.Many2many(
         "product.template",
         "product_tmpl_rel",
         "product_tmpl_merge_id",
         "product_tmpl_id",
-        string="Products to merge",
+        string="Product templates to merge",
     )
     merge_method = fields.Selection([("sql", "SQL"), ("orm", "ORM")], default="sql")
 
@@ -69,23 +69,28 @@ class BaseProductMerge(models.Model):
                     self.product_tmpl_ids.product_variant_ids - dst_product_product
                 )
                 if not product_product_to_merge:
-                    raise UserError(_("You cannot merge product to it self."))
+                    raise UserError(self.env._("You cannot merge product to it self."))
                 self.merge_products(
                     "product.product", product_product_to_merge, dst_product_product
                 )
         self.merge_products(self.ptype, products_to_merge, dst_product)
 
+    @api.private
     def merge_products(self, model, products_to_merge, dst_product):
         try:
             if not products_to_merge:
-                raise UserError(_("You cannot merge product to it self."))
+                raise UserError(self.env._("You cannot merge product to it self."))
             openupgrade_merge_records.merge_records(
                 self.env,
                 model,
                 products_to_merge.ids,
                 dst_product.id,
                 method=self.merge_method,
+                exclude_columns=[
+                    ("product_rel", "product_id"),
+                    ("product_tmpl_rel", "product_tmpl_id"),
+                ],
             )
         except Exception as e:
             _logger.warning(e)
-            raise UserError(_("Error occurred while merging products.")) from e
+            raise UserError(self.env._("Error occurred while merging products.")) from e
