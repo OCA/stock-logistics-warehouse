@@ -1,9 +1,9 @@
 # Copyright 2017-19 ForgeFlow S.L. (https://www.forgeflow.com)
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
-from datetime import date
 from datetime import timedelta as td
 
+from odoo import fields
 from odoo.exceptions import UserError
 from odoo.tests.common import TransactionCase
 
@@ -59,8 +59,8 @@ class TestStockDemandEstimate(TransactionCase):
 
     def test_01_create_estimate(self):
         """Crete an estimate entering manually the date from and date to."""
-        date_from = date.today() + td(days=10)
-        date_to = date.today() + td(days=19)
+        date_from = fields.Date.today() + td(days=10)
+        date_to = fields.Date.today() + td(days=19)
         estimate = self.estimate_model.create(
             {
                 "product_id": self.product_1.id,
@@ -79,7 +79,7 @@ class TestStockDemandEstimate(TransactionCase):
     def test_02_create_estimate_by_duration_and_different_uom(self):
         """Create an estimate entering manually the date from, duration and
         using a different UoM than product's."""
-        date_from = date.today() + td(days=10)
+        date_from = fields.Date.today() + td(days=10)
         estimate = self.estimate_model.create(
             {
                 "product_id": self.product_1.id,
@@ -99,8 +99,8 @@ class TestStockDemandEstimate(TransactionCase):
         self.assertEqual(estimate.daily_qty, expected_qty / 15)
 
     def test_03_get_qty_by_range(self):
-        date_from = date.today() + td(days=10)
-        date_to = date.today() + td(days=19)
+        date_from = fields.Date.today() + td(days=10)
+        date_to = fields.Date.today() + td(days=19)
         estimate = self.estimate_model.create(
             {
                 "product_id": self.product_1.id,
@@ -121,19 +121,21 @@ class TestStockDemandEstimate(TransactionCase):
         )
         self.assertEqual(res, 50)
         # get full period
-        res = estimate.get_quantity_by_date_range(date.today(), date_from + td(days=17))
+        res = estimate.get_quantity_by_date_range(
+            fields.Date.today(), date_from + td(days=17)
+        )
         self.assertEqual(res, 100)
         # Get exact period:
         res = estimate.get_quantity_by_date_range(estimate.date_from, estimate.date_to)
         self.assertEqual(res, 100)
         # Ask for interval out fo the estimate's:
         res = estimate.get_quantity_by_date_range(
-            date.today(), date.today() + td(days=8)
+            fields.Date.today(), fields.Date.today() + td(days=8)
         )
         self.assertEqual(res, 0)
 
     def test_04_display_name(self):
-        date_from = date.today() + td(days=10)
+        date_from = fields.Date.today() + td(days=10)
         estimate = self.estimate_model.create(
             {
                 "product_id": self.product_1.id,
@@ -151,8 +153,8 @@ class TestStockDemandEstimate(TransactionCase):
         )
 
     def test_05_onchange_methods(self):
-        date_from = date.today() + td(days=10)
-        date_to = date.today() + td(days=19)
+        date_from = fields.Date.today() + td(days=10)
+        date_to = fields.Date.today() + td(days=19)
         estimate = self.estimate_model.new(
             {
                 "product_id": self.product_1.id,
@@ -206,7 +208,7 @@ class TestStockDemandEstimate(TransactionCase):
             }
         )
         estimate_vals = {
-            "manual_date_from": date.today(),
+            "manual_date_from": fields.Date.today(),
             "manual_duration": 1,
             "product_uom_qty": 10.0,
         }

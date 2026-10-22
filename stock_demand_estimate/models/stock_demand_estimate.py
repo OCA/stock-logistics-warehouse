@@ -2,7 +2,7 @@
 # Copyright 2016 Aleph Objects, Inc. (https://www.alephobjects.com/)
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
-from datetime import date, timedelta
+from datetime import timedelta
 
 from odoo import api, fields, models
 from odoo.exceptions import UserError
@@ -28,18 +28,16 @@ class StockDemandEstimate(models.Model):
     )
     product_id = fields.Many2one(
         comodel_name="product.product",
-        string="Product",
         required=True,
         check_company=True,
     )
     product_uom = fields.Many2one(comodel_name="uom.uom", string="Unit of measure")
     location_id = fields.Many2one(
         comodel_name="stock.location",
-        string="Location",
         required=True,
         check_company=True,
     )
-    product_uom_qty = fields.Float(string="Quantity", digits="Product Unit of Measure")
+    product_uom_qty = fields.Float(string="Quantity", digits="Product Unit")
     product_qty = fields.Float(
         string="Quantity (Product UoM)",
         compute="_compute_product_quantity",
@@ -52,14 +50,13 @@ class StockDemandEstimate(models.Model):
     daily_qty = fields.Float(string="Quantity / Day", compute="_compute_daily_qty")
     company_id = fields.Many2one(
         comodel_name="res.company",
-        string="Company",
         required=True,
         default=lambda self: self.env.company,
     )
 
     @api.depends("manual_duration", "manual_date_from", "manual_date_to")
     def _compute_dates(self):
-        today = date.today()
+        today = fields.Date.today()
         for rec in self:
             rec.date_from = rec.manual_date_from or today
             if rec.manual_date_to:
