@@ -43,15 +43,13 @@ class SaleStockReserve(models.TransientModel):
 
         picking_env = self.env["stock.picking"]
         reservation_env = self.env["stock.reservation"]
-        picking_type_id = reservation_env.with_context(
-            warehouse_id=line.order_id.warehouse_id.id
-        )._default_picking_type_id()
+        picking_type_id = line.order_id.warehouse_id.out_type_id.id
         location_id = self.location_id.id
         if picking_type_id and not location_id:
             picking = self.env["stock.picking"].new(
                 {"picking_type_id": picking_type_id}
             )
-            picking.onchange_picking_type()
+            picking._onchange_picking_type()
             location_id = picking.location_id.id
         location_dest_id = (
             self.location_dest_id.id or reservation_env._default_location_dest_id()

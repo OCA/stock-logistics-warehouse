@@ -12,8 +12,7 @@
                 </group>
             </group>
             <xpath expr="//header//button[@name='open_move']" position="after">
-                    <button
-                    class="oe_stat_button"
+                <button
                     string="View Stock Picking"
                     type="object"
                     name="action_view_reserves_stock_picking_reservation"

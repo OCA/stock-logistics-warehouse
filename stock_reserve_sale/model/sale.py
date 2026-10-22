@@ -87,7 +87,7 @@ class SaleOrder(models.Model):
     def _compute_reserves_count(self):
         for order in self:
             lines = order.order_line.filtered(
-                lambda ln: ln.product_id.detailed_type != "service"
+                lambda ln: ln.product_id and ln.product_id.detailed_type != "service"
             )
             reserves_count = len(order.stock_reservation_ids)
             order.reserves_count = reserves_count

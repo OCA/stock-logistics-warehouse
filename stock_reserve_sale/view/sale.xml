@@ -12,7 +12,7 @@
                     type="object"
                     name="action_view_reserves_products"
                     icon="fa-lock"
-                    invisible="reserves_count == 0"
+                    attrs="{'invisible': [('reserves_count', '=', 0)]}"
                 >
                     <field string="Reserved" name="reserves_count" widget="statinfo" />
                     <field name="reserves_count" invisible="1" />
@@ -26,7 +26,7 @@
                     type="action"
                     string="Reserve Stock"
                     help="Pre-book products from stock"
-                    invisible="all_lines_reserved or state != 'draft'"
+                    attrs="{'invisible': ['|', ('all_lines_reserved', '=', True), ('state', '!=', 'draft')]}"
                 />
             </button>
             <field name="order_line" position="attributes">
@@ -36,39 +36,41 @@
                 expr="//field[@name='order_line']/form//field[@name='state']"
                 position="before"
             >
-                <field name="reservation_ids" column_invisible="True" />
+                <field name="reservation_ids" invisible="1" />
                 <button
                     name="%(action_sale_stock_reserve)d"
                     type="action"
                     string="Reserve Stock"
-                    invisible="reservation_ids or state != 'draft'"
+                    attrs="{'invisible': ['|', ('reservation_ids', '!=', []),
+                                                ('state', '!=', 'draft')]}"
                 />
                 <button
                     name="release_stock_reservation"
                     type="object"
                     string="Release Reservation"
-                    invisible="not reservation_ids or state != 'draft'"
+                    attrs="{'invisible': ['|', ('reservation_ids', '=', []),
+                                                ('state', '!=', 'draft')]}"
                 />
             </xpath>
             <xpath
                 expr="//field[@name='order_line']/tree/field[@name='price_subtotal']"
                 position="after"
             >
-                <field name="reservation_ids" column_invisible="True" />
-                <field name="is_stock_reservable" column_invisible="True" />
+                <field name="reservation_ids" invisible="1" />
+                <field name="is_stock_reservable" invisible="1" />
                 <button
                     name="%(action_sale_stock_reserve)d"
                     type="action"
                     title="Reserve Stock"
                     icon="fa-lock"
-                    invisible="not is_stock_reservable"
+                    attrs="{'invisible': [('is_stock_reservable', '=', False)]}"
                 />
                 <button
                     name="release_stock_reservation"
                     type="object"
                     title="Release Stock Reservation"
                     icon="fa-undo"
-                    invisible="not reservation_ids"
+                    attrs="{'invisible': [('reservation_ids', '=', [])]}"
                 />
             </xpath>
             <field name="user_id" position="before">
@@ -79,7 +81,7 @@
                     name="action_open_release_reservation_wizard"
                     string="Cancel all reservations"
                     type="object"
-                    invisible="not has_stock_reservation"
+                    attrs="{'invisible': [('has_stock_reservation', '=', False)]}"
                 />
             </xpath>
             <!-- Make readonly the fields quantity and product_id when they are reserved -->
@@ -87,37 +89,47 @@
                 expr="//field[@name='order_line']/form//field[@name='product_id']"
                 position="after"
             >
-                <field name="is_readonly" column_invisible="True" />
+                <field name="is_readonly" invisible="1" />
             </xpath>
             <xpath
                 expr="//field[@name='order_line']/form//field[@name='product_uom_qty']"
                 position="attributes"
             >
-                <attribute name="readonly">is_readonly</attribute>
+                <attribute
+                    name="attrs"
+                >{'readonly': [('is_readonly', '=', True)]}</attribute>
             </xpath>
             <xpath
                 expr="//field[@name='order_line']/form//field[@name='product_id']"
                 position="attributes"
             >
-                <attribute name="readonly">is_readonly</attribute>
+                <attribute name="attrs">{
+                    'readonly': [('is_readonly', '=', True)],
+                    'required': [('display_type', '=', False)],
+                }</attribute>
             </xpath>
             <xpath
                 expr="//field[@name='order_line']/tree/field[@name='product_id']"
                 position="after"
             >
-                <field name="is_readonly" column_invisible="True" />
+                <field name="is_readonly" invisible="1" />
             </xpath>
             <xpath
                 expr="//field[@name='order_line']/tree/field[@name='product_uom_qty']"
                 position="attributes"
             >
-                <attribute name="readonly">is_readonly</attribute>
+                <attribute
+                    name="attrs"
+                >{'readonly': [('is_readonly', '=', True)]}</attribute>
             </xpath>
             <xpath
                 expr="//field[@name='order_line']/tree/field[@name='product_id']"
                 position="attributes"
             >
-                <attribute name="readonly">is_readonly</attribute>
+                <attribute name="attrs">{
+                    'readonly': [('is_readonly', '=', True)],
+                    'required': [('display_type', '=', False)],
+                }</attribute>
             </xpath>
         </field>
     </record>
