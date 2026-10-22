@@ -265,6 +265,14 @@ class StockMoveLocationWizard(models.TransientModel):
 
     def action_move_location(self):
         self.ensure_one()
+
+        for lne in self.stock_move_location_line_ids:
+            if lne.move_quantity == 0:
+                lne.unlink() #remove lines that have zero move_quantity
+
+        if not self.stock_move_location_line_ids:
+            return #all lines had zero quantity.
+            
         picking = self.picking_id if self.picking_id else self._create_picking()
         self._create_moves(picking)
         if not self.env.context.get("planned"):
