@@ -86,6 +86,11 @@ class StockMove(models.Model):
                         if not next_quant:
                             continue
                         location, location_quantity, to_take = next_quant
+                        # Don't take into account those quants as that can lead
+                        # to a negative demand in the created move line
+                        # Mimic odoo behavior in move _action_assign() method.
+                        if location_quantity <= 0:
+                            continue
                         taken_in_loc = super()._update_reserved_quantity(
                             # in this strategy, we take as much as we can
                             # from this bin
