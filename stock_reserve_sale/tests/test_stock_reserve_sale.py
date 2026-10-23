@@ -262,3 +262,19 @@ class TestStockReserveSale(common.TransactionCase):
             line_form.quantity = 3
         with self.assertRaises(ValidationError):
             wiz_form.save()
+
+    def test_reserve_13_default_location_from_order_warehouse(self):
+        so = self._create_sale_order([(self.product_1, 3)])
+        so.warehouse_id = self.warehouse
+        wiz_form = Form(
+            self.env["sale.stock.reserve"].with_context(
+                active_model="sale.order", active_id=so.id, active_ids=so.ids
+            )
+        )
+        self.assertEqual(wiz_form.location_id, self.warehouse.lot_stock_id)
+        wiz_form = Form(
+            self.env["sale.stock.reserve"].with_context(
+                active_model="sale.order.line", active_ids=so.order_line.ids
+            )
+        )
+        self.assertEqual(wiz_form.location_id, self.warehouse.lot_stock_id)

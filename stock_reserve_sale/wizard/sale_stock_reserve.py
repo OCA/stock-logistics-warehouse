@@ -11,6 +11,9 @@ class SaleStockReserve(models.TransientModel):
 
     @api.model
     def _default_location_id(self):
+        warehouse = self._get_sale_order_lines().order_id.warehouse_id
+        if len(warehouse) == 1:
+            return warehouse.lot_stock_id
         domain = [
             "|",
             ("company_id", "=", self.env.company.id),
