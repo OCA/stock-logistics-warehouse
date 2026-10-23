@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_sale_stock_reserve_form" model="ir.ui.view">
+        <field name="name">sale.stock.reserve.form</field>
+        <field name="model">sale.stock.reserve</field>
+        <field name="arch" type="xml">
+            <form string="Reserve Stock">
+                <p class="oe_grey">
+                    A stock reservation will be created for the products
+                    of the selected quotation lines. If a validity date is specified,
+                    the reservation will be released once the date has passed.
+                    Lines in orange will not be fully reserved.
+                </p>
+                <group>
+                    <field name="location_id" />
+                    <field name="location_dest_id" />
+                    <field name="date_validity" />
+                    <field name="owner_id" groups="stock.group_tracking_owner" />
+                </group>
+                <field name="line_ids" nolabel="1">
+                    <tree
+                        editable="bottom"
+                        create="0"
+                        decoration-warning="quantity &lt; product_uom_qty"
+                    >
+                        <field name="sale_line_id" invisible="1" />
+                        <field name="product_id" />
+                        <field name="product_uom_qty" />
+                        <field name="available_qty" />
+                        <field name="quantity" />
+                        <field name="product_uom" groups="uom.group_uom" />
+                    </tree>
+                </field>
+                <div name="note" class="text-break text-900">
+                    <div class="o_horizontal_separator">
+                        <label for="note" />
+                    </div>
+                    <div class="o_horizontal_separator" />
+                    <div>
+                        <field name="note" nolabel='1' />
+                    </div>
+                </div>
+                <footer>
+                    <button
+                        string="Reserve"
+                        name="button_reserve"
+                        type="object"
+                        class="oe_highlight"
+                    />
+                    or
+                    <button special="cancel" class="oe_link" string="Cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="action_sale_stock_reserve" model="ir.actions.act_window">
+        <field name="name">Reserve Stock for Quotation Lines</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">sale.stock.reserve</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>
