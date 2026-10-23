@@ -68,18 +68,17 @@ To decide how much stock is reserved from quotations, go to *Sales >
 Configuration > Settings* and set the *Stock Reservation Policy* in the
 *Quotations & Orders* section:
 
-- *Always reserve the ordered quantity* (default): the reservation is
-  created for the ordered quantity even if there is no stock in the
-  source location. The missing quantity is reserved when it becomes
+- *Always reserve the ordered quantity* (default): the quantity to
+  reserve defaults to the ordered quantity, even if there is no stock in
+  the source location. The missing quantity is reserved when it becomes
   available.
-- *Reserve the available quantity*: only the quantity that is available
-  in the source location is reserved.
-- *Reserve only if the full quantity is available*: a line is reserved
-  only when its whole quantity is available in the source location.
+- *Reserve the available quantity*: the quantity to reserve defaults to
+  the quantity available in the source location, and cannot exceed it.
+- *Reserve only if the full quantity is available*: a line can only be
+  reserved for its whole ordered quantity, and only when it is available
+  in the source location.
 
-With the last two policies, lines without available stock are not
-reserved, and an error is raised if none of the selected lines can be
-reserved.
+Lines with no quantity to reserve are not reserved.
 
 In the same section, *Reservation Transfers* (enabled by default) groups
 the stock reservations of each quotation and source location in a
@@ -95,14 +94,18 @@ Usage
 Now you can reserve all the lines by clicking on *Reserve Stock* or you
 can reserve each one by pressing on the lock icon at the lines.
 
+The reservation wizard lists the lines to reserve with their ordered
+quantity, the quantity available in the source location and the quantity
+to reserve, which you can change. Lines that will not be fully reserved
+are shown in orange.
+
 Once they where reserved, you can release the reserves by clicking at
 *Cancell all* button or by clicking the undo icon on the lines.
 
 Known issues / Roadmap
 ======================
 
-- Indicate the quantity that the user wants to reserve for the line. Set
-  the remaining quantity to be reserved as the default value.
+- Allow reserving the remaining quantity of partially reserved lines.
 - Disable the ability to edit the destination location when creating a
   stock reservation for a specific sales order line. It should be a
   fixed, non-editable location.
@@ -139,6 +142,10 @@ Contributors
 - `FactorLibre <https://www.factorlibre.com>`__:
 
   - Hugo Córdoba
+
+- `ForgeFlow <https://www.forgeflow.com>`__:
+
+  - Jordi Masvidal
 
 Maintainers
 -----------

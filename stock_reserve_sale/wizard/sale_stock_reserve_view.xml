@@ -9,6 +9,7 @@
                     A stock reservation will be created for the products
                     of the selected quotation lines. If a validity date is specified,
                     the reservation will be released once the date has passed.
+                    Lines in orange will not be fully reserved.
                 </p>
                 <group>
                     <field name="location_id" />
@@ -16,6 +17,20 @@
                     <field name="date_validity" />
                     <field name="owner_id" groups="stock.group_tracking_owner" />
                 </group>
+                <field name="line_ids" nolabel="1">
+                    <tree
+                        editable="bottom"
+                        create="0"
+                        decoration-warning="quantity &lt; product_uom_qty"
+                    >
+                        <field name="sale_line_id" invisible="1" />
+                        <field name="product_id" />
+                        <field name="product_uom_qty" />
+                        <field name="available_qty" />
+                        <field name="quantity" />
+                        <field name="product_uom" groups="uom.group_uom" />
+                    </tree>
+                </field>
                 <div name="note" class="text-break text-900">
                     <div class="o_horizontal_separator">
                         <label for="note" />

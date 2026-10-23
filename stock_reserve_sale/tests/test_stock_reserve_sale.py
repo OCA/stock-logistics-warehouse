@@ -1,6 +1,6 @@
 # Copyright 2021 Tecnativa - Carlos Roca
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
-from odoo.exceptions import UserError
+from odoo.exceptions import UserError, ValidationError
 from odoo.tests import Form, common
 
 
@@ -47,7 +47,7 @@ class TestStockReserveSale(common.TransactionCase):
                 order_line_form.product_uom_qty = quantity
         return sale_order_form.save()
 
-    def _reserve_from_location(self, sale_order, location):
+    def _get_reserve_wizard_form(self, sale_order, location):
         wiz_form = Form(
             self.env["sale.stock.reserve"].with_context(
                 active_model="sale.order",
@@ -56,7 +56,10 @@ class TestStockReserveSale(common.TransactionCase):
             )
         )
         wiz_form.location_id = location
-        wiz_form.save().button_reserve()
+        return wiz_form
+
+    def _reserve_from_location(self, sale_order, location):
+        self._get_reserve_wizard_form(sale_order, location).save().button_reserve()
 
     def test_reserve_01_tree_reserve_release(self):
         sale_order_form = Form(self.env["sale.order"])
@@ -219,3 +222,43 @@ class TestStockReserveSale(common.TransactionCase):
         )
         so.release_all_stock_reservation()
         self.assertEqual(reservation.state, "cancel")
+
+    def test_reserve_11_wizard_lines(self):
+        self.env.company.sale_stock_reservation_policy = "partial"
+        so = self._create_sale_order([(self.product_1, 15), (self.product_2, 5)])
+        wiz_form = self._get_reserve_wizard_form(so, self.warehouse.lot_stock_id)
+        self.assertEqual(len(wiz_form.line_ids), 2)
+        with wiz_form.line_ids.edit(0) as line_form:
+            self.assertEqual(line_form.product_id, self.product_1)
+            self.assertEqual(line_form.available_qty, 10)
+            self.assertEqual(line_form.quantity, 10)
+        with wiz_form.line_ids.edit(1) as line_form:
+            self.assertEqual(line_form.quantity, 5)
+            line_form.quantity = 2
+        wiz_form.save().button_reserve()
+        line_1 = so.order_line.filtered(lambda line: line.product_id == self.product_1)
+        line_2 = so.order_line - line_1
+        self.assertEqual(line_1.reservation_ids.product_uom_qty, 10)
+        self.assertEqual(line_2.reservation_ids.product_uom_qty, 2)
+
+    def test_reserve_12_wizard_line_quantity_checks(self):
+        so = self._create_sale_order([(self.product_1, 15), (self.product_2, 5)])
+        wiz_form = self._get_reserve_wizard_form(so, self.warehouse.lot_stock_id)
+        with wiz_form.line_ids.edit(1) as line_form:
+            line_form.quantity = 6
+        with self.assertRaises(ValidationError):
+            wiz_form.save()
+        self.env.company.sale_stock_reservation_policy = "partial"
+        wiz_form = self._get_reserve_wizard_form(so, self.warehouse.lot_stock_id)
+        with wiz_form.line_ids.edit(0) as line_form:
+            line_form.quantity = 12
+        with self.assertRaises(ValidationError):
+            wiz_form.save()
+        self.env.company.sale_stock_reservation_policy = "full"
+        wiz_form = self._get_reserve_wizard_form(so, self.warehouse.lot_stock_id)
+        with wiz_form.line_ids.edit(0) as line_form:
+            self.assertEqual(line_form.quantity, 0)
+        with wiz_form.line_ids.edit(1) as line_form:
+            line_form.quantity = 3
+        with self.assertRaises(ValidationError):
+            wiz_form.save()
