@@ -120,6 +120,10 @@ class TestStockDemandEstimate(TransactionCase):
                     "The product does not match in the line",
                 )
                 self.assertEqual(
+                    line.value_y,
+                    f"[PROD1] {self.product_1.name} - {self.product_1.uom_id.name}",
+                )
+                self.assertEqual(
                     line.location_id.id,
                     self.location.id,
                     "The product does not match in the line",
@@ -332,8 +336,6 @@ class TestStockDemandEstimate(TransactionCase):
             {
                 "domain": [("id", "in", [line1.estimate_id.id, line2.estimate_id.id])],
                 "name": "Stock Demand Estimates",
-                "src_model": "stock.demand.estimate.wizard",
-                "view_type": "form",
                 "view_mode": "list",
                 "res_model": "stock.demand.estimate",
                 "type": "ir.actions.act_window",

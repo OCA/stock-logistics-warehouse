@@ -45,6 +45,7 @@ class StockDemandEstimateSheet(models.TransientModel):
         comodel_name="res.company",
         string="Company",
         required=True,
+        readonly=True,
         default=lambda self: self.env.company,
     )
 
@@ -124,7 +125,7 @@ class StockDemandEstimateSheet(models.TransientModel):
     ):
         name_y = f"{product.name} - {product.uom_id.name}"
         if product.default_code:
-            name_y += f"[{product.default_code}] {name_y}"
+            name_y = f"[{product.default_code}] {name_y}"
         values = {
             "value_x": _range.name,
             "value_y": name_y,
@@ -160,8 +161,6 @@ class StockDemandEstimateSheet(models.TransientModel):
         res = {
             "domain": [("id", "in", res)],
             "name": self.env._("Stock Demand Estimates"),
-            "src_model": "stock.demand.estimate.wizard",
-            "view_type": "form",
             "view_mode": "list",
             "res_model": "stock.demand.estimate",
             "type": "ir.actions.act_window",

@@ -76,8 +76,6 @@ class DemandEstimateWizard(models.TransientModel):
 
         res = {
             "name": self.env._("Estimate Sheet"),
-            "src_model": "stock.demand.estimate.wizard",
-            "view_type": "form",
             "view_mode": "form",
             "target": "new",
             "res_model": "stock.demand.estimate.sheet",
