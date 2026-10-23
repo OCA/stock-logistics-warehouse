@@ -17,3 +17,9 @@ class ResCompany(models.Model):
         required=True,
         default="always",
     )
+    sale_stock_reservation_picking = fields.Boolean(
+        string="Reservation Transfers",
+        default=True,
+        help="Group the stock reservations of each quotation and source "
+        "location in a delivery transfer.",
+    )

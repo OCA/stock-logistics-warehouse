@@ -58,27 +58,28 @@ class SaleStockReserve(models.TransientModel):
         location_dest_id = (
             self.location_dest_id.id or reservation_env._default_location_dest_id()
         )
-        picking_id = picking_env.search(
-            [
-                ("sale_reserve_id", "=", line.order_id.id),
-                ("location_id", "=", location_id),
-                ("location_dest_id", "=", location_dest_id),
-                ("state", "not in", ["cancel", "done"]),
-            ],
-            limit=1,
-        )
-
-        if not picking_id:
-            picking_id = picking_env.create(
-                {
-                    "location_id": location_id,
-                    "location_dest_id": location_dest_id,
-                    "origin": line.order_id.name,
-                    "sale_reserve_id": line.order_id.id,
-                    "picking_type_id": picking_type_id,
-                    "company_id": line.order_id.company_id.id,
-                }
+        picking_id = picking_env
+        if line.order_id.company_id.sale_stock_reservation_picking:
+            picking_id = picking_env.search(
+                [
+                    ("sale_reserve_id", "=", line.order_id.id),
+                    ("location_id", "=", location_id),
+                    ("location_dest_id", "=", location_dest_id),
+                    ("state", "not in", ["cancel", "done"]),
+                ],
+                limit=1,
             )
+            if not picking_id:
+                picking_id = picking_env.create(
+                    {
+                        "location_id": location_id,
+                        "location_dest_id": location_dest_id,
+                        "origin": line.order_id.name,
+                        "sale_reserve_id": line.order_id.id,
+                        "picking_type_id": picking_type_id,
+                        "company_id": line.order_id.company_id.id,
+                    }
+                )
         return {
             "product_id": line.product_id.id,
             "product_uom": line.product_uom.id,

@@ -9,3 +9,7 @@ class ResConfigSettings(models.TransientModel):
         related="company_id.sale_stock_reservation_policy",
         readonly=False,
     )
+    sale_stock_reservation_picking = fields.Boolean(
+        related="company_id.sale_stock_reservation_picking",
+        readonly=False,
+    )

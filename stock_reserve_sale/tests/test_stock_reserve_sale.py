@@ -205,3 +205,17 @@ class TestStockReserveSale(common.TransactionCase):
         self.assertFalse(
             self.env["stock.picking"].search([("sale_reserve_id", "=", so.id)])
         )
+
+    def test_reserve_10_without_picking(self):
+        self.env.company.sale_stock_reservation_picking = False
+        so = self._create_sale_order([(self.product_1, 3)])
+        self._reserve_from_location(so, self.warehouse.lot_stock_id)
+        reservation = so.order_line.reservation_ids
+        self.assertFalse(reservation.picking_id)
+        self.assertEqual(reservation.picking_type_id, self.warehouse.out_type_id)
+        self.assertEqual(reservation.state, "assigned")
+        self.assertFalse(
+            self.env["stock.picking"].search([("sale_reserve_id", "=", so.id)])
+        )
+        so.release_all_stock_reservation()
+        self.assertEqual(reservation.state, "cancel")

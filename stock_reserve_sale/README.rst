@@ -81,6 +81,11 @@ With the last two policies, lines without available stock are not
 reserved, and an error is raised if none of the selected lines can be
 reserved.
 
+In the same section, *Reservation Transfers* (enabled by default) groups
+the stock reservations of each quotation and source location in a
+delivery transfer. When it is disabled, the reservations are created as
+stock moves without a transfer.
+
 Usage
 =====
 

@@ -29,6 +29,21 @@
                         </div>
                     </div>
                 </div>
+                <div
+                    class="col-12 col-lg-6 o_setting_box"
+                    id="sale_stock_reservation_picking"
+                >
+                    <div class="o_setting_left_pane">
+                        <field name="sale_stock_reservation_picking" />
+                    </div>
+                    <div class="o_setting_right_pane">
+                        <label for="sale_stock_reservation_picking" />
+                        <div class="text-muted">
+                            Group the stock reservations of each quotation and source
+                            location in a delivery transfer
+                        </div>
+                    </div>
+                </div>
             </xpath>
         </field>
     </record>
