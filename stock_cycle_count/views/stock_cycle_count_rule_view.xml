@@ -32,26 +32,24 @@
                         <group name="specific rule fields">
                             <field
                                 name="periodic_qty_per_period"
-                                attrs="{'invisible': [('rule_type', '!=', 'periodic')]}"
+                                invisible="rule_type != 'periodic'"
                             />
                             <field
                                 name="periodic_count_period"
-                                attrs="{'invisible': [('rule_type', '!=', 'periodic')]}"
+                                invisible="rule_type != 'periodic'"
                             />
                             <field
                                 name="turnover_inventory_value_threshold"
-                                attrs="{'invisible': [('rule_type', '!=', 'turnover')]}"
+                                invisible="rule_type != 'turnover'"
                                 widget="monetary"
                                 options="{'currency_field': 'currency_id'}"
                             />
                             <field name="currency_id" invisible="True" />
                             <label
                                 for="accuracy_threshold"
-                                attrs="{'invisible': [('rule_type', '!=', 'accuracy')]}"
+                                invisible="rule_type != 'accuracy'"
                             />
-                            <div
-                                attrs="{'invisible': [('rule_type', '!=', 'accuracy')]}"
-                            >
+                            <div invisible="rule_type != 'accuracy'">
                                 <field name="accuracy_threshold" class="oe_inline" /> %
                             </div>
                         </group>
@@ -70,12 +68,12 @@
                             <field
                                 name="warehouse_ids"
                                 widget="many2many_tags"
-                                attrs="{'readonly': [('apply_in', '!=', 'warehouse')]}"
+                                readonly="apply_in != 'warehouse'"
                             />
                             <field
                                 name="location_ids"
                                 widget="many2many_tags"
-                                attrs="{'invisible': [('apply_in', '!=', 'location')]}"
+                                invisible="apply_in != 'location'"
                             />
                         </group>
                     </group>

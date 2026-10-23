@@ -132,12 +132,6 @@ class StockInventory(models.Model):
         self._update_cycle_state()
         return res
 
-    def action_force_done(self):
-        res = super().action_force_done()
-        self._calculate_inventory_accuracy()
-        self._update_cycle_state()
-        return res
-
     @api.model_create_multi
     def create(self, vals_list):
         inventories = super().create(vals_list)

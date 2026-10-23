@@ -3,6 +3,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 from datetime import datetime, timedelta
 
+from odoo import Command
 from odoo.exceptions import AccessError, ValidationError
 from odoo.tests import common
 
@@ -169,7 +170,7 @@ class TestStockCycleCount(common.TransactionCase):
         self.inventory_model.create(
             {
                 "name": "Pre-existing inventory",
-                "location_ids": [(4, loc.id)],
+                "location_ids": [Command.link(loc.id)],
                 "date": date,
             }
         )
@@ -192,7 +193,9 @@ class TestStockCycleCount(common.TransactionCase):
         )
         move1._action_confirm()
         move1._action_assign()
-        move1.move_line_ids[0].qty_done = 1.0
+        for move_line in move1.move_line_ids:
+            move_line.quantity = 1
+        move1.picked = True
         move1._action_done()
         # Remove the pre_existing_count
         self.inventory_model.search(
@@ -221,7 +224,9 @@ class TestStockCycleCount(common.TransactionCase):
         )
         move2._action_confirm()
         move2._action_assign()
-        move2.move_line_ids[0].qty_done = 1.0
+        for move_line in move2.move_line_ids:
+            move_line.quantity = 1
+        move2.picked = True
         move2._action_done()
         count = self.cycle_count_model.search(
             [
@@ -617,3 +622,39 @@ class TestStockCycleCount(common.TransactionCase):
                 additional_user_2.id,
                 "Quant user not updated after inventory responsible change.",
             )
+
+    def test_location_accuracy_report(self):
+        """Tests the methods used by the location accuracy report."""
+        report = self.env["report.stock_cycle_count.stock_location_accuracy"]
+        loc = self.stock_location_model.create(
+            {"name": "Report Location", "usage": "internal"}
+        )
+        inventory = self.inventory_model.create(
+            {
+                "name": "Done inventory",
+                "location_ids": [Command.link(loc.id)],
+                "date": datetime.today() - timedelta(days=1),
+                "state": "done",
+                "inventory_accuracy": 90.0,
+            }
+        )
+        domain = report._get_inventory_domain(loc.id)
+        self.assertIn(("location_ids", "in", [loc.id]), domain)
+        domain_no_sublocation = report._get_inventory_domain(
+            loc.id, exclude_sublocation=False
+        )
+        self.assertIn(("exclude_sublocation", "=", False), domain_no_sublocation)
+        location_data = report._get_location_data(loc)
+        self.assertIn(loc, location_data)
+        self.assertIn(inventory, location_data[loc])
+        report_values = report._get_report_values(loc.ids)
+        self.assertEqual(report_values["docs"], loc)
+        self.assertIn(inventory, report_values["location_data"][loc])
+
+    def test_action_accuracy_stats(self):
+        """Tests the accuracy stats action."""
+        action = self.count_loc.action_accuracy_stats()
+        self.assertEqual(action["res_model"], "stock.inventory")
+        self.assertTrue(
+            action["domain"].endswith("('location_ids', 'in', active_ids)]")
+        )

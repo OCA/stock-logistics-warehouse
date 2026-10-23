@@ -20,20 +20,14 @@ class StockCycleCount(models.Model):
         comodel_name="stock.location",
         string="Location",
         required=True,
-        readonly=True,
-        states={"draft": [("readonly", False)]},
     )
     responsible_id = fields.Many2one(
         comodel_name="res.users",
         string="Assigned to",
-        readonly=True,
-        states={"draft": [("readonly", False)], "open": [("readonly", False)]},
         tracking=True,
     )
     date_deadline = fields.Date(
         string="Required Date",
-        readonly=True,
-        states={"draft": [("readonly", False)]},
         tracking=True,
         compute="_compute_date_deadline",
         inverse="_inverse_date_deadline",
@@ -41,22 +35,16 @@ class StockCycleCount(models.Model):
     )
     automatic_deadline_date = fields.Date(
         string="Automatic Required Date",
-        readonly=True,
-        states={"draft": [("readonly", False)]},
         tracking=True,
     )
     manual_deadline_date = fields.Date(
         string="Manual Required Date",
-        readonly=True,
-        states={"draft": [("readonly", False)]},
         tracking=True,
     )
     cycle_count_rule_id = fields.Many2one(
         comodel_name="stock.cycle.count.rule",
         string="Cycle count rule",
         required=True,
-        readonly=True,
-        states={"draft": [("readonly", False)]},
         tracking=True,
     )
     state = fields.Selection(
@@ -81,7 +69,6 @@ class StockCycleCount(models.Model):
         string="Company",
         required=True,
         default=lambda self: self.env.company,
-        readonly=True,
     )
 
     @api.depends("stock_adjustment_ids")
