@@ -13,7 +13,7 @@ class SaleStockReserve(models.TransientModel):
             "product_uom": bom_line.bom_id.product_uom_id.id,
             "product_uom_qty": bom_vals["qty"],
             "date_validity": self.date_validity,
-            "name": "{} ({})".format(line.order_id.name, line.name),
+            "name": f"{line.order_id.name} ({line.name})",
             "location_id": self.location_id.id,
             "location_dest_id": self.location_dest_id.id,
             "note": self.note,

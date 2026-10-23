@@ -40,8 +40,8 @@ class TestStockReserveSaleMRP(TestStockReserveSale):
             )
         ).save()
         wiz.button_reserve()
-        self.assertEquals(self.product_1.virtual_available, 7)
-        self.assertEquals(self.product_2.virtual_available, 7)
+        self.assertEqual(self.product_1.virtual_available, 7)
+        self.assertEqual(self.product_2.virtual_available, 7)
 
     def test_reserve_02_mixed_products(self):
         sale_order_form = Form(self.env["sale.order"])
@@ -59,5 +59,5 @@ class TestStockReserveSaleMRP(TestStockReserveSale):
             )
         ).save()
         wiz.button_reserve()
-        self.assertEquals(self.product_1.virtual_available, 3)
-        self.assertEquals(self.product_2.virtual_available, 7)
+        self.assertEqual(self.product_1.virtual_available, 3)
+        self.assertEqual(self.product_2.virtual_available, 7)
