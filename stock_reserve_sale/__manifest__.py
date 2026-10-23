@@ -14,6 +14,7 @@
         "wizard/sale_stock_reserve_release_view.xml",
         "view/sale.xml",
         "view/stock_reserve.xml",
+        "view/res_config_settings.xml",
         "security/ir.model.access.csv",
     ],
     "installable": True,

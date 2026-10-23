@@ -36,6 +36,27 @@ class TestStockReserveSale(common.TransactionCase):
                 "quantity": 10.0,
             }
         )
+        cls.env.company.sale_stock_reservation_policy = "always"
+
+    def _create_sale_order(self, quantities):
+        sale_order_form = Form(self.env["sale.order"])
+        sale_order_form.partner_id = self.partner
+        for product, quantity in quantities:
+            with sale_order_form.order_line.new() as order_line_form:
+                order_line_form.product_id = product
+                order_line_form.product_uom_qty = quantity
+        return sale_order_form.save()
+
+    def _reserve_from_location(self, sale_order, location):
+        wiz_form = Form(
+            self.env["sale.stock.reserve"].with_context(
+                active_model="sale.order",
+                active_id=sale_order.id,
+                active_ids=sale_order.ids,
+            )
+        )
+        wiz_form.location_id = location
+        wiz_form.save().button_reserve()
 
     def test_reserve_01_tree_reserve_release(self):
         sale_order_form = Form(self.env["sale.order"])
@@ -155,4 +176,32 @@ class TestStockReserveSale(common.TransactionCase):
         self.assertEqual(reservation.picking_type_id, self.warehouse.out_type_id)
         self.assertEqual(
             reservation.picking_id.picking_type_id, self.warehouse.out_type_id
+        )
+
+    def test_reserve_07_policy_partial(self):
+        self.env.company.sale_stock_reservation_policy = "partial"
+        so = self._create_sale_order([(self.product_1, 15)])
+        self._reserve_from_location(so, self.warehouse.lot_stock_id)
+        reservation = so.order_line.reservation_ids
+        self.assertEqual(reservation.product_uom_qty, 10)
+        self.assertEqual(reservation.state, "assigned")
+
+    def test_reserve_08_policy_full(self):
+        self.env.company.sale_stock_reservation_policy = "full"
+        so = self._create_sale_order([(self.product_1, 15), (self.product_2, 5)])
+        self._reserve_from_location(so, self.warehouse.lot_stock_id)
+        line_1 = so.order_line.filtered(lambda line: line.product_id == self.product_1)
+        line_2 = so.order_line - line_1
+        self.assertFalse(line_1.reservation_ids)
+        self.assertEqual(line_2.reservation_ids.product_uom_qty, 5)
+        self.assertEqual(line_2.reservation_ids.state, "assigned")
+
+    def test_reserve_09_policy_no_available_stock(self):
+        self.env.company.sale_stock_reservation_policy = "partial"
+        so = self._create_sale_order([(self.product_1, 3)])
+        with self.assertRaises(UserError):
+            self._reserve_from_location(so, self.env.ref("stock.stock_location_stock"))
+        self.assertFalse(so.order_line.reservation_ids)
+        self.assertFalse(
+            self.env["stock.picking"].search([("sale_reserve_id", "=", so.id)])
         )

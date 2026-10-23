@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.form - stock_reserve_sale</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="sale.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//div[@name='quotation_order_setting_container']"
+                position="inside"
+            >
+                <div
+                    class="col-12 col-lg-6 o_setting_box"
+                    id="sale_stock_reservation_policy"
+                >
+                    <div class="o_setting_right_pane">
+                        <label for="sale_stock_reservation_policy" />
+                        <div class="text-muted">
+                            Quantity reserved when reserving stock from quotations
+                        </div>
+                        <div class="content-group">
+                            <div class="mt16">
+                                <field
+                                    name="sale_stock_reservation_policy"
+                                    class="o_light_label"
+                                    widget="radio"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

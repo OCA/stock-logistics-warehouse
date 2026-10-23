@@ -1,6 +1,8 @@
 # Copyright 2013 Camptocamp SA - Guewen Baconnier
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
-from odoo import api, fields, models
+from odoo import _, api, fields, models
+from odoo.exceptions import UserError
+from odoo.tools import float_compare, float_is_zero
 
 
 class SaleStockReserve(models.TransientModel):
@@ -93,16 +95,57 @@ class SaleStockReserve(models.TransientModel):
             "picking_type_id": picking_type_id,
         }
 
+    def _get_reservation_quantity(self, line):
+        quantity = line.product_uom_qty
+        product = line.product_id
+        policy = line.order_id.company_id.sale_stock_reservation_policy
+        if (
+            policy == "always"
+            or product.type != "product"
+            or self.location_id.should_bypass_reservation()
+        ):
+            return quantity
+        available = product.uom_id._compute_quantity(
+            self.env["stock.quant"]._get_available_quantity(product, self.location_id),
+            line.product_uom,
+            rounding_method="DOWN",
+        )
+        if (
+            float_compare(
+                available, quantity, precision_rounding=line.product_uom.rounding
+            )
+            >= 0
+        ):
+            return quantity
+        if policy == "partial":
+            return available
+        return 0.0
+
     def stock_reserve(self, line_ids):
         self.ensure_one()
 
         lines = self.env["sale.order.line"].browse(line_ids)
+        reserved = unavailable = False
         for line in lines:
             if not line.is_stock_reservable:
                 continue
+            quantity = self._get_reservation_quantity(line)
+            if float_is_zero(quantity, precision_rounding=line.product_uom.rounding):
+                unavailable = True
+                continue
             vals = self._prepare_stock_reservation(line)
+            vals["product_uom_qty"] = quantity
             reserv = self.env["stock.reservation"].create(vals)
             reserv.reserve()
+            reserved = True
+        if unavailable and not reserved:
+            raise UserError(
+                _(
+                    "There is not enough stock available in %(location)s "
+                    "to reserve the selected lines.",
+                    location=self.location_id.display_name,
+                )
+            )
 
     def button_reserve(self):
         self.ensure_one()
