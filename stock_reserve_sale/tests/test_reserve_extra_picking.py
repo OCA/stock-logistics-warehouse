@@ -24,6 +24,19 @@ class TestReserveExtraPicking(TestReserveExtraPickingCommon):
         self.sale_order.order_line[1].release_stock_reservation()
         self.assertEqual(self.sale_order.reserves_count, 0)
 
+    def test_01_all_lines_reserved(self):
+        line_1, line_2 = self.sale_order.order_line
+        wiz = self.env["sale.stock.reserve"].create({})
+        vals = wiz._prepare_stock_reservation(line_1)
+        self.env["stock.reservation"].create([vals, vals])
+        self.assertEqual(self.sale_order.reserves_count, 2)
+        self.assertFalse(self.sale_order.all_lines_reserved)
+        self.env["stock.reservation"].create(wiz._prepare_stock_reservation(line_2))
+        self.assertEqual(self.sale_order.reserves_count, 3)
+        self.assertTrue(self.sale_order.all_lines_reserved)
+        line_1.release_stock_reservation()
+        self.assertFalse(self.sale_order.all_lines_reserved)
+
     def test_reserve_stock_reservation(self):
         self.context = {
             "active_id": self.sale_order.id,

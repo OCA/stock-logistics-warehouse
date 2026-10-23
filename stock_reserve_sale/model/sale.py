@@ -83,15 +83,18 @@ class SaleOrder(models.Model):
             "target": "new",
         }
 
-    @api.depends("stock_reservation_ids", "order_line.product_id.detailed_type")
+    @api.depends(
+        "stock_reservation_ids",
+        "order_line.reservation_ids",
+        "order_line.product_id.detailed_type",
+    )
     def _compute_reserves_count(self):
         for order in self:
             lines = order.order_line.filtered(
                 lambda ln: ln.product_id and ln.product_id.detailed_type != "service"
             )
-            reserves_count = len(order.stock_reservation_ids)
-            order.reserves_count = reserves_count
-            order.all_lines_reserved = bool(reserves_count == len(lines))
+            order.reserves_count = len(order.stock_reservation_ids)
+            order.all_lines_reserved = all(line.reservation_ids for line in lines)
 
     def action_view_reserves_products(self):
         action = self.env["ir.actions.act_window"]._for_xml_id(
