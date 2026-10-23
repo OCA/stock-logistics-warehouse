@@ -1,0 +1,7 @@
+- Lois Rilo \<<lois.rilo@forgeflow.com>\>
+- Jordi Ballester Alomar \<<jordi.ballester@forgeflow.com>\>
+- Bhavesh Odedra \<<bodedra@opensourceintegrators.com>\>
+- Jim Hoefnagels \<<jim.hoefnagels@dynapps.be>\>
+- Binhex
+  - Ariel Barreiros
+  - Antonio Ruban <antoniodavid8@gmail.com>
