@@ -17,4 +17,4 @@ class StockDemandEstimateSheetLine(models.TransientModel):
     value_x = fields.Char(string="Period Name")
     value_y = fields.Char(string="Product Name")
     product_uom = fields.Many2one(comodel_name="uom.uom", string="Unit of measure")
-    product_uom_qty = fields.Float(string="Quantity", digits="Product UoM")
+    product_uom_qty = fields.Float(string="Quantity", digits="Product Unit")

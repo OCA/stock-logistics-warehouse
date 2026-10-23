@@ -5,7 +5,7 @@ from datetime import datetime
 
 from dateutil.rrule import MONTHLY
 
-from odoo import fields
+from odoo import Command, fields
 from odoo.exceptions import UserError, ValidationError
 from odoo.tests.common import TransactionCase
 
@@ -69,8 +69,8 @@ class TestStockDemandEstimate(TransactionCase):
                 "password": "demo",
                 "email": "example@yourcompany.com",
                 "company_id": company.id,
-                "company_ids": [(4, company.id)],
-                "groups_id": [(6, 0, group_ids)],
+                "company_ids": [Command.link(company.id)],
+                "group_ids": [Command.set(group_ids)],
             }
         )
         return user
@@ -86,7 +86,7 @@ class TestStockDemandEstimate(TransactionCase):
                 "date_end": "1943-12-31",
                 "location_id": self.location.id,
                 "date_range_type_id": self.drt_monthly.id,
-                "product_ids": [(6, 0, [self.product_1.id])],
+                "product_ids": [Command.set([self.product_1.id])],
             }
         )
         wiz.create_sheet()
@@ -158,7 +158,7 @@ class TestStockDemandEstimate(TransactionCase):
                 "date_end": "1943-12-31",
                 "location_id": self.location.id,
                 "date_range_type_id": self.drt_monthly.id,
-                "product_ids": [(6, 0, [self.product_1.id])],
+                "product_ids": [Command.set([self.product_1.id])],
             }
         )
         wiz.create_sheet()
@@ -180,7 +180,7 @@ class TestStockDemandEstimate(TransactionCase):
                     "date_end": "1943-01-01",
                     "location_id": self.location.id,
                     "date_range_type_id": self.drt_monthly.id,
-                    "product_ids": [(6, 0, [self.product_1.id])],
+                    "product_ids": [Command.set([self.product_1.id])],
                 }
             )
 
@@ -237,7 +237,7 @@ class TestStockDemandEstimate(TransactionCase):
             "date_start": "1943-01-01",
             "date_end": "1943-12-31",
             "location_id": self.location.id,
-            "product_ids": [(6, 0, [self.product_1.id])],
+            "product_ids": [Command.set([self.product_1.id])],
         }
         with self.assertRaises(UserError):
             self.env["stock.demand.estimate.wizard"].create(
@@ -255,7 +255,7 @@ class TestStockDemandEstimate(TransactionCase):
                 "date_end": "2023-12-31",
                 "location_id": self.location.id,
                 "date_range_type_id": self.drt_monthly.id,
-                "product_ids": [(6, 0, [self.product_1.id])],
+                "product_ids": [Command.set([self.product_1.id])],
             }
         )
         sheet_values = wizard._prepare_demand_estimate_sheet()

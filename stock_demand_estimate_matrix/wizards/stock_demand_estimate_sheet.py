@@ -1,9 +1,9 @@
 # Copyright 2019 ForgeFlow S.L. (https://www.forgeflow.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from odoo import _, api, fields, models
+from odoo import Command, api, fields, models
 from odoo.exceptions import UserError
-from odoo.osv import expression
+from odoo.fields import Domain
 
 
 class StockDemandEstimateSheet(models.TransientModel):
@@ -59,7 +59,7 @@ class StockDemandEstimateSheet(models.TransientModel):
                 return
             ranges = sheet._get_ranges()
             if not ranges:
-                raise UserError(_("There is no ranges created."))
+                raise UserError(self.env._("There is no ranges created."))
             estimates = self.env["stock.demand.estimate"].search(
                 [
                     ("product_id", "in", sheet.product_ids.ids),
@@ -76,7 +76,7 @@ class StockDemandEstimateSheet(models.TransientModel):
                         )
                     )
                     if estimate:
-                        uom_id = fields.first(estimate).product_uom.id
+                        uom_id = estimate[0].product_uom.id
                         uom_qty = estimate[0].product_uom_qty
                         estimate_id = estimate[0].id
                     else:
@@ -84,9 +84,7 @@ class StockDemandEstimateSheet(models.TransientModel):
                         uom_qty = 0.0
                         estimate_id = None
                     lines.append(
-                        (
-                            0,
-                            0,
+                        Command.create(
                             sheet._get_default_estimate_line(
                                 _range,
                                 product,
@@ -117,7 +115,7 @@ class StockDemandEstimateSheet(models.TransientModel):
             ("date_start", "<=", self.date_start),
             ("date_end", ">=", self.date_start),
         ]
-        domain = expression.OR([domain_1, domain_2])
+        domain = Domain.OR([domain_1, domain_2])
         ranges = self.env["date.range"].search(domain)
         return ranges
 
@@ -161,7 +159,7 @@ class StockDemandEstimateSheet(models.TransientModel):
                 res.append(estimate.id)
         res = {
             "domain": [("id", "in", res)],
-            "name": _("Stock Demand Estimates"),
+            "name": self.env._("Stock Demand Estimates"),
             "src_model": "stock.demand.estimate.wizard",
             "view_type": "form",
             "view_mode": "list",
