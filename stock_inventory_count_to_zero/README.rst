@@ -1,7 +1,3 @@
-.. image:: https://odoo-community.org/readme-banner-image
-   :target: https://odoo-community.org/get-involved?utm_source=readme
-   :alt: Odoo Community Association
-
 =============================
 Stock Inventory Count To Zero
 =============================
@@ -17,7 +13,7 @@ Stock Inventory Count To Zero
 .. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
     :alt: Beta
-.. |badge2| image:: https://img.shields.io/badge/license-AGPL--3-blue.png
+.. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fstock--logistics--warehouse-lightgray.png?logo=github
@@ -32,8 +28,8 @@ Stock Inventory Count To Zero
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-This module extends the functionality of stock module to allow request a inventory and
-set inventory quantities to zero.
+This module extends the functionality of stock module to allow request a
+inventory and set inventory quantities to zero.
 
 **Table of contents**
 
@@ -45,10 +41,10 @@ Usage
 
 To use this module you need to:
 
-#. Go to a *Inventory > Operations > Inventory adjustment*.
-#. Select some records and click on button "Request a count".
-#. Set the "Set to zero" in count field.
-#. Apply inventory when you want.
+1. Go to a *Inventory > Operations > Inventory adjustment*.
+2. Select some records and click on button "Request a count".
+3. Set the "Set to zero" in count field.
+4. Apply inventory when you want.
 
 Bug Tracker
 ===========
@@ -64,19 +60,19 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * Tecnativa
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* `Tecnativa <https://www.tecnativa.com>`_
+- `Tecnativa <https://www.tecnativa.com>`__
 
-  * Sergio Teruel
+  - Sergio Teruel
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is maintained by the OCA.
 
