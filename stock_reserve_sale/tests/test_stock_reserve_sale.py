@@ -135,3 +135,24 @@ class TestStockReserveSale(common.TransactionCase):
             so.unlink()
         with self.assertRaises(UserError):
             so.order_line.unlink()
+
+    def test_reserve_06_picking_type_from_source_location(self):
+        sale_order_form = Form(self.env["sale.order"])
+        sale_order_form.partner_id = self.partner
+        with sale_order_form.order_line.new() as order_line_form:
+            order_line_form.product_id = self.product_1
+            order_line_form.product_uom_qty = 3
+        so = sale_order_form.save()
+        self.assertNotEqual(so.warehouse_id, self.warehouse)
+        wiz_form = Form(
+            self.env["sale.stock.reserve"].with_context(
+                active_model="sale.order.line", active_ids=so.order_line.ids
+            )
+        )
+        wiz_form.location_id = self.warehouse.lot_stock_id
+        wiz_form.save().button_reserve()
+        reservation = so.order_line.reservation_ids
+        self.assertEqual(reservation.picking_type_id, self.warehouse.out_type_id)
+        self.assertEqual(
+            reservation.picking_id.picking_type_id, self.warehouse.out_type_id
+        )
