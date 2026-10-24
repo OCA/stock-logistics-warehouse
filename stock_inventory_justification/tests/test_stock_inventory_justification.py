@@ -5,6 +5,13 @@ from odoo.addons.stock.tests.common import TestStockCommon
 
 
 class TestStockInventoryJustification(TestStockCommon):
+    # TestStockCommon only grants product.group_product_manager on 20.0, which
+    # is not enough to create quants nor justifications.
+    _test_user_groups = (
+        "product.group_product_manager",
+        "stock.group_stock_manager",
+    )
+
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
