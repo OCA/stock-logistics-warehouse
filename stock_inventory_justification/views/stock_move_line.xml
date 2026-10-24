@@ -25,7 +25,7 @@
             <field name="location_dest_usage" position="after">
                 <field name="is_inventory" column_invisible="1" />
             </field>
-            <field name="product_uom_id" position="after">
+            <field name="uom_id" position="after">
                 <field
                     name="inventory_justification_ids"
                     widget="many2many_tags"

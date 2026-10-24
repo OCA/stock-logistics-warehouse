@@ -3,16 +3,15 @@
 
 {
     "name": "Stock Inventory Justification",
-    "summary": """
-        This module allows to set justification on inventories""",
-    "version": "19.0.1.1.0",
+    "summary": "Set a justification on inventory adjustments",
+    "version": "20.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV,Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "maintainers": ["rousseldenis", "ThomasBinsfeld"],
     "depends": ["stock"],
     "data": [
-        "security/acl_stock_inventory_justification.xml",
+        "security/ir.access.csv",
         "views/stock_move_line.xml",
         "views/stock_quant.xml",
         "views/stock_inventory_justification.xml",
