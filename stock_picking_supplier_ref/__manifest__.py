@@ -3,14 +3,12 @@
 
 {
     "name": "Stock Picking Supplier Reference",
-    "version": "19.0.1.0.0",
+    "version": "20.0.1.0.0",
     "category": "Stock",
     "author": "Trey, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "license": "AGPL-3",
-    "summary": """
-        Adds a supplier reference field inside supplier's pickings and
-        allows search for this reference.""",
+    "summary": "Add a searchable supplier reference field on supplier pickings",
     "depends": ["stock"],
     "data": ["views/stock_picking.xml"],
     "installable": True,
