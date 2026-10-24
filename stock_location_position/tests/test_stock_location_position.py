@@ -5,6 +5,10 @@ from odoo.addons.base.tests.common import BaseCommon
 
 
 class TestStockLocationPosition(BaseCommon):
+    # On 20.0 BaseCommon runs the tests as a restricted user built from this
+    # attribute, so the inventory rights have to be granted explicitly.
+    _test_user_groups = ("stock.group_stock_manager",)
+
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
