@@ -2,6 +2,10 @@ from odoo.addons.base.tests.common import BaseCommon
 
 
 class TestStockPickingSupplierReference(BaseCommon):
+    # On 20.0 BaseCommon runs the tests as a restricted user built from this
+    # attribute, so the inventory rights have to be granted explicitly.
+    _test_user_groups = ("stock.group_stock_manager",)
+
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -32,7 +36,7 @@ class TestStockPickingSupplierReference(BaseCommon):
             {
                 "product_id": cls.product.id,
                 "product_uom_qty": 10,
-                "product_uom": cls.product.uom_id.id,
+                "uom_id": cls.product.uom_id.id,
                 "picking_id": cls.stock_picking.id,
                 "location_id": cls.picking_type_out.default_location_src_id.id,
                 "location_dest_id": cls.picking_type_out.default_location_dest_id.id,
