@@ -1,8 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <record id="view_stock_move_line_inventory_tree" model="ir.ui.view">
         <field name="name">stock.move.line.tree.view.inventory</field>
         <field name="model">stock.move.line</field>
-        <field name="priority">1000</field>
+        <field name="priority" eval="1000" />
         <field name="arch" type="xml">
             <list>
                 <field name="date" />

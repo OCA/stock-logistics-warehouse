@@ -14,7 +14,6 @@ class StockQuant(models.Model):
     )
     current_inventory_id = fields.Many2one(
         "stock.inventory",
-        string="Current Inventory",
         store=True,
     )
 
@@ -34,9 +33,11 @@ class StockQuant(models.Model):
                 ],
                 order="create_date asc",
             ).filtered(
-                lambda x, rec=rec: not x.company_id.id
-                or not rec.company_id.id
-                or rec.company_id.id == x.company_id.id
+                lambda x, rec=rec: (
+                    not x.company_id.id
+                    or not rec.company_id.id
+                    or rec.company_id.id == x.company_id.id
+                )
             )
             if len(moves) == 0:
                 raise ValueError(self.env._("No move lines have been created"))

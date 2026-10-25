@@ -1,8 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <record id="view_inventory_group_form" model="ir.ui.view">
         <field name="name">stock.inventory.form.view</field>
         <field name="model">stock.inventory</field>
-        <field name="priority">1000</field>
+        <field name="priority" eval="1000" />
         <field name="arch" type="xml">
             <form>
                 <header>
@@ -148,7 +149,7 @@
     <record id="view_inventory_group_tree" model="ir.ui.view">
         <field name="name">stock.inventory.tree.view</field>
         <field name="model">stock.inventory</field>
-        <field name="priority">1000</field>
+        <field name="priority" eval="1000" />
         <field name="arch" type="xml">
             <list>
                 <field name="name" />
@@ -168,7 +169,7 @@
         </field>
     </record>
 
-    <record model="ir.ui.view" id="stock_inventory_search_view">
+    <record id="stock_inventory_search_view" model="ir.ui.view">
         <field name="model">stock.inventory</field>
         <field name="arch" type="xml">
             <search>

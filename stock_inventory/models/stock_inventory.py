@@ -7,9 +7,7 @@ class InventoryAdjustmentsGroup(models.Model):
     _name = "stock.inventory"
     _description = "Inventory Adjustment Group"
     _order = "date desc, id desc"
-    _inherit = [
-        "mail.thread",
-    ]
+    _inherit = "mail.thread"
 
     name = fields.Char(
         required=True,
@@ -44,7 +42,6 @@ class InventoryAdjustmentsGroup(models.Model):
 
     owner_id = fields.Many2one(
         "res.partner",
-        "Owner",
         help="This is the owner of the inventory adjustment",
         readonly=True,
     )
@@ -142,7 +139,6 @@ class InventoryAdjustmentsGroup(models.Model):
         comodel_name="product.product",
         compute="_compute_products_under_review_ids",
         search="_search_products_under_review_ids",
-        string="Products Under Review",
         relation="stock_inventory_product_review_rel",
     )
 
@@ -328,7 +324,6 @@ class InventoryAdjustmentsGroup(models.Model):
                 "current_inventory_id": self.id,
             }
         )
-        return
 
     def action_state_to_done(self):
         self.ensure_one()
@@ -343,13 +338,11 @@ class InventoryAdjustmentsGroup(models.Model):
                 "current_inventory_id": False,
             }
         )
-        return
 
     def action_auto_state_to_done(self):
         self.ensure_one()
         if not any(self.stock_quant_ids.filtered(lambda sq: sq.to_do)):
             self.action_state_to_done()
-        return
 
     def action_state_to_draft(self):
         self.ensure_one()
@@ -365,7 +358,6 @@ class InventoryAdjustmentsGroup(models.Model):
             }
         )
         self.stock_quant_ids = None
-        return
 
     def action_state_to_cancel(self):
         self.ensure_one()
