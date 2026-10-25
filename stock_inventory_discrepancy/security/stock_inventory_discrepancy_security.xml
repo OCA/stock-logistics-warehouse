@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!-- Copyright 2023 Tecnativa - Ernesto Tejeda
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo noupdate="1">
@@ -13,7 +13,7 @@
         />
         <field name="user_ids" eval="[(4, ref('base.user_root'))]" />
     </record>
-    <record model="res.groups" id="stock.group_stock_manager">
+    <record id="stock.group_stock_manager" model="res.groups">
         <field
             name="implied_ids"
             eval="[(4, ref('stock_inventory_discrepancy.group_stock_inventory_validation_always'))]"

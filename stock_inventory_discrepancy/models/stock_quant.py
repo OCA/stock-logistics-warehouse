@@ -104,5 +104,5 @@ class StockQuant(models.Model):
                 self.env._("Only a stock manager can validate an inventory adjustment.")
             )
         # Allow to write last_inventory_date on stock.location
-        self = self.sudo().with_context(from_apply_inventory=True)
-        return super()._apply_inventory(date=date)
+        quants = self.sudo().with_context(from_apply_inventory=True)
+        return super(StockQuant, quants)._apply_inventory(date=date)
