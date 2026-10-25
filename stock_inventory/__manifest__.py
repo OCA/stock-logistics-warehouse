@@ -1,6 +1,6 @@
 {
     "name": "Stock Inventory Adjustment",
-    "version": "19.0.1.1.0",
+    "version": "20.0.1.0.0",
     "license": "LGPL-3",
     "maintainer": ["DavidJForgeFlow"],
     "development_status": "Beta",
@@ -10,8 +10,7 @@
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "depends": ["stock"],
     "data": [
-        "security/ir.model.access.csv",
-        "security/security.xml",
+        "security/ir.access.csv",
         "views/stock_inventory.xml",
         "views/stock_quant.xml",
         "views/stock_move_line.xml",

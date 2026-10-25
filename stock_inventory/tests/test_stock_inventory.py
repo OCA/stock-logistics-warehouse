@@ -1,12 +1,15 @@
 # Copyright 2022 ForgeFlow S.L
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
-from odoo.exceptions import UserError, ValidationError
+from odoo.exceptions import AccessError, UserError, ValidationError
+from odoo.tests.common import new_test_user
 
 from odoo.addons.base.tests.common import BaseCommon
 
 
 class TestStockInventory(BaseCommon):
+    _test_user_groups = None
+
     def setUp(self):
         super().setUp()
         self.env.company.stock_inventory_auto_complete = False
@@ -659,3 +662,37 @@ class TestStockInventory(BaseCommon):
         self.assertIn(quant_parent.id, found_ids)
         self.assertIn(quant_child.id, found_ids)
         self.assertNotIn(quant_grandchild.id, found_ids)
+
+    def test_inventory_access_rights(self):
+        user = new_test_user(
+            self.env, login="inventory_user", groups="stock.group_stock_user"
+        )
+        manager = new_test_user(
+            self.env, login="inventory_manager", groups="stock.group_stock_manager"
+        )
+        inventory = self.inventory_model.with_user(user).create(
+            {"name": "Inventory access test"}
+        )
+        inventory.write({"name": "Updated inventory access test"})
+        self.assertEqual(inventory.read(["name"])[0]["name"], inventory.name)
+        with self.assertRaises(AccessError), self.cr.savepoint():
+            inventory.unlink()
+        inventory.with_user(manager).unlink()
+
+    def test_inventory_multi_company_access(self):
+        user = new_test_user(
+            self.env, login="inventory_company_user", groups="stock.group_stock_user"
+        )
+        other_company = self.env["res.company"].create(
+            {"name": "Other inventory company"}
+        )
+        own_inventory = self.inventory_model.create({"name": "Own company inventory"})
+        other_inventory = self.inventory_model.create(
+            {"name": "Other company inventory", "company_id": other_company.id}
+        )
+        inventories = self.inventory_model.with_user(user).search(
+            [("id", "in", (own_inventory | other_inventory).ids)]
+        )
+        self.assertEqual(inventories.ids, own_inventory.ids)
+        with self.assertRaises(AccessError), self.cr.savepoint():
+            other_inventory.with_user(user).write({"name": "Forbidden update"})
