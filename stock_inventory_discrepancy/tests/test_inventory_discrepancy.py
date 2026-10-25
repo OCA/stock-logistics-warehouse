@@ -10,6 +10,8 @@ from odoo.addons.base.tests.common import BaseCommon
 
 @tagged("post_install", "-at_install")
 class TestInventoryDiscrepancy(BaseCommon):
+    _test_user_groups = None
+
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -190,3 +192,96 @@ class TestInventoryDiscrepancy(BaseCommon):
             0.3,
             "Threshold Discrepancy wrongly propagated",
         )
+
+    def test_discrepancy_without_count_or_stock(self):
+        self.quant_line1.inventory_quantity_set = False
+        self.assertEqual(self.quant_line1.discrepancy_percent, 0)
+        empty_quant = self.obj_quant.create(
+            {
+                "product_id": self.product1.id,
+                "location_id": self.test_wh.lot_stock_id.id,
+            }
+        )
+        empty_quant.inventory_quantity = 2
+        self.assertEqual(empty_quant.discrepancy_percent, 0)
+
+    def test_no_discrepancy_threshold(self):
+        self.test_loc.discrepancy_threshold = 0
+        self.quant_line1.inventory_quantity = self.quant_line1.quantity
+        self.assertFalse(self.quant_line1.discrepancy_threshold)
+        self.assertFalse(self.quant_line1.has_over_discrepancy)
+
+    def test_search_over_discrepancy(self):
+        self.quant_line1.inventory_quantity = 3
+        self.quant_line2.inventory_quantity = 4
+        candidates = self.quant_line1 | self.quant_line2
+        for operator, value, expected in (
+            ("=", True, self.quant_line1),
+            ("=", False, self.quant_line2),
+            ("!=", True, self.quant_line2),
+            ("!=", False, self.quant_line1),
+        ):
+            with self.subTest(operator=operator, value=value):
+                found = self.obj_quant.search(
+                    [
+                        ("id", "in", candidates.ids),
+                        ("has_over_discrepancy", operator, value),
+                    ]
+                )
+                self.assertEqual(found, expected)
+        for value, expected in (
+            ("True", self.quant_line1),
+            ("False", self.quant_line2),
+        ):
+            domain = self.obj_quant._search_has_over_discrepancy("=", value)
+            self.assertEqual(
+                self.obj_quant.search([("id", "in", candidates.ids)] + domain), expected
+            )
+        with self.assertRaisesRegex(UserError, "operator is not supported"):
+            self.obj_quant._search_has_over_discrepancy(">", True)
+        with self.assertRaisesRegex(UserError, "Value should be True or False"):
+            self.obj_quant._search_has_over_discrepancy("=", "invalid")
+
+    def test_apply_under_threshold(self):
+        self.quant_line1.inventory_quantity = 2.1
+        self.quant_line1.with_user(self.user).action_apply_inventory()
+        self.assertEqual(self.quant_line1.quantity, 2.1)
+
+    def test_discrepancy_control_disabled(self):
+        self.env.company.inventory_discrepancy_enable = False
+        self.quant_line1.inventory_quantity = 3
+        self.assertTrue(self.quant_line1.has_over_discrepancy)
+        self.quant_line1.with_user(self.user).action_apply_inventory()
+        self.assertEqual(self.quant_line1.quantity, 3)
+
+    def test_apply_inventory_requires_validation_group(self):
+        stock_user = new_test_user(
+            self.env, "stock_user_without_validation", groups="stock.group_stock_user"
+        )
+        self.quant_line1.inventory_quantity = 2.1
+        with self.assertRaisesRegex(UserError, "Only a stock manager can validate"):
+            self.quant_line1.with_user(stock_user)._apply_inventory()
+        self.assertEqual(self.quant_line1.quantity, 2)
+
+    def test_wizard_without_selected_quants(self):
+        wizard = (
+            self.env["confirm.discrepancy.wiz"]
+            .with_context(discrepancy_quant_ids=[])
+            .create({})
+        )
+        self.assertFalse(wizard.discrepancy_quant_ids)
+
+    def test_recursive_threshold_propagation(self):
+        child = self.obj_location.create(
+            {"name": "Threshold child", "location_id": self.test_loc.id}
+        )
+        grandchild = self.obj_location.create(
+            {"name": "Threshold grandchild", "location_id": child.id}
+        )
+        self.test_loc.write(
+            {"discrepancy_threshold": 15, "propagate_discrepancy_threshold": True}
+        )
+        self.assertEqual(child.discrepancy_threshold, 15)
+        self.assertEqual(grandchild.discrepancy_threshold, 15)
+        self.assertTrue(child.propagate_discrepancy_threshold)
+        self.assertTrue(grandchild.propagate_discrepancy_threshold)
