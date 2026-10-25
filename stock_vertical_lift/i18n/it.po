@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2026-10-11 10:46+0000\n"
+"PO-Revision-Date: 2026-10-25 23:46+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -826,7 +826,7 @@ msgstr "Inventario operazione magazzino verticale"
 #. module: stock_vertical_lift
 #: model:ir.model,name:stock_vertical_lift.model_vertical_lift_operation_pick
 msgid "Vertical Lift Operation Pick"
-msgstr "Prelievo operazione magazzino  verticale"
+msgstr "Prelievo operazione magazzino verticale"
 
 #. module: stock_vertical_lift
 #: model:ir.model,name:stock_vertical_lift.model_vertical_lift_operation_put
