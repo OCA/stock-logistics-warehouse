@@ -1,7 +1,3 @@
-.. image:: https://odoo-community.org/readme-banner-image
-   :target: https://odoo-community.org/get-involved?utm_source=readme
-   :alt: Odoo Community Association
-
 ====================
 Stock Secondary Unit
 ====================
@@ -17,7 +13,7 @@ Stock Secondary Unit
 .. |badge1| image:: https://img.shields.io/badge/maturity-Production%2FStable-green.png
     :target: https://odoo-community.org/page/development-status
     :alt: Production/Stable
-.. |badge2| image:: https://img.shields.io/badge/license-AGPL--3-blue.png
+.. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fstock--logistics--warehouse-lightgray.png?logo=github
@@ -104,11 +100,13 @@ re-derived from the primary quantity and losing precision or meaning:
   make-to-order replenishment) carries the secondary unit forward into
   the next move it creates, the same way the primary quantity already
   does.
-- **``secondary_uom_qty_done``**, a new aggregate field on
-  ``stock.move``, mirrors what core's own ``quantity`` field does for
-  the primary unit: it sums what was actually counted across the move's
-  lines, so other code needing "how many pieces were actually done"
-  doesn't have to re-derive that sum ad hoc every time.
+- **``secondary_uom_qty_done``**, an aggregate field on ``stock.move``,
+  mirrors what core's own ``quantity`` field does for the primary unit.
+  It sums what was counted across the move's lines, and for
+  ``dependent`` secondary units, it can also be edited directly on the
+  transfer or detailed operations form to adjust the done quantity,
+  delegating to core's ``_set_quantity()`` to update move lines
+  automatically.
 
 **Table of contents**
 
@@ -135,7 +133,11 @@ Demanding and counting a secondary quantity on a transfer
    detail form when *Detailed Operations* is enabled), the *Secondary
    Qty* and its unit are editable columns/fields (needs the "Units of
    Measure" feature enabled, ``uom.group_uom``).
-2. What happens when the secondary quantity is entered depends on the
+2. On the transfer's main operations list (``stock.move``) and in the
+   move header, the *Done Secondary Qty* (``secondary_uom_qty_done``)
+   can be edited directly for ``dependent`` secondary units to set the
+   moved quantity without manually adjusting move lines.
+3. What happens when the secondary quantity is entered depends on the
    product's secondary unit ``dependency_type``:
 
    - ``dependent``: entering either quantity recomputes the other
@@ -220,6 +222,7 @@ Contributors
 - Kitti Upariphutthiphong <kittiu@ecosoft.co.th>
 - Pimolnat Suntian <pimolnats@ecosoft.co.th>
 - Alan Ramos <alan.ramos@jarsa.com.mx>
+- Patryk Pyczko <patryk.pyczko@nagarro.com>
 
 Maintainers
 -----------

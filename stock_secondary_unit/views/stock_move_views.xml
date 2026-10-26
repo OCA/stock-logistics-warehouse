@@ -64,9 +64,17 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='product_id']" position="after">
                 <field name="is_initial_demand_editable" invisible="1" />
+                <field name="secondary_uom_dependency_type" invisible="1" />
                 <field
                     name="secondary_uom_qty"
                     readonly="not is_initial_demand_editable"
+                    groups="uom.group_uom"
+                />
+                <field
+                    name="secondary_uom_qty_done"
+                    string="Done Secondary Qty"
+                    readonly="not is_quantity_done_editable or (secondary_uom_id and secondary_uom_dependency_type != 'dependent')"
+                    invisible="state == 'draft'"
                     groups="uom.group_uom"
                 />
                 <field

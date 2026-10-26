@@ -33,9 +33,19 @@ class StockMove(models.Model):
     # were actually done" doesn't have to re-derive it ad hoc every time.
     secondary_uom_qty_done = fields.Float(
         compute="_compute_secondary_uom_qty_done",
+        readonly=False,
         store=True,
         digits="Product Unit of Measure",
+        help="Quantity done expressed in the secondary unit of measure.",
     )
+    secondary_uom_dependency_type = fields.Selection(
+        related="secondary_uom_id.dependency_type",
+    )
+
+    def _convert_secondary_to_primary_qty(self, secondary_qty):
+        self.ensure_one()
+        qty_base = secondary_qty * (self.secondary_uom_id.factor or 1.0)
+        return self.product_id.uom_id._compute_quantity(qty_base, self.product_uom)
 
     @api.depends("secondary_uom_qty", "secondary_uom_id")
     def _compute_product_uom_qty(self):
@@ -51,6 +61,54 @@ class StockMove(models.Model):
     @api.onchange("product_uom")
     def onchange_product_uom_for_secondary(self):
         self._onchange_helper_product_uom_for_secondary()
+
+    @api.onchange("secondary_uom_qty_done")
+    def _onchange_secondary_uom_qty_done(self):
+        if not (
+            self.secondary_uom_id
+            and self.secondary_uom_id.dependency_type == "dependent"
+        ):
+            return
+        # Prevent ping-pong loop: skip if secondary_uom_qty_done already matches
+        # the rounded conversion of current primary quantity
+        expected_sec_qty = self._convert_qty_to_secondary_uom(self.quantity)
+        sec_rounding = self.secondary_uom_id.uom_id.rounding
+        if (
+            float_compare(
+                self.secondary_uom_qty_done,
+                expected_sec_qty,
+                precision_rounding=sec_rounding,
+            )
+            == 0
+        ):
+            return
+        new_qty = self._convert_secondary_to_primary_qty(self.secondary_uom_qty_done)
+        if (
+            float_compare(
+                self.quantity, new_qty, precision_rounding=self.product_uom.rounding
+            )
+            != 0
+        ):
+            self.quantity = new_qty
+
+    @api.onchange("quantity")
+    def _onchange_quantity_for_secondary(self):
+        if not (
+            self.secondary_uom_id
+            and self.secondary_uom_id.dependency_type == "dependent"
+        ):
+            return
+        new_sec_qty = self._convert_qty_to_secondary_uom(self.quantity)
+        sec_rounding = self.secondary_uom_id.uom_id.rounding
+        if (
+            float_compare(
+                self.secondary_uom_qty_done,
+                new_sec_qty,
+                precision_rounding=sec_rounding,
+            )
+            != 0
+        ):
+            self.secondary_uom_qty_done = new_sec_qty
 
     def _onchange_helper_product_uom_for_secondary(self):
         # A count-preserving secondary unit (e.g. pieces vs. weight) must
@@ -230,6 +288,25 @@ class StockMove(models.Model):
         for move in self:
             move.onchange_product_uom_for_secondary()
         return res
+
+    def write(self, vals):
+        # Primary unit takes precedence when both are provided
+        if "quantity" in vals and "secondary_uom_qty_done" in vals:
+            vals = dict(vals)
+            vals.pop("secondary_uom_qty_done")
+        elif "secondary_uom_qty_done" in vals and "quantity" not in vals:
+            vals = dict(vals)
+            sec_qty = vals.pop("secondary_uom_qty_done")
+            for move in self:
+                if (
+                    move.secondary_uom_id
+                    and move.secondary_uom_id.dependency_type == "dependent"
+                ):
+                    primary_qty = move._convert_secondary_to_primary_qty(sec_qty)
+                    move.quantity = primary_qty
+            if not vals:
+                return True
+        return super().write(vals)
 
 
 class StockMoveLine(models.Model):

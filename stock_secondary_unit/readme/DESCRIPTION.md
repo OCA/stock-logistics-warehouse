@@ -70,8 +70,9 @@ re-derived from the primary quantity and losing precision or meaning:
   make-to-order replenishment) carries the secondary unit forward into
   the next move it creates, the same way the primary quantity already
   does.
-- **`secondary_uom_qty_done`**, a new aggregate field on `stock.move`,
-  mirrors what core's own `quantity` field does for the primary unit: it
-  sums what was actually counted across the move's lines, so other code
-  needing "how many pieces were actually done" doesn't have to
-  re-derive that sum ad hoc every time.
+- **`secondary_uom_qty_done`**, an aggregate field on `stock.move`, mirrors
+  what core's own `quantity` field does for the primary unit. It sums what
+  was counted across the move's lines, and for `dependent` secondary units,
+  it can also be edited directly on the transfer or detailed operations form
+  to adjust the done quantity, delegating to core's `_set_quantity()` to
+  update move lines automatically.

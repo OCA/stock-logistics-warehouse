@@ -6,6 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-26 14:46+0000\n"
+"PO-Revision-Date: 2026-10-26 14:46+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -27,6 +29,31 @@ msgstr ""
 #. module: stock_secondary_unit
 #: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_move__product_uom_qty
 msgid "Demand"
+msgstr ""
+
+#. module: stock_secondary_unit
+#: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_move__secondary_uom_dependency_type
+msgid "Dependency Type"
+msgstr ""
+
+#. module: stock_secondary_unit
+#: model_terms:ir.ui.view,arch_db:stock_secondary_unit.view_picking_form
+#: model_terms:ir.ui.view,arch_db:stock_secondary_unit.view_stock_move_operations
+msgid "Done Secondary Qty"
+msgstr ""
+
+#. module: stock_secondary_unit
+#: model:ir.model.fields,help:stock_secondary_unit.field_stock_move__secondary_uom_dependency_type
+msgid ""
+"If dependency type is 'dependent' the factor is used to compute quantity in "
+"primary unit and vice versa. If 'independent', primary and secondary unit "
+"are unrelated - for example if you sell a service by package (1 unit) and "
+"want to put the real time (e.g. 4 hours) to allow employee scheduling. If "
+"'secondary unit priority', the factor is only used to estimate the primary "
+"unit from the secondary one (like 'dependent'), but the secondary unit is "
+"never itself recomputed back from the primary one (like 'independent') - for"
+" example counting pieces of a product sold by weight, where the real weight "
+"of each piece varies but the piece count must stay exact."
 msgstr ""
 
 #. module: stock_secondary_unit
@@ -54,6 +81,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_secondary_unit.field_product_template__secondary_unit_qty_available
 #: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_product_secondary_unit_mixin__secondary_unit_qty_available
 msgid "Quantity On Hand (2Unit)"
+msgstr ""
+
+#. module: stock_secondary_unit
+#: model:ir.model.fields,help:stock_secondary_unit.field_stock_move__secondary_uom_qty_done
+msgid "Quantity done expressed in the secondary unit of measure."
 msgstr ""
 
 #. module: stock_secondary_unit

@@ -755,3 +755,55 @@ class TestProductSecondaryUnit(BaseCommon):
         picking.action_confirm()
         self.assertEqual(len(picking.move_ids), 1)
         self.assertEqual(picking.move_ids.secondary_uom_qty, 2)
+
+    def test_stock_move_secondary_uom_qty_done_write(self):
+        """Writing secondary_uom_qty_done updates quantity on dependent moves,
+        respects primary precedence, and ignores non-dependent moves."""
+        product = self.product_template.product_variant_ids[0]
+        secondary_unit = product.product_tmpl_id.secondary_uom_ids[0]
+        secondary_unit.write({"factor": 0.5, "dependency_type": "dependent"})
+        picking = self._create_confirmed_picking_out(secondary_unit, 20, 10)
+        move = picking.move_ids
+
+        # 1. Writing secondary done qty converts to primary UoM and updates move lines
+        move.write({"secondary_uom_qty_done": 30.0})
+        self.assertEqual(move.quantity, 15.0)
+        self.assertEqual(sum(move.move_line_ids.mapped("quantity")), 15.0)
+
+        # 2. Primary quantity takes precedence when both are written together
+        move.write({"quantity": 25.0, "secondary_uom_qty_done": 10.0})
+        self.assertEqual(move.quantity, 25.0)
+        self.assertEqual(move.secondary_uom_qty_done, 50.0)
+
+        # 3. Non-dependent units must not update primary quantity from the move header
+        secondary_unit.dependency_type = "secondary_priority"
+        move.write({"secondary_uom_qty_done": 80.0})
+        self.assertEqual(
+            move.quantity,
+            25.0,
+            "Count-preserving units must not derive primary quantity from move header",
+        )
+
+    def test_stock_move_secondary_uom_qty_done_onchange_and_rounding(self):
+        """Test symmetrical onchanges and ensure non-integer conversion factors
+        do not trigger a cascading rounding loop."""
+        product = self.product_template.product_variant_ids[0]
+        secondary_unit = product.product_tmpl_id.secondary_uom_ids[0]
+        # Use a non-integer factor to test rounding stability (e.g. 8.74)
+        secondary_unit.write({"factor": 8.74, "dependency_type": "dependent"})
+        picking = self._create_confirmed_picking_out(secondary_unit, 1, 8.74)
+        move = picking.move_ids
+
+        # Onchange: secondary -> primary
+        move.secondary_uom_qty_done = 3.0
+        move._onchange_secondary_uom_qty_done()
+        self.assertAlmostEqual(move.quantity, 26.22, places=2)
+
+        # Onchange: primary -> secondary (avoiding ping-pong loop)
+        move.quantity = 10.0
+        move._onchange_quantity_for_secondary()
+        # 10 / 8.74 = ~1.14
+        self.assertAlmostEqual(move.secondary_uom_qty_done, 1.14, places=2)
+        # Calling inverse onchange must not bounce 10.0 back to 9.97
+        move._onchange_secondary_uom_qty_done()
+        self.assertEqual(move.quantity, 10.0)
