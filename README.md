@@ -27,7 +27,7 @@ addon | version | maintainers | summary
 [procurement_auto_create_group](procurement_auto_create_group/) | 17.0.1.0.0 |  | Allows to configure the system to propose automatically new procurement groups during the procurement run.
 [product_route_profile](product_route_profile/) | 17.0.1.0.0 | <a href='https://github.com/Kev-Roche'><img src='https://github.com/Kev-Roche.png' width='32' height='32' style='border-radius:50%;' alt='Kev-Roche'/></a> | Add Route profile concept on product
 [scrap_reason_code](scrap_reason_code/) | 17.0.1.0.1 | <a href='https://github.com/bodedra'><img src='https://github.com/bodedra.png' width='32' height='32' style='border-radius:50%;' alt='bodedra'/></a> | Reason code for scrapping
-[stock_account_change_qty_reason](stock_account_change_qty_reason/) | 17.0.1.0.0 |  | Stock Account Change Quantity Reason
+[stock_account_change_qty_reason](stock_account_change_qty_reason/) | 17.0.1.0.1 |  | Stock Account Change Quantity Reason
 [stock_archive_constraint](stock_archive_constraint/) | 17.0.1.0.0 | <a href='https://github.com/victoralmau'><img src='https://github.com/victoralmau.png' width='32' height='32' style='border-radius:50%;' alt='victoralmau'/></a> | Stock archive constraint
 [stock_change_qty_reason](stock_change_qty_reason/) | 17.0.1.0.0 |  | Stock Quantity Change Reason
 [stock_demand_estimate](stock_demand_estimate/) | 17.0.1.2.0 |  | Allows to create demand estimates.

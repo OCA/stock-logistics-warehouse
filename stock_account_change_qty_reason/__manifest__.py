@@ -7,7 +7,7 @@
     "author": "ForgeFlow, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "category": "Warehouse Management",
-    "version": "17.0.1.0.0",
+    "version": "17.0.1.0.1",
     "license": "AGPL-3",
     "depends": ["stock_account", "stock_change_qty_reason"],
     "data": ["views/stock_quant_reason_view.xml", "views/stock_move_line_view.xml"],
