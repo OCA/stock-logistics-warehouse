@@ -1,0 +1,71 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_vlm_mgmt_kardex
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: es\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: stock_vlm_mgmt_kardex
+#: model:ir.model,name:stock_vlm_mgmt_kardex.model_stock_location
+msgid "Inventory Locations"
+msgstr "Ubicaciones de inventario"
+
+#. module: stock_vlm_mgmt_kardex
+#: model:ir.model.fields.selection,name:stock_vlm_mgmt_kardex.selection__stock_location__vlm_vendor__kardex
+msgid "Kardex"
+msgstr "Kardex"
+
+#. module: stock_vlm_mgmt_kardex
+#: model:ir.model.fields,field_description:stock_vlm_mgmt_kardex.field_stock_location__vlm_vendor
+msgid "Vlm Vendor"
+msgstr "Proveedor VLM"
+
+
+#. module: stock_vlm_mgmt_kardex
+#: model:ir.model.fields,field_description:stock_vlm_mgmt_kardex.field_stock_location__format_expression
+msgid "Socket Message Format"
+msgstr "Formato del mensaje del socket"
+
+#. module: stock_vlm_mgmt_kardex
+#: model:ir.model.fields,help:stock_vlm_mgmt_kardex.field_stock_location__format_expression
+msgid "Message template using placeholders such as {task_type},{task_id},{qty}. Commas are replaced with the configured separator. Available keys: task_type, task_id, address, carrier, pos_x, pos_y, qty, info1, info2, info3, info4."
+msgstr "Plantilla del mensaje con marcadores como {task_type},{task_id},{qty}. Las comas se sustituyen por el separador configurado. Claves disponibles: task_type, task_id, address, carrier, pos_x, pos_y, qty, info1, info2, info3, info4."
+
+#. module: stock_vlm_mgmt_kardex
+#: model:ir.model.fields,field_description:stock_vlm_mgmt_kardex.field_stock_location__separator
+msgid "Separator"
+msgstr "Separador"
+
+#. module: stock_vlm_mgmt_kardex
+#: model:ir.model.fields,help:stock_vlm_mgmt_kardex.field_stock_location__separator
+msgid "Field separator used in socket requests and responses."
+msgstr "Separador de campos utilizado en las solicitudes y respuestas del socket."
+
+#. module: stock_vlm_mgmt_kardex
+#: model:ir.model.fields,field_description:stock_vlm_mgmt_kardex.field_stock_location__format
+msgid "Socket Format"
+msgstr "Formato del socket"
+
+#. module: stock_vlm_mgmt_kardex
+#: model:ir.model.fields,help:stock_vlm_mgmt_kardex.field_stock_location__format
+msgid "Ordered response field names, separated by the configured separator. For example, with a semicolon separator: task_type;task_id;qty."
+msgstr "Nombres de los campos de respuesta en orden, separados por el separador configurado. Por ejemplo, con punto y coma: task_type;task_id;qty."
+
+#. module: stock_vlm_mgmt_kardex
+#: model:ir.model.fields,field_description:stock_vlm_mgmt_kardex.field_stock_location__response_code_key
+msgid "Response Code Key"
+msgstr "Clave del código de respuesta"
+
+#. module: stock_vlm_mgmt_kardex
+#: model:ir.model.fields,help:stock_vlm_mgmt_kardex.field_stock_location__response_code_key
+msgid "Key in the parsed response that contains the response code."
+msgstr "Clave de la respuesta procesada que contiene el código de respuesta."
