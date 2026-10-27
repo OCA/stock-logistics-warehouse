@@ -2,6 +2,7 @@
 #   (http://www.forgeflow.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 from datetime import datetime, timedelta
+from unittest.mock import patch
 
 from odoo import Command
 from odoo.exceptions import AccessError, ValidationError
@@ -280,6 +281,22 @@ class TestStockCycleCount(common.TransactionCase):
             self._create_stock_cycle_count_rule_periodic(self.user, "rule_1b", [2, 7])
         with self.assertRaises(AccessError):
             self.cycle_count_1.with_user(self.user).unlink()
+
+    def test_action_done_checks_zero_confirmations_with_sudo(self):
+        locations = []
+
+        def check_zero_confirmation(location_records):
+            locations.append(location_records)
+
+        with patch.object(
+            type(self.count_loc),
+            "check_zero_confirmation",
+            new=check_zero_confirmation,
+        ):
+            self.stock_move_model.with_user(self.user).browse()._action_done()
+
+        self.assertEqual(len(locations), 1)
+        self.assertTrue(locations[0].env.su)
 
     def test_rule_periodic_constrains(self):
         """Tests the constrains for the periodic rules."""
