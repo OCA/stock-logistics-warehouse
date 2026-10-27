@@ -77,13 +77,25 @@
                     </div>
                     <group name="top">
                         <group name="left">
-                            <field name="location_id">Location</field>
-                            <field name="cycle_count_rule_id" />
+                            <field
+                                name="location_id"
+                                readonly="state != 'draft'"
+                            >Location</field>
+                            <field
+                                name="cycle_count_rule_id"
+                                readonly="state != 'draft'"
+                            />
                         </group>
                         <group name="right">
-                            <field name="responsible_id">Assigned to</field>
-                            <field name="date_deadline">Deadline Date</field>
-                            <field name="company_id" />
+                            <field
+                                name="responsible_id"
+                                readonly="state not in ('draft', 'open')"
+                            >Assigned to</field>
+                            <field
+                                name="date_deadline"
+                                readonly="state != 'draft'"
+                            >Deadline Date</field>
+                            <field name="company_id" readonly="True" />
                         </group>
                     </group>
                 </sheet>

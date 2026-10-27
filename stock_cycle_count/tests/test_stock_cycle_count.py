@@ -4,6 +4,8 @@
 from datetime import datetime, timedelta
 from unittest.mock import patch
 
+from lxml import etree
+
 from odoo import Command
 from odoo.exceptions import AccessError, ValidationError
 from odoo.tests import common
@@ -681,3 +683,16 @@ class TestStockCycleCount(common.TransactionCase):
             self.cycle_count_model._fields["location_id"].domain,
             "[('company_id', '=', company_id)]",
         )
+
+    def test_cycle_count_form_readonly_by_state(self):
+        view = self.env.ref("stock_cycle_count.stock_cycle_count_form_view")
+        arch = etree.fromstring(view.arch_db.encode())
+        fields = {field.get("name"): field for field in arch.xpath(".//field")}
+
+        for field_name in ("location_id", "cycle_count_rule_id", "date_deadline"):
+            self.assertEqual(fields[field_name].get("readonly"), "state != 'draft'")
+        self.assertEqual(
+            fields["responsible_id"].get("readonly"),
+            "state not in ('draft', 'open')",
+        )
+        self.assertEqual(fields["company_id"].get("readonly"), "True")
