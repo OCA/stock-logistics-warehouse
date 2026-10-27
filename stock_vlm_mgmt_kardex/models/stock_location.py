@@ -1,4 +1,5 @@
 # Copyright 2023 Tecnativa - David Vidal
+# Copyright 2026 Tecnativa - Adasat Torres
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from odoo import fields, models
 
@@ -13,6 +14,7 @@ class StockLocation(models.Model):
             ("kardex", "Kardex"),
         ],
     )
+    format_expression = fields.Char()
 
     def _kardex_vlm_connector(self) -> KardexRequest:
         """Wildcarded method to return our vendor specific connector"""
@@ -21,6 +23,8 @@ class StockLocation(models.Model):
     def send_vlm_request(self, data, **options):
         """The tray call in Kardex doesn't return anything, so we can release the
         thread immediately"""
-        if self.vlm_vendor == "kardex" and self.env.context.get("vlm_tray_call"):
-            options["ignore_response"] = True
+        if self.vlm_vendor == "kardex":
+            options["format_expression"] = self.format_expression
+            if self.env.context.get("vlm_tray_call"):
+                options["ignore_response"] = True
         return super().send_vlm_request(data, **options)

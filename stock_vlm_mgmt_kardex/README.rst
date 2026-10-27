@@ -1,7 +1,3 @@
-.. image:: https://odoo-community.org/readme-banner-image
-   :target: https://odoo-community.org/get-involved?utm_source=readme
-   :alt: Odoo Community Association
-
 ======================================
 Kardex integration with stock_vlm_mgmt
 ======================================
@@ -17,7 +13,7 @@ Kardex integration with stock_vlm_mgmt
 .. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
     :alt: Beta
-.. |badge2| image:: https://img.shields.io/badge/license-AGPL--3-blue.png
+.. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fstock--logistics--warehouse-lightgray.png?logo=github
@@ -32,7 +28,28 @@ Kardex integration with stock_vlm_mgmt
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-Integration with Kardex VLMs
+This module extends ``stock_vlm_mgmt`` to communicate with Kardex
+Vertical Lift Modules (VLMs) over a TCP socket connection. It supports
+put, get, count and tray release operations from Odoo.
+
+Each Kardex location provides a format expression to build the outgoing
+message. The expression is evaluated with Odoo's ``safe_eval`` and can
+use Python f-strings to insert values from the request's ``data``
+dictionary, including the task identifier, machine address, carrier,
+coordinates, quantity and additional information fields. Operation types
+are converted to Kardex codes and quantities to integers before
+evaluating the expression.
+
+The expression must return the complete message, including its
+terminator. The connector currently expects the standard eleven-field,
+semicolon-separated layout when extracting the outgoing task identifier
+and parsing responses. Customizing the outgoing expression does not
+change the response parser.
+
+When a response is expected, the connector matches it to the task
+identifier and reports the machine result and confirmed quantity to
+Odoo. Tray calls send the command without waiting for operator
+confirmation at the machine.
 
 **Table of contents**
 
@@ -63,6 +80,7 @@ Contributors
 - `Tecnativa <https://www.tecnativa.com>`__:
 
   - David Vidal
+  - Adasat Torres
 
 Maintainers
 -----------
