@@ -20,6 +20,7 @@ class StockCycleCount(models.Model):
         comodel_name="stock.location",
         string="Location",
         required=True,
+        domain="[('company_id', '=', company_id)]",
     )
     responsible_id = fields.Many2one(
         comodel_name="res.users",

@@ -658,3 +658,9 @@ class TestStockCycleCount(common.TransactionCase):
         self.assertTrue(
             action["domain"].endswith("('location_ids', 'in', active_ids)]")
         )
+
+    def test_cycle_count_location_domain_uses_company(self):
+        self.assertEqual(
+            self.cycle_count_model._fields["location_id"].domain,
+            "[('company_id', '=', company_id)]",
+        )
