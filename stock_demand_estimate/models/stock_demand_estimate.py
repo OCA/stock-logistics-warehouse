@@ -39,7 +39,7 @@ class StockDemandEstimate(models.Model):
         required=True,
         check_company=True,
     )
-    product_uom_qty = fields.Float(string="Quantity", digits="Product Unit of Measure")
+    product_uom_qty = fields.Float(string="Quantity", digits="Product Unit")
     product_qty = fields.Float(
         string="Quantity (Product UoM)",
         compute="_compute_product_quantity",
