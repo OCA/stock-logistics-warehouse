@@ -21,8 +21,8 @@ class VlmOperationTask(models.Model):
     tray_id = fields.Many2one(comodel_name="stock.location.vlm.tray")
     tray_type_id = fields.Many2one(related="tray_id.tray_type_id")
     splitted_vlm_task_id = fields.Many2one(comodel_name="stock.vlm.task")
-    quantity_pending = fields.Float(digits="Product Unit of Measure")
-    quantity_done = fields.Float(digits="Product Unit of Measure")
+    quantity_pending = fields.Float(digits="Product Unit")
+    quantity_done = fields.Float(digits="Product Unit")
     reference = fields.Char(default="")
     state = fields.Selection(
         selection=[
