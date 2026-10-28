@@ -6,139 +6,141 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2026-10-28 12:46+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: stock_inventory_location_state
 #: model_terms:ir.ui.view,arch_db:stock_inventory_location_state.view_inventory_group_form
 msgid "<span class=\"o_stat_text\">Locations</span>"
-msgstr ""
+msgstr "<span class=\"o_stat_text\">Ubicazioni</span>"
 
 #. module: stock_inventory_location_state
 #: model:ir.model.fields,field_description:stock_inventory_location_state.field_stock_inventory_location__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Creato da"
 
 #. module: stock_inventory_location_state
 #: model:ir.model.fields,field_description:stock_inventory_location_state.field_stock_inventory_location__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Creato il"
 
 #. module: stock_inventory_location_state
 #: model:ir.model.fields,field_description:stock_inventory_location_state.field_stock_inventory_location__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nome da visualizzare"
 
 #. module: stock_inventory_location_state
 #: model:ir.model.fields.selection,name:stock_inventory_location_state.selection__stock_inventory_location__state__done
 #: model_terms:ir.ui.view,arch_db:stock_inventory_location_state.view_stock_inventory_location_search
 #: model_terms:ir.ui.view,arch_db:stock_inventory_location_state.view_stock_inventory_location_tree
 msgid "Done"
-msgstr ""
+msgstr "Eseguito"
 
 #. module: stock_inventory_location_state
 #: model:ir.model.fields,field_description:stock_inventory_location_state.field_stock_inventory_location__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: stock_inventory_location_state
 #: model:ir.model.fields,field_description:stock_inventory_location_state.field_stock_inventory_location__inventory_id
 msgid "Inventory"
-msgstr ""
+msgstr "Inventario"
 
 #. module: stock_inventory_location_state
 #: model:ir.model,name:stock_inventory_location_state.model_stock_inventory
 msgid "Inventory Adjustment Group"
-msgstr ""
+msgstr "Gruppo rettifiche d'inventario"
 
 #. module: stock_inventory_location_state
 #: model_terms:ir.ui.view,arch_db:stock_inventory_location_state.view_stock_inventory_location_tree
 msgid "Inventory Lines"
-msgstr ""
+msgstr "Righe magazzino"
 
 #. module: stock_inventory_location_state
 #. odoo-python
 #: code:addons/stock_inventory_location_state/models/stock_inventory.py:0
 msgid "Inventory Locations"
-msgstr ""
+msgstr "Ubicazioni di inventario"
 
 #. module: stock_inventory_location_state
 #: model:ir.model.constraint,message:stock_inventory_location_state.constraint_stock_inventory_location_inventory_location_unique
 msgid "Inventory location must be unique per inventory."
-msgstr ""
+msgstr "Le ubicazioni di inventario devono essere univoche nell'inventario."
 
 #. module: stock_inventory_location_state
 #: model:ir.model.fields,field_description:stock_inventory_location_state.field_stock_inventory_location__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Ultimo aggiornamento di"
 
 #. module: stock_inventory_location_state
 #: model:ir.model.fields,field_description:stock_inventory_location_state.field_stock_inventory_location__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Ultimo aggiornamento il"
 
 #. module: stock_inventory_location_state
 #: model:ir.model.fields,field_description:stock_inventory_location_state.field_stock_inventory_location__location_id
 msgid "Location"
-msgstr ""
+msgstr "Ubicazione"
 
 #. module: stock_inventory_location_state
 #: model:ir.model.fields,field_description:stock_inventory_location_state.field_stock_inventory__done_location_count
 msgid "Number of Done Sub-Locations"
-msgstr ""
+msgstr "Numero di sotto-ubicazioni completate"
 
 #. module: stock_inventory_location_state
 #: model:ir.model.fields,field_description:stock_inventory_location_state.field_stock_inventory__remaining_location_count
 msgid "Number of Remaining Sub-Locations"
-msgstr ""
+msgstr "Numero di sotto-ubicazioni residue"
 
 #. module: stock_inventory_location_state
 #: model:ir.model.fields,field_description:stock_inventory_location_state.field_stock_inventory__location_count
 msgid "Number of Sub-Locations"
-msgstr ""
+msgstr "Numero di sotto-ubicazioni"
 
 #. module: stock_inventory_location_state
 #: model:ir.model.fields.selection,name:stock_inventory_location_state.selection__stock_inventory_location__state__pending
 #: model_terms:ir.ui.view,arch_db:stock_inventory_location_state.view_stock_inventory_location_search
 msgid "Pending"
-msgstr ""
+msgstr "In sospeso"
 
 #. module: stock_inventory_location_state
 #: model_terms:ir.ui.view,arch_db:stock_inventory_location_state.view_stock_inventory_location_tree
 msgid "Re-open"
-msgstr ""
+msgstr "Riapri"
 
 #. module: stock_inventory_location_state
 #: model_terms:ir.ui.view,arch_db:stock_inventory_location_state.view_stock_inventory_location_tree
 msgid "Start"
-msgstr ""
+msgstr "Avvia"
 
 #. module: stock_inventory_location_state
 #: model:ir.model.fields.selection,name:stock_inventory_location_state.selection__stock_inventory_location__state__started
 #: model_terms:ir.ui.view,arch_db:stock_inventory_location_state.view_stock_inventory_location_search
 msgid "Started"
-msgstr ""
+msgstr "Iniziato"
 
 #. module: stock_inventory_location_state
 #: model:ir.model.fields,field_description:stock_inventory_location_state.field_stock_inventory_location__state
 #: model_terms:ir.ui.view,arch_db:stock_inventory_location_state.view_stock_inventory_location_search
 msgid "State"
-msgstr ""
+msgstr "Stato"
 
 #. module: stock_inventory_location_state
 #: model:ir.model,name:stock_inventory_location_state.model_stock_inventory_location
 msgid "Stock Inventory Location"
-msgstr ""
+msgstr "Ubicazioni inventario magazzino"
 
 #. module: stock_inventory_location_state
 #: model:ir.model.fields,field_description:stock_inventory_location_state.field_stock_inventory__sub_location_ids
 msgid "Sub-Locations"
-msgstr ""
+msgstr "Sotto-ubicazione"
 
 #. module: stock_inventory_location_state
 #. odoo-python
@@ -148,18 +150,22 @@ msgid ""
 "%(locations)s\n"
 "You must finalize the corresponding sub-locations."
 msgstr ""
+"Le seguenti ubicazioni non sono ancora state inventariate:\n"
+"%(locations)s\n"
+"È necessario completare le relative sottoubicazioni."
 
 #. module: stock_inventory_location_state
 #. odoo-python
 #: code:addons/stock_inventory_location_state/models/stock_inventory_location.py:0
 msgid "Unable to re-open: inventory %(name)s has been validated."
-msgstr ""
+msgstr "Impossibile riaprire: l'inventario %(name)s è stato convalidato."
 
 #. module: stock_inventory_location_state
 #. odoo-python
 #: code:addons/stock_inventory_location_state/models/stock_inventory_location.py:0
 msgid "Unable to start inventory of location %(name)s: it isn't pending."
 msgstr ""
+"Impossibile avviare l'inventario della posizione %(name)s: non è in attesa."
 
 #. module: stock_inventory_location_state
 #. odoo-python
@@ -167,3 +173,5 @@ msgstr ""
 msgid ""
 "Unable to validate inventory of location %(name)s: it hasn't been started."
 msgstr ""
+"Impossibile convalidare l'inventario della sede %(name)s: non è stato "
+"avviato."
