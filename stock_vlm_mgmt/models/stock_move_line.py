@@ -13,7 +13,7 @@ class StockMoveLine(models.Model):
     vlm_pending_quantity = fields.Float(
         help="Quantity pending on VLM Operations",
         default=0.0,
-        digits="Product Unit of Measure",
+        digits="Product Unit",
         copy=False,
         store=True,
         readonly=False,
