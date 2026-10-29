@@ -14,7 +14,11 @@
    detail form when *Detailed Operations* is enabled), the
    *Secondary Qty* and its unit are editable columns/fields (needs the
    "Units of Measure" feature enabled, `uom.group_uom`).
-2. What happens when the secondary quantity is entered depends on the
+2. On the transfer's main operations list (`stock.move`) and in the move
+   header, the *Done Secondary Qty* (`secondary_uom_qty_done`) can be edited
+   directly for `dependent` secondary units to set the moved quantity without
+   manually adjusting move lines.
+3. What happens when the secondary quantity is entered depends on the
    product's secondary unit `dependency_type`:
    - `dependent`: entering either quantity recomputes the other
      through the conversion factor.
