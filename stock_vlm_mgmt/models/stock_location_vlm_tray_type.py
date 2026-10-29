@@ -1,7 +1,8 @@
 # Copyright 2019 Camptocamp SA
 # Copyright 2024 Tecnativa - David Vidal
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-from odoo import api, fields, models
+from odoo import _, api, fields, models
+from odoo.exceptions import ValidationError
 
 
 class StockLocationVlmTrayType(models.Model):
@@ -12,8 +13,8 @@ class StockLocationVlmTrayType(models.Model):
     active = fields.Boolean(default=True)
     name = fields.Char(required=True)
     code = fields.Char(required=True)
-    rows = fields.Integer(required=True)
-    cols = fields.Integer(required=True)
+    rows = fields.Integer(required=True, default=1)
+    cols = fields.Integer(required=True, default=1)
     width = fields.Integer(help="Width of the tray in mm")
     depth = fields.Integer(help="Depth of the tray in mm")
     height = fields.Integer(help="Height of the tray in mm")
@@ -51,3 +52,10 @@ class StockLocationVlmTrayType(models.Model):
 
     def _generate_cells_matrix(self, default_state=0):
         return [[default_state] * self.cols for __ in range(self.rows)]
+
+    @api.constrains("rows", "cols")
+    def _check_negative_rows_cols(self):
+        for record in self:
+            if record.rows > 0 and record.cols > 0:
+                continue
+            raise ValidationError(_("Rows and columns must be greater than zero."))
