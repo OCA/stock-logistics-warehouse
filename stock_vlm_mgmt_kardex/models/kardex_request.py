@@ -1,7 +1,10 @@
 # Copyright 2022 Tecnativa - David Vidal
+# Copyright 2026 Tecnativa - Adasat Torres
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 import logging
 import socket
+
+from odoo.tools.safe_eval import safe_eval
 
 _logger = logging.getLogger(__name__)
 
@@ -68,6 +71,7 @@ class KardexRequest:
         self.port = int(port)
         self.timeout = timeout
         self.ignore_response = options.get("ignore_response")
+        self.format_expression = options.get("format_expression")
 
     def parse_data(self, data):
         """Transforms csv single string into a dictionary that we can work with.
@@ -93,8 +97,8 @@ class KardexRequest:
         """
         # No support for floats :S
         data["qty"] = int(float(data["qty"]))
-        values = [str(v) for v in data.values()]
-        return f"{';'.join(values)}\r\n"
+        message = safe_eval(self.format_expression, {"data": data})
+        return message
 
     def request_operation(self, data):
         """
