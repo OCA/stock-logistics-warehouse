@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,14 +18,6 @@ msgstr ""
 #: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:0
 #, python-format
 msgid "(No description provided.)"
-msgstr ""
-
-#. module: stock_cycle_count
-#: model_terms:ir.ui.view,arch_db:stock_cycle_count.res_config_settings_view_form_cycle_adjustment
-msgid ""
-"<span class=\"fa fa-lg fa-building-o\" title=\"Values set here are company-"
-"specific.\" aria-label=\"Values set here are company-specific.\" "
-"groups=\"base.group_multi_company\" role=\"img\"/>"
 msgstr ""
 
 #. module: stock_cycle_count
@@ -229,7 +221,6 @@ msgstr ""
 
 #. module: stock_cycle_count
 #: model:ir.actions.server,name:stock_cycle_count.ir_cron_compute_cycle_count_action_ir_actions_server
-#: model:ir.cron,cron_name:stock_cycle_count.ir_cron_compute_cycle_count_action
 msgid "Cycle Count Planner Computation"
 msgstr ""
 
@@ -511,12 +502,6 @@ msgid "Is Follower"
 msgstr ""
 
 #. module: stock_cycle_count
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count____last_update
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule____last_update
-msgid "Last Modified on"
-msgstr ""
-
-#. module: stock_cycle_count
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__write_uid
 #: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count_rule__write_uid
 msgid "Last Updated by"
@@ -539,11 +524,6 @@ msgstr ""
 #. module: stock_cycle_count
 #: model:ir.model,name:stock_cycle_count.model_report_stock_cycle_count_stock_location_accuracy
 msgid "Location Accuracy Report"
-msgstr ""
-
-#. module: stock_cycle_count
-#: model:ir.model.fields,field_description:stock_cycle_count.field_stock_cycle_count__message_main_attachment_id
-msgid "Main Attachment"
 msgstr ""
 
 #. module: stock_cycle_count
@@ -698,7 +678,7 @@ msgstr ""
 
 #. module: stock_cycle_count
 #: model_terms:ir.ui.view,arch_db:stock_cycle_count.res_config_settings_view_form_cycle_adjustment
-msgid "Sets default counted quanities in Inventory Adjustments"
+msgid "Sets default counted quanities in Inventory Adjustments."
 msgstr ""
 
 #. module: stock_cycle_count
