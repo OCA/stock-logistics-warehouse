@@ -19,7 +19,7 @@ class StockLocation(models.Model):
     def write(self, values):
         res = super().write(values)
 
-        if "block_stock_entrance" in values and values["block_stock_entrance"]:
+        if values.get("block_stock_entrance"):
             # Unlink zero quants before checking
             # if there are quants on the location
             self.env["stock.quant"]._unlink_zero_quants()
