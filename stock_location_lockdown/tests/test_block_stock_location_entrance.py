@@ -22,7 +22,6 @@ class TestStockLocationLockdown(TransactionCase):
             {
                 "name": "Test Lockdown Product",
                 "is_storable": True,
-                "tracking": "none",
             }
         )
 
@@ -48,14 +47,14 @@ class TestStockLocationLockdown(TransactionCase):
             "product_uom_qty": self.product.qty_available + 1,
             "quantity": self.product.qty_available + 1,
             "picked": True,
-            "product_uom": self.product.uom_id.id,
+            "uom_id": self.product.uom_id.id,
             "move_line_ids": [
                 (
                     0,
                     0,
                     {
                         "product_id": self.product.id,
-                        "product_uom_id": self.product.uom_id.id,
+                        "uom_id": self.product.uom_id.id,
                         "quantity": self.product.qty_available + 1,
                         "location_id": self.supplier_location.id,
                         "location_dest_id": self.new_stock_location.id,
@@ -80,14 +79,14 @@ class TestStockLocationLockdown(TransactionCase):
             "product_uom_qty": self.product.qty_available + 1,
             "quantity": self.product.qty_available + 1,
             "picked": True,
-            "product_uom": self.product.uom_id.id,
+            "uom_id": self.product.uom_id.id,
             "move_line_ids": [
                 (
                     0,
                     0,
                     {
                         "product_id": self.product.id,
-                        "product_uom_id": self.product.uom_id.id,
+                        "uom_id": self.product.uom_id.id,
                         "quantity": self.product.qty_available + 1,
                         "location_id": self.new_stock_location.id,
                         "location_dest_id": self.customer_location.id,
