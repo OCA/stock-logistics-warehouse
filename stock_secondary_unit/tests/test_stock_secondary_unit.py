@@ -755,3 +755,32 @@ class TestProductSecondaryUnit(BaseCommon):
         picking.action_confirm()
         self.assertEqual(len(picking.move_ids), 1)
         self.assertEqual(picking.move_ids.secondary_uom_qty, 2)
+
+    def test_pick_from_quant(self):
+        """Picking a quant in the detailed operations fills the quantity"""
+        product = self.env["product.product"].create(
+            {"name": "Product without secondary unit", "is_storable": True}
+        )
+        quant = self.env["stock.quant"].create(
+            {
+                "product_id": product.id,
+                "location_id": self.location_stock.id,
+                "quantity": 10.0,
+            }
+        )
+        move = self.env["stock.move"].create(
+            {
+                "name": product.name,
+                "product_id": product.id,
+                "product_uom": product.uom_id.id,
+                "product_uom_qty": 4.0,
+                "location_id": self.location_stock.id,
+                "location_dest_id": self.env.ref("stock.stock_location_customers").id,
+            }
+        )
+        move._action_confirm()
+        move_form = Form(move, view="stock.view_stock_move_operations")
+        with move_form.move_line_ids.new() as move_line:
+            move_line.quant_id = quant
+        move = move_form.save()
+        self.assertEqual(move.move_line_ids.quantity, 4.0)
