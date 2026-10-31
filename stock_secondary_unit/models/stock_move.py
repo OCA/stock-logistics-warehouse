@@ -258,12 +258,15 @@ class StockMoveLine(models.Model):
         # stock.move (product_uom_qty) above. "independent" itself already
         # gets this protection from the mixin's own helper, no need to
         # special-case it here too.
+        # Core fills the quantity of a line picked from a quant
+        res = super()._compute_quantity()
         already_measured = self.filtered(
             lambda line: line.secondary_uom_id
             and line.secondary_uom_id.dependency_type == "secondary_priority"
             and line.quantity
         )
         (self - already_measured)._compute_helper_target_field_qty()
+        return res
 
     def _get_aggregated_product_quantities(self, **kwargs):
         aggregated_move_lines = super()._get_aggregated_product_quantities(**kwargs)
