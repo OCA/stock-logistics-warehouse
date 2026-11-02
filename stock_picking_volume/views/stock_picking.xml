@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!-- Copyright 2023 ACSONE SA/NV
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-    <record model="ir.ui.view" id="stock_picking_form_view">
+    <record id="stock_picking_form_view" model="ir.ui.view">
         <field name="name">stock.picking.form (in stock_picking_volume)</field>
         <field name="model">stock.picking</field>
         <field name="inherit_id" ref="stock.view_picking_form" />
@@ -25,7 +25,7 @@
         </field>
     </record>
 
-    <record model="ir.ui.view" id="stock_picking_tree_view">
+    <record id="stock_picking_tree_view" model="ir.ui.view">
         <field name="name">stock.picking.tree (in stock_picking_volume)</field>
         <field name="model">stock.picking</field>
         <field name="inherit_id" ref="stock.vpicktree" />

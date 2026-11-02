@@ -166,7 +166,7 @@ class TestStockPickingVolume(TransactionCase):
                         {
                             "display_name": product2.name,
                             "product_id": product2.id,
-                            "product_uom": product2.uom_id.id,
+                            "uom_id": product2.uom_id.id,
                             "product_uom_qty": 5.0,
                             "location_id": self.loc_stock.id,
                             "location_dest_id": self.loc_customer.id,
@@ -190,3 +190,50 @@ class TestStockPickingVolume(TransactionCase):
         self.assertEqual(self.product._get_volume_for_qty(5, from_uom), 9000)
         empty_product = self.env["product.product"].browse()
         self.assertEqual(empty_product._get_volume_for_qty(5), 0.0)
+
+    def test_volume_demand_without_reservation(self):
+        self.product.volume = 0.15
+        move = self.picking.move_ids
+        move.product_uom_qty = 10
+        self.assertAlmostEqual(move.volume, 1.5)
+        self.assertAlmostEqual(self.picking.volume, 1.5)
+        self.picking.action_confirm()
+        self.assertFalse(move.quantity)
+        self.assertAlmostEqual(self.picking.volume, 1.5)
+        move.product_uom_qty = 6
+        self.assertAlmostEqual(move.volume, 0.9)
+        self.assertAlmostEqual(self.picking.volume, 0.9)
+
+    def test_volume_reservation_changes(self):
+        self.product.volume = 0.15
+        move = self.picking.move_ids
+        move.product_uom_qty = 10
+        self._set_product_qty(self.product, 10)
+        self.picking.action_confirm()
+        self.picking.action_assign()
+        self.assertAlmostEqual(move.volume, 1.5)
+        self.assertAlmostEqual(self.picking.volume, 1.5)
+        for quantity in (4, 6, 2):
+            move.quantity = quantity
+            self.assertAlmostEqual(move.volume, quantity * 0.15)
+            self.assertAlmostEqual(self.picking.volume, quantity * 0.15)
+
+    def test_volume_uom_change(self):
+        move = self.picking.move_ids
+        self.assertEqual(move.volume, 750)
+        move.uom_id = self.env.ref("uom.product_uom_dozen")
+        self.assertEqual(move.volume, 9000)
+        self.assertEqual(self.picking.volume, 9000)
+
+    def test_volume_product_changes(self):
+        move = self.picking.move_ids
+        self.assertEqual(self.picking.volume, 750)
+        self.product.volume = 2
+        self.assertEqual(move.volume, 10)
+        self.assertEqual(self.picking.volume, 10)
+        self.product.volume = 0
+        self.assertEqual(move.volume, 0)
+        self.assertEqual(self.picking.volume, 0)
+        self.product.write({"is_storable": False, "type": "service", "volume": 2})
+        self.assertEqual(move.volume, 0)
+        self.assertEqual(self.picking.volume, 0)

@@ -22,13 +22,20 @@ class StockMove(models.Model):
             return self.quantity
         return self.product_uom_qty
 
-    @api.depends("product_id", "product_uom_qty", "state", "quantity")
+    @api.depends(
+        "product_id",
+        "product_id.volume",
+        "product_uom_qty",
+        "uom_id",
+        "state",
+        "quantity",
+    )
     def _compute_volume(self):
         for move in self:
             product = move.product_id
             if product and product.type == "consu":
                 quantity = move._get_processible_quantity()
-                volume = product._get_volume_for_qty(quantity, move.product_uom)
+                volume = product._get_volume_for_qty(quantity, move.uom_id)
             else:
                 volume = 0
             if move.volume != volume:
