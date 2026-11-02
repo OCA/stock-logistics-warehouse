@@ -12,6 +12,14 @@ class StockWarehouse(models.Model):
     calendar_id = fields.Many2one(
         comodel_name="resource.calendar", string="Working Hours", check_company=True
     )
+    calendar_compute_leaves = fields.Boolean(
+        string="Consider Global Time Off",
+        help="Take into account the Global Time Off defined in the warehouse "
+        "working hours (public holidays, plant shutdowns, ...) when planning "
+        "warehouse operations.\n"
+        "If not set, only the weekly working days are considered and those "
+        "days are planned as if the warehouse were open.",
+    )
 
     def wh_plan_days(self, date_from, delta):
         """Helper method to schedule warehouse operations based on its
@@ -37,7 +45,9 @@ class StockWarehouse(models.Model):
             else:
                 # We force the date planned at the end of the day.
                 dt_planned = date_from.replace(hour=23)
-            date_result = self.calendar_id.plan_days(delta, dt_planned)
+            date_result = self.calendar_id.plan_days(
+                delta, dt_planned, compute_leaves=self.calendar_compute_leaves
+            )
         else:
             date_result = date_from + timedelta(days=delta)
         return date_result
