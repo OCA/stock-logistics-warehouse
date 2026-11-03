@@ -30,28 +30,41 @@ class BaseProductMerge(models.Model):
             rec.update({"product_tmpl_ids": [(6, 0, product_templates.ids)]})
         return rec
 
-    dst_product_id = fields.Many2one("product.product", string="Destination product")
+    dst_product_id = fields.Many2one(
+        comodel_name="product.product",
+        string="Destination product",
+    )
     product_ids = fields.Many2many(
-        "product.product",
-        "product_rel",
-        "product_merge_id",
-        "product_id",
+        comodel_name="product.product",
+        relation="product_merge_rel",
+        column1="product_merge_id",
+        column2="product_id",
         string="Products to merge",
     )
     ptype = fields.Selection(
-        [("product.product", "Product"), ("product.template", "Template")]
+        selection=[
+            ("product.product", "Product"),
+            ("product.template", "Template"),
+        ],
     )
     dst_product_tmpl_id = fields.Many2one(
-        "product.template", string="Destination product"
+        comodel_name="product.template",
+        string="Destination product template",
     )
     product_tmpl_ids = fields.Many2many(
-        "product.template",
-        "product_tmpl_rel",
-        "product_tmpl_merge_id",
-        "product_tmpl_id",
-        string="Products to merge",
+        comodel_name="product.template",
+        relation="product_tmpl_merge_rel",
+        column1="product_tmpl_merge_id",
+        column2="product_tmpl_id",
+        string="Product templates to merge",
     )
-    merge_method = fields.Selection([("sql", "SQL"), ("orm", "ORM")], default="sql")
+    merge_method = fields.Selection(
+        selection=[
+            ("sql", "SQL"),
+            ("orm", "ORM"),
+        ],
+        default="sql",
+    )
 
     def action_merge(self):
         if self.ptype == "product.product":
@@ -79,6 +92,10 @@ class BaseProductMerge(models.Model):
         try:
             if not products_to_merge:
                 raise UserError(_("You cannot merge product to it self."))
+            # Avoid unique constraint errors in openupgrade_merge_records.
+            self.sudo().write(
+                {"product_ids": [(5, 0, 0)], "product_tmpl_ids": [(5, 0, 0)]}
+            )
             openupgrade_merge_records.merge_records(
                 self.env,
                 model,

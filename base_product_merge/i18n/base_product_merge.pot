@@ -75,7 +75,7 @@ msgstr ""
 
 #. module: base_product_merge
 #: model:res.groups,name:base_product_merge.res_group_merge_duplicate_product
-msgid "Merge duplicate products"
+msgid "Merge duplicated products"
 msgstr ""
 
 #. module: base_product_merge
