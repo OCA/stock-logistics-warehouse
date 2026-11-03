@@ -9,6 +9,10 @@ on:
       - "17.0"
       - "17.0-ocabot-*"
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   unreleased-deps:
     runs-on: ubuntu-latest
@@ -36,19 +40,38 @@ jobs:
       matrix:
         include:
           - container: ghcr.io/oca/oca-ci/py3.10-odoo17.0:latest
+            include: "base_product_merge"
             name: test with Odoo
           - container: ghcr.io/oca/oca-ci/py3.10-ocb17.0:latest
+            include: "base_product_merge"
+            name: test with OCB
+            makepot: "true"
+          - container: ghcr.io/oca/oca-ci/py3.10-odoo17.0:latest
+            include: "stock_exception"
+            name: test with Odoo
+          - container: ghcr.io/oca/oca-ci/py3.10-ocb17.0:latest
+            include: "stock_exception"
+            name: test with OCB
+            makepot: "true"
+          - container: ghcr.io/oca/oca-ci/py3.10-odoo17.0:latest
+            exclude: "base_product_merge,stock_exception"
+            name: test with Odoo
+          - container: ghcr.io/oca/oca-ci/py3.10-ocb17.0:latest
+            exclude: "base_product_merge,stock_exception"
             name: test with OCB
             makepot: "true"
     services:
       postgres:
-        image: postgres:12.0
+        image: postgres:12
         env:
           POSTGRES_USER: odoo
           POSTGRES_PASSWORD: odoo
           POSTGRES_DB: odoo
         ports:
           - 5432:5432
+    env:
+      INCLUDE: "${{ matrix.include }}"
+      EXCLUDE: "${{ matrix.exclude }}"
     steps:
       - uses: actions/checkout@v4
         with:
@@ -63,6 +86,13 @@ jobs:
         run: oca_init_test_database
       - name: Run tests
         run: oca_run_tests
+      - name: Upload screenshots from JS tests
+        uses: actions/upload-artifact@v4
+        if: ${{ failure() }}
+        with:
+          name: Screenshots of failed JS tests - ${{ matrix.name }}${{ join(matrix.include) }}
+          path: /tmp/odoo_tests/${{ env.PGDATABASE }}
+          if-no-files-found: ignore
       - uses: codecov/codecov-action@v4
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
