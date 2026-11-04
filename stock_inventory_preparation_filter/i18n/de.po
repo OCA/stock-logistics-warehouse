@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-02-27 11:37+0000\n"
-"PO-Revision-Date: 2025-09-18 11:42+0000\n"
+"PO-Revision-Date: 2026-11-04 20:36+0000\n"
 "Last-Translator: Bastian Günther <mail@bastian-guenther.de>\n"
 "Language-Team: German (https://www.transifex.com/oca/teams/23907/de/)\n"
 "Language: de\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.10.4\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: stock_inventory_preparation_filter
 #: model:ir.model.fields,field_description:stock_inventory_preparation_filter.field_stock_inventory__product_domain
@@ -26,9 +26,8 @@ msgstr "Domain"
 
 #. module: stock_inventory_preparation_filter
 #: model:ir.model.fields.selection,name:stock_inventory_preparation_filter.selection__stock_inventory__product_selection__domain
-#, fuzzy
 msgid "Filtered Products"
-msgstr "Ausgewählte Produkte"
+msgstr "Gefilterte Produkte"
 
 #. module: stock_inventory_preparation_filter
 #: model:ir.model,name:stock_inventory_preparation_filter.model_stock_inventory
