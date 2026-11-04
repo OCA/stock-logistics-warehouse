@@ -17,6 +17,34 @@ class TestSaleStockOnHandPopup(common.SavepointCase):
         context = action_data.get("context")
         self.assertEqual(self.product_1.id, context.get("default_product_id"))
 
+    def test_move_line_action(self):
+        """
+        The action of the move line shows the quants of its product.
+        """
+        # Arrange
+        company = self.env.company
+        from_location = self.env.ref("stock.stock_location_stock")
+        to_location = self.env.ref("stock.stock_location_customers")
+        product = self.product_1
+        move_line = self.env["stock.move.line"].create(
+            {
+                "company_id": company.id,
+                "product_id": product.id,
+                "product_uom_id": product.uom_id.id,
+                "location_id": from_location.id,
+                "location_dest_id": to_location.id,
+            }
+        )
+
+        # Act
+        move_line_action = move_line.action_open_quants_show_products()
+
+        # Assert
+        self.assertEqual(
+            move_line_action,
+            move_line.product_id.action_open_quants_show_products(),
+        )
+
     def test_get_stock_quant(self):
         wiz_prod_1 = self.env["product.quant.wizard"].create(
             {

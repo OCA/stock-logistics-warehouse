@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<odoo>
+    <record id="view_picking_form" model="ir.ui.view">
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//page[@name='operations']//field[@name='move_ids_without_package']/form//field[@widget='forecast_widget']"
+                position="after"
+            >
+                <widget name="stock_on_hand_widget" width="0.1px" />
+            </xpath>
+            <xpath
+                expr="//page[@name='operations']//field[@name='move_ids_without_package']/tree//field[@widget='forecast_widget']"
+                position="after"
+            >
+                <widget name="stock_on_hand_widget" width="20px" />
+            </xpath>
+        </field>
+    </record>
+</odoo>

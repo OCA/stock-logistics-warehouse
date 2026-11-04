@@ -5,3 +5,5 @@ To use this module, you need to:
 #. Click on the icon in the line and you will
    see in the popover the '-> View Stock' button that will redirect
    the user to a 'Stock Lines' page for the specific product.
+
+The same widget can also be opened from any picking's line.
