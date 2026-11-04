@@ -155,7 +155,7 @@ class TestInventoryDiscrepancy(BaseCommon):
         with self.assertRaises(UserError):
             wiz.button_apply()
         # Apply the wizard with a stock manager will apply the adjustment
-        wiz.with_user(self.user_2).button_apply()
+        wiz.with_user(self.manager).button_apply()
         self.assertEqual(self.quant_line1.quantity, 3)
         self.assertEqual(self.quant_line2.quantity, 4.1)
 
