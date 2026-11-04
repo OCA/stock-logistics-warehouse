@@ -49,7 +49,7 @@
             <td class="text-center" name="move_line_secondary_quantity">
                 <span
                     t-esc="aggregated_lines[line]['secondary_uom_qty']"
-                    t-options="{'widget': 'float', 'decimal_precision': 'Product Unit of Measure'}"
+                    t-options="{'widget': 'float', 'decimal_precision': 'Product Unit'}"
                 />
                 <span t-esc="aggregated_lines[line]['secondary_uom_id'].display_name" />
             </td>
