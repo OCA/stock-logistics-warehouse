@@ -1,2 +1,2 @@
-- Sébastien Alix \<<sebastien.alix@camptocamp.com>\>
+- Sébastien Alix \<sebastien.alix@akretion.com>\>
 - Vincent Van Rossem \<vincent.vanrossem@camptocamp.com\>

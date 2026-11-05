@@ -1,59 +1,15 @@
 # Copyright 2025 Camptocamp SA
+# Copyright 2026  Akretion (https://www.akretion.com).
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl)
 
-from odoo import fields
 from odoo.tests import tagged
 
-from odoo.addons.base.tests.common import BaseCommon
+from .common import CommonOutPull
 
 
 @tagged("post_install", "-at_install")
-class TestDeliverySteps(BaseCommon):
-    @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
-        cls.warehouse = cls.env["stock.warehouse"].create(
-            {"name": "TEST", "code": "TEST"}
-        )
-        cls.customers_location = cls.env.ref("stock.stock_location_customers")
-        cls.product = cls.env["product.product"].create(
-            {"name": "TEST", "is_storable": True}
-        )
-        # Put some stock
-        cls.env["stock.quant"]._update_available_quantity(
-            cls.product,
-            cls.warehouse.lot_stock_id,
-            10,
-        )
-
-    def _run_procurement(self, product, qty):
-        moves_before = self.env["stock.move"].search([])
-        uom = product.uom_id
-        proc_qty, proc_uom = uom._adjust_uom_quantities(qty, uom)
-        today = fields.Date.today()
-        values = {
-            "date_planned": today,
-            "date_deadline": today,
-            "warehouse_id": self.warehouse or False,
-            "company_id": self.company,
-        }
-        procurement = self.env["stock.rule"].Procurement(
-            product,
-            proc_qty,
-            proc_uom,
-            self.customers_location,
-            product.name,
-            "PROC TEST",
-            self.company,
-            values,
-        )
-        self.env["stock.rule"].run([procurement])
-        moves_after = self.env["stock.move"].search([])
-        return moves_after - moves_before
-
-    def _validate_picking(self, picking):
-        picking.move_line_ids.write({"picked": True})
-        picking._action_done()
+class TestDeliverySteps(CommonOutPull):
+    _test_user_groups = ("stock.group_stock_manager",)
 
     def test_delivery_pick_ship_with_pull_rules(self):
         """Test delivery pull rules with pick+ship configuration."""

@@ -16,7 +16,7 @@ class StockWarehouse(models.Model):
     def get_rules_dict(self):
         # Override to adapt multi-steps delivery routing
         res = super().get_rules_dict()
-        customer_loc, supplier_loc = self._get_partner_locations()
+        customer_loc, _supplier_loc = self._get_partner_locations()
         for warehouse in self:
             if not warehouse.delivery_pull:
                 continue
