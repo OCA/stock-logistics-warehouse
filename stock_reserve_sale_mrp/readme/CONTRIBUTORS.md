@@ -1,0 +1,2 @@
+- Jaume Bernaus \<<jaume.bernaus@forgeflow.com>\>
+- Jordi Masvidal \<<jordi.masvidal@forgeflow.com>\>
