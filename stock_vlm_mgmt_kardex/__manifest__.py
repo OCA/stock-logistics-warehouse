@@ -10,5 +10,5 @@
     "license": "AGPL-3",
     "category": "Stock",
     "depends": ["stock_vlm_mgmt"],
-    "data": [],
+    "data": ["views/stock_location_views.xml"],
 }
