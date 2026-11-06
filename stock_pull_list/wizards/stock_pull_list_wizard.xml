@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" ?>
 <!-- Copyright 2020 ForgeFlow S.L.
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
@@ -116,8 +117,8 @@
     </record>
 
     <menuitem
-        name="Generate Pull List"
         id="menu_stock_pull_list_wizard"
+        name="Generate Pull List"
         action="action_stock_pull_list_wizard"
         parent="stock.menu_stock_warehouse_mgmt"
         groups="stock.group_stock_manager"

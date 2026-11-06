@@ -147,8 +147,9 @@ class PullListWizard(models.TransientModel):
         incoming_dict = {}
         for supply in incoming_moves:
             move_for_date = demand_moves.filtered(
-                lambda m, supply=supply: m.product_id == supply.product_id
-                and m.date >= supply.date
+                lambda m, supply=supply: (
+                    m.product_id == supply.product_id and m.date >= supply.date
+                )
             )
             if move_for_date:
                 date_selected = move_for_date[0].date if not force_date else force_date
