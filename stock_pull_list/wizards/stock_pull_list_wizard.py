@@ -5,7 +5,6 @@ import itertools
 
 from odoo import api, fields, models
 from odoo.exceptions import UserError
-from odoo.tools import float_compare
 
 
 class PullListWizard(models.TransientModel):
@@ -15,7 +14,7 @@ class PullListWizard(models.TransientModel):
     @api.model
     def default_get(self, fields_list):
         res = super().default_get(fields_list)
-        company = self.env.user.company_id
+        company = self.env.company
         wh = self.env["stock.warehouse"].search(
             [("company_id", "=", company.id)], limit=1
         )
@@ -28,6 +27,9 @@ class PullListWizard(models.TransientModel):
     )
     warehouse_id = fields.Many2one(
         comodel_name="stock.warehouse",
+        compute="_compute_warehouse_id",
+        store=True,
+        readonly=False,
     )
     line_ids = fields.One2many(
         comodel_name="stock.pull.list.wizard.line",
@@ -59,6 +61,16 @@ class PullListWizard(models.TransientModel):
     max_lines = fields.Integer()
     group_by_rule = fields.Boolean()
 
+    @api.depends("location_id")
+    def _compute_warehouse_id(self):
+        for wizard in self:
+            wizard.warehouse_id = wizard.location_id.warehouse_id
+
+    @api.onchange("warehouse_id")
+    def _onchange_warehouse_id(self):
+        if self.warehouse_id and self.location_id.warehouse_id != self.warehouse_id:
+            self.location_id = self.warehouse_id.lot_stock_id
+
     def _get_moves_demand_domain(self):
         self.ensure_one()
         domain = [
@@ -86,16 +98,17 @@ class PullListWizard(models.TransientModel):
         return domain
 
     @api.model
-    def _prepare_line_values(self, key, demand_qty, supply_qty):
+    def _prepare_line_values(self, key, demand_qty, supply_qty, qty_assigned=None):
         product, location, date = key
         rule = self._get_stock_rule_id(product, location)
-        global qty_assigned
-        prev = qty_assigned.setdefault(product, 0.0)
+        if qty_assigned is None:
+            qty_assigned = {}
+        prev = qty_assigned.setdefault((product, location), 0.0)
         qty_available = self._get_available_qty(product, location) - prev
         need_without_stock = max(demand_qty - supply_qty, 0.0)
         qty_assigned_now = min(qty_available, need_without_stock)
         qty_needed = max(demand_qty - qty_available - supply_qty, 0.0)
-        qty_assigned[product] = prev + qty_assigned_now
+        qty_assigned[(product, location)] = prev + qty_assigned_now
         return {
             "product_id": product.id if product else False,
             "location_id": location.id if location else False,
@@ -114,11 +127,14 @@ class PullListWizard(models.TransientModel):
             return product_l.free_qty
         return product_l.qty_available
 
+    def _get_company(self):
+        return self.location_id.company_id or self.env.company
+
     @api.model
     def _get_stock_rule_id(self, product_id, location_id):
         values = {
             "warehouse_id": self.warehouse_id,
-            "company_id": self.env.user.company_id,
+            "company_id": self._get_company(),
         }
         stock_rule_id = self.env["stock.rule"]._get_rule(
             product_id, location_id, values
@@ -140,7 +156,7 @@ class PullListWizard(models.TransientModel):
             )
             prev = demand_dict.setdefault(key, 0.0)
             # TODO: when exclude_reserved is selected, handle partially avail.
-            demand_dict[key] = prev + demand.product_uom_qty
+            demand_dict[key] = prev + demand.product_qty
 
         domain = self._get_moves_incoming_domain()
         incoming_moves = self.env["stock.move"].search(domain, order="date asc")
@@ -162,15 +178,16 @@ class PullListWizard(models.TransientModel):
                 fields.Date.to_date(date_selected),
             )
             prev = incoming_dict.setdefault(key, 0.0)
-            incoming_dict[key] = prev + supply.product_uom_qty
+            incoming_dict[key] = prev + supply.product_qty
 
         lines = []
-        global qty_assigned
         qty_assigned = {}
         for key, demand_qty in demand_dict.items():
             supply_qty = incoming_dict.get(key, 0.0)
-            line_data = self._prepare_line_values(key, demand_qty, supply_qty)
-            if line_data["needed_qty"] > 0.0:
+            line_data = self._prepare_line_values(
+                key, demand_qty, supply_qty, qty_assigned=qty_assigned
+            )
+            if key[0].uom_id.compare(line_data["needed_qty"], 0.0) > 0:
                 lines.append((0, 0, line_data))
         self.update({"line_ids": lines})
         res = self._act_window_pull_list_step_2()
@@ -215,7 +232,7 @@ class PullListWizard(models.TransientModel):
         values = {
             "date_planned": date,
             "warehouse_id": self.warehouse_id,
-            "company_id": self.env.user.company_id,
+            "company_id": self._get_company(),
             "reference_ids": stock_ref,
         }
         return values
@@ -267,7 +284,7 @@ class PullListWizard(models.TransientModel):
             for line in lines.filtered("selected"):
                 n += 1
                 if 0 < self.max_lines < n:
-                    n = 0
+                    n = 1
                     stock_ref = sr_obj.create(self._prepare_stock_ref_values())
                     stock_references.append(stock_ref.id)
 
@@ -280,7 +297,7 @@ class PullListWizard(models.TransientModel):
                         line.location_id,
                         f"Pull List {self.id}",
                         f"Pull List {self.id}",
-                        self.env.user.company_id,
+                        self._get_company(),
                         values,
                     )
                 )
@@ -330,4 +347,4 @@ class PullListWizardLine(models.TransientModel):
         qty_avail = self.wizard_id._get_available_qty(
             self.product_id, self.stock_rule_id.location_src_id
         )
-        return float_compare(qty_avail, self.needed_qty, precision_digits=2) > 0
+        return self.product_id.uom_id.compare(qty_avail, self.needed_qty) >= 0

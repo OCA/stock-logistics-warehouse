@@ -57,7 +57,7 @@ class TestPullListCommon(TransactionCase):
         cls.create_picking_out_a(cls.date_3, 70)
 
     @classmethod
-    def create_picking_out_a(cls, date_move, qty):
+    def create_picking_out_a(cls, date_move, qty, uom=None):
         picking = cls.picking_obj.create(
             {
                 "picking_type_id": cls.env.ref("stock.picking_type_out").id,
@@ -69,7 +69,7 @@ class TestPullListCommon(TransactionCase):
                         {
                             "product_id": cls.product_a.id,
                             "date": date_move,
-                            "product_uom": cls.product_a.uom_id.id,
+                            "uom_id": (uom or cls.product_a.uom_id).id,
                             "product_uom_qty": qty,
                             "location_id": cls.warehouse.lot_stock_id.id,
                             "location_dest_id": cls.customer_loc.id,

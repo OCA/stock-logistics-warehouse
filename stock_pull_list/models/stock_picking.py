@@ -24,7 +24,10 @@ class StockPicking(models.Model):
                     )
                 )
         pull_wizard = self.env["stock.pull.list.wizard"].create(
-            {"location_id": source_location.id}
+            {
+                "location_id": source_location.id,
+                "warehouse_id": source_location.warehouse_id.id,
+            }
         )
         res = pull_wizard.action_prepare()
         return res

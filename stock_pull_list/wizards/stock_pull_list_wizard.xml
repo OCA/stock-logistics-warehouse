@@ -83,7 +83,7 @@
                             name="action_update_selected"
                             string="Apply Filter"
                             type="object"
-                            icon="fa-cogs"
+                            icon="settings_applications"
                         />
                     </group>
                 </group>
