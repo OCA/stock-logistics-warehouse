@@ -1,0 +1,3 @@
+id,name,model_id,group_id/id,operation,domain
+access_wiz_stock_pull_list_user,access_wiz_stock_pull_list_user,stock.pull.list.wizard,stock.group_stock_user,crud,
+access_wiz_stock_pull_list_line_user,access_wiz_stock_pull_list_line_user,stock.pull.list.wizard.line,stock.group_stock_user,crud,
