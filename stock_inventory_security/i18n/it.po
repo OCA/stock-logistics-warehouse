@@ -6,40 +6,42 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2026-11-09 15:46+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: stock_inventory_security
 #: model:ir.model.fields,field_description:stock_inventory_security.field_stock_quant__inventory_quantity_auto_apply
 msgid "Inventoried Quantity"
-msgstr ""
+msgstr "Quantità inventariata"
 
 #. module: stock_inventory_security
 #: model:ir.model,name:stock_inventory_security.model_stock_location
 msgid "Inventory Locations"
-msgstr ""
+msgstr "Ubicazioni di inventario"
 
 #. module: stock_inventory_security
 #: model:ir.model,name:stock_inventory_security.model_stock_lot
 msgid "Lot/Serial"
-msgstr ""
+msgstr "Lotto/seriale"
 
 #. module: stock_inventory_security
 #: model:ir.model,name:stock_inventory_security.model_product_product
 msgid "Product Variant"
-msgstr ""
+msgstr "Variante prodotto"
 
 #. module: stock_inventory_security
 #: model:ir.model,name:stock_inventory_security.model_stock_quant
 msgid "Quants"
-msgstr ""
+msgstr "Quanti"
 
 #. module: stock_inventory_security
 #: model:res.groups,name:stock_inventory_security.group_inventory_adjustment
 msgid "Stock: Inventory Adjustments"
-msgstr ""
+msgstr "Giacenza: rettifiche di inventario"
