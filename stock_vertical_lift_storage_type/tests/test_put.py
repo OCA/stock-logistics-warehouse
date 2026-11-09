@@ -173,6 +173,41 @@ class TestPut(VerticalLiftCase):
         )
         self.assertEqual(operation.state, "save")
 
+    def test_storage_type_put_away_keep_valid_destination(self):
+        self.package.package_type_id = self.package_type_small_8x
+        move_line = self.int_picking.move_line_ids
+        # the destination is already a valid cell of the shuttle, although
+        # not the first one the put-away would choose
+        move_line.package_level_id.location_dest_id = self.location_1a_x2y1
+        self.assertEqual(move_line.location_dest_id, self.location_1a_x2y1)
+
+        operation = self._open_screen("put")
+        operation.on_barcode_scanned(self.package.name)
+        self.assertEqual(operation.current_move_line_id, move_line)
+        # the put-away is not recomputed
+        self.assertEqual(move_line.location_dest_id, self.location_1a_x2y1)
+        self.assertEqual(
+            move_line.package_level_id.location_dest_id, self.location_1a_x2y1
+        )
+        self.assertEqual(operation.state, "save")
+
+    def test_storage_type_put_away_destination_other_shuttle(self):
+        self.package.package_type_id = self.package_type_small_8x
+        move_line = self.int_picking.move_line_ids
+        # the destination is a cell of another shuttle
+        move_line.package_level_id.location_dest_id = self.location_2a_x1y1
+        self.assertEqual(move_line.location_dest_id, self.location_2a_x1y1)
+
+        operation = self._open_screen("put")
+        operation.on_barcode_scanned(self.package.name)
+        self.assertEqual(operation.current_move_line_id, move_line)
+        # the put-away is recomputed in the current shuttle
+        self.assertEqual(move_line.location_dest_id, self.location_1a_x1y1)
+        self.assertEqual(
+            move_line.package_level_id.location_dest_id, self.location_1a_x1y1
+        )
+        self.assertEqual(operation.state, "save")
+
     def test_storage_type_not_configured(self):
         # if we do have a storage type, but the storage type is not used in the
         # shuttle (although it may be used on the lift view location, so we can have an
