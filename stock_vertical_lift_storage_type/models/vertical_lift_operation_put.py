@@ -105,12 +105,23 @@ class VerticalLiftOperationPut(models.Model):
         )
         return bool(compatible_locations)
 
+    def _get_putaway_excluded_move_lines(self):
+        move_line = self.current_move_line_id
+        # the destination of the package level is propagated to all its lines
+        return move_line | move_line.package_level_id.move_line_ids
+
     def _putaway_with_storage_type(self):
         move_line = self.current_move_line_id
         package_id = self._get_current_package()
         # Trigger the put-away application to place it somewhere inside
         # the current shuttle's location.
-        new_destination = move_line.location_dest_id._get_package_type_putaway_strategy(
+        # The lines being put away already target their current destination:
+        # exclude them, otherwise this destination is seen as being filled
+        # (e.g. not empty anymore) and is rejected by the storage type rules.
+        location_dest = move_line.location_dest_id.with_context(
+            exclude_sml_ids=self._get_putaway_excluded_move_lines().ids
+        )
+        new_destination = location_dest._get_package_type_putaway_strategy(
             self.location_id,
             package_id,
             move_line.product_id,

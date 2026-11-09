@@ -152,6 +152,27 @@ class TestPut(VerticalLiftCase):
         # when a putaway is available
         self.assertEqual(operation.state, "save")
 
+    def test_storage_type_put_away_scan_again(self):
+        self.package.package_type_id = self.package_type_small_8x
+        move_line = self.int_picking.move_line_ids
+        operation = self._open_screen("put")
+        operation.on_barcode_scanned(self.package.name)
+        self.assertEqual(move_line.location_dest_id, self.location_1a_x1y1)
+        self.assertEqual(operation.state, "save")
+
+        # the operator starts over and scans the same package again
+        operation.reset_steps()
+        self.assertEqual(operation.state, "scan_source")
+        operation.on_barcode_scanned(self.package.name)
+        self.assertEqual(operation.current_move_line_id, move_line)
+        # the cell only accepts goods when empty, but it is "being filled" by
+        # the very same move line: it must still be accepted
+        self.assertEqual(move_line.location_dest_id, self.location_1a_x1y1)
+        self.assertEqual(
+            move_line.package_level_id.location_dest_id, self.location_1a_x1y1
+        )
+        self.assertEqual(operation.state, "save")
+
     def test_storage_type_not_configured(self):
         # if we do have a storage type, but the storage type is not used in the
         # shuttle (although it may be used on the lift view location, so we can have an
