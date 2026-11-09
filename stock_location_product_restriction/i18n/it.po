@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-12-31 15:52+0000\n"
+"PO-Revision-Date: 2026-11-09 15:46+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -14,12 +14,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.6.2\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: stock_location_product_restriction
 #: model:ir.model.fields,field_description:stock_location_product_restriction.field_stock_quant__being_filled_before_done_location_ids
 msgid "Being Filled Before Done Location"
-msgstr ""
+msgstr "Ubicazione riempita prima del completamento"
 
 #. module: stock_location_product_restriction
 #: model:ir.model.fields,field_description:stock_location_product_restriction.field_stock_location__has_restriction_violation
@@ -86,6 +86,8 @@ msgid ""
 "Technical field to compute locations with their fill stateat 'Being Filled' "
 "before they'll be filled with an incoming move."
 msgstr ""
+"Campo tecnico per calcolare le ubicazioni e il relativo stato di riempimento "
+"'In riempimento' prima che vengano riempite da un movimento in entrata."
 
 #. module: stock_location_product_restriction
 #. odoo-python
