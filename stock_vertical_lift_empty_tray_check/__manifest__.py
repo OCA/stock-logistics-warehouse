@@ -17,7 +17,10 @@
     "assets": {
         "web.assets_backend": [
             "stock_vertical_lift_empty_tray_check/static/src/scss/vertical_lift.scss",
-        ]
+        ],
+        "web.assets_tests": [
+            "stock_vertical_lift_empty_tray_check/static/tests/tours/*.js",
+        ],
     },
     "installable": True,
     "development_status": "Alpha",
