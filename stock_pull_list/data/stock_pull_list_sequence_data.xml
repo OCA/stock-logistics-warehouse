@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo noupdate="1">
+    <record id="seq_stock_pull_list" model="ir.sequence">
+        <field name="name">Stock Pull List</field>
+        <field name="code">stock.pull.list</field>
+        <field name="prefix">SPL/</field>
+        <field name="padding">6</field>
+        <field name="company_id" eval="False" />
+    </record>
+</odoo>

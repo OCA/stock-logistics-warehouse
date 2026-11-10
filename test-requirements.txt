@@ -1,0 +1,1 @@
+odoo-addon-stock_free_quantity @ git+https://github.com/OCA/stock-logistics-availability@refs/pull/103/head#subdirectory=stock_free_quantity
