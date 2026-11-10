@@ -17,7 +17,7 @@ class StockMove(models.Model):
             self.write({"procure_method": "make_to_stock"})
         return new_move_vals
 
-    def _adjust_procure_method(self):
+    def _adjust_procure_method(self, picking_type_code=False):
         precision = self.env["decimal.precision"].precision_get(
             "Product Unit of Measure"
         )
@@ -29,6 +29,8 @@ class StockMove(models.Model):
                 ("location_dest_id", "=", move.location_dest_id.id),
                 ("action", "!=", "push"),
             ]
+            if picking_type_code:
+                domain.append(("picking_type_id.code", "=", picking_type_code))
             rules = self.env["procurement.group"]._search_rule(
                 False, move.product_packaging_id, product_id, move.warehouse_id, domain
             )
@@ -59,7 +61,9 @@ class StockMove(models.Model):
                     )
                     move._action_assign()
         if no_split_procurement_moves:
-            return super(StockMove, no_split_procurement_moves)._adjust_procure_method()
+            return super(StockMove, no_split_procurement_moves)._adjust_procure_method(
+                picking_type_code=picking_type_code
+            )
 
     def _action_confirm(self, merge=True, merge_into=False):
         precision = self.env["decimal.precision"].precision_get(

@@ -32,7 +32,8 @@ class TestCommon(TransactionCase):
         cls.product = Product.create(
             {
                 "name": "Test Product",
-                "type": "product",
+                "type": "consu",
+                "is_storable": True,
                 "route_ids": [(6, 0, route_mto_mts.ids)],
             }
         )

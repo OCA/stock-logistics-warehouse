@@ -51,6 +51,27 @@ class TestStockMove(TestCommon):
             msg="Procure method must be equal to 'make_to_order'",
         )
 
+    def test_adjust_procure_method_picking_type_code(self):
+        """The picking type code filter is honored and forwarded to super."""
+        moves = self.run_procurement_group_and_get_stock_move(4.0)
+        self.assertEqual(len(moves), 3, msg="Count records must be equal to 3")
+        moves._adjust_procure_method(picking_type_code="outgoing")
+        expected_list = ["make_to_order", "make_to_order", "make_to_stock"]
+        self.assertListEqual(
+            moves.mapped("procure_method"), expected_list, msg="Lists must be the same"
+        )
+
+    def test_adjust_procure_method_picking_type_code_no_rule(self):
+        """No split rule matches the picking type: fallback on standard Odoo."""
+        moves = self.run_procurement_group_and_get_stock_move(1.0)
+        self.assertEqual(len(moves), 1, msg="Count records must be equal to 1")
+        moves._adjust_procure_method(picking_type_code="repair_operation")
+        self.assertEqual(
+            moves.procure_method,
+            "make_to_stock",
+            msg="Procure method must be equal to 'make_to_stock'",
+        )
+
     def test_01_action_confirm_split_procurement(self):
         production = self.env["mrp.production"].create(
             {
