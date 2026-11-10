@@ -24,6 +24,7 @@ addon | version | maintainers | summary
 --- | --- | --- | ---
 [stock_demand_estimate](stock_demand_estimate/) | 20.0.1.0.0 |  | Allows to create demand estimates.
 [stock_warehouse_calendar](stock_warehouse_calendar/) | 20.0.1.0.0 | <a href='https://github.com/JordiBForgeFlow'><img src='https://github.com/JordiBForgeFlow.png' width='32' height='32' style='border-radius:50%;' alt='JordiBForgeFlow'/></a> | Adds a calendar to the Warehouse
+[stock_warehouse_out_pull](stock_warehouse_out_pull/) | 20.0.1.0.0 | <a href='https://github.com/sebalix'><img src='https://github.com/sebalix.png' width='32' height='32' style='border-radius:50%;' alt='sebalix'/></a> | Restore delivery pull rules as in Odoo <= 17.0
 
 [//]: # (end addons)
 
