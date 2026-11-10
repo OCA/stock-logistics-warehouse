@@ -1,0 +1,4 @@
+id,name,model_id,group_id/id,operation,domain
+access_stock_inventory_user,stock.inventory,stock.inventory,stock.group_stock_user,cru,
+access_stock_inventory_manager,stock.inventory,stock.inventory,stock.group_stock_manager,crud,
+stock_inventory_comp_rule,Stock Inventory multi-company,stock.inventory,,crud,"[('company_id', 'in', company_ids + [False])]"
