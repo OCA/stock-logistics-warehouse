@@ -25,6 +25,7 @@ Available addons
 ----------------
 addon | version | maintainers | summary
 --- | --- | --- | ---
+[account_move_line_product](account_move_line_product/) | 19.0.1.0.0 |  | Group journal items by product and display product and quantity
 [stock_demand_estimate](stock_demand_estimate/) | 19.0.1.1.0 |  | Allows to create demand estimates.
 [stock_demand_estimate_matrix](stock_demand_estimate_matrix/) | 19.0.1.0.0 |  | Allows to create demand estimates.
 [stock_inventory](stock_inventory/) | 19.0.1.2.0 |  | Allows to do an easier follow up of the Inventory Adjustments
