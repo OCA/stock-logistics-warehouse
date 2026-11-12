@@ -2,8 +2,7 @@
 #   (http://www.forgeflow.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from odoo import _, api, fields, models
-from odoo.exceptions import UserError
+from odoo import api, fields, models
 
 
 class StockQuant(models.Model):
@@ -22,9 +21,6 @@ class StockQuant(models.Model):
                 return domain, "in_date ASC, removal_priority ASC, id"
             elif removal_strategy == "lifo":
                 return domain, "in_date DESC, removal_priority ASC, id desc"
-            raise UserError(
-                _("Removal strategy %s not implemented.") % (removal_strategy,)
-            )
         return super()._get_removal_strategy_domain_order(domain, removal_strategy, qty)
 
     def _get_removal_strategy_sort_key(self, removal_strategy):
