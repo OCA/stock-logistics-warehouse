@@ -6,9 +6,7 @@ from odoo import api, fields, models
 class StockLot(models.Model):
     _inherit = "stock.lot"
 
-    condition_id = fields.Many2one(
-        comodel_name="stock.lot.condition", string="Condition"
-    )
+    condition_id = fields.Many2one(comodel_name="stock.lot.condition")
     condition_required_note = fields.Boolean(compute="_compute_condition_required_note")
     condition_note = fields.Text()
 
