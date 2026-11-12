@@ -20,14 +20,12 @@ class StockDemandEstimateSheet(models.TransientModel):
         readonly=True,
     )
     date_range_type_id = fields.Many2one(
-        string="Date Range Type",
         comodel_name="date.range.type",
         readonly=True,
         check_company=True,
     )
     location_id = fields.Many2one(
         comodel_name="stock.location",
-        string="Location",
         readonly=True,
         check_company=True,
     )
@@ -43,7 +41,6 @@ class StockDemandEstimateSheet(models.TransientModel):
     )
     company_id = fields.Many2one(
         comodel_name="res.company",
-        string="Company",
         required=True,
         readonly=True,
         default=lambda self: self.env.company,

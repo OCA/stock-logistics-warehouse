@@ -19,14 +19,12 @@ class DemandEstimateWizard(models.TransientModel):
         required=True,
     )
     date_range_type_id = fields.Many2one(
-        string="Date Range Type",
         comodel_name="date.range.type",
         required=True,
         check_company=True,
     )
     location_id = fields.Many2one(
         comodel_name="stock.location",
-        string="Location",
         required=True,
         check_company=True,
     )
@@ -37,7 +35,6 @@ class DemandEstimateWizard(models.TransientModel):
     )
     company_id = fields.Many2one(
         comodel_name="res.company",
-        string="Company",
         required=True,
         default=lambda self: self.env.company,
     )

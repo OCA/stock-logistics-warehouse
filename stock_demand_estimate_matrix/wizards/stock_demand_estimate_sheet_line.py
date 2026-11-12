@@ -13,7 +13,7 @@ class StockDemandEstimateSheetLine(models.TransientModel):
     location_id = fields.Many2one(
         comodel_name="stock.location", string="Stock Location"
     )
-    product_id = fields.Many2one(comodel_name="product.product", string="Product")
+    product_id = fields.Many2one(comodel_name="product.product")
     value_x = fields.Char(string="Period Name")
     value_y = fields.Char(string="Product Name")
     product_uom = fields.Many2one(comodel_name="uom.uom", string="Unit of measure")
