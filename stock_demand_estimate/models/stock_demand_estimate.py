@@ -28,14 +28,12 @@ class StockDemandEstimate(models.Model):
     )
     product_id = fields.Many2one(
         comodel_name="product.product",
-        string="Product",
         required=True,
         check_company=True,
     )
     product_uom = fields.Many2one(comodel_name="uom.uom", string="Unit of measure")
     location_id = fields.Many2one(
         comodel_name="stock.location",
-        string="Location",
         required=True,
         check_company=True,
     )
@@ -52,7 +50,6 @@ class StockDemandEstimate(models.Model):
     daily_qty = fields.Float(string="Quantity / Day", compute="_compute_daily_qty")
     company_id = fields.Many2one(
         comodel_name="res.company",
-        string="Company",
         required=True,
         default=lambda self: self.env.company,
     )

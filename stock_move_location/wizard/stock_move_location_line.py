@@ -15,14 +15,9 @@ class StockMoveLocationWizardLine(models.TransientModel):
         string="Move location Wizard",
         comodel_name="wiz.stock.move.location",
     )
-    product_id = fields.Many2one(
-        string="Product", comodel_name="product.product", required=True
-    )
-    origin_location_id = fields.Many2one(
-        string="Origin Location", comodel_name="stock.location"
-    )
+    product_id = fields.Many2one(comodel_name="product.product", required=True)
+    origin_location_id = fields.Many2one(comodel_name="stock.location")
     destination_location_id = fields.Many2one(
-        string="Destination Location",
         comodel_name="stock.location",
         compute="_compute_destination_location_id",
     )

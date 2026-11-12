@@ -14,7 +14,6 @@ class StockQuant(models.Model):
     )
     current_inventory_id = fields.Many2one(
         "stock.inventory",
-        string="Current Inventory",
         store=True,
     )
 

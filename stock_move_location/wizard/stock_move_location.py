@@ -17,7 +17,6 @@ class StockMoveLocationWizard(models.TransientModel):
         help="technical field to disable the edition of origin location.",
     )
     origin_location_id = fields.Many2one(
-        string="Origin Location",
         comodel_name="stock.location",
         required=True,
         domain=lambda self: self._get_locations_domain(),
@@ -27,7 +26,6 @@ class StockMoveLocationWizard(models.TransientModel):
         help="technical field to disable the edition of destination location.",
     )
     destination_location_id = fields.Many2one(
-        string="Destination Location",
         comodel_name="stock.location",
         required=True,
         domain=lambda self: self._get_locations_domain(),
