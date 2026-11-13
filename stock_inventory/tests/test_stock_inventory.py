@@ -589,3 +589,73 @@ class TestStockInventory(TransactionCase):
             ).current_inventory_id,
             inventory2,
         )
+
+    def test_14_apply_links_own_lines_despite_re_reservation(self):
+        quant_lot_1 = self.quant_model.sudo().create(
+            {
+                "product_id": self.product.id,
+                "lot_id": self.lot_1.id,
+                "quantity": 10.0,
+                "location_id": self.location2.id,
+            }
+        )
+        picking = self.env["stock.picking"].create(
+            {
+                "picking_type_id": self.env.ref("stock.picking_type_out").id,
+                "location_id": self.location2.id,
+                "location_dest_id": self.location_dst.id,
+                "move_ids": [
+                    (
+                        0,
+                        0,
+                        {
+                            "name": self.product.name,
+                            "product_id": self.product.id,
+                            "product_uom": self.product.uom_id.id,
+                            "product_uom_qty": 3.0,
+                            "location_id": self.location2.id,
+                            "location_dest_id": self.location_dst.id,
+                        },
+                    )
+                ],
+            }
+        )
+        picking.action_assign()
+        self.assertEqual(picking.move_line_ids.lot_id, self.lot_2)
+        inventory = self.inventory_model.create(
+            {
+                "name": "Inventory_Test_14",
+                "product_selection": "all",
+                "location_ids": [self.location2.id],
+            }
+        )
+        inventory.action_state_to_in_progress()
+        self.quant2.inventory_quantity = 0
+        quant_lot_1.inventory_quantity = 7
+        (self.quant2 | quant_lot_1).action_apply_inventory()
+        # Emptying lot 2 moved the reservation to lot 1, in a newer move line.
+        self.assertEqual(picking.move_line_ids.lot_id, self.lot_1)
+        self.assertFalse(picking.move_line_ids.inventory_adjustment_id)
+        self.assertEqual(picking.move_line_ids.reference, picking.name)
+        lines = inventory.stock_move_ids
+        self.assertEqual(lines.lot_id, self.lot_1 | self.lot_2)
+        self.assertEqual(sorted(lines.mapped("quantity")), [3.0, 100.0])
+        for line in lines:
+            self.assertTrue(line.move_id.is_inventory)
+            self.assertEqual(line.reference, f"Inventory_Test_14: {line.move_id.name}")
+
+    def test_15_relocation_during_inventory_is_not_linked(self):
+        inventory = self.inventory_model.create(
+            {
+                "name": "Inventory_Test_15",
+                "product_selection": "all",
+                "location_ids": [self.location2.id],
+            }
+        )
+        inventory.action_state_to_in_progress()
+        self.assertEqual(self.quant2.current_inventory_id, inventory)
+        self.quant2.move_quants(location_dest_id=self.location3)
+        line = self.move_model.search([("location_dest_id", "=", self.location3.id)])
+        self.assertEqual(line.lot_id, self.lot_2)
+        self.assertFalse(line.inventory_adjustment_id)
+        self.assertFalse(inventory.stock_move_ids)

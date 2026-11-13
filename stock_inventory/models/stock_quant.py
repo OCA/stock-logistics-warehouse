@@ -1,4 +1,4 @@
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 
 
 class StockQuant(models.Model):
@@ -19,45 +19,47 @@ class StockQuant(models.Model):
     )
 
     def _apply_inventory(self):
-        res = super()._apply_inventory()
-        record_moves = self.env["stock.move.line"]
+        inventories = self.current_inventory_id
+        if inventories and self.env.company.stock_inventory_auto_complete:
+            # Concurrent applies must conflict on the inventory row, or neither one
+            # sees the other's quants as done and the inventory never auto-completes.
+            inventories.write({})
+        res = super(
+            StockQuant, self.with_context(stock_inventory_quant_ids=self.ids)
+        )._apply_inventory()
         adjustment = self.env["stock.inventory"].browse()
         for rec in self:
             adjustment = rec.current_inventory_id
-            moves = record_moves.search(
-                [
-                    ("product_id", "=", rec.product_id.id),
-                    ("lot_id", "=", rec.lot_id.id),
-                    "|",
-                    ("location_id", "=", rec.location_id.id),
-                    ("location_dest_id", "=", rec.location_id.id),
-                ],
-                order="create_date asc",
-            ).filtered(
-                lambda x, rec=rec: not x.company_id.id
-                or not rec.company_id.id
-                or rec.company_id.id == x.company_id.id
-            )
-            if len(moves) == 0:
-                raise ValueError(_("No move lines have been created"))
-            move = moves[len(moves) - 1]
-            adjustment.stock_move_ids |= move
-            reference = move.reference
-            if adjustment.name and move.reference:
-                reference = adjustment.name + ": " + move.reference
-            elif adjustment.name:
-                reference = adjustment.name
-            move.write(
-                {
-                    "inventory_adjustment_id": adjustment.id,
-                    "reference": reference,
-                }
-            )
             rec.to_do = False
             rec.current_inventory_id = False
         if adjustment and self.env.company.stock_inventory_auto_complete:
             adjustment.action_auto_state_to_done()
         return res
+
+    def _get_inventory_move_values(
+        self,
+        qty,
+        location_id,
+        location_dest_id,
+        package_id=False,
+        package_dest_id=False,
+    ):
+        vals = super()._get_inventory_move_values(
+            qty, location_id, location_dest_id, package_id, package_dest_id
+        )
+        adjustment = self.current_inventory_id
+        # move_quants() builds its moves here too: only link the applied quants.
+        if adjustment and self.id in self.env.context.get(
+            "stock_inventory_quant_ids", []
+        ):
+            for command in vals["move_line_ids"]:
+                command[2].update(
+                    {
+                        "inventory_adjustment_id": adjustment.id,
+                        "reference": f"{adjustment.name}: {vals['name']}",
+                    }
+                )
+        return vals
 
     def _get_inventory_fields_write(self):
         return super()._get_inventory_fields_write() + ["to_do"]
