@@ -9,6 +9,7 @@
     "website": "https://github.com/OCA/stock-logistics-warehouse",
     "author": "Tecnativa, Odoo Community Association (OCA)",
     "license": "AGPL-3",
+    "maintainers": ["sergio-teruel"],
     "application": False,
     "installable": True,
     "depends": ["stock", "product_secondary_unit"],
