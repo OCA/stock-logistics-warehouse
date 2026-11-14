@@ -1,0 +1,4 @@
+- [Camptocamp](https://www.camptocamp.com):
+  - Hadrien Huvelle \<<hadrien.huvelle@camptocamp.com>\>
+  - Iván Todorovich \<<ivan.todorovich@camptocamp.com>\>
+  - Simone Orsi \<<simone.orsi@camptocamp.com>\>
