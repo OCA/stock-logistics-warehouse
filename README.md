@@ -90,6 +90,7 @@ addon | version | maintainers | summary
 [stock_reservation_date_show](stock_reservation_date_show/) | 16.0.1.0.0 |  | Display reservation date of stock moves
 [stock_reserve](stock_reserve/) | 16.0.1.3.1 |  | Stock reservations on products
 [stock_reserve_rule](stock_reserve_rule/) | 16.0.1.0.1 |  | Configure reservation rules by location
+[stock_reserve_sale](stock_reserve_sale/) | 16.0.1.0.0 |  | Stock Reserve Sales
 [stock_route_mto](stock_route_mto/) | 16.0.1.0.1 |  | Allows to identify MTO routes through a checkbox and availability to filter them.
 [stock_scrap_location_default](stock_scrap_location_default/) | 16.0.1.0.1 | <a href='https://github.com/rousseldenis'><img src='https://github.com/rousseldenis.png' width='32' height='32' style='border-radius:50%;' alt='rousseldenis'/></a> | Allows to define a setting at company level that reference a default scrap location
 [stock_search_supplierinfo_code](stock_search_supplierinfo_code/) | 16.0.1.0.1 |  | Allows to search for picking from supplierinfo code
