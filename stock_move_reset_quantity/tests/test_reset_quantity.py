@@ -17,10 +17,12 @@ class TestResetQuantity(BaseCommon):
             {
                 "name": "Product Reset Quantity",
                 "is_storable": True,
-                "categ_id": self.env.ref("product.product_category_all").id,
+                "categ_id": self.env["product.category"]
+                .create({"name": "Category Reset Quantity"})
+                .id,
             }
         )
-        with picking.move_ids_without_package.new() as move:
+        with picking.move_ids.new() as move:
             move.product_id = self.product
             move.product_uom_qty = 2.0
         picking = picking.save()
