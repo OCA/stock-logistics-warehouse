@@ -942,8 +942,8 @@ msgstr "Prenotate"
 
 #. module: stock_reserve
 #: model:ir.model.fields,field_description:stock_reserve.field_stock_reservation__sale_line_id
-msgid "Sale Line"
-msgstr "Riga di vendita"
+msgid "Sale Order Line"
+msgstr ""
 
 #. module: stock_reserve
 #: model:ir.model.fields,help:stock_reserve.field_stock_reservation__date
@@ -1228,6 +1228,9 @@ msgid ""
 msgstr ""
 "il magazzino da considerare per la selezione della rotta nel prossimo "
 "approvvigionamento (ce c'è)."
+
+#~ msgid "Sale Line"
+#~ msgstr "Riga di vendita"
 
 #~ msgid "Amount of packages demanded."
 #~ msgstr "Quantità dei colli richiesti."
