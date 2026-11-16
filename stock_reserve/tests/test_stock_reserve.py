@@ -42,6 +42,26 @@ class TestStockReserve(common.TransactionCase):
         reservation_1.release_reserve()
         self.assertEqual(self.product.virtual_available, 9)
 
+    def test_reservation_picking_type_from_location(self):
+        defaults = (
+            self.env["stock.reservation"]
+            .with_context(default_location_id=self.warehouse.lot_stock_id.id)
+            .default_get(["location_id", "picking_type_id"])
+        )
+        self.assertEqual(defaults["picking_type_id"], self.warehouse.out_type_id.id)
+        location = self.env["stock.location"].create(
+            {
+                "name": "Location without warehouse",
+                "usage": "internal",
+                "location_id": self.env.ref("stock.stock_location_locations").id,
+            }
+        )
+        picking_type = self.env["stock.reservation"]._get_picking_type(
+            location, self.env.company.id
+        )
+        self.assertEqual(picking_type.code, "outgoing")
+        self.assertEqual(picking_type.company_id, self.env.company)
+
     def test_cron_release(self):
         reservation_1 = self._create_stock_reservation(6)
         reservation_1.date_validity = fields.Date.from_string("2021-01-01")

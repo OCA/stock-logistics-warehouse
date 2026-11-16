@@ -78,17 +78,10 @@ class StockReservation(models.Model):
         # If picking_type_id is present and location_id is not, try to find
         # default value for location_id
         if not res.get("picking_type_id", None):
-            res["picking_type_id"] = (
-                self.env["stock.picking.type"]
-                .search(
-                    [
-                        ("code", "=", "outgoing"),
-                        ("company_id", "=", res.get("company_id")),
-                    ],
-                    limit=1,
-                )
-                .id
-            )
+            location = self.env["stock.location"].browse(res.get("location_id"))
+            res["picking_type_id"] = self._get_picking_type(
+                location, res.get("company_id")
+            ).id
 
         picking_type_id = res.get("picking_type_id")
         if picking_type_id and not res.get("location_id", False):
@@ -102,6 +95,18 @@ class StockReservation(models.Model):
         if "product_uom_qty" in fields_list:
             res["product_uom_qty"] = 1.0
         return res
+
+    @api.model
+    def _get_picking_type(self, location, company_id):
+        return location.warehouse_id.out_type_id or self.env[
+            "stock.picking.type"
+        ].search(
+            [
+                ("code", "=", "outgoing"),
+                ("company_id", "=", company_id),
+            ],
+            limit=1,
+        )
 
     @api.model
     def get_location_from_ref(self, ref):
