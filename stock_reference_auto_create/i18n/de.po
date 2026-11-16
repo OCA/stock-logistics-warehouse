@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * procurement_auto_create_group
+# * stock_reference_auto_create
 #
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2017
@@ -19,26 +19,26 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#. module: procurement_auto_create_group
-#: model:ir.model.fields,field_description:procurement_auto_create_group.field_stock_rule__auto_create_group
+#. module: stock_reference_auto_create
+#: model:ir.model.fields,field_description:stock_reference_auto_create.field_stock_rule__auto_create_group
 msgid "Auto-create Procurement Group"
 msgstr "Auto-Anlage Beschaffungsgruppe"
 
-#. module: procurement_auto_create_group
+#. module: stock_reference_auto_create
 #. odoo-python
-#: code:addons/procurement_auto_create_group/models/stock_rule.py:0
+#: code:addons/stock_reference_auto_create/models/stock_rule.py:0
 #, fuzzy, python-format
 msgid "No sequence defined for procurement group."
 msgstr "Keine Reihenfolge in Beschaffungsgruppe festgelegt"
 
-#. module: procurement_auto_create_group
-#: model:ir.model,name:procurement_auto_create_group.model_procurement_group
+#. module: stock_reference_auto_create
+#: model:ir.model,name:stock_reference_auto_create.model_procurement_group
 #, fuzzy
 msgid "Procurement Group"
 msgstr "Beschaffungsregel"
 
-#. module: procurement_auto_create_group
-#: model:ir.model,name:procurement_auto_create_group.model_stock_rule
+#. module: stock_reference_auto_create
+#: model:ir.model,name:stock_reference_auto_create.model_stock_rule
 msgid "Stock Rule"
 msgstr ""
 

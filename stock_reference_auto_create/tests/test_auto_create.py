@@ -4,12 +4,12 @@
 from odoo.tests.common import TransactionCase
 
 
-class TestProcurementAutoCreateGroup(TransactionCase):
+class TestStockReferenceAutoCreate(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
-        cls.group_obj = cls.env["procurement.group"]
+        cls.reference_obj = cls.env["stock.reference"]
         cls.rule_obj = cls.env["stock.rule"]
         cls.route_obj = cls.env["stock.route"]
         cls.move_obj = cls.env["stock.move"]
@@ -17,11 +17,17 @@ class TestProcurementAutoCreateGroup(TransactionCase):
         cls.product_obj = cls.env["product.product"]
 
         cls.warehouse = cls.env.ref("stock.warehouse0")
-        cls.location = cls.env.ref("stock.stock_location_stock")
-        cls.company_id = cls.env.ref("base.main_company")
+        cls.location = cls.warehouse.lot_stock_id
+        cls.company_id = cls.warehouse.company_id
         cls.supplier_location = cls.env.ref("stock.stock_location_suppliers")
-        cls.loc_components = cls.env.ref("stock.stock_location_components")
-        picking_type_id = cls.env.ref("stock.picking_type_internal").id
+        cls.loc_components = cls.env["stock.location"].create(
+            {
+                "name": "Components",
+                "usage": "internal",
+                "location_id": cls.warehouse.view_location_id.id,
+            }
+        )
+        picking_type_id = cls.warehouse.int_type_id.id
 
         cls.partner = cls.env["res.partner"].create({"name": "Partner"})
 
@@ -31,7 +37,7 @@ class TestProcurementAutoCreateGroup(TransactionCase):
             {
                 "name": "rule with autocreate",
                 "route_id": pull_push_route_auto.id,
-                "auto_create_group": True,
+                "auto_create_reference": True,
                 "action": "pull_push",
                 "warehouse_id": cls.warehouse.id,
                 "picking_type_id": picking_type_id,
@@ -47,7 +53,7 @@ class TestProcurementAutoCreateGroup(TransactionCase):
             {
                 "name": "rule with no autocreate",
                 "route_id": pull_push_route_no_auto.id,
-                "auto_create_group": False,
+                "auto_create_reference": False,
                 "action": "pull_push",
                 "warehouse_id": cls.warehouse.id,
                 "picking_type_id": picking_type_id,
@@ -62,7 +68,7 @@ class TestProcurementAutoCreateGroup(TransactionCase):
                 "location_src_id": cls.location.id,
                 "location_dest_id": cls.loc_components.id,
                 "route_id": push_route_auto.id,
-                "auto_create_group": True,
+                "auto_create_reference": True,
                 "auto": "manual",
                 "picking_type_id": picking_type_id,
                 "warehouse_id": cls.warehouse.id,
@@ -77,7 +83,7 @@ class TestProcurementAutoCreateGroup(TransactionCase):
                 "location_src_id": cls.location.id,
                 "location_dest_id": cls.loc_components.id,
                 "route_id": push_route_no_auto.id,
-                "auto_create_group": False,
+                "auto_create_reference": False,
                 "auto": "manual",
                 "picking_type_id": picking_type_id,
                 "warehouse_id": cls.warehouse.id,
@@ -116,16 +122,16 @@ class TestProcurementAutoCreateGroup(TransactionCase):
             }
         )
 
-        cls.group = cls.group_obj.create({"name": "SO0001"})
+        cls.reference = cls.reference_obj.create({"name": "SO0001"})
 
     @classmethod
     def _procure(cls, product):
         values = {
-            "group_id": cls.group,
+            "reference_ids": cls.reference,
         }
-        cls.group_obj.run(
+        cls.rule_obj.run(
             [
-                cls.env["procurement.group"].Procurement(
+                cls.rule_obj.Procurement(
                     product,
                     5.0,
                     product.uom_id,
@@ -143,7 +149,7 @@ class TestProcurementAutoCreateGroup(TransactionCase):
     def _push_trigger(cls, product):
         picking = cls.picking_obj.create(
             {
-                "picking_type_id": cls.env.ref("stock.picking_type_in").id,
+                "picking_type_id": cls.warehouse.in_type_id.id,
                 "location_id": cls.supplier_location.id,
                 "location_dest_id": cls.location.id,
                 "move_ids": [
@@ -151,7 +157,6 @@ class TestProcurementAutoCreateGroup(TransactionCase):
                         0,
                         0,
                         {
-                            "name": "Test move",
                             "product_id": product.id,
                             "date_deadline": "2099-06-01 18:00:00",
                             "date": "2099-06-01 18:00:00",
@@ -168,8 +173,8 @@ class TestProcurementAutoCreateGroup(TransactionCase):
         picking.move_ids.write({"quantity": 1.0})
         picking.button_validate()
 
-    def test_01_pull_push_no_auto_create_group(self):
-        """Test auto creation of group."""
+    def test_01_pull_push_no_auto_create_reference(self):
+        """Test auto creation of reference."""
         move = self.move_obj.search(
             [("product_id", "=", self.prod_no_auto_pull_push.id)]
         )
@@ -180,34 +185,24 @@ class TestProcurementAutoCreateGroup(TransactionCase):
         )
         self.assertTrue(move)
         self.assertEqual(
-            move.group_id,
-            self.group,
-            "Procurement Group should not have been assigned.",
+            move.reference_ids,
+            self.reference,
+            "Reference should not have been auto-created.",
         )
 
-    def test_02_pull_push_auto_create_group(self):
+    def test_02_pull_push_auto_create_reference(self):
         move = self.move_obj.search([("product_id", "=", self.prod_auto_pull_push.id)])
         self.assertFalse(move)
         self._procure(self.prod_auto_pull_push)
         move = self.move_obj.search([("product_id", "=", self.prod_auto_pull_push.id)])
         self.assertTrue(move)
-        self.assertTrue(move.group_id, "Procurement Group not assigned.")
-        self.assertEqual(
-            move.group_id.partner_id,
-            self.partner,
-            "Procurement Group partner missing.",
-        )
+        self.assertTrue(move.reference_ids, "Reference not assigned.")
+        self.assertNotEqual(move.reference_ids, self.reference)
+        self.assertTrue(move.reference_ids.name.startswith("SR/"))
+        self.assertEqual(move.partner_id, self.partner)
 
-    def test_03_onchange_method(self):
-        """Test onchange method for stock rule."""
-        proc_rule = self.push_rule_auto
-        self.assertTrue(proc_rule.auto_create_group)
-        proc_rule.write({"group_propagation_option": "none"})
-        proc_rule._onchange_group_propagation_option()
-        self.assertFalse(proc_rule.auto_create_group)
-
-    def test_04_push_no_auto_create_group(self):
-        """Test no auto creation of group."""
+    def test_04_push_no_auto_create_reference(self):
+        """Test no auto creation of reference."""
         move = self.move_obj.search(
             [
                 ("product_id", "=", self.prod_no_auto_push.id),
@@ -223,12 +218,10 @@ class TestProcurementAutoCreateGroup(TransactionCase):
             ]
         )
         self.assertTrue(move)
-        self.assertFalse(
-            move.group_id, "Procurement Group should not have been assigned."
-        )
+        self.assertFalse(move.reference_ids, "Reference should not have been assigned.")
 
-    def test_05_push_auto_create_group(self):
-        """Test auto creation of group."""
+    def test_05_push_auto_create_reference(self):
+        """Test auto creation of reference."""
         move = self.move_obj.search(
             [
                 ("product_id", "=", self.prod_auto_push.id),
@@ -244,4 +237,4 @@ class TestProcurementAutoCreateGroup(TransactionCase):
             ]
         )
         self.assertTrue(move)
-        self.assertTrue(move.group_id, "Procurement Group not assigned.")
+        self.assertTrue(move.reference_ids, "Reference not assigned.")

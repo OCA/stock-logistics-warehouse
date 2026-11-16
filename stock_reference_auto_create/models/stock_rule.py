@@ -2,36 +2,38 @@
 # Copyright 2021 Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from odoo import _, api, fields, models
+from odoo import Command, api, fields, models
 from odoo.exceptions import UserError
 
 
 class StockRule(models.Model):
     _inherit = "stock.rule"
 
-    auto_create_group = fields.Boolean(string="Auto-create Procurement Group")
+    auto_create_reference = fields.Boolean(string="Auto-create Reference")
 
-    @api.onchange("group_propagation_option")
-    def _onchange_group_propagation_option(self):
-        if self.group_propagation_option != "propagate":
-            self.auto_create_group = False
+    @api.model
+    def _get_rule(self, product_id, location_id, values):
+        rule = super()._get_rule(product_id, location_id, values)
+        if rule and rule.auto_create_reference and values.get("date_planned"):
+            values["reference_ids"] = rule._get_auto_reference(product_id)
+        return rule
 
-    def _get_auto_procurement_group(self, product):
-        group_data = self._prepare_auto_procurement_group_data(product)
-        return self.env["procurement.group"].create(group_data)
+    def _get_auto_reference(self, product):
+        return self.env["stock.reference"].create(
+            self._prepare_auto_reference_data(product)
+        )
 
     def _push_prepare_move_copy_values(self, move_to_copy, new_date):
         new_move_vals = super()._push_prepare_move_copy_values(move_to_copy, new_date)
-        if self.auto_create_group:
-            group = self._get_auto_procurement_group(move_to_copy.product_id)
-            new_move_vals["group_id"] = group.id
+        if self.auto_create_reference:
+            reference = self._get_auto_reference(move_to_copy.product_id)
+            new_move_vals["reference_ids"] = [Command.set(reference.ids)]
         return new_move_vals
 
-    def _prepare_auto_procurement_group_data(self, product):
-        name = self.env["ir.sequence"].next_by_code("procurement.group") or False
+    def _prepare_auto_reference_data(self, product):
+        name = self.env["ir.sequence"].next_by_code("stock.reference.auto")
         if not name:
-            raise UserError(_("No sequence defined for procurement group."))
-        return {
-            "name": name,
-            "partner_id": self.partner_address_id.id,
-        }
+            raise UserError(
+                self.env._("No sequence defined for auto-created references.")
+            )
+        return {"name": name}
