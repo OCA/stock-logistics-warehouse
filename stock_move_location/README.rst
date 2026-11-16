@@ -40,13 +40,28 @@ another and move only selected quantities.
 .. contents::
    :local:
 
+Configuration
+=============
+
+By default, the "Move from location..." wizard offers both "IMMEDIATE
+TRANSFER" and "PLANNED TRANSFER". To only allow planned transfers, so
+that each transfer is checked before it is validated:
+
+1. Go to Inventory > Configuration > Settings.
+2. In the Operations section, check "Restrict Immediate Transfer in Move
+   Location Wizard".
+
+This setting is per company. When it is checked, the "IMMEDIATE
+TRANSFER" button is hidden from the wizard.
+
 Usage
 =====
 
 - A new menu item Operations > Move from location... opens a wizard
   where 2 locations can be specified.
 - Select origin and destination locations and press "IMMEDIATE TRANSFER"
-  or "PLANNED TRANSFER"
+  or "PLANNED TRANSFER". The "IMMEDIATE TRANSFER" button is hidden when
+  immediate transfer is restricted in the settings (see Configuration)
 - Those lines can be edited. Move quantity can't be more than a max
   available quantity
 - Move doesn't care about the reservations and will move stuff anyway
