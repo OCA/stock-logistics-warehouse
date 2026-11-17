@@ -51,6 +51,11 @@
                                     class="oe_inline"
                                 />
                             </div>
+                            <field
+                                name="lot_ids"
+                                widget="many2many_tags"
+                                domain="[('product_id','=',product_id)]"
+                            />
                             <field name="product_uom_category_id" invisible="1" />
                             <field name="name" />
                             <field name="date_validity" />
@@ -90,6 +95,11 @@
                 <field name="move_id" />
                 <field name="product_uom_qty" sum="Total" />
                 <field name="product_uom" />
+                <field
+                    name="lot_ids"
+                    widget="many2many_tags"
+                    domain="[('product_id','=',product_id)]"
+                />
                 <field name="date_validity" />
                 <field name="restrict_partner_id" groups="stock.group_tracking_owner" />
                 <field name="location_id" />

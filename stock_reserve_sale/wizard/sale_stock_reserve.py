@@ -127,6 +127,7 @@ class SaleStockReserve(models.TransientModel):
         self.ensure_one()
         vals = self._prepare_stock_reservation(reserve_line.sale_line_id)
         vals["product_uom_qty"] = reserve_line.quantity
+        vals["lot_ids"] = [Command.set(reserve_line.lot_ids.ids)]
         return [vals]
 
     def button_reserve(self):
