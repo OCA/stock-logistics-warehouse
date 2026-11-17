@@ -18,15 +18,14 @@ class StockReservation(models.Model):
         return super().release_reserve()
 
     def action_view_reserves_stock_picking_reservation(self):
-        stock_picking = self.env["stock.picking"]
+        self.ensure_one()
         action = self.env["ir.actions.actions"]._for_xml_id(
             "stock.action_picking_tree_all"
         )
-        if self.sale_id:
-            stock_picking = self.env["stock.picking"].search(
-                [("sale_id", "=", self.sale_id.id), ("state", "!=", "cancel")], limit=1
-            )
-        if stock_picking:
-            view_id = self.env.ref("stock.view_picking_form").id
-            action.update(views=[(view_id, "form")], res_id=stock_picking.id)
+        view_id = self.env.ref("stock.view_picking_form").id
+        action.update(
+            views=[(view_id, "form")],
+            view_mode="form",
+            res_id=self.picking_id.id,
+        )
         return action

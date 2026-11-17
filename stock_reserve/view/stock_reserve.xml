@@ -41,6 +41,7 @@
                     <group>
                         <group name="main_grp" string="Details">
                             <field name="company_id" invisible="1" />
+                            <field name="has_tracking" invisible="1" />
                             <field name="product_id" />
                             <label for="product_uom_qty" />
                             <div>
@@ -51,6 +52,13 @@
                                     class="oe_inline"
                                 />
                             </div>
+                            <field
+                                name="lot_ids"
+                                groups="stock.group_production_lot"
+                                widget="many2many_tags"
+                                attrs="{'invisible': [('has_tracking', '=', 'none')]}"
+                                domain="[('product_id','=',product_id)]"
+                            />
                             <field name="product_uom_category_id" invisible="1" />
                             <field name="name" />
                             <field name="date_validity" />
@@ -85,11 +93,19 @@
                 decoration-primary="state == 'draft'"
                 decoration-muted="state == 'cancel'"
             >
+                <field name="has_tracking" invisible="1" />
                 <field name="name" />
                 <field name="product_id" />
                 <field name="move_id" />
                 <field name="product_uom_qty" sum="Total" />
                 <field name="product_uom" />
+                <field
+                    name="lot_ids"
+                    groups="stock.group_production_lot"
+                    widget="many2many_tags"
+                    attrs="{'invisible': [('has_tracking', '=', 'none')]}"
+                    domain="[('product_id','=',product_id)]"
+                />
                 <field name="date_validity" />
                 <field name="restrict_partner_id" groups="stock.group_tracking_owner" />
                 <field name="location_id" />

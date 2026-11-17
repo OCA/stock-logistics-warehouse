@@ -104,9 +104,49 @@ class SaleOrder(models.Model):
         action["context"] = {"search_default_groupby_product": False}
         return action
 
+    def _get_reserved_lots_data(self):
+        """Lots reserved for each order line: {line: [(lot, location, qty)]}"""
+        data = {}
+        for line in self.order_line:
+            move_lines = line.reservation_ids.move_line_ids.filtered("lot_id")
+            if move_lines:
+                data[line] = [
+                    (ml.lot_id, ml.location_id, ml.reserved_qty) for ml in move_lines
+                ]
+        return data
+
+    def _reserve_lots_in_deliveries(self, lots_data):
+        """Reserve in the outgoing moves the lots that were reserved before."""
+        moves_lots_data = []
+        for line, line_lots_data in lots_data.items():
+            moves = line.move_ids
+            moves |= self.env["stock.move"].browse(moves._rollup_move_origs())
+            locations = self.env["stock.location"].union(
+                *[location for _lot, location, _qty in line_lots_data]
+            )
+            moves_lots_data += [
+                (move, line_lots_data)
+                for move in moves
+                if move.product_id == line.product_id
+                and move.state in ("confirmed", "partially_available", "assigned")
+                and all(loc._child_of(move.location_id) for loc in locations)
+            ]
+        # Unreserve everything first, as the moves may have been automatically
+        # reserved on confirmation with the lots reserved for other lines.
+        self.env["stock.move"].union(*[m for m, _d in moves_lots_data])._do_unreserve()
+        for move, line_lots_data in moves_lots_data:
+            move._reserve_lots(line_lots_data, strict=True)
+        # Reserve the rest, if any, as usual
+        self.env["stock.move"].union(
+            *[m for m, _d in moves_lots_data if m.state != "assigned"]
+        )._action_assign()
+
     def action_confirm(self):
+        lots_data = self._get_reserved_lots_data()
         self.release_all_stock_reservation()
-        return super().action_confirm()
+        res = super().action_confirm()
+        self._reserve_lots_in_deliveries(lots_data)
+        return res
 
     def action_cancel(self):
         self.release_all_stock_reservation()

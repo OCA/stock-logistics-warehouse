@@ -1,9 +1,10 @@
 # Copyright 2021 Tecnativa - Carlos Roca
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 from odoo.exceptions import UserError, ValidationError
-from odoo.tests import Form, common
+from odoo.tests import Form, common, tagged
 
 
+@tagged("post_install", "-at_install")
 class TestStockReserveSale(common.TransactionCase):
     @classmethod
     def setUpClass(cls):
@@ -37,6 +38,43 @@ class TestStockReserveSale(common.TransactionCase):
             }
         )
         cls.env.company.sale_stock_reservation_policy = "always"
+        cls.product_lot = cls.env["product.product"].create(
+            {
+                "name": "Test Product Lot",
+                "type": "product",
+                "tracking": "lot",
+            }
+        )
+        cls.lot_1 = cls.env["stock.lot"].create(
+            {
+                "name": "LOT001",
+                "product_id": cls.product_lot.id,
+                "company_id": cls.env.company.id,
+            }
+        )
+        cls.lot_2 = cls.env["stock.lot"].create(
+            {
+                "name": "LOT002",
+                "product_id": cls.product_lot.id,
+                "company_id": cls.env.company.id,
+            }
+        )
+        cls.env["stock.quant"].create(
+            [
+                {
+                    "product_id": cls.product_lot.id,
+                    "location_id": cls.warehouse.lot_stock_id.id,
+                    "lot_id": cls.lot_1.id,
+                    "quantity": 5.0,
+                },
+                {
+                    "product_id": cls.product_lot.id,
+                    "location_id": cls.warehouse.lot_stock_id.id,
+                    "lot_id": cls.lot_2.id,
+                    "quantity": 5.0,
+                },
+            ]
+        )
 
     def _create_sale_order(self, quantities):
         sale_order_form = Form(self.env["sale.order"])
@@ -60,6 +98,23 @@ class TestStockReserveSale(common.TransactionCase):
 
     def _reserve_from_location(self, sale_order, location):
         self._get_reserve_wizard_form(sale_order, location).save().button_reserve()
+
+    def _reserve_lots(self, sale_order, lines_lots):
+        """Reserve each line (by index) with its lots and quantity."""
+        sale_order.warehouse_id = self.warehouse
+        wiz_form = self._get_reserve_wizard_form(
+            sale_order, self.warehouse.lot_stock_id
+        )
+        for index, (lots, quantity) in lines_lots.items():
+            with wiz_form.line_ids.edit(index) as line_form:
+                for lot in lots:
+                    line_form.lot_ids.add(lot)
+                line_form.quantity = quantity
+        wiz_form.save().button_reserve()
+
+    def _get_delivery_lots(self, order_line):
+        move_lines = order_line.move_ids.move_line_ids
+        return {ml.lot_id: ml.reserved_uom_qty for ml in move_lines}
 
     def test_reserve_01_tree_reserve_release(self):
         sale_order_form = Form(self.env["sale.order"])
@@ -278,3 +333,71 @@ class TestStockReserveSale(common.TransactionCase):
             )
         )
         self.assertEqual(wiz_form.location_id, self.warehouse.lot_stock_id)
+
+    def test_reserve_14_lots(self):
+        so = self._create_sale_order([(self.product_lot, 4)])
+        wiz_form = self._get_reserve_wizard_form(so, self.warehouse.lot_stock_id)
+        with wiz_form.line_ids.edit(0) as line_form:
+            line_form.lot_ids.add(self.lot_2)
+            # The quantity is set to the available quantity of the lot...
+            self.assertEqual(line_form.quantity, 5)
+            # ...but it can be edited afterwards.
+            line_form.quantity = 4
+        wiz_form.save().button_reserve()
+        reservation = so.order_line.reservation_ids
+        self.assertEqual(reservation.state, "assigned")
+        self.assertEqual(reservation.move_line_ids.lot_id, self.lot_2)
+        self.assertEqual(sum(reservation.move_line_ids.mapped("reserved_uom_qty")), 4)
+
+    def test_reserve_15_several_lots(self):
+        so = self._create_sale_order([(self.product_lot, 10)])
+        wiz_form = self._get_reserve_wizard_form(so, self.warehouse.lot_stock_id)
+        with wiz_form.line_ids.edit(0) as line_form:
+            line_form.lot_ids.add(self.lot_1)
+            self.assertEqual(line_form.quantity, 5)
+            line_form.lot_ids.add(self.lot_2)
+            self.assertEqual(line_form.quantity, 10)
+        wiz_form.save().button_reserve()
+        reservation = so.order_line.reservation_ids
+        self.assertEqual(reservation.move_line_ids.lot_id, self.lot_1 | self.lot_2)
+
+    def test_reserve_16_lot_name_with_available_quantity(self):
+        location = self.warehouse.lot_stock_id
+        lots = (self.lot_1 | self.lot_2).with_context(
+            show_available_qty=True, reservation_location_id=location.id
+        )
+        names = dict(lots.name_get())
+        self.assertIn("(5.00 ", names[self.lot_1.id])
+        self.assertIn("(5.00 ", names[self.lot_2.id])
+        # Reserved quantity is not shown as available
+        so = self._create_sale_order([(self.product_lot, 3)])
+        wiz_form = self._get_reserve_wizard_form(so, location)
+        with wiz_form.line_ids.edit(0) as line_form:
+            line_form.lot_ids.add(self.lot_2)
+            line_form.quantity = 3
+        wiz_form.save().button_reserve()
+        names = dict(lots.name_get())
+        self.assertIn("(2.00 ", names[self.lot_2.id])
+        # Without context, the name is the standard one
+        self.assertEqual(self.lot_2.display_name, self.lot_2.name)
+
+    def test_reserve_17_view_actions(self):
+        so = self._create_sale_order([(self.product_1, 1)])
+        self._reserve_from_location(so, self.warehouse.lot_stock_id)
+        reservation = so.stock_reservation_ids
+        self.assertTrue(reservation.picking_id)
+        action = reservation.action_view_reserves_stock_picking_reservation()
+        self.assertEqual(action["res_id"], reservation.picking_id.id)
+
+    def test_reserve_18_confirm_keeps_lots(self):
+        so = self._create_sale_order([(self.product_lot, 3), (self.product_lot, 6)])
+        line_1, line_2 = so.order_line
+        # FIFO would reserve lot_1 for the first line. The second line is only
+        # partially reserved: the rest is reserved as usual on confirmation.
+        self._reserve_lots(so, {0: (self.lot_2, 3), 1: (self.lot_1, 5)})
+        so.action_confirm()
+        self.assertFalse(so.order_line.reservation_ids)
+        self.assertEqual(self._get_delivery_lots(line_1), {self.lot_2: 3})
+        self.assertEqual(
+            self._get_delivery_lots(line_2), {self.lot_1: 5, self.lot_2: 1}
+        )

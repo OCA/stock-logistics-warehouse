@@ -69,7 +69,6 @@ class SaleStockReserve(models.TransientModel):
 
     def _prepare_stock_reservation(self, line):
         self.ensure_one()
-
         picking_env = self.env["stock.picking"]
         reservation_env = self.env["stock.reservation"]
         picking_type_id = reservation_env._get_picking_type(
@@ -148,4 +147,7 @@ class SaleStockReserve(models.TransientModel):
             reservations = self.env["stock.reservation"].create(
                 self._prepare_stock_reservation_vals_list(line)
             )
-            reservations.reserve()
+            if line.lot_ids:
+                reservations.reserve_lots(line.lot_ids)
+            else:
+                reservations.reserve()
