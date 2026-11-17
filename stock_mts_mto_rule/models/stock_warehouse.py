@@ -55,7 +55,7 @@ class StockWarehouse(models.Model):
                         "company_id": self.company_id.id,
                         "auto": "manual",
                         "propagate_cancel": True,
-                        "route_id": self._find_global_route(
+                        "route_id": self._find_or_create_global_route(
                             "stock_mts_mto_rule.route_mto_mts",
                             _("Make To Order + Make To Stock"),
                         ).id,
