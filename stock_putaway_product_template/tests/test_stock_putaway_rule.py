@@ -108,3 +108,46 @@ class TestStockPutawayRule(common.TransactionCase):
         self.assertEqual(locations._get_putaway_strategy(variant1), location1)
         self.assertEqual(locations._get_putaway_strategy(variant2), location2)
         self.assertEqual(locations._get_putaway_strategy(variant3), location1)
+
+    def _create_rule(self, location_in, location_out, **vals):
+        return self.putawayRuleObj.create(
+            dict(
+                vals,
+                company_id=location_in.company_id.id,
+                location_in_id=location_in.id,
+                location_out_id=location_out.id,
+            )
+        )
+
+    def test_putaway_template_rule_other_template(self):
+        Location = self.env["stock.location"]
+        Category = self.env["product.category"]
+        Product = self.env["product.product"]
+        stock = self.env.ref("stock.stock_location_stock")
+        loc_in = Location.create({"name": "Input", "location_id": stock.id})
+        loc_tmpl = Location.create({"name": "Template", "location_id": loc_in.id})
+        loc_other = Location.create({"name": "Other", "location_id": loc_in.id})
+        loc_categ = Location.create({"name": "Category", "location_id": loc_in.id})
+        categ = Category.create({"name": "Putaway categ"})
+        other_categ = Category.create({"name": "Other categ"})
+        self.template.categ_id = categ
+        other_template = self.env["product.template"].create(
+            {"name": "Other template", "type": "consu", "categ_id": other_categ.id}
+        )
+        product_same_categ = Product.create(
+            {"name": "Same categ", "type": "consu", "categ_id": categ.id}
+        )
+        product_other_categ = Product.create(
+            {"name": "Other categ", "type": "consu", "categ_id": other_categ.id}
+        )
+        self._create_rule(loc_in, loc_other, product_tmpl_id=other_template.id)
+        self._create_rule(loc_in, loc_tmpl, product_tmpl_id=self.template.id)
+        self._create_rule(loc_in, loc_categ, category_id=categ.id)
+        variant = self.template.product_variant_ids[0]
+        self.assertEqual(loc_in._get_putaway_strategy(variant), loc_tmpl)
+        self.assertEqual(loc_in._get_putaway_strategy(product_same_categ), loc_categ)
+        self.assertEqual(loc_in._get_putaway_strategy(product_other_categ), loc_in)
+        self.assertEqual(
+            loc_in._get_putaway_strategy(other_template.product_variant_id),
+            loc_other,
+        )
