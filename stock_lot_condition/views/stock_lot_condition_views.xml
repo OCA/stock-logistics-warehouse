@@ -38,6 +38,7 @@
                 <field name="name" />
                 <field name="description" optional="hide" />
                 <field name="color" widget="color_picker" />
+                <field name="required_note" />
             </list>
         </field>
     </record>
