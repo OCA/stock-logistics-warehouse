@@ -102,7 +102,13 @@ class TestProductSecondaryUnit(BaseCommon):
         )
 
     def test_01_stock_secondary_unit_template(self):
-        self.assertEqual(self.product_template.secondary_unit_qty_available, 0)
+        # All the variants share the same second unit for inventory, so the
+        # template gets it too and shows the stock of all of them (20 kg)
+        self.assertEqual(
+            self.product_template.stock_secondary_uom_id,
+            self.product_template.product_variant_ids.stock_secondary_uom_id,
+        )
+        self.assertEqual(self.product_template.secondary_unit_qty_available, 40)
 
     def test_02_stock_secondary_unit_variant(self):
         for variant in self.product_template.product_variant_ids.filtered(
@@ -805,3 +811,143 @@ class TestProductSecondaryUnit(BaseCommon):
             },
             {secondary_units[0]: 8.0, secondary_units[1]: 2.0},
         )
+
+    def _create_template_with_secondary_units(self, **vals):
+        return self.env["product.template"].create(
+            {
+                "name": "test secondary units",
+                "uom_id": self.product_uom_kg.id,
+                "uom_po_id": self.product_uom_kg.id,
+                "is_storable": True,
+                "secondary_uom_ids": [
+                    Command.create(
+                        {
+                            "name": "box 4",
+                            "uom_id": self.product_uom_unit.id,
+                            "factor": 4,
+                        },
+                    ),
+                    Command.create(
+                        {
+                            "name": "box 2",
+                            "uom_id": self.product_uom_unit.id,
+                            "factor": 2,
+                        },
+                    ),
+                ],
+                **vals,
+            }
+        )
+
+    def test_template_stock_secondary_uom_reaches_variants(self):
+        template = self.product_template
+        box_10 = template.secondary_uom_ids.filtered(lambda u: u.code == "C")
+        template.stock_secondary_uom_id = box_10
+        self.assertEqual(template.product_variant_ids.stock_secondary_uom_id, box_10)
+        # Variants with distinct units leave the template without any
+        white, black = template.product_variant_ids
+        black.stock_secondary_uom_id = template.secondary_uom_ids[0]
+        self.assertFalse(template.stock_secondary_uom_id)
+        self.assertEqual(white.stock_secondary_uom_id, box_10)
+        template.stock_secondary_uom_id = False
+        self.assertFalse(template.product_variant_ids.stock_secondary_uom_id)
+        # Also when given on creation, before the variant exists
+        secondary_uom = self._create_template_with_secondary_units().secondary_uom_ids[
+            0
+        ]
+        template = self._create_template_with_secondary_units(
+            stock_secondary_uom_id=secondary_uom.id
+        )
+        self.assertEqual(
+            template.product_variant_id.stock_secondary_uom_id, secondary_uom
+        )
+
+    def test_new_variants_get_template_stock_secondary_uom(self):
+        template = self._create_template_with_secondary_units()
+        box_4 = template.secondary_uom_ids[0]
+        template.stock_secondary_uom_id = box_4
+        template.attribute_line_ids = [
+            Command.create(
+                {
+                    "attribute_id": self.attribute_color.id,
+                    "value_ids": [Command.set(self.attribute_value_white.ids)],
+                }
+            )
+        ]
+        template.attribute_line_ids.value_ids += self.attribute_value_black
+        self.assertEqual(len(template.product_variant_ids), 2)
+        for variant in template.product_variant_ids:
+            self.assertEqual(variant.stock_secondary_uom_id, box_4)
+        self.assertEqual(template.stock_secondary_uom_id, box_4)
+        # A unit of a specific variant is not given to the new ones
+        variants = template.product_variant_ids
+        template.stock_secondary_uom_id = self.env["product.secondary.unit"].create(
+            {
+                "name": "white box",
+                "product_tmpl_id": template.id,
+                "product_id": variants[0].id,
+                "uom_id": self.product_uom_unit.id,
+                "factor": 3,
+            }
+        )
+        template.attribute_line_ids.value_ids += self.env[
+            "product.attribute.value"
+        ].create({"name": "test_red", "attribute_id": self.attribute_color.id})
+        red = template.product_variant_ids - variants
+        self.assertEqual(len(red), 1)
+        self.assertFalse(red.stock_secondary_uom_id)
+
+    def test_product_catalog_secondary_unit_qty_available(self):
+        arch = self.env["product.product"].get_views(
+            [(self.env.ref("product.product_view_kanban_catalog").id, "kanban")]
+        )["views"]["kanban"]["arch"]
+        self.assertIn('name="secondary_unit_qty_available"', arch)
+        self.assertIn('name="stock_secondary_uom_id"', arch)
+        # Usually set on the template, from its form or an import
+        template = self._create_template_with_secondary_units()
+        template.stock_secondary_uom_id = template.secondary_uom_ids[0]
+        product = template.product_variant_id
+        self.env["stock.quant"].create(
+            {
+                "product_id": product.id,
+                "location_id": self.warehouse.lot_stock_id.id,
+                "quantity": 10.0,
+            }
+        )
+        self.assertEqual(product.secondary_unit_qty_available, 2.5)
+
+    def test_archived_template_keeps_stock_secondary_uom(self):
+        template = self._create_template_with_secondary_units()
+        box_4, box_2 = template.secondary_uom_ids
+        template.stock_secondary_uom_id = box_4
+        template.action_archive()
+        variant = template.with_context(active_test=False).product_variant_ids
+        self.assertEqual(variant.stock_secondary_uom_id, box_4)
+        # Recomputing it (e.g. on a module update) does not empty it
+        self.env.add_to_compute(template._fields["stock_secondary_uom_id"], template)
+        template.flush_recordset(["stock_secondary_uom_id"])
+        self.assertEqual(template.stock_secondary_uom_id, box_4)
+        template.stock_secondary_uom_id = box_2
+        self.assertEqual(variant.stock_secondary_uom_id, box_2)
+        self.assertEqual(template.stock_secondary_uom_id, box_2)
+
+    def test_archived_variant_recomputes_template_stock_secondary_uom(self):
+        template = self.product_template
+        white, black = template.product_variant_ids
+        black.stock_secondary_uom_id = template.secondary_uom_ids[1]
+        self.assertFalse(template.stock_secondary_uom_id)
+        # Only the active variants count
+        black.action_archive()
+        self.assertEqual(template.stock_secondary_uom_id, white.stock_secondary_uom_id)
+        # But setting a new one warns about the archived one, which is written too
+        self.assertIn("warning", template.onchange_stock_secondary_uom_id())
+
+    def test_reactivated_variant_gets_template_stock_secondary_uom(self):
+        template = self.product_template
+        white, black = template.product_variant_ids
+        black.action_archive()
+        box_10 = template.secondary_uom_ids.filtered(lambda u: u.code == "C")
+        template.stock_secondary_uom_id = box_10
+        black.action_unarchive()
+        self.assertEqual(black.stock_secondary_uom_id, box_10)
+        self.assertEqual(template.stock_secondary_uom_id, box_10)
