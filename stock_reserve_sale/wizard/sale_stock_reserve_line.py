@@ -13,6 +13,10 @@ class SaleStockReserveLine(models.TransientModel):
         "sale.order.line", string="Order Line", required=True, ondelete="cascade"
     )
     product_id = fields.Many2one(related="sale_line_id.product_id")
+    lot_ids = fields.Many2many(
+        "stock.lot",
+        string="Lots/Serial Numbers",
+    )
     product_uom = fields.Many2one(related="sale_line_id.product_uom")
     product_uom_qty = fields.Float(
         related="sale_line_id.product_uom_qty", string="Ordered Quantity"
