@@ -132,4 +132,21 @@
             </xpath>
         </field>
     </record>
+
+    <record id="product_view_kanban_catalog" model="ir.ui.view">
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="stock.product_view_kanban_catalog" />
+        <field name="arch" type="xml">
+            <div name="o_kanban_qty_available" position="inside">
+                <t
+                    t-if="record.stock_secondary_uom_id.raw_value"
+                    groups="uom.group_uom"
+                >
+                    <span class="mx-1">/</span>
+                    <field name="secondary_unit_qty_available" />
+                    <field name="stock_secondary_uom_id" class="ms-1" />
+                </t>
+            </div>
+        </field>
+    </record>
 </odoo>

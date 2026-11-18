@@ -9,6 +9,10 @@
    to "On Hand"), showing the current stock quantity converted into
    that unit. This is purely informational: it does not affect any
    transfer.
+3. The same quantity is shown on the product card of the catalog (e.g.
+   the *Catalog* button of a sale or purchase order), next to the stock
+   in the product unit (*On Hand: 10 kg / 2.5 box 4-4.0*). Products
+   without a "Second unit for inventory" show only the usual stock.
 
 ## Demanding and counting a secondary quantity on a transfer
 
