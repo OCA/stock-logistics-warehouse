@@ -897,6 +897,25 @@ class TestProductSecondaryUnit(BaseCommon):
         self.assertEqual(len(red), 1)
         self.assertFalse(red.stock_secondary_uom_id)
 
+    def test_product_catalog_secondary_unit_qty_available(self):
+        arch = self.env["product.product"].get_views(
+            [(self.env.ref("product.product_view_kanban_catalog").id, "kanban")]
+        )["views"]["kanban"]["arch"]
+        self.assertIn('name="secondary_unit_qty_available"', arch)
+        self.assertIn('name="stock_secondary_uom_id"', arch)
+        # Usually set on the template, from its form or an import
+        template = self._create_template_with_secondary_units()
+        template.stock_secondary_uom_id = template.secondary_uom_ids[0]
+        product = template.product_variant_id
+        self.env["stock.quant"].create(
+            {
+                "product_id": product.id,
+                "location_id": self.warehouse.lot_stock_id.id,
+                "quantity": 10.0,
+            }
+        )
+        self.assertEqual(product.secondary_unit_qty_available, 2.5)
+
     def test_archived_template_keeps_stock_secondary_uom(self):
         template = self._create_template_with_secondary_units()
         box_4, box_2 = template.secondary_uom_ids
