@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record id="seq_stock_reference_auto" model="ir.sequence">
+        <field name="name">Auto-created Stock Reference</field>
+        <field name="code">stock.reference.auto</field>
+        <field name="prefix">SR/</field>
+        <field name="padding">6</field>
+        <field name="company_id" eval="False" />
+    </record>
+</odoo>
