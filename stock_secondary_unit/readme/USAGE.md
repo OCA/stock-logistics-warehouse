@@ -2,7 +2,9 @@
 
 1. On a product, go to *Inventory tab \> Secondary unit* and choose
    which of the product's configured secondary units should be used
-   for the on-hand display ("Second unit for inventory").
+   for the on-hand display ("Second unit for inventory"). Set on the
+   product template, it is written on all its variants; if the variants
+   end up with distinct ones, the template shows none.
 2. A "Secondary Unit" smart button appears on the product form (next
    to "On Hand"), showing the current stock quantity converted into
    that unit. This is purely informational: it does not affect any
