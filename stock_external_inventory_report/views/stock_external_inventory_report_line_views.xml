@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_stock_external_inventory_report_line_list" model="ir.ui.view">
+        <field name="name">stock.external.inventory.report.line.list</field>
+        <field name="model">stock.external.inventory.report.line</field>
+        <field name="arch" type="xml">
+            <list
+                decoration-danger="over_threshold"
+                decoration-warning="zero_standard_price"
+                decoration-muted="product_not_found"
+            >
+                <header>
+                    <button
+                        name="action_apply_stock_overwrite"
+                        type="object"
+                        string="Apply"
+                        class="btn-primary"
+                        display="always"
+                    />
+                    <button
+                        name="action_mark_reviewed"
+                        type="object"
+                        string="Review"
+                        display="always"
+                    />
+                </header>
+                <field name="report_id" />
+                <field name="external_product_code" />
+                <field name="product_id" />
+                <field name="location_id" />
+                <field name="lot_id" />
+                <field name="stock_type" />
+                <field name="external_qty" />
+                <field name="odoo_qty" />
+                <field name="delta_qty" />
+                <field name="currency_id" column_invisible="True" />
+                <field
+                    name="unit_cost"
+                    widget="monetary"
+                    options="{'currency_field': 'currency_id', 'field_digits': True}"
+                />
+                <field name="variance_amount" />
+                <field name="line_state" />
+                <field name="note" optional="hide" />
+                <field name="over_threshold" column_invisible="True" />
+                <field name="zero_standard_price" column_invisible="True" />
+                <field name="product_not_found" column_invisible="True" />
+                <button
+                    name="action_mark_reviewed"
+                    type="object"
+                    string="Review"
+                    invisible="line_state != 'new'"
+                />
+                <button
+                    name="action_apply_stock_overwrite"
+                    type="object"
+                    string="Apply"
+                    invisible="line_state == 'applied'"
+                />
+            </list>
+        </field>
+    </record>
+
+    <record id="view_stock_external_inventory_report_line_form" model="ir.ui.view">
+        <field name="name">stock.external.inventory.report.line.form</field>
+        <field name="model">stock.external.inventory.report.line</field>
+        <field name="arch" type="xml">
+            <form string="External Inventory Report Line">
+                <header>
+                    <button
+                        name="action_mark_reviewed"
+                        type="object"
+                        string="Review"
+                        invisible="line_state != 'new'"
+                    />
+                    <button
+                        name="action_apply_stock_overwrite"
+                        type="object"
+                        string="Apply"
+                        class="oe_highlight"
+                        invisible="line_state == 'applied'"
+                    />
+                    <field
+                        name="line_state"
+                        widget="statusbar"
+                        statusbar_visible="new,reviewed,applied"
+                    />
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="report_id" />
+                            <field name="external_product_code" />
+                            <field name="product_id" />
+                            <field name="location_id" />
+                            <field name="lot_id" />
+                            <field name="stock_type" />
+                        </group>
+                        <group>
+                            <field name="external_qty" />
+                            <field name="odoo_qty" readonly="1" />
+                            <field name="delta_qty" readonly="1" />
+                            <field name="currency_id" invisible="1" />
+                            <field
+                                name="unit_cost"
+                                widget="monetary"
+                                options="{'currency_field': 'currency_id', 'field_digits': True}"
+                            />
+                            <field name="variance_amount" readonly="1" />
+                            <field name="reviewed_at" readonly="1" />
+                        </group>
+                    </group>
+                    <group>
+                        <field name="note" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_stock_external_inventory_report_line_search" model="ir.ui.view">
+        <field name="name">stock.external.inventory.report.line.search</field>
+        <field name="model">stock.external.inventory.report.line</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="external_product_code" />
+                <field name="product_id" />
+                <field name="location_id" />
+                <field name="report_id" />
+                <filter
+                    name="needs_review"
+                    string="Needs Review"
+                    domain="[('line_state', '=', 'new')]"
+                />
+                <filter
+                    name="reviewed"
+                    string="Reviewed"
+                    domain="[('line_state', '=', 'reviewed')]"
+                />
+                <filter
+                    name="applied"
+                    string="Applied"
+                    domain="[('line_state', '=', 'applied')]"
+                />
+                <separator />
+                <filter
+                    name="missing_product"
+                    string="Missing Product"
+                    domain="[('product_not_found', '=', True)]"
+                />
+                <filter
+                    name="over_threshold"
+                    string="Over Threshold"
+                    domain="[('over_threshold', '=', True)]"
+                />
+                <filter
+                    name="zero_cost"
+                    string="Zero Cost"
+                    domain="[('zero_standard_price', '=', True)]"
+                />
+                <group>
+                    <filter
+                        name="group_by_report"
+                        string="Report"
+                        context="{'group_by': 'report_id'}"
+                    />
+                    <filter
+                        name="group_by_location"
+                        string="Location"
+                        context="{'group_by': 'location_id'}"
+                    />
+                    <filter
+                        name="group_by_line_state"
+                        string="Line State"
+                        context="{'group_by': 'line_state'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record
+        id="action_stock_external_inventory_report_line"
+        model="ir.actions.act_window"
+    >
+        <field name="name">External Inventory Report Lines</field>
+        <field name="res_model">stock.external.inventory.report.line</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_needs_review': 1}</field>
+    </record>
+
+    <menuitem
+        id="menu_stock_external_inventory_report_line"
+        name="External Inventory Report Lines"
+        parent="menu_stock_external_inventory_report_root"
+        action="action_stock_external_inventory_report_line"
+        groups="stock.group_stock_manager"
+        sequence="20"
+    />
+</odoo>

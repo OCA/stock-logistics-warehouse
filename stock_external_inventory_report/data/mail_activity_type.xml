@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+    Copyright 2026 Camptocamp SA
+    License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+-->
+<odoo noupdate="1">
+    <record id="mail_activity_type_discrepancy" model="mail.activity.type">
+        <field name="name">Inventory Discrepancy Review</field>
+        <field name="res_model">stock.external.inventory.report</field>
+        <field name="icon">fa-balance-scale</field>
+    </record>
+    <record id="mail_activity_type_zero_cost" model="mail.activity.type">
+        <field name="name">Inventory Product Cost Missing</field>
+        <field name="res_model">stock.external.inventory.report</field>
+        <field name="icon">fa-money</field>
+    </record>
+    <record id="mail_activity_type_missing_product" model="mail.activity.type">
+        <field name="name">Inventory Product Not Found</field>
+        <field name="res_model">stock.external.inventory.report</field>
+        <field name="icon">fa-question</field>
+    </record>
+</odoo>
