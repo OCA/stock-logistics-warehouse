@@ -71,6 +71,7 @@
                             <field name="report_date" />
                             <field name="warehouse_id" />
                             <field name="external_reference" />
+                            <field name="comparison_date" />
                         </group>
                         <group>
                             <field name="discrepancy_user_id" />
@@ -126,10 +127,61 @@
         </field>
     </record>
 
+    <record id="view_stock_external_inventory_report_search" model="ir.ui.view">
+        <field name="name">stock.external.inventory.report.search</field>
+        <field name="model">stock.external.inventory.report</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="external_reference" />
+                <field name="warehouse_id" />
+                <field name="discrepancy_user_id" />
+                <filter name="new" string="New" domain="[('state', '=', 'new')]" />
+                <filter
+                    name="processed"
+                    string="Processed"
+                    domain="[('state', '=', 'processed')]"
+                />
+                <filter
+                    name="obsolete"
+                    string="Obsolete"
+                    domain="[('state', '=', 'obsolete')]"
+                />
+                <separator />
+                <filter
+                    name="comparison_error"
+                    string="Comparison Error"
+                    domain="[('comparison_has_error', '=', True)]"
+                />
+                <group name="groupby">
+                    <filter
+                        name="groupby_warehouse"
+                        string="Warehouse"
+                        context="{'group_by': 'warehouse_id'}"
+                    />
+                    <filter
+                        name="groupby_state"
+                        string="Status"
+                        context="{'group_by': 'state'}"
+                    />
+                    <filter
+                        name="groupby_discrepancy_user"
+                        string="Discrepancy Responsible"
+                        context="{'group_by': 'discrepancy_user_id'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+
     <record id="action_stock_external_inventory_report" model="ir.actions.act_window">
         <field name="name">External Inventory Reports</field>
         <field name="res_model">stock.external.inventory.report</field>
         <field name="view_mode">list,form</field>
+        <field
+            name="search_view_id"
+            ref="view_stock_external_inventory_report_search"
+        />
     </record>
 
     <menuitem

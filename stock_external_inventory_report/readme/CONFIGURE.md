@@ -1,3 +1,4 @@
-- Optionally, set the system parameter
-  `stock_external_inventory_report.discrepancy_user_id` to the id of the user
-  responsible for the discrepancies (the current user by default).
+- Set the *External Inventory Responsible* on the warehouses: the user
+  responsible for the discrepancies of their reports, who gets their
+  activities. Without one, no activity is scheduled; it can also be set on
+  each report.
