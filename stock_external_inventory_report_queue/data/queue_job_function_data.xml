@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+    Copyright 2026 Camptocamp SA
+    License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+    <record
+        id="job_function_stock_external_inventory_report_process_comparisons_and_alerts"
+        model="queue.job.function"
+    >
+        <field
+            name="model_id"
+            ref="stock_external_inventory_report.model_stock_external_inventory_report"
+        />
+        <field name="method">_process_comparisons_and_alerts</field>
+    </record>
+</odoo>
