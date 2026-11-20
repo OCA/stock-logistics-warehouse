@@ -1,0 +1,2 @@
+odoo-addon-stock_warehouse_lock_location @ git+https://github.com/OCA/stock-logistics-warehouse.git@refs/pull/2729/head#subdirectory=stock_warehouse_lock_location
+odoo-addon-stock_warehouse_stock_type @ git+https://github.com/OCA/stock-logistics-warehouse.git@refs/pull/2731/head#subdirectory=stock_warehouse_stock_type
