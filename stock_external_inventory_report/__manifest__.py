@@ -23,6 +23,7 @@
         "data/mail_activity_type.xml",
         "views/stock_external_inventory_report_views.xml",
         "views/stock_external_inventory_report_line_views.xml",
+        "views/stock_warehouse_views.xml",
     ],
     "installable": True,
 }

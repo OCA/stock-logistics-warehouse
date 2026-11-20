@@ -9,6 +9,7 @@ from unittest.mock import patch
 
 from odoo.exceptions import UserError
 from odoo.fields import Command
+from odoo.tests import new_test_user
 
 from ..models.stock_external_inventory_report import (
     ACTIVITY_DISCREPANCY,
@@ -384,3 +385,37 @@ class TestStockExternalInventoryReport(InventoryReportCommon):
             # queue module's)
             StockExternalInventoryReport.process_comparisons_and_alerts(report)
         compare.assert_called_once_with(report)
+
+    def test_discrepancy_user_from_warehouse(self):
+        """The report's responsible is the one of its warehouse, if any."""
+        user = new_test_user(
+            self.env,
+            login="external_inventory_responsible",
+            groups="stock.group_stock_user",
+        )
+        self.warehouse.external_inventory_user_id = user
+        report = self._create_report()
+        self.assertEqual(report.discrepancy_user_id, user)
+        self.warehouse.external_inventory_user_id = False
+        self.assertFalse(self._create_report().discrepancy_user_id)
+
+    def test_no_activity_without_discrepancy_user(self):
+        """Without responsible, the comparison schedules no activity."""
+        self.warehouse.external_inventory_user_id = False
+        report = self._create_report(
+            line_ids=[
+                Command.create(
+                    {"external_product_code": "UNKNOWN-CODE", "external_qty": 1.0}
+                )
+            ]
+        )
+        report._process_comparisons_and_alerts()
+        self.assertTrue(report.line_ids.product_not_found)
+        self.assertFalse(self._activities_for_report(report))
+
+    def test_comparison_date(self):
+        """A successful comparison is dated, a failed one is not."""
+        report = self._create_report()
+        self.assertFalse(report.comparison_date)
+        report._process_comparisons_and_alerts()
+        self.assertTrue(report.comparison_date)

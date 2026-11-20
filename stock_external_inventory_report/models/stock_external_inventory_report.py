@@ -52,10 +52,15 @@ class StockExternalInventoryReport(models.Model):
     discrepancy_user_id = fields.Many2one(
         "res.users",
         string="Discrepancy Responsible",
-        required=True,
-        default=lambda self: self._default_discrepancy_user_id(),
+        compute="_compute_discrepancy_user_id",
+        store=True,
+        readonly=False,
+        precompute=True,
         check_company=True,
         tracking=True,
+        help="Gets the activities of the report. Defaults to the external "
+        "inventory responsible of the warehouse; without one, no activity is "
+        "scheduled.",
     )
     state = fields.Selection(
         [
@@ -84,6 +89,11 @@ class StockExternalInventoryReport(models.Model):
         "unresolved lines until this is fixed and retried.",
     )
     comparison_error_message = fields.Text(copy=False)
+    comparison_date = fields.Datetime(
+        readonly=True,
+        copy=False,
+        help="When the lines were last compared with the stock successfully.",
+    )
 
     @api.private
     def process_comparisons_and_alerts(self):
@@ -116,13 +126,13 @@ class StockExternalInventoryReport(models.Model):
                 report._write_comparison_error(str(exc))
                 raise
             else:
-                if report.comparison_has_error:
-                    report.write(
-                        {
-                            "comparison_has_error": False,
-                            "comparison_error_message": False,
-                        }
-                    )
+                report.write(
+                    {
+                        "comparison_date": fields.Datetime.now(),
+                        "comparison_has_error": False,
+                        "comparison_error_message": False,
+                    }
+                )
         return True
 
     def _write_comparison_error(self, message):
@@ -142,20 +152,10 @@ class StockExternalInventoryReport(models.Model):
         """Return the variance amount above which a line is a discrepancy."""
         return 100.0
 
-    # FIXME: should not default to current user
-    # and should come from warehouse specific field.
-    @api.model
-    def _default_discrepancy_user_id(self):
-        user_param = (
-            self.env["ir.config_parameter"]
-            .sudo()
-            .get_param(
-                "stock_external_inventory_report.discrepancy_user_id",
-            )
-        )
-        if user_param and user_param.isdigit():
-            return int(user_param)
-        return self.env.user.id
+    @api.depends("warehouse_id")
+    def _compute_discrepancy_user_id(self):
+        for report in self:
+            report.discrepancy_user_id = report.warehouse_id.external_inventory_user_id
 
     @api.depends("line_ids.line_state")
     def _compute_line_counters(self):
@@ -205,6 +205,7 @@ class StockExternalInventoryReport(models.Model):
             "activity_ids",
             "comparison_has_error",
             "comparison_error_message",
+            "comparison_date",
         }
         if blocked_fields and self.filtered(lambda rec: rec.state == "obsolete"):
             raise UserError(

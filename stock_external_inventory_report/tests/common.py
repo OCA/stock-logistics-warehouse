@@ -23,6 +23,7 @@ class InventoryReportCommon(TransactionCase):
             )
         )
         cls.warehouse = cls.env.ref("stock.warehouse0")
+        cls.warehouse.external_inventory_user_id = cls.env.user
 
         cls.product = cls.env["product.product"].create(
             {

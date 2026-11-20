@@ -71,6 +71,7 @@
                             <field name="report_date" />
                             <field name="warehouse_id" />
                             <field name="external_reference" />
+                            <field name="comparison_date" />
                         </group>
                         <group>
                             <field name="discrepancy_user_id" />
