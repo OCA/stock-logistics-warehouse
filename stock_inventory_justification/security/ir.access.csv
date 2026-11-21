@@ -1,0 +1,3 @@
+id,name,model_id,group_id/id,operation,domain
+stock_inventory_justification_reader,stock.inventory.justification reader access,stock.inventory.justification,stock.group_stock_user,r,
+stock_inventory_justification_manager_access,stock.inventory.justification manager access,stock.inventory.justification,stock.group_stock_manager,crud,
