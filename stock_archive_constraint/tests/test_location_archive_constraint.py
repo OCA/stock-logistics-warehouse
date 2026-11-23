@@ -75,7 +75,7 @@ class TestLocationArchiveConstraint(BaseCommon):
     def _create_stock_picking(self, location_id, location_dest_id, product_id, qty):
         stock_picking_form = Form(self.env["stock.picking"])
         stock_picking_form.picking_type_id = self.env.ref("stock.picking_type_in")
-        with stock_picking_form.move_ids_without_package.new() as line:
+        with stock_picking_form.move_ids.new() as line:
             line.product_id = product_id
             line.product_uom_qty = qty
         stock_picking = stock_picking_form.save()
@@ -83,7 +83,7 @@ class TestLocationArchiveConstraint(BaseCommon):
             {"location_id": location_id.id, "location_dest_id": location_dest_id.id}
         )
         stock_picking.action_confirm()
-        for line in stock_picking.move_ids_without_package:
+        for line in stock_picking.move_ids:
             line.quantity = line.product_uom_qty
         stock_picking.button_validate()
 

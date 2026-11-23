@@ -31,9 +31,9 @@ class ProductProduct(models.Model):
                 self.env._(
                     "It is not possible to archive product "
                     "'%(display_name)s' which has "
-                    "associated stock quantities."
+                    "associated stock quantities.",
+                    display_name=res.product_id.display_name,
                 )
-                % {"display_name": res.product_id.display_name}
             )
 
     @api.constrains("active")
@@ -52,9 +52,9 @@ class ProductProduct(models.Model):
                 self.env._(
                     "It is not possible to archive product "
                     "'%(display_name)s' which has "
-                    "associated picking lines."
+                    "associated picking lines.",
+                    display_name=res.product_id.display_name,
                 )
-                % {"display_name": res.product_id.display_name}
             )
 
     @api.constrains("active")
@@ -73,7 +73,7 @@ class ProductProduct(models.Model):
                 self.env._(
                     "It is not possible to archive product "
                     "'%(display_name)s' which has "
-                    "associated stock reservations."
+                    "associated stock reservations.",
+                    display_name=res.product_id.display_name,
                 )
-                % {"display_name": res.product_id.display_name}
             )

@@ -41,9 +41,9 @@ class StockLocation(models.Model):
                 self.env._(
                     "It is not possible to archive location "
                     "'%(display_name)s' which has "
-                    "associated picking lines."
+                    "associated picking lines.",
+                    display_name=res.display_name,
                 )
-                % {"display_name": res.display_name}
             )
 
     @api.constrains("active")
@@ -73,7 +73,7 @@ class StockLocation(models.Model):
                 self.env._(
                     "It is not possible to archive location "
                     "'%(display_name)s' which has "
-                    "associated stock reservations."
+                    "associated stock reservations.",
+                    display_name=res.display_name,
                 )
-                % {"display_name": res.display_name}
             )
