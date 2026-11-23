@@ -2,7 +2,7 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
 from odoo.exceptions import ValidationError
-from odoo.tests import Form, tagged
+from odoo.tests import Form, new_test_user, tagged
 
 from odoo.addons.base.tests.common import BaseCommon
 
@@ -166,6 +166,31 @@ class TestLocationArchiveConstraint(BaseCommon):
         self.assertFalse(self.product_1.active)
         with self.assertRaises(ValidationError):
             self.product_2.active = False
+
+    def test_archive_product_stock_other_company(self):
+        company_2 = self.env["res.company"].create({"name": "Company 2"})
+        warehouse_2 = self.env["stock.warehouse"].search(
+            [("company_id", "=", company_2.id)], limit=1
+        )
+        self.env["stock.quant"].create(
+            {
+                "location_id": warehouse_2.lot_stock_id.id,
+                "product_id": self.product_2.id,
+                "quantity": 20.00,
+            }
+        )
+        user = new_test_user(
+            self.env,
+            login="stock_archive_constraint_manager",
+            groups="stock.group_stock_manager,product.group_product_manager",
+            company_id=self.company.id,
+            company_ids=[(6, 0, (self.company | company_2).ids)],
+        )
+        product = self.product_2.with_user(user).with_context(
+            allowed_company_ids=self.company.ids
+        )
+        with self.assertRaises(ValidationError):
+            product.active = False
 
     def test_archive_unarchive_stock_location(self):
         self.stock_location.active = False
