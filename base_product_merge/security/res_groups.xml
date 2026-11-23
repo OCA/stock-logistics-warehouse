@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record id="res_group_merge_duplicate_product" model="res.groups">
+        <field name="name">Merge duplicate products</field>
+    </record>
+</odoo>

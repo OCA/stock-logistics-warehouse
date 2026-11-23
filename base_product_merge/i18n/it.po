@@ -1,0 +1,141 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* base_product_merge
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2024-08-07 08:58+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.6.2\n"
+
+#. module: base_product_merge
+#: model_terms:ir.ui.view,arch_db:base_product_merge.view_base_product_merge_form
+msgid "Cancel"
+msgstr "Annulla"
+
+#. module: base_product_merge
+#: model:ir.model.fields,field_description:base_product_merge.field_base_product_merge__create_uid
+msgid "Created by"
+msgstr "Creato da"
+
+#. module: base_product_merge
+#: model:ir.model.fields,field_description:base_product_merge.field_base_product_merge__create_date
+msgid "Created on"
+msgstr "Creato il"
+
+#. module: base_product_merge
+#: model:ir.model.fields,field_description:base_product_merge.field_base_product_merge__dst_product_id
+#: model:ir.model.fields,field_description:base_product_merge.field_base_product_merge__dst_product_tmpl_id
+msgid "Destination product"
+msgstr "Prodotto destinazione"
+
+#. module: base_product_merge
+#: model:ir.model.fields,field_description:base_product_merge.field_base_product_merge__display_name
+msgid "Display Name"
+msgstr "Nome visualizzato"
+
+#. module: base_product_merge
+#. odoo-python
+#: code:addons/base_product_merge/wizard/base_product_merge.py:0
+#, python-format
+msgid "Error occurred while merging products."
+msgstr "Errore durante l'unione dei prodotti."
+
+#. module: base_product_merge
+#: model:ir.model.fields,field_description:base_product_merge.field_base_product_merge__id
+msgid "ID"
+msgstr "ID"
+
+#. module: base_product_merge
+#: model:ir.model.fields,field_description:base_product_merge.field_base_product_merge__write_uid
+msgid "Last Updated by"
+msgstr "Ultimo aggiornamento di"
+
+#. module: base_product_merge
+#: model:ir.model.fields,field_description:base_product_merge.field_base_product_merge__write_date
+msgid "Last Updated on"
+msgstr "Ultimo aggiornamento il"
+
+#. module: base_product_merge
+#: model:ir.model.fields,field_description:base_product_merge.field_base_product_merge__merge_method
+msgid "Merge Method"
+msgstr "Metodo di unione"
+
+#. module: base_product_merge
+#: model:ir.actions.act_window,name:base_product_merge.action_product_merge
+#: model:ir.actions.act_window,name:base_product_merge.action_product_template_merge
+#: model_terms:ir.ui.view,arch_db:base_product_merge.view_base_product_merge_form
+msgid "Merge Products"
+msgstr "Unisci prodotti"
+
+#. module: base_product_merge
+#: model:res.groups,name:base_product_merge.res_group_merge_duplicate_product
+msgid "Merge duplicate products"
+msgstr "Unisci prodotti duplicati"
+
+#. module: base_product_merge
+#: model:ir.model,name:base_product_merge.model_base_product_merge
+msgid "Merges two products"
+msgstr "Unisci due prodotti"
+
+#. module: base_product_merge
+#: model:ir.model.fields.selection,name:base_product_merge.selection__base_product_merge__merge_method__orm
+msgid "ORM"
+msgstr "ORM"
+
+#. module: base_product_merge
+#: model:ir.model.fields.selection,name:base_product_merge.selection__base_product_merge__ptype__product_product
+msgid "Product"
+msgstr "Prodotto"
+
+#. module: base_product_merge
+#: model:ir.model.fields,field_description:base_product_merge.field_base_product_merge__product_ids
+#: model:ir.model.fields,field_description:base_product_merge.field_base_product_merge__product_tmpl_ids
+msgid "Products to merge"
+msgstr "Prodotti da unire"
+
+#. module: base_product_merge
+#: model:ir.model.fields,field_description:base_product_merge.field_base_product_merge__ptype
+msgid "Ptype"
+msgstr "Tipo prodotto"
+
+#. module: base_product_merge
+#: model:ir.model.fields.selection,name:base_product_merge.selection__base_product_merge__merge_method__sql
+msgid "SQL"
+msgstr "SQL"
+
+#. module: base_product_merge
+#: model:ir.model.fields.selection,name:base_product_merge.selection__base_product_merge__ptype__product_template
+msgid "Template"
+msgstr "Modello"
+
+#. module: base_product_merge
+#: model_terms:ir.ui.view,arch_db:base_product_merge.view_base_product_merge_form
+msgid ""
+"The selected products will be merged together. All\n"
+"                        documents linking to one of these products will be\n"
+"                        redirected to the aggregated product. You can remove\n"
+"                        products from this list to avoid merging them."
+msgstr ""
+"I prodotti selezionati verrano uniti insieme. Tutti\n"
+"                        i documenti collegati ad uno di questi prodotti "
+"verranno\n"
+"                        rediretti al prodotto aggregato. Si possono "
+"rimuovere\n"
+"                        prodotti da questo elenco per evitare di unirli."
+
+#. module: base_product_merge
+#. odoo-python
+#: code:addons/base_product_merge/wizard/base_product_merge.py:0
+#: code:addons/base_product_merge/wizard/base_product_merge.py:0
+#, python-format
+msgid "You cannot merge product to it self."
+msgstr "Non si può unire un prodotto con se stesso."
