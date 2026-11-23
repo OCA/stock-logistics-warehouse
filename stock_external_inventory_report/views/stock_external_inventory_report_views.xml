@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_stock_external_inventory_report_tree" model="ir.ui.view">
+        <field name="name">stock.external.inventory.report.tree</field>
+        <field name="model">stock.external.inventory.report</field>
+        <field name="arch" type="xml">
+            <list decoration-danger="comparison_has_error">
+                <field name="name" />
+                <field name="report_date" />
+                <field name="warehouse_id" optional="show" />
+                <field name="discrepancy_user_id" />
+                <field name="state" />
+                <field name="line_count" />
+                <field name="reviewed_line_count" />
+                <field name="total_variance_amount" />
+                <field name="over_threshold_line_count" />
+                <field name="zero_cost_line_count" />
+                <field name="comparison_has_error" optional="hide" />
+            </list>
+        </field>
+    </record>
+
+    <record id="view_stock_external_inventory_report_form" model="ir.ui.view">
+        <field name="name">stock.external.inventory.report.form</field>
+        <field name="model">stock.external.inventory.report</field>
+        <field name="arch" type="xml">
+            <form string="External Inventory Report">
+                <header>
+                    <button
+                        name="action_process_comparisons"
+                        type="object"
+                        string="Run Comparison"
+                        invisible="state != 'new'"
+                    />
+                    <button
+                        name="action_apply_stock_overwrite"
+                        type="object"
+                        string="Apply Stock Overwrite"
+                        invisible="state == 'obsolete'"
+                    />
+                    <button
+                        name="action_mark_processed"
+                        type="object"
+                        string="Mark as Processed"
+                        invisible="state != 'new'"
+                    />
+                    <button
+                        name="action_set_obsolete"
+                        type="object"
+                        string="Set Obsolete"
+                        invisible="state == 'obsolete'"
+                    />
+                    <field
+                        name="state"
+                        widget="statusbar"
+                        statusbar_visible="new,processed,obsolete"
+                    />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box" />
+                    <div
+                        class="alert alert-danger"
+                        role="alert"
+                        invisible="not comparison_has_error"
+                    >
+                        <field name="comparison_error_message" readonly="1" />
+                    </div>
+                    <group>
+                        <group>
+                            <field name="name" readonly="1" />
+                            <field name="report_date" />
+                            <field name="warehouse_id" />
+                            <field name="external_reference" />
+                            <field name="comparison_date" />
+                        </group>
+                        <group>
+                            <field name="discrepancy_user_id" />
+                            <field
+                                name="company_id"
+                                groups="base.group_multi_company"
+                            />
+                            <field name="total_variance_amount" readonly="1" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Lines">
+                            <field
+                                name="line_ids"
+                                readonly="state == 'obsolete'"
+                                limit="500"
+                            >
+                                <list editable="bottom">
+                                    <field name="product_id" />
+                                    <field name="location_id" />
+                                    <field name="lot_id" />
+                                    <field name="stock_type" />
+                                    <field name="external_qty" />
+                                    <field name="odoo_qty" readonly="1" />
+                                    <field name="delta_qty" readonly="1" />
+                                    <field name="currency_id" column_invisible="True" />
+                                    <field
+                                        name="unit_cost"
+                                        widget="monetary"
+                                        options="{'currency_field': 'currency_id', 'field_digits': True}"
+                                    />
+                                    <field name="variance_amount" readonly="1" />
+                                    <field name="line_state" />
+                                    <button
+                                        name="action_mark_reviewed"
+                                        type="object"
+                                        string="Review"
+                                        invisible="line_state != 'new'"
+                                    />
+                                    <button
+                                        name="action_apply_stock_overwrite"
+                                        type="object"
+                                        string="Apply"
+                                        invisible="line_state == 'applied'"
+                                    />
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter />
+            </form>
+        </field>
+    </record>
+
+    <record id="view_stock_external_inventory_report_search" model="ir.ui.view">
+        <field name="name">stock.external.inventory.report.search</field>
+        <field name="model">stock.external.inventory.report</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="external_reference" />
+                <field name="warehouse_id" />
+                <field name="discrepancy_user_id" />
+                <filter name="new" string="New" domain="[('state', '=', 'new')]" />
+                <filter
+                    name="processed"
+                    string="Processed"
+                    domain="[('state', '=', 'processed')]"
+                />
+                <filter
+                    name="obsolete"
+                    string="Obsolete"
+                    domain="[('state', '=', 'obsolete')]"
+                />
+                <separator />
+                <filter
+                    name="comparison_error"
+                    string="Comparison Error"
+                    domain="[('comparison_has_error', '=', True)]"
+                />
+                <group name="groupby">
+                    <filter
+                        name="groupby_warehouse"
+                        string="Warehouse"
+                        context="{'group_by': 'warehouse_id'}"
+                    />
+                    <filter
+                        name="groupby_state"
+                        string="Status"
+                        context="{'group_by': 'state'}"
+                    />
+                    <filter
+                        name="groupby_discrepancy_user"
+                        string="Discrepancy Responsible"
+                        context="{'group_by': 'discrepancy_user_id'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_stock_external_inventory_report" model="ir.actions.act_window">
+        <field name="name">External Inventory Reports</field>
+        <field name="res_model">stock.external.inventory.report</field>
+        <field name="view_mode">list,form</field>
+        <field
+            name="search_view_id"
+            ref="view_stock_external_inventory_report_search"
+        />
+    </record>
+
+    <menuitem
+        id="menu_stock_external_inventory_report_root"
+        name="External Inventory Reports"
+        parent="stock.menu_stock_warehouse_mgmt"
+        groups="stock.group_stock_manager"
+        sequence="95"
+    />
+
+    <menuitem
+        id="menu_stock_external_inventory_report"
+        name="External Inventory Reports"
+        parent="menu_stock_external_inventory_report_root"
+        action="action_stock_external_inventory_report"
+        groups="stock.group_stock_manager"
+        sequence="10"
+    />
+</odoo>
