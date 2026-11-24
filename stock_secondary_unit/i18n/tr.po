@@ -48,6 +48,15 @@ msgid "Product Variant"
 msgstr "Ürün Varyantı"
 
 #. module: stock_secondary_unit
+#. odoo-python
+#: code:addons/stock_secondary_unit/models/product_template.py:0
+msgid ""
+"Product variants have distinct second units for inventory:\n"
+"{secondary_uom}\n"
+"All variants will be written with the new one"
+msgstr ""
+
+#. module: stock_secondary_unit
 #: model:ir.model.fields,field_description:stock_secondary_unit.field_stock_move_line__quantity
 msgid "Quantity"
 msgstr "Miktar"
@@ -112,3 +121,9 @@ msgstr ""
 "Bu, taşınması planlanan ürün miktarıdır. Bu miktarın düşürülmesi bir sipariş "
 "geri dönüşü oluşturmaz. Atanmış taşımalarda bu miktarın değiştirilmesi ürün "
 "rezervasyonunu etkiler ve dikkatli yapılmalıdır."
+
+#. module: stock_secondary_unit
+#. odoo-python
+#: code:addons/stock_secondary_unit/models/product_template.py:0
+msgid "Warning"
+msgstr ""
