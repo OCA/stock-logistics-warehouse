@@ -127,23 +127,25 @@ class StockWarehouse(models.Model):
         domain = [("location_id", "=", location.id), ("state", "in", ["draft"])]
         existing_cycle_counts = self.env["stock.cycle.count"].search(domain)
         if existing_cycle_counts:
-            existing_earliest_date = sorted(
-                existing_cycle_counts.mapped("date_deadline")
-            )[0]
-            existing_earliest_date = fields.Date.from_string(existing_earliest_date)
             cycle_count_proposed_date = fields.Date.from_string(
                 cycle_count_proposed["date"]
             )
-            if cycle_count_proposed_date < existing_earliest_date:
-                cc_to_update = existing_cycle_counts.filtered(
-                    lambda x: x.date_deadline == existing_earliest_date
-                )
-                cc_to_update.write(
-                    {
-                        "automatic_deadline_date": cycle_count_proposed_date,
-                        "cycle_count_rule_id": cycle_count_proposed["rule_type"].id,
-                    }
-                )
+            vals = {
+                "automatic_deadline_date": cycle_count_proposed_date,
+                "cycle_count_rule_id": cycle_count_proposed["rule_type"].id,
+            }
+            undated_cycle_counts = existing_cycle_counts.filtered(
+                lambda x: not x.date_deadline
+            )
+            undated_cycle_counts.write(vals)
+            dated_cycle_counts = existing_cycle_counts - undated_cycle_counts
+            if dated_cycle_counts:
+                existing_earliest_date = min(dated_cycle_counts.mapped("date_deadline"))
+                if cycle_count_proposed_date < existing_earliest_date:
+                    cc_to_update = dated_cycle_counts.filtered(
+                        lambda x: x.date_deadline == existing_earliest_date
+                    )
+                    cc_to_update.write(vals)
         return existing_cycle_counts
 
     @api.model
