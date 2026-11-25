@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+ir_model_access_product_history,product_history user,product_history.model_product_history,stock.group_stock_user,1,1,1,1
