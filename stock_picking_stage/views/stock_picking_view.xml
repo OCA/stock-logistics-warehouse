@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 Camptocamp SA
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="view_picking_stage_form" model="ir.ui.view">
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form" />
+        <field name="arch" type="xml">
+            <field name="origin" position="before">
+                <field name="stage_id" />
+                <field name="stage_code" invisible="1" />
+                <field name="stage_color" invisible="1" />
+            </field>
+            <div name="button_box" position="after">
+                <widget
+                    name="picking_stage_ribbon"
+                    field_name="stage_code"
+                    bg_color_field="stage_color"
+                    invisible="not id or not (stage_id or stage_code)"
+                />
+            </div>
+        </field>
+    </record>
+</odoo>

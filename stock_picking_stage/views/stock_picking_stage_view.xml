@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 Camptocamp SA
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="stock_picking_stage_view_form" model="ir.ui.view">
+        <field name="name">stock.picking.stage.view.form</field>
+        <field name="model">stock.picking.stage</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only" />
+                        <h1>
+                            <field name="name" />
+                        </h1>
+                    </div>
+                    <group>
+                        <field name="code" />
+                        <field name="color" widget="color_picker" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="stock_picking_stage_view_tree" model="ir.ui.view">
+        <field name="name">stock.picking.stage.view.tree</field>
+        <field name="model">stock.picking.stage</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name" />
+                <field name="code" />
+                <field name="color" />
+            </list>
+        </field>
+    </record>
+
+    <record id="stock_picking_stage_action" model="ir.actions.act_window">
+        <field name="name">Picking Stage</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">stock.picking.stage</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem
+        id="stock_picking_stage_menu"
+        name="Picking Stage"
+        parent="stock.menu_stock_config_settings"
+        action="stock_picking_stage_action"
+        sequence="99"
+    />
+</odoo>
