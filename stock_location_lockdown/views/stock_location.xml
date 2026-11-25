@@ -8,6 +8,8 @@
         <field name="arch" type="xml">
             <field name="usage" position="after">
                 <field name="block_stock_entrance" invisible="usage != 'internal'" />
+                <field name="block_stock_exit" invisible="usage != 'internal'" />
+                <field name="no_physical_stock" invisible="usage != 'internal'" />
             </field>
         </field>
     </record>
