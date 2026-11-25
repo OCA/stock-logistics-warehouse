@@ -240,6 +240,37 @@ class TestStockCycleCount(BaseCommon):
         )
         self.assertTrue(count, "Zero confirmation not being created.")
 
+    def test_cycle_count_planner_existing_drafts(self):
+        """Existing planned cycle counts are dated or brought forward."""
+        loc_undated = self.big_wh.lot_stock_id
+        loc_dated = self.stock_location_model.create(
+            {"name": "Shelf", "location_id": loc_undated.id}
+        )
+        undated_count = self.cycle_count_model.create(
+            {
+                "name": "Planned cycle count without date",
+                "cycle_count_rule_id": self.rule_periodic.id,
+                "location_id": loc_undated.id,
+            }
+        )
+        dated_count = self.cycle_count_model.create(
+            {
+                "name": "Planned cycle count with a later date",
+                "cycle_count_rule_id": self.rule_periodic.id,
+                "location_id": loc_dated.id,
+                "automatic_deadline_date": fields.Date.today() + timedelta(days=20),
+            }
+        )
+        self.assertFalse(undated_count.date_deadline)
+        self.big_wh.cron_cycle_count()
+        self.assertEqual(undated_count.date_deadline, fields.Date.today())
+        self.assertEqual(dated_count.date_deadline, fields.Date.today())
+        for loc in loc_undated | loc_dated:
+            self.assertEqual(
+                self.cycle_count_model.search_count([("location_id", "=", loc.id)]),
+                1,
+            )
+
     def test_cycle_count_workflow(self):
         """Tests workflow."""
         self.cycle_count_1.action_create_inventory_adjustment()
