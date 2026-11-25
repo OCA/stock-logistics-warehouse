@@ -38,6 +38,7 @@ class TestStockRemovalLocationByPriority(TransactionCase):
         # Removal strategies:
         self.fifo = self.env.ref("stock.removal_fifo")
         self.lifo = self.env.ref("stock.removal_lifo")
+        self.closest = self.env.ref("stock.removal_closest")
 
         # Create locations:
         self.stock = self.stock_location_model.create(
@@ -160,3 +161,20 @@ class TestStockRemovalLocationByPriority(TransactionCase):
                 self.assertEqual(q.reserved_quantity, 0.0)
             if q.location_id == self.shelf_B:
                 self.assertEqual(q.reserved_quantity, 5.0)
+
+    def test_03_stock_removal_location_by_priority_closest(self):
+        """Other removal strategies fall back to the standard behaviour."""
+        self.stock.removal_strategy_id = self.closest
+        picking_1 = self._create_picking(
+            self.picking_internal, self.stock, self.stock_2, 5
+        )
+        picking_1.flush_model()
+        picking_1.action_confirm()
+        picking_1.action_assign()
+        self.assertEqual(picking_1.state, "assigned")
+        # quants must be reserved in Shelf A (closest location by name).
+        for q in self.quants:
+            if q.location_id == self.shelf_A:
+                self.assertEqual(q.reserved_quantity, 5.0)
+            if q.location_id == self.shelf_B:
+                self.assertEqual(q.reserved_quantity, 0.0)

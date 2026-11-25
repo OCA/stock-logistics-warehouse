@@ -3,7 +3,6 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 from odoo import api, fields, models
-from odoo.exceptions import UserError
 
 
 class StockQuant(models.Model):
@@ -22,7 +21,4 @@ class StockQuant(models.Model):
                 return "in_date ASC, removal_priority ASC, id"
             elif removal_strategy == "lifo":
                 return "in_date DESC, removal_priority ASC, id desc"
-            raise UserError(
-                self.env._("Removal strategy %s not implemented.", removal_strategy)
-            )
         return super()._get_removal_strategy_order(removal_strategy)
