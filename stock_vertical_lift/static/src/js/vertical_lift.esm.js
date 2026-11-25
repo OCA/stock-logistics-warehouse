@@ -85,10 +85,7 @@ patch(FormController.prototype, {
 
     vlift_bus_action_refresh(params) {
         if (params.id === this.props.resId && params.model === this.props.resModel) {
-            this.env.services.action.doAction({
-                type: "ir.actions.client",
-                tag: "soft_reload",
-            });
+            this.model.root.load();
         }
     },
 });
