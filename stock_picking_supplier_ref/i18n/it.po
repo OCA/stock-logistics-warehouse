@@ -1,0 +1,47 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_picking_supplier_ref
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2025-07-15 11:25+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.10.4\n"
+
+#. module: stock_picking_supplier_ref
+#: model:ir.model.fields,help:stock_picking_supplier_ref.field_stock_picking__supplier_reference
+msgid ""
+"Enter the supplier's delivery note or shipment reference related to this "
+"receipt. This does not sync automatically with the supplier reference in the "
+"purchase order."
+msgstr ""
+"Inserire la bolla di consegna del fornitore o il riferimento di spedizione "
+"relativo a questa ricevuta. Questo non si sincronizza automaticamente con il "
+"riferimento del fornitore nell'ordine di acquisto."
+
+#. module: stock_picking_supplier_ref
+#: model:ir.model.fields,field_description:stock_picking_supplier_ref.field_stock_picking__supplier_reference
+msgid "Supplier Delivery Reference"
+msgstr "Riferimento consegna fornitore"
+
+#. module: stock_picking_supplier_ref
+#: model:ir.model,name:stock_picking_supplier_ref.model_stock_picking
+msgid "Transfer"
+msgstr "Trasferimento"
+
+#~ msgid "Supplier Reference Available in PO"
+#~ msgstr "Riferimento fornitore disponibile in OA"
+
+#~ msgid ""
+#~ "This field adds the supplier reference added in related purchase order"
+#~ msgstr ""
+#~ "Questo campo aggiunge il riferimento fornitore aggiunto nell0ordine di "
+#~ "acquisto relativo"
