@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-06-10 05:35+0000\n"
-"PO-Revision-Date: 2026-10-01 08:46+0000\n"
+"PO-Revision-Date: 2026-11-25 10:46+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.15.2\n"
+"X-Generator: Weblate 2026.11.2\n"
 
 #. module: stock_cycle_count
 #: code:addons/stock_cycle_count/models/stock_cycle_count_rule.py:0
@@ -163,7 +163,7 @@ msgstr "Calcola regole conteggio a rotazione"
 #. module: stock_cycle_count
 #: model:ir.model,name:stock_cycle_count.model_res_config_settings
 msgid "Config Settings"
-msgstr "Impostazioni di configurazione"
+msgstr "Impostazioni configurazione"
 
 #. module: stock_cycle_count
 #: model_terms:ir.ui.view,arch_db:stock_cycle_count.stock_cycle_count_form_view
