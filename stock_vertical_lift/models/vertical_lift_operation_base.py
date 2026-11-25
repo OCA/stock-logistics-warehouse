@@ -97,7 +97,7 @@ class VerticalLiftOperationBase(models.AbstractModel):
     shuttle_id = fields.Many2one(
         comodel_name="vertical.lift.shuttle", required=True, readonly=True
     )
-    location_id = fields.Many2one(related="shuttle_id.location_id")
+    location_id = fields.Many2one(related="shuttle_id.shared_storage_location_id")
     number_of_ops = fields.Integer(
         compute="_compute_number_of_ops", string="Number of Operations"
     )
