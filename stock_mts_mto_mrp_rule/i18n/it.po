@@ -1,0 +1,37 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_mts_mto_mrp_rule
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2022-12-06 11:44+0000\n"
+"Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.14.1\n"
+
+#. module: stock_mts_mto_mrp_rule
+#: model:ir.model.fields,field_description:stock_mts_mto_mrp_rule.field_stock_move__display_name
+msgid "Display Name"
+msgstr "Nome visualizzato"
+
+#. module: stock_mts_mto_mrp_rule
+#: model:ir.model.fields,field_description:stock_mts_mto_mrp_rule.field_stock_move__id
+msgid "ID"
+msgstr "ID"
+
+#. module: stock_mts_mto_mrp_rule
+#: model:ir.model.fields,field_description:stock_mts_mto_mrp_rule.field_stock_move____last_update
+msgid "Last Modified on"
+msgstr "Ultima modifica il"
+
+#. module: stock_mts_mto_mrp_rule
+#: model:ir.model,name:stock_mts_mto_mrp_rule.model_stock_move
+msgid "Stock Move"
+msgstr "Movimento di magazzino"
