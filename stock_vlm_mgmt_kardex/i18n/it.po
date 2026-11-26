@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2025-07-15 15:53+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
@@ -30,3 +30,43 @@ msgstr "Kardex"
 #: model:ir.model.fields,field_description:stock_vlm_mgmt_kardex.field_stock_location__vlm_vendor
 msgid "Vlm Vendor"
 msgstr "Fornitore VLM"
+
+#. module: stock_vlm_mgmt_kardex
+#: model:ir.model.fields,field_description:stock_vlm_mgmt_kardex.field_stock_location__format_expression
+msgid "Socket Message Format"
+msgstr "Formato del messaggio socket"
+
+#. module: stock_vlm_mgmt_kardex
+#: model:ir.model.fields,help:stock_vlm_mgmt_kardex.field_stock_location__format_expression
+msgid "Message template using placeholders such as {task_type},{task_id},{qty}. Commas are replaced with the configured separator. Available keys: task_type, task_id, address, carrier, pos_x, pos_y, qty, info1, info2, info3, info4."
+msgstr "Modello del messaggio con segnaposto come {task_type},{task_id},{qty}. Le virgole vengono sostituite con il separatore configurato. Chiavi disponibili: task_type, task_id, address, carrier, pos_x, pos_y, qty, info1, info2, info3, info4."
+
+#. module: stock_vlm_mgmt_kardex
+#: model:ir.model.fields,field_description:stock_vlm_mgmt_kardex.field_stock_location__separator
+msgid "Separator"
+msgstr "Separatore"
+
+#. module: stock_vlm_mgmt_kardex
+#: model:ir.model.fields,help:stock_vlm_mgmt_kardex.field_stock_location__separator
+msgid "Field separator used in socket requests and responses."
+msgstr "Separatore dei campi utilizzato nelle richieste e nelle risposte socket."
+
+#. module: stock_vlm_mgmt_kardex
+#: model:ir.model.fields,field_description:stock_vlm_mgmt_kardex.field_stock_location__format
+msgid "Socket Format"
+msgstr "Formato socket"
+
+#. module: stock_vlm_mgmt_kardex
+#: model:ir.model.fields,help:stock_vlm_mgmt_kardex.field_stock_location__format
+msgid "Ordered response field names, separated by the configured separator. For example, with a semicolon separator: task_type;task_id;qty."
+msgstr "Nomi dei campi della risposta in ordine, separati dal separatore configurato. Ad esempio, con il punto e virgola: task_type;task_id;qty."
+
+#. module: stock_vlm_mgmt_kardex
+#: model:ir.model.fields,field_description:stock_vlm_mgmt_kardex.field_stock_location__response_code_key
+msgid "Response Code Key"
+msgstr "Chiave del codice di risposta"
+
+#. module: stock_vlm_mgmt_kardex
+#: model:ir.model.fields,help:stock_vlm_mgmt_kardex.field_stock_location__response_code_key
+msgid "Key in the parsed response that contains the response code."
+msgstr "Chiave nella risposta analizzata che contiene il codice di risposta."

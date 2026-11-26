@@ -1,23 +1,10 @@
 # Copyright 2022 Tecnativa - David Vidal
+# Copyright 2026 Tecnativa - Adasat Torres
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 import logging
 import socket
 
 _logger = logging.getLogger(__name__)
-
-KARDEX_KEYS = [
-    "task_type",
-    "task_id",
-    "address",
-    "carrier",
-    "pos_x",
-    "pos_y",
-    "qty",
-    "info1",
-    "info2",
-    "info3",
-    "info4",
-]
 
 
 KARDEX_OPERATION_CODES = {
@@ -28,134 +15,120 @@ KARDEX_OPERATION_CODES = {
 }
 
 
+KARDEX_INTERMEDIATE_CODES = frozenset({"201", "202", "203"})
+KARDEX_RESPONSE_CODES = {"101": "-4", "107": "-5"}
+
+
 class KardexRequest:
-    """
-    Interface to Kardex SVMs
+    """TCP client for Kardex SVM task requests and responses.
 
-    To command tasks we send a tcp message to the SVM with this format
+    Requests use a configurable ``format_expression`` template with named
+    placeholders from the input dictionary. After interpolation, all commas
+    are replaced with ``separator``. Each request ends with a single CRLF
+    terminator, appended automatically after removing trailing CR/LF characters.
 
-    TASK_TYPE;TASK_ID;ADDRESS;CARRIER;POS_X;POS_Y;QTY;INFO1;INFO2;INFO3;INFO4<CR><LF>
+    Responses use the ordered field names in ``format``, split by the same
+    separator. The field named by ``response_code_key`` is used to interpret
+    device codes. Responses do not require a task identifier.
 
-    Each task is enqueued in the SVM and every time it gets finished it returns a
-    response with a success or error code (0 or 101).
-
-    - TASK_TYPE is configured at the machine itself.
-    - TASK_ID would be a unique id we give to the task so we can identify it when
-      the JMIF server responds back.
-    - ADDRESS: Which device to call.
-    - CARRIER: The tray we want to call
-    - POSX, POSY: Show the user where the items are located inside the tray
-    - QTY: How many items to get from the SVM
-    - The INFO fields are optional to show the user usefull info for the pick.
-
-    An example call:
-    3;001;21;6;7;1;40;PICK002;MAT02;Capacitor 40 mV;Check they're ok<CR><LF>
-
-    The message will get to the SVM screen. When the user finishes, the SVM will respond
-    back with a success message. Notice that in this response, the quantity has been
-    changed by the user:
-    0;001;21;6;7;1;25;PICK002;MAT02;Capacitor 40 mV;Check they're ok<CR><LF>
-
-    If there'd be an error in the process we'd get an error:
-    101;001;21;6;7;1;40;PICK002;MAT02;Capacitor 40 mV;Check they're ok<CR><LF>
-
-    If we want to release the carriers, we can call the carrier 0
-    0;465;21;0;0;0;0;;;;<CR><LF>
+    A typical semicolon-separated message contains task_type, task_id,
+    address, carrier, pos_x, pos_y, qty, and info1 through info4. The device
+    may return an adjusted quantity after the operator completes the task.
     """
 
     def __init__(self, ip, port, timeout=0, **options):
+        """Configure the device connection and message serialization.
+
+        :param ip: Device IP address or hostname.
+        :param port: TCP port, converted to an integer.
+        :param timeout: Receive timeout in seconds; zero leaves reads blocking.
+        :param options: Message template (format_expression), response field
+            order (format), field separator (separator), response code field
+            (response_code_key), and whether to skip reads (ignore_response).
+        """
         self.ip = ip
         self.port = int(port)
         self.timeout = timeout
         self.ignore_response = options.get("ignore_response")
+        self.format_expression = options.get("format_expression")
+        self.format = options.get("format")
+        self.separator = options.get("separator")
+        self.response_code_key = options.get("response_code_key")
 
-    def parse_data(self, data):
-        """Transforms csv single string into a dictionary that we can work with.
-        @param {string} data: semicolon separated values for the kardex payload format
-        @return {dict} those csv values transformed into key value pairs
-        """
-        parsed_data = dict.fromkeys(KARDEX_KEYS, None)
-        try:
-            parsed_data.update(
-                {k: v for k, v in zip(KARDEX_KEYS, data.split(";"), strict=True)}
-            )
-        except Exception:
-            _logger.debug(f"Exception parsing data: {data}")
-        if parsed_data.get("qty"):
-            # Strip dots
-            parsed_data["qty"] = parsed_data["qty"].replace(".", "")
-        return parsed_data
+    def parse_response(self, response):
+        """Map separated response values to the configured field names.
 
-    def prepare_data(self, data):
-        """Transforms data dict into kardex csv data string
-        @param {dict} data
-        @return {string}
+        Values remain strings, including any whitespace or line terminators.
+        Missing values are set to None and extra values are ignored.
+
+        :param response: Decoded device response.
+        :return: Dictionary keyed by the field names in ``format``.
         """
-        # No support for floats :S
-        data["qty"] = int(float(data["qty"]))
-        values = [str(v) for v in data.values()]
-        return f"{';'.join(values)}\r\n"
+        keys = self.format.split(self.separator)
+        parsed_response = dict.fromkeys(keys, None)
+        parsed_response.update(zip(keys, response.split(self.separator), strict=False))
+        return parsed_response
+
+    def parse_request(self, data):
+        """Interpolate the request template and replace commas with the separator.
+
+        Replacement also affects commas inside interpolated values. Trailing
+        CR/LF characters are replaced with a single CRLF terminator.
+
+        :param data: Dictionary containing the template placeholder values.
+        :return: Formatted message ready for UTF-8 encoding.
+        :raises KeyError: If a template placeholder is missing from data.
+        """
+        data.update(
+            {
+                "task_type": KARDEX_OPERATION_CODES.get(
+                    data.get("task_type"), data.get("task_type")
+                ),
+                "qty": int(float(data["qty"])),
+            }
+        )
+        message = self.format_expression.format_map(data)
+        return message.replace(",", self.separator).rstrip("\r\n") + "\r\n"
 
     def request_operation(self, data):
+        """Send a task over TCP and optionally wait for a final CRLF-delimited response.
+
+        Each socket read is expected to contain one complete response.
+        Events 201, 202 and 203 are intermediate; wait for confirmation after
+        carrier arrival. Task identifiers are not checked. Device codes 101 and 107
+        are mapped to -4 and -5 in the configured response code field.
+        Connection refusal, a closed connection, and receive timeout
+        return codes -1, -2, and -3 respectively under the ``code`` key.
+        When reads are skipped, return code 0 and the submitted task ID.
+
+        :param data: Template values, including task_id for status dictionaries.
+        :return: Parsed final response or a code/task_id status dictionary.
         """
-        @param {string|dict} we can handle either a dictionary with the KARDEX_KEYS
-        format or the csv formatted values in a string (it must end in \r\n)
-        @return {dict} with the reponse of the device on the matching task
-        """
-        if isinstance(data, dict):
-            # We receive the task type with a common code. Transform into the Kardex one
-            data["task_type"] = KARDEX_OPERATION_CODES.get(data["task_type"], "0")
-            data = self.prepare_data(data)
-        _logger.info(f"Request: {data}")
-        operation_id = self.parse_data(data).get("task_id")
-        if not operation_id:
-            return
-        data = data.encode("utf-8")
+        message = self.parse_request(data)
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as device:
             try:
                 device.connect((self.ip, self.port))
             except ConnectionRefusedError:
-                return {"code": "-1", "task_id": operation_id}
-            device.sendall(data)
+                return {"code": "-1", "task_id": data["task_id"]}
+            device.sendall(message.encode("utf-8"))
             # Open the request with the optional timeout so the thread isn't halted
             # forever
             if self.timeout:
                 device.settimeout(self.timeout)
-            # Default response
-            response = {"code": "0", "task_id": operation_id}
-            # TODO: This is uncomplete: when we do the request, we won't receive the
-            # response until the VLM user validates the operation from the device screen
-            # That's an unknown amount of time.
-            # And what if the system is reset in the meantime? We'd loose the original
-            # thread and the response would be missed.
-            # I guess that's why the c2c module has that proxy thing, so they can be
-            # more resilient on that regard or at least to not block the thread waiting
-            # for a response.
-            while True and not self.ignore_response:
-                # TBE: Will this response window be enough to get it in one shot?
+            if self.ignore_response:
+                return {"code": "0", "task_id": data["task_id"]}
+            while True:
                 try:
-                    res = device.recv(1024).decode("utf-8")
-                    _logger.info(res)
+                    message = device.recv(1024).decode("utf-8")
                 except socket.timeout:
-                    response["code"] = "-3"
-                    return response
-                response = self.parse_data(res)
-                # Deal with response codes. Default to unkown issue code
-                response["code"] = response.get("task_type", "-999")
-                # Code 101 for an issue that happens in the VLM hardware itself
-                if response["code"] == "101":
-                    response["code"] = "-4"
-                # Task cancelled
-                if response["code"] == "107":
-                    response["code"] = "-5"
-                # If it's not our operation we should keep trying
-                # TBE: But until when? This locks the current thread so the screen
-                # is indeed locked and the user can't do virtually anything about it
-                if response["task_id"] == operation_id:
-                    break
-                if response["task_id"] is None:
-                    # Empty response. Unknow reason error. Could be due to a shutdown
-                    # of the JMIF service.
-                    return {"code": "-2", "task_id": operation_id}
-        _logger.info(f"Response: {response}")
-        return response
+                    return {"code": "-3", "task_id": data["task_id"]}
+                if not message:
+                    return {"code": "-2", "task_id": data["task_id"]}
+                message = message.rstrip("\r\n")
+                _logger.info("Kardex response: %s", message)
+                response = self.parse_response(message)
+                code = response.get(self.response_code_key) or "-999"
+                if code in KARDEX_INTERMEDIATE_CODES:
+                    continue
+                response[self.response_code_key] = KARDEX_RESPONSE_CODES.get(code, code)
+                return response

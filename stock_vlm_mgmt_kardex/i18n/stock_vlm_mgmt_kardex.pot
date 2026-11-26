@@ -27,3 +27,43 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_vlm_mgmt_kardex.field_stock_location__vlm_vendor
 msgid "Vlm Vendor"
 msgstr ""
+
+#. module: stock_vlm_mgmt_kardex
+#: model:ir.model.fields,field_description:stock_vlm_mgmt_kardex.field_stock_location__format_expression
+msgid "Socket Message Format"
+msgstr ""
+
+#. module: stock_vlm_mgmt_kardex
+#: model:ir.model.fields,help:stock_vlm_mgmt_kardex.field_stock_location__format_expression
+msgid "Message template using placeholders such as {task_type},{task_id},{qty}. Commas are replaced with the configured separator. Available keys: task_type, task_id, address, carrier, pos_x, pos_y, qty, info1, info2, info3, info4."
+msgstr ""
+
+#. module: stock_vlm_mgmt_kardex
+#: model:ir.model.fields,field_description:stock_vlm_mgmt_kardex.field_stock_location__separator
+msgid "Separator"
+msgstr ""
+
+#. module: stock_vlm_mgmt_kardex
+#: model:ir.model.fields,help:stock_vlm_mgmt_kardex.field_stock_location__separator
+msgid "Field separator used in socket requests and responses."
+msgstr ""
+
+#. module: stock_vlm_mgmt_kardex
+#: model:ir.model.fields,field_description:stock_vlm_mgmt_kardex.field_stock_location__format
+msgid "Socket Format"
+msgstr ""
+
+#. module: stock_vlm_mgmt_kardex
+#: model:ir.model.fields,help:stock_vlm_mgmt_kardex.field_stock_location__format
+msgid "Ordered response field names, separated by the configured separator. For example, with a semicolon separator: task_type;task_id;qty."
+msgstr ""
+
+#. module: stock_vlm_mgmt_kardex
+#: model:ir.model.fields,field_description:stock_vlm_mgmt_kardex.field_stock_location__response_code_key
+msgid "Response Code Key"
+msgstr ""
+
+#. module: stock_vlm_mgmt_kardex
+#: model:ir.model.fields,help:stock_vlm_mgmt_kardex.field_stock_location__response_code_key
+msgid "Key in the parsed response that contains the response code."
+msgstr ""
