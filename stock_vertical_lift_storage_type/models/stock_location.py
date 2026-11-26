@@ -49,3 +49,13 @@ class StockLocation(models.Model):
             if not location.tray_type_id:
                 continue
             location.storage_category_id = location.tray_type_id.storage_category_id
+
+    def _order_allowed_locations(self, valid_locations):
+        valid_locations = super()._order_allowed_locations(valid_locations)
+        preferred_ids = self.env.context.get("putaway_preferred_location_ids")
+        if preferred_ids:
+            preferred = valid_locations.browse(
+                [loc_id for loc_id in preferred_ids if loc_id in valid_locations.ids]
+            )
+            valid_locations = preferred | (valid_locations - preferred)
+        return valid_locations
