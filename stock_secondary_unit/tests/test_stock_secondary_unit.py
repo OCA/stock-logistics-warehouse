@@ -932,3 +932,96 @@ class TestProductSecondaryUnit(BaseCommon):
         black.action_unarchive()
         self.assertEqual(black.stock_secondary_uom_id, box_10)
         self.assertEqual(template.stock_secondary_uom_id, box_10)
+
+    def _create_delivery_two_variants(self, white_qty, black_qty):
+        """Delivery of both variants in their first secondary unit."""
+        white, black = self.product_template.product_variant_ids
+        customers = self.env.ref("stock.stock_location_customers")
+        picking = self.StockPicking.create(
+            {
+                "picking_type_id": self.picking_type_out.id,
+                "location_id": self.location_stock.id,
+                "location_dest_id": customers.id,
+                "move_ids": [
+                    Command.create(
+                        {
+                            "name": product.display_name,
+                            "product_id": product.id,
+                            "product_uom": product.uom_id.id,
+                            "product_uom_qty": qty,
+                            "secondary_uom_id": product.secondary_uom_ids[0].id,
+                            "location_id": self.location_stock.id,
+                            "location_dest_id": customers.id,
+                        }
+                    )
+                    for product, qty in [(white, white_qty), (black, black_qty)]
+                ],
+            }
+        )
+        picking.action_confirm()
+        picking.action_assign()
+        return picking
+
+    def _render_delivery_slip(self, picking):
+        return self.env["ir.actions.report"]._render_qweb_html(
+            "stock.report_deliveryslip", picking.ids
+        )[0]
+
+    def test_delivery_slip_secondary_qty_with_packages(self):
+        picking = self._create_delivery_two_variants(10.0, 5.0)
+        white_move, black_move = picking.move_ids
+        # 6 kg of white and all the black go in a package, 4 kg of white loose
+        white_move.move_line_ids.quantity = 6.0
+        picking.move_ids.picked = True
+        package = picking.action_put_in_pack()
+        loose_line = self.env["stock.move.line"].create(
+            {
+                "move_id": white_move.id,
+                "picking_id": picking.id,
+                "product_id": white_move.product_id.id,
+                "product_uom_id": white_move.product_uom.id,
+                "location_id": self.location_stock.id,
+                "location_dest_id": white_move.location_dest_id.id,
+                "quantity": 4.0,
+                "picked": True,
+            }
+        )
+        picking.button_validate()
+        self.assertEqual(picking.state, "done")
+        self.assertTrue(self._render_delivery_slip(picking))
+        # Factor 0.5: 2 units per kg
+        packed = picking.move_line_ids.filtered("result_package_id")
+        self.assertEqual(packed.result_package_id, package)
+        self.assertEqual(
+            {
+                v["product"]: v["secondary_uom_qty"]
+                for v in packed._get_aggregated_product_quantities(strict=True).values()
+            },
+            {white_move.product_id: 12.0, black_move.product_id: 10.0},
+        )
+        loose = picking.move_line_ids._get_aggregated_product_quantities(
+            except_package=True
+        )
+        self.assertEqual(
+            [(v["product"], v["secondary_uom_qty"]) for v in loose.values()],
+            [(white_move.product_id, loose_line.secondary_uom_qty)],
+        )
+        self.assertEqual(loose_line.secondary_uom_qty, 8.0)
+
+    def test_delivery_slip_secondary_qty_cancelled_move(self):
+        picking = self._create_delivery_two_variants(10.0, 5.0)
+        white_move, black_move = picking.move_ids
+        black_move._do_unreserve()
+        white_move.picked = True
+        action = picking.button_validate()
+        wizard = Form(
+            self.env[action["res_model"]].with_context(**action["context"])
+        ).save()
+        wizard.process_cancel_backorder()
+        self.assertEqual(black_move.state, "cancel")
+        self.assertTrue(self._render_delivery_slip(picking))
+        aggregated = picking.move_line_ids._get_aggregated_product_quantities()
+        self.assertEqual(
+            {v["product"]: v["secondary_uom_qty"] for v in aggregated.values()},
+            {white_move.product_id: 20.0, black_move.product_id: 0.0},
+        )

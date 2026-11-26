@@ -272,12 +272,17 @@ class StockMoveLine(models.Model):
 
     def _get_aggregated_product_quantities(self, **kwargs):
         aggregated_move_lines = super()._get_aggregated_product_quantities(**kwargs)
+        # Rows of moves without move lines (e.g. cancelled ones) come from core too
+        for line in aggregated_move_lines.values():
+            line.setdefault("secondary_uom_qty", 0.0)
+            line.setdefault("secondary_uom_id", line["move"].secondary_uom_id)
         for move_line in self:
+            # Same lines core skips, or packed quantities count twice in the slip
+            if kwargs.get("except_package") and move_line.result_package_id:
+                continue
             line_key = self._get_aggregated_properties(move_line=move_line)["line_key"]
             line = aggregated_move_lines[line_key]
-            line["secondary_uom_qty"] = (
-                line.get("secondary_uom_qty", 0.0) + move_line.secondary_uom_qty
-            )
+            line["secondary_uom_qty"] += move_line.secondary_uom_qty
             line["secondary_uom_id"] = move_line.secondary_uom_id
 
         return aggregated_move_lines
