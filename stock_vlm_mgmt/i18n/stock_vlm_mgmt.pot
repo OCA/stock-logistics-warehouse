@@ -490,6 +490,13 @@ msgid "Rows"
 msgstr ""
 
 #. module: stock_vlm_mgmt
+#. odoo-python
+#: code:addons/stock_vlm_mgmt/models/stock_location_vlm_tray_type.py:0
+#, python-format
+msgid "Rows and columns must be greater than zero."
+msgstr ""
+
+#. module: stock_vlm_mgmt
 #: model:ir.model.fields,field_description:stock_vlm_mgmt.field_stock_vlm_task_action__vlm_task_id
 msgid "Selected task"
 msgstr ""
