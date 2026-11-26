@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="sale_stock_reserve_confirm_view_form" model="ir.ui.view">
+    <field name="name">sale.stock.reserve.confirm.form</field>
+    <field name="model">sale.stock.reserve.confirm</field>
+    <field name="arch" type="xml">
+        <form string="Confirm reservation">
+            <div class="alert alert-warning" role="alert">
+                The selected quantity exceeds the ordered quantity.
+                Do you want to update the order quantity and continue?
+            </div>
+            <footer>
+                <button
+                        name="action_confirm"
+                        string="Update and Reserve"
+                        type="object"
+                        class="oe_highlight"
+                    />
+                <button string="Cancel" special="cancel" />
+            </footer>
+        </form>
+    </field>
+</record>
+
+</odoo>

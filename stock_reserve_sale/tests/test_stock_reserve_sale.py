@@ -301,6 +301,20 @@ class TestStockReserveSale(common.TransactionCase):
         wiz_form = self._get_reserve_wizard_form(so, self.warehouse.lot_stock_id)
         with wiz_form.line_ids.edit(1) as line_form:
             line_form.quantity = 6
+        wizard = wiz_form.save()
+        action = wizard.button_reserve()
+        self.assertEqual(action["res_model"], "sale.stock.reserve.confirm")
+        self.assertEqual(action["target"], "new")
+        # Confirming updates the order quantity and creates the reservation.
+        confirmation = self.env[action["res_model"]].browse(action["res_id"])
+        confirmation.action_confirm()
+        line_2 = so.order_line.filtered(lambda line: line.product_id == self.product_2)
+        self.assertEqual(line_2.product_uom_qty, 6)
+        self.assertEqual(line_2.reservation_ids.product_uom_qty, 6)
+        so.order_line.reservation_ids.release_reserve()
+        wiz_form = self._get_reserve_wizard_form(so, self.warehouse.lot_stock_id)
+        with wiz_form.line_ids.edit(1) as line_form:
+            line_form.quantity = -1
         with self.assertRaises(ValidationError):
             wiz_form.save()
         self.env.company.sale_stock_reservation_policy = "partial"
@@ -380,7 +394,7 @@ class TestStockReserveSale(common.TransactionCase):
         self.assertIn("(2.00 ", names[self.lot_2.id])
         # Without context, the name is the standard one
         self.assertEqual(self.lot_2.display_name, self.lot_2.name)
-        
+
     def test_reserve_18_confirm_keeps_lots(self):
         so = self._create_sale_order([(self.product_lot, 3), (self.product_lot, 6)])
         line_1, line_2 = so.order_line
@@ -393,4 +407,3 @@ class TestStockReserveSale(common.TransactionCase):
         self.assertEqual(
             self._get_delivery_lots(line_2), {self.lot_1: 5, self.lot_2: 1}
         )
-        

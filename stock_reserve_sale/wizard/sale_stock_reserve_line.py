@@ -104,17 +104,10 @@ class SaleStockReserveLine(models.TransientModel):
         for line in self:
             rounding = line.product_uom.rounding
             policy = line._get_reservation_policy()
-            if (
-                float_compare(line.quantity, 0.0, precision_rounding=rounding) < 0
-                or float_compare(
-                    line.quantity, line.product_uom_qty, precision_rounding=rounding
-                )
-                > 0
-            ):
+            if float_compare(line.quantity, 0.0, precision_rounding=rounding) < 0:
                 raise ValidationError(
                     _(
-                        "The quantity to reserve of %(product)s must be between "
-                        "0 and the ordered quantity.",
+                        "The quantity to reserve of %(product)s cannot be negative.",
                         product=line.product_id.display_name,
                     )
                 )

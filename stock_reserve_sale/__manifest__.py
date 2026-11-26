@@ -11,6 +11,7 @@
     "depends": ["sale_stock", "stock_reserve"],
     "data": [
         "wizard/sale_stock_reserve_view.xml",
+        "wizard/sale_stock_reserve_confirm_view.xml",
         "wizard/sale_stock_reserve_release_view.xml",
         "view/sale.xml",
         "view/stock_reserve.xml",
