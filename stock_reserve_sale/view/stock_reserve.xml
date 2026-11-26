@@ -16,6 +16,7 @@
                     string="View Stock Picking"
                     type="object"
                     name="action_view_reserves_stock_picking_reservation"
+                    attrs="{'invisible': [('picking_id', '=', False)]}"
                 />
             </xpath>
         </field>

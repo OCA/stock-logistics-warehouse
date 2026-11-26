@@ -97,11 +97,31 @@ class SaleOrder(models.Model):
             order.all_lines_reserved = all(line.reservation_ids for line in lines)
 
     def action_view_reserves_products(self):
+        self.ensure_one()
         action = self.env["ir.actions.act_window"]._for_xml_id(
             "stock_reserve.action_stock_reservation_tree"
         )
-        action["domain"] = [("sale_id", "in", self.ids)]
-        action["context"] = {"search_default_groupby_product": False}
+        reservations = self.stock_reservation_ids
+        action["domain"] = [("id", "in", reservations.ids)]
+        if len(reservations) == 1:
+            action.update(
+                {
+                    "view_mode": "form",
+                    "views": [
+                        (
+                            self.env.ref(
+                                "stock_reserve.view_stock_reservation_form"
+                            ).id,
+                            "form",
+                        )
+                    ],
+                    "res_id": reservations.id,
+                }
+            )
+        else:
+            action["context"] = {
+                "search_default_groupby_product": False,
+            }
         return action
 
     def _get_reserved_lots_data(self):

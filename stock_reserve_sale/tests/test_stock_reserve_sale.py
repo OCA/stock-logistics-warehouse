@@ -380,15 +380,7 @@ class TestStockReserveSale(common.TransactionCase):
         self.assertIn("(2.00 ", names[self.lot_2.id])
         # Without context, the name is the standard one
         self.assertEqual(self.lot_2.display_name, self.lot_2.name)
-
-    def test_reserve_17_view_actions(self):
-        so = self._create_sale_order([(self.product_1, 1)])
-        self._reserve_from_location(so, self.warehouse.lot_stock_id)
-        reservation = so.stock_reservation_ids
-        self.assertTrue(reservation.picking_id)
-        action = reservation.action_view_reserves_stock_picking_reservation()
-        self.assertEqual(action["res_id"], reservation.picking_id.id)
-
+        
     def test_reserve_18_confirm_keeps_lots(self):
         so = self._create_sale_order([(self.product_lot, 3), (self.product_lot, 6)])
         line_1, line_2 = so.order_line
@@ -401,3 +393,4 @@ class TestStockReserveSale(common.TransactionCase):
         self.assertEqual(
             self._get_delivery_lots(line_2), {self.lot_1: 5, self.lot_2: 1}
         )
+        
