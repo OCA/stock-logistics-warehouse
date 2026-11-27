@@ -1,7 +1,7 @@
 # Copyright 2019 ForgeFlow S.L. (https://www.forgeflow.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from odoo import api, fields, models
+from odoo import fields, models
 
 
 class StockMove(models.Model):
@@ -13,7 +13,6 @@ class StockMove(models.Model):
         copy=False,
     )
 
-    @api.model
     def _prepare_account_move_line(
         self, qty, cost, credit_account_id, debit_account_id, svl_id, description
     ):
