@@ -90,3 +90,16 @@ class TestLocationTrayType(LocationTrayTypeCase):
         self.assertEqual(tray_type.depth_per_cell, 12)
         tray_type.depth = 0
         self.assertEqual(tray_type.depth_per_cell, 0)
+
+    def test_tray_matrix_several_tray_types(self):
+        tray_types = self.env["stock.location.tray.type"].create(
+            [
+                {"name": "Test Type 2x3", "code": "T23", "rows": 2, "cols": 3},
+                {"name": "Test Type 1x4", "code": "T14", "rows": 1, "cols": 4},
+            ]
+        )
+        tray_types.invalidate_recordset(["tray_matrix"])
+        self.assertEqual(
+            [matrix["cells"] for matrix in tray_types.mapped("tray_matrix")],
+            [[[1, 1, 1], [1, 1, 1]], [[1, 1, 1, 1]]],
+        )

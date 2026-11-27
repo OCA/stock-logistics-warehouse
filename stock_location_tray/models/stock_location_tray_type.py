@@ -54,7 +54,7 @@ class StockLocationTrayType(models.Model):
             # the tray, we generate a "full" tray, we'll
             # see all the boxes on the web widget.
             # (0 means empty, 1 means used)
-            cells = self._generate_cells_matrix(default_state=1)
+            cells = record._generate_cells_matrix(default_state=1)
             record.tray_matrix = {"selected": [], "cells": cells}
 
     def _generate_cells_matrix(self, default_state=0):
