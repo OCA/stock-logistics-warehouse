@@ -33,6 +33,10 @@ class StockRule(models.Model):
         if warehouse.calendar_id and self.delay:
             date = warehouse.wh_plan_days(values["date_planned"], -1 * self.delay)
             res["date"] = date
+            if values.get("date_deadline"):
+                res["date_deadline"] = warehouse.wh_plan_days(
+                    values["date_deadline"], -1 * self.delay
+                )
         return res
 
     def _get_push_new_date(self, move):
