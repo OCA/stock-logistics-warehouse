@@ -302,3 +302,31 @@ class TestStockWarehouseCalendar(BaseCommon):
         # Compute new date with push rule (should be same day)
         new_date = push_rule._get_push_new_date(move)
         self.assertEqual(new_date, move_date)
+
+    def test_09_procurement_deadline_with_calendar(self):
+        """The deadline of the move skips the weekend like its date."""
+        values = {
+            "date_planned": "2097-01-07 09:00:00",  # Monday inside working hours
+            "date_deadline": "2097-01-07 09:00:00",
+            "warehouse_id": self.warehouse,
+            "company_id": self.company,
+            "rule_id": self.transfer_rule,
+        }
+        self.rule_obj.run(
+            [
+                self.rule_obj.Procurement(
+                    self.product,
+                    100,
+                    self.product.uom_id,
+                    self.warehouse.lot_stock_id,
+                    "Test",
+                    "Test",
+                    self.warehouse.company_id,
+                    values,
+                )
+            ]
+        )
+        move = self.move_obj.search([("product_id", "=", self.product.id)], limit=1)
+        # Friday 4th Jan 2097
+        friday = fields.Date.to_date("2097-01-04")
+        self.assertEqual(fields.Date.to_date(move.date_deadline), friday)
