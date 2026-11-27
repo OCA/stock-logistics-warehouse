@@ -127,15 +127,20 @@ class StockReservation(models.Model):
         return self.get_location_from_ref(ref)
 
     def reserve(self):
-        """Confirm reservations
-
-        The reservation is done using the default UOM of the product.
-        A date until which the product is reserved can be specified.
-        """
         self.write({"date": fields.Datetime.now()})
         # Don't call _action_confirm() method to prevent assign picking
         self.mapped("move_id").write({"state": "confirmed"})
         self.mapped("move_id")._action_assign()
+        return True
+
+    def reserve_lots(self, lots):
+        """Reserve only from the given lots, in order, up to the move qty."""
+        self.ensure_one()
+        self.write({"date": fields.Datetime.now()})
+        move = self.move_id
+        # Don't call _action_confirm() to prevent assigning picking
+        move.write({"state": "confirmed"})
+        move._reserve_lots([(lot, move.location_id, None) for lot in lots])
         return True
 
     def release_reserve(self):

@@ -88,3 +88,57 @@ class TestStockReserve(common.TransactionCase):
         cron.method_direct_trigger()
         self.assertEqual(reservation_1.state, "assigned")
         self.assertEqual(self.product.virtual_available, 9)
+
+    def test_reservation_with_lots(self):
+        lot_1 = self.env["stock.lot"].create(
+            {
+                "name": "LOT-001",
+                "product_id": self.product.id,
+                "company_id": self.env.company.id,
+            }
+        )
+        lot_2 = self.env["stock.lot"].create(
+            {
+                "name": "LOT-002",
+                "product_id": self.product.id,
+                "company_id": self.env.company.id,
+            }
+        )
+        self.env["stock.quant"].search(
+            [
+                ("product_id", "=", self.product.id),
+                ("location_id", "=", self.warehouse.lot_stock_id.id),
+            ]
+        ).unlink()
+        self.env["stock.quant"].create(
+            [
+                {
+                    "product_id": self.product.id,
+                    "location_id": self.warehouse.lot_stock_id.id,
+                    "lot_id": lot_1.id,
+                    "quantity": 5.0,
+                },
+                {
+                    "product_id": self.product.id,
+                    "location_id": self.warehouse.lot_stock_id.id,
+                    "lot_id": lot_2.id,
+                    "quantity": 5.0,
+                },
+            ]
+        )
+        reservation = self._create_stock_reservation(7)
+        # Only the chosen lots are reserved, in the given order
+        reservation.reserve_lots(lot_2 | lot_1)
+        move_lines = reservation.move_id.move_line_ids
+        self.assertEqual(
+            {line.lot_id: line.reserved_uom_qty for line in move_lines},
+            {lot_2: 5.0, lot_1: 2.0},
+        )
+        self.assertEqual(reservation.state, "assigned")
+        # A single lot without enough quantity leaves it partially available
+        reservation.release_reserve()
+        reservation = self._create_stock_reservation(7)
+        reservation.reserve_lots(lot_2)
+        self.assertEqual(reservation.move_id.move_line_ids.lot_id, lot_2)
+        self.assertEqual(reservation.move_id.reserved_availability, 5.0)
+        self.assertEqual(reservation.state, "partially_available")

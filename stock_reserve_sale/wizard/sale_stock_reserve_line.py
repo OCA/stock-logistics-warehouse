@@ -13,10 +13,18 @@ class SaleStockReserveLine(models.TransientModel):
         "sale.order.line", string="Order Line", required=True, ondelete="cascade"
     )
     product_id = fields.Many2one(related="sale_line_id.product_id")
+    lot_ids = fields.Many2many(
+        "stock.lot",
+        string="Lots/Serial Numbers",
+        # Set here and not only in the view, as the web client doesn't use the
+        # view context when reading the names of the selected lots.
+        context={"show_available_qty": True},
+    )
     product_uom = fields.Many2one(related="sale_line_id.product_uom")
     product_uom_qty = fields.Float(
         related="sale_line_id.product_uom_qty", string="Ordered Quantity"
     )
+    has_tracking = fields.Selection(related="product_id.tracking")
     available_qty = fields.Float(
         string="Available Quantity",
         compute="_compute_available_qty",
@@ -35,16 +43,23 @@ class SaleStockReserveLine(models.TransientModel):
         for line in self:
             line.available_qty = line._get_available_quantity()
 
-    @api.depends("wizard_id.location_id", "sale_line_id")
+    @api.depends("wizard_id.location_id", "sale_line_id", "lot_ids")
     def _compute_quantity(self):
         for line in self:
-            line.quantity = line._get_default_quantity()
+            if line.lot_ids:
+                line.quantity = line._get_available_quantity(lots=line.lot_ids)
+            else:
+                line.quantity = line._get_default_quantity()
 
     def _get_reservation_policy(self):
         self.ensure_one()
         return self.sale_line_id.order_id.company_id.sale_stock_reservation_policy
 
-    def _get_available_quantity(self):
+    def _get_available_quantity(self, lots=None):
+        """Unreserved quantity in the wizard location, in the line UoM.
+
+        If ``lots`` is given, only the quantity of those lots is summed.
+        """
         self.ensure_one()
         product = self.product_id
         location = self.wizard_id.location_id
@@ -52,10 +67,18 @@ class SaleStockReserveLine(models.TransientModel):
             return 0.0
         if product.type != "product" or location.should_bypass_reservation():
             return self.product_uom_qty
+        Quant = self.env["stock.quant"]
+        if lots:
+            # Inside onchanges lots are new records: use the real ones.
+            lots = lots._origin
+            available = sum(
+                Quant._get_available_quantity(product, location, lot_id=lot)
+                for lot in lots
+            )
+        else:
+            available = Quant._get_available_quantity(product, location)
         return product.uom_id._compute_quantity(
-            self.env["stock.quant"]._get_available_quantity(product, location),
-            self.product_uom,
-            rounding_method="DOWN",
+            available, self.product_uom, rounding_method="DOWN"
         )
 
     def _get_default_quantity(self):
@@ -81,17 +104,10 @@ class SaleStockReserveLine(models.TransientModel):
         for line in self:
             rounding = line.product_uom.rounding
             policy = line._get_reservation_policy()
-            if (
-                float_compare(line.quantity, 0.0, precision_rounding=rounding) < 0
-                or float_compare(
-                    line.quantity, line.product_uom_qty, precision_rounding=rounding
-                )
-                > 0
-            ):
+            if float_compare(line.quantity, 0.0, precision_rounding=rounding) < 0:
                 raise ValidationError(
                     _(
-                        "The quantity to reserve of %(product)s must be between "
-                        "0 and the ordered quantity.",
+                        "The quantity to reserve of %(product)s cannot be negative.",
                         product=line.product_id.display_name,
                     )
                 )

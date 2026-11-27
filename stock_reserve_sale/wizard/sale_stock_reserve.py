@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 from odoo import Command, _, api, fields, models
 from odoo.exceptions import UserError
-from odoo.tools import float_is_zero
+from odoo.tools import float_compare, float_is_zero
 
 
 class SaleStockReserve(models.TransientModel):
@@ -69,7 +69,6 @@ class SaleStockReserve(models.TransientModel):
 
     def _prepare_stock_reservation(self, line):
         self.ensure_one()
-
         picking_env = self.env["stock.picking"]
         reservation_env = self.env["stock.reservation"]
         picking_type_id = reservation_env._get_picking_type(
@@ -138,14 +137,32 @@ class SaleStockReserve(models.TransientModel):
             )
         )
         if not lines:
-            raise UserError(
-                _(
-                    "There is nothing to reserve. Set a quantity to reserve "
-                    "on at least one line."
-                )
+            raise UserError(_("There are no products to reserve."))
+        exceeding_lines = lines.filtered(
+            lambda line: float_compare(
+                line.quantity,
+                line.product_uom_qty,
+                precision_rounding=line.product_uom.rounding,
             )
+            > 0
+        )
+        if exceeding_lines:
+            confirmation = self.env["sale.stock.reserve.confirm"].create(
+                {"reserve_id": self.id}
+            )
+            return {
+                "type": "ir.actions.act_window",
+                "name": _("Confirm Reservation"),
+                "res_model": "sale.stock.reserve.confirm",
+                "view_mode": "form",
+                "res_id": confirmation.id,
+                "target": "new",
+            }
         for line in lines:
             reservations = self.env["stock.reservation"].create(
                 self._prepare_stock_reservation_vals_list(line)
             )
-            reservations.reserve()
+            if line.lot_ids:
+                reservations.reserve_lots(line.lot_ids)
+            else:
+                reservations.reserve()
