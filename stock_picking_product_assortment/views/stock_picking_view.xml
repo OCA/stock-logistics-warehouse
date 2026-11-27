@@ -32,13 +32,17 @@
             ref="stock.view_stock_move_line_detailed_operation_tree"
         />
         <field name="arch" type="xml">
+            <xpath expr="//list/field[@name='product_id']" position="before">
+                <field name="picking_assortment_product_ids" column_invisible="1" />
+                <field name="picking_has_assortment" column_invisible="1" />
+            </xpath>
             <xpath expr="//list/field[@name='product_id']" position="attributes">
                 <attribute
                     name="domain"
                     operation="domain_add"
-                    condition="parent.has_assortment"
+                    condition="picking_has_assortment"
                 >
-                    [('id', 'in', parent.assortment_product_ids)]
+                    [('id', 'in', picking_assortment_product_ids)]
                 </attribute>
             </xpath>
         </field>
