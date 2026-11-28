@@ -1,0 +1,2 @@
+- [Camptocamp](https://www.camptocamp.com):
+  - Simone Orsi \<<simone.orsi@camptocamp.com>\>
